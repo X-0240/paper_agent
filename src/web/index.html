@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>论文调研工作台</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div id="login-view" class="login-view">
+  <div class="login-panel">
+    <div class="brand-row">
+      <span class="brand-mark">调</span>
+      <span class="brand-name">论文调研工作台</span>
+    </div>
+    <form id="login-form" class="login-form">
+      <label class="field">
+        <span>用户名</span>
+        <input id="username" name="username" autocomplete="username" required>
+      </label>
+      <label class="field">
+        <span>密码</span>
+        <input id="password" name="password" type="password" autocomplete="current-password" required>
+      </label>
+      <div id="login-error" class="login-error" hidden></div>
+      <button id="login-btn" class="btn btn-primary" type="submit">
+        <i data-lucide="log-in"></i><span>登录</span>
+      </button>
+    </form>
+  </div>
+</div>
+
+<div id="chat-view" class="chat-view" hidden>
+  <header class="topbar">
+    <div class="brand-row">
+      <span class="brand-mark">调</span>
+      <span class="brand-name">论文调研工作台</span>
+    </div>
+    <div class="topbar-right">
+      <span id="user-label" class="user-label"></span>
+      <button id="logout-btn" class="btn btn-ghost" type="button">
+        <i data-lucide="log-out"></i><span>退出</span>
+      </button>
+    </div>
+  </header>
+  <main id="messages" class="messages" aria-live="polite"></main>
+  <div class="composer-wrap">
+    <div class="composer">
+      <textarea id="question-input" rows="2" placeholder="输入问题或研究方向"></textarea>
+      <button id="send-btn" class="btn btn-primary send-btn" type="button" disabled>
+        <i data-lucide="send"></i><span>提问</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="/static/app.js"></script>
+</body>
+</html>

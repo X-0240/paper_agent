@@ -1,0 +1,16 @@
+.env
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+datasets/
+eval_results/
+cards/
+papers_sections/
+*.faiss
+*.faiss.json
+llm_usage.jsonl
+.git/
+
+# CI文件待workflow权限令牌后恢复推送
+.github/workflows/ci.yml
