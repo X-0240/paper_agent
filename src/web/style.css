@@ -233,6 +233,25 @@ button,input,textarea{font:inherit}
   font-family:Consolas,Menlo,monospace;
   font-size:13px;
 }
+.table-wrap{
+  overflow-x:auto;
+  margin:8px 0;
+}
+.table-wrap table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:13px;
+}
+.table-wrap th,.table-wrap td{
+  border:1px solid #d1d5db;
+  padding:6px 8px;
+  vertical-align:top;
+  min-width:90px;
+}
+.table-wrap th{
+  background:#f9fafb;
+  font-weight:600;
+}
 .sources{
   display:flex;
   flex-wrap:wrap;

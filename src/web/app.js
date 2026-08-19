@@ -77,20 +77,59 @@ function escapeHtml(s){
 function inlineMd(s){
   return escapeHtml(s)
     .replace(/\*\*([^*]+)\*\*/g,"<strong>$1</strong>")
-    .replace(/`([^`]+)`/g,"<code>$1</code>");
+    .replace(/`([^`]+)`/g,"<code>$1</code>")
+    .replace(/&lt;br&gt;/g,"<br>");
+}
+
+function splitTableRow(s){
+  return s.trim().replace(/^\|/,"").replace(/\|$/,"").split("|").map(c=>c.trim());
+}
+
+function isTableSep(s){
+  return /^\s*\|?\s*:?-{3,}:?\s*(\|\s*:?-{3,}:?\s*)*\|?\s*$/.test(s);
+}
+
+function parseAligns(sep){
+  return splitTableRow(sep).map((c)=>{
+    const left=c.startsWith(":");
+    const right=c.endsWith(":");
+    return left&&right?"center":right?"right":"left";
+  });
+}
+
+function buildTable(head,aligns,rows){
+  const thead="<tr>"+head.map((c,i)=>`<th style="text-align:${aligns[i]||"left"}">${inlineMd(c)}</th>`).join("")+"</tr>";
+  const body=rows.map((r)=>"<tr>"+r.map((c,i)=>`<td style="text-align:${aligns[i]||"left"}">${inlineMd(c)}</td>`).join("")+"</tr>").join("");
+  return `<div class="table-wrap"><table><thead>${thead}</thead><tbody>${body}</tbody></table></div>`;
 }
 
 function renderMarkdown(src){
   const lines=src.split("\n");
   let html="";
   let list=null;
+  let i=0;
   const closeList=()=>{
     if(list){
       html+=list==="ul"?"</ul>":"</ol>";
       list=null;
     }
   };
-  for(const line of lines){
+  for(;i<lines.length;i++){
+    const line=lines[i];
+    if(line.includes("|")&&splitTableRow(line).length>1&&i+1<lines.length&&isTableSep(lines[i+1])){
+      const head=splitTableRow(line);
+      const aligns=parseAligns(lines[i+1]);
+      const rows=[];
+      let j=i+2;
+      while(j<lines.length&&lines[j].includes("|")&&splitTableRow(lines[j]).length>1){
+        rows.push(splitTableRow(lines[j]));
+        j++;
+      }
+      closeList();
+      html+=buildTable(head,aligns,rows);
+      i=j-1;
+      continue;
+    }
     const head=line.match(/^(#{1,4})\s+(.*)$/);
     if(head){
       closeList();
