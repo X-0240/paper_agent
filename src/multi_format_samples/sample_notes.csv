@@ -1,0 +1,3 @@
+model,param_count,source
+BERT-base,110M,paper A
+BERT-large,340M,paper B
