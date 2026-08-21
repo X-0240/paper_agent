@@ -78,6 +78,7 @@ docker build -t paper-agent .
 ## 目录职责
 
 - `task_router.py`：纯规则路由，无外部依赖
+- `doc_ingest.py`：统一文档解析入口（PDF/Word/Excel/CSV/图片），输出 DocumentRecord + 章节切片
 - `rag_tool.py`：混合检索（BM25 + FAISS + 可选 Rerank）
 - `agent_react.py`：手写 ReAct 循环，Supervisor + Worker
 - `agent1_retrieve.py` / `agent2_parse.py` / `agent3_review.py`：3-Agent 工具层
@@ -85,9 +86,11 @@ docker build -t paper-agent .
 - `api_server.py`：FastAPI 接口层，JWT 鉴权 + SSE 流式
 - `cost_report.py`：每日 LLM 成本报表
 - `experiments/`：检索、Rerank、单/多 Agent 对比等评测脚本，不属于线上链路
+- `multi_format_samples/`：多格式解析样例（PDF/Word/Excel/CSV/图片/表格），`scripts/make_samples.py` 可重新生成
 
 ## 已知边界
 
 - 综述链路一次请求约消耗 4-6 倍 Token，且耗时较长，SSE 目前先完整跑完再分片推送，未做真正的中途流式
 - `GET /ask/stream` 依赖 Authorization 头，浏览器原生 EventSource 无法直接携带，前端需要走 fetch 流式或查询参数方案
 - 服务依赖本地模型和索引文件，Docker 内需要显式挂载并覆盖路径
+- 论文场景以原生文本 PDF 为主，不处理扫描件；图片 OCR 为可选 P1，当前未安装引擎时接口明确返回 OCR 不可用

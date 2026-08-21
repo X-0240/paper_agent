@@ -4,6 +4,7 @@ from pathlib import Path
 import fitz
 from docx import Document as DocxDocument
 from openpyxl import Workbook
+from PIL import Image, ImageDraw
 
 SAMPLE_DIR=Path(__file__).resolve().parents[1]/"multi_format_samples"
 
@@ -56,12 +57,41 @@ def make_csv(path):
         writer.writerow(["BERT-base","110M","paper A"])
         writer.writerow(["BERT-large","340M","paper B"])
 
+def make_image(path):
+    #生成带文字的图片样例，供OCR接口测试
+    img=Image.new("RGB",(600,200),color="white")
+    draw=ImageDraw.Draw(img)
+    draw.text((20,40),"RAG Retrieval Sample",fill="black")
+    draw.text((20,90),"BM25 + FAISS + Rerank",fill="black")
+    draw.text((20,140),"Evidence-level recall 39.2%",fill="black")
+    img.save(path)
+
+def make_table_pdf(path):
+    #生成带表格的PDF样例：画线+填文本，测试表格结构化提取
+    doc=fitz.open()
+    page=doc.new_page(width=595,height=842)
+    rows=3
+    cols=3
+    x0=72;y0=72;w=140;h=30
+    for r in range(rows+1):
+        page.draw_line((x0,y0+r*h),(x0+cols*w,y0+r*h))
+    for c in range(cols+1):
+        page.draw_line((x0+c*w,y0),(x0+c*w,y0+rows*h))
+    data=[["Format","Parser","Status"],["PDF","PyMuPDF","ok"],["Word","python-docx","ok"]]
+    for r,row in enumerate(data):
+        for c,val in enumerate(row):
+            page.insert_text((x0+c*w+6,y0+r*h+20),val,fontsize=10,fontname="helv")
+    doc.save(str(path))
+    doc.close()
+
 def main():
     SAMPLE_DIR.mkdir(exist_ok=True)
     make_pdf(SAMPLE_DIR/"sample_paper.pdf")
     make_docx(SAMPLE_DIR/"sample_report.docx")
     make_xlsx(SAMPLE_DIR/"sample_data.xlsx")
     make_csv(SAMPLE_DIR/"sample_notes.csv")
+    make_image(SAMPLE_DIR/"sample_image.png")
+    make_table_pdf(SAMPLE_DIR/"sample_table.pdf")
     for p in sorted(SAMPLE_DIR.iterdir()):
         print(p.name)
 
