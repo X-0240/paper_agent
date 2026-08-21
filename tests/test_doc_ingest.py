@@ -26,3 +26,15 @@ def test_chunk_size_bounded():
     record=parse_document(SAMPLE_DIR/"sample_report.docx")
     chunks=chunk_splitter(record)
     assert all(c.token_len<=CHUNK_TOKENS+CHUNK_OVERLAP for c in chunks)
+
+def test_image_without_ocr():
+    #图片OCR为可选P1，引擎未安装时必须明确报错，不能静默返回空文本
+    image=parse_document(SAMPLE_DIR/"sample_image.png")
+    assert image.doc_type=="image"
+    assert "OCR" in image.error
+
+def test_table_pdf_extracts_rows():
+    #表格PDF必须结构化提取，不丢失单元格内容
+    record=parse_document(SAMPLE_DIR/"sample_table.pdf")
+    assert record.tables
+    assert any("PyMuPDF" in str(cell) for table in record.tables for row in table for cell in row)

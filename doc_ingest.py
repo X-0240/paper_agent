@@ -176,6 +176,33 @@ def _parse_text(path):
     return DocumentRecord(source=path.name,doc_type="text",text=body,
                           sections=sections,tables=[],metadata={})
 
+def _ocr_image(path):
+    #图片OCR：优先PaddleOCR，其次Tesseract；都没有则明确报错
+    try:
+        from paddleocr import PaddleOCR
+        ocr=PaddleOCR(use_angle_cls=True,lang="ch",show_log=False)
+        result=ocr.ocr(str(path),cls=True)
+        return "\n".join(line[1][0] for res in result or [] for line in res or [])
+    except ImportError:
+        try:
+            import pytesseract
+            from PIL import Image
+            return pytesseract.image_to_string(Image.open(path))
+        except ImportError:
+            return "OCR不可用：未安装PaddleOCR或Tesseract，图片暂无法提取"
+
+def _parse_image(path):
+    #图片解析：记录尺寸和OCR文本，OCR缺失时error字段标明
+    from PIL import Image
+    img=Image.open(path)
+    text=_ocr_image(path)
+    record=DocumentRecord(source=path.name,doc_type="image",text=text,
+                          sections=[{"title":"Image OCR","text":text,"page":0}],
+                          tables=[],metadata={"size":img.size,"mode":img.mode})
+    if "OCR不可用" in text:
+        record.error="OCR未安装，图片未提取"
+    return record
+
 def parse_document(path):
     #统一入口：按后缀路由到对应解析器
     p=Path(path)
@@ -190,6 +217,8 @@ def parse_document(path):
         return _parse_csv(p)
     if ext in (".txt",".md"):
         return _parse_text(p)
+    if ext in (".png",".jpg",".jpeg",".bmp"):
+        return _parse_image(p)
     raise ValueError(f"不支持的格式：{ext}")
 
 def approx_tokens(text):
