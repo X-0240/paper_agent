@@ -1,6 +1,6 @@
-# 论文调研多Agent系统
+# 论文调研Agent系统
 
-论文知识库问答 + 手写ReAct多Agent调研系统。用户输入问题，系统按关键词路由：普通问答走混合检索短路路径，对比/综述类问题走 3-Agent 全链路（检索 -> 解析对比 -> 事实校验与综述生成）。
+论文知识库问答 + 手写 ReAct Agent 调研系统。用户输入问题，系统按关键词路由：普通问答走混合检索短路路径；对比/综述类问题由单个 ReAct Agent 通过工具集完成检索、读章节、建卡、关系分析、冲突验证与综述生成。
 
 ## 快速启动
 
@@ -85,7 +85,7 @@ docker build -t paper-agent .
 - `tools.py`：执行层工具入口，已实现 search_papers（本地混合检索 → PaperMeta+Chunk）、read_section（精确→模糊→None，会话缓存+句子边界截断）、build_paper_card（复用旧建卡，字段对齐新PaperCard）；agent2_parse/rag_tool 的章节与标题逻辑已收敛到这里
 - `rag_tool.py`：混合检索（BM25 + FAISS + 可选 Rerank）
 - `agent_react.py`：手写 ReAct 循环，Supervisor + Worker
-- `agent1_retrieve.py` / `agent2_parse.py` / `agent3_review.py`：3-Agent 工具层
+- `agent1_retrieve.py` / `agent2_parse.py` / `agent3_review.py`：旧流水线模块，正在向 `tools.py` 单 Agent 工具集收敛
 - `pipeline.py`：simple 短路与 survey 全链路编排
 - `api_server.py`：FastAPI 接口层，JWT 鉴权 + SSE 流式
 - `cost_report.py`：每日 LLM 成本报表
