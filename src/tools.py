@@ -1,7 +1,7 @@
 import os
 
 from config import MAX_CHUNKS_PER_PAPER, MAX_PAPER_PER_QUERY
-from state import PaperMeta
+from state import PaperCard, PaperMeta, SectionRef
 
 def build_search_result(results):
     #检索结果统一映射为PaperMeta+Chunk，同一论文只保留一份元数据
@@ -64,3 +64,34 @@ def read_section(paper_id,section_name,cache=None,max_chars=4000):
             cache[key]=matched
         return matched
     return None
+
+def build_paper_card(paper_id,cache=None):
+    #旧建卡逻辑复用，输出对齐新PaperCard；命中缓存不重复调LLM
+    if cache and paper_id in cache:
+        return cache[paper_id]
+    from agent2_parse import build_paper_card as old_build_card, get_paper_sections
+    card=old_build_card(paper_id)
+    sections_ref=[]
+    try:
+        for title,_ in get_paper_sections(paper_id):
+            sections_ref.append(SectionRef(name=title,page=None,chunk_ids=[]))
+    except Exception:
+        pass
+    key_findings=card.get("innovation",[])
+    if isinstance(key_findings,str):
+        key_findings=[key_findings] if key_findings!="未提及" else []
+    limitations=card.get("limitations","")
+    if isinstance(limitations,str):
+        limitations=[] if limitations=="未提及" else [limitations]
+    paper_card=PaperCard(
+        paper_id=paper_id,
+        title=card.get("title") or paper_id,
+        abstract=card.get("background",""),
+        key_findings=key_findings,
+        methodology=card.get("method",""),
+        limitations=limitations,
+        sections_ref=sections_ref
+    )
+    if cache is not None:
+        cache[paper_id]=paper_card
+    return paper_card

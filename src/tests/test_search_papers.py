@@ -1,4 +1,4 @@
-from tools import build_search_result, read_section
+from tools import build_paper_card, build_search_result, read_section
 
 def test_build_search_result_dedup_papers():
     #同一论文多片段只产生一条PaperMeta，但保留全部Chunk
@@ -33,4 +33,25 @@ def test_read_section_exact_fuzzy_and_cache(monkeypatch):
         return sections
     monkeypatch.setattr("agent2_parse.get_paper_sections",counting)
     read_section("P","1 Introduction",cache)
+    assert calls["n"]==0
+
+def test_build_paper_card_maps_fields_and_cache(monkeypatch):
+    #旧卡片字段映射到新PaperCard，缓存命中后不再调LLM
+    monkeypatch.setattr("agent2_parse.build_paper_card",lambda paper_id:{
+        "title":"Attention Is All You Need",
+        "background":"解决序列转换问题",
+        "method":"多头注意力",
+        "innovation":["完全基于注意力"],
+        "limitations":"未提及"
+    })
+    monkeypatch.setattr("agent2_parse.get_paper_sections",lambda paper_id:[("1 Introduction","intro"),("3 Method","method")])
+    cache={}
+    card=build_paper_card("P",cache)
+    assert card.title=="Attention Is All You Need"
+    assert card.key_findings==["完全基于注意力"]
+    assert card.limitations==[]
+    assert len(card.sections_ref)==2
+    calls={"n":0}
+    monkeypatch.setattr("agent2_parse.build_paper_card",lambda paper_id:(calls.__setitem__("n",calls["n"]+1) or {}))
+    build_paper_card("P",cache)
     assert calls["n"]==0
