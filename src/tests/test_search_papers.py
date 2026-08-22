@@ -1,4 +1,8 @@
-from tools import build_paper_card, build_search_result, read_section
+import json
+
+from doc_ingest import Chunk
+from state import PaperCard
+from tools import analyze_paper_relations, build_paper_card, build_search_result, read_section, _resolve_chunk_id
 
 def test_build_search_result_dedup_papers():
     #同一论文多片段只产生一条PaperMeta，但保留全部Chunk
@@ -75,3 +79,27 @@ def test_build_paper_card_maps_fields_and_cache(monkeypatch):
     monkeypatch.setattr("agent2_parse.build_paper_card",lambda paper_id:(calls.__setitem__("n",calls["n"]+1) or {}))
     build_paper_card("P",cache)
     assert calls["n"]==0
+
+def test_analyze_paper_relations_filters_unresolvable_facts(monkeypatch):
+    #无paper_id/无章节/来源解析不到的事实全部丢弃
+    monkeypatch.setattr("agent2_parse.compare_papers",lambda paper_ids:"对比矩阵")
+    monkeypatch.setattr("tools.build_paper_card",lambda paper_id,cache=None:PaperCard(paper_id=paper_id,title=paper_id))
+    monkeypatch.setattr("llm_api.safe_call_deepseek",lambda messages,**kw:{"choices":[{"message":{"content":json.dumps([
+        {"paper_id":"P1","entity":"BERT","attribute":"param_count","value":"110M","content":"参数量","section_name":"1 Introduction","raw_quote":"quote"},
+        {"paper_id":"P1","entity":"BERT","attribute":"type","value":"encoder","content":"类型","section_name":""},
+        {"paper_id":"P999","entity":"X","attribute":"y","value":"z","content":"bad","section_name":"Method","raw_quote":"q"}
+    ])}}]})
+    monkeypatch.setattr("tools._resolve_chunk_id",lambda pid,sec:"P1::1 Introduction::0" if pid=="P1" and sec=="1 Introduction" else None)
+    out=analyze_paper_relations(["P1","P2"])
+    assert out["comparison"]=="对比矩阵"
+    assert len(out["facts"])==1
+    assert out["facts"][0].source_chunk_id=="P1::1 Introduction::0"
+
+def test_resolve_chunk_id_exact_and_fuzzy(monkeypatch):
+    #章节名映射到真实chunk_id：精确优先，模糊兜底
+    fake=[Chunk(chunk_id="P::1 Introduction::0",doc_id="P",section_name="1 Introduction",text="intro",token_len=1,page_num=None,parent_id="P::1 Introduction",position="")]
+    monkeypatch.setattr("doc_ingest.load_sections",lambda paper_id:[{"title":"1 Introduction","text":"intro"}])
+    monkeypatch.setattr("doc_ingest.chunk_splitter",lambda record,chunk_tokens=800,overlap=100:fake)
+    assert _resolve_chunk_id("P","1 Introduction")=="P::1 Introduction::0"
+    assert _resolve_chunk_id("P","Introduction")=="P::1 Introduction::0"
+    assert _resolve_chunk_id("P","NotExist") is None
