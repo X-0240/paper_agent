@@ -29,18 +29,10 @@ model=SentenceTransformer(MODEL_PATH)
 SECTIONS_DIR=os.path.join(os.path.dirname(os.path.abspath(__file__)),"papers_sections")
 
 def read_section(source,section,max_chars=4000):
-    #全文展开：Agent判断片段不完整时读取完整章节
-    path=os.path.join(SECTIONS_DIR,f"{source}.json")
-    if not os.path.exists(path):
-        return f"论文{source}没有章节缓存，请先运行build_sections_cache.py"
-    try:
-        sections=json.load(open(path,encoding="utf-8"))
-    except Exception as e:
-        return f"章节缓存读取失败：{e}"
-    for title,text in sections:
-        if section in title or title in section:
-            return f"【{title}】\n{text[:max_chars]}"
-    return f"未找到章节：{section}"
+    #旧接口适配：全文展开统一收敛到tools.read_section，保持原错误语义
+    from tools import read_section as _read
+    result=_read(source,section,max_chars=max_chars)
+    return result if result is not None else f"未找到章节：{section}"
 
 #BM25索引：中文问题分词后构建，解决口语化/专业术语查不到的问题
 tokenized_docs=[list(jieba.cut(d)) for d in documents]

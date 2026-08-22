@@ -1,80 +1,27 @@
 import json
 import logging
 import os
-import re
-import fitz
 from llm_api import safe_call_deepseek
 
 logging.basicConfig(level=logging.INFO)
 logger=logging.getLogger(__name__)
 
-PAPERS_DIR=os.getenv("PAPERS_DIR")
 CARD_DIR=os.path.join(os.path.dirname(os.path.abspath(__file__)),"cards")
 os.makedirs(CARD_DIR,exist_ok=True)
-SECTIONS_DIR=os.path.join(os.path.dirname(os.path.abspath(__file__)),"papers_sections")
-TITLES_FILE=os.path.join(os.path.dirname(os.path.abspath(__file__)),"qasper_titles.json")
-_titles_cache=None
 
 #以下两函数复用paper_rag的章节提取逻辑（PyMuPDF blocks按标题切分）
-def is_heading(block):
-    #标题识别：数字编号+英文大写，排除公式行和算法步骤
-    t=block.strip().replace("\n"," ")
-    if len(t)<5 or len(t)>80:
-        return False
-    if not re.match(r"^\d+(\.\d+)*\.?\s+[A-Z]",t):
-        return False
-    if re.search(r"[\U0001D400-\U0001D7FF]",t):
-        return False
-    if re.match(r"^\d+\.?\s+(compute|set|let|for|while|if|return)\b",t,re.I):
-        return False
-    return True
-
-def extract_sections(pdf_path):
-    #按章节累计文本：遇到新标题就归档上一章节，全文保持标题-正文结构
-    doc=fitz.open(pdf_path)
-    sections=[]
-    current_title="Abstract"
-    current_text=""
-    for page in doc:
-        for block in page.get_text("blocks"):
-            text=block[4].strip()
-            if not text:
-                continue
-            if is_heading(text):
-                if current_text.strip():
-                    sections.append((current_title,current_text.strip()))
-                current_title=text.replace("\n"," ")
-                current_text=""
-            else:
-                current_text+=text+"\n"
-    if current_text.strip():
-        sections.append((current_title,current_text.strip()))
-    doc.close()
-    return sections
-
 def get_paper_sections(paper_name):
-    #优先读章节缓存；没有缓存才解析PDF，并顺手写入缓存
-    cache_path=os.path.join(SECTIONS_DIR,f"{paper_name}.json")
-    if os.path.exists(cache_path):
-        return json.load(open(cache_path,encoding="utf-8"))
-    pdf_path=os.path.join(PAPERS_DIR,f"{paper_name}.pdf")
-    if not os.path.exists(pdf_path):
-        raise FileNotFoundError(f"找不到论文PDF：{pdf_path}")
-    sections=extract_sections(pdf_path)
-    os.makedirs(SECTIONS_DIR,exist_ok=True)
-    with open(cache_path,"w",encoding="utf-8") as f:
-        json.dump(sections,f,ensure_ascii=False)
-    return sections
+    #旧接口适配：章节读取统一收敛到doc_ingest
+    from doc_ingest import load_sections
+    sections=load_sections(paper_name)
+    if not sections:
+        raise FileNotFoundError(f"找不到论文章节：{paper_name}")
+    return [(s.get("title",""),s.get("text","")) for s in sections]
 
 def get_paper_title(paper_name):
-    #QASPER论文用arxiv id做source，真实标题存在映射文件里
-    global _titles_cache
-    if _titles_cache is None:
-        if os.path.exists(TITLES_FILE):
-            _titles_cache=json.load(open(TITLES_FILE,encoding="utf-8")) or {}
-        else:
-            _titles_cache={}
-    return _titles_cache.get(paper_name,"")
+    #旧接口适配：标题映射统一收敛到doc_ingest
+    from doc_ingest import paper_title
+    return paper_title(paper_name)
 
 CARD_PROMPT="""你是论文结构化解析Agent。根据给定论文章节内容，提取结构化信息，只输出JSON，不要输出其他内容：
 {
