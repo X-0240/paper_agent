@@ -38,6 +38,7 @@ class FactItem:
     section_name: str=""
     raw_quote: str=""
     confidence: str="low"
+    year: Optional[int]=None
 
 @dataclass
 class Conflict:
@@ -54,6 +55,7 @@ class ReviewReport:
     title: str=""
     consensus: List[str]=field(default_factory=list)
     disagreements: List[dict]=field(default_factory=list)
+    superseded_conclusions: List[str]=field(default_factory=list)
     open_questions: List[str]=field(default_factory=list)
     references: List[str]=field(default_factory=list)
     conflict_mark_list: List[str]=field(default_factory=list)
