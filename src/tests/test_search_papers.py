@@ -2,7 +2,7 @@ import json
 
 from doc_ingest import Chunk
 from state import FactItem, PaperCard
-from tools import analyze_paper_relations, build_paper_card, build_search_result, read_section, verify_claim, _extract_facts, _resolve_chunk_id
+from tools import analyze_paper_relations, build_paper_card, build_search_result, read_section, verify_claim, _extract_facts, _extract_verdict, _resolve_chunk_id
 
 def test_build_search_result_dedup_papers():
     #同一论文多片段只产生一条PaperMeta，但保留全部Chunk
@@ -144,7 +144,7 @@ def test_verify_claim_validates_category(monkeypatch):
         category="bad_category" if mode["n"]==1 else "true_conflict"
         if mode["n"]==3:
             category="superseded"
-        return {"choices":[{"message":{"content":json.dumps({"category":category,"verdict":"结论","evidence_supplementary":"证据"})}}]}
+        return {"choices":[{"message":{"content":json.dumps({"category":category,"title":"标题","detail":"详细结论","evidence_supplementary":"证据"})}}]}
     monkeypatch.setattr("llm_api.safe_call_deepseek",fake)
     fa=FactItem(fact_id="f1",paper_id="P1",entity="E",attribute="A",value="1",content="c1",source_chunk_id="c1",section_name="S")
     fb=FactItem(fact_id="f2",paper_id="P2",entity="E",attribute="A",value="2",content="c2",source_chunk_id="c2",section_name="S")
@@ -152,7 +152,15 @@ def test_verify_claim_validates_category(monkeypatch):
     assert bad.category=="insufficient_evidence"
     ok=verify_claim(fa,fb)
     assert ok.category=="true_conflict"
+    assert ok.description=="标题"
+    assert ok.verdict=="详细结论"
+    assert ok.description!=ok.verdict
     newer=verify_claim(fa,fb)
     assert newer.category=="superseded"
     assert ok.fact_ids==["f1","f2"]
     assert bad.conflict_id!=ok.conflict_id
+
+def test_extract_verdict_skips_explanation_object():
+    #LLM先输出解释对象再输出裁决对象时，只取带category的裁决
+    text='先解释：{"note":"说明"} 最终结论：{"category":"true_conflict","title":"t","detail":"d"}'
+    assert _extract_verdict(text)=={"category":"true_conflict","title":"t","detail":"d"}

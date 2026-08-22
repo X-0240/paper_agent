@@ -1,6 +1,7 @@
 import json
 import logging
 import os
+import re
 from config import MAX_CARDS_TEXT_CHARS, MAX_CHUNKS_PER_PAPER, MAX_PAPER_PER_QUERY
 from state import Conflict, FactItem, PaperCard, PaperMeta, SectionRef
 
@@ -11,7 +12,7 @@ FACT_EXTRACT_PROMPT="""你是论文事实抽取器。根据论文卡片抽取可
 约束：必须带paper_id和section_name；没有明确来源的不输出；不要编造。"""
 
 VERIFY_PROMPT="""你是冲突裁决器。根据两个事实主张、双方年份和原文证据，裁决冲突类型，只输出JSON对象：
-{"category":"true_conflict|superseded|misunderstanding|card_error|insufficient_evidence","verdict":"裁决结论","evidence_supplementary":"补充证据"}
+{"category":"true_conflict|superseded|misunderstanding|card_error|insufficient_evidence","title":"简短标题","detail":"详细裁决分析","evidence_supplementary":"补充证据"}
 规则：
 - true_conflict：两个结论在相同范围内都没有被对方推翻，属于实质矛盾
 - superseded：后发表论文显式引用并否定同范围旧结论，新结论取代旧结论（注意双方年份）
@@ -225,16 +226,16 @@ def analyze_paper_relations(paper_ids,cache=None):
     return {"comparison":comparison,"facts":facts}
 
 def _extract_verdict(text):
-    #从LLM输出中截取裁决JSON对象
-    start=text.find("{")
-    end=text.rfind("}")
-    if start==-1 or end==-1:
-        return {}
-    try:
-        obj=json.loads(text[start:end+1])
-        return obj if isinstance(obj,dict) else {}
-    except Exception:
-        return {}
+    #遍历所有JSON对象候选，取带category的裁决对象，兼容前后缀和多个对象
+    decoder=json.JSONDecoder()
+    for m in re.finditer(r"\{",text):
+        try:
+            obj,_=decoder.raw_decode(text[m.start():])
+        except Exception:
+            continue
+        if isinstance(obj,dict) and "category" in obj:
+            return obj
+    return {}
 
 def verify_claim(fact_a,fact_b):
     #冲突二次取证：读取双方章节原文，LLM裁决，category必须落在四种枚举
@@ -264,8 +265,8 @@ def verify_claim(fact_a,fact_b):
         conflict_id=f"conflict-{_conflict_counter}",
         fact_ids=[fact_a.fact_id,fact_b.fact_id],
         category=category,
-        description=verdict.get("verdict",""),
-        verdict=verdict.get("verdict",""),
+        description=verdict.get("title",""),
+        verdict=verdict.get("detail",""),
         confidence="low" if category=="insufficient_evidence" else "high",
         evidence_supplementary=verdict.get("evidence_supplementary","")
     )
