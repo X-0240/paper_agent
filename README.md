@@ -78,7 +78,11 @@ docker build -t paper-agent .
 ## 目录职责
 
 - `task_router.py`：纯规则路由，无外部依赖
+- `CONTRACT.md`：模块2/3 接口契约（State 结构、工具接口、旧代码映射）
+- `config.py`：统一配置常量（检索/Agent/成本上限）
+- `state.py`：AgentState 与实体数据类（PaperMeta/PaperCard/FactItem/Conflict/ReviewReport）
 - `doc_ingest.py`：统一文档解析入口（PDF/Word/Excel/CSV/图片），输出 DocumentRecord + 章节切片
+- `tools.py`：执行层工具入口，当前已实现 search_papers（本地混合检索 → PaperMeta+Chunk）
 - `rag_tool.py`：混合检索（BM25 + FAISS + 可选 Rerank）
 - `agent_react.py`：手写 ReAct 循环，Supervisor + Worker
 - `agent1_retrieve.py` / `agent2_parse.py` / `agent3_review.py`：3-Agent 工具层
