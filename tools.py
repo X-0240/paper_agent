@@ -3,7 +3,7 @@ import logging
 import os
 
 from config import MAX_CARDS_TEXT_CHARS, MAX_CHUNKS_PER_PAPER, MAX_PAPER_PER_QUERY
-from state import FactItem, PaperCard, PaperMeta, SectionRef
+from state import Conflict, FactItem, PaperCard, PaperMeta, SectionRef
 
 logger=logging.getLogger(__name__)
 
@@ -11,8 +11,13 @@ FACT_EXTRACT_PROMPT="""你是论文事实抽取器。根据论文卡片抽取可
 [{"paper_id":"论文ID","entity":"实体","attribute":"属性","value":"值","content":"一句话描述","section_name":"来源章节名","raw_quote":"原文摘录不超过100字"}]
 约束：必须带paper_id和section_name；没有明确来源的不输出；不要编造。"""
 
+VERIFY_PROMPT="""你是冲突裁决器。根据两个事实主张和它们所在章节的原文证据，裁决冲突类型，只输出JSON对象：
+{"category":"true_conflict|misunderstanding|card_error|insufficient_evidence","verdict":"裁决结论","evidence_supplementary":"补充证据"}
+规则：原文能证明两个值确实矛盾时用true_conflict；是理解错误用misunderstanding；卡片抽取错误用card_error；证据不足用insufficient_evidence。不要编造。"""
+
 _chunk_cache={}
 _fact_counter=0
+_conflict_counter=0
 
 def _truncate_boundary(text,max_chars):
     #尽量在句子边界截断，避免切在半句话
@@ -119,15 +124,29 @@ def build_paper_card(paper_id,cache=None):
     return paper_card
 
 def _extract_json_array(text):
-    #从LLM输出中截取JSON数组，格式不完整时返回空
+    #兼容数组/对象两种输出；对象里第一个list字段视为事实列表
     start=text.find("[")
     end=text.rfind("]")
-    if start==-1 or end==-1:
-        return []
-    try:
-        return json.loads(text[start:end+1])
-    except Exception:
-        return []
+    if start!=-1 and end!=-1:
+        try:
+            return json.loads(text[start:end+1])
+        except Exception:
+            pass
+    start=text.find("{")
+    end=text.rfind("}")
+    if start!=-1 and end!=-1:
+        try:
+            obj=json.loads(text[start:end+1])
+            if isinstance(obj,list):
+                return obj
+            if isinstance(obj,dict):
+                for v in obj.values():
+                    if isinstance(v,list):
+                        return v
+                return [obj]
+        except Exception:
+            pass
+    return []
 
 def _extract_facts(cards_text):
     #LLM事实抽取：JSON格式失败时带纠正指令重试一次，仍失败返回空
@@ -141,7 +160,9 @@ def _extract_facts(cards_text):
         items=_extract_json_array(result["choices"][0]["message"]["content"])
         if items:
             return items
-        messages.append({"role":"user","content":"你上次的输出不是合法JSON数组，请只输出JSON数组。"})
+        #把失败输出回填给LLM，让它看到自己的错误样板再纠正
+        messages.append({"role":"assistant","content":result["choices"][0]["message"]["content"]})
+        messages.append({"role":"user","content":"上述输出不是合法JSON数组，请只输出JSON数组。"})
     logger.warning("事实抽取两次均失败，本次返回空事实列表")
     return []
 
@@ -197,3 +218,49 @@ def analyze_paper_relations(paper_ids,cache=None):
             confidence="high"
         ))
     return {"comparison":comparison,"facts":facts}
+
+def _extract_verdict(text):
+    #从LLM输出中截取裁决JSON对象
+    start=text.find("{")
+    end=text.rfind("}")
+    if start==-1 or end==-1:
+        return {}
+    try:
+        obj=json.loads(text[start:end+1])
+        return obj if isinstance(obj,dict) else {}
+    except Exception:
+        return {}
+
+def verify_claim(fact_a,fact_b):
+    #冲突二次取证：读取双方章节原文，LLM裁决，category必须落在四种枚举
+    from llm_api import safe_call_deepseek
+    evidence_a=read_section(fact_a.paper_id,fact_a.section_name) or fact_a.raw_quote
+    evidence_b=read_section(fact_b.paper_id,fact_b.section_name) or fact_b.raw_quote
+    payload={
+        "fact_a":vars(fact_a),
+        "fact_b":vars(fact_b),
+        "evidence_a":evidence_a[:2000],
+        "evidence_b":evidence_b[:2000]
+    }
+    result=safe_call_deepseek(
+        [{"role":"system","content":VERIFY_PROMPT},{"role":"user","content":json.dumps(payload,ensure_ascii=False,default=str)}],
+        temperature=0.1,
+        max_tokens=1000
+    )
+    verdict=_extract_verdict(result["choices"][0]["message"]["content"])
+    allowed={"true_conflict","misunderstanding","card_error","insufficient_evidence"}
+    category=verdict.get("category","insufficient_evidence")
+    if category not in allowed:
+        logger.warning(f"裁决返回非法category：{category}，回退insufficient_evidence")
+        category="insufficient_evidence"
+    global _conflict_counter
+    _conflict_counter+=1
+    return Conflict(
+        conflict_id=f"conflict-{_conflict_counter}",
+        fact_ids=[fact_a.fact_id,fact_b.fact_id],
+        category=category,
+        description=verdict.get("verdict",""),
+        verdict=verdict.get("verdict",""),
+        confidence="low" if category=="insufficient_evidence" else "high",
+        evidence_supplementary=verdict.get("evidence_supplementary","")
+    )

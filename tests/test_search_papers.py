@@ -1,8 +1,8 @@
 import json
 
 from doc_ingest import Chunk
-from state import PaperCard
-from tools import analyze_paper_relations, build_paper_card, build_search_result, read_section, _extract_facts, _resolve_chunk_id
+from state import FactItem, PaperCard
+from tools import analyze_paper_relations, build_paper_card, build_search_result, read_section, verify_claim, _extract_facts, _resolve_chunk_id
 
 def test_build_search_result_dedup_papers():
     #同一论文多片段只产生一条PaperMeta，但保留全部Chunk
@@ -111,11 +111,19 @@ def test_extract_facts_retry_on_bad_json(monkeypatch):
         calls["n"]+=1
         if calls["n"]==1:
             return {"choices":[{"message":{"content":"不是JSON"}}]}
+        #第二次必须能看到自己第一次的错误输出
+        assert any(m.get("role")=="assistant" and m.get("content")=="不是JSON" for m in messages)
         return {"choices":[{"message":{"content":json.dumps([{"paper_id":"P1","entity":"E","attribute":"A","value":"V","content":"C","section_name":"S","raw_quote":"q"}])}}]}
     monkeypatch.setattr("llm_api.safe_call_deepseek",fake)
     items=_extract_facts("cards")
     assert len(items)==1
     assert calls["n"]==2
+
+def test_extract_json_array_accepts_object(monkeypatch):
+    #LLM返回对象或含facts字段的对象时也能解析成事实列表
+    from tools import _extract_json_array
+    assert _extract_json_array('{"facts":[{"entity":"E"}]}')==[{"entity":"E"}]
+    assert _extract_json_array('{"entity":"E","attribute":"A"}')==[{"entity":"E","attribute":"A"}]
 
 def test_fact_id_not_duplicated(monkeypatch):
     #多次调用analyze_paper_relations时fact_id不能重复
@@ -126,3 +134,21 @@ def test_fact_id_not_duplicated(monkeypatch):
     out1=analyze_paper_relations(["P1"])
     out2=analyze_paper_relations(["P1"])
     assert out1["facts"][0].fact_id!=out2["facts"][0].fact_id
+
+def test_verify_claim_validates_category(monkeypatch):
+    #非法category回退insufficient_evidence，合法category保留
+    monkeypatch.setattr("tools.read_section",lambda pid,sec,cache=None,max_chars=4000:"原文证据")
+    mode={"n":0}
+    def fake(messages,**kw):
+        mode["n"]+=1
+        category="bad_category" if mode["n"]==1 else "true_conflict"
+        return {"choices":[{"message":{"content":json.dumps({"category":category,"verdict":"结论","evidence_supplementary":"证据"})}}]}
+    monkeypatch.setattr("llm_api.safe_call_deepseek",fake)
+    fa=FactItem(fact_id="f1",paper_id="P1",entity="E",attribute="A",value="1",content="c1",source_chunk_id="c1",section_name="S")
+    fb=FactItem(fact_id="f2",paper_id="P2",entity="E",attribute="A",value="2",content="c2",source_chunk_id="c2",section_name="S")
+    bad=verify_claim(fa,fb)
+    assert bad.category=="insufficient_evidence"
+    ok=verify_claim(fa,fb)
+    assert ok.category=="true_conflict"
+    assert ok.fact_ids==["f1","f2"]
+    assert bad.conflict_id!=ok.conflict_id
