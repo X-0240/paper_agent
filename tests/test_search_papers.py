@@ -20,8 +20,8 @@ def test_build_search_result_empty():
 
 def test_read_section_exact_fuzzy_and_cache(monkeypatch):
     #精确匹配返回章节全文，模糊匹配兜底，缓存命中后不再读章节
-    sections=[("1 Introduction","intro text"),("3 Method","method text")]
-    monkeypatch.setattr("agent2_parse.get_paper_sections",lambda paper_id:sections)
+    sections=[{"title":"1 Introduction","text":"intro text","page":None},{"title":"3 Method","text":"method text","page":None}]
+    monkeypatch.setattr("tools._load_sections",lambda paper_id:sections)
     cache={}
     assert read_section("P","1 Introduction",cache)=="intro text"
     assert read_section("P","Introduction",cache)=="intro text"
@@ -31,9 +31,29 @@ def test_read_section_exact_fuzzy_and_cache(monkeypatch):
     def counting(paper_id):
         calls["n"]+=1
         return sections
-    monkeypatch.setattr("agent2_parse.get_paper_sections",counting)
+    monkeypatch.setattr("tools._load_sections",counting)
     read_section("P","1 Introduction",cache)
     assert calls["n"]==0
+
+def test_read_section_fuzzy_cache_uses_real_title(monkeypatch):
+    #模糊命中后，实际章节名也要写缓存，后续精确请求不再读章节
+    sections=[{"title":"1 Introduction","text":"intro text","page":None}]
+    monkeypatch.setattr("tools._load_sections",lambda paper_id:sections)
+    cache={}
+    read_section("P","Introductin",cache)
+    calls={"n":0}
+    monkeypatch.setattr("tools._load_sections",lambda paper_id:(calls.__setitem__("n",calls["n"]+1) or sections))
+    assert read_section("P","1 Introduction",cache)=="intro text"
+    assert calls["n"]==0
+
+def test_read_section_truncate_at_sentence_boundary(monkeypatch):
+    #截断点尽量停在句子边界，不切在半句话
+    long_text="第一句"*30+"。"+"第二句很长"*200
+    sections=[{"title":"1 Introduction","text":long_text,"page":None}]
+    monkeypatch.setattr("tools._load_sections",lambda paper_id:sections)
+    text=read_section("P","1 Introduction",max_chars=100)
+    assert len(text)<=100
+    assert text.endswith("。")
 
 def test_build_paper_card_maps_fields_and_cache(monkeypatch):
     #旧卡片字段映射到新PaperCard，缓存命中后不再调LLM
@@ -44,7 +64,7 @@ def test_build_paper_card_maps_fields_and_cache(monkeypatch):
         "innovation":["完全基于注意力"],
         "limitations":"未提及"
     })
-    monkeypatch.setattr("agent2_parse.get_paper_sections",lambda paper_id:[("1 Introduction","intro"),("3 Method","method")])
+    monkeypatch.setattr("tools._load_sections",lambda paper_id:[{"title":"1 Introduction","text":"intro","page":None},{"title":"3 Method","text":"method","page":None}])
     cache={}
     card=build_paper_card("P",cache)
     assert card.title=="Attention Is All You Need"
