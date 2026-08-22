@@ -38,6 +38,7 @@ class Chunk:
     token_len: int
     page_num: int
     parent_id: str=""
+    position: str=""
 
 def is_heading(text):
     #中英文标题识别：数字编号、常见英文章节名、中文编号
@@ -308,7 +309,7 @@ def chunk_text(text,chunk_tokens=CHUNK_TOKENS,overlap=CHUNK_OVERLAP):
     return [c for c in chunks if c.strip()]
 
 def chunk_splitter(record,chunk_tokens=CHUNK_TOKENS,overlap=CHUNK_OVERLAP):
-    #章节级切片：每节独立切，跨页章节页码置None，避免错误起始页
+    #章节级切片：跨页章节页码置None；Word用段落区间定位，不依赖页码
     chunks=[]
     idx=0
     for sec in record.sections:
@@ -318,7 +319,14 @@ def chunk_splitter(record,chunk_tokens=CHUNK_TOKENS,overlap=CHUNK_OVERLAP):
         if pages:
             uniq=sorted(set(pages))
             page=uniq[0] if len(uniq)==1 else None
+        para_cursor=0
         for piece in chunk_text(sec.get("text",""),chunk_tokens,overlap):
+            lines=piece.splitlines()
+            pos=""
+            if record.doc_type=="word" and lines:
+                start=para_cursor+1
+                para_cursor+=len(lines)
+                pos=f"段落{start}-{para_cursor}"
             chunks.append(Chunk(
                 chunk_id=f"{record.source}-{idx}",
                 doc_id=record.source,
@@ -326,7 +334,8 @@ def chunk_splitter(record,chunk_tokens=CHUNK_TOKENS,overlap=CHUNK_OVERLAP):
                 text=piece,
                 token_len=token_len(piece),
                 page_num=page,
-                parent_id=f"{record.source}::{title}"
+                parent_id=f"{record.source}::{title}",
+                position=pos
             ))
             idx+=1
     return chunks
