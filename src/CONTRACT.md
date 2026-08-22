@@ -37,6 +37,7 @@ class PaperCard(TypedDict):
 class FactItem(TypedDict):
     fact_id: str
     paper_id: str
+    year: Optional[int]       # 论文发布年份，用于时间演进判定
     entity: str
     attribute: str
     value: str
@@ -49,7 +50,7 @@ class FactItem(TypedDict):
 class Conflict(TypedDict):
     conflict_id: str
     fact_ids: List[str]
-    category: Literal["true_conflict","misunderstanding","card_error","insufficient_evidence"]
+    category: Literal["true_conflict","superseded","misunderstanding","card_error","insufficient_evidence"]
     description: str
     verdict: str
     confidence: Literal["high","low"]
@@ -59,6 +60,7 @@ class ReviewReport(TypedDict):
     title: str
     consensus: List[str]
     disagreements: List[Conflict]
+    superseded_conclusions: List[str]   # 被新结论显式推翻的历史结论
     open_questions: List[str]
     references: List[str]     # 格式：[Author, Year, §chunk_id]
     conflict_mark_list: List[str]
@@ -126,7 +128,8 @@ class AgentState(TypedDict):
 - 输入：`fact_a: FactItem`, `fact_b: FactItem`
 - 输出：`Conflict`
 - 实现：复用 `agent3_review.verify_with_retrieval` 的二次检索与裁决思路；先查本地，外网 P1
-- 约束：category 只能是四种枚举之一
+- 约束：category 只能是五种枚举之一
+- 时间演进：Prompt 必须区分“实质矛盾”和“结论被推翻”；新论文须显式引用并否定同范围旧结论才判 `superseded`，不能只因为发布时间晚就赢
 - 超时：60s
 
 ### 6. write_review

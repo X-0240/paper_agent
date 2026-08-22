@@ -1,7 +1,6 @@
 import json
 import logging
 import os
-
 from config import MAX_CARDS_TEXT_CHARS, MAX_CHUNKS_PER_PAPER, MAX_PAPER_PER_QUERY
 from state import Conflict, FactItem, PaperCard, PaperMeta, SectionRef
 
@@ -11,9 +10,15 @@ FACT_EXTRACT_PROMPT="""你是论文事实抽取器。根据论文卡片抽取可
 [{"paper_id":"论文ID","entity":"实体","attribute":"属性","value":"值","content":"一句话描述","section_name":"来源章节名","raw_quote":"原文摘录不超过100字"}]
 约束：必须带paper_id和section_name；没有明确来源的不输出；不要编造。"""
 
-VERIFY_PROMPT="""你是冲突裁决器。根据两个事实主张和它们所在章节的原文证据，裁决冲突类型，只输出JSON对象：
-{"category":"true_conflict|misunderstanding|card_error|insufficient_evidence","verdict":"裁决结论","evidence_supplementary":"补充证据"}
-规则：原文能证明两个值确实矛盾时用true_conflict；是理解错误用misunderstanding；卡片抽取错误用card_error；证据不足用insufficient_evidence。不要编造。"""
+VERIFY_PROMPT="""你是冲突裁决器。根据两个事实主张、双方年份和原文证据，裁决冲突类型，只输出JSON对象：
+{"category":"true_conflict|superseded|misunderstanding|card_error|insufficient_evidence","verdict":"裁决结论","evidence_supplementary":"补充证据"}
+规则：
+- true_conflict：两个结论在相同范围内都没有被对方推翻，属于实质矛盾
+- superseded：后发表论文显式引用并否定同范围旧结论，新结论取代旧结论（注意双方年份）
+- misunderstanding：理解错误
+- card_error：卡片抽取错误
+- insufficient_evidence：证据不足
+不要因为发布时间晚就自动判 superseded，必须看到显式否定证据。不要编造。"""
 
 _chunk_cache={}
 _fact_counter=0
@@ -248,7 +253,7 @@ def verify_claim(fact_a,fact_b):
         max_tokens=1000
     )
     verdict=_extract_verdict(result["choices"][0]["message"]["content"])
-    allowed={"true_conflict","misunderstanding","card_error","insufficient_evidence"}
+    allowed={"true_conflict","superseded","misunderstanding","card_error","insufficient_evidence"}
     category=verdict.get("category","insufficient_evidence")
     if category not in allowed:
         logger.warning(f"裁决返回非法category：{category}，回退insufficient_evidence")

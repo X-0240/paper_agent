@@ -142,6 +142,8 @@ def test_verify_claim_validates_category(monkeypatch):
     def fake(messages,**kw):
         mode["n"]+=1
         category="bad_category" if mode["n"]==1 else "true_conflict"
+        if mode["n"]==3:
+            category="superseded"
         return {"choices":[{"message":{"content":json.dumps({"category":category,"verdict":"结论","evidence_supplementary":"证据"})}}]}
     monkeypatch.setattr("llm_api.safe_call_deepseek",fake)
     fa=FactItem(fact_id="f1",paper_id="P1",entity="E",attribute="A",value="1",content="c1",source_chunk_id="c1",section_name="S")
@@ -150,5 +152,7 @@ def test_verify_claim_validates_category(monkeypatch):
     assert bad.category=="insufficient_evidence"
     ok=verify_claim(fa,fb)
     assert ok.category=="true_conflict"
+    newer=verify_claim(fa,fb)
+    assert newer.category=="superseded"
     assert ok.fact_ids==["f1","f2"]
     assert bad.conflict_id!=ok.conflict_id
