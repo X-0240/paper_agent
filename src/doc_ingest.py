@@ -1,19 +1,23 @@
 import csv
 import logging
+import os
 import re
 from dataclasses import dataclass, field
 from pathlib import Path
 
 import fitz
 from docx import Document as DocxDocument
+from dotenv import load_dotenv
 from openpyxl import load_workbook
 
 from pdf_preprocess import preprocess_pdf
 
+load_dotenv()
 logger=logging.getLogger(__name__)
 
 CHUNK_TOKENS=800
 CHUNK_OVERLAP=100
+_tokenizer=None
 
 @dataclass
 class DocumentRecord:
@@ -33,6 +37,7 @@ class Chunk:
     text: str
     token_len: int
     page_num: int
+    parent_id: str=""
 
 def is_heading(text):
     #中英文标题识别：数字编号、常见英文章节名、中文编号
@@ -48,12 +53,13 @@ def is_heading(text):
     return False
 
 def _extract_sections_pdf(pdf_path):
-    #按blocks解析PDF，标题变更时归档上一节，并记录起始页码
+    #按blocks解析PDF，标题变更时归档上一节，记录覆盖的页码集合
     doc=fitz.open(pdf_path)
     sections=[]
     current_title="Abstract"
     current_text=""
     current_page=0
+    current_pages=[]
     for page_no,page in enumerate(doc):
         for block in page.get_text("blocks"):
             text=block[4].strip()
@@ -61,14 +67,16 @@ def _extract_sections_pdf(pdf_path):
                 continue
             if is_heading(text):
                 if current_text.strip():
-                    sections.append({"title":current_title,"text":current_text.strip(),"page":current_page})
+                    sections.append({"title":current_title,"text":current_text.strip(),"page":current_page,"pages":sorted(set(current_pages))})
                 current_title=text.replace("\n"," ")
                 current_text=""
                 current_page=page_no
+                current_pages=[page_no]
             else:
                 current_text+=text+"\n"
+                current_pages.append(page_no)
     if current_text.strip():
-        sections.append({"title":current_title,"text":current_text.strip(),"page":current_page})
+        sections.append({"title":current_title,"text":current_text.strip(),"page":current_page,"pages":sorted(set(current_pages))})
     doc.close()
     return sections
 
@@ -221,41 +229,104 @@ def parse_document(path):
         return _parse_image(p)
     raise ValueError(f"不支持的格式：{ext}")
 
-def approx_tokens(text):
-    #混合估算：中文字符按字、英文按词
+def _get_tokenizer():
+    #优先本地bge-m3子词tokenizer（无网络依赖），其次tiktoken，最后回退启发式
+    global _tokenizer
+    if _tokenizer is None:
+        try:
+            from transformers import AutoTokenizer
+            _tokenizer=AutoTokenizer.from_pretrained(os.getenv("MODEL_PATH",""))
+        except Exception:
+            try:
+                import tiktoken
+                _tokenizer=tiktoken.get_encoding("cl100k_base")
+            except Exception:
+                _tokenizer="fallback"
+    return _tokenizer
+
+def token_len(text):
+    #子词真实计数：标点、数字、代码都能统计；tokenizer不可用时回退启发式
+    tok=_get_tokenizer()
+    if tok!="fallback":
+        try:
+            return len(tok.encode(text))
+        except Exception:
+            pass
     return len(re.findall(r"[\u4e00-\u9fff]",text))+len(re.findall(r"[A-Za-z0-9]+",text))
 
-def chunk_text(text,chunk_tokens=CHUNK_TOKENS,overlap=CHUNK_OVERLAP):
-    #按token位置切分，保留原文字，尾部不足时直接收尾
-    tokens=list(re.finditer(r"[A-Za-z0-9]+|[\u4e00-\u9fff]",text))
-    if not tokens:
-        return [text] if text.strip() else []
-    chunks=[]
-    step=max(1,chunk_tokens-overlap)
-    start=0
-    while start<len(tokens):
-        end=min(len(tokens),start+chunk_tokens)
-        chunks.append(text[tokens[start].start():tokens[end-1].end()])
-        if end==len(tokens):
+def _tail_lines_by_tokens(lines,limit):
+    #从尾部向前收拢，使重叠区累计token不超过上限
+    tail=[]
+    total=0
+    for line in reversed(lines):
+        cost=token_len(line)
+        if tail and total+cost>limit:
             break
-        start+=step
-    return chunks
+        tail.append(line)
+        total+=cost
+    return "".join(reversed(tail))
+
+def _split_long_line(line,limit):
+    #单行超限时按字符硬切，每段用真实token数校准
+    pieces=[]
+    start=0
+    while start<len(line):
+        end=min(len(line),start+limit*4)
+        while end>start+1 and token_len(line[start:end])>limit:
+            end-=max(1,(end-start)//2)
+        if end==start:
+            end=start+1
+        pieces.append(line[start:end])
+        start=end
+    return pieces
+
+def chunk_text(text,chunk_tokens=CHUNK_TOKENS,overlap=CHUNK_OVERLAP):
+    #行级贪婪切分：按真实token数校准，避免代码长行和标点导致超长
+    if not text.strip():
+        return []
+    chunks=[]
+    lines=text.splitlines(keepends=True) or [text]
+    buf=""
+    buf_lines=[]
+    for line in lines:
+        if token_len(line)>chunk_tokens:
+            if buf:
+                chunks.append(buf)
+                buf=""
+                buf_lines=[]
+            chunks.extend(_split_long_line(line,chunk_tokens))
+            continue
+        if buf and token_len(buf+line)>chunk_tokens:
+            chunks.append(buf)
+            carry=_tail_lines_by_tokens(buf_lines,overlap)
+            buf=carry
+            buf_lines=carry.splitlines(keepends=True) if carry else []
+        buf+=line
+        buf_lines.append(line)
+    if buf.strip():
+        chunks.append(buf)
+    return [c for c in chunks if c.strip()]
 
 def chunk_splitter(record,chunk_tokens=CHUNK_TOKENS,overlap=CHUNK_OVERLAP):
-    #章节级切片：每节独立切，保留章节名和页码
+    #章节级切片：每节独立切，跨页章节页码置None，避免错误起始页
     chunks=[]
     idx=0
     for sec in record.sections:
         title=sec.get("title","全文")
         page=sec.get("page")
+        pages=sec.get("pages")
+        if pages:
+            uniq=sorted(set(pages))
+            page=uniq[0] if len(uniq)==1 else None
         for piece in chunk_text(sec.get("text",""),chunk_tokens,overlap):
             chunks.append(Chunk(
                 chunk_id=f"{record.source}-{idx}",
                 doc_id=record.source,
                 section_name=title,
                 text=piece,
-                token_len=approx_tokens(piece),
-                page_num=page
+                token_len=token_len(piece),
+                page_num=page,
+                parent_id=f"{record.source}::{title}"
             ))
             idx+=1
     return chunks

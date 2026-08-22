@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from doc_ingest import DocumentRecord, parse_document, chunk_splitter, CHUNK_TOKENS, CHUNK_OVERLAP
+from doc_ingest import DocumentRecord, parse_document, chunk_splitter, chunk_text, token_len, CHUNK_TOKENS, CHUNK_OVERLAP
 
 SAMPLE_DIR=Path(__file__).resolve().parents[1]/"multi_format_samples"
 
@@ -38,3 +38,17 @@ def test_table_pdf_extracts_rows():
     record=parse_document(SAMPLE_DIR/"sample_table.pdf")
     assert record.tables
     assert any("PyMuPDF" in str(cell) for table in record.tables for row in table for cell in row)
+
+def test_long_code_line_not_oversize():
+    #长代码行不能因为标点被无视而整行塞进一个chunk
+    code="def f(x):\n    return "+"x+"*5000+"y\n"
+    chunks=chunk_text(code,chunk_tokens=100,overlap=10)
+    assert all(token_len(c)<=100 for c in chunks)
+
+def test_multipage_section_page_none():
+    #跨页章节无法精确到单页时，页码必须置None而不是错误起始页
+    record=DocumentRecord(source="fake.pdf",doc_type="pdf_text",text="a"*3000,
+                          sections=[{"title":"Chapter3","text":"a"*3000,"page":10,"pages":[10,15]}])
+    chunks=chunk_splitter(record,chunk_tokens=100,overlap=10)
+    assert chunks
+    assert all(c.page_num is None for c in chunks)
