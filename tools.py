@@ -1,14 +1,18 @@
 import json
+import logging
 import os
 
-from config import MAX_CHUNKS_PER_PAPER, MAX_PAPER_PER_QUERY
+from config import MAX_CARDS_TEXT_CHARS, MAX_CHUNKS_PER_PAPER, MAX_PAPER_PER_QUERY
 from state import FactItem, PaperCard, PaperMeta, SectionRef
+
+logger=logging.getLogger(__name__)
 
 FACT_EXTRACT_PROMPT="""你是论文事实抽取器。根据论文卡片抽取可跨论文比较的事实主张，只输出JSON数组：
 [{"paper_id":"论文ID","entity":"实体","attribute":"属性","value":"值","content":"一句话描述","section_name":"来源章节名","raw_quote":"原文摘录不超过100字"}]
 约束：必须带paper_id和section_name；没有明确来源的不输出；不要编造。"""
 
 _chunk_cache={}
+_fact_counter=0
 
 def _truncate_boundary(text,max_chars):
     #尽量在句子边界截断，避免切在半句话
@@ -125,6 +129,22 @@ def _extract_json_array(text):
     except Exception:
         return []
 
+def _extract_facts(cards_text):
+    #LLM事实抽取：JSON格式失败时带纠正指令重试一次，仍失败返回空
+    from llm_api import safe_call_deepseek
+    messages=[
+        {"role":"system","content":FACT_EXTRACT_PROMPT},
+        {"role":"user","content":cards_text}
+    ]
+    for attempt in range(2):
+        result=safe_call_deepseek(messages,temperature=0.2,max_tokens=3000)
+        items=_extract_json_array(result["choices"][0]["message"]["content"])
+        if items:
+            return items
+        messages.append({"role":"user","content":"你上次的输出不是合法JSON数组，请只输出JSON数组。"})
+    logger.warning("事实抽取两次均失败，本次返回空事实列表")
+    return []
+
 def _resolve_chunk_id(paper_id,section_name):
     #章节名映射到真实chunk_id：精确→模糊→None，来源不可追溯的事实直接丢弃
     from doc_ingest import DocumentRecord, chunk_splitter, load_sections
@@ -149,16 +169,11 @@ def analyze_paper_relations(paper_ids,cache=None):
     #横向对比复用旧逻辑；事实抽取后必须带真实chunk_id，否则丢弃
     from dataclasses import asdict
     from agent2_parse import compare_papers
-    from llm_api import safe_call_deepseek
     comparison=compare_papers(paper_ids)
     cards=[build_paper_card(pid,cache) for pid in paper_ids]
-    cards_text=json.dumps([asdict(c) for c in cards],ensure_ascii=False,default=str)[:12000]
-    result=safe_call_deepseek(
-        [{"role":"system","content":FACT_EXTRACT_PROMPT},{"role":"user","content":cards_text}],
-        temperature=0.2,
-        max_tokens=3000
-    )
-    items=_extract_json_array(result["choices"][0]["message"]["content"])
+    cards_text=json.dumps([asdict(c) for c in cards],ensure_ascii=False,default=str)[:MAX_CARDS_TEXT_CHARS]
+    items=_extract_facts(cards_text)
+    global _fact_counter
     facts=[]
     for it in items:
         pid=it.get("paper_id","")
@@ -168,8 +183,9 @@ def analyze_paper_relations(paper_ids,cache=None):
         chunk_id=_resolve_chunk_id(pid,section)
         if not chunk_id:
             continue
+        _fact_counter+=1
         facts.append(FactItem(
-            fact_id=f"fact-{len(facts)+1}",
+            fact_id=f"fact-{_fact_counter}",
             paper_id=pid,
             entity=it.get("entity",""),
             attribute=it.get("attribute",""),
