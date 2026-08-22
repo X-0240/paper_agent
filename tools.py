@@ -2,7 +2,12 @@ import json
 import logging
 import os
 import re
+from dataclasses import asdict
+
+from agent2_parse import build_paper_card as old_build_card, compare_papers
 from config import MAX_CARDS_TEXT_CHARS, MAX_CHUNKS_PER_PAPER, MAX_PAPER_PER_QUERY
+from doc_ingest import Chunk, DocumentRecord, chunk_splitter, load_sections, paper_title, token_len
+from llm_api import safe_call_deepseek
 from state import Conflict, FactItem, PaperCard, PaperMeta, SectionRef
 
 logger=logging.getLogger(__name__)
@@ -35,7 +40,6 @@ def _truncate_boundary(text,max_chars):
 
 def build_search_result(results):
     #检索结果统一映射为PaperMeta+Chunk，同一论文只保留一份元数据
-    from doc_ingest import Chunk, paper_title, token_len
     papers=[]
     seen=set()
     chunks=[]
@@ -61,6 +65,7 @@ def build_search_result(results):
 
 def search_papers(query,limit=MAX_PAPER_PER_QUERY):
     #本地检索入口：复用rag_tool混合检索，输出契约化的papers+chunks
+    #rag_tool顶层会加载SentenceTransformer，保持函数内导入避免拖慢测试与导入
     from rag_tool import search_papers_rerank, search_papers_structured
     if os.getenv("USE_RERANK")=="1":
         results=search_papers_rerank(query,k=limit)
@@ -73,7 +78,6 @@ def read_section(paper_id,section_name,cache=None,max_chars=4000):
     key=f"{paper_id}||{section_name}"
     if cache and key in cache:
         return cache[key]
-    from doc_ingest import load_sections
     sections=load_sections(paper_id)
     if not sections:
         return None
@@ -104,10 +108,8 @@ def build_paper_card(paper_id,cache=None):
     if cache and paper_id in cache:
         return cache[paper_id]
     #旧建卡逻辑待移植到新链前暂时保留依赖
-    from agent2_parse import build_paper_card as old_build_card
     card=old_build_card(paper_id)
     sections_ref=[]
-    from doc_ingest import load_sections, paper_title
     for sec in load_sections(paper_id):
         sections_ref.append(SectionRef(name=sec.get("title",""),page=sec.get("page"),chunk_ids=[]))
     key_findings=card.get("innovation",[])
@@ -156,7 +158,6 @@ def _extract_json_array(text):
 
 def _extract_facts(cards_text):
     #LLM事实抽取：JSON格式失败时带纠正指令重试一次，仍失败返回空
-    from llm_api import safe_call_deepseek
     messages=[
         {"role":"system","content":FACT_EXTRACT_PROMPT},
         {"role":"user","content":cards_text}
@@ -174,7 +175,6 @@ def _extract_facts(cards_text):
 
 def _resolve_chunk_id(paper_id,section_name):
     #章节名映射到真实chunk_id：精确→模糊→None，来源不可追溯的事实直接丢弃
-    from doc_ingest import DocumentRecord, chunk_splitter, load_sections
     if paper_id not in _chunk_cache:
         sections=load_sections(paper_id)
         _chunk_cache[paper_id]=chunk_splitter(DocumentRecord(source=paper_id,doc_type="pdf_text",text="",sections=sections)) if sections else []
@@ -194,8 +194,6 @@ def _resolve_chunk_id(paper_id,section_name):
 
 def analyze_paper_relations(paper_ids,cache=None):
     #横向对比复用旧逻辑；事实抽取后必须带真实chunk_id，否则丢弃
-    from dataclasses import asdict
-    from agent2_parse import compare_papers
     comparison=compare_papers(paper_ids)
     cards=[build_paper_card(pid,cache) for pid in paper_ids]
     cards_text=json.dumps([asdict(c) for c in cards],ensure_ascii=False,default=str)[:MAX_CARDS_TEXT_CHARS]
@@ -239,7 +237,6 @@ def _extract_verdict(text):
 
 def verify_claim(fact_a,fact_b):
     #冲突二次取证：读取双方章节原文，LLM裁决，category必须落在四种枚举
-    from llm_api import safe_call_deepseek
     evidence_a=read_section(fact_a.paper_id,fact_a.section_name) or fact_a.raw_quote
     evidence_b=read_section(fact_b.paper_id,fact_b.section_name) or fact_b.raw_quote
     payload={
