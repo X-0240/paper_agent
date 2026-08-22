@@ -1,4 +1,5 @@
 import csv
+import json
 import logging
 import os
 import re
@@ -18,6 +19,34 @@ logger=logging.getLogger(__name__)
 CHUNK_TOKENS=800
 CHUNK_OVERLAP=100
 _tokenizer=None
+SECTIONS_DIR=os.path.join(os.path.dirname(os.path.abspath(__file__)),"papers_sections")
+TITLES_FILE=os.path.join(os.path.dirname(os.path.abspath(__file__)),"qasper_titles.json")
+_titles_cache=None
+
+def paper_title(paper_id):
+    #标题映射：qasper_titles.json优先，查不到回退空串
+    global _titles_cache
+    if _titles_cache is None:
+        _titles_cache=json.load(open(TITLES_FILE,encoding="utf-8")) if os.path.exists(TITLES_FILE) else {}
+    return _titles_cache.get(paper_id,"")
+
+def load_sections(paper_id):
+    #章节唯一入口：优先读缓存，其次doc_ingest解析PDF；统一为dict列表
+    path=os.path.join(SECTIONS_DIR,f"{paper_id}.json")
+    if os.path.exists(path):
+        data=json.load(open(path,encoding="utf-8"))
+        out=[]
+        for item in data:
+            if isinstance(item,dict):
+                out.append(item)
+            else:
+                out.append({"title":item[0],"text":item[1],"page":None,"pages":None})
+        return out
+    pdf_path=os.path.join(os.getenv("PAPERS_DIR",""),f"{paper_id}.pdf")
+    if os.path.exists(pdf_path):
+        record=parse_document(pdf_path)
+        return [{"title":s.get("title",""),"text":s.get("text",""),"page":s.get("page"),"pages":s.get("pages")} for s in record.sections]
+    return []
 
 @dataclass
 class DocumentRecord:
