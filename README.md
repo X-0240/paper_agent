@@ -94,3 +94,4 @@ docker build -t paper-agent .
 - `GET /ask/stream` 依赖 Authorization 头，浏览器原生 EventSource 无法直接携带，前端需要走 fetch 流式或查询参数方案
 - 服务依赖本地模型和索引文件，Docker 内需要显式挂载并覆盖路径
 - 论文场景以原生文本 PDF 为主，不处理扫描件；图片 OCR 为可选 P1，当前未安装引擎时接口明确返回 OCR 不可用
+- Token 计数使用本地 bge-m3 子词 tokenizer（无网络依赖），只作为 DeepSeek 真实 token 数的近似；Chunk 带 `parent_id` 指向完整章节，供后续父文档检索
