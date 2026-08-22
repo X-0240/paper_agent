@@ -82,7 +82,7 @@ docker build -t paper-agent .
 - `config.py`：统一配置常量（检索/Agent/成本上限）
 - `state.py`：AgentState 与实体数据类（PaperMeta/PaperCard/FactItem/Conflict/ReviewReport）
 - `doc_ingest.py`：统一文档解析入口（PDF/Word/Excel/CSV/图片），章节加载/标题映射的唯一实现
-- `tools.py`：执行层工具入口，已实现 search_papers（本地混合检索 → PaperMeta+Chunk）、read_section（精确→模糊→None，会话缓存+句子边界截断）、build_paper_card（复用旧建卡）、analyze_paper_relations（对比+事实抽取，来源必须映射到真实 chunk_id）；agent2_parse/rag_tool 的章节与标题逻辑已收敛到这里
+- `tools.py`：执行层工具入口，已实现 search_papers、read_section、build_paper_card、analyze_paper_relations、verify_claim（二次取证+裁决，category 强制枚举）；agent2_parse/rag_tool 的章节与标题逻辑已收敛到这里
 - `rag_tool.py`：混合检索（BM25 + FAISS + 可选 Rerank）
 - `agent_react.py`：手写 ReAct 循环，Supervisor + Worker
 - `agent1_retrieve.py` / `agent2_parse.py` / `agent3_review.py`：旧流水线模块，正在向 `tools.py` 单 Agent 工具集收敛
