@@ -1,6 +1,7 @@
 import json
 import logging
 import os
+from doc_ingest import load_sections, paper_title
 from llm_api import safe_call_deepseek
 
 logging.basicConfig(level=logging.INFO)
@@ -12,7 +13,6 @@ os.makedirs(CARD_DIR,exist_ok=True)
 #以下两函数复用paper_rag的章节提取逻辑（PyMuPDF blocks按标题切分）
 def get_paper_sections(paper_name):
     #旧接口适配：章节读取统一收敛到doc_ingest
-    from doc_ingest import load_sections
     sections=load_sections(paper_name)
     if not sections:
         raise FileNotFoundError(f"找不到论文章节：{paper_name}")
@@ -20,7 +20,6 @@ def get_paper_sections(paper_name):
 
 def get_paper_title(paper_name):
     #旧接口适配：标题映射统一收敛到doc_ingest
-    from doc_ingest import paper_title
     return paper_title(paper_name)
 
 CARD_PROMPT="""你是论文结构化解析Agent。根据给定论文章节内容，提取结构化信息，只输出JSON，不要输出其他内容：
