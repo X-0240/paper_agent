@@ -52,3 +52,9 @@ def test_multipage_section_page_none():
     chunks=chunk_splitter(record,chunk_tokens=100,overlap=10)
     assert chunks
     assert all(c.page_num is None for c in chunks)
+
+def test_word_chunk_has_paragraph_position():
+    #Word不用页码定位，而是用段落区间
+    record=parse_document(SAMPLE_DIR/"sample_report.docx")
+    chunks=chunk_splitter(record)
+    assert all(c.position.startswith("段落") for c in chunks)
