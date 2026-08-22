@@ -1,7 +1,14 @@
+import json
 import os
 
 from config import MAX_CHUNKS_PER_PAPER, MAX_PAPER_PER_QUERY
-from state import PaperCard, PaperMeta, SectionRef
+from state import FactItem, PaperCard, PaperMeta, SectionRef
+
+FACT_EXTRACT_PROMPT="""你是论文事实抽取器。根据论文卡片抽取可跨论文比较的事实主张，只输出JSON数组：
+[{"paper_id":"论文ID","entity":"实体","attribute":"属性","value":"值","content":"一句话描述","section_name":"来源章节名","raw_quote":"原文摘录不超过100字"}]
+约束：必须带paper_id和section_name；没有明确来源的不输出；不要编造。"""
+
+_chunk_cache={}
 
 def _truncate_boundary(text,max_chars):
     #尽量在句子边界截断，避免切在半句话
@@ -106,3 +113,71 @@ def build_paper_card(paper_id,cache=None):
     if cache is not None:
         cache[paper_id]=paper_card
     return paper_card
+
+def _extract_json_array(text):
+    #从LLM输出中截取JSON数组，格式不完整时返回空
+    start=text.find("[")
+    end=text.rfind("]")
+    if start==-1 or end==-1:
+        return []
+    try:
+        return json.loads(text[start:end+1])
+    except Exception:
+        return []
+
+def _resolve_chunk_id(paper_id,section_name):
+    #章节名映射到真实chunk_id：精确→模糊→None，来源不可追溯的事实直接丢弃
+    from doc_ingest import DocumentRecord, chunk_splitter, load_sections
+    if paper_id not in _chunk_cache:
+        sections=load_sections(paper_id)
+        _chunk_cache[paper_id]=chunk_splitter(DocumentRecord(source=paper_id,doc_type="pdf_text",text="",sections=sections)) if sections else []
+    target=section_name.strip()
+    for c in _chunk_cache[paper_id]:
+        t=c.section_name.strip()
+        if target==t or (target and target in t) or (t and t in target):
+            return c.chunk_id
+    import difflib
+    titles=[c.section_name for c in _chunk_cache[paper_id]]
+    matches=difflib.get_close_matches(target,titles,n=1,cutoff=0.6)
+    if matches:
+        for c in _chunk_cache[paper_id]:
+            if c.section_name==matches[0]:
+                return c.chunk_id
+    return None
+
+def analyze_paper_relations(paper_ids,cache=None):
+    #横向对比复用旧逻辑；事实抽取后必须带真实chunk_id，否则丢弃
+    from dataclasses import asdict
+    from agent2_parse import compare_papers
+    from llm_api import safe_call_deepseek
+    comparison=compare_papers(paper_ids)
+    cards=[build_paper_card(pid,cache) for pid in paper_ids]
+    cards_text=json.dumps([asdict(c) for c in cards],ensure_ascii=False,default=str)[:12000]
+    result=safe_call_deepseek(
+        [{"role":"system","content":FACT_EXTRACT_PROMPT},{"role":"user","content":cards_text}],
+        temperature=0.2,
+        max_tokens=3000
+    )
+    items=_extract_json_array(result["choices"][0]["message"]["content"])
+    facts=[]
+    for it in items:
+        pid=it.get("paper_id","")
+        section=it.get("section_name","")
+        if pid not in paper_ids or not section:
+            continue
+        chunk_id=_resolve_chunk_id(pid,section)
+        if not chunk_id:
+            continue
+        facts.append(FactItem(
+            fact_id=f"fact-{len(facts)+1}",
+            paper_id=pid,
+            entity=it.get("entity",""),
+            attribute=it.get("attribute",""),
+            value=it.get("value",""),
+            content=it.get("content",""),
+            source_chunk_id=chunk_id,
+            section_name=section,
+            raw_quote=it.get("raw_quote",""),
+            confidence="high"
+        ))
+    return {"comparison":comparison,"facts":facts}
