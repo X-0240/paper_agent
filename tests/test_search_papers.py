@@ -167,9 +167,14 @@ def test_extract_verdict_skips_explanation_object():
 
 def test_write_review_generates_references(monkeypatch):
     #引用从facts确定性生成，LLM只负责内容，不编引用
-    monkeypatch.setattr("tools.safe_call_deepseek",lambda messages,**kw:{"choices":[{"message":{"content":json.dumps({
-        "title":"综述","consensus":["共识"],"disagreements":[],"superseded_conclusions":[],"open_questions":[],"conflict_mark_list":[]
-    })}}]})
+    def fake(messages,**kw):
+        #payload必须是完整合法JSON，不能截断
+        payload=json.loads(messages[-1]["content"])
+        assert "facts" in payload and "conflicts" in payload
+        return {"choices":[{"message":{"content":json.dumps({
+            "title":"综述","consensus":["共识"],"disagreements":[],"superseded_conclusions":[],"open_questions":[],"conflict_mark_list":[]
+        })}}]}
+    monkeypatch.setattr("tools.safe_call_deepseek",fake)
     facts=[FactItem(fact_id="f1",paper_id="P1",entity="E",attribute="A",value="1",content="c",source_chunk_id="c1",section_name="S",year=2020)]
     out=write_review("问题",facts,[])
     assert out.title=="综述"
