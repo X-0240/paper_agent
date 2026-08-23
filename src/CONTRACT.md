@@ -168,6 +168,7 @@ class AgentState(TypedDict):
 - 工具超时抛出 `TimeoutError`，Agent 捕获后写入 trace_log 并优雅降级
 - `step_count>=MAX_AGENT_STEP` 强制调用 `write_review`
 - `len(facts)>=MAX_FACTS_PER_SESSION` 或 `len(conflicts)>=MAX_CONFLICT_PER_SESSION` 提前进入 `write_review`
+- 编排层自动兜底：循环结束后若有卡片但无 facts，自动补一次 `analyze_paper_relations` 再写综述
 - 每次 LLM 调用前执行预算检查：
   - 已有 facts → 生成不完整综述，标注“因预算限制未完全展开”
   - 无 facts → 返回“预算不足，请明日再试”
@@ -188,7 +189,7 @@ class AgentState(TypedDict):
 ```python
 MAX_PAPER_PER_QUERY=10
 MAX_CHUNKS_PER_PAPER=20
-MAX_AGENT_STEP=10
+MAX_AGENT_STEP=15
 MAX_FACTS_PER_SESSION=20
 MAX_CONFLICT_PER_SESSION=5
 MAX_EXTERNAL_SEARCH_NUM=3
@@ -204,5 +205,5 @@ SESSION_COST_BUDGET=1.0    # 元
 1. `FactItem.source_chunk_id` 强制非空：接受
 2. 旧 agent2/agent3 不立即删除：先标记 deprecated，新链路测试通过后再删
 3. 预算不足时生成不完整综述：接受
-4. `MAX_AGENT_STEP=10`：接受，成本护栏兜底
+4. `MAX_AGENT_STEP=15`：接受（实测10步会被检索/建卡耗尽，无法进入事实抽取），成本护栏兜底
 5. 冲突评测：自标 20-40 对，不用公开数据集，避免编造
