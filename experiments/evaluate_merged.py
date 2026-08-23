@@ -87,27 +87,10 @@ def section_match(section,expected_section):
         return False
     return e in a or a in e
 
-#主项目10篇：只读papers_pdf里的论文，避免QASPER缓存重复计入
-chunks=[]; sources=[]; sections=[]
-main_sources=sorted(f[:-4] for f in os.listdir(os.getenv("PAPERS_DIR")) if f.endswith(".pdf"))
-for source in main_sources:
-    cache_path=os.path.join(SECTIONS_DIR,f"{source}.json")
-    if not os.path.exists(cache_path):
-        continue
-    sec_list=json.load(open(cache_path,encoding="utf-8"))
-    for title,text in sec_list:
-        for part in split_fixed(text):
-            if len(part.strip())<20:
-                continue
-            chunks.append(part)
-            sources.append(source)
-            sections.append(title)
-
-#QASPER 40篇：JSON full_text
+#QASPER 40篇：只用于构建truth章节，不重新切分语料
 data=json.load(open(DATA_PATH,encoding="utf-8"))
 papers=[{**v,"arxiv_id":k} for k,v in data.items()]
 qasper_papers=select_qasper(papers)
-qasper_ids={p["arxiv_id"] for p in qasper_papers}
 paper_sections={}
 for p in qasper_papers:
     aid=p["arxiv_id"]
@@ -116,13 +99,12 @@ for p in qasper_papers:
         sec=block.get("section_name") or "Unknown"
         text="\n".join(block.get("paragraphs",[]))
         paper_sections[aid][sec]=text
-        for part in split_fixed(text):
-            if len(part.strip())<20:
-                continue
-            chunks.append(part)
-            sources.append(aid)
-            sections.append(sec)
-logger.info(f"合并语料：{len(chunks)}切片，{len(sources)}条来源")
+
+#从重建后的索引加载切片，评测对象=线上检索实际使用的语料
+FAISS_PATH=os.getenv("FAISS_PATH")
+meta=json.load(open(FAISS_PATH+".json",encoding="utf-8"))
+chunks=meta["documents"]; sources=meta["sources"]; sections=meta["sections"]
+logger.info(f"合并语料：{len(chunks)}切片（索引加载）")
 
 model=SentenceTransformer(MODEL_PATH)
 emb=model.encode(chunks,batch_size=64,normalize_embeddings=True,show_progress_bar=False)
