@@ -151,3 +151,35 @@ def run_survey(query):
     state.trace_log.extend(history)
     _auto_finalize(state,query)
     return state
+
+def review_to_markdown(report):
+    #综述对象转Markdown，供API/WebUI输出
+    lines=[f"# {report.title}",""]
+    if report.consensus:
+        lines.append("## 核心共识")
+        lines.extend(f"- {c}" for c in report.consensus)
+        lines.append("")
+    if report.disagreements:
+        lines.append("## 主要分歧")
+        for d in report.disagreements:
+            if isinstance(d,dict):
+                lines.append(f"- {d.get('summary',d)}")
+            else:
+                lines.append(f"- {d}")
+        lines.append("")
+    if report.superseded_conclusions:
+        lines.append("## 被推翻的历史结论")
+        lines.extend(f"- {c}" for c in report.superseded_conclusions)
+        lines.append("")
+    if report.open_questions:
+        lines.append("## 未解决问题")
+        lines.extend(f"- {q}" for q in report.open_questions)
+        lines.append("")
+    if report.conflict_mark_list:
+        lines.append("## 冲突标注")
+        lines.extend(f"- {m}" for m in report.conflict_mark_list)
+        lines.append("")
+    if report.references:
+        lines.append("## 引用")
+        lines.extend(f"- {r}" for r in report.references)
+    return "\n".join(lines)
