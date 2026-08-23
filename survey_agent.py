@@ -87,7 +87,9 @@ def _make_tools(state):
             return "错误：没有事实，不能写综述"
         report=_write_review(query,state.facts,state.conflicts,state.pending_conflicts)
         state.review=report
-        return f"综述已生成：{report.title}"
+        return (f"综述已生成：{report.title}"
+                f"（{len(report.consensus)}条共识，{len(report.disagreements)}条分歧，"
+                f"{len(report.superseded_conclusions)}条被推翻结论）")
 
     return {
         "search_papers":{"func":search_papers,"description":"检索论文","schema":{"query":{"type":"str","required":True}}},

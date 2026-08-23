@@ -42,3 +42,23 @@ def test_finalize_review_fills_missing_review(monkeypatch):
     _finalize_review(state,"q")
     assert state.review is not None
     assert state.review.title=="综述"
+
+def test_contract_fields_present():
+    #State必须带编排层依赖的字段，防止契约漂移
+    state=AgentState()
+    assert hasattr(state,"search_count")
+    assert hasattr(state,"pending_conflicts")
+    assert hasattr(state,"card_cache")
+    assert len(_make_tools(state))==6
+
+def test_write_review_observation_has_stats(monkeypatch):
+    #Observation返回综述统计信息，让Agent能判断是否补充
+    monkeypatch.setattr("survey_agent._write_review",lambda query,facts,conflicts,pending=None:ReviewReport(
+        title="综述",consensus=["c1","c2"],disagreements=[{"x":1}],superseded_conclusions=["s"]
+    ))
+    state=AgentState(facts=[FactItem(fact_id="f1",paper_id="P1",entity="E",attribute="A",value="1",content="c",source_chunk_id="c1",section_name="S")])
+    tools=_make_tools(state)
+    out=tools["write_review"]["func"]("q")
+    assert "2条共识" in out
+    assert "1条分歧" in out
+    assert "1条被推翻结论" in out
