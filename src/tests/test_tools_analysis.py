@@ -7,11 +7,11 @@ def test_analyze_paper_relations_filters_unresolvable_facts(monkeypatch):
     #无paper_id/无章节/来源解析不到的事实全部丢弃
     monkeypatch.setattr("tools.compare_papers",lambda paper_ids:"对比矩阵")
     monkeypatch.setattr("tools.build_paper_card",lambda paper_id,cache=None:PaperCard(paper_id=paper_id,title=paper_id))
-    monkeypatch.setattr("tools.safe_call_deepseek",lambda messages,**kw:{"choices":[{"message":{"content":json.dumps([
+    monkeypatch.setattr("tools._extract_facts",lambda card_text:json.loads(json.dumps([
         {"paper_id":"P1","entity":"BERT","attribute":"param_count","value":"110M","content":"参数量","section_name":"1 Introduction","raw_quote":"quote"},
         {"paper_id":"P1","entity":"BERT","attribute":"type","value":"encoder","content":"类型","section_name":""},
         {"paper_id":"P999","entity":"X","attribute":"y","value":"z","content":"bad","section_name":"Method","raw_quote":"q"}
-    ])}}]})
+    ])))
     monkeypatch.setattr("tools._resolve_chunk_id",lambda pid,sec:"P1::1 Introduction::0" if pid=="P1" and sec=="1 Introduction" else None)
     out=analyze_paper_relations(["P1","P2"])
     assert out["comparison"]=="对比矩阵"
@@ -38,12 +38,13 @@ def test_extract_json_array_accepts_object(monkeypatch):
     from tools import _extract_json_array
     assert _extract_json_array('{"facts":[{"entity":"E"}]}')==[{"entity":"E"}]
     assert _extract_json_array('{"entity":"E","attribute":"A"}')==[{"entity":"E","attribute":"A"}]
+    assert _extract_json_array('```json\n[{"entity":"E"}]\n```')==[{"entity":"E"}]
 
 def test_fact_id_not_duplicated(monkeypatch):
     #多次调用analyze_paper_relations时fact_id不能重复
     monkeypatch.setattr("tools.compare_papers",lambda paper_ids:"对比矩阵")
     monkeypatch.setattr("tools.build_paper_card",lambda paper_id,cache=None:PaperCard(paper_id=paper_id,title=paper_id))
-    monkeypatch.setattr("tools.safe_call_deepseek",lambda messages,**kw:{"choices":[{"message":{"content":json.dumps([{"paper_id":"P1","entity":"E","attribute":"A","value":"V","content":"C","section_name":"S","raw_quote":"q"}])}}]})
+    monkeypatch.setattr("tools._extract_facts",lambda card_text:[{"paper_id":"P1","entity":"E","attribute":"A","value":"V","content":"C","section_name":"S","raw_quote":"q"}])
     monkeypatch.setattr("tools._resolve_chunk_id",lambda pid,sec:"chunk")
     out1=analyze_paper_relations(["P1"])
     out2=analyze_paper_relations(["P1"])

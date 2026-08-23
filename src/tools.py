@@ -136,7 +136,12 @@ def build_paper_card(paper_id,cache=None):
     return paper_card
 
 def _extract_json_array(text):
-    #兼容数组/对象两种输出；对象里第一个list字段视为事实列表
+    #去掉Markdown代码围栏，再兼容数组/对象两种输出
+    text=text.strip()
+    if text.startswith("```"):
+        text="\n".join(text.splitlines()[1:])
+        if text.rstrip().endswith("```"):
+            text=text.rstrip()[:-3]
     start=text.find("[")
     end=text.rfind("]")
     if start!=-1 and end!=-1:
@@ -164,10 +169,10 @@ def _trim_card(card):
     #长字段裁剪后再序列化，避免截断JSON破坏结构
     for k in ("abstract","methodology"):
         if isinstance(card.get(k),str):
-            card[k]=card[k][:2000]
+            card[k]=card[k][:1500]
     for k in ("key_findings","limitations"):
         if isinstance(card.get(k),list):
-            card[k]=[str(x)[:500] for x in card[k]][:20]
+            card[k]=[str(x)[:300] for x in card[k]][:10]
     return card
 
 def build_pending_conflicts(facts):
@@ -198,6 +203,7 @@ def _extract_facts(cards_text):
         items=_extract_json_array(result["choices"][0]["message"]["content"])
         if items:
             return items
+        logger.warning("事实抽取第%d次原始输出：%s",attempt+1,result["choices"][0]["message"]["content"][:500])
         #把失败输出回填给LLM，让它看到自己的错误样板再纠正
         messages.append({"role":"assistant","content":result["choices"][0]["message"]["content"]})
         messages.append({"role":"user","content":"上述输出不是合法JSON数组，请只输出JSON数组。"})
@@ -225,10 +231,16 @@ def _resolve_chunk_id(paper_id,section_name):
 
 def analyze_paper_relations(paper_ids,cache=None):
     #横向对比复用旧逻辑；事实抽取后必须带真实chunk_id，否则丢弃
+    paper_ids=paper_ids[:MAX_PAPER_PER_QUERY]
     comparison=compare_papers(paper_ids)
     cards=[build_paper_card(pid,cache) for pid in paper_ids]
-    cards_text=json.dumps([_trim_card(asdict(c)) for c in cards],ensure_ascii=False,default=str)
-    items=_extract_facts(cards_text)
+    items=[]
+    #逐篇抽取：一次只喂一张卡片，避免长输入导致LLM返回空
+    for card in cards:
+        card_text=json.dumps(_trim_card(asdict(card)),ensure_ascii=False,default=str)
+        for it in _extract_facts(card_text):
+            it["paper_id"]=card.paper_id
+            items.append(it)
     global _fact_counter
     facts=[]
     for it in items:
@@ -252,6 +264,8 @@ def analyze_paper_relations(paper_ids,cache=None):
             raw_quote=it.get("raw_quote",""),
             confidence="high"
         ))
+    if items and not facts:
+        logger.warning("事实解析到%d条，全部因来源解析失败丢弃",len(items))
     return {"comparison":comparison,"facts":facts}
 
 def _extract_verdict(text):
