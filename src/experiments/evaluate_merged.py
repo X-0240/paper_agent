@@ -253,7 +253,7 @@ for q,truth_source,truth_sections,use_match,lang in test_cases:
 elapsed=time.time()-t0
 
 lines=[]
-lines.append("## 合并评测集（50篇，363题，章节级 HitRate@5，bge-m3）")
+lines.append(f"## 合并评测集（50篇，363题，章节级 HitRate@5，{os.path.basename(MODEL_PATH)}）")
 lines.append(f"- 切片数：{len(chunks)}，测试题数：{total}")
 def fmt(stats,n):
     return (f"- baseline：{stats['base']/n:.1%}，+Rerank：{stats['rerank']/n:.1%}，"

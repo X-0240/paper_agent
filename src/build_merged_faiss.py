@@ -21,8 +21,8 @@ DATA_PATH=os.path.join(os.path.dirname(os.path.abspath(__file__)),"datasets","qa
 SECTIONS_DIR=os.path.join(os.path.dirname(os.path.abspath(__file__)),"papers_sections")
 FAISS_PATH=os.getenv("FAISS_PATH")
 TOP_N_PAPERS=40
-CHUNK_TOKENS=int(os.getenv("CHUNK_TOKENS","800"))
-CHUNK_OVERLAP=int(os.getenv("CHUNK_OVERLAP","100"))
+CHUNK_TOKENS=int(os.getenv("CHUNK_TOKENS","448"))
+CHUNK_OVERLAP=int(os.getenv("CHUNK_OVERLAP","64"))
 
 TOPICS=[
     "translation","parsing","generation","summarization","question answering","embedding",
