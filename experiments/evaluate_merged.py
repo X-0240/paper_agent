@@ -151,6 +151,18 @@ def base_top(query,top_n=5):
     cands=weighted_candidates(query,10,0.5)
     return [j for j,_ in cands[:top_n]]
 
+def vec_top(query,top_n=5):
+    #纯向量top5，用于oracle并集上限
+    qv=model.encode([query])
+    qv=qv/np.linalg.norm(qv)
+    vs,vi=index.search(qv.astype("float32"),top_n)
+    return list(vi[0])
+
+def bm25_top(query,top_n=5):
+    #纯BM25 top5，用于oracle并集上限
+    scores=bm25.get_scores(tokenize(query))
+    return sorted(range(len(scores)),key=lambda i:scores[i],reverse=True)[:top_n]
+
 def chapter_hit(idxs,truth_source,truth_sections,use_section_match=False):
     for j in idxs:
         if sources[j]!=truth_source:
@@ -197,7 +209,7 @@ for q,ref in zip(questions_main,fixed_refs):
         if key.lower() in paper_part.lower():
             source=src; break
     if source:
-        test_cases.append((q,source,[section_part],True))
+        test_cases.append((q,source,[section_part],True,"zh"))
 
 #QASPER 263题
 for p in qasper_papers:
@@ -220,25 +232,37 @@ for p in qasper_papers:
                         truth_sections.add(sec)
                         break
         if truth_sections:
-            test_cases.append((q,aid,list(truth_sections),False))
+            test_cases.append((q,aid,list(truth_sections),False,"en"))
 
-stats={"base":0,"rerank":0,"neighbor":0}
+stats_all={"base":0,"rerank":0,"neighbor":0,"union":0}
+stats_zh={"base":0,"rerank":0,"neighbor":0,"union":0}
+stats_en={"base":0,"rerank":0,"neighbor":0,"union":0}
 total=len(test_cases)
 t0=time.time()
-for q,truth_source,truth_sections,use_match in test_cases:
+for q,truth_source,truth_sections,use_match,lang in test_cases:
     use_match=bool(use_match)
-    stats["base"]+=chapter_hit(base_top(q),truth_source,truth_sections,use_match)
+    target=stats_zh if lang=="zh" else stats_en
+    for bucket in (stats_all,target):
+        bucket["base"]+=chapter_hit(base_top(q),truth_source,truth_sections,use_match)
+        bucket["union"]+=(chapter_hit(vec_top(q),truth_source,truth_sections,use_match) or
+                          chapter_hit(bm25_top(q),truth_source,truth_sections,use_match))
     rr=rerank_top(q,5)
-    stats["rerank"]+=chapter_hit(rr,truth_source,truth_sections,use_match)
-    stats["neighbor"]+=chapter_hit(neighbors(rr,2),truth_source,truth_sections,use_match)
+    for bucket in (stats_all,target):
+        bucket["rerank"]+=chapter_hit(rr,truth_source,truth_sections,use_match)
+        bucket["neighbor"]+=chapter_hit(neighbors(rr,2),truth_source,truth_sections,use_match)
 elapsed=time.time()-t0
 
 lines=[]
 lines.append("## 合并评测集（50篇，363题，章节级 HitRate@5，bge-m3）")
 lines.append(f"- 切片数：{len(chunks)}，测试题数：{total}")
-lines.append(f"- 混合检索 baseline：{stats['base']/total:.1%}")
-lines.append(f"- +Rerank：{stats['rerank']/total:.1%}")
-lines.append(f"- +Rerank+邻接±2：{stats['neighbor']/total:.1%}")
+def fmt(stats,n):
+    return (f"- baseline：{stats['base']/n:.1%}，+Rerank：{stats['rerank']/n:.1%}，"
+            f"+Rerank+邻接：{stats['neighbor']/n:.1%}，vector∪BM25上限：{stats['union']/n:.1%}")
+lines.append(fmt(stats_all,total))
+zh_total=len([1 for c in test_cases if c[4]=="zh"])
+en_total=total-zh_total
+lines.append(f"- 中文题（{zh_total}）：{fmt(stats_zh,zh_total)}")
+lines.append(f"- 英文题（{en_total}）：{fmt(stats_en,en_total)}")
 lines.append(f"- 平均单题耗时：{elapsed/total:.2f}s")
 report="\n".join(lines)
 print(report)
