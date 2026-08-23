@@ -2,7 +2,7 @@ import json
 
 from doc_ingest import Chunk
 from state import FactItem, PaperCard
-from tools import analyze_paper_relations, build_paper_card, build_search_result, read_section, verify_claim, _extract_facts, _extract_verdict, _resolve_chunk_id
+from tools import analyze_paper_relations, build_paper_card, build_search_result, read_section, verify_claim, write_review, _extract_facts, _extract_verdict, _resolve_chunk_id
 
 def test_build_search_result_dedup_papers():
     #同一论文多片段只产生一条PaperMeta，但保留全部Chunk
@@ -164,3 +164,21 @@ def test_extract_verdict_skips_explanation_object():
     #LLM先输出解释对象再输出裁决对象时，只取带category的裁决
     text='先解释：{"note":"说明"} 最终结论：{"category":"true_conflict","title":"t","detail":"d"}'
     assert _extract_verdict(text)=={"category":"true_conflict","title":"t","detail":"d"}
+
+def test_write_review_generates_references(monkeypatch):
+    #引用从facts确定性生成，LLM只负责内容，不编引用
+    monkeypatch.setattr("tools.safe_call_deepseek",lambda messages,**kw:{"choices":[{"message":{"content":json.dumps({
+        "title":"综述","consensus":["共识"],"disagreements":[],"superseded_conclusions":[],"open_questions":[],"conflict_mark_list":[]
+    })}}]})
+    facts=[FactItem(fact_id="f1",paper_id="P1",entity="E",attribute="A",value="1",content="c",source_chunk_id="c1",section_name="S",year=2020)]
+    out=write_review("问题",facts,[])
+    assert out.title=="综述"
+    assert out.references==["P1, 2020, §c1"]
+
+def test_write_review_fallback_on_bad_json(monkeypatch):
+    #LLM输出非法JSON时返回空结构综述，标题回退为query，引用仍保留
+    monkeypatch.setattr("tools.safe_call_deepseek",lambda messages,**kw:{"choices":[{"message":{"content":"不是JSON"}}]})
+    facts=[FactItem(fact_id="f1",paper_id="P1",entity="E",attribute="A",value="1",content="c",source_chunk_id="c1",section_name="S")]
+    out=write_review("问题",facts,[])
+    assert out.title=="问题"
+    assert out.references==["P1, N/A, §c1"]

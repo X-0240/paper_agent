@@ -137,7 +137,7 @@ class AgentState(TypedDict):
 - 输入：`query: str`, `facts: List[FactItem]`, `conflicts: List[Conflict]`
 - 输出：`ReviewReport`
 - 实现：复用 `agent3_review.generate_review` 的综述生成思路，输出字段对齐新结构
-- 强制：引用带 chunk_id
+- 强制：引用由 facts 确定性生成（`作者/论文, 年份, §chunk_id`），LLM 不编引用
 - 超时：60s
 
 ## 四、旧代码映射（按真实函数名核对）

@@ -3,12 +3,11 @@ import logging
 import os
 import re
 from dataclasses import asdict
-
 from agent2_parse import build_paper_card as old_build_card, compare_papers
 from config import MAX_CARDS_TEXT_CHARS, MAX_CHUNKS_PER_PAPER, MAX_PAPER_PER_QUERY
 from doc_ingest import Chunk, DocumentRecord, chunk_splitter, load_sections, paper_title, token_len
 from llm_api import safe_call_deepseek
-from state import Conflict, FactItem, PaperCard, PaperMeta, SectionRef
+from state import Conflict, FactItem, PaperCard, PaperMeta, ReviewReport, SectionRef
 
 logger=logging.getLogger(__name__)
 
@@ -25,6 +24,10 @@ VERIFY_PROMPT="""你是冲突裁决器。根据两个事实主张、双方年份
 - card_error：卡片抽取错误
 - insufficient_evidence：证据不足
 不要因为发布时间晚就自动判 superseded，必须看到显式否定证据。不要编造。"""
+
+REVIEW_PROMPT="""你是综述写作器。根据事实、冲突和用户问题生成结构化综述，只输出JSON对象：
+{"title":"综述标题","consensus":["核心共识1"],"disagreements":[{"conflict_id":"","summary":"分歧摘要"}],"superseded_conclusions":["被推翻的历史结论"],"open_questions":["未解决问题"],"conflict_mark_list":["冲突标注"]}
+引用由系统生成，不要自己编引用。不要编造。"""
 
 _chunk_cache={}
 _fact_counter=0
@@ -240,8 +243,8 @@ def verify_claim(fact_a,fact_b):
     evidence_a=read_section(fact_a.paper_id,fact_a.section_name) or fact_a.raw_quote
     evidence_b=read_section(fact_b.paper_id,fact_b.section_name) or fact_b.raw_quote
     payload={
-        "fact_a":vars(fact_a),
-        "fact_b":vars(fact_b),
+        "fact_a":asdict(fact_a),
+        "fact_b":asdict(fact_b),
         "evidence_a":evidence_a[:2000],
         "evidence_b":evidence_b[:2000]
     }
@@ -266,4 +269,46 @@ def verify_claim(fact_a,fact_b):
         verdict=verdict.get("detail",""),
         confidence="low" if category=="insufficient_evidence" else "high",
         evidence_supplementary=verdict.get("evidence_supplementary","")
+    )
+
+def _extract_review_report(text):
+    #遍历JSON对象候选，取带title的综述对象，兼容前后缀和多对象
+    decoder=json.JSONDecoder()
+    for m in re.finditer(r"\{",text):
+        try:
+            obj,_=decoder.raw_decode(text[m.start():])
+        except Exception:
+            continue
+        if isinstance(obj,dict) and "title" in obj:
+            return obj
+    return {}
+
+def write_review(query,facts,conflicts):
+    #引用从facts确定性生成（保证chunk_id），LLM只负责综述内容
+    references=[]
+    seen=set()
+    for f in facts:
+        ref=f"{f.paper_id}, {f.year or 'N/A'}, §{f.source_chunk_id}"
+        if ref not in seen:
+            seen.add(ref)
+            references.append(ref)
+    payload={
+        "query":query,
+        "facts":[asdict(f) for f in facts],
+        "conflicts":[asdict(c) for c in conflicts]
+    }
+    result=safe_call_deepseek(
+        [{"role":"system","content":REVIEW_PROMPT},{"role":"user","content":json.dumps(payload,ensure_ascii=False,default=str)[:MAX_CARDS_TEXT_CHARS]}],
+        temperature=0.2,
+        max_tokens=4000
+    )
+    data=_extract_review_report(result["choices"][0]["message"]["content"])
+    return ReviewReport(
+        title=data.get("title") or query,
+        consensus=data.get("consensus",[]),
+        disagreements=data.get("disagreements",[]),
+        superseded_conclusions=data.get("superseded_conclusions",[]),
+        open_questions=data.get("open_questions",[]),
+        references=references,
+        conflict_mark_list=data.get("conflict_mark_list",[])
     )
