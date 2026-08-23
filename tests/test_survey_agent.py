@@ -1,5 +1,5 @@
 from state import AgentState, Conflict, FactItem, PaperCard, PaperMeta, ReviewReport
-from survey_agent import _auto_finalize, _enrich_trace, _finalize_review, _make_tools
+from survey_agent import _auto_finalize, _enrich_trace, _finalize_review, _make_tools, review_to_markdown
 from tools import build_pending_conflicts
 
 def test_build_pending_conflicts_groups_by_entity_attribute():
@@ -81,3 +81,10 @@ def test_auto_finalize_analyzes_when_cards_exist(monkeypatch):
     _auto_finalize(state,"q")
     assert state.review is not None
     assert state.review.title=="兜底综述"
+
+def test_review_to_markdown_renders_sections():
+    #综述对象渲染为Markdown，引用必须出现
+    report=ReviewReport(title="综述",consensus=["共识1"],references=["P1, 2020, §c1"])
+    md=review_to_markdown(report)
+    assert "## 核心共识" in md
+    assert "§c1" in md

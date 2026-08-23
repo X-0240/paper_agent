@@ -67,6 +67,24 @@ python -m pytest tests -q
 - 查看每日成本：`python cost_report.py`
 - 省钱建议：重活（综述全链路、批量评测）放到闲时跑；Agent 循环已加输出上限和历史裁剪，防止多轮调用上下文无限膨胀
 
+## 上下文管理
+
+- ReAct 历史裁剪：只保留系统指令 + 初始问题 + 最近 3 轮
+- Observation 超长截断（1500 字截到 1000 字）
+- 会话缓存：章节缓存 `section_cache`、卡片缓存 `card_cache`，避免重复读/重复调 LLM
+- 输入裁剪：卡片字段裁剪、逐篇事实抽取、facts/conflicts/pending 数量上限
+- 硬限制：`MAX_AGENT_STEP=15`、`MAX_SEARCH_PER_SESSION=3`，防止死循环和 token 失控
+
+## 评测指标
+
+| 维度 | 指标 | 当前结果 |
+|---|---|---|
+| 检索 | QASPER 证据级 HitRate@5 | 39.2%（bge-m3+Rerank+邻接） |
+| 检索 | 合并集章节级 HitRate@5 | 36.1% |
+| 多格式 | multi_format_samples 解析通过率 | pytest 覆盖 6 类样例 |
+| 冲突粗筛 | 合成小集 P/R/F1 | 1.00 / 1.00 / 1.00 |
+| 综述质量 | LLM 评测（完整性/准确性/清晰度） | 7 / 9 / 8，avg 8.0（合成样例） |
+
 ## Docker
 
 ```bash

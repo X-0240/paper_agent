@@ -64,8 +64,15 @@ def simple_answer(question,k=5,use_rewrite=False):
     return result["choices"][0]["message"]["content"] or ""
 
 def survey_pipeline(question,top_n=3,human_confirm=False):
-    #编排：Agent-1检索→Agent-2解析对比→Agent-3校验综述
+    #新链路：单ReAct Agent综述编排；旧链路保留为回退
     t0=time.time()
+    if os.getenv("USE_NEW_SURVEY","1")=="1":
+        from survey_agent import review_to_markdown, run_survey
+        state=run_survey(question)
+        t1=time.time()
+        logger.info(f"新综述链路耗时{t1-t0:.1f}s papers={len(state.papers)} facts={len(state.facts)} conflicts={len(state.conflicts)}")
+        return review_to_markdown(state.review) if state.review else "证据不足：未找到足够论文生成综述。"
+    #旧链路（deprecated，仅回退用）
     try:
         papers=agent_1(question,top_n)
         t1=time.time()
