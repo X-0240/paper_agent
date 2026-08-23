@@ -20,7 +20,8 @@ load_dotenv()
 logging.basicConfig(level=logging.INFO)
 logger=logging.getLogger(__name__)
 
-DATA_PATH=os.path.join(os.path.dirname(os.path.abspath(__file__)),"datasets","qasper-test-v0.3.json")
+_DATA=os.path.join(os.path.dirname(os.path.abspath(__file__)),"datasets","qasper-test-v0.3.json")
+DATA_PATH=_DATA if os.path.exists(_DATA) else os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),"datasets","qasper-test-v0.3.json")
 SECTIONS_DIR=os.path.join(os.path.dirname(os.path.abspath(__file__)),"papers_sections")
 MODEL_PATH=os.getenv("MODEL_PATH")
 CHUNK_SIZE=500
