@@ -88,6 +88,7 @@ class AgentState(TypedDict):
 - `FactItem.source_chunk_id` 为空则丢弃，不写 State
 - `Conflict` 只能由 `verify_claim` 产出，Agent 不能自行构造
 - `trace_log` 只追加不覆盖
+- `trace_log` 每条必须含 `step / action / input / observation / search_count / step_count / facts_count / conflicts_count`
 
 ## 三、6 个工具接口
 

@@ -1,4 +1,4 @@
-from agent_react import parse_action
+from agent_react import parse_action, react
 
 def test_json_finish():
     #标准格式：Action+Action Input JSON
@@ -20,3 +20,18 @@ def test_tool_bad_json():
     action,action_input=parse_action(text)
     assert action=="Search"
     assert action_input=={}
+
+def test_react_on_step_callback(monkeypatch):
+    #on_step回调在每次工具执行后收到完整history条目
+    calls=[]
+    def fake_llm(messages,**kw):
+        if len(messages)<5:
+            return {"choices":[{"message":{"content":"Action: Search\nAction Input: {\"q\":\"x\"}"}}]}
+        return {"choices":[{"message":{"content":"Action: Finish\nAction Input: {\"answer\":\"done\"}"}}]}
+    monkeypatch.setattr("agent_react.safe_call_deepseek",fake_llm)
+    tools={"Search":{"func":lambda q:"found","description":"","schema":{"q":{"type":"str","required":True}}}}
+    answer,history=react("q",tools,"system",max_steps=3,on_step=calls.append)
+    assert answer=="done"
+    assert calls
+    assert calls[0]["action"]=="Search"
+    assert "observation" in calls[0]

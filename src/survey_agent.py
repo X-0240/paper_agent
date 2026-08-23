@@ -31,6 +31,14 @@ def _summarize_state(state):
             f"conflicts={len(state.conflicts)}, pending={len(state.pending_conflicts)}, "
             f"search_count={state.search_count}/{MAX_SEARCH_PER_SESSION}")
 
+def _enrich_trace(entry,state):
+    #每步审计快照：工具名/入参/返回由history自带，这里补状态计数
+    entry["search_count"]=state.search_count
+    entry["step_count"]=entry.get("step")
+    entry["facts_count"]=len(state.facts)
+    entry["conflicts_count"]=len(state.conflicts)
+    entry["pending_count"]=len(state.pending_conflicts)
+
 def _make_tools(state):
     #每个工具包装：前置校验、State读写由编排层完成，工具本身无副作用
     def search_papers(query):
@@ -112,7 +120,8 @@ def run_survey(query):
     system_prompt=SYSTEM_PROMPT_TEMPLATE.format(max_search=MAX_SEARCH_PER_SESSION,state_summary=_summarize_state(state))
     history=[]
     try:
-        answer,history=react(query,tools,system_prompt,max_steps=MAX_AGENT_STEP)
+        answer,history=react(query,tools,system_prompt,max_steps=MAX_AGENT_STEP,
+                             on_step=lambda e: _enrich_trace(e,state))
     except BudgetExceeded as e:
         logger.warning(f"预算受限：{e}")
         if state.facts:

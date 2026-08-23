@@ -1,5 +1,5 @@
 from state import AgentState, Conflict, FactItem, PaperMeta, ReviewReport
-from survey_agent import _finalize_review, _make_tools
+from survey_agent import _enrich_trace, _finalize_review, _make_tools
 from tools import build_pending_conflicts
 
 def test_build_pending_conflicts_groups_by_entity_attribute():
@@ -62,3 +62,13 @@ def test_write_review_observation_has_stats(monkeypatch):
     assert "2条共识" in out
     assert "1条分歧" in out
     assert "1条被推翻结论" in out
+
+def test_enrich_trace_fills_audit_fields():
+    #审计快照必须包含搜索数/步数/facts/conflicts计数
+    state=AgentState(search_count=2,facts=[FactItem(fact_id="f1",paper_id="P1",entity="E",attribute="A",value="1",content="c",source_chunk_id="c1",section_name="S")])
+    entry={"step":3,"action":"Search","input":{"q":"x"},"observation":"ok"}
+    _enrich_trace(entry,state)
+    assert entry["search_count"]==2
+    assert entry["step_count"]==3
+    assert entry["facts_count"]==1
+    assert entry["conflicts_count"]==0
