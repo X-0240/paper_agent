@@ -4,7 +4,7 @@ import os
 import re
 from dataclasses import asdict
 from agent2_parse import build_paper_card as old_build_card, compare_papers
-from config import MAX_CARDS_TEXT_CHARS, MAX_CHUNKS_PER_PAPER, MAX_PAPER_PER_QUERY
+from config import MAX_CHUNKS_PER_PAPER, MAX_CONFLICT_PER_SESSION, MAX_FACTS_PER_SESSION, MAX_PAPER_PER_QUERY
 from doc_ingest import Chunk, DocumentRecord, chunk_splitter, load_sections, paper_title, token_len
 from llm_api import safe_call_deepseek
 from state import Conflict, FactItem, PaperCard, PaperMeta, ReviewReport, SectionRef
@@ -159,6 +159,16 @@ def _extract_json_array(text):
             pass
     return []
 
+def _trim_card(card):
+    #长字段裁剪后再序列化，避免截断JSON破坏结构
+    for k in ("abstract","methodology"):
+        if isinstance(card.get(k),str):
+            card[k]=card[k][:2000]
+    for k in ("key_findings","limitations"):
+        if isinstance(card.get(k),list):
+            card[k]=[str(x)[:500] for x in card[k]][:20]
+    return card
+
 def _extract_facts(cards_text):
     #LLM事实抽取：JSON格式失败时带纠正指令重试一次，仍失败返回空
     messages=[
@@ -199,7 +209,7 @@ def analyze_paper_relations(paper_ids,cache=None):
     #横向对比复用旧逻辑；事实抽取后必须带真实chunk_id，否则丢弃
     comparison=compare_papers(paper_ids)
     cards=[build_paper_card(pid,cache) for pid in paper_ids]
-    cards_text=json.dumps([asdict(c) for c in cards],ensure_ascii=False,default=str)[:MAX_CARDS_TEXT_CHARS]
+    cards_text=json.dumps([_trim_card(asdict(c)) for c in cards],ensure_ascii=False,default=str)
     items=_extract_facts(cards_text)
     global _fact_counter
     facts=[]
@@ -272,7 +282,7 @@ def verify_claim(fact_a,fact_b):
     )
 
 def _extract_review_report(text):
-    #遍历JSON对象候选，取带title的综述对象，兼容前后缀和多对象
+    #多重解析：raw_decode候选优先，正则整体兜底，仍失败记warning
     decoder=json.JSONDecoder()
     for m in re.finditer(r"\{",text):
         try:
@@ -281,6 +291,15 @@ def _extract_review_report(text):
             continue
         if isinstance(obj,dict) and "title" in obj:
             return obj
+    m=re.search(r"\{.*\}",text,re.S)
+    if m:
+        try:
+            obj=json.loads(m.group())
+            if isinstance(obj,dict) and "title" in obj:
+                return obj
+        except Exception:
+            pass
+    logger.warning("综述JSON解析失败，返回空结构")
     return {}
 
 def write_review(query,facts,conflicts):
@@ -292,23 +311,32 @@ def write_review(query,facts,conflicts):
         if ref not in seen:
             seen.add(ref)
             references.append(ref)
-    payload={
-        "query":query,
-        "facts":[asdict(f) for f in facts],
-        "conflicts":[asdict(c) for c in conflicts]
-    }
+    #限制数量+裁剪长字段，保证JSON完整，不再截断payload
+    facts_payload=[asdict(f) for f in facts[:MAX_FACTS_PER_SESSION]]
+    for f in facts_payload:
+        for k in ("content","raw_quote"):
+            if isinstance(f.get(k),str):
+                f[k]=f[k][:500]
+    conflicts_payload=[asdict(c) for c in conflicts[:MAX_CONFLICT_PER_SESSION]]
+    for c in conflicts_payload:
+        for k in ("description","verdict","evidence_supplementary"):
+            if isinstance(c.get(k),str):
+                c[k]=c[k][:1000]
+    payload={"query":query,"facts":facts_payload,"conflicts":conflicts_payload}
     result=safe_call_deepseek(
-        [{"role":"system","content":REVIEW_PROMPT},{"role":"user","content":json.dumps(payload,ensure_ascii=False,default=str)[:MAX_CARDS_TEXT_CHARS]}],
+        [{"role":"system","content":REVIEW_PROMPT},{"role":"user","content":json.dumps(payload,ensure_ascii=False,default=str)}],
         temperature=0.2,
         max_tokens=4000
     )
     data=_extract_review_report(result["choices"][0]["message"]["content"])
+    def _as_list(v):
+        return v if isinstance(v,list) else []
     return ReviewReport(
         title=data.get("title") or query,
-        consensus=data.get("consensus",[]),
-        disagreements=data.get("disagreements",[]),
-        superseded_conclusions=data.get("superseded_conclusions",[]),
-        open_questions=data.get("open_questions",[]),
+        consensus=_as_list(data.get("consensus")),
+        disagreements=_as_list(data.get("disagreements")),
+        superseded_conclusions=_as_list(data.get("superseded_conclusions")),
+        open_questions=_as_list(data.get("open_questions")),
         references=references,
-        conflict_mark_list=data.get("conflict_mark_list",[])
+        conflict_mark_list=_as_list(data.get("conflict_mark_list"))
     )
