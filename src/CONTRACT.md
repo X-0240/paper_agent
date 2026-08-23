@@ -79,6 +79,9 @@ class AgentState(TypedDict):
     cost_consumed: float      # 人民币
     trace_log: List[Dict]
     section_cache: Dict[str,str]  # paper_id||section_name -> 章节全文，会话内缓存
+    card_cache: Dict[str,PaperCard]
+    pending_conflicts: List[Dict]  # 未裁决冲突候选，聚合自facts
+    search_count: int
 ```
 
 强制约束：
@@ -121,6 +124,7 @@ class AgentState(TypedDict):
 - 输出：`{"comparison": str, "facts": List[FactItem]}`
 - 实现：横向对比复用 `agent2_parse.compare_papers`；事实抽取为新增逻辑
 - 质量约束：每个 FactItem 必须带 `source_chunk_id`
+- 后置：返回 facts 必须带唯一 fact_id，编排层追加写入 State.facts
 - 超时：60s
 
 ### 5. verify_claim
@@ -130,14 +134,16 @@ class AgentState(TypedDict):
 - 实现：复用 `agent3_review.verify_with_retrieval` 的二次检索与裁决思路；先查本地，外网 P1
 - 约束：category 只能是五种枚举之一
 - 时间演进：Prompt 必须区分“实质矛盾”和“结论被推翻”；新论文须显式引用并否定同范围旧结论才判 `superseded`，不能只因为发布时间晚就赢
+- 后置：裁决完成后编排层更新 pending_conflicts（解决/保留）
 - 超时：60s
 
 ### 6. write_review
 
-- 输入：`query: str`, `facts: List[FactItem]`, `conflicts: List[Conflict]`
+- 输入：`query: str`, `facts: List[FactItem]`, `conflicts: List[Conflict]`, `pending_conflicts: List[Dict]=[]`
 - 输出：`ReviewReport`
 - 实现：复用 `agent3_review.generate_review` 的综述生成思路，输出字段对齐新结构
 - 强制：引用由 facts 确定性生成（`作者/论文, 年份, §chunk_id`），LLM 不编引用
+- 降级：pending_conflicts 最多传 `MAX_PENDING_IN_REVIEW` 条，综述中标注“待核实”
 - 超时：60s
 
 ## 四、旧代码映射（按真实函数名核对）
@@ -185,6 +191,8 @@ MAX_AGENT_STEP=10
 MAX_FACTS_PER_SESSION=20
 MAX_CONFLICT_PER_SESSION=5
 MAX_EXTERNAL_SEARCH_NUM=3
+MAX_SEARCH_PER_SESSION=3
+MAX_PENDING_IN_REVIEW=3
 MAX_CARDS_TEXT_CHARS=12000
 DAILY_COST_BUDGET=5.0      # 元，可被.env覆盖
 SESSION_COST_BUDGET=1.0    # 元

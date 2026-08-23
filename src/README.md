@@ -83,6 +83,7 @@ docker build -t paper-agent .
 - `state.py`：AgentState 与实体数据类（PaperMeta/PaperCard/FactItem/Conflict/ReviewReport）
 - `doc_ingest.py`：统一文档解析入口（PDF/Word/Excel/CSV/图片），章节加载/标题映射的唯一实现
 - `tools.py`：执行层工具入口，6 个工具已全部落地（search_papers / read_section / build_paper_card / analyze_paper_relations / verify_claim / write_review）；引用由 facts 确定性生成，LLM 不编引用
+- `survey_agent.py`：单 ReAct Agent 综述编排，复用 agent_react 循环，工具前置/后置校验、pending_conflicts 聚合、预算降级
 - `rag_tool.py`：混合检索（BM25 + FAISS + 可选 Rerank）
 - `agent_react.py`：手写 ReAct 循环，Supervisor + Worker
 - `agent1_retrieve.py` / `agent2_parse.py` / `agent3_review.py`：旧流水线模块，正在向 `tools.py` 单 Agent 工具集收敛
