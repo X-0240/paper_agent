@@ -69,7 +69,7 @@ def parse_action(text):
     return action,action_input
 
 #通用ReAct循环（每个Agent内部共用的思考-行动-观察内核）
-def react(question,tools,system_prompt,max_steps=6,timeout=120,repeat_limit=3):
+def react(question,tools,system_prompt,max_steps=6,timeout=120,repeat_limit=3,on_step=None):
     messages=[
         {"role":"system","content":system_prompt},
         {"role":"user","content":question}
@@ -126,6 +126,9 @@ def react(question,tools,system_prompt,max_steps=6,timeout=120,repeat_limit=3):
             observation = observation["answer"]
         logger.info(f"工具返回:{observation[:100]}")
         history[-1]["observation"]=observation
+        #可选审计回调：编排层可在每步工具后写入状态快照
+        if on_step:
+            on_step(history[-1])
 
         messages.append({"role":"assistant","content":ai_text})
         #把工具结果作为Observation追加进上下文，供下一步思考使用
