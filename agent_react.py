@@ -35,6 +35,9 @@ def run_tool(name,args,tools):
 
 def _validate_args(schema,args):
     #校验必填字段和类型，返回错误说明或None
+    extra=set(args.keys())-set(schema.keys())
+    if extra:
+        return f"未知参数：{sorted(extra)}，只接受{sorted(schema.keys())}"
     for field,rule in schema.items():
         value=args.get(field)
         if rule.get("required") and (value is None or value==""):

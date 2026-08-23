@@ -21,6 +21,13 @@ def test_tool_bad_json():
     assert action=="Search"
     assert action_input=={}
 
+def test_validate_args_rejects_unknown():
+    #多余参数必须被拒绝，防止LLM发明参数浪费步数
+    from agent_react import run_tool
+    tools={"Search":{"func":lambda q:"found","schema":{"q":{"type":"str","required":True}}}}
+    out=run_tool("Search",{"q":"x","max_results":10},tools)
+    assert "未知参数" in out
+
 def test_react_on_step_callback(monkeypatch):
     #on_step回调在每次工具执行后收到完整history条目
     calls=[]

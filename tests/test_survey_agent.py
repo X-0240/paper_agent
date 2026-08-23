@@ -1,5 +1,5 @@
-from state import AgentState, Conflict, FactItem, PaperMeta, ReviewReport
-from survey_agent import _enrich_trace, _finalize_review, _make_tools
+from state import AgentState, Conflict, FactItem, PaperCard, PaperMeta, ReviewReport
+from survey_agent import _auto_finalize, _enrich_trace, _finalize_review, _make_tools
 from tools import build_pending_conflicts
 
 def test_build_pending_conflicts_groups_by_entity_attribute():
@@ -72,3 +72,12 @@ def test_enrich_trace_fills_audit_fields():
     assert entry["step_count"]==3
     assert entry["facts_count"]==1
     assert entry["conflicts_count"]==0
+
+def test_auto_finalize_analyzes_when_cards_exist(monkeypatch):
+    #循环结束后有卡片没事实，编排层自动补事实抽取和综述
+    monkeypatch.setattr("survey_agent._analyze",lambda ids,cache=None:{"comparison":"c","facts":[FactItem(fact_id="f1",paper_id="P1",entity="E",attribute="A",value="1",content="c",source_chunk_id="c1",section_name="S")]})
+    monkeypatch.setattr("survey_agent._write_review",lambda query,facts,conflicts,pending=None:ReviewReport(title="兜底综述"))
+    state=AgentState(cards=[PaperCard(paper_id="P1",title="T1")])
+    _auto_finalize(state,"q")
+    assert state.review is not None
+    assert state.review.title=="兜底综述"

@@ -14,9 +14,19 @@ logger=logging.getLogger(__name__)
 SYSTEM_PROMPT_TEMPLATE="""你是论文调研综述Agent。用户给一个综述/对比类问题，你按需调用工具完成检索、读章节、建卡、抽取事实、核验冲突、生成综述。
 工具规则：
 1. 先search_papers找到论文，再决定是否read_section/build_paper_card
-2. facts不足不能写综述；有冲突候选时用verify_claim核验
-3. 最后必须调用write_review生成综述，然后Finish
-4. 搜索最多{max_search}次，不要重复调用已读章节
+2. 卡片足够后必须调用analyze_paper_relations抽取事实，再决定是否verify_claim
+3. facts不足不能写综述；有冲突候选时用verify_claim核验
+4. 最后必须调用write_review生成综述，然后Finish
+5. 搜索最多{max_search}次，不要重复调用已读章节/重复建卡
+6. facts为空时不要调用write_review，直接Finish，答案写“证据不足”
+注意：总步数最多{max_steps}，检索/读章节/建卡不要过度重复，尽快进入事实抽取和综述阶段。
+只能调用以下工具，工具名和参数必须精确匹配，禁止发明工具：
+- search_papers: {{"query": "..."}}
+- read_section: {{"paper_id": "...", "section_name": "..."}}
+- build_paper_card: {{"paper_id": "..."}}
+- analyze_paper_relations: {{"paper_ids": ["...", "..."]}}
+- verify_claim: {{"fact_id_a": "...", "fact_id_b": "..."}}
+- write_review: {{"query": "..."}}
 当前状态：{state_summary}
 每次输出格式：
 Thought: ...
@@ -113,11 +123,20 @@ def _finalize_review(state,query):
     if state.review is None and state.facts:
         state.review=_write_review(query,state.facts,state.conflicts,state.pending_conflicts)
 
+def _auto_finalize(state,query):
+    #编排层兜底：循环结束后有卡片但没事实，自动补一次抽取和综述
+    if state.review is None and not state.facts and state.cards:
+        ids=[c.paper_id for c in state.cards]
+        result=_analyze(ids,cache=state.card_cache)
+        state.facts.extend(result["facts"])
+        state.pending_conflicts=build_pending_conflicts(state.facts)
+    _finalize_review(state,query)
+
 def run_survey(query):
     #综述入口：实例化全新State，跑ReAct循环，预算不足时降级生成
     state=AgentState(query=query,complexity="COMPLEX")
     tools=_make_tools(state)
-    system_prompt=SYSTEM_PROMPT_TEMPLATE.format(max_search=MAX_SEARCH_PER_SESSION,state_summary=_summarize_state(state))
+    system_prompt=SYSTEM_PROMPT_TEMPLATE.format(max_search=MAX_SEARCH_PER_SESSION,max_steps=MAX_AGENT_STEP,state_summary=_summarize_state(state))
     history=[]
     try:
         answer,history=react(query,tools,system_prompt,max_steps=MAX_AGENT_STEP,
@@ -130,5 +149,5 @@ def run_survey(query):
         else:
             answer="预算不足，请明日再试"
     state.trace_log.extend(history)
-    _finalize_review(state,query)
+    _auto_finalize(state,query)
     return state
