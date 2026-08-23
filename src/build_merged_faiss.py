@@ -21,6 +21,8 @@ DATA_PATH=os.path.join(os.path.dirname(os.path.abspath(__file__)),"datasets","qa
 SECTIONS_DIR=os.path.join(os.path.dirname(os.path.abspath(__file__)),"papers_sections")
 FAISS_PATH=os.getenv("FAISS_PATH")
 TOP_N_PAPERS=40
+CHUNK_TOKENS=int(os.getenv("CHUNK_TOKENS","800"))
+CHUNK_OVERLAP=int(os.getenv("CHUNK_OVERLAP","100"))
 
 TOPICS=[
     "translation","parsing","generation","summarization","question answering","embedding",
@@ -58,7 +60,7 @@ def select_qasper(papers):
 
 def add_record(record,source):
     #新切片：doc_ingest章节+token级切分，同一实现保证可复测
-    for c in chunk_splitter(record):
+    for c in chunk_splitter(record,chunk_tokens=CHUNK_TOKENS,overlap=CHUNK_OVERLAP):
         if len(c.text.strip())<20:
             continue
         chunks.append(c.text)
