@@ -16,8 +16,8 @@ from pdf_preprocess import preprocess_pdf
 load_dotenv()
 logger=logging.getLogger(__name__)
 
-CHUNK_TOKENS=800
-CHUNK_OVERLAP=100
+CHUNK_TOKENS=448
+CHUNK_OVERLAP=64
 _tokenizer=None
 SECTIONS_DIR=os.path.join(os.path.dirname(os.path.abspath(__file__)),"papers_sections")
 TITLES_FILE=os.path.join(os.path.dirname(os.path.abspath(__file__)),"qasper_titles.json")
