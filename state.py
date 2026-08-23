@@ -75,3 +75,6 @@ class AgentState:
     cost_consumed: float=0.0
     trace_log: List[dict]=field(default_factory=list)
     section_cache: dict=field(default_factory=dict)
+    card_cache: dict=field(default_factory=dict)
+    pending_conflicts: List[dict]=field(default_factory=list)
+    search_count: int=0

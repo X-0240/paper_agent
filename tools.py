@@ -4,7 +4,7 @@ import os
 import re
 from dataclasses import asdict
 from agent2_parse import build_paper_card as old_build_card, compare_papers
-from config import MAX_CHUNKS_PER_PAPER, MAX_CONFLICT_PER_SESSION, MAX_FACTS_PER_SESSION, MAX_PAPER_PER_QUERY
+from config import MAX_CHUNKS_PER_PAPER, MAX_CONFLICT_PER_SESSION, MAX_FACTS_PER_SESSION, MAX_PAPER_PER_QUERY, MAX_PENDING_IN_REVIEW
 from doc_ingest import Chunk, DocumentRecord, chunk_splitter, load_sections, paper_title, token_len
 from llm_api import safe_call_deepseek
 from state import Conflict, FactItem, PaperCard, PaperMeta, ReviewReport, SectionRef
@@ -27,6 +27,7 @@ VERIFY_PROMPT="""你是冲突裁决器。根据两个事实主张、双方年份
 
 REVIEW_PROMPT="""你是综述写作器。根据事实、冲突和用户问题生成结构化综述，只输出JSON对象：
 {"title":"综述标题","consensus":["核心共识1"],"disagreements":[{"conflict_id":"","summary":"分歧摘要"}],"superseded_conclusions":["被推翻的历史结论"],"open_questions":["未解决问题"],"conflict_mark_list":["冲突标注"]}
+如果给了pending_conflicts，必须在conflict_mark_list里用“⚠待核实”标注，表示尚未完成深度核验。
 引用由系统生成，不要自己编引用。不要编造。"""
 
 _chunk_cache={}
@@ -169,6 +170,23 @@ def _trim_card(card):
             card[k]=[str(x)[:500] for x in card[k]][:20]
     return card
 
+def build_pending_conflicts(facts):
+    #确定性粗筛：相同entity+attribute、value不同 → 待核实冲突候选
+    groups={}
+    for f in facts:
+        key=(f.entity,f.attribute)
+        groups.setdefault(key,{}).setdefault(f.value,[]).append(f.fact_id)
+    pending=[]
+    for (entity,attribute),values in groups.items():
+        if len(values)>1:
+            pending.append({
+                "entity":entity,
+                "attribute":attribute,
+                "values":list(values.keys()),
+                "fact_ids":[fid for v in values.values() for fid in v]
+            })
+    return pending
+
 def _extract_facts(cards_text):
     #LLM事实抽取：JSON格式失败时带纠正指令重试一次，仍失败返回空
     messages=[
@@ -302,7 +320,7 @@ def _extract_review_report(text):
     logger.warning("综述JSON解析失败，返回空结构")
     return {}
 
-def write_review(query,facts,conflicts):
+def write_review(query,facts,conflicts,pending_conflicts=None):
     #引用从facts确定性生成（保证chunk_id），LLM只负责综述内容
     references=[]
     seen=set()
@@ -322,7 +340,8 @@ def write_review(query,facts,conflicts):
         for k in ("description","verdict","evidence_supplementary"):
             if isinstance(c.get(k),str):
                 c[k]=c[k][:1000]
-    payload={"query":query,"facts":facts_payload,"conflicts":conflicts_payload}
+    pending_payload=[p for p in (pending_conflicts or [])][:MAX_PENDING_IN_REVIEW]
+    payload={"query":query,"facts":facts_payload,"conflicts":conflicts_payload,"pending_conflicts":pending_payload}
     result=safe_call_deepseek(
         [{"role":"system","content":REVIEW_PROMPT},{"role":"user","content":json.dumps(payload,ensure_ascii=False,default=str)}],
         temperature=0.2,
