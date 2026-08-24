@@ -5,6 +5,7 @@ import re
 import sys
 import time
 import numpy as np
+sys.path.insert(0,os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from dotenv import load_dotenv
 import faiss
 from rank_bm25 import BM25Okapi
@@ -21,8 +22,17 @@ logger=logging.getLogger(__name__)
 FAISS_PATH=os.getenv("FAISS_PATH")
 MODEL_PATH=os.getenv("MODEL_PATH")
 CACHE_PATH=os.path.join(os.path.dirname(os.path.abspath(__file__)),"eval_query_transform_cache.json")
+TRANSFORMS=os.getenv("QUERY_TRANSFORMS","all").split(",")
 
-TRANSLATE_PROMPT="把下面的中文科研问题翻译成英文检索query，只输出英文，不要解释。"
+TRANSLATE_PROMPT=(
+    "你是专业英文学术翻译。把用户的中文科研问题翻译成用于论文检索的英文query。"
+    "规则：只输出英文翻译本身，禁止输出中文、解释、引号或任何额外内容。\n"
+    "示例：\n"
+    "中文：什么是Transformer？\n"
+    "英文：What is Transformer?\n"
+    "中文：BERT的参数量是多少？\n"
+    "英文：What is the parameter count of BERT?"
+)
 REWRITE_PROMPT="把下面的问题改写为信息更完整、更利于论文检索的中文query，只输出改写结果，不要解释。"
 
 def tokenize(text):
@@ -86,22 +96,37 @@ def save_cache(cache):
     with open(CACHE_PATH,"w",encoding="utf-8") as f:
         json.dump(cache,f,ensure_ascii=False)
 
-def llm_transform(question,prompt,cache):
-    if question in cache:
-        return cache[question]
-    try:
-        result=safe_call_deepseek(
-            [{"role":"system","content":prompt},{"role":"user","content":question}],
-            temperature=0.1,
-            max_tokens=200
-        )
-        text=result["choices"][0]["message"]["content"].strip()
-        cache[question]=text if text else question
-    except Exception as e:
-        logger.warning(f"变换失败，回退原问题：{e}")
-        cache[question]=question
+def valid_english(text):
+    #英文翻译校验：不能含中文，且要完整到句尾问号或足够长
+    if re.search(r"[\u4e00-\u9fff]",text):
+        return False
+    return len(text)>=25 or text.endswith("?")
+
+def llm_transform(question,prompt,cache,prefix,require_english=False):
+    #缓存键带前缀，避免不同变换互相覆盖
+    key=f"{prefix}|{question}"
+    if key in cache:
+        return cache[key]
+    text=question
+    for attempt in range(3):
+        try:
+            result=safe_call_deepseek(
+                [{"role":"system","content":prompt},{"role":"user","content":question}],
+                temperature=0.1,
+                max_tokens=200
+            )
+            text=result["choices"][0]["message"]["content"].strip()
+        except Exception as e:
+            logger.warning(f"变换失败，回退原问题：{e}")
+            text=question
+            break
+        if require_english and not valid_english(text):
+            logger.warning(f"第{attempt+1}次翻译不合规，重试")
+            continue
+        break
+    cache[key]=text if text else question
     save_cache(cache)
-    return cache[question]
+    return cache[key]
 
 #加载索引与模型
 meta=json.load(open(FAISS_PATH+".json",encoding="utf-8"))
@@ -159,12 +184,13 @@ variants={
 transformed={}
 for q,_,_ in test_cases:
     transformed.setdefault("原文",[]).append(q)
-    translated=llm_transform(q,TRANSLATE_PROMPT,cache)
-    transformed.setdefault("翻译成英文",[]).append(translated)
-    rewritten=llm_transform(q,REWRITE_PROMPT,cache)
-    transformed.setdefault("中文改写",[]).append(rewritten)
-    translated2=llm_transform(rewritten,TRANSLATE_PROMPT,cache)
-    transformed.setdefault("改写+翻译",[]).append(translated2)
+    if "all" in TRANSFORMS or "translate" in TRANSFORMS:
+        transformed.setdefault("翻译成英文",[]).append(llm_transform(q,TRANSLATE_PROMPT,cache,"translate",require_english=True))
+    if "all" in TRANSFORMS or "rewrite" in TRANSFORMS or "rewrite_translate" in TRANSFORMS:
+        rewritten=llm_transform(q,REWRITE_PROMPT,cache,"rewrite")
+        transformed.setdefault("中文改写",[]).append(rewritten)
+    if "all" in TRANSFORMS or "rewrite_translate" in TRANSFORMS:
+        transformed.setdefault("改写+翻译",[]).append(llm_transform(rewritten,TRANSLATE_PROMPT,cache,"rewrite_translate"))
 
 t0=time.time()
 for name,queries in transformed.items():
