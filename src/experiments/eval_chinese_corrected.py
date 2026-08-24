@@ -5,10 +5,12 @@ import re
 import sys
 import time
 import numpy as np
+sys.path.insert(0,os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from dotenv import load_dotenv
 import faiss
 from rank_bm25 import BM25Okapi
 from sentence_transformers import SentenceTransformer
+from rerank import rerank
 
 if sys.stdout and hasattr(sys.stdout,"reconfigure"):
     sys.stdout.reconfigure(errors="replace")
@@ -27,7 +29,6 @@ def tokenize(text):
 
 def norm(s):
     s=re.sub(r"^[\d.]+\s*","",s.lower())
-    s=re.sub(r"^(figure|table|abstract|appendix|proposition|theorem|section)\s*[\d.]*\s*","",s)
     return re.sub(r"[^a-z ]","",s).strip()
 
 def section_match(section,expected):
@@ -57,8 +58,9 @@ def weighted_candidates(query,candidates=25,alpha=0.5):
     for s,j in zip(bm,bm_idx): comb[j]=comb.get(j,0)+(1-alpha)*float(s)
     return sorted(comb.items(),key=lambda x:x[1],reverse=True)[:candidates]
 
-def top5(query):
-    return [j for j,_ in weighted_candidates(query,10,0.5)[:5]]
+def top_k(query,k):
+    # 候选池取25，保证top20也有足够余量
+    return [j for j,_ in weighted_candidates(query,25,0.5)[:k]]
 
 meta=json.load(open(FAISS_PATH+".json",encoding="utf-8"))
 chunks=meta["documents"]; sources=meta["sources"]; sections=meta["sections"]
@@ -76,8 +78,60 @@ variants={"原文":[c["question"] for c in cases],
 
 t0=time.time()
 for name,qs in variants.items():
+    for k in [5,10,15,20]:
+        hits=0
+        paper_hits=0
+        paper_hit_chapter_miss=0
+        for c,q in zip(cases,qs):
+            idxs=top_k(q,k)
+            chapter=chapter_hit(idxs,c["source"],c["mapped_section"])
+            paper=any(sources[j]==c["source"] for j in idxs)
+            hits+=chapter
+            paper_hits+=paper
+            paper_hit_chapter_miss+=paper and not chapter
+        print(f"{name}（修正章节）：章节级@{k}={hits/len(cases):.1%}（{hits}/{len(cases)}），论文级@{k}={paper_hits/len(cases):.1%}（{paper_hits}/{len(cases)}），论文中章节未中={paper_hit_chapter_miss}")
+
+# Rerank对照：翻译变体，Top-25粗召回后用Cross-Encoder精排
+for k in [5,10]:
     hits=0
-    for c,q in zip(cases,qs):
-        hits+=chapter_hit(top5(q),c["source"],c["mapped_section"])
-    print(f"{name}（修正章节）：章节级@5={hits/len(cases):.1%}（{hits}/{len(cases)}）")
+    paper_hits=0
+    for c,q in zip(cases,variants["翻译成英文"]):
+        top=weighted_candidates(q,25,0.5)
+        items=[{"source":sources[j],"section":sections[j],"text":chunks[j][:300],"idx":j} for j,_ in top]
+        ranked=rerank(q,items,top_n=k)
+        idxs=[it["idx"] for it in ranked]
+        hits+=chapter_hit(idxs,c["source"],c["mapped_section"])
+        paper_hits+=any(sources[j]==c["source"] for j in idxs)
+    print(f"Rerank翻译（修正章节）：章节级@{k}={hits/len(cases):.1%}（{hits}/{len(cases)}），论文级@{k}={paper_hits/len(cases):.1%}（{paper_hits}/{len(cases)}）")
+
+# 诊断：翻译变体下正确章节chunk的最低排名分布
+diag={"top20":0,"beyond20":0,"not_in_candidates":0,"section_missing":0}
+samples=[]
+missing_samples=[]
+for c,q in zip(cases,variants["翻译成英文"]):
+    correct=[i for i in range(len(chunks)) if sources[i]==c["source"] and section_match(sections[i],c["mapped_section"])]
+    if not correct:
+        diag["section_missing"]+=1
+        if len(missing_samples)<15:
+            idx_sections=sorted(set(sections[i] for i in range(len(chunks)) if sources[i]==c["source"]))
+            similar=[x for x in idx_sections if section_match(x,c["mapped_section"])]
+            missing_samples.append({"question":c["question"][:50],"source":c["source"],"mapped_section":c["mapped_section"],"index_similar":similar[:3]})
+        continue
+    full=weighted_candidates(q,100,0.5)
+    ranks=[r+1 for r,(j,_) in enumerate(full) if j in correct]
+    min_rank=min(ranks) if ranks else None
+    if min_rank is None:
+        diag["not_in_candidates"]+=1
+    elif min_rank<=20:
+        diag["top20"]+=1
+    else:
+        diag["beyond20"]+=1
+    if len(samples)<10 and (min_rank is None or min_rank>20):
+        samples.append({"question":c["question"][:60],"source":c["source"],"mapped_section":c["mapped_section"],"min_rank":min_rank})
+print(f"章节排名诊断（翻译变体）：{diag}")
+for s in samples:
+    print(s)
+print(f"章节缺失样例（{len(missing_samples)}）")
+for s in missing_samples:
+    print(s)
 print(f"评测耗时：{time.time()-t0:.1f}s")
