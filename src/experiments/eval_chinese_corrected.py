@@ -38,11 +38,14 @@ def section_match(section,expected):
     return e in a or a in e
 
 def chapter_hit(idxs,truth_source,truth_section):
+    if isinstance(truth_section,str):
+        truth_section=[truth_section]
     for j in idxs:
         if sources[j]!=truth_source:
             continue
-        if section_match(sections[j],truth_section):
-            return True
+        for sec in truth_section:
+            if section_match(sections[j],sec):
+                return True
     return False
 
 def weighted_candidates(query,candidates=25,alpha=0.5):
@@ -70,7 +73,7 @@ emb=model.encode(chunks,batch_size=64,normalize_embeddings=True,show_progress_ba
 index=faiss.IndexFlatIP(emb.shape[1]); index.add(emb.astype("float32"))
 bm25=BM25Okapi([tokenize(c) for c in chunks])
 
-cases=[c for c in json.load(open(CASES_PATH,encoding="utf-8")) if c["mapped_section"]]
+cases=[c for c in json.load(open(CASES_PATH,encoding="utf-8")) if c["mapped_section"] and c.get("valid_sections")]
 logging.info(f"修正后中文题：{len(cases)}")
 cache=json.load(open(CACHE_PATH,encoding="utf-8")) if os.path.exists(CACHE_PATH) else {}
 variants={"原文":[c["question"] for c in cases],
@@ -84,7 +87,7 @@ for name,qs in variants.items():
         paper_hit_chapter_miss=0
         for c,q in zip(cases,qs):
             idxs=top_k(q,k)
-            chapter=chapter_hit(idxs,c["source"],c["mapped_section"])
+            chapter=chapter_hit(idxs,c["source"],c["valid_sections"])
             paper=any(sources[j]==c["source"] for j in idxs)
             hits+=chapter
             paper_hits+=paper
@@ -100,7 +103,7 @@ for k in [5,10]:
         items=[{"source":sources[j],"section":sections[j],"text":chunks[j][:300],"idx":j} for j,_ in top]
         ranked=rerank(q,items,top_n=k)
         idxs=[it["idx"] for it in ranked]
-        hits+=chapter_hit(idxs,c["source"],c["mapped_section"])
+        hits+=chapter_hit(idxs,c["source"],c["valid_sections"])
         paper_hits+=any(sources[j]==c["source"] for j in idxs)
     print(f"Rerank翻译（修正章节）：章节级@{k}={hits/len(cases):.1%}（{hits}/{len(cases)}），论文级@{k}={paper_hits/len(cases):.1%}（{paper_hits}/{len(cases)}）")
 
@@ -109,12 +112,12 @@ diag={"top20":0,"beyond20":0,"not_in_candidates":0,"section_missing":0}
 samples=[]
 missing_samples=[]
 for c,q in zip(cases,variants["翻译成英文"]):
-    correct=[i for i in range(len(chunks)) if sources[i]==c["source"] and section_match(sections[i],c["mapped_section"])]
+    correct=[i for i in range(len(chunks)) if sources[i]==c["source"] and any(section_match(sections[i],sec) for sec in c["valid_sections"])]
     if not correct:
         diag["section_missing"]+=1
         if len(missing_samples)<15:
             idx_sections=sorted(set(sections[i] for i in range(len(chunks)) if sources[i]==c["source"]))
-            similar=[x for x in idx_sections if section_match(x,c["mapped_section"])]
+            similar=[x for x in idx_sections if any(section_match(x,sec) for sec in c["valid_sections"])]
             missing_samples.append({"question":c["question"][:50],"source":c["source"],"mapped_section":c["mapped_section"],"index_similar":similar[:3]})
         continue
     full=weighted_candidates(q,100,0.5)
