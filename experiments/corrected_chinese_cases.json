@@ -793,9 +793,14 @@
     "mapped_section": "3 Experiments",
     "method": "exact",
     "valid_sections": [
-      "3 Experiments"
+      "1 Introduction",
+      "3.4 Fact Veriﬁcation"
     ],
-    "validity": "valid"
+    "validity": "valid",
+    "evidence_sentences": [
+      "For knowledge-intensive generation, we experiment with MS-MARCO [1] and Jeopardy question generation.",
+      "FEVER [56] requires classifying whether a natural language claim is supported or refuted by Wikipedia, or whether there is not enough information to decide."
+    ]
   },
   {
     "question": "RAG相比纯预训练生成模型，在哪类指标提升最显著？",
@@ -817,7 +822,11 @@
     "valid_sections": [
       "6 Discussion"
     ],
-    "validity": "valid"
+    "validity": "valid",
+    "evidence_sentences": [
+      "For Open-domain QA we report test numbers using 15 retrieved documents for RAG-Token models.",
+      "For RAG-Sequence models, we report test results using 50 retrieved documents, and we use the"
+    ]
   },
   {
     "question": "为什么RAG不需要微调海量模型参数就能注入新知识？",
@@ -904,9 +913,12 @@
     "mapped_section": "6 CONCLUSION",
     "method": "english_terms",
     "valid_sections": [
-      "6 CONCLUSION"
+      "3.2 METHODS"
     ],
-    "validity": "valid"
+    "validity": "valid",
+    "evidence_sentences": [
+      "Similar to Figure 1(d), each trajectory consists of multiple thought-action-observation steps (i.e. dense thought)."
+    ]
   },
   {
     "question": "在HotpotQA多跳问答数据集，ReAct相比仅CoT基线提升的核心原因？",
@@ -915,9 +927,12 @@
     "mapped_section": "1 INTRODUCTION",
     "method": "english_terms",
     "valid_sections": [
-      "1 INTRODUCTION"
+      "3.3 RESULTS AND OBSERVATIONS"
     ],
-    "validity": "valid"
+    "validity": "valid",
+    "evidence_sentences": [
+      "In contrast, the problem solving trajectory of ReAct is more grounded, fact-driven, and trustworthy, thanks to the access of an external knowledge base."
+    ]
   },
   {
     "question": "ReAct何时终止Thought-Action循环并输出最终答案？",
@@ -1009,10 +1024,9 @@
     "original_section": "2 Model Architecture Transformer Decoder Detail",
     "mapped_section": "2.3. Model",
     "method": "exact",
-    "valid_sections": [
-      "2.3. Model"
-    ],
-    "validity": "valid"
+    "valid_sections": [],
+    "validity": "unanswerable",
+    "evidence_sentences": []
   },
   {
     "question": "论文核心论点是什么，即大模型无监督预训练后可零样本适配多种NLP任务？",
@@ -1081,9 +1095,13 @@
     "mapped_section": "2.3 Relative position embedding",
     "method": "fuzzy",
     "valid_sections": [
-      "2.3 Relative position embedding"
+      "Abstract"
     ],
-    "validity": "valid"
+    "validity": "valid",
+    "evidence_sentences": [
+      "RoPE encodes the absolute position with a rotation matrix and meanwhile incorporates explicit relative position dependency in self-attention formulation.",
+      "RoPE enables valuable properties, including the flexibility of sequence length, decaying inter-token dependency and the capability of equipping the linear self-attention with relative position encoding."
+    ]
   },
   {
     "question": "RoPE将向量维度两两分组做旋转，奇数维度如何处理？",
@@ -1091,10 +1109,9 @@
     "original_section": "3 Rotary Position Embedding Implementation Detail",
     "mapped_section": "4.5.1 Implementation",
     "method": "exact",
-    "valid_sections": [
-      "4.5.1 Implementation"
-    ],
-    "validity": "valid"
+    "valid_sections": [],
+    "validity": "unanswerable",
+    "evidence_sentences": []
   },
   {
     "question": "标准绝对位置编码存在什么缺陷，RoPE予以解决？",
@@ -1103,9 +1120,12 @@
     "mapped_section": "2.3 Relative position embedding",
     "method": "fuzzy",
     "valid_sections": [
-      "2.3 Relative position embedding"
+      "Abstract"
     ],
-    "validity": "valid"
+    "validity": "valid",
+    "evidence_sentences": [
+      "RoPE encodes the absolute position with a rotation matrix and meanwhile incorporates explicit relative position dependency in self-attention formulation."
+    ]
   },
   {
     "question": "RoPE如何计算两个token间基于相对位置的注意力分数？",
@@ -1125,9 +1145,12 @@
     "mapped_section": "Abstract",
     "method": "english_terms",
     "valid_sections": [
-      "Abstract"
+      "4.2.1 Experimental Settings"
     ],
-    "validity": "valid"
+    "validity": "valid",
+    "evidence_sentences": [
+      "BERT Devlin et al. [2019] is adopted as our baseline model."
+    ]
   },
   {
     "question": "消融实验中移除RoPE替换为正弦位置编码，长文本困惑度会如何变化？",
@@ -1135,10 +1158,9 @@
     "original_section": "Ablation Experiments",
     "mapped_section": "Abstract",
     "method": "english_terms",
-    "valid_sections": [
-      "Abstract"
-    ],
-    "validity": "valid"
+    "valid_sections": [],
+    "validity": "unanswerable",
+    "evidence_sentences": []
   },
   {
     "question": "RoPE旋转计算的频率基底参数作用是什么？",
@@ -1147,8 +1169,12 @@
     "mapped_section": "Abstract",
     "method": "english_terms",
     "valid_sections": [
-      "Abstract"
+      "3.3 Properties of RoPE"
     ],
-    "validity": "valid"
+    "validity": "valid",
+    "evidence_sentences": [
+      "Following Vaswani et al. [2017], we set θi = 10000−2i/d.",
+      "One can prove that this setting provides a long-term decay property (refer to Section (3.4.3) for more details), which means the inner-product will decay when the relative position increase."
+    ]
   }
 ]

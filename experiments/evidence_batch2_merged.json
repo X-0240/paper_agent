@@ -9,7 +9,8 @@
       "In this paper, we argue that a missing principle is making attention algorithms IO-aware [1]—that is, carefully accounting for reads and writes to different levels of fast and slow memory (e.g., between fast GPU on-chip SRAM and relatively slow GPU high bandwidth memory, or HBM [45], Figure 1 left)."
     ],
     "source_section": "1 Introduction",
-    "note": "AI1:原文给出SRAM、HBM、CPU DRAM，但未完整给出GPU内存从快到慢的完整排序；明确优化SRAM与HBM之间读写。 | AI2:指出优化HBM与SRAM之间的读写"
+    "note": "AI1:原文给出SRAM、HBM、CPU DRAM，但未完整给出GPU内存从快到慢的完整排序；明确优化SRAM与HBM之间读写。 | AI2:指出优化HBM与SRAM之间的读写",
+    "question": "GPU内存层级从快到慢排序，FlashAttention主要优化哪两层之间的数据读写？"
   },
   {
     "id": 2,
@@ -18,7 +19,8 @@
       "FlashAttention does not read and write the large N×N attention matrix to HBM, resulting in an 7.6× speedup on the attention computation."
     ],
     "source_section": "1 Introduction",
-    "note": "人工复核：3000字截断/章节标错，已定位全文证据"
+    "note": "人工复核：3000字截断/章节标错，已定位全文证据",
+    "question": "FlashAttention相比标准注意力，HBM读写量降低多少倍（GPT2实验数据）？"
   },
   {
     "id": 3,
@@ -27,7 +29,8 @@
       "We propose FlashAttention, an IO‑aware exact attention algorithm that uses tiling to reduce the number of memory reads/writes between GPU high bandwidth memory (HBM) and GPU on‑chip SRAM."
     ],
     "source_section": "Abstract",
-    "note": "AI1:原文说明FlashAttention是exact attention，不会改变注意力数学计算结果。 | AI2:明确为exact attention，不改变数学结果"
+    "note": "AI1:原文说明FlashAttention是exact attention，不会改变注意力数学计算结果。 | AI2:明确为exact attention，不改变数学结果",
+    "question": "FlashAttention是否改变注意力数学计算结果？"
   },
   {
     "id": 4,
@@ -36,7 +39,8 @@
       "Therefore if we keep track of some extra statistics (m(x), ℓ(x)), we can compute softmax one block at a time."
     ],
     "source_section": "3.1 An Efficient Attention Algorithm With Tiling and Recomputation",
-    "note": "人工复核：3000字截断/章节标错，已定位全文证据"
+    "note": "人工复核：3000字截断/章节标错，已定位全文证据",
+    "question": "分块计算softmax时，为保证数值正确性，需要缓存哪两个逐行统计量？"
   },
   {
     "id": 5,
@@ -45,7 +49,8 @@
       "The runtime (for seq. length 4K) of block-sparse FlashAttention is faster than FlashAttention by a factor proportional to the sparsity."
     ],
     "source_section": "3.2 Analysis: IO Complexity of FlashAttention",
-    "note": "AI1:该章节只说明block‑sparse运行时与稀疏度成正比，未给出IO复杂度相乘的稀疏系数。 | AI2:提到与稀疏度成比例，但未给出具体稀疏系数公式"
+    "note": "AI1:该章节只说明block‑sparse运行时与稀疏度成正比，未给出IO复杂度相乘的稀疏系数。 | AI2:提到与稀疏度成比例，但未给出具体稀疏系数公式",
+    "question": "Block-Sparse FlashAttention的IO复杂度相比稠密Flash，会乘以什么稀疏系数？"
   },
   {
     "id": 6,
@@ -54,7 +59,8 @@
       "FlashAttention outperforms the MLPerf 1.1 [58] speed record for BERT by 15%, and speeds up GPT‑2 up to 3× over HuggingFace [87] and 1.8× over Megatron [77] over standard Transformers."
     ],
     "source_section": "4 Experiments",
-    "note": "AI1:原文给出BERT‑Large相对MLPerf提速15%；GPT‑2(1K序列)对比HuggingFace提速3×，对比Megatron提速1.8×。 | AI2:直接给出BERT-Large提速15%，GPT-2提速3×"
+    "note": "AI1:原文给出BERT‑Large相对MLPerf提速15%；GPT‑2(1K序列)对比HuggingFace提速3×，对比Megatron提速1.8×。 | AI2:直接给出BERT-Large提速15%，GPT-2提速3×",
+    "question": "使用Flash训练BERT-Large相比MLPerf基准提速多少？GPT2（1K序列）提速倍数？"
   },
   {
     "id": 7,
@@ -66,7 +72,8 @@
       "Let N be the sequence length, d be the head dimension, and M be size of SRAM"
     ],
     "source_section": "3.2 Analysis: IO Complexity of FlashAttention",
-    "note": "AI1:IO复杂度公式为Θ(𝑁2𝑑2𝑀−1)，M代表SRAM（片上SRAM）的大小。 | AI2:给出公式，M为SRAM大小"
+    "note": "AI1:IO复杂度公式为Θ(𝑁2𝑑2𝑀−1)，M代表SRAM（片上SRAM）的大小。 | AI2:给出公式，M为SRAM大小",
+    "question": "FlashAttention的IO复杂度公式是什么，M代表什么硬件参数？"
   },
   {
     "id": 8,
@@ -76,7 +83,8 @@
       "the first Transformers to achieve better-than-chance performance on the Path-X challenge (seq. length 16K, 61.4% accuracy) and Path-256 (seq. length 64K, 63.1% accuracy)."
     ],
     "source_section": "Abstract",
-    "note": "AI1:两个长文本基准是Path‑X与Path‑256。 | AI2:明确Path-X和Path-256两个基准"
+    "note": "AI1:两个长文本基准是Path‑X与Path‑256。 | AI2:明确Path-X和Path-256两个基准",
+    "question": "Flash支持超长序列，哪两个长文本基准首次通过它实现高于随机的效果？"
   },
   {
     "id": 9,
@@ -87,7 +95,8 @@
       "For a pre-trained weight matrix W0 ∈ R^{d×k}, we constrain its update by representing the latter with a low-rank decomposition W0 + ∆W = W0 + BA, where B ∈ R^{d×r}, A ∈ R^{r×k}"
     ],
     "source_section": "4.1 LOW‑RANK‑PARAMETRIZED UPDATE MATRICES",
-    "note": "AI1:LoRA冻结预训练权重W0，仅训练低秩矩阵A、B两组矩阵。 | AI2:给出低秩矩阵A和B"
+    "note": "AI1:LoRA冻结预训练权重W0，仅训练低秩矩阵A、B两组矩阵。 | AI2:给出低秩矩阵A和B",
+    "question": "LoRA微调仅冻结预训练大模型权重，只训练哪两组低秩矩阵？"
   },
   {
     "id": 10,
@@ -98,7 +107,8 @@
       "This guarantees that we do not introduce any additional latency during inference compared to a fine-tuned model by construction."
     ],
     "source_section": "1 INTRODUCTION",
-    "note": "AI1:当前1 INTRODUCTION没有给出LoRA推理延迟相关原文，证据片段仅描述其它方法的延迟，无法回答本问题。 | AI2:说明不引入额外延迟，原因是可合并矩阵计算"
+    "note": "AI1:当前1 INTRODUCTION没有给出LoRA推理延迟相关原文，证据片段仅描述其它方法的延迟，无法回答本问题。 | AI2:说明不引入额外延迟，原因是可合并矩阵计算",
+    "question": "LoRA推理时是否引入额外延迟，原因是什么？"
   },
   {
     "id": 11,
@@ -107,7 +117,8 @@
       "We illustrate our reparametrization in Figure 1. We use a random Gaussian initialization for A and zero for B, so ∆W = BA is zero at the beginning of training."
     ],
     "source_section": "1 INTRODUCTION",
-    "note": "AI1:1 INTRODUCTION章节被截断，没有给出权重更新完整公式、矩阵A、B初始化策略。 | AI2:给出初始化策略，但未给出完整更新公式（h = W0x + BAx已在文中，但未直接摘录）"
+    "note": "AI1:1 INTRODUCTION章节被截断，没有给出权重更新完整公式、矩阵A、B初始化策略。 | AI2:给出初始化策略，但未给出完整更新公式（h = W0x + BAx已在文中，但未直接摘录）",
+    "question": "LoRA的权重更新公式是什么，训练初始化矩阵A、B策略是？"
   },
   {
     "id": 12,
@@ -117,7 +128,8 @@
       "We leave the empirical investigation of adapting the MLP ... to future work."
     ],
     "source_section": "4.2 APPLYING LORA TO TRANSFORMER",
-    "note": "人工复核：3000字截断/章节标错，已定位全文证据"
+    "note": "人工复核：3000字截断/章节标错，已定位全文证据",
+    "question": "论文为什么仅针对注意力矩阵做低秩适配，不作用于FFN层？"
   },
   {
     "id": 13,
@@ -128,7 +140,8 @@
       "We show that a very low rank (i.e., r in Figure 1 can be one or two) suffices even when the full rank (i.e., d) is as high as 12,288, making LoRA both storage- and compute-efficient."
     ],
     "source_section": "Abstract",
-    "note": "AI1:摘要仅说明r是低秩分解的秩，未描述r增大对适配能力、参数量的变化关系。 | AI2:r代表秩，r越大参数量增多，适配能力增强（隐含）"
+    "note": "AI1:摘要仅说明r是低秩分解的秩，未描述r增大对适配能力、参数量的变化关系。 | AI2:r代表秩，r越大参数量增多，适配能力增强（隐含）",
+    "question": "LoRA超参数r代表什么，r越大模型适配能力与参数量如何变化？"
   },
   {
     "id": 14,
@@ -138,7 +151,8 @@
       "Compared to GPT-3 175B fine-tuned with Adam, LoRA can reduce the number of trainable parameters by 10,000 times and the GPU memory requirement by 3 times."
     ],
     "source_section": "5.1 BASELINES",
-    "note": "AI1:给出LoRA相比全量微调存储开销优势，但没有给出和Prefix Tuning对比的存储开销信息。 | AI2:给出存储优势（参数减少、显存减少）"
+    "note": "AI1:给出LoRA相比全量微调存储开销优势，但没有给出和Prefix Tuning对比的存储开销信息。 | AI2:给出存储优势（参数减少、显存减少）",
+    "question": "相比全参数微调、Prefix Tuning，LoRA在存储开销上的优势是什么？"
   },
   {
     "id": 15,
@@ -148,7 +162,8 @@
       "we leave ... biases to a future work."
     ],
     "source_section": "1 INTRODUCTION",
-    "note": "人工复核：3000字截断/章节标错，已定位全文证据"
+    "note": "人工复核：3000字截断/章节标错，已定位全文证据",
+    "question": "LoRA训练阶段是否使用dropout、偏置项等辅助参数？"
   },
   {
     "id": 16,
@@ -157,7 +172,8 @@
       "On GPT-3 175B, we reduce the VRAM consumption during training from 1.2TB to 350GB."
     ],
     "source_section": "4.2 APPLYING LORA TO TRANSFORMER",
-    "note": "人工复核：3000字截断/章节标错，已定位全文证据"
+    "note": "人工复核：3000字截断/章节标错，已定位全文证据",
+    "question": "在GPT-3 175B实验中，同等性能下LoRA相比全微调节省多少显存？"
   },
   {
     "id": 17,
@@ -167,14 +183,16 @@
       "A pre-trained model can be shared and used to build many small LoRA modules for different tasks. We can freeze the shared model and efficiently switch tasks by replacing the matrices A and B in Figure 1"
     ],
     "source_section": "Abstract",
-    "note": "AI1:摘要没有描述多任务场景下切换任务适配权重的操作流程。 | AI2:说明通过替换A和B切换任务"
+    "note": "AI1:摘要没有描述多任务场景下切换任务适配权重的操作流程。 | AI2:说明通过替换A和B切换任务",
+    "question": "多任务场景下LoRA如何切换不同任务适配权重？"
   },
   {
     "id": 18,
     "answerable": "no",
     "evidence_sentences": [],
     "source_section": "",
-    "note": "人工复核：当前解析文本无答案，标记不可回答"
+    "note": "人工复核：当前解析文本无答案，标记不可回答",
+    "question": "消融实验证明将LoRA应用于Encoder-Decoder哪部分效果最优？"
   },
   {
     "id": 19,
@@ -185,7 +203,8 @@
       "This graph index spans nodes (e.g., entities), edges (e.g., relationships), and covariates (e.g., claims)"
     ],
     "source_section": "1 Introduction",
-    "note": "AI1:GraphRAG相比传统向量RAG新增知识图谱(knowledge graph)结构化存储单元。 | AI2:核心新增结构化存储为知识图谱（节点、边等）"
+    "note": "AI1:GraphRAG相比传统向量RAG新增知识图谱(knowledge graph)结构化存储单元。 | AI2:核心新增结构化存储为知识图谱（节点、边等）",
+    "question": "GraphR相比传统向量RAG，核心新增哪一类结构化存储单元？"
   },
   {
     "id": 20,
@@ -194,7 +213,8 @@
       "Our approach uses an LLM to build a graph index in two stages: first, to derive an entity knowledge graph from the source documents, then to pre-generate community summaries for all groups of closely related entities."
     ],
     "source_section": "Abstract",
-    "note": "人工复核：3000字截断/章节标错，已定位全文证据"
+    "note": "人工复核：3000字截断/章节标错，已定位全文证据",
+    "question": "GraphRAG对原始文档做分层抽取，哪两级图结构用于检索？"
   },
   {
     "id": 21,
@@ -203,14 +223,16 @@
       "In this step, the LLM is prompted to extract instances of important entities and the relationships between the entities from a given chunk."
     ],
     "source_section": "3.1.2 Text Chunks →Entities & Relationships",
-    "note": "AI1:通过提示大模型(LLM prompted)从文本块中抽取实体与关系三元组。 | AI2:直接说明用LLM从文本块抽取实体和关系"
+    "note": "AI1:通过提示大模型(LLM prompted)从文本块中抽取实体与关系三元组。 | AI2:直接说明用LLM从文本块抽取实体和关系",
+    "question": "GraphRAG构建图时，通过什么步骤从文本抽取实体与关系三元组？"
   },
   {
     "id": 22,
     "answerable": "no",
     "evidence_sentences": [],
     "source_section": "",
-    "note": "人工复核：当前解析文本无答案，标记不可回答"
+    "note": "人工复核：当前解析文本无答案，标记不可回答",
+    "question": "局部检索与全局检索分别适配什么类型用户查询？"
   },
   {
     "id": 23,
@@ -220,7 +242,8 @@
       "Each level of this hierarchy provides a community partition that covers the nodes of the graph in a mutually exclusive, collectively exhaustive way, enabling divide‑and‑conquer global summarization."
     ],
     "source_section": "3.1.4 Knowledge Graph →Graph Communities",
-    "note": "AI1:社区检测算法对图做分层划分，得到互斥完备的社区划分，支持分治式全局摘要生成。 | AI2:说明使用Leiden算法进行层次社区检测"
+    "note": "AI1:社区检测算法对图做分层划分，得到互斥完备的社区划分，支持分治式全局摘要生成。 | AI2:说明使用Leiden算法进行层次社区检测",
+    "question": "GraphRAG中社区检测算法的作用是什么？"
   },
   {
     "id": 24,
@@ -230,14 +253,16 @@
       "However, RAG fails on global questions directed at an entire text corpus, such as 'What are the main themes in the dataset?', since this is inherently a query-focused summarization (QFS) task, rather than an explicit retrieval task."
     ],
     "source_section": "Abstract",
-    "note": "AI1:传统向量RAG缺陷是无法处理面向整个语料库的全局感知类问题，GraphRAG借助图结构弥补该不足。 | AI2:指出RAG在全局问题上失败，GraphRAG通过图结构弥补"
+    "note": "AI1:传统向量RAG缺陷是无法处理面向整个语料库的全局感知类问题，GraphRAG借助图结构弥补该不足。 | AI2:指出RAG在全局问题上失败，GraphRAG通过图结构弥补",
+    "question": "传统向量RAG的缺陷是什么，GraphRAG通过图结构弥补？"
   },
   {
     "id": 25,
     "answerable": "no",
     "evidence_sentences": [],
     "source_section": "",
-    "note": "人工复核：当前解析文本无答案，标记不可回答"
+    "note": "人工复核：当前解析文本无答案，标记不可回答",
+    "question": "GraphRAG检索流程第一步，对用户查询做什么图相关预处理？"
   },
   {
     "id": 26,
@@ -249,7 +274,8 @@
       "GraphRAG generates community summaries by adding various element summaries (for nodes, edges, and related claims) to a community summary template. Community summaries from lower-level communities are used to generate summaries for higher-level communities"
     ],
     "source_section": "3.1.5 Graph Communities →Community Summaries",
-    "note": "AI1:区分叶子层级与高层级社区，填充元素摘要至模板，超出token限制时用子社区摘要替换长元素摘要生成全局社区摘要。 | AI2:说明生成方式，采用自下而上合并子社区摘要"
+    "note": "AI1:区分叶子层级与高层级社区，填充元素摘要至模板，超出token限制时用子社区摘要替换长元素摘要生成全局社区摘要。 | AI2:说明生成方式，采用自下而上合并子社区摘要",
+    "question": "全局社区摘要如何生成？"
   },
   {
     "id": 27,
@@ -259,7 +285,8 @@
       "For a class of global sensemaking questions over datasets in the 1 million token range, we show that GraphRAG leads to substantial improvements over a conventional RAG baseline for both the comprehensiveness and diversity of generated answers."
     ],
     "source_section": "Abstract",
-    "note": "人工复核：3000字截断/章节标错，已定位全文证据"
+    "note": "人工复核：3000字截断/章节标错，已定位全文证据",
+    "question": "GraphRAG在多文档综合问答任务上相比普通RAG提升的核心原因？"
   },
   {
     "id": 28,
@@ -268,7 +295,8 @@
       "Figure 1 illustrates the high-level data flow of the GraphRAG approach and pipeline."
     ],
     "source_section": "3.1 GraphRAG Workflow",
-    "note": "人工复核：3000字截断/章节标错，已定位全文证据"
+    "note": "人工复核：3000字截断/章节标错，已定位全文证据",
+    "question": "GraphRAG的完整处理流水线包含哪五大核心步骤？"
   },
   {
     "id": 29,
@@ -278,7 +306,8 @@
       "We introduce RAG models where the parametric memory is a pre‑trained seq2seq model and the non‑parametric memory is a dense vector index of Wikipedia, accessed with a pre‑trained neural retriever."
     ],
     "source_section": "Abstract",
-    "note": "AI1:RAG由预训练seq2seq生成器（参数记忆）和预训练神经检索器+维基稠密向量索引（非参数记忆）两大模块组成。 | AI2:明确两个核心模块：seq2seq生成器和神经检索器"
+    "note": "AI1:RAG由预训练seq2seq生成器（参数记忆）和预训练神经检索器+维基稠密向量索引（非参数记忆）两大模块组成。 | AI2:明确两个核心模块：seq2seq生成器和神经检索器",
+    "question": "原始RAG模型由哪两个核心模块组合而成？"
   },
   {
     "id": 30,
@@ -288,7 +317,8 @@
       "In the RAG-Token model we can draw a different latent document for each target token."
     ],
     "source_section": "2.1 Models",
-    "note": "人工复核：3000字截断/章节标错，已定位全文证据"
+    "note": "人工复核：3000字截断/章节标错，已定位全文证据",
+    "question": "RAG两种变体RAG-Sequence与RAG-Token的区别是什么？"
   },
   {
     "id": 31,
@@ -299,7 +329,8 @@
       "Pre-trained neural language models ... have downsides: They cannot easily expand or revise their memory, can’t straightforwardly provide insight into their predictions, and may produce 'hallucinations'. Hybrid models that combine parametric memory with non-parametric memories can address some of these issues"
     ],
     "source_section": "1 Introduction",
-    "note": "AI1:RAG动机是结合参数与非参数记忆，解决大模型不易修改扩展记忆、难以解释预测结果、易产生幻觉的固有缺陷。 | AI2:直接回答设计动机，解决无法更新记忆、无法提供解释和幻觉问题"
+    "note": "AI1:RAG动机是结合参数与非参数记忆，解决大模型不易修改扩展记忆、难以解释预测结果、易产生幻觉的固有缺陷。 | AI2:直接回答设计动机，解决无法更新记忆、无法提供解释和幻觉问题",
+    "question": "RAG的核心设计动机是什么，解决大模型什么固有缺陷？"
   },
   {
     "id": 32,
@@ -308,6 +339,7 @@
       "The retriever (Dense Passage Retriever [26], henceforth DPR) provides latent documents conditioned on the input, and the seq2seq model (BART [32]) then conditions on these latent documents together with the input to generate the output."
     ],
     "source_section": "1 Introduction",
-    "note": "AI1:只说明DPR基于输入得到潜在文档，没有给出DPR的具体输入是什么。 | AI2:未详细描述DPR的输入是什么"
+    "note": "AI1:只说明DPR基于输入得到潜在文档，没有给出DPR的具体输入是什么。 | AI2:未详细描述DPR的输入是什么",
+    "question": "检索阶段使用的稠密检索模型DPR，输入分别是什么？"
   }
 ]
