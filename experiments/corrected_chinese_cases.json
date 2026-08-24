@@ -412,9 +412,12 @@
     "mapped_section": "4 Experiments",
     "method": "exact",
     "valid_sections": [
-      "4 Experiments"
+      "1 Introduction"
     ],
-    "validity": "valid"
+    "validity": "valid",
+    "evidence_sentences": [
+      "FlashAttention does not read and write the large N×N attention matrix to HBM, resulting in an 7.6× speedup on the attention computation."
+    ]
   },
   {
     "question": "FlashAttention是否改变注意力数学计算结果？",
@@ -434,9 +437,12 @@
     "mapped_section": "1 Introduction",
     "method": "english_terms",
     "valid_sections": [
-      "1 Introduction"
+      "3.1 An Efficient Attention Algorithm With Tiling and Recomputation"
     ],
-    "validity": "valid"
+    "validity": "valid",
+    "evidence_sentences": [
+      "Therefore if we keep track of some extra statistics (m(x), ℓ(x)), we can compute softmax one block at a time."
+    ]
   },
   {
     "question": "Block-Sparse FlashAttention的IO复杂度相比稠密Flash，会乘以什么稀疏系数？",
@@ -523,9 +529,13 @@
     "mapped_section": "8 CONCLUSION AND FUTURE WORK",
     "method": "english_terms",
     "valid_sections": [
-      "8 CONCLUSION AND FUTURE WORK"
+      "4.2 APPLYING LORA TO TRANSFORMER"
     ],
-    "validity": "valid"
+    "validity": "valid",
+    "evidence_sentences": [
+      "We limit our study to only adapting the attention weights for downstream tasks.",
+      "We leave the empirical investigation of adapting the MLP ... to future work."
+    ]
   },
   {
     "question": "LoRA超参数r代表什么，r越大模型适配能力与参数量如何变化？",
@@ -556,9 +566,13 @@
     "mapped_section": "5.1 BASELINES",
     "method": "english_terms",
     "valid_sections": [
-      "5.1 BASELINES"
+      "1 INTRODUCTION"
     ],
-    "validity": "valid"
+    "validity": "valid",
+    "evidence_sentences": [
+      "We only train A and B.",
+      "we leave ... biases to a future work."
+    ]
   },
   {
     "question": "在GPT-3 175B实验中，同等性能下LoRA相比全微调节省多少显存？",
@@ -567,9 +581,12 @@
     "mapped_section": "5 EMPIRICAL EXPERIMENTS",
     "method": "fuzzy",
     "valid_sections": [
-      "5 EMPIRICAL EXPERIMENTS"
+      "4.2 APPLYING LORA TO TRANSFORMER"
     ],
-    "validity": "valid"
+    "validity": "valid",
+    "evidence_sentences": [
+      "On GPT-3 175B, we reduce the VRAM consumption during training from 1.2TB to 350GB."
+    ]
   },
   {
     "question": "多任务场景下LoRA如何切换不同任务适配权重？",
@@ -588,10 +605,9 @@
     "original_section": "4 Experiments Ablation Layer Ablation",
     "mapped_section": "1 INTRODUCTION",
     "method": "english_terms",
-    "valid_sections": [
-      "1 INTRODUCTION"
-    ],
-    "validity": "valid"
+    "valid_sections": [],
+    "validity": "unanswerable",
+    "evidence_sentences": []
   },
   {
     "question": "GraphR相比传统向量RAG，核心新增哪一类结构化存储单元？",
@@ -611,9 +627,12 @@
     "mapped_section": "2.4 RAG evaluation criteria",
     "method": "english_terms",
     "valid_sections": [
-      "2.4 RAG evaluation criteria"
+      "Abstract"
     ],
-    "validity": "valid"
+    "validity": "valid",
+    "evidence_sentences": [
+      "Our approach uses an LLM to build a graph index in two stages: first, to derive an entity knowledge graph from the source documents, then to pre-generate community summaries for all groups of closely related entities."
+    ]
   },
   {
     "question": "GraphRAG构建图时，通过什么步骤从文本抽取实体与关系三元组？",
@@ -632,10 +651,9 @@
     "original_section": "3 Pipeline Architecture Local vs Global Search",
     "mapped_section": "Abstract",
     "method": "english_terms",
-    "valid_sections": [
-      "Abstract"
-    ],
-    "validity": "valid"
+    "valid_sections": [],
+    "validity": "unanswerable",
+    "evidence_sentences": []
   },
   {
     "question": "GraphRAG中社区检测算法的作用是什么？",
@@ -665,10 +683,9 @@
     "original_section": "4 Retrieval Pipeline",
     "mapped_section": "7 Conclusion",
     "method": "english_terms",
-    "valid_sections": [
-      "3.1 GraphRAG Workflow"
-    ],
-    "validity": "valid"
+    "valid_sections": [],
+    "validity": "unanswerable",
+    "evidence_sentences": []
   },
   {
     "question": "全局社区摘要如何生成？",
@@ -688,9 +705,13 @@
     "mapped_section": "4.2 Experiment 2",
     "method": "exact",
     "valid_sections": [
-      "4.2 Experiment 2"
+      "Abstract"
     ],
-    "validity": "valid"
+    "validity": "valid",
+    "evidence_sentences": [
+      "However, RAG fails on global questions directed at an entire text corpus, such as “What are the main themes in the dataset?”, since this is inherently a query-focused summarization (QFS) task, rather than an explicit retrieval task.",
+      "For a class of global sensemaking questions over datasets in the 1 million token range, we show that GraphRAG leads to substantial improvements over a conventional RAG baseline for both the comprehensiveness and diversity of generated answers."
+    ]
   },
   {
     "question": "GraphRAG的完整处理流水线包含哪五大核心步骤？",
@@ -699,9 +720,12 @@
     "mapped_section": "7 Conclusion",
     "method": "english_terms",
     "valid_sections": [
-      "7 Conclusion"
+      "3.1 GraphRAG Workflow"
     ],
-    "validity": "valid"
+    "validity": "valid",
+    "evidence_sentences": [
+      "Figure 1 illustrates the high-level data flow of the GraphRAG approach and pipeline."
+    ]
   },
   {
     "question": "原始RAG模型由哪两个核心模块组合而成？",
@@ -721,9 +745,13 @@
     "mapped_section": "3.4 Fact Veriﬁcation",
     "method": "english_terms",
     "valid_sections": [
-      "3.4 Fact Veriﬁcation"
+      "2.1 Models"
     ],
-    "validity": "valid"
+    "validity": "valid",
+    "evidence_sentences": [
+      "The RAG-Sequence model uses the same retrieved document to generate the entire output sequence.",
+      "In the RAG-Token model we can draw a different latent document for each target token."
+    ]
   },
   {
     "question": "RAG的核心设计动机是什么，解决大模型什么固有缺陷？",

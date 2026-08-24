@@ -1,0 +1,313 @@
+[
+  {
+    "id": 1,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "e.g., between fast GPU on‑chip SRAM and relatively slow GPU high bandwidth memory, or HBM [45], Figure 1 left).",
+      "FlashAttention uses tiling to prevent materialization of the large 𝑁× 𝑁attention matrix (dotted box) on (relatively) slow GPU HBM.",
+      "On modern GPUs, compute speed has out-paced memory speed [61, 62, 63], and most operations in Transformers are bottlenecked by memory accesses [43].",
+      "In this paper, we argue that a missing principle is making attention algorithms IO-aware [1]—that is, carefully accounting for reads and writes to different levels of fast and slow memory (e.g., between fast GPU on-chip SRAM and relatively slow GPU high bandwidth memory, or HBM [45], Figure 1 left)."
+    ],
+    "source_section": "1 Introduction",
+    "note": "AI1:原文给出SRAM、HBM、CPU DRAM，但未完整给出GPU内存从快到慢的完整排序；明确优化SRAM与HBM之间读写。 | AI2:指出优化HBM与SRAM之间的读写"
+  },
+  {
+    "id": 2,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "FlashAttention does not read and write the large N×N attention matrix to HBM, resulting in an 7.6× speedup on the attention computation."
+    ],
+    "source_section": "1 Introduction",
+    "note": "人工复核：3000字截断/章节标错，已定位全文证据"
+  },
+  {
+    "id": 3,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "We propose FlashAttention, an IO‑aware exact attention algorithm that uses tiling to reduce the number of memory reads/writes between GPU high bandwidth memory (HBM) and GPU on‑chip SRAM."
+    ],
+    "source_section": "Abstract",
+    "note": "AI1:原文说明FlashAttention是exact attention，不会改变注意力数学计算结果。 | AI2:明确为exact attention，不改变数学结果"
+  },
+  {
+    "id": 4,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "Therefore if we keep track of some extra statistics (m(x), ℓ(x)), we can compute softmax one block at a time."
+    ],
+    "source_section": "3.1 An Efficient Attention Algorithm With Tiling and Recomputation",
+    "note": "人工复核：3000字截断/章节标错，已定位全文证据"
+  },
+  {
+    "id": 5,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "The runtime (for seq. length 4K) of block-sparse FlashAttention is faster than FlashAttention by a factor proportional to the sparsity."
+    ],
+    "source_section": "3.2 Analysis: IO Complexity of FlashAttention",
+    "note": "AI1:该章节只说明block‑sparse运行时与稀疏度成正比，未给出IO复杂度相乘的稀疏系数。 | AI2:提到与稀疏度成比例，但未给出具体稀疏系数公式"
+  },
+  {
+    "id": 6,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "FlashAttention outperforms the MLPerf 1.1 [58] speed record for BERT by 15%, and speeds up GPT‑2 up to 3× over HuggingFace [87] and 1.8× over Megatron [77] over standard Transformers."
+    ],
+    "source_section": "4 Experiments",
+    "note": "AI1:原文给出BERT‑Large相对MLPerf提速15%；GPT‑2(1K序列)对比HuggingFace提速3×，对比Megatron提速1.8×。 | AI2:直接给出BERT-Large提速15%，GPT-2提速3×"
+  },
+  {
+    "id": 7,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "while FlashAttention (Algorithm 1) requires Θ(𝑁2𝑑2𝑀−1) HBM accesses.",
+      "Let 𝑁be the sequence length, 𝑑be the head dimension, and 𝑀be size of SRAM with 𝑑≤𝑀≤𝑁𝑑.",
+      "FlashAttention (Algorithm 1) requires Θ(N²d²M⁻¹) HBM accesses.",
+      "Let N be the sequence length, d be the head dimension, and M be size of SRAM"
+    ],
+    "source_section": "3.2 Analysis: IO Complexity of FlashAttention",
+    "note": "AI1:IO复杂度公式为Θ(𝑁2𝑑2𝑀−1)，M代表SRAM（片上SRAM）的大小。 | AI2:给出公式，M为SRAM大小"
+  },
+  {
+    "id": 8,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "the ﬁrst Transformers to achieve better‑than‑chance performance on the Path‑X challenge (seq. length 16K, 61.4% accuracy) and Path‑256 (seq. length 64K, 63.1% accuracy).",
+      "the first Transformers to achieve better-than-chance performance on the Path-X challenge (seq. length 16K, 61.4% accuracy) and Path-256 (seq. length 64K, 63.1% accuracy)."
+    ],
+    "source_section": "Abstract",
+    "note": "AI1:两个长文本基准是Path‑X与Path‑256。 | AI2:明确Path-X和Path-256两个基准"
+  },
+  {
+    "id": 9,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "For a pre‑trained weight matrix W0 ∈Rd×k, we constrain its update by representing the latter with a low‑rank decomposition W0 + ∆W = W0 + BA, where B ∈Rd×r, A ∈Rr×k, and the rank r ≪min(d, k).",
+      "During training, W0 is frozen and does not receive gradient updates, while A and B contain trainable parameters.",
+      "For a pre-trained weight matrix W0 ∈ R^{d×k}, we constrain its update by representing the latter with a low-rank decomposition W0 + ∆W = W0 + BA, where B ∈ R^{d×r}, A ∈ R^{r×k}"
+    ],
+    "source_section": "4.1 LOW‑RANK‑PARAMETRIZED UPDATE MATRICES",
+    "note": "AI1:LoRA冻结预训练权重W0，仅训练低秩矩阵A、B两组矩阵。 | AI2:给出低秩矩阵A和B"
+  },
+  {
+    "id": 10,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "However, existing techniques often introduce inference latency (Houlsby et al., 2019; Rebufﬁet al., 2017) by extending model depth or reduce the model’s usable sequence length (Li & Liang, 2021; Lester et al., 2021; Hambardzumyan et al., 2020; Liu et al., 2021) (Section 3).",
+      "No Additional Inference Latency. When deployed in production, we can explicitly compute and store W = W0 + BA and perform inference as usual.",
+      "This guarantees that we do not introduce any additional latency during inference compared to a fine-tuned model by construction."
+    ],
+    "source_section": "1 INTRODUCTION",
+    "note": "AI1:当前1 INTRODUCTION没有给出LoRA推理延迟相关原文，证据片段仅描述其它方法的延迟，无法回答本问题。 | AI2:说明不引入额外延迟，原因是可合并矩阵计算"
+  },
+  {
+    "id": 11,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "We illustrate our reparametrization in Figure 1. We use a random Gaussian initialization for A and zero for B, so ∆W = BA is zero at the beginning of training."
+    ],
+    "source_section": "1 INTRODUCTION",
+    "note": "AI1:1 INTRODUCTION章节被截断，没有给出权重更新完整公式、矩阵A、B初始化策略。 | AI2:给出初始化策略，但未给出完整更新公式（h = W0x + BAx已在文中，但未直接摘录）"
+  },
+  {
+    "id": 12,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "We limit our study to only adapting the attention weights for downstream tasks.",
+      "We leave the empirical investigation of adapting the MLP ... to future work."
+    ],
+    "source_section": "4.2 APPLYING LORA TO TRANSFORMER",
+    "note": "人工复核：3000字截断/章节标错，已定位全文证据"
+  },
+  {
+    "id": 13,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "we propose Low‑Rank Adaptation, or LoRA, which freezes the pre‑trained model weights and injects trainable rank decomposition matrices into each layer of the Transformer architecture, greatly reducing the number of trainable parameters for downstream tasks.",
+      "where B ∈ R^{d×r}, A ∈ R^{r×k}, and the rank r ≪ min(d, k).",
+      "We show that a very low rank (i.e., r in Figure 1 can be one or two) suffices even when the full rank (i.e., d) is as high as 12,288, making LoRA both storage- and compute-efficient."
+    ],
+    "source_section": "Abstract",
+    "note": "AI1:摘要仅说明r是低秩分解的秩，未描述r增大对适配能力、参数量的变化关系。 | AI2:r代表秩，r越大参数量增多，适配能力增强（隐含）"
+  },
+  {
+    "id": 14,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "We still need the 350GB model during deployment; however, storing 100 adapted models only requires 350GB + 35MB * 100 ≈354GB as opposed to 100 * 350GB ≈35TB.",
+      "Compared to GPT-3 175B fine-tuned with Adam, LoRA can reduce the number of trainable parameters by 10,000 times and the GPU memory requirement by 3 times."
+    ],
+    "source_section": "5.1 BASELINES",
+    "note": "AI1:给出LoRA相比全量微调存储开销优势，但没有给出和Prefix Tuning对比的存储开销信息。 | AI2:给出存储优势（参数减少、显存减少）"
+  },
+  {
+    "id": 15,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "We only train A and B.",
+      "we leave ... biases to a future work."
+    ],
+    "source_section": "1 INTRODUCTION",
+    "note": "人工复核：3000字截断/章节标错，已定位全文证据"
+  },
+  {
+    "id": 16,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "On GPT-3 175B, we reduce the VRAM consumption during training from 1.2TB to 350GB."
+    ],
+    "source_section": "4.2 APPLYING LORA TO TRANSFORMER",
+    "note": "人工复核：3000字截断/章节标错，已定位全文证据"
+  },
+  {
+    "id": 17,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "Compared to GPT‑3 175B fine‑tuned with Adam, LoRA can reduce the number of trainable parameters by 10,000 times and the GPU memory requirement by 3 times.",
+      "A pre-trained model can be shared and used to build many small LoRA modules for different tasks. We can freeze the shared model and efficiently switch tasks by replacing the matrices A and B in Figure 1"
+    ],
+    "source_section": "Abstract",
+    "note": "AI1:摘要没有描述多任务场景下切换任务适配权重的操作流程。 | AI2:说明通过替换A和B切换任务"
+  },
+  {
+    "id": 18,
+    "answerable": "no",
+    "evidence_sentences": [],
+    "source_section": "",
+    "note": "人工复核：当前解析文本无答案，标记不可回答"
+  },
+  {
+    "id": 19,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "GraphRAG first uses an LLM to construct a knowledge graph, where nodes correspond to key entities in the corpus and edges represent relationships between those entities.",
+      "In this paper, we present GraphRAG – a graph-based RAG approach that enables sensemaking over the entirety of a large text corpus. GraphRAG first uses an LLM to construct a knowledge graph",
+      "This graph index spans nodes (e.g., entities), edges (e.g., relationships), and covariates (e.g., claims)"
+    ],
+    "source_section": "1 Introduction",
+    "note": "AI1:GraphRAG相比传统向量RAG新增知识图谱(knowledge graph)结构化存储单元。 | AI2:核心新增结构化存储为知识图谱（节点、边等）"
+  },
+  {
+    "id": 20,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "Our approach uses an LLM to build a graph index in two stages: first, to derive an entity knowledge graph from the source documents, then to pre-generate community summaries for all groups of closely related entities."
+    ],
+    "source_section": "Abstract",
+    "note": "人工复核：3000字截断/章节标错，已定位全文证据"
+  },
+  {
+    "id": 21,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "In this step, the LLM is prompted to extract instances of important entities and the relationships between the entities from a given chunk."
+    ],
+    "source_section": "3.1.2 Text Chunks →Entities & Relationships",
+    "note": "AI1:通过提示大模型(LLM prompted)从文本块中抽取实体与关系三元组。 | AI2:直接说明用LLM从文本块抽取实体和关系"
+  },
+  {
+    "id": 22,
+    "answerable": "no",
+    "evidence_sentences": [],
+    "source_section": "",
+    "note": "人工复核：当前解析文本无答案，标记不可回答"
+  },
+  {
+    "id": 23,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "In our pipeline, we use Leiden community detection (Traag et al., 2019) in a hierarchical manner, recursively detecting sub‑communities within each detected community until reaching leaf communities that can no longer be partitioned.",
+      "Each level of this hierarchy provides a community partition that covers the nodes of the graph in a mutually exclusive, collectively exhaustive way, enabling divide‑and‑conquer global summarization."
+    ],
+    "source_section": "3.1.4 Knowledge Graph →Graph Communities",
+    "note": "AI1:社区检测算法对图做分层划分，得到互斥完备的社区划分，支持分治式全局摘要生成。 | AI2:说明使用Leiden算法进行层次社区检测"
+  },
+  {
+    "id": 24,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "However, RAG fails on global questions directed at an entire text corpus, such as “What are the main themes in the dataset?”, since this is inherently a query‑focused summarization (QFS) task, rather than an explicit retrieval task.",
+      "However, RAG fails on global questions directed at an entire text corpus, such as 'What are the main themes in the dataset?', since this is inherently a query-focused summarization (QFS) task, rather than an explicit retrieval task."
+    ],
+    "source_section": "Abstract",
+    "note": "AI1:传统向量RAG缺陷是无法处理面向整个语料库的全局感知类问题，GraphRAG借助图结构弥补该不足。 | AI2:指出RAG在全局问题上失败，GraphRAG通过图结构弥补"
+  },
+  {
+    "id": 25,
+    "answerable": "no",
+    "evidence_sentences": [],
+    "source_section": "",
+    "note": "人工复核：当前解析文本无答案，标记不可回答"
+  },
+  {
+    "id": 26,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "GraphRAG generates community summaries by adding various element summaries (for nodes, edges, and related claims) to a community summary template.",
+      "Leaf‑level communities. The element summaries of a leaf‑level community are prioritized and then iteratively added to the LLM context window until the token limit is reached.",
+      "Higher‑level communities. If all element summaries fit within the token limit of the context window, proceed as for leaf‑level communities and summarize all element summaries within the community. Otherwise, rank sub‑communities in decreasing order of element summary tokens and iteratively substitute sub‑community summaries (shorter) for their associated element summaries (longer) until they fit within the context window.",
+      "GraphRAG generates community summaries by adding various element summaries (for nodes, edges, and related claims) to a community summary template. Community summaries from lower-level communities are used to generate summaries for higher-level communities"
+    ],
+    "source_section": "3.1.5 Graph Communities →Community Summaries",
+    "note": "AI1:区分叶子层级与高层级社区，填充元素摘要至模板，超出token限制时用子社区摘要替换长元素摘要生成全局社区摘要。 | AI2:说明生成方式，采用自下而上合并子社区摘要"
+  },
+  {
+    "id": 27,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "However, RAG fails on global questions directed at an entire text corpus, such as “What are the main themes in the dataset?”, since this is inherently a query-focused summarization (QFS) task, rather than an explicit retrieval task.",
+      "For a class of global sensemaking questions over datasets in the 1 million token range, we show that GraphRAG leads to substantial improvements over a conventional RAG baseline for both the comprehensiveness and diversity of generated answers."
+    ],
+    "source_section": "Abstract",
+    "note": "人工复核：3000字截断/章节标错，已定位全文证据"
+  },
+  {
+    "id": 28,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "Figure 1 illustrates the high-level data flow of the GraphRAG approach and pipeline."
+    ],
+    "source_section": "3.1 GraphRAG Workflow",
+    "note": "人工复核：3000字截断/章节标错，已定位全文证据"
+  },
+  {
+    "id": 29,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "RAG — models which combine pre‑trained parametric and non‑parametric memory for language generation.",
+      "We introduce RAG models where the parametric memory is a pre‑trained seq2seq model and the non‑parametric memory is a dense vector index of Wikipedia, accessed with a pre‑trained neural retriever."
+    ],
+    "source_section": "Abstract",
+    "note": "AI1:RAG由预训练seq2seq生成器（参数记忆）和预训练神经检索器+维基稠密向量索引（非参数记忆）两大模块组成。 | AI2:明确两个核心模块：seq2seq生成器和神经检索器"
+  },
+  {
+    "id": 30,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "The RAG-Sequence model uses the same retrieved document to generate the entire output sequence.",
+      "In the RAG-Token model we can draw a different latent document for each target token."
+    ],
+    "source_section": "2.1 Models",
+    "note": "人工复核：3000字截断/章节标错，已定位全文证据"
+  },
+  {
+    "id": 31,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "While this development is exciting, such models do have downsides: They cannot easily expand or revise their memory, can’t straightforwardly provide insight into their predictions, and may produce “hallucinations” [38].",
+      "Hybrid models that combine parametric memory with non‑parametric (i.e., retrieval‑based) memories [20, 26, 48] can address some of these issues because knowledge can be directly revised and expanded, and accessed knowledge can be inspected and interpreted.",
+      "Pre-trained neural language models ... have downsides: They cannot easily expand or revise their memory, can’t straightforwardly provide insight into their predictions, and may produce 'hallucinations'. Hybrid models that combine parametric memory with non-parametric memories can address some of these issues"
+    ],
+    "source_section": "1 Introduction",
+    "note": "AI1:RAG动机是结合参数与非参数记忆，解决大模型不易修改扩展记忆、难以解释预测结果、易产生幻觉的固有缺陷。 | AI2:直接回答设计动机，解决无法更新记忆、无法提供解释和幻觉问题"
+  },
+  {
+    "id": 32,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "The retriever (Dense Passage Retriever [26], henceforth DPR) provides latent documents conditioned on the input, and the seq2seq model (BART [32]) then conditions on these latent documents together with the input to generate the output."
+    ],
+    "source_section": "1 Introduction",
+    "note": "AI1:只说明DPR基于输入得到潜在文档，没有给出DPR的具体输入是什么。 | AI2:未详细描述DPR的输入是什么"
+  }
+]
