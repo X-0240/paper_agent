@@ -85,7 +85,7 @@ index=faiss.IndexFlatIP(emb.shape[1])
 index.add(emb.astype("float32"))
 bm25=BM25Okapi([tokenize(c) for c in chunks])
 
-cases=[c for c in json.load(open(CASES_PATH,encoding="utf-8")) if c["mapped_section"]]
+cases=[c for c in json.load(open(CASES_PATH,encoding="utf-8")) if c["mapped_section"] and c.get("valid_sections")]
 logger.info(f"修正后中文题：{len(cases)}")
 
 cache=json.load(open(CACHE_PATH,encoding="utf-8")) if os.path.exists(CACHE_PATH) else {}
@@ -99,7 +99,7 @@ for name,qs in variants.items():
         paper_hits=0
         for c,q in zip(cases,qs):
             idxs=top_k(q,k)
-            hits+=chapter_hit(idxs,c["source"],[c["mapped_section"]])
+            hits+=chapter_hit(idxs,c["source"],c["valid_sections"])
             paper_hits+=any(sources[j]==c["source"] for j in idxs)
         print(f"{name}（10篇专属索引）：章节级@{k}={hits/len(cases):.1%}（{hits}/{len(cases)}），论文级@{k}={paper_hits/len(cases):.1%}（{paper_hits}/{len(cases)}）")
 print(f"评测耗时：{time.time()-t0:.1f}s")
