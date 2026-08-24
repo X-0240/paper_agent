@@ -20,6 +20,8 @@ logger=logging.getLogger(__name__)
 FAISS_PATH=os.getenv("FAISS_PATH")
 MODEL_PATH=os.getenv("MODEL_PATH")
 PAPERS_DIR=os.getenv("PAPERS_DIR")
+BASE_DIR=os.path.dirname(os.path.abspath(__file__))
+CASES_PATH=os.path.join(BASE_DIR,"corrected_chinese_cases.json")
 CACHE_PATH=os.path.join(os.path.dirname(os.path.abspath(__file__)),"eval_query_transform_cache.json")
 
 def tokenize(text):
@@ -28,7 +30,6 @@ def tokenize(text):
 def section_match(section,expected_section):
     def norm(s):
         s=re.sub(r"^[\d.]+\s*","",s.lower())
-        s=re.sub(r"^(figure|table|abstract|appendix|proposition|theorem|section)\s*[\d.]*\s*","",s)
         return re.sub(r"[^a-z ]","",s).strip()
     e=norm(expected_section)
     a=norm(section)
@@ -64,9 +65,9 @@ def weighted_candidates(query,candidates=25,alpha=0.5):
         combined[j]=combined.get(j,0)+(1-alpha)*float(s)
     return sorted(combined.items(),key=lambda x:x[1],reverse=True)[:candidates]
 
-def base_top(query,top_n=5):
-    cands=weighted_candidates(query,10,0.5)
-    return [j for j,_ in cands[:top_n]]
+def top_k(query,k):
+    # 候选池取25，与50篇评测口径一致
+    return [j for j,_ in weighted_candidates(query,25,0.5)[:k]]
 
 #10篇主论文来源
 main_sources=set(sorted(f[:-4] for f in os.listdir(PAPERS_DIR) if f.endswith(".pdf")))
@@ -84,48 +85,21 @@ index=faiss.IndexFlatIP(emb.shape[1])
 index.add(emb.astype("float32"))
 bm25=BM25Okapi([tokenize(c) for c in chunks])
 
-paper_map={
-    "Attention Is All You Need":"Attention_Is_All_You_Need","BERT":"BERT",
-    "Chain-of-Thought":"Chain_of_Thought","FlashAttention":"FlashAttention","GraphRAG":"GraphRAG",
-    "LoRA":"LoRA","RAG Original":"RAG_Original_Paper","ReAct":"ReAct","GPT2":"GPT2",
-    "GPT-2":"GPT2","RoFormer":"RoFormer_RoPE",
-}
-q_file=os.getenv("TEST_QUESTIONS_FILE")
-questions_main=re.findall(r"问题：(.+)",open(q_file,encoding="utf-8").read())
-v_content=open(os.getenv("TEST_REFERENCES_FILE"),encoding="utf-8").read()
-fixed_refs=[]
-for block in re.split(r"(?=第\d+题)",v_content):
-    if not block.strip():
-        continue
-    m=re.search(r"修正后引用：(.*)",block)
-    if m and m.group(1).strip():
-        fixed_refs.append(m.group(1).strip())
-    else:
-        m2=re.search(r"原始引用：(.*)",block)
-        if m2:
-            fixed_refs.append(m2.group(1).strip())
-test_cases=[]
-for q,ref in zip(questions_main,fixed_refs):
-    parts=re.split(r"\s+-\s+",ref,maxsplit=1)
-    if len(parts)<2:
-        continue
-    paper_part,section_part=parts
-    source=None
-    for key,src in paper_map.items():
-        if key.lower() in paper_part.lower():
-            source=src; break
-    if source:
-        test_cases.append((q,source,[section_part]))
-logger.info(f"中文测试题：{len(test_cases)}")
+cases=[c for c in json.load(open(CASES_PATH,encoding="utf-8")) if c["mapped_section"]]
+logger.info(f"修正后中文题：{len(cases)}")
 
 cache=json.load(open(CACHE_PATH,encoding="utf-8")) if os.path.exists(CACHE_PATH) else {}
-queries={"原文":[q for q,_,_ in test_cases]}
-queries["翻译成英文"]=[cache.get(q,q) for q in queries["原文"]]
+variants={"原文":[c["question"] for c in cases],
+          "翻译成英文":[cache.get(c["question"],c["question"]) for c in cases]}
 
 t0=time.time()
-for name,qs in queries.items():
-    hits=0
-    for (q,source,truth_sections),tq in zip(test_cases,qs):
-        hits+=chapter_hit(base_top(tq),source,truth_sections)
-    print(f"{name}（10篇专属索引）：章节级@5={hits/len(test_cases):.1%}（{hits}/{len(test_cases)}）")
+for name,qs in variants.items():
+    for k in [5,10,20]:
+        hits=0
+        paper_hits=0
+        for c,q in zip(cases,qs):
+            idxs=top_k(q,k)
+            hits+=chapter_hit(idxs,c["source"],[c["mapped_section"]])
+            paper_hits+=any(sources[j]==c["source"] for j in idxs)
+        print(f"{name}（10篇专属索引）：章节级@{k}={hits/len(cases):.1%}（{hits}/{len(cases)}），论文级@{k}={paper_hits/len(cases):.1%}（{paper_hits}/{len(cases)}）")
 print(f"评测耗时：{time.time()-t0:.1f}s")
