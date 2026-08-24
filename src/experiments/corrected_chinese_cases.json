@@ -17,9 +17,13 @@
     "mapped_section": "3.2 Attention",
     "method": "exact",
     "valid_sections": [
-      "3.2 Attention"
+      "3.2.1 Scaled Dot-Product Attention"
     ],
-    "validity": "valid"
+    "validity": "valid",
+    "evidence_sentences": [
+      "We suspect that for large values of dk, the dot products grow large in magnitude, pushing the softmax function into regions where it has extremely small gradients.",
+      "To counteract this effect, we scale the dot products by 1/√dk."
+    ]
   },
   {
     "question": "原文中多头注意力设置的头数h、单头维度dₖ、模型总维度d_model分别是多少？",
@@ -28,9 +32,13 @@
     "mapped_section": "3.2 Attention",
     "method": "exact",
     "valid_sections": [
-      "3.2 Attention"
+      "3.2.2 Multi-Head Attention"
     ],
-    "validity": "valid"
+    "validity": "valid",
+    "evidence_sentences": [
+      "In this work we employ h = 8 parallel attention layers, or heads.",
+      "For each of these we use dk = dv = dmodel/h = 64."
+    ]
   },
   {
     "question": "Transformer解码器的自注意力层增加了什么掩码操作，保证生成的自回归属性？",
@@ -72,9 +80,13 @@
     "mapped_section": "Abstract",
     "method": "fuzzy",
     "valid_sections": [
-      "Abstract"
+      "3.4 Embeddings and Softmax"
     ],
-    "validity": "valid"
+    "validity": "valid",
+    "evidence_sentences": [
+      "Table 1: Maximum path lengths, per-layer complexity and minimum number of sequential operations for different layer types.",
+      "Self-Attention O(n2 · d) O(1) O(1)"
+    ]
   },
   {
     "question": "在WMT2014英德翻译任务上，Big Transformer取得的单模型BLEU值是多少？",
@@ -105,9 +117,13 @@
     "mapped_section": "3.2 Attention",
     "method": "exact",
     "valid_sections": [
-      "3.2 Attention"
+      "7 Conclusion"
     ],
-    "validity": "valid"
+    "validity": "valid",
+    "evidence_sentences": [
+      "Figure 3: An example of the attention mechanism following long-distance dependencies in the encoder self-attention in layer 5 of 6.",
+      "Figure 4: Two attention heads, also in layer 5 of 6, apparently involved in anaphora resolution."
+    ]
   },
   {
     "question": "B区别于GPT的核心预训练任务是什么，该任务如何实现双向上下文建模？",
@@ -127,9 +143,14 @@
     "mapped_section": "1 Introduction",
     "method": "english_terms",
     "valid_sections": [
-      "1 Introduction"
+      "3 BERT"
     ],
-    "validity": "valid"
+    "validity": "valid",
+    "evidence_sentences": [
+      "The first token of every sequence is always a special classification token ([CLS]).",
+      "The final hidden state corresponding to this token is used as the aggregate sequence representation for classification tasks.",
+      "First, we separate them with a special token ([SEP])."
+    ]
   },
   {
     "question": "BERT预训练的第二个无监督任务NSP全称与目标是什么？",
@@ -183,9 +204,12 @@
     "mapped_section": "3 BERT",
     "method": "exact",
     "valid_sections": [
-      "3 BERT"
+      "1 Introduction"
     ],
-    "validity": "valid"
+    "validity": "valid",
+    "evidence_sentences": [
+      "There are two existing strategies for applying pre-trained language representations to downstream tasks: feature-based and fine-tuning."
+    ]
   },
   {
     "question": "SQuAD v2.0任务中，BERT如何处理无答案的问答样本？",
@@ -194,9 +218,12 @@
     "mapped_section": "4.2 SQuAD v1.1",
     "method": "exact",
     "valid_sections": [
-      "4.2 SQuAD v1.1"
+      "4.3 SQuAD v2.0"
     ],
-    "validity": "valid"
+    "validity": "valid",
+    "evidence_sentences": [
+      "We treat questions that do not have an answer as having an answer span with start and end at the [CLS] token."
+    ]
   },
   {
     "question": "BERT预训练使用的两大语料库分别是什么？",
@@ -207,7 +234,10 @@
     "valid_sections": [
       "3.1 Pre-training BERT"
     ],
-    "validity": "valid"
+    "validity": "valid",
+    "evidence_sentences": [
+      "For the pre-training corpus we use the BooksCorpus (800M words) (Zhu et al., 2015) and English Wikipedia (2,500M words)."
+    ]
   },
   {
     "question": "单句分类、句对分类、抽取式问答、序列标注四类任务分别复用BERT哪部分输出？",
@@ -227,9 +257,12 @@
     "mapped_section": "2 Chain-of-Thought Prompting",
     "method": "exact",
     "valid_sections": [
-      "2 Chain-of-Thought Prompting"
+      "1 Introduction"
     ],
-    "validity": "valid"
+    "validity": "valid",
+    "evidence_sentences": [
+      "Specifically, we explore the ability of language models to perform few-shot prompting for reasoning tasks, given a prompt that consists of triples: ⟨input, chain of thought, output⟩."
+    ]
   },
   {
     "question": "CoT提升模型推理能力是哪种模型涌现能力，多少参数规模下才会显现正向效果？",
@@ -249,9 +282,12 @@
     "mapped_section": "Abstract",
     "method": "fuzzy",
     "valid_sections": [
-      "Abstract"
+      "1 Introduction"
     ],
-    "validity": "valid"
+    "validity": "valid",
+    "evidence_sentences": [
+      "Figure 2: PaLM 540B uses chain-of-thought prompting to achieve new state-of-the-art performance on the GSM8K benchmark of math word problems."
+    ]
   },
   {
     "question": "论文做的消融实验中，仅输出数学公式、先答案后推理两种变体为什么效果弱于完整CoT？",
@@ -293,9 +329,12 @@
     "mapped_section": "3.2 Results",
     "method": "english_terms",
     "valid_sections": [
-      "3.2 Results"
+      "8 Conclusions"
     ],
-    "validity": "valid"
+    "validity": "valid",
+    "evidence_sentences": [
+      "manually reading 45 errors made by PaLM 62B and categorizing them into semantic understanding (20 errors), one step missing (18 errors), and other errors (7 errors)."
+    ]
   },
   {
     "question": "CoT适用度最高的任务满足哪三个条件？",
@@ -306,7 +345,10 @@
     "valid_sections": [
       "2 Chain-of-Thought Prompting"
     ],
-    "validity": "valid"
+    "validity": "valid",
+    "evidence_sentences": [
+      "Chain-of-thought prompting has several attractive properties as an approach for facilitating reasoning in language models."
+    ]
   },
   {
     "question": "常识推理评测使用了CSQA、StrategyQA等数据集，CoT在哪类常识任务提升幅度最大？",
@@ -1080,12 +1122,5 @@
       "Abstract"
     ],
     "validity": "valid"
-  },
-  {
-    "question": "RoPE能否和多头注意力、FlashAttention等优化方案兼容？",
-    "source": "RoFormer_RoPE",
-    "original_section": "Discussion Compatibility",
-    "mapped_section": "",
-    "method": "not_mapped"
   }
 ]

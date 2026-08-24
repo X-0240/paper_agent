@@ -1,0 +1,322 @@
+[
+  {
+    "id": 1,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "In this work we propose the Transformer, a model architecture eschewing recurrence and instead relying entirely on an attention mechanism to draw global dependencies between input and output."
+    ],
+    "source_section": "1 Introduction",
+    "note": "AI1:原文明确说明Transformer抛弃循环，完全依靠注意力机制搭建模型。 | AI2:直接回答"
+  },
+  {
+    "id": 2,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "We suspect that for large values of dk, the dot products grow large in magnitude, pushing the softmax function into regions where it has extremely small gradients.",
+      "To counteract this effect, we scale the dot products by 1/√dk."
+    ],
+    "source_section": "3.2.1 Scaled Dot-Product Attention",
+    "note": "人工复核：3000字截断导致AI漏判，已定位全文证据"
+  },
+  {
+    "id": 3,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "In this work we employ h = 8 parallel attention layers, or heads.",
+      "For each of these we use dk = dv = dmodel/h = 64."
+    ],
+    "source_section": "3.2.2 Multi-Head Attention",
+    "note": "人工复核：3000字截断导致AI漏判，已定位全文证据"
+  },
+  {
+    "id": 4,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "We also modify the self‑attention sub‑layer in the decoder stack to prevent positions from attending to subsequent positions.",
+      "This masking, combined with fact that the output embeddings are offset by one position, ensures that the predictions for position i can depend only on the known outputs at positions less than i."
+    ],
+    "source_section": "3.1 Encoder and Decoder Stacks",
+    "note": "AI1:原文说明解码器自注意力增加掩码，防止位置关注后续位置，保证自回归属性。 | AI2:直接回答掩码操作和作用"
+  },
+  {
+    "id": 5,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "FFN(x) = max(0, xW1 + b1)W2 + b2",
+      "The dimensionality of input and output is dmodel = 512, and the inner‑layer has dimensionality dff = 2048."
+    ],
+    "source_section": "3.3 Position‑wise Feed‑Forward Networks",
+    "note": "AI1:章节给出FFN计算公式，输入输出维度、中间隐层维度。 | AI2:直接给出公式和维度"
+  },
+  {
+    "id": 6,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "In this work, we use sine and cosine functions of different frequencies:",
+      "We chose the sinusoidal version because it may allow the model to extrapolate to sequence lengths longer than the ones encountered during training.",
+      "We chose this function because we hypothesized it would allow the model to easily learn to attend by relative positions, since for any fixed offset k, PEpos+k can be represented as a linear function of PEpos."
+    ],
+    "source_section": "3.5 Positional Encoding",
+    "note": "AI1:原文说明使用正弦余弦位置编码，优势是可外推至训练未见过的更长序列。 | AI2:说明采用正弦余弦编码及其优势"
+  },
+  {
+    "id": 7,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "Table 1: Maximum path lengths, per-layer complexity and minimum number of sequential operations for different layer types.",
+      "Self-Attention O(n2 · d) O(1) O(1)"
+    ],
+    "source_section": "3.4 Embeddings and Softmax",
+    "note": "人工复核：3000字截断导致AI漏判，已定位全文证据"
+  },
+  {
+    "id": 8,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "On the WMT 2014 English‑to‑German translation task, the big transformer model (Transformer (big) in Table 2) outperforms the best previously reported models (including ensembles) by more than 2.0 BLEU, establishing a new state‑of‑the‑art BLEU score of 28.4."
+    ],
+    "source_section": "6.1 Machine Translation",
+    "note": "AI1:原文直接给出Big Transformer在WMT2014英德翻译任务的BLEU值28.4。 | AI2:直接给出BLEU值"
+  },
+  {
+    "id": 9,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "We employ a residual connection [11] around each of the two sub‑layers, followed by layer normalization [1].",
+      "That is, the output of each sub‑layer is LayerNorm(x + Sublayer(x)), where Sublayer(x) is the function implemented by the sub‑layer itself.",
+      "We employ a residual connection [11] around each of the two sub-layers, followed by layer normalization [1]. That is, the output of each sub-layer is LayerNorm(x + Sublayer(x))"
+    ],
+    "source_section": "3.1 Encoder and Decoder Stacks",
+    "note": "AI1:原文说明执行残差连接之后再执行层归一化。 | AI2:说明顺序为残差后层归一化"
+  },
+  {
+    "id": 10,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "Figure 3: An example of the attention mechanism following long-distance dependencies in the encoder self-attention in layer 5 of 6.",
+      "Figure 4: Two attention heads, also in layer 5 of 6, apparently involved in anaphora resolution."
+    ],
+    "source_section": "7 Conclusion",
+    "note": "人工复核：3000字截断导致AI漏判，已定位全文证据"
+  },
+  {
+    "id": 11,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "BERT alleviates the previously mentioned unidirectionality constraint by using a “masked language model” (MLM) pre‑training objective, inspired by the Cloze task (Taylor, 1953).",
+      "Unlike left‑to‑right language model pre‑training, the MLM objective enables the representation to fuse the left and the right context, which allows us to pre‑train a deep bidirectional Transformer.",
+      "BERT alleviates the previously mentioned unidirectionality constraint by using a 'masked language model' (MLM) pre-training objective",
+      "Unlike left-to-right language model pre-training, the MLM objective enables the representation to fuse the left and the right context"
+    ],
+    "source_section": "1 Introduction",
+    "note": "AI1:引言给出MLM任务和双向建模原理，但未完整展开任务细节。 | AI2:直接回答核心预训练任务及双向上下文建模方式"
+  },
+  {
+    "id": 12,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "The first token of every sequence is always a special classification token ([CLS]).",
+      "The final hidden state corresponding to this token is used as the aggregate sequence representation for classification tasks.",
+      "First, we separate them with a special token ([SEP])."
+    ],
+    "source_section": "3 BERT",
+    "note": "人工复核：3000字截断导致AI漏判，已定位全文证据"
+  },
+  {
+    "id": 13,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "In addition to the masked language model, we also use a “next sentence prediction” task that jointly pre‑trains text‑pair repre",
+      "In addition to the masked language model, we also use a 'next sentence prediction' task that jointly pre-trains text-pair representations."
+    ],
+    "source_section": "1 Introduction",
+    "note": "AI1:文本被截断，只给出NSP缩写全称片段，未给出完整任务目标。 | AI2:给出全称Next Sentence Prediction及目标（联合预训练文本对表示）"
+  },
+  {
+    "id": 14,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "If the i‑th token is chosen, we replace the i‑th token with (1) the [MASK] token 80% of the time (2) a random token 10% of the time (3) the unchanged i‑th token 10% of the time."
+    ],
+    "source_section": "3.1 Pre‑training BERT",
+    "note": "AI1:原文给出MLM选中待预测token后三种替换策略占比。 | AI2:直接给出三种替换策略占比"
+  },
+  {
+    "id": 15,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "We primarily report results on two model sizes: BERTBASE (L=12, H=768, A=12, Total Parameters=110M) and BERTLARGE (L=24, H=1024, A=16, Total Parameters=340M).",
+      "BERTBASE (L=12, H=768, A=12, Total Parameters=110M) and BERTLARGE (L=24, H=1024, A=16, Total Parameters=340M)."
+    ],
+    "source_section": "3 BERT",
+    "note": "AI1:该章节直接给出BERT‑BASE与BERT‑LARGE的L、H、A参数。 | AI2:直接列出两模型的L、H、A"
+  },
+  {
+    "id": 16,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "In Table 5, we show that removing NSP hurts performance significantly on QNLI, MNLI, and SQuAD 1.1.",
+      "we show that removing NSP hurts performance significantly on QNLI, MNLI, and SQuAD 1.1."
+    ],
+    "source_section": "5.1 Effect of Pre‑training Tasks",
+    "note": "AI1:原文说明移除NSP后QNLI、MNLI、SQuAD 1.1任务性能明显下降。 | AI2:明确列出性能下降的下游任务"
+  },
+  {
+    "id": 17,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "There are two existing strategies for applying pre-trained language representations to downstream tasks: feature-based and fine-tuning."
+    ],
+    "source_section": "1 Introduction",
+    "note": "人工复核：3000字截断导致AI漏判，已定位全文证据"
+  },
+  {
+    "id": 18,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "We treat questions that do not have an answer as having an answer span with start and end at the [CLS] token."
+    ],
+    "source_section": "4.3 SQuAD v2.0",
+    "note": "人工复核：3000字截断导致AI漏判，已定位全文证据"
+  },
+  {
+    "id": 19,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "For the pre-training corpus we use the BooksCorpus (800M words) (Zhu et al., 2015) and English Wikipedia (2,500M words)."
+    ],
+    "source_section": "3.1 Pre-training BERT",
+    "note": "人工复核：3000字截断导致AI漏判，已定位全文证据"
+  },
+  {
+    "id": 20,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "At the output, the token representations are fed into an output layer for token‑level tasks, such as sequence tagging or question answering, and the [CLS] representation is fed into an output layer for classification, such as entailment or sentiment analysis."
+    ],
+    "source_section": "3.2 Fine‑tuning BERT",
+    "note": "AI1:原文区分token‑level任务与分类任务输出，未直接完整覆盖四类任务分别复用哪部分输出。 | AI2:说明分类任务用[CLS]，token级任务用token representations"
+  },
+  {
+    "id": 21,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "Specifically, we explore the ability of language models to perform few-shot prompting for reasoning tasks, given a prompt that consists of triples: ⟨input, chain of thought, output⟩."
+    ],
+    "source_section": "1 Introduction",
+    "note": "人工复核：3000字截断导致AI漏判，已定位全文证据"
+  },
+  {
+    "id": 22,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "First, Figure 4 shows that chain‑of‑thought prompting is an emergent ability of model scale (Wei et al., 2022b).",
+      "That is, chain‑of‑thought prompting does not positively impact performance for small models, and only yields performance gains when used with models of ∼100B parameters.",
+      "chain-of-thought prompting is an emergent ability of model scale",
+      "only yields performance gains when used with models of ∼100B parameters."
+    ],
+    "source_section": "3.2 Results",
+    "note": "AI1:原文说明CoT是模型规模的涌现能力，约100B参数才出现正向效果。 | AI2:直接回答涌现能力和参数规模阈值"
+  },
+  {
+    "id": 23,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "Figure 2: PaLM 540B uses chain-of-thought prompting to achieve new state-of-the-art performance on the GSM8K benchmark of math word problems."
+    ],
+    "source_section": "1 Introduction",
+    "note": "人工复核：3000字截断导致AI漏判，已定位全文证据"
+  },
+  {
+    "id": 24,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "Figure 5 shows that equation only prompting does not help much for GSM8K, which implies that the semantics of the questions in GSM8K are too challenging to directly translate into an equation without the natural language reasoning steps in chain of thought.",
+      "This variant performs about the same as the baseline, which suggests that the sequential reasoning embodied in the chain of thought is useful for reasons beyond just activating knowledge.",
+      "Equation only prompting does not help much for GSM8K, which implies that the semantics of the questions in GSM8K are too challenging to directly translate into an equation without the natural language reasoning steps in chain of thought."
+    ],
+    "source_section": "3.3 Ablation Study",
+    "note": "AI1:原文分别解释仅输出公式、推理在答案之后变体效果弱于完整CoT的原因。 | AI2:分别解释equation only和先答案后推理效果弱的原因"
+  },
+  {
+    "id": 25,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "• Last letter concatenation. This task asks the model to concatenate the last letters of words in a name (e.g., “Amy Brown” →“yn”).",
+      "• Coin flip. This task asks the model to answer whether a coin is still heads up after people either flip or don’t flip the coin (e.g., “A coin is heads up. Phoebe flips the coin. Osvaldo does not flip the coin. Is the coin still heads up?” →“no”).",
+      "We use the following two toy tasks. • Last letter concatenation. • Coin flip.",
+      "we consider an in-domain test set ... as well as an out-of-domain (OOD) test set, for which evaluation examples had more steps than those in the exemplars."
+    ],
+    "source_section": "5 Symbolic Reasoning",
+    "note": "AI1:论文在Last letter concatenation与Coin flip两类符号任务验证长度泛化特性。 | AI2:指出两类符号任务及OOD泛化实验"
+  },
+  {
+    "id": 26,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "Although there is variance among different chain of thought annotations, as would be expected when using exemplar‑based prompting (Le Scao and Rush, 2021; Reynolds and McDonell, 2021; Zhao et al., 2021), all sets of chain of thought prompts outperform the standard baseline by a large margin. This result implies that successful use of chain of thought does not depend on a particular linguistic style.",
+      "Although there is variance among different chain of thought annotations, as would be expected when using exemplar-based prompting, all sets of chain of thought prompts outperform the standard baseline by a large margin.",
+      "This result implies that successful use of chain of thought does not depend on a particular linguistic style."
+    ],
+    "source_section": "3.4 Robustness of Chain of Thought",
+    "note": "AI1:实验结果说明CoT具备对提示示例语言风格的鲁棒性。 | AI2:说明CoT具有鲁棒性，不依赖特定风格"
+  },
+  {
+    "id": 27,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "manually reading 45 errors made by PaLM 62B and categorizing them into semantic understanding (20 errors), one step missing (18 errors), and other errors (7 errors)."
+    ],
+    "source_section": "8 Conclusions",
+    "note": "人工复核：3000字截断导致AI漏判，已定位全文证据"
+  },
+  {
+    "id": 28,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "Chain-of-thought prompting has several attractive properties as an approach for facilitating reasoning in language models."
+    ],
+    "source_section": "2 Chain-of-Thought Prompting",
+    "note": "人工复核：3000字截断导致AI漏判，已定位全文证据"
+  },
+  {
+    "id": 29,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "For all tasks, scaling up model size improved the performance of standard prompting; chain‑of‑thought prompting led to further gains, with improvements appearing to be largest for PaLM 540B.",
+      "these results demonstrate that chain‑of‑thought prompting can also improve performance on tasks requiring a range of commonsense reasoning abilities (though note that gain was minimal on CSQA).",
+      "with chain-of-thought prompting, PaLM 540B achieved strong performance relative to baselines, outperforming the prior state of the art on StrategyQA (75.6% vs 69.4%) and outperforming an unaided sports enthusiast on sports understanding (95.4% vs 84)."
+    ],
+    "source_section": "4 Commonsense Reasoning",
+    "note": "AI1:文本没有直接写明哪类常识任务提升幅度最大，仅说明CSQA提升很小。 | AI2:在StrategyQA和Sports Understanding上提升显著，但未明确说‘最大’，故标注部分信息"
+  },
+  {
+    "id": 30,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "Although there is variance among different chain of thought annotations, as would be expected when using exemplar‑based prompting (Le Scao and Rush, 2021; Reynolds and McDonell, 2021; Zhao et al., 2021), all sets of chain of thought prompts outperform the standard baseline by a large margin.",
+      "To confirm that successful chain‑of‑thought prompting works for other sets of exemplars, we also run experiments with three sets of eight exemplars randomly sampled from the GSM8K training set, an independent source (examples in this dataset already included reasoning steps like a chain of thought)."
+    ],
+    "source_section": "3.4 Robustness of Chain of Thought",
+    "note": "AI1:说明不强制必须针对每个数据集单独制作示例，但未给出直接明确的yes/no结论句。 | AI2:原文未直接回答是否需要针对每个数据集单独制作示例"
+  },
+  {
+    "id": 31,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "Standard attention implementations materialize the matrices S and P to HBM, which takes 𝑂(𝑁2) memory.",
+      "Standard attention implementations materialize the matrices S and P to HBM, which takes O(N^2) memory."
+    ],
+    "source_section": "2.2 Standard Attention Implementation",
+    "note": "AI1:内存瓶颈来自S、P中间矩阵，空间复杂度为O(N²)与序列长度N平方相关。 | AI2:直接指出内存瓶颈来自S和P矩阵，复杂度O(N^2)"
+  },
+  {
+    "id": 32,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "We apply two established techniques (tiling, recomputation) to overcome the technical challenge of computing exact attention in sub‑quadratic HBM accesses."
+    ],
+    "source_section": "3.1 An Efficient Attention Algorithm With Tiling and Recomputation",
+    "note": "AI1:FlashAttention两大核心优化为tiling（分块/瓦片）与recomputation（重计算）。 | AI2:明确两大优化技术为tiling和recomputation"
+  }
+]
