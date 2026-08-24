@@ -90,7 +90,7 @@ logger.info(f"修正后中文题：{len(cases)}")
 
 cache=json.load(open(CACHE_PATH,encoding="utf-8")) if os.path.exists(CACHE_PATH) else {}
 variants={"原文":[c["question"] for c in cases],
-          "翻译成英文":[cache.get(c["question"],c["question"]) for c in cases]}
+          "翻译成英文":[cache.get(f"translate|{c['question']}",c["question"]) for c in cases]}
 
 t0=time.time()
 for name,qs in variants.items():
