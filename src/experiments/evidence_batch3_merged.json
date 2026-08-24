@@ -1,0 +1,322 @@
+[
+  {
+    "id": 1,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "We jointly train the retriever and generator components without any direct supervision on what document should be retrieved.",
+      "minimize the negative marginal log-likelihood of each target, P j −log p(yj|xj) using stochastic gradient descent with Adam",
+      "minimize the negative marginal log(p(x)=\\prod_{i=1}^{n} p(s_n|s_1, ..., s_{n‑1}))likelihood of each target, $\\sum_j -\\log p(y_j|x_j)$ using stochastic gradient descent with Adam [28]."
+    ],
+    "source_section": "2.4 Training",
+    "note": "AI1:给出联合训练和负对数似然损失，未明确两类损失命名，但可推断为检索和生成损失 | AI2:原文仅给出最小化目标负边缘对数似然，未明确写出两类损失的名称。",
+    "question": "RAG训练时联合优化哪两类损失？"
+  },
+  {
+    "id": 2,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "For knowledge-intensive generation, we experiment with MS-MARCO [1] and Jeopardy question generation.",
+      "FEVER [56] requires classifying whether a natural language claim is supported or refuted by Wikipedia, or whether there is not enough information to decide."
+    ],
+    "source_section": "1 Introduction",
+    "note": "人工复核：3000字截断/章节标错，已定位全文证据",
+    "question": "论文评测哪四类知识密集型NLP任务验证RAG效果？"
+  },
+  {
+    "id": 3,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "We found that people prefer RAG’s generation over purely parametric BART, finding RAG more factual and specific.",
+      "the fact that it is more strongly grounded in real factual knowledge (in this case Wikipedia) makes it “hallucinate” less with generations that are more factual, and offers more control and interpretability."
+    ],
+    "source_section": "6 Discussion",
+    "note": "AI1:指出RAG在事实性和具体性上更优 | AI2:RAG相比纯预训练生成模型，在生成内容的事实性、特异性指标提升最显著。",
+    "question": "RAG相比纯预训练生成模型，在哪类指标提升最显著？"
+  },
+  {
+    "id": 4,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "For Open-domain QA we report test numbers using 15 retrieved documents for RAG-Token models.",
+      "For RAG-Sequence models, we report test results using 50 retrieved documents, and we use the"
+    ],
+    "source_section": "6 Discussion",
+    "note": "人工复核：3000字截断/章节标错，已定位全文证据",
+    "question": "推理阶段RAG检索多少个top-k文档融合进生成上下文？"
+  },
+  {
+    "id": 5,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "we illustrated how the retrieval index can be hot-swapped to update the model without requiring any retraining.",
+      "we illustrated how the retrieval index can be hot(p(x)=\\prod_{i=1}^{n} p(s_n|s_1, ..., s_{n‑1}))swapped to update the model without requiring any retraining."
+    ],
+    "source_section": "6 Discussion",
+    "note": "AI1:明确通过热交换检索索引更新知识，无需重新训练模型参数 | AI2:依靠可热交换的检索索引（非参数记忆）更新知识，不需要重新微调模型海量参数。",
+    "question": "为什么RAG不需要微调海量模型参数就能注入新知识？"
+  },
+  {
+    "id": 6,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "To assess the effectiveness of the retrieval mechanism, we run ablations where we freeze the retriever during training. As shown in Table 6, learned retrieval improves results for all tasks.",
+      "As shown in Table 6, learned retrieval improves results for all tasks.",
+      "Differentiable retrieval improves results on all other tasks, especially for Open(p(x)=\\prod_{i=1}^{n} p(s_n|s_1, ..., s_{n‑1}))Domain QA, where it is crucial."
+    ],
+    "source_section": "4.5 Additional Results",
+    "note": "AI1:移除检索（冻结）导致所有任务性能下降，但未指明具体哪个任务断崖下跌 | AI2:原文说明移除可学习检索后全部任务性能下降，尤其开放域问答影响最大，但没有写“断崖下跌”对应明确原句。",
+    "question": "消融实验中移除检索模块后，模型哪项性能断崖下跌？"
+  },
+  {
+    "id": 7,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "ReAct performs more than just isolated, fixed reasoning, and integrates model actions and their corresponding observations into a coherent stream of inputs for the model to reason more accurately"
+    ],
+    "source_section": "5 RELATED WORK",
+    "note": "AI1:指出ReAct交替生成推理和动作/观察，但未明确列出两类内容 | AI2:5 RELATED WORK只做相关工作综述，没有给出ReAct交替生成的两类内容。",
+    "question": "Re框架交替生成哪两类内容，实现推理与工具调用协同？"
+  },
+  {
+    "id": 8,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "This tight synergy between 'acting' and 'reasoning' allows humans to learn new tasks quickly and perform robust decision making or reasoning",
+      "This tight synergy between “acting” and “reasoning” allows humans to learn new tasks quickly and perform robust decision making or reasoning, even under previously unseen circumstances or facing information uncertainties."
+    ],
+    "source_section": "1 INTRODUCTION",
+    "note": "AI1:指出结合推理与行动的核心优势，但未直接对比纯CoT或纯工具调用，可提取此句说明协同价值 | AI2:引言给出人类层面推理与动作协同思想，但未完整陈述ReAct对比纯CoT、纯工具调用Prompt的核心优势完整原文。",
+    "question": "ReAct相比纯CoT、纯工具调用Prompt的核心优势是什么？"
+  },
+  {
+    "id": 9,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "At time step t, an agent receives an observation ot ∈O from the environment and takes an action at ∈A following some policy π(at|ct), where ct = (o1, a1, · · · , ot−1, at−1, ot) is the context to the agent.",
+      "The idea of ReAct is simple: we augment the agent’s action space to ˆ A = A ∪L, where L is the space of language. An action ˆat ∈L in the language space, which we will refer to as a thought or a reasoning trace, does not affect the external environment, thus leading to no observation feedback. Instead, a thought ˆat aims to compose useful information by reasoning over the current context ct, and update the context ct+1 = (ct, ˆat) to support future reasoning or acting.",
+      "For the tasks where reasoning is of primary importance (Figure 1(1)), we alternate the generation of thoughts and actions so that the task(p(x)=\\prod_{i=1}^{n} p(s_n|s_1, ..., s_{n‑1}))solving trajectory consists of multiple thought(p(x)=\\prod_{i=1}^{n} p(s_n|s_1, ..., s_{n‑1}))action(p(x)=\\prod_{i=1}^{n} p(s_n|s_1, ..., s_{n‑1}))observation steps."
+    ],
+    "source_section": "2 REACT: SYNERGIZING REASONING + ACTING",
+    "note": "AI1:描述完整循环：观察→行动/思考→更新上下文，交替进行 | AI2:给出thought(p(x)=\\prod_{i=1}^{n} p(s_n|s_1, ..., s_{n‑1}))action(p(x)=\\prod_{i=1}^{n} p(s_n|s_1, ..., s_{n‑1}))observation交替步骤，但未完整描述完整交互循环全部细节。",
+    "question": "ReAct完整交互循环流程是什么？"
+  },
+  {
+    "id": 10,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "We design a simple Wikipedia web API with three types of actions to support interactive information retrieval: (1) search[entity], which returns the first 5 sentences from the corresponding entity wiki page if it exists, or else suggests top-5 similar entities from the Wikipedia search engine, (2) lookup[string], which would return the next sentence in the page containing string, simulating Ctrl+F functionality on the browser. (3) finish[answer], which would finish the current task with answer.",
+      "We design a simple Wikipedia web API with three types of actions to support interactive information retrieval: (1) search[entity], which returns the first 5 sentences from the corresponding entity wiki page if it exists, or else suggests top(p(x)=\\prod_{i=1}^{n} p(s_n|s_1, ..., s_{n‑1}))5 similar entities from the Wikipedia search engine, (2) lookup[string], which would return the next sentence in the page containing string, simulating Ctrl+F functionality on the browser."
+    ],
+    "source_section": "3.1 SETUP",
+    "note": "AI1:明确外部工具为Wikipedia API的检索类操作 | AI2:外部检索类工具为Wikipedia web API，包含search、lookup检索动作。",
+    "question": "论文使用的外部工具主要是什么检索类工具？"
+  },
+  {
+    "id": 11,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "Concretely, on question answering (HotpotQA) and fact verification (Fever), ReAct overcomes prevalent issues of hallucination and error propagation in chain-of-thought reasoning by interacting with a simple Wikipedia API"
+    ],
+    "source_section": "Abstract",
+    "note": "AI1:指出纯CoT有幻觉和错误传播问题，ReAct通过外部交互解决 | AI2:给出的章节截断文本没有描述纯CoT在外部实时知识任务的致命缺陷原句。",
+    "question": "纯CoT模型在需要外部实时知识的任务上存在什么致命缺陷？"
+  },
+  {
+    "id": 12,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "Similar to Figure 1(d), each trajectory consists of multiple thought-action-observation steps (i.e. dense thought)."
+    ],
+    "source_section": "3.2 METHODS",
+    "note": "人工复核：3000字截断/章节标错，已定位全文证据",
+    "question": "ReAct的提示示例由哪四元组样例构成？"
+  },
+  {
+    "id": 13,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "In contrast, the problem solving trajectory of ReAct is more grounded, fact-driven, and trustworthy, thanks to the access of an external knowledge base."
+    ],
+    "source_section": "3.3 RESULTS AND OBSERVATIONS",
+    "note": "人工复核：3000字截断/章节标错，已定位全文证据",
+    "question": "在HotpotQA多跳问答数据集，ReAct相比仅CoT基线提升的核心原因？"
+  },
+  {
+    "id": 14,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "finish[answer], which would finish the current task with answer.",
+      "(3) finish[answer], which would finish the current task with answer."
+    ],
+    "source_section": "3.1 SETUP",
+    "note": "AI1:通过finish action终止循环 | AI2:仅提到finish动作可以结束任务输出答案，没有说明Thought(p(x)=\\prod_{i=1}^{n} p(s_n|s_1, ..., s_{n‑1}))Action循环终止的完整条件。",
+    "question": "ReAct何时终止Thought-Action循环并输出最终答案？"
+  },
+  {
+    "id": 15,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "Hallucination is a serious problem for CoT, resulting in much higher false positive rate than ReAct (14% vs. 6%) in success mode, and make up its major failure mode (56%). In contrast, the problem solving trajectory of ReActis more grounded, fact-driven, and trustworthy, thanks to the access of an external knowledge base.",
+      "A) Hallucination is a serious problem for CoT, resulting in much higher false positive rate than ReAct (14% vs. 6%) in success mode, and make up its major failure mode (56%).",
+      "In contrast, the problem solving trajectory of ReAct is more grounded, fact(p(x)=\\prod_{i=1}^{n} p(s_n|s_1, ..., s_{n‑1}))driven, and trustworthy, thanks to the access of an external knowledge base."
+    ],
+    "source_section": "3.3 RESULTS AND OBSERVATIONS",
+    "note": "AI1:移除Action（即纯CoT）导致幻觉严重 | AI2:移除Action工具调用，模型会出现严重的幻觉问题，事实可靠性下降。",
+    "question": "消融实验移除Action工具调用后，模型会出现什么问题？"
+  },
+  {
+    "id": 16,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "ReAct overcomes prevalent issues of hallucination and error propagation in chain-of-thought reasoning by interacting with a simple Wikipedia API, and generating human-like task-solving trajectories that are more interpretable than baselines without reasoning traces.",
+      "While large language models (LLMs) have demonstrated impressive performance across tasks in language understanding and interactive decision making, their abilities for reasoning (e.g. chain(p(x)=\\prod_{i=1}^{n} p(s_n|s_1, ..., s_{n‑1}))of(p(x)=\\prod_{i=1}^{n} p(s_n|s_1, ..., s_{n‑1}))thought prompting) and acting (e.g. action plan generation) have primarily been studied as separate topics."
+    ],
+    "source_section": "Abstract",
+    "note": "AI1:解决纯推理的幻觉和错误传播，提升可解释性 | AI2:ReAct解决推理与工具调用动作被分开研究的问题，实现推理与动作的协同。",
+    "question": "ReAct解决了工具调用模型的什么问题？"
+  },
+  {
+    "id": 17,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "We use a Transformer (Vaswani et al., 2017) based architecture for our LMs.",
+      "We use a Transformer (Vaswani et al., 2017) based architecture for our LMs. The model largely follows the details of the OpenAI GPT model (Radford et al., 2018) with a few modifications."
+    ],
+    "source_section": "2.3. Model",
+    "note": "AI1:明确基于Transformer (Vaswani et al., 2017) | AI2:GPT1架构基于Vaswani et al., 2017论文提出的Transformer。",
+    "question": "GPT1模型基础架构基于哪篇论文提出的解码器Transformer？"
+  },
+  {
+    "id": 18,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "At the core of our approach is language modeling. Language modeling is usually framed as unsupervised distribution estimation from a set of examples (x1, x2, ..., xn) each composed of variable length sequences of symbols (s1, s2, ..., sn). Since language has a natural sequential ordering, it is common to factorize the joint probabilities over symbols as the product of conditional probabilities",
+      "Language modeling is usually framed as unsupervised distribution estimation from a set of examples $(x_1, x_2, ..., x_n)$ each composed of variable length sequences of symbols $(s_1, s_2, ..., s_n)$.",
+      "Since language has a natural sequential ordering, it is common to factorize the joint probabilities over symbols as the product of conditional probabilities (Jelinek & Mercer, 1980) (Bengio et al., 2003): $p(x)=\\prod_{i=1}^{n} p(s_n|s_1, ..., s_{n(p(x)=\\prod_{i=1}^{n} p(s_n|s_1, ..., s_{n‑1}))1})$"
+    ],
+    "source_section": "2. Approach",
+    "note": "AI1:指出预训练采用无监督语言建模（条件概率分解） | AI2:给出通用语言建模目标公式，但未明确指明这就是GPT1所采用的预训练目标。",
+    "question": "GPT1预训练采用什么无监督语言建模目标？"
+  },
+  {
+    "id": 19,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "Parameters Layers dmodel 117M 12 768",
+      "We use a Transformer (Vaswani et al., 2017) based architecture for our LMs. The model largely follows the details of the OpenAI GPT model (Radford et al., 2018) with a few modifications."
+    ],
+    "source_section": "2.3. Model",
+    "note": "AI1:表格中给出117M模型层数12、dmodel768，对应GPT-1参数（OpenAI GPT） | AI2:表格为GPT(p(x)=\\prod_{i=1}^{n} p(s_n|s_1, ..., s_{n‑1}))2 117M参数配置，文本仅说明GPT2大体跟随GPT1，未给出GPT1原始确切超参。",
+    "question": "GPT1的Transformer解码器堆叠层数、隐藏维度、注意力头数是多少？"
+  },
+  {
+    "id": 20,
+    "answerable": "no",
+    "evidence_sentences": [],
+    "source_section": "",
+    "note": "人工复核：当前解析文本无答案，标记不可回答",
+    "question": "GPT1预训练时解码器自注意力采用什么掩码，保证单向生成？"
+  },
+  {
+    "id": 21,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "We demonstrate that language models begin to learn these tasks without any explicit supervision when trained on a new dataset of millions of webpages called WebText.",
+      "The capacity of the language model is essential to the success of zero-shot task transfer",
+      "These findings suggest a promising path towards building language processing systems which learn to perform tasks from their naturally occurring demonstrations."
+    ],
+    "source_section": "Abstract",
+    "note": "AI1:核心论点为无监督预训练后可零样本适配多种任务 | AI2:论文核心论点：语言模型在WebText上无监督预训练后，可从自然任务演示中学习执行多种NLP任务，实现零样本迁移。",
+    "question": "论文核心论点是什么，即大模型无监督预训练后可零样本适配多种NLP任务？"
+  },
+  {
+    "id": 22,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "we propose a novel method named Rotary Position Embedding(RoPE)",
+      "Then, we propose a novel method named Rotary Position Embedding(RoPE) to effectively leverage the positional information."
+    ],
+    "source_section": "Abstract",
+    "note": "AI1:全称Rotary Position Embedding，缩写RoPE | AI2:RoPE的全称为Rotary Position Embedding。",
+    "question": "RoFormer提出的位置编码全称是什么，缩写RoPE？"
+  },
+  {
+    "id": 23,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "Specifically, the proposed RoPE encodes the absolute position with a rotation matrix and meanwhile incorporates the explicit relative position dependency in self-attention formulation."
+    ],
+    "source_section": "Abstract",
+    "note": "AI1:核心操作为旋转矩阵变换 | AI2:该章节只给出希望达成的约束公式，没有直接说明对token向量执行的核心数学变换名称。",
+    "question": "RoPE编码的核心数学操作是对token向量执行什么变换？"
+  },
+  {
+    "id": 24,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "RoPE encodes the absolute position with a rotation matrix and meanwhile incorporates explicit relative position dependency in self-attention formulation.",
+      "RoPE enables valuable properties, including the flexibility of sequence length, decaying inter-token dependency and the capability of equipping the linear self-attention with relative position encoding."
+    ],
+    "source_section": "Abstract",
+    "note": "人工复核：3000字截断/章节标错，已定位全文证据",
+    "question": "RoPE相比正弦位置编码、可学习位置编码的核心优势？"
+  },
+  {
+    "id": 25,
+    "answerable": "no",
+    "evidence_sentences": [],
+    "source_section": "",
+    "note": "人工复核：当前解析文本无答案，标记不可回答",
+    "question": "RoPE将向量维度两两分组做旋转，奇数维度如何处理？"
+  },
+  {
+    "id": 26,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "RoPE encodes the absolute position with a rotation matrix and meanwhile incorporates explicit relative position dependency in self-attention formulation."
+    ],
+    "source_section": "Abstract",
+    "note": "人工复核：3000字截断/章节标错，已定位全文证据",
+    "question": "标准绝对位置编码存在什么缺陷，RoPE予以解决？"
+  },
+  {
+    "id": 27,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "the proposed RoPE encodes the absolute position with a rotation matrix and meanwhile incorporates the explicit relative position dependency in self-attention formulation.",
+      "Specifically, the proposed RoPE encodes the absolute position with a rotation matrix and meanwhile incorporates the explicit relative position dependency in self(p(x)=\\prod_{i=1}^{n} p(s_n|s_1, ..., s_{n‑1}))attention formulation."
+    ],
+    "source_section": "Abstract",
+    "note": "AI1:说明通过旋转矩阵在自注意力中融入相对位置依赖 | AI2:摘要只说明RoPE用旋转矩阵编码绝对位置、融入相对位置依赖，未给出计算注意力分数的具体过程。",
+    "question": "RoPE如何计算两个token间基于相对位置的注意力分数？"
+  },
+  {
+    "id": 28,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "BERT Devlin et al. [2019] is adopted as our baseline model."
+    ],
+    "source_section": "4.2.1 Experimental Settings",
+    "note": "人工复核：3000字截断/章节标错，已定位全文证据",
+    "question": "RoFormer基础模型的主干网络采用Transformer编码器还是解码器？"
+  },
+  {
+    "id": 29,
+    "answerable": "no",
+    "evidence_sentences": [],
+    "source_section": "",
+    "note": "人工复核：当前解析文本无答案，标记不可回答",
+    "question": "消融实验中移除RoPE替换为正弦位置编码，长文本困惑度会如何变化？"
+  },
+  {
+    "id": 30,
+    "answerable": "yes",
+    "evidence_sentences": [
+      "Following Vaswani et al. [2017], we set θi = 10000−2i/d.",
+      "One can prove that this setting provides a long-term decay property (refer to Section (3.4.3) for more details), which means the inner-product will decay when the relative position increase."
+    ],
+    "source_section": "3.3 Properties of RoPE",
+    "note": "人工复核：3000字截断/章节标错，已定位全文证据",
+    "question": "RoPE旋转计算的频率基底参数作用是什么？"
+  }
+]

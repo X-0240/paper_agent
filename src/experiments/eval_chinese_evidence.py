@@ -22,7 +22,7 @@ MODEL_PATH=os.getenv("MODEL_PATH")
 BASE_DIR=os.path.dirname(os.path.abspath(__file__))
 CASES_PATH=os.path.join(BASE_DIR,"corrected_chinese_cases.json")
 CACHE_PATH=os.path.join(BASE_DIR,"eval_query_transform_cache.json")
-BATCH_FILES=[("evidence_batch1_merged.json",0),("evidence_batch2_merged.json",32),("evidence_batch3_merged.json",64)]
+BATCH_FILES=["evidence_batch1_merged.json","evidence_batch2_merged.json","evidence_batch3_merged.json"]
 
 def tokenize(text):
     return re.findall(r"[a-z0-9]+",text.lower())
@@ -77,19 +77,19 @@ bm25=BM25Okapi([tokenize(c) for c in chunks])
 all_cases=[c for c in json.load(open(CASES_PATH,encoding="utf-8")) if c["mapped_section"] and c.get("valid_sections")]
 cache=json.load(open(CACHE_PATH,encoding="utf-8")) if os.path.exists(CACHE_PATH) else {}
 
-#把各批证据句映射到索引chunk，key为94题里的下标
+#把各批证据句映射到索引chunk，key为问题原文，避免无效题移出后编号错位
 ev_map={}
-for fname,offset in BATCH_FILES:
+for fname in BATCH_FILES:
     path=os.path.join(BASE_DIR,fname)
     if not os.path.exists(path):
         continue
     for e in json.load(open(path,encoding="utf-8")):
         if e["answerable"]=="yes":
-            ev_map[offset+e["id"]-1]=e
+            ev_map[e["question"]]=e
 not_mapped=0
 evidence_chunks={}
 for idx,c in enumerate(all_cases):
-    e=ev_map.get(idx)
+    e=ev_map.get(c["question"])
     if not e:
         evidence_chunks[idx]=[]
         continue
@@ -110,7 +110,7 @@ for k in [5,10,20]:
     ch_hits=0
     n=0
     for idx,c in enumerate(all_cases):
-        if idx not in ev_map:
+        if c["question"] not in ev_map:
             continue
         n+=1
         q=cache.get(f"translate|{c['question']}",c["question"])
