@@ -22,7 +22,7 @@ MODEL_PATH=os.getenv("MODEL_PATH")
 BASE_DIR=os.path.dirname(os.path.abspath(__file__))
 CASES_PATH=os.path.join(BASE_DIR,"corrected_chinese_cases.json")
 CACHE_PATH=os.path.join(BASE_DIR,"eval_query_transform_cache.json")
-EVIDENCE_PATH=os.path.join(BASE_DIR,"evidence_batch1_merged.json")
+BATCH_FILES=[("evidence_batch1_merged.json",0),("evidence_batch2_merged.json",32),("evidence_batch3_merged.json",64)]
 
 def tokenize(text):
     return re.findall(r"[a-z0-9]+",text.lower())
@@ -75,19 +75,23 @@ index=faiss.IndexFlatIP(emb.shape[1]); index.add(emb.astype("float32"))
 bm25=BM25Okapi([tokenize(c) for c in chunks])
 
 all_cases=[c for c in json.load(open(CASES_PATH,encoding="utf-8")) if c["mapped_section"] and c.get("valid_sections")]
-cases=all_cases[:32]
-evs=json.load(open(EVIDENCE_PATH,encoding="utf-8"))
-ev_map={e["id"]:e for e in evs}
 cache=json.load(open(CACHE_PATH,encoding="utf-8")) if os.path.exists(CACHE_PATH) else {}
 
-#把证据句映射到索引chunk
+#把各批证据句映射到索引chunk，key为94题里的下标
+ev_map={}
+for fname,offset in BATCH_FILES:
+    path=os.path.join(BASE_DIR,fname)
+    if not os.path.exists(path):
+        continue
+    for e in json.load(open(path,encoding="utf-8")):
+        if e["answerable"]=="yes":
+            ev_map[offset+e["id"]-1]=e
 not_mapped=0
 evidence_chunks={}
-for c in cases:
-    e=ev_map.get(cases.index(c)+1)
-    if not e or not e.get("evidence_sentences"):
-        not_mapped+=1
-        evidence_chunks[cases.index(c)]=[]
+for idx,c in enumerate(all_cases):
+    e=ev_map.get(idx)
+    if not e:
+        evidence_chunks[idx]=[]
         continue
     ids=set()
     for s in e["evidence_sentences"]:
@@ -97,18 +101,21 @@ for c in cases:
                 ids.add(i)
     if not ids:
         not_mapped+=1
-    evidence_chunks[cases.index(c)]=ids
-print(f"证据映射：32题中未映射证据到chunk={not_mapped}")
+    evidence_chunks[idx]=ids
+print(f"证据映射：有证据题={len(ev_map)}，证据未映射到chunk={not_mapped}")
 
 t0=time.time()
 for k in [5,10,20]:
     ev_hits=0
     ch_hits=0
-    for c in cases:
-        idx=cases.index(c)
+    n=0
+    for idx,c in enumerate(all_cases):
+        if idx not in ev_map:
+            continue
+        n+=1
         q=cache.get(f"translate|{c['question']}",c["question"])
         idxs=top_k(q,k)
         ev_hits+=bool(evidence_chunks[idx] and (set(idxs)&evidence_chunks[idx]))
         ch_hits+=chapter_hit(idxs,c["source"],c["valid_sections"])
-    print(f"批1翻译（32题）：证据级@{k}={ev_hits/32:.1%}（{ev_hits}/32），章节级@{k}={ch_hits/32:.1%}（{ch_hits}/32）")
+    print(f"翻译（{n}题）：证据级@{k}={ev_hits/n:.1%}（{ev_hits}/{n}），章节级@{k}={ch_hits/n:.1%}（{ch_hits}/{n}）")
 print(f"评测耗时：{time.time()-t0:.1f}s")
