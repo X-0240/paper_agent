@@ -4,6 +4,7 @@ import os
 import re
 import sys
 import time
+import unicodedata
 import numpy as np
 sys.path.insert(0,os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from dotenv import load_dotenv
@@ -28,6 +29,7 @@ def tokenize(text):
     return re.findall(r"[a-z0-9]+",text.lower())
 
 def norm(s):
+    s=unicodedata.normalize("NFKC",s)
     s=re.sub(r"^[\d.]+\s*","",s.lower())
     return re.sub(r"[^a-z ]","",s).strip()
 
