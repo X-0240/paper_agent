@@ -29,6 +29,7 @@ def tokenize(text):
     return re.findall(r"[a-z0-9]+",text.lower())
 
 def norm(s):
+    s=unicodedata.normalize("NFKC",s)
     s=re.sub(r"^[\d.]+\s*","",s.lower())
     return re.sub(r"[^a-z ]","",s).strip()
 

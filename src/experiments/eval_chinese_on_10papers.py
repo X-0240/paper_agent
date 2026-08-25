@@ -4,6 +4,7 @@ import os
 import re
 import sys
 import time
+import unicodedata
 import numpy as np
 from dotenv import load_dotenv
 import faiss
@@ -29,6 +30,7 @@ def tokenize(text):
 
 def section_match(section,expected_section):
     def norm(s):
+        s=unicodedata.normalize("NFKC",s)
         s=re.sub(r"^[\d.]+\s*","",s.lower())
         return re.sub(r"[^a-z ]","",s).strip()
     e=norm(expected_section)
