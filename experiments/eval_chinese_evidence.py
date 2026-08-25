@@ -11,6 +11,7 @@ from dotenv import load_dotenv
 import faiss
 from rank_bm25 import BM25Okapi
 from sentence_transformers import SentenceTransformer
+from rerank import rerank
 
 if sys.stdout and hasattr(sys.stdout,"reconfigure"):
     sys.stdout.reconfigure(errors="replace")
@@ -121,4 +122,20 @@ for k in [5,10,20]:
         ev_hits+=bool(evidence_chunks[idx] and (set(idxs)&evidence_chunks[idx]))
         ch_hits+=chapter_hit(idxs,c["source"],c["valid_sections"])
     print(f"翻译（{n}题）：证据级@{k}={ev_hits/n:.1%}（{ev_hits}/{n}），章节级@{k}={ch_hits/n:.1%}（{ch_hits}/{n}）")
+
+#Rerank对照：主指标证据级，全文评分
+for k in [5,10]:
+    ev_hits=0
+    n=0
+    for idx,c in enumerate(all_cases):
+        if c["question"] not in ev_map:
+            continue
+        n+=1
+        q=cache.get(f"translate|{c['question']}",c["question"])
+        top=weighted_candidates(q,25,0.5)
+        items=[{"source":sources[j],"section":sections[j],"text":chunks[j],"idx":j} for j,_ in top]
+        ranked=rerank(q,items,top_n=k)
+        idxs=[it["idx"] for it in ranked]
+        ev_hits+=bool(evidence_chunks[idx] and (set(idxs)&evidence_chunks[idx]))
+    print(f"Rerank翻译证据级@{k}={ev_hits/n:.1%}（{ev_hits}/{n}）")
 print(f"评测耗时：{time.time()-t0:.1f}s")
