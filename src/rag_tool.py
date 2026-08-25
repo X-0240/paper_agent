@@ -147,9 +147,12 @@ def search_papers_rerank(query,k=5,alpha=0.5,candidates=25):
         "source":sources[idx],
         "section":sections[idx],
         "score":round(float(score),3),
-        "text":documents[idx][:300]
+        "text":documents[idx]
     } for idx,score in top]
     items=rerank(query,items,top_n=k)
+    #重排用全文评分，返回观察时再截断，避免观察内容膨胀
+    for it in items:
+        it["text"]=it["text"][:300]
     logger.info(f"Rerank检索 query={query} 候选={len(top)} 输出={len(items)}")
     return items
 
