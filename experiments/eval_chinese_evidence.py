@@ -4,6 +4,7 @@ import os
 import re
 import sys
 import time
+import unicodedata
 import numpy as np
 sys.path.insert(0,os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from dotenv import load_dotenv
@@ -32,7 +33,8 @@ def norm(s):
     return re.sub(r"[^a-z ]","",s).strip()
 
 def ev_norm(s):
-    #证据匹配：只保留字母数字，容忍换行/连字符/数学符号差异
+    #证据匹配：NFKC统一数学斜体/连字，再只保留字母数字，容忍换行/连字符/符号差异
+    s=unicodedata.normalize("NFKC",s)
     return re.sub(r"[^a-z0-9]+","",s.lower())
 
 def section_match(section,expected):

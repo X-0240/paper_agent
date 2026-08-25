@@ -370,7 +370,10 @@
     "valid_sections": [
       "3.4 Robustness of Chain of Thought"
     ],
-    "validity": "valid"
+    "validity": "valid",
+    "evidence_sentences": [
+      "Although there is variance among different chain of thought annotations, as would be expected when using exemplar-based prompting"
+    ]
   },
   {
     "question": "标准自注意力的内存瓶颈来自哪个中间矩阵，其空间复杂度与序列长度N是什么关系？",
@@ -1099,8 +1102,8 @@
     ],
     "validity": "valid",
     "evidence_sentences": [
-      "RoPE encodes the absolute position with a rotation matrix and meanwhile incorporates explicit relative position dependency in self-attention formulation.",
-      "RoPE enables valuable properties, including the flexibility of sequence length, decaying inter-token dependency and the capability of equipping the linear self-attention with relative position encoding."
+      "the proposed RoPE encodes the absolute position with a rotation matrix and meanwhile incorporates the explicit relative position dependency in self-attention formulation.",
+      "Notably, RoPE enables valuable properties, including the flexibility of sequence length, decaying inter-token dependency with increasing relative distances, and the capability of equipping the linear self-attention with relative position encoding."
     ]
   },
   {
@@ -1124,7 +1127,7 @@
     ],
     "validity": "valid",
     "evidence_sentences": [
-      "RoPE encodes the absolute position with a rotation matrix and meanwhile incorporates explicit relative position dependency in self-attention formulation."
+      "the proposed RoPE encodes the absolute position with a rotation matrix and meanwhile incorporates the explicit relative position dependency in self-attention formulation."
     ]
   },
   {
