@@ -323,8 +323,7 @@
     "id": 30,
     "answerable": "yes",
     "evidence_sentences": [
-      "Although there is variance among different chain of thought annotations, as would be expected when using exemplar‑based prompting (Le Scao and Rush, 2021; Reynolds and McDonell, 2021; Zhao et al., 2021), all sets of chain of thought prompts outperform the standard baseline by a large margin.",
-      "To confirm that successful chain‑of‑thought prompting works for other sets of exemplars, we also run experiments with three sets of eight exemplars randomly sampled from the GSM8K training set, an independent source (examples in this dataset already included reasoning steps like a chain of thought)."
+      "Although there is variance among different chain of thought annotations, as would be expected when using exemplar-based prompting"
     ],
     "source_section": "3.4 Robustness of Chain of Thought",
     "note": "AI1:说明不强制必须针对每个数据集单独制作示例，但未给出直接明确的yes/no结论句。 | AI2:原文未直接回答是否需要针对每个数据集单独制作示例",

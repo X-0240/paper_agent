@@ -254,8 +254,8 @@
     "id": 24,
     "answerable": "yes",
     "evidence_sentences": [
-      "RoPE encodes the absolute position with a rotation matrix and meanwhile incorporates explicit relative position dependency in self-attention formulation.",
-      "RoPE enables valuable properties, including the flexibility of sequence length, decaying inter-token dependency and the capability of equipping the linear self-attention with relative position encoding."
+      "the proposed RoPE encodes the absolute position with a rotation matrix and meanwhile incorporates the explicit relative position dependency in self-attention formulation.",
+      "Notably, RoPE enables valuable properties, including the flexibility of sequence length, decaying inter-token dependency with increasing relative distances, and the capability of equipping the linear self-attention with relative position encoding."
     ],
     "source_section": "Abstract",
     "note": "人工复核：3000字截断/章节标错，已定位全文证据",
@@ -273,7 +273,7 @@
     "id": 26,
     "answerable": "yes",
     "evidence_sentences": [
-      "RoPE encodes the absolute position with a rotation matrix and meanwhile incorporates explicit relative position dependency in self-attention formulation."
+      "the proposed RoPE encodes the absolute position with a rotation matrix and meanwhile incorporates the explicit relative position dependency in self-attention formulation."
     ],
     "source_section": "Abstract",
     "note": "人工复核：3000字截断/章节标错，已定位全文证据",
