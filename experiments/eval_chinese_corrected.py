@@ -102,7 +102,7 @@ for k in [5,10]:
     paper_hits=0
     for c,q in zip(cases,variants["翻译成英文"]):
         top=weighted_candidates(q,25,0.5)
-        items=[{"source":sources[j],"section":sections[j],"text":chunks[j][:300],"idx":j} for j,_ in top]
+        items=[{"source":sources[j],"section":sections[j],"text":chunks[j],"idx":j} for j,_ in top]
         ranked=rerank(q,items,top_n=k)
         idxs=[it["idx"] for it in ranked]
         hits+=chapter_hit(idxs,c["source"],c["valid_sections"])
