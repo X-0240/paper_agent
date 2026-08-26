@@ -1,4 +1,5 @@
 import json
+import hashlib
 import logging
 import os
 from doc_ingest import load_sections, paper_title
@@ -34,6 +35,20 @@ CARD_PROMPT="""你是论文结构化解析Agent。根据给定论文章节内容
   "limitations": "作者承认的局限或论文不足"
 }
 如果某字段原文没有，写"未提及"，不要编造。"""
+
+#提示词版本：内容变化自动失效旧卡片缓存
+CARD_PROMPT_VERSION=hashlib.md5(CARD_PROMPT.encode("utf-8")).hexdigest()[:8]
+
+def _card_cache_ok(card_path):
+    #旧缓存（无meta）或提示词版本不一致时都判失效
+    meta_path=card_path+".meta"
+    if not os.path.exists(card_path) or not os.path.exists(meta_path):
+        return False
+    try:
+        meta=json.load(open(meta_path,encoding="utf-8"))
+        return meta.get("version")==CARD_PROMPT_VERSION
+    except Exception:
+        return False
 
 def select_card_input(sections,max_chars=8000):
     #上下文裁剪：优先摘要/引言/方法/结论，单节截断，控制LLM输入
@@ -73,7 +88,7 @@ REQUIRED_FIELDS={"title","background","method","innovation","experiments","concl
 def build_paper_card(paper_name):
     #卡片缓存：同一论文不重复调用LLM
     card_path=os.path.join(CARD_DIR,f"{paper_name}.json")
-    if os.path.exists(card_path):
+    if _card_cache_ok(card_path):
         return json.load(open(card_path,encoding="utf-8"))
     sections=get_paper_sections(paper_name)
     input_text=select_card_input(sections)
@@ -106,6 +121,8 @@ def build_paper_card(paper_name):
         raise ValueError("卡片生成失败")
     with open(card_path,"w",encoding="utf-8") as f:
         json.dump(card,f,ensure_ascii=False,indent=2)
+    with open(card_path+".meta","w",encoding="utf-8") as f:
+        json.dump({"version":CARD_PROMPT_VERSION},f)
     logger.info(f"已生成卡片:{paper_name}")
     return card
 

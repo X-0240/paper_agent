@@ -79,7 +79,7 @@ python -m pytest tests -q
 
 - ReAct 历史裁剪：只保留系统指令 + 初始问题 + 最近 3 轮
 - Observation 超长截断（1500 字截到 1000 字）
-- 会话缓存：章节缓存 `section_cache`、卡片缓存 `card_cache`，避免重复读/重复调 LLM
+- 会话缓存：章节缓存 `section_cache`、卡片缓存 `card_cache`，避免重复读/重复调 LLM；卡片缓存带提示词版本号，`CARD_PROMPT` 改动自动失效
 - 输入裁剪：卡片字段裁剪、逐篇事实抽取、facts/conflicts/pending 数量上限
 - 硬限制：`MAX_AGENT_STEP=15`、`MAX_SEARCH_PER_SESSION=3`，防止死循环和 token 失控
 
