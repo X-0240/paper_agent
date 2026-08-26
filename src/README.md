@@ -17,6 +17,12 @@ uvicorn api_server:app --host 127.0.0.1 --port 8000
 
 界面支持单篇问答和文献综述两种路由：单篇问答流式输出并展示引用来源；文献综述提示处理时长后输出完整综述。前端通过 fetch 读取 SSE，不依赖浏览器原生 EventSource，因此 Token 始终放在请求头里。
 
+## 外网检索
+
+- simple 路径并行跑本地 FAISS 检索 + 外网检索（Wikipedia REST + arXiv API），来源统一展示
+- 外网请求默认 8 秒超时、并发上限 5，失败自动降级为本地-only，不阻塞主链路
+- 配置：`.env` 的 `WEB_SEARCH_TIMEOUT` / `WEB_SEARCH_MAX_RESULTS` / `WEB_SEARCH_CONCURRENCY`
+
 ## 接口
 
 ### POST /login
@@ -109,6 +115,7 @@ docker build -t paper-agent .
 - `survey_agent.py`：单 ReAct Agent 综述编排，复用 agent_react 循环，工具前置/后置校验、pending_conflicts 聚合、预算降级
 - `scripts/run_acceptance.py`：6 条固定 query 的验收脚本（简单/综述/冲突/超预算/无结果 + Transformer对比）
 - `rag_tool.py`：混合检索（BM25 + FAISS + 可选 Rerank）
+- `web_search.py`：外网检索并发（Wikipedia/arXiv），统一来源结构与降级
 - `agent_react.py`：手写 ReAct 循环，Supervisor + Worker
 - `agent1_retrieve.py` / `agent2_parse.py` / `agent3_review.py`：旧流水线模块，正在向 `tools.py` 单 Agent 工具集收敛
 - `pipeline.py`：simple 短路与 survey 全链路编排

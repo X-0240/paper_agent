@@ -1,18 +1,19 @@
+import asyncio
 import json
 import os
 import time
 from datetime import datetime, timedelta, timezone
 from typing import Optional
 import jwt
+import numpy as np
 from dotenv import load_dotenv
 from fastapi import Depends, FastAPI, HTTPException
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from fastapi.responses import FileResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
-from rag_tool import search_papers_structured
 from llm_api import call_deepseek_stream
-from pipeline import simple_answer, survey_pipeline, SIMPLE_SYSTEM_PROMPT
+from pipeline import simple_answer_async, simple_context, survey_pipeline, SIMPLE_SYSTEM_PROMPT
 from task_router import classify_task, rate_limit_allowed
 
 load_dotenv()
@@ -65,45 +66,32 @@ def login(req: LoginRequest):
     return {"access_token":create_token(req.username),"token_type":"bearer"}
 
 @app.post("/ask")
-def ask(req: AskRequest, user: str=Depends(verify_token)):
+async def ask(req: AskRequest, user: str=Depends(verify_token)):
     if not rate_limit_allowed(user):
         raise HTTPException(status_code=429,detail="请求过于频繁，请稍后再试")
     task=classify_task(req.question) if req.use_survey is None else ("survey" if req.use_survey else "simple")
     if task=="survey":
-        answer=survey_pipeline(req.question,human_confirm=False)
+        answer=await asyncio.to_thread(survey_pipeline,req.question,human_confirm=False)
     else:
-        answer=simple_answer(req.question)
+        answer=await simple_answer_async(req.question)
     return {"route":task,"answer":answer,"user":user}
 
-def build_context(question,k=5):
-    results=search_papers_structured(question,k=k)
-    #检索分数可能是numpy.float32，统一转float防SSE序列化失败
-    for r in results:
-        r["score"]=float(r.get("score",0))
-    return results
-
-def format_context(results):
-    return "\n\n".join(
-        f"[来源:{r['source']} - {r['section']}]\n{r['text']}"
-        for r in results
-    )
-
 def sse_event(obj):
-    return f"data: {json.dumps(obj,ensure_ascii=False)}\n\n"
+    #numpy.float32不能直接JSON序列化，统一转float兜底
+    return f"data: {json.dumps(obj,ensure_ascii=False,default=lambda o: float(o) if isinstance(o,np.float32) else str(o))}\n\n"
 
 @app.get("/ask/stream")
 def ask_stream(question: str, user: str=Depends(verify_token)):
     if not rate_limit_allowed(user):
         raise HTTPException(status_code=429,detail="请求过于频繁，请稍后再试")
-    def gen():
+    async def gen():
         #流式异常必须转成SSE事件，不能让连接无提示中断
         try:
             task=classify_task(question)
             yield sse_event({"type":"route","route":task})
             if task=="simple":
-                results=build_context(question)
-                yield sse_event({"type":"sources","sources":results})
-                context=format_context(results)
+                sources,context=await simple_context(question)
+                yield sse_event({"type":"sources","sources":sources})
                 messages=[
                     {"role":"system","content":SIMPLE_SYSTEM_PROMPT},
                     {"role":"user","content":f"以下是相关的论文内容：\n{context}\n\n用户问题：{question}"}
@@ -112,7 +100,7 @@ def ask_stream(question: str, user: str=Depends(verify_token)):
                     yield sse_event({"type":"token","content":token})
             else:
                 yield sse_event({"type":"status","content":"正在生成综述（约 1-3 分钟）"})
-                answer=survey_pipeline(question,human_confirm=False)
+                answer=await asyncio.to_thread(survey_pipeline,question,human_confirm=False)
                 for i in range(0,len(answer),40):
                     yield sse_event({"type":"token","content":answer[i:i+40]})
         except Exception as e:

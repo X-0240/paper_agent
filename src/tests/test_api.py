@@ -1,4 +1,5 @@
 import json
+import unittest.mock as mock
 import numpy as np
 from fastapi.testclient import TestClient
 from api_server import app
@@ -28,7 +29,7 @@ def test_ask_requires_token():
     assert client.post("/ask",json={"question":"x"}).status_code==401
 
 def test_ask_simple(monkeypatch):
-    monkeypatch.setattr("api_server.simple_answer",lambda q,**kw:"mock answer")
+    monkeypatch.setattr("api_server.simple_answer_async",mock.AsyncMock(return_value="mock answer"))
     r=client.post("/ask",json={"question":"什么是Transformer？"},headers=auth_header(login()))
     assert r.status_code==200
     assert r.json()["route"]=="simple"
@@ -42,15 +43,17 @@ def test_ask_forced_survey(monkeypatch):
     assert r.json()["answer"]=="mock review"
 
 def test_stream_simple(monkeypatch):
-    monkeypatch.setattr("api_server.search_papers_structured",lambda q,**kw:[{"source":"s","section":"sec","text":"t"}])
+    sources=[{"source_type":"local","title":"s","snippet":"t","paper_id":"s","section":"sec","url":None,"arxiv_id":None}]
+    monkeypatch.setattr("api_server.simple_context",mock.AsyncMock(return_value=(sources,"ctx")))
     monkeypatch.setattr("api_server.call_deepseek_stream",lambda messages:iter(["你","好"]))
     r=client.get("/ask/stream",params={"question":"什么是Transformer？"},headers=auth_header(login()))
     events=[json.loads(line[5:]) for line in r.iter_lines() if line.startswith("data:")]
     assert [e["type"] for e in events]==["route","sources","token","token","done"]
-    assert events[1]["sources"][0]["source"]=="s"
+    assert events[1]["sources"][0]["title"]=="s"
 
 def test_stream_error_event(monkeypatch):
-    monkeypatch.setattr("api_server.search_papers_structured",lambda q,**kw:[{"source":"s","section":"sec","text":"t"}])
+    sources=[{"source_type":"local","title":"s","snippet":"t","paper_id":"s","section":"sec","url":None,"arxiv_id":None}]
+    monkeypatch.setattr("api_server.simple_context",mock.AsyncMock(return_value=(sources,"ctx")))
     def boom(messages):
         raise RuntimeError("mock boom")
     monkeypatch.setattr("api_server.call_deepseek_stream",boom)
@@ -60,8 +63,9 @@ def test_stream_error_event(monkeypatch):
     assert events[-1]["type"]=="done"
 
 def test_stream_simple_float32_score(monkeypatch):
-    #FAISS分数是numpy.float32，必须能过JSON序列化，否则sources事件报错
-    monkeypatch.setattr("api_server.search_papers_structured",lambda q,**kw:[{"source":"s","section":"sec","text":"t","score":np.float32(0.5)}])
+    #来源里若混入numpy.float32，也必须能过JSON序列化
+    sources=[{"source_type":"local","title":"s","snippet":"t","paper_id":"s","section":"sec","url":None,"arxiv_id":None,"score":np.float32(0.5)}]
+    monkeypatch.setattr("api_server.simple_context",mock.AsyncMock(return_value=(sources,"ctx")))
     monkeypatch.setattr("api_server.call_deepseek_stream",lambda messages:iter(["ok"]))
     r=client.get("/ask/stream",params={"question":"什么是Transformer？"},headers=auth_header(login()))
     events=[json.loads(line[5:]) for line in r.iter_lines() if line.startswith("data:")]
