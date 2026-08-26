@@ -13,5 +13,5 @@ llm_usage.jsonl
 experiments/eval_query_transform_cache.json
 .git/
 
-# CI文件待workflow权限令牌后恢复推送
+# CI文件需要workflow权限的令牌才能推送，本地保留
 .github/workflows/ci.yml

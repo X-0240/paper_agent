@@ -10,6 +10,8 @@ python -m experiments.evaluate_qasper
 python -m experiments.experiment_single_vs_multi
 ```
 
+当前中文题评测以 `eval_chinese_corrected.py`（章节级/论文级）和 `eval_chinese_evidence.py`（证据级，支持原生英文查询与 Rerank 对照）为准。
+
 运行前需要本地模型和 FAISS 索引（见根目录 `.env` 的 `MODEL_PATH`、`FAISS_PATH`），并注意 DeepSeek 峰谷计费：重活建议在闲时（非 9-12 点、14-18 点）跑。
 
 主要脚本与结论：
@@ -20,5 +22,3 @@ python -m experiments.experiment_single_vs_multi
 - `experiment_qasper_neighbor.py`、`experiment_qasper_semantic.py`：邻接扩展与语义切片
 - `experiment_single_vs_multi.py`：单 Agent vs 3-Agent 综述质量对比
 - `diagnose_qasper_retrieval.py`：QASPER 命中拆解诊断
-- `run_benchmark.py`：流水线成功率/耗时/LLM 调用次数基准
-- `test_agent3_loop.py`：Agent-3 冲突回环手工验证
