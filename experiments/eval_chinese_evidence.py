@@ -109,7 +109,7 @@ for idx,c in enumerate(all_cases):
 print(f"证据映射：有证据题={len(ev_map)}，证据未映射到chunk={not_mapped}")
 
 t0=time.time()
-def run_variant(name,qkey,use_rerank=False):
+def run_variant(name,qkey,use_rerank=False,candidates=25):
     ks=[5,10] if use_rerank else [5,10,20]
     for k in ks:
         ev_hits=0
@@ -120,7 +120,7 @@ def run_variant(name,qkey,use_rerank=False):
                 continue
             n+=1
             q=cache.get(f"{qkey}|{c['question']}",c["question"])
-            top=weighted_candidates(q,25,0.5)
+            top=weighted_candidates(q,candidates,0.5)
             if use_rerank:
                 items=[{"source":sources[j],"section":sections[j],"text":chunks[j],"idx":j} for j,_ in top]
                 ranked=rerank(q,items,top_n=k)
@@ -137,4 +137,6 @@ def run_variant(name,qkey,use_rerank=False):
 for name,qkey in [("翻译","translate"),("原生1","english_native1"),("原生2","english_native2")]:
     run_variant(name,qkey)
     run_variant(name,qkey,use_rerank=True)
+#候选池放大验证：原生1查询，Top-100重排能否救回硬案例
+run_variant("原生1池100","english_native1",use_rerank=True,candidates=100)
 print(f"评测耗时：{time.time()-t0:.1f}s")
