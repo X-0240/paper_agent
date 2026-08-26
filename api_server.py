@@ -94,7 +94,7 @@ def ask_stream(question: str, user: str=Depends(verify_token)):
                 yield sse_event({"type":"sources","sources":sources})
                 messages=[
                     {"role":"system","content":SIMPLE_SYSTEM_PROMPT},
-                    {"role":"user","content":f"以下是相关的论文内容：\n{context}\n\n用户问题：{question}"}
+                    {"role":"user","content":f"以下是检索到的相关资料：\n{context}\n\n用户问题：{question}"}
                 ]
                 for token in call_deepseek_stream(messages):
                     yield sse_event({"type":"token","content":token})
