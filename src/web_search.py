@@ -99,14 +99,16 @@ async def web_search(query,limit=WEB_SEARCH_MAX_RESULTS):
     a=a if isinstance(a,list) else []
     return w+a
 
+def _local_search(query,top_k):
+    #延迟导入模型，避免web_search模块被测试/无关调用拖慢
+    from rag_tool import search_papers_rerank, search_papers_structured
+    if os.getenv("USE_RERANK")=="1":
+        return search_papers_rerank(query,k=top_k)
+    return search_papers_structured(query,k=top_k)
+
 async def hybrid_search(query,top_k=5):
     #本地检索在线程池，外网并行；本地加载模型延迟到首次调用
-    def _local():
-        from rag_tool import search_papers_rerank, search_papers_structured
-        if os.getenv("USE_RERANK")=="1":
-            return search_papers_rerank(query,k=top_k)
-        return search_papers_structured(query,k=top_k)
-    local_task=asyncio.create_task(asyncio.to_thread(_local))
+    local_task=asyncio.create_task(asyncio.to_thread(_local_search,query,top_k))
     web_task=asyncio.create_task(web_search(query))
     local,web=await asyncio.gather(local_task,web_task,return_exceptions=True)
     local=local if isinstance(local,list) else []

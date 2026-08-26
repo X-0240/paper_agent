@@ -103,3 +103,37 @@ def test_semaphore_limits_concurrency():
         await asyncio.gather(*[worker() for _ in range(10)])
         return peak
     assert asyncio.run(run())<=web_search.WEB_SEARCH_CONCURRENCY
+
+def test_hybrid_search_merges_local_and_web(monkeypatch):
+    #本地+外网合并，统一来源结构
+    def fake_local(query,top_k):
+        return [{"source":"P","section":"S","text":"T"}]
+    monkeypatch.setattr(web_search,"_local_search",fake_local)
+    async def fake_get(url,params=None,headers=None):
+        resp=mock.MagicMock()
+        resp.raise_for_status=mock.MagicMock()
+        if "wikipedia" in url:
+            resp.json.return_value={"query":{"search":[{"title":"Wiki","snippet":"W","pageid":1}]}}
+        else:
+            resp.text="""<?xml version="1.0"?><feed xmlns="http://www.w3.org/2005/Atom"></feed>"""
+        return resp
+    async def run():
+        with mock.patch("web_search.httpx.AsyncClient.get",side_effect=fake_get):
+            return await web_search.hybrid_search("什么是Transformer？",top_k=5)
+    data=asyncio.run(run())
+    types={s["source_type"] for s in data["sources"]}
+    assert types=={"local","wikipedia"}
+    assert data["context"]
+
+def test_hybrid_search_local_only_on_web_failure(monkeypatch):
+    #外网全部失败时降级为本地-only
+    def fake_local(query,top_k):
+        return [{"source":"P","section":"S","text":"T"}]
+    monkeypatch.setattr(web_search,"_local_search",fake_local)
+    async def fake_get(url,params=None,headers=None):
+        raise httpx.ConnectError("network down")
+    async def run():
+        with mock.patch("web_search.httpx.AsyncClient.get",side_effect=fake_get):
+            return await web_search.hybrid_search("什么是Transformer？",top_k=5)
+    data=asyncio.run(run())
+    assert {s["source_type"] for s in data["sources"]}=={"local"}
