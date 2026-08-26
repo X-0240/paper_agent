@@ -109,33 +109,32 @@ for idx,c in enumerate(all_cases):
 print(f"证据映射：有证据题={len(ev_map)}，证据未映射到chunk={not_mapped}")
 
 t0=time.time()
-for k in [5,10,20]:
-    ev_hits=0
-    ch_hits=0
-    n=0
-    for idx,c in enumerate(all_cases):
-        if c["question"] not in ev_map:
-            continue
-        n+=1
-        q=cache.get(f"translate|{c['question']}",c["question"])
-        idxs=top_k(q,k)
-        ev_hits+=bool(evidence_chunks[idx] and (set(idxs)&evidence_chunks[idx]))
-        ch_hits+=chapter_hit(idxs,c["source"],c["valid_sections"])
-    print(f"翻译（{n}题）：证据级@{k}={ev_hits/n:.1%}（{ev_hits}/{n}），章节级@{k}={ch_hits/n:.1%}（{ch_hits}/{n}）")
+def run_variant(name,qkey,use_rerank=False):
+    ks=[5,10] if use_rerank else [5,10,20]
+    for k in ks:
+        ev_hits=0
+        ch_hits=0
+        n=0
+        for idx,c in enumerate(all_cases):
+            if c["question"] not in ev_map:
+                continue
+            n+=1
+            q=cache.get(f"{qkey}|{c['question']}",c["question"])
+            top=weighted_candidates(q,25,0.5)
+            if use_rerank:
+                items=[{"source":sources[j],"section":sections[j],"text":chunks[j],"idx":j} for j,_ in top]
+                ranked=rerank(q,items,top_n=k)
+                idxs=[it["idx"] for it in ranked]
+            else:
+                idxs=[j for j,_ in top[:k]]
+            ev_hits+=bool(evidence_chunks[idx] and (set(idxs)&evidence_chunks[idx]))
+            ch_hits+=chapter_hit(idxs,c["source"],c["valid_sections"])
+        if use_rerank:
+            print(f"Rerank{name}证据级@{k}={ev_hits/n:.1%}（{ev_hits}/{n}）")
+        else:
+            print(f"{name}（{n}题）：证据级@{k}={ev_hits/n:.1%}（{ev_hits}/{n}），章节级@{k}={ch_hits/n:.1%}（{ch_hits}/{n}）")
 
-#Rerank对照：主指标证据级，全文评分
-for k in [5,10]:
-    ev_hits=0
-    n=0
-    for idx,c in enumerate(all_cases):
-        if c["question"] not in ev_map:
-            continue
-        n+=1
-        q=cache.get(f"translate|{c['question']}",c["question"])
-        top=weighted_candidates(q,25,0.5)
-        items=[{"source":sources[j],"section":sections[j],"text":chunks[j],"idx":j} for j,_ in top]
-        ranked=rerank(q,items,top_n=k)
-        idxs=[it["idx"] for it in ranked]
-        ev_hits+=bool(evidence_chunks[idx] and (set(idxs)&evidence_chunks[idx]))
-    print(f"Rerank翻译证据级@{k}={ev_hits/n:.1%}（{ev_hits}/{n}）")
+for name,qkey in [("翻译","translate"),("原生1","english_native1"),("原生2","english_native2")]:
+    run_variant(name,qkey)
+    run_variant(name,qkey,use_rerank=True)
 print(f"评测耗时：{time.time()-t0:.1f}s")
