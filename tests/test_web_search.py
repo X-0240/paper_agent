@@ -73,6 +73,21 @@ def test_web_search_merges_both_sources():
     types={r["source_type"] for r in res}
     assert types=={"wikipedia","arxiv"}
 
+def test_arxiv_uses_english_terms_for_chinese_query():
+    #中文查询先提取英文术语，arXiv才可能命中
+    captured={}
+    async def fake_get(url,params=None,headers=None):
+        captured["params"]=params
+        resp=mock.MagicMock()
+        resp.raise_for_status=mock.MagicMock()
+        resp.text="""<?xml version="1.0"?><feed xmlns="http://www.w3.org/2005/Atom"></feed>"""
+        return resp
+    async def run():
+        with mock.patch("web_search.httpx.AsyncClient.get",side_effect=fake_get):
+            return await web_search.search_arxiv("什么是Transformer？",limit=1)
+    asyncio.run(run())
+    assert "Transformer" in captured["params"]["search_query"]
+
 def test_semaphore_limits_concurrency():
     #并发上限：10个任务同时跑，活跃协程不超过配置值
     async def run():

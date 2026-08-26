@@ -66,7 +66,10 @@ async def search_arxiv(query,limit=WEB_SEARCH_MAX_RESULTS):
         if wait>0:
             await asyncio.sleep(wait)
         _arxiv_last=time.time()
-    params={"search_query":f"all:{query}","start":"0","max_results":str(limit)}
+    #中文查询先提取英文术语再检索，arXiv对中文命中率低
+    english_terms=[t for t in re.findall(r"[A-Za-z][A-Za-z0-9\-]{1,}",query) if len(t)>=2]
+    search_expr="all:"+(" ".join(english_terms[:4]) if english_terms else query)
+    params={"search_query":search_expr,"start":"0","max_results":str(limit)}
     try:
         async with _get_semaphore():
             async with httpx.AsyncClient(timeout=WEB_SEARCH_TIMEOUT) as client:
