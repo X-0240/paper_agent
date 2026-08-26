@@ -207,3 +207,41 @@ SESSION_COST_BUDGET=1.0    # 元
 3. 预算不足时生成不完整综述：接受
 4. `MAX_AGENT_STEP=15`：接受（实测10步会被检索/建卡耗尽，无法进入事实抽取），成本护栏兜底
 5. 冲突评测：自标 20-40 对，不用公开数据集，避免编造
+
+## 九、外网检索并发（web_search，2026-08-26）
+
+### 目标
+
+simple 路径本地 + 外网双路并行检索，外网源为 Wikipedia REST API 与 arXiv API（免费无 key），失败降级为本地-only，整条链路不挂。
+
+### 并发与生命周期（AI#3 审查后定稿）
+
+- `/ask` 改为 `async def`，禁止在同步端点里用 `asyncio.run()`；SSE 生成器直接 `await` 同一套异步函数
+- 本地检索用 `asyncio.to_thread()`；外网用 httpx AsyncClient，`async with` 局部创建，不跨事件循环复用
+- `asyncio.Semaphore` 作为模块级懒加载单例，在事件循环内首次创建，默认并发 5（`WEB_SEARCH_CONCURRENCY`）
+- 每个外网子任务独立 `asyncio.wait_for`，超时默认 8 秒（`WEB_SEARCH_TIMEOUT`）；子协程内部捕获所有异常并返回空列表，不向外抛
+- arXiv 请求间隔 ≥3 秒，请求头带合规 User-Agent
+
+### 统一来源字段（固定 key，空值填 None）
+
+```python
+{"source_type":"local|wikipedia|arxiv","title":str,"snippet":str,
+ "paper_id":Optional[str],"section":Optional[str],
+ "url":Optional[str],"arxiv_id":Optional[str]}
+```
+
+### 输入输出
+
+- 输入：`query`、`top_k`
+- 输出：`{"sources":[统一来源], "context":"本地在前、外网在后"}`
+- 不去重；外网全失败时只含本地结果
+
+### 环境变量
+
+`WEB_SEARCH_TIMEOUT=8`、`WEB_SEARCH_MAX_RESULTS=3`、`WEB_SEARCH_CONCURRENCY=5`
+
+### 验证
+
+- 单测用 `unittest.mock.AsyncMock` patch `httpx.AsyncClient.get`：正常、超时、429、SSL、空结果、并发上限、中文查询
+- 集成实测：Wikipedia/arXiv 各真实调用一次；断网或 API 失败时仍返回本地结果
+- 全量 pytest 保持通过

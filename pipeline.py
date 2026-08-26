@@ -1,3 +1,4 @@
+import asyncio
 import logging
 import os
 import sys
@@ -8,6 +9,7 @@ from agent3_review import agent_3
 from rag_tool import search_papers_rerank, search_papers_structured
 from llm_api import safe_call_deepseek, BudgetExceeded
 from task_router import classify_task
+from web_search import hybrid_search
 
 #Windows控制台可能遇到特殊字符，统一兜底防崩溃
 if sys.stdout and hasattr(sys.stdout,"reconfigure"):
@@ -38,30 +40,29 @@ def rewrite_query(question):
         logger.warning(f"查询改写失败，使用原问题：{e}")
         return question
 
-def simple_answer(question,k=5,use_rewrite=False):
-    #短路路径：检索+直接回答，不启动多Agent
-    #改写默认关闭：跨语言实测93%→92%，待优化为"保留中文+扩展术语"再开
-    query=rewrite_query(question) if use_rewrite else question
-    #Rerank默认关闭：ms-marco偏英文，中文题实测-1%，换bge后设USE_RERANK=1
-    if os.getenv("USE_RERANK")=="1":
-        results=search_papers_rerank(query,k=k)
-    else:
-        results=search_papers_structured(query,k=k)
-    if not results:
-        return "未找到相关论文"
-    context="\n\n".join(
-        f"[来源:{r['source']} - {r['section']}]\n{r['text']}"
-        for r in results
-    )
+async def simple_context(question,k=5):
+    #外网并发检索：返回统一sources与拼接context
+    data=await hybrid_search(question,k)
+    return data["sources"],data["context"]
+
+async def simple_answer_async(question,k=5):
+    #API异步入口：检索+LLM回答，LLM丢线程池避免阻塞事件循环
+    sources,context=await simple_context(question,k)
+    if not sources:
+        return "未找到相关信息"
     messages=[
         {"role":"system","content":SIMPLE_SYSTEM_PROMPT},
         {"role":"user","content":f"以下是相关的论文内容：\n{context}\n\n用户问题：{question}"}
     ]
     try:
-        result=safe_call_deepseek(messages,temperature=0.2,max_tokens=2000)
+        result=await asyncio.to_thread(safe_call_deepseek,messages,0.2,2000)
     except BudgetExceeded as e:
         return f"[预算保护] {e}"
     return result["choices"][0]["message"]["content"] or ""
+
+def simple_answer(question,k=5,use_rewrite=False):
+    #同步包装：仅供CLI/测试调用；API必须走simple_answer_async，避免asyncio.run跨循环
+    return asyncio.run(simple_answer_async(question,k))
 
 def survey_pipeline(question,top_n=3,human_confirm=False):
     #新链路：单ReAct Agent综述编排；旧链路保留为回退

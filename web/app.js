@@ -165,14 +165,32 @@ function renderSources(sources){
     chip.className="source-chip";
     const title=document.createElement("div");
     title.className="source-title";
-    title.textContent=s.source||"未知来源";
+    title.textContent=s.title||s.source||"未知来源";
     const sec=document.createElement("div");
     sec.className="source-section";
-    sec.textContent=s.section||"";
+    const type=s.source_type||"local";
+    let meta="";
+    if(type==="local"){
+      meta=s.paper_id?(s.paper_id+(s.section?" - "+s.section:"")):(s.section||"");
+    }else if(type==="wikipedia"){
+      meta="Wikipedia";
+    }else if(type==="arxiv"){
+      meta="arXiv"+(s.arxiv_id?" "+s.arxiv_id:"");
+    }
+    sec.textContent=meta;
     const snippet=document.createElement("div");
     snippet.className="source-snippet";
-    snippet.textContent=s.text||"";
-    chip.append(title,sec,snippet);
+    snippet.textContent=s.snippet||s.text||"";
+    if(s.url){
+      const link=document.createElement("a");
+      link.href=s.url;
+      link.target="_blank";
+      link.rel="noopener";
+      link.textContent="原文链接";
+      chip.append(title,sec,snippet,link);
+    }else{
+      chip.append(title,sec,snippet);
+    }
     wrap.append(chip);
   });
   return wrap;
