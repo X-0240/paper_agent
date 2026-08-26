@@ -18,8 +18,8 @@ if sys.stdout and hasattr(sys.stdout,"reconfigure"):
 logging.basicConfig(level=logging.INFO)
 logger=logging.getLogger(__name__)
 
-SIMPLE_SYSTEM_PROMPT="""你是一个论文问答助手。根据提供的论文片段回答用户问题，回答要引用来源。
-如果信息不足，明确说'根据现有论文无法回答'。"""
+SIMPLE_SYSTEM_PROMPT="""你是一个论文问答助手。根据检索到的相关资料（本地论文/维基百科/arXiv）回答用户问题，回答要标注来源类型。
+如果信息不足，明确说'根据现有资料无法回答'。"""
 
 REWRITE_SYSTEM_PROMPT="""原样保留用户问题，然后在后面追加3-5个英文专业术语关键词，用空格分隔。只输出这一行。"""
 
@@ -52,7 +52,7 @@ async def simple_answer_async(question,k=5):
         return "未找到相关信息"
     messages=[
         {"role":"system","content":SIMPLE_SYSTEM_PROMPT},
-        {"role":"user","content":f"以下是相关的论文内容：\n{context}\n\n用户问题：{question}"}
+        {"role":"user","content":f"以下是检索到的相关资料：\n{context}\n\n用户问题：{question}"}
     ]
     try:
         result=await asyncio.to_thread(safe_call_deepseek,messages,0.2,2000)
