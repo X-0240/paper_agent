@@ -13,7 +13,7 @@ from pydantic import BaseModel
 from rag_tool import search_papers_structured
 from llm_api import call_deepseek_stream
 from pipeline import simple_answer, survey_pipeline, SIMPLE_SYSTEM_PROMPT
-from task_router import classify_task
+from task_router import classify_task, rate_limit_allowed
 
 load_dotenv()
 app=FastAPI(title="论文调研Agent API")
@@ -66,6 +66,8 @@ def login(req: LoginRequest):
 
 @app.post("/ask")
 def ask(req: AskRequest, user: str=Depends(verify_token)):
+    if not rate_limit_allowed(user):
+        raise HTTPException(status_code=429,detail="请求过于频繁，请稍后再试")
     task=classify_task(req.question) if req.use_survey is None else ("survey" if req.use_survey else "simple")
     if task=="survey":
         answer=survey_pipeline(req.question,human_confirm=False)
@@ -91,6 +93,8 @@ def sse_event(obj):
 
 @app.get("/ask/stream")
 def ask_stream(question: str, user: str=Depends(verify_token)):
+    if not rate_limit_allowed(user):
+        raise HTTPException(status_code=429,detail="请求过于频繁，请稍后再试")
     def gen():
         #流式异常必须转成SSE事件，不能让连接无提示中断
         try:

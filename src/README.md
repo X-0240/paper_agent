@@ -13,7 +13,7 @@ uvicorn api_server:app --host 127.0.0.1 --port 8000
 
 ## WebUI
 
-服务启动后浏览器打开 `http://127.0.0.1:8001`，用 `.env` 里的 `API_USERNAME` / `API_PASSWORD` 登录（默认 `admin` / `admin123`）。
+服务启动后浏览器打开 `http://127.0.0.1:8000`，用 `.env` 里的 `API_USERNAME` / `API_PASSWORD` 登录（默认 `admin` / `admin123`）。
 
 界面支持单篇问答和文献综述两种路由：单篇问答流式输出并展示引用来源；文献综述提示处理时长后输出完整综述。前端通过 fetch 读取 SSE，不依赖浏览器原生 EventSource，因此 Token 始终放在请求头里。
 
@@ -36,6 +36,8 @@ uvicorn api_server:app --host 127.0.0.1 --port 8000
 ```
 
 `use_survey` 为空时按关键词自动路由；为 `true` 强制走综述全链路，`false` 强制短路。
+
+每个账号默认每分钟最多 10 次请求（`.env` 的 `RATE_LIMIT_PER_MINUTE` 可调），超限返回 `429`。
 
 ### GET /ask/stream
 
@@ -81,9 +83,9 @@ python -m pytest tests -q
 |---|---|---|
 | 检索 | QASPER 证据级 HitRate@5 | 33.1% 基线 / 39.2%（Rerank+邻接），2026-08-23 重测 |
 | 检索 | QASPER 章节级 / 论文级 HitRate@5 | 39.9% / 56.3%（2026-08-23） |
-| 检索 | BCEmbedding 索引（50篇/1593切片）章节级 HitRate@5 | 49.3% 基线；中文题16.0%（+BCE Rerank 23.0%）、英文题63.4%，2026-08-23 重测 |
-| 中文题可靠性 | 10篇专属索引召回仍16%，失败题75.3%因真理章节不在解析结构 | 中文章节级不作为主指标；主指标用 QASPER 证据级 |
-| 中文题修正后 | 参考答案映射到实际解析章节后：原文24.2%、翻译成英文31.3%（99/100映射成功） | 翻译收益+7pp，指标更接近真实检索能力 |
+| 中文题（88题，翻译成英文） | 证据级 / 章节级 HitRate@5 | 61.4% / 67.0%（2026-08-25，主指标证据级） |
+| 中文题（88题，原生英文改写） | 证据级 HitRate@5 / @10 / @20 | 64.8% / 75.0% / 85.2%（双AI交叉，章节级@5=72.7%） |
+| 中文题可靠性 | 99题双AI校验+人工复核 | 31题修正章节、11题判无效/无答案，有效88题 |
 | 多格式 | multi_format_samples 解析通过率 | pytest 覆盖 6 类样例 |
 | 冲突粗筛 | 合成小集 P/R/F1 | 1.00 / 1.00 / 1.00 |
 | 综述质量 | LLM 评测（完整性/准确性/清晰度） | 7 / 9 / 8，avg 8.0（合成样例） |
@@ -98,7 +100,7 @@ docker build -t paper-agent .
 
 ## 目录职责
 
-- `task_router.py`：纯规则路由，无外部依赖
+- `task_router.py`：纯规则路由 + 进程内令牌桶限流，无外部依赖
 - `CONTRACT.md`：模块2/3 接口契约（State 结构、工具接口、旧代码映射）
 - `config.py`：统一配置常量（检索/Agent/成本上限）
 - `state.py`：AgentState 与实体数据类（PaperMeta/PaperCard/FactItem/Conflict/ReviewReport）
@@ -110,7 +112,7 @@ docker build -t paper-agent .
 - `agent_react.py`：手写 ReAct 循环，Supervisor + Worker
 - `agent1_retrieve.py` / `agent2_parse.py` / `agent3_review.py`：旧流水线模块，正在向 `tools.py` 单 Agent 工具集收敛
 - `pipeline.py`：simple 短路与 survey 全链路编排
-- `api_server.py`：FastAPI 接口层，JWT 鉴权 + SSE 流式
+- `api_server.py`：FastAPI 接口层，JWT 鉴权 + SSE 流式 + 限流
 - `cost_report.py`：每日 LLM 成本报表
 - `experiments/`：检索、Rerank、单/多 Agent 对比等评测脚本，不属于线上链路
 - `multi_format_samples/`：多格式解析样例（PDF/Word/Excel/CSV/图片/表格），`scripts/make_samples.py` 可重新生成
