@@ -1,0 +1,16 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  pure-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install lightweight deps
+        run: pip install requests python-dotenv tenacity pytest
+      - name: Run pure unit tests
+        run: pytest tests/test_task_router.py tests/test_agent_react.py tests/test_llm_cost.py -q
