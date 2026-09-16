@@ -11,6 +11,6 @@ jobs:
         with:
           python-version: "3.11"
       - name: Install lightweight deps
-        run: pip install requests python-dotenv tenacity pytest
+        run: pip install requests python-dotenv tenacity pytest httpx
       - name: Run pure unit tests
-        run: python -m pytest tests/test_task_router.py tests/test_agent_react.py tests/test_llm_cost.py -q
+        run: python -m pytest tests/test_task_router.py tests/test_agent_react.py tests/test_llm_cost.py tests/test_web_search.py tests/test_evaluation_metrics.py -q
