@@ -13,6 +13,7 @@ from rank_bm25 import BM25Okapi
 import jieba
 from sentence_transformers import SentenceTransformer
 from rerank import rerank
+from rerank_policy import should_rerank
 
 load_dotenv()
 logging.basicConfig(level=logging.INFO)
@@ -25,6 +26,14 @@ index=faiss.read_index(FAISS_PATH+".faiss")
 meta=json.load(open(FAISS_PATH+".json",encoding="utf-8"))
 sources=meta["sources"]; sections=meta["sections"]; documents=meta["documents"]
 model=SentenceTransformer(MODEL_PATH)
+
+def _index_snapshot():
+    #索引指纹：文件时间+大小+切片数，索引更新后重排缓存自动失效
+    try:
+        st=os.stat(FAISS_PATH+".faiss")
+        return f"{int(st.st_mtime)}-{st.st_size}-{len(documents)}"
+    except Exception:
+        return "unknown"
 
 SECTIONS_DIR=os.path.join(os.path.dirname(os.path.abspath(__file__)),"papers_sections")
 
@@ -138,22 +147,27 @@ def search_papers_structured(query,k=5,alpha=0.5):
     return results
 
 def search_papers_rerank(query,k=5,alpha=0.5,candidates=25):
-    #工业标配：Top-25粗召回 → Cross-Encoder精排 → 取Top-k
+    #工业标配：Top-25粗召回 → 条件触发Cross-Encoder精排 → 取Top-k
     top,status=hybrid_search(query,candidates,alpha)
     top=filter_results(top)
     if status=="failed" or not top:
         return []
+    margin=float(os.getenv("RERANK_TRIGGER_MARGIN","0.1"))
+    use_rerank=should_rerank(top,k,margin)
     items=[{
         "source":sources[idx],
         "section":sections[idx],
         "score":round(float(score),3),
         "text":documents[idx]
     } for idx,score in top]
-    items=rerank(query,items,top_n=k)
+    if use_rerank:
+        items=rerank(query,items,top_n=k,snapshot=_index_snapshot())
+    else:
+        items=items[:k]
     #重排用全文评分，返回观察时再截断，避免观察内容膨胀
     for it in items:
         it["text"]=it["text"][:300]
-    logger.info(f"Rerank检索 query={query} 候选={len(top)} 输出={len(items)}")
+    logger.info(f"Rerank检索 query={query} 候选={len(top)} 输出={len(items)} 触发={use_rerank}")
     return items
 
 def search_papers_rerank_text(query,k=5,alpha=0.5,candidates=25):

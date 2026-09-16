@@ -23,6 +23,14 @@ uvicorn api_server:app --host 127.0.0.1 --port 8000
 - 外网请求默认 8 秒超时、并发上限 5，失败自动降级为本地-only，不阻塞主链路
 - 配置：`.env` 的 `WEB_SEARCH_TIMEOUT` / `WEB_SEARCH_MAX_RESULTS` / `WEB_SEARCH_CONCURRENCY`
 
+## 重排（Cross-Encoder）
+
+- 生产链路：BM25+向量粗召回 Top-25 → 条件触发 Cross-Encoder 精排 → Top-5
+- 重排模型：本地 `bge-reranker-v2-m3`（多语言，无 API 成本）；粗排 Top-1 与 Top-K 分差足够大时跳过重排，控制延迟
+- 缓存：按 query + 索引快照做进程内 LRU，索引更新后自动失效
+- 配置：`USE_RERANK` / `RERANK_MODEL_NAME` / `RERANK_MAX_CHARS` / `RERANK_TRIGGER_MARGIN` / `RERANK_CACHE_SIZE`
+- 实测：88 题 64.8%→72.7%（+8.0pp），正向 42 题 64.3%→83.3%（+19.0pp）；候选 25 约 1.0s/题，候选 10 约 0.44s/题
+
 ## 接口
 
 ### POST /login
@@ -114,7 +122,7 @@ docker build -t paper-agent .
 - `tools.py`：执行层工具入口，6 个工具已全部落地（search_papers / read_section / build_paper_card / analyze_paper_relations / verify_claim / write_review）；引用由 facts 确定性生成，LLM 不编引用
 - `survey_agent.py`：单 ReAct Agent 综述编排，复用 agent_react 循环，工具前置/后置校验、pending_conflicts 聚合、预算降级
 - `scripts/run_acceptance.py`：6 条固定 query 的验收脚本（简单/综述/冲突/超预算/无结果 + Transformer对比）
-- `rag_tool.py`：混合检索（BM25 + FAISS + 可选 Rerank）
+- `rag_tool.py`：混合检索（BM25 + FAISS + 条件触发 Cross-Encoder 重排）
 - `web_search.py`：外网检索并发（Wikipedia/arXiv），统一来源结构与降级
 - `agent_react.py`：手写 ReAct 循环，Supervisor + Worker
 - `agent1_retrieve.py` / `agent2_parse.py` / `agent3_review.py`：旧流水线模块，正在向 `tools.py` 单 Agent 工具集收敛
