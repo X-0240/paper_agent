@@ -1,0 +1,202 @@
+{
+  "n": 4,
+  "recovered": 1,
+  "rows": [
+    {
+      "question_id": "16",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.5 Additional Results"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.5 Additional Results"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "2.1 RAG Approaches and Systems"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "2 Methods"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "2.1 Models"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "RAG_Original_Paper",
+          "section": "Abstract"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "2.3 Generator: BART"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "3 Experiments"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "6 Discussion"
+        }
+      ]
+    },
+    {
+      "question_id": "26",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "RoFormer_RoPE",
+          "section": "4.1.2 Implementation details"
+        },
+        {
+          "source": "LoRA",
+          "section": "5.1 BASELINES"
+        },
+        {
+          "source": "1908.10461",
+          "section": "Methods ::: Model comparison"
+        },
+        {
+          "source": "BERT",
+          "section": "4.2 SQuAD v1.1"
+        },
+        {
+          "source": "1803.06745",
+          "section": "Baseline"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "RoFormer_RoPE",
+          "section": "4.1.2 Implementation details"
+        },
+        {
+          "source": "LoRA",
+          "section": "5.1 BASELINES"
+        },
+        {
+          "source": "1908.10461",
+          "section": "Methods ::: Model comparison"
+        },
+        {
+          "source": "BERT",
+          "section": "4.2 SQuAD v1.1"
+        },
+        {
+          "source": "1803.06745",
+          "section": "Baseline"
+        }
+      ]
+    },
+    {
+      "question_id": "30",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "6 Discussion"
+        },
+        {
+          "source": "1803.08419",
+          "section": "Conclusion"
+        },
+        {
+          "source": "2004.02334",
+          "section": "Classifier based NLG ::: Shorter Sequences for Autoregressor"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "1 Introduction"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "6 Discussion"
+        },
+        {
+          "source": "1803.08419",
+          "section": "Conclusion"
+        },
+        {
+          "source": "2004.02334",
+          "section": "Classifier based NLG ::: Shorter Sequences for Autoregressor"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "1 Introduction"
+        }
+      ]
+    },
+    {
+      "question_id": "40",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "2004.01820",
+          "section": "Curating a Comprehensive Cyberbullying Dataset"
+        },
+        {
+          "source": "2004.01820",
+          "section": "Conclusion"
+        },
+        {
+          "source": "2004.01820",
+          "section": "Introduction"
+        },
+        {
+          "source": "LoRA",
+          "section": "8 CONCLUSION AND FUTURE WORK"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "7 Conclusion"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "2004.01820",
+          "section": "Curating a Comprehensive Cyberbullying Dataset"
+        },
+        {
+          "source": "2004.01820",
+          "section": "Conclusion"
+        },
+        {
+          "source": "2004.01820",
+          "section": "Introduction"
+        },
+        {
+          "source": "LoRA",
+          "section": "8 CONCLUSION AND FUTURE WORK"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "7 Conclusion"
+        }
+      ]
+    }
+  ]
+}

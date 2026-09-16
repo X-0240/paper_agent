@@ -1,0 +1,439 @@
+[
+  {
+    "question": "在特征工程中，作者为荷兰语和英语的主观性词典特征分别使用了哪些情感词典？",
+    "evidence_sentences": [
+      "For Dutch, we made use of the Duoman BIBREF61 and Pattern BIBREF62 lexicons.",
+      "For English, we included the Hu and Liu opinion lexicon BIBREF63 , the MPQA lexicon BIBREF64 , General Inquirer Sentiment Lexicon BIBREF65 , AFINN BIBREF66 , and MSOL BIBREF67 ."
+    ],
+    "question_type": "method",
+    "paper_id": "1801.05617",
+    "section": "Pre-processing and Feature Engineering",
+    "source": "reverse"
+  },
+  {
+    "question": "RoPE 是如何编码绝对位置并在自注意力中引入相对位置依赖的？",
+    "evidence_sentences": [
+      "Specifically, the\nproposed RoPE encodes the absolute position with a rotation matrix and meanwhile incorporates\nthe explicit relative position dependency in self-attention formulation."
+    ],
+    "question_type": "method",
+    "paper_id": "RoFormer_RoPE",
+    "section": "Abstract",
+    "source": "reverse"
+  },
+  {
+    "question": "在 FlashAttention 论文该片段的参考文献中，哪篇文献指出自注意力不需要 O(n^2) 内存？",
+    "evidence_sentences": [
+      "[66] Markus N Rabe and Charles Staats. Self-attention does not need 𝑂(𝑛2) memory. arXiv preprint\narXiv:2112.05682, 2021."
+    ],
+    "question_type": "fact",
+    "paper_id": "FlashAttention",
+    "section": "5 Limitations and Future Directions",
+    "source": "reverse"
+  },
+  {
+    "question": "ReAct 论文的参考文献列表中是否引用了 Micheli 和 Fleuret 的《Language models are few-shot butlers》？",
+    "evidence_sentences": [
+      "Vincent Micheli and François Fleuret. Language models are few-shot butlers. arXiv preprint\narXiv:2104.07972, 2021."
+    ],
+    "question_type": "fact",
+    "paper_id": "ReAct",
+    "section": "6 CONCLUSION",
+    "source": "reverse"
+  },
+  {
+    "question": "根据该片段，为什么在 Figure 4 的 HotpotQA 示例中只有 ReAct 能获得最新答案？",
+    "evidence_sentences": [
+      "Only ReAct is able to obtain the up-to-date answer thanks to real-world web interaction plus reasoning."
+    ],
+    "question_type": "experiment",
+    "paper_id": "ReAct",
+    "section": "6 CONCLUSION",
+    "source": "reverse"
+  },
+  {
+    "question": "在缺乏黄金标准时，GraphRAG 论文如何评估针对全局意义构建问题的 RAG 生成答案？",
+    "evidence_sentences": [
+      "Lacking a gold standard for evaluation, one can quantify relative performance for a given criterion by prompting the LLM to compare generations from two different competing models (LLM-as-a-judge, (Zheng et al., 2024)).",
+      "In this work, we design criteria for evaluating RAG-generated answers to global sensemaking questions and evaluate our results using the comparative approach. We also validate results using statistics derived from LLM-extracted statements of verifiable facts, or “claims.”"
+    ],
+    "question_type": "method",
+    "paper_id": "GraphRAG",
+    "section": "2.4 RAG evaluation criteria",
+    "source": "reverse"
+  },
+  {
+    "question": "在 RoFormer 论文结论部分的参考文献中，哪项工作研究了自注意力的相对位置表示？",
+    "evidence_sentences": [
+      "Peter Shaw, Jakob Uszkoreit, and Ashish Vaswani. Self-attention with relative position representations. In NAACL-HLT,\n2018."
+    ],
+    "question_type": "fact",
+    "paper_id": "RoFormer_RoPE",
+    "section": "5 Conclusions",
+    "source": "reverse"
+  },
+  {
+    "question": "LoRA论文中，用于衡量两个列正交矩阵子空间相似度的指标与标准Projection Metric是什么关系？",
+    "evidence_sentences": [
+      "We point out that this similarity is simply a reverse of the standard Projection Metric that measures distance between subspaces Ham & Lee (2008)."
+    ],
+    "question_type": "method",
+    "paper_id": "LoRA",
+    "section": "8 CONCLUSION AND FUTURE WORK",
+    "source": "reverse"
+  },
+  {
+    "question": "根据该片段，成功的思维链（Chain of Thought）使用是否依赖特定的语言风格？",
+    "evidence_sentences": [
+      "This result implies that successful use of chain of thought does not depend on a particular linguistic style."
+    ],
+    "question_type": "fact",
+    "paper_id": "Chain_of_Thought",
+    "section": "3.4 Robustness of Chain of Thought",
+    "source": "reverse"
+  },
+  {
+    "question": "根据该片段，最终返回实体和关系列表时应使用什么作为列表分隔符？",
+    "evidence_sentences": [
+      "Use **{record delimiter}** as the list delimiter."
+    ],
+    "question_type": "method",
+    "paper_id": "GraphRAG",
+    "section": "7 Conclusion",
+    "source": "reverse"
+  },
+  {
+    "question": "论文在 F.3 节中旨在评估不同适应方法在什么数据条件下的性能？",
+    "evidence_sentences": [
+      "To evaluate the performance of different adaptation approaches in the low-data regime. we randomly"
+    ],
+    "question_type": "experiment",
+    "paper_id": "LoRA",
+    "section": "8 CONCLUSION AND FUTURE WORK",
+    "source": "reverse"
+  },
+  {
+    "question": "在评估全局意义建构时，GraphRAG 采用了哪三个目标标准？",
+    "evidence_sentences": [
+      "• Comprehensiveness. How much detail does the answer provide to cover all aspects and details of the question?",
+      "• Diversity. How varied and rich is the answer in providing different perspectives and insights on the question?",
+      "• Empowerment. How well does the answer help the reader understand and make informed judgments about the topic?"
+    ],
+    "question_type": "method",
+    "paper_id": "GraphRAG",
+    "section": "3.3 Criteria for Evaluating Global Sensemaking",
+    "source": "reverse"
+  },
+  {
+    "question": "在该论文的参考文献中，哪篇工作提出用自洽性（self-consistency）改进语言模型中的思维链推理？",
+    "evidence_sentences": [
+      "Xuezhi Wang, Jason Wei, Dale Schuurmans, Quoc Le, Ed Chi, and Denny Zhou. 2022a.\nSelf-consistency improves chain of thought reasoning in language models.\narXiv preprint\narXiv:2203.11171."
+    ],
+    "question_type": "fact",
+    "paper_id": "Chain_of_Thought",
+    "section": "8 Conclusions",
+    "source": "reverse"
+  },
+  {
+    "question": "根据该片段，为什么 LoRA 在 GPT-3 下游任务中使用 r = 1 也能表现良好？",
+    "evidence_sentences": [
+      "Directions corresponding to the top singular vector overlap signiﬁcantly between Ar=8 and Ar=64, while others do not.",
+      "Speciﬁcally, ∆Wv (resp. ∆Wq) of Ar=8 and ∆Wv (resp. ∆Wq) of Ar=64 share a subspace of dimension 1 with normalized similarity > 0.5, providing an explanation of why r = 1 performs quite well in our downstream tasks for GPT-3."
+    ],
+    "question_type": "experiment",
+    "paper_id": "LoRA",
+    "section": "7.2 WHAT IS THE OPTIMAL RANK r FOR LORA?",
+    "source": "reverse"
+  },
+  {
+    "question": "片段提到 ReAct 建立在哪个闭环系统工作之上？作者对它的“inner thoughts”有何批评？",
+    "evidence_sentences": [
+      "To our knowledge, Inner Monologue is the ﬁ rst work that demonstrates such a closed-loop system, which ReAct builds on.",
+      "However, we argue that Inner Monologue does not truly comprise of inner thoughts — this is elaborated in Section 4."
+    ],
+    "question_type": "fact",
+    "paper_id": "ReAct",
+    "section": "5 RELATED WORK",
+    "source": "reverse"
+  },
+  {
+    "question": "这篇论文为什么使用非参数检验来分析不同条件下的性能差异？",
+    "evidence_sentences": [
+      "Results of Shapiro-Wilk tests in-\ndicated that the data did not follow a normal distribution. Thus, non-parametric tests (Wilcoxon signed-rank tests) were employed to assess the performance differences between pairs of condi-\ntions, with Holm-Bonferroni correction applied to account for multiple pairwise comparisons."
+    ],
+    "question_type": "method",
+    "paper_id": "GraphRAG",
+    "section": "4. When finished, output {completion delimiter}",
+    "source": "reverse"
+  },
+  {
+    "question": "这篇论文在结论中指出，其网络欺凌检测方法目前还存在什么主要局限？",
+    "evidence_sentences": [
+      "Despite improvements over baseline methods, our classifiers have not attained the high levels of precision and recall that should be expected of real-world detection systems.",
+      "For this reason, we argue that the challenging task of cyberbullying detection remains an open research problem."
+    ],
+    "question_type": "limitation",
+    "paper_id": "2004.01820",
+    "section": "Conclusion",
+    "source": "reverse"
+  },
+  {
+    "question": "在图7中，用于展示思维链提示提升常识推理能力的语言模型是哪一个？",
+    "evidence_sentences": [
+      "The language model shown here is PaLM."
+    ],
+    "question_type": "fact",
+    "paper_id": "Chain_of_Thought",
+    "section": "100 SayCan",
+    "source": "reverse"
+  },
+  {
+    "question": "该片段中哪篇参考文献提出了用于开放域问答的稠密段落检索方法？",
+    "evidence_sentences": [
+      "[26] Vladimir Karpukhin, Barlas Oguz, Sewon Min, Ledell Wu, Sergey Edunov, Danqi Chen, and\nWen-tau Yih. Dense passage retrieval for open-domain question answering. arXiv preprint\narXiv:2004.04906, 2020. URL https://arxiv.org/abs/2004.04906."
+    ],
+    "question_type": "fact",
+    "paper_id": "RAG_Original_Paper",
+    "section": "6 Discussion",
+    "source": "reverse"
+  },
+  {
+    "question": "GraphRAG 参考文献中，Wang 等人 2022 年关于语言模型思维链推理的论文标题是什么？",
+    "evidence_sentences": [
+      "Self-consistency improves chain of thought reasoning in language models."
+    ],
+    "question_type": "fact",
+    "paper_id": "GraphRAG",
+    "section": "7 Conclusion",
+    "source": "reverse"
+  },
+  {
+    "question": "该片段中，哪篇文献提出了Winograd Schema Challenge？",
+    "evidence_sentences": [
+      "Levesque, H., Davis, E., and Morgenstern, L.\nThe winograd\nschema challenge. In Thirteenth International Conference on\nthe Principles of Knowledge Representation and Reasoning,\n2012."
+    ],
+    "question_type": "fact",
+    "paper_id": "GPT2",
+    "section": "7. Conclusion",
+    "source": "reverse"
+  },
+  {
+    "question": "GPT-2在什么条件下能够复现葛底斯堡演说？",
+    "evidence_sentences": [
+      "For example, when conditioned on the ﬁrst sentence\nand a half of the Gettysburg Address (which occurs approximately\n40 times throughout WebText), an argmax decode from GPT-2\nrecovers the speech."
+    ],
+    "question_type": "fact",
+    "paper_id": "GPT2",
+    "section": "8.2. Text Memorization",
+    "source": "reverse"
+  },
+  {
+    "question": "论文在实验部分如何预训练模型以生成对抗样本？",
+    "evidence_sentences": [
+      "We pretrain our models with dataset that generates a number of character and word perturbations."
+    ],
+    "question_type": "method",
+    "paper_id": "1909.07873",
+    "section": "Experiments",
+    "source": "reverse"
+  },
+  {
+    "question": "在 BERT 中，给定 token 的输入表示是如何构造的？",
+    "evidence_sentences": [
+      "For a given token, its input representation is\nconstructed by summing the corresponding token,\nsegment, and position embeddings."
+    ],
+    "question_type": "method",
+    "paper_id": "BERT",
+    "section": "3 BERT",
+    "source": "reverse"
+  },
+  {
+    "question": "在 LoRA 论文中，WikiSQL 和 SAMSum 数据集分别包含多少训练/验证与训练/测试样本？",
+    "evidence_sentences": [
+      "WikiSQL is introduced in Zhong et al. (2017) and contains 56, 355/8, 421 training/validation ex-\namples.",
+      "SAMSum is introduced in Gliwa et al. (2019) and contains 14, 732/819 training/test examples."
+    ],
+    "question_type": "fact",
+    "paper_id": "LoRA",
+    "section": "8 CONCLUSION AND FUTURE WORK",
+    "source": "reverse"
+  },
+  {
+    "question": "在短序列场景下，FlashAttention 相比 Apex FMHA 的整体运行时间表现如何？",
+    "evidence_sentences": [
+      "Generally FlashAttention is slightly faster than FMHA in the forward pass and slightly slower than FMHA in the backward pass.",
+      "Compared to FMHA, the overall runtime of FlashAttention is about 4% slower for sequence length 128, 8% faster for sequence length 256, and 5% faster for sequence length 512."
+    ],
+    "question_type": "experiment",
+    "paper_id": "FlashAttention",
+    "section": "5 Limitations and Future Directions",
+    "source": "reverse"
+  },
+  {
+    "question": "根据该片段，作者计划未来在哪些基准上研究微调 GPT？",
+    "evidence_sentences": [
+      "Given the prior success of ﬁne-tuning GPT, we plan to in-\nvestigate ﬁne-tuning on benchmarks such as decaNLP and\nGLUE, especially since it is unclear whether the additional\nLanguage Models are Unsupervised Multitask Learners\ntraining data and capacity of GPT-2 is sufﬁcient to over-\ncome the inefﬁciencies of uni-directional representations\ndemonstrated by BERT (Devlin et al., 2018)."
+    ],
+    "question_type": "experiment",
+    "paper_id": "GPT2",
+    "section": "6. Discussion",
+    "source": "reverse"
+  },
+  {
+    "question": "在 MultiArith (MAWPS) 和 Sports Understanding 任务上，该片段比较了哪两种提示方法随 few-shot 示例数量变化的表现？",
+    "evidence_sentences": [
+      "Number of few-shot exemplars",
+      "Standard prompting",
+      "Chain of thought prompting"
+    ],
+    "question_type": "experiment",
+    "paper_id": "Chain_of_Thought",
+    "section": "2 OOD: 3 OOD: 4 2 OOD: 3 OOD: 4",
+    "source": "reverse"
+  },
+  {
+    "question": "在GLUE基准上，LoRA被用来评估是否能匹配哪个全微调模型的性能？",
+    "evidence_sentences": [
+      "We evaluate if LoRA can still match the performance of a fully ﬁne-tuned DeBERTa XXL (1.5B) on GLUE."
+    ],
+    "question_type": "fact",
+    "paper_id": "LoRA",
+    "section": "5.3 DEBERTA XXL",
+    "source": "reverse"
+  },
+  {
+    "question": "Chain-of-thought prompting 使大语言模型能够处理哪些任务？",
+    "evidence_sentences": [
+      "Figure 1: Chain-of-thought prompting enables large language models to tackle complex arithmetic,\ncommonsense, and symbolic reasoning tasks.",
+      "Chain-of-thought reasoning processes are highlighted."
+    ],
+    "question_type": "fact",
+    "paper_id": "Chain_of_Thought",
+    "section": "Abstract",
+    "source": "reverse"
+  },
+  {
+    "question": "在 DART 数据集上，当可训练参数量相同时，LoRA 与基于前缀的方法相比表现如何？",
+    "evidence_sentences": [
+      "Similar to our result on E2E NLG Challenge, reported in Section 5, LoRA performs better than or at least on-par with preﬁx-based approaches given the same number of trainable parameters."
+    ],
+    "question_type": "experiment",
+    "paper_id": "LoRA",
+    "section": "8 CONCLUSION AND FUTURE WORK",
+    "source": "reverse"
+  },
+  {
+    "question": "根据片段，GPT-2 在零样本设置下在多少个数据集上达到了当时的最优结果？",
+    "evidence_sentences": [
+      "WebText LMs transfer well across domains and datasets,\nimproving the state of the art on 7 out of the 8 datasets in a\nzero-shot setting."
+    ],
+    "question_type": "experiment",
+    "paper_id": "GPT2",
+    "section": "3.1. Language Modeling",
+    "source": "reverse"
+  },
+  {
+    "question": "根据该片段，AdapterH 和 AdapterL 在适配器层插入位置上的主要区别是什么？",
+    "evidence_sentences": [
+      "Adapter tuning as proposed in Houlsby et al. (2019) inserts adapter layers between the self-\nattention module (and the MLP module) and the subsequent residual connection.",
+      "Recently, Lin et al. (2020) proposed a more efﬁcient design with the\nadapter layer applied only after the MLP module and after a LayerNorm."
+    ],
+    "question_type": "method",
+    "paper_id": "LoRA",
+    "section": "5.1 BASELINES",
+    "source": "reverse"
+  },
+  {
+    "question": "根据该片段，对话系统可以分为哪两类？其中哪一类更难构建？",
+    "evidence_sentences": [
+      "Dialogue systems can be divided into goal-driven systems, such as technical support services, booking systems, and querying systems. On the other hand we have non-goal-driven systems which are also referred to as chit-chat models.",
+      "Compared to goal oriented dialog systems where the universe is limited to an application, building open-ended chit-chat models is more challenging."
+    ],
+    "question_type": "fact",
+    "paper_id": "1803.08419",
+    "section": "Introduction",
+    "source": "reverse"
+  },
+  {
+    "question": "根据该片段，对话系统可以分为哪两类？",
+    "evidence_sentences": [
+      "Dialogue systems can be divided into goal-driven systems, such as technical support services, booking systems, and querying systems.",
+      "On the other hand we have non-goal-driven systems which are also referred to as chit-chat models."
+    ],
+    "question_type": "fact",
+    "paper_id": "1803.08419",
+    "section": "Introduction",
+    "source": "reverse"
+  },
+  {
+    "question": "论文指出，在 few-shot prompting 中，语言模型需要满足什么条件才能生成 chain of thought？",
+    "evidence_sentences": [
+      "We will show that sufﬁciently large language models can generate chains of thought if demonstrations of chain-of-thought reasoning are provided in the exemplars for few-shot prompting."
+    ],
+    "question_type": "method",
+    "paper_id": "Chain_of_Thought",
+    "section": "2 Chain-of-Thought Prompting",
+    "source": "reverse"
+  },
+  {
+    "question": "根据该片段，商用对话智能体的一个主要不足是什么？",
+    "evidence_sentences": [
+      "However these agents lack a sense of context and a grounding in common sense that their human interlocutors possess."
+    ],
+    "question_type": "limitation",
+    "paper_id": "1803.08419",
+    "section": "Knowledge augmented models",
+    "source": "reverse"
+  },
+  {
+    "question": "该片段指出系统存在哪些主要局限性？",
+    "evidence_sentences": [
+      "The accuracy is not enough for using for the practical applications.",
+      "The agent suffers from the cold start issue.",
+      "In the case of end-to-end learning, they found that for a moderately sized knowledge base, the agent almost always fails if starting from random initialization."
+    ],
+    "question_type": "limitation",
+    "paper_id": "1803.08419",
+    "section": "End-to-End Reinforcement Learning of Dialogue Agents for Information Access",
+    "source": "reverse"
+  },
+  {
+    "question": "在 ReAct 的这段示例轨迹中，智能体最终把 knife 1 放在了哪里？",
+    "evidence_sentences": [
+      "You put the knife 1 in/on the countertop 1."
+    ],
+    "question_type": "fact",
+    "paper_id": "ReAct",
+    "section": "6 CONCLUSION",
+    "source": "reverse"
+  },
+  {
+    "question": "在英语成分句法分析实验中，作者为 WSJ only 和 semi-supervised 设置选择的 beam size 和 α 分别是多少？",
+    "evidence_sentences": [
+      "We used a beam size of 21 and α = 0.3 for both WSJ only and the semi-supervised setting."
+    ],
+    "question_type": "experiment",
+    "paper_id": "Attention_Is_All_You_Need",
+    "section": "6.3 English Constituency Parsing",
+    "source": "reverse"
+  },
+  {
+    "question": "GPT-2 在 WMT-14 英法翻译测试集上的 BLEU 分数是多少？",
+    "evidence_sentences": [
+      "On the WMT-14 English-French\ntest set, GPT-2 gets 5 BLEU, which is slightly worse than\na word-by-word substitution with a bilingual lexicon in-\nferred in previous work on unsupervised word translation"
+    ],
+    "question_type": "experiment",
+    "paper_id": "GPT2",
+    "section": "3.7. Translation",
+    "source": "reverse"
+  },
+  {
+    "question": "BERT 与 Radford et al. (2018) 使用的预训练语言模型有何不同？",
+    "evidence_sentences": [
+      "Unlike Radford et al. (2018), which uses unidirectional language models for pre-training, BERT uses masked language models to enable pre-trained deep bidirectional representations."
+    ],
+    "question_type": "method",
+    "paper_id": "BERT",
+    "section": "1 Introduction",
+    "source": "reverse"
+  }
+]
