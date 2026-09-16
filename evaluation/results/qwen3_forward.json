@@ -1,0 +1,1448 @@
+{
+  "config": {
+    "questions": "evaluation/questions/forward_40.json",
+    "mode": "hybrid",
+    "k": 5,
+    "alpha": 0.5,
+    "candidates": 25,
+    "query_field": "question",
+    "split": null
+  },
+  "n": 42,
+  "hits": 25,
+  "rate": 0.5952380952380952,
+  "ci95": [
+    0.4449404552817742,
+    0.7295735232879093
+  ],
+  "rows": [
+    {
+      "question_id": "1",
+      "question": "Chain-of-Thought Prompting 的核心思想是什么？它的提示格式由什么构成？",
+      "query_en": null,
+      "paper_id": "Chain_of_Thought",
+      "question_type": "method",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.4 Robustness of Chain of Thought"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.3 Ablation Study"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.3 Ablation Study"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "Abstract"
+        }
+      ]
+    },
+    {
+      "question_id": "2",
+      "question": "使用链式思考提示在GSM8K数学应用题基准上取得了怎样的效果？",
+      "query_en": null,
+      "paper_id": "Chain_of_Thought",
+      "question_type": "experiment",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.4 Robustness of Chain of Thought"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.3 Ablation Study"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.2 Results"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "2 OOD: 3 OOD: 4 2 OOD: 3 OOD: 4"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        }
+      ]
+    },
+    {
+      "question_id": "3",
+      "question": "论文中提到了链式思考提示的哪些局限性？",
+      "query_en": null,
+      "paper_id": "Chain_of_Thought",
+      "question_type": "limitation",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.4 Robustness of Chain of Thought"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.3 Ablation Study"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.3 Ablation Study"
+        }
+      ]
+    },
+    {
+      "question_id": "4",
+      "question": "FlashAttention 通过哪些技术实现精确注意力，同时避免将 N×N 注意力矩阵写入 HBM？",
+      "query_en": null,
+      "paper_id": "FlashAttention",
+      "question_type": "method",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "3.2 Analysis: IO Complexity of FlashAttention"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "3.2 Analysis: IO Complexity of FlashAttention"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        }
+      ]
+    },
+    {
+      "question_id": "5",
+      "question": "FlashAttention 在训练 BERT、GPT-2 和长程竞技场（LRA）任务上分别取得了怎样的加速效果？",
+      "query_en": null,
+      "paper_id": "FlashAttention",
+      "question_type": "experiment",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "FlashAttention",
+          "section": "4 Experiments"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "4.1 Faster Models with FlashAttention"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "4.1 Faster Models with FlashAttention"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "5 Limitations and Future Directions"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "4.2 Better Models with Longer Sequences"
+        }
+      ]
+    },
+    {
+      "question_id": "6",
+      "question": "在序列长度增长时，近似注意力方法相比 FlashAttention 会在什么情况下变得更快？",
+      "query_en": null,
+      "paper_id": "FlashAttention",
+      "question_type": "comparison",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "FlashAttention",
+          "section": "4.3 Benchmarking Attention"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "4.3 Benchmarking Attention"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "4 Experiments"
+        }
+      ]
+    },
+    {
+      "question_id": "7",
+      "question": "ReAct 是如何把推理和行动结合起来以协同工作的？",
+      "query_en": null,
+      "paper_id": "ReAct",
+      "question_type": "method",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "ReAct",
+          "section": "4 DECISION MAKING TASKS"
+        },
+        {
+          "source": "ReAct",
+          "section": "4 DECISION MAKING TASKS"
+        },
+        {
+          "source": "ReAct",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "ReAct",
+          "section": "4 DECISION MAKING TASKS"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        }
+      ]
+    },
+    {
+      "question_id": "8",
+      "question": "在 HotpotQA 和 Fever 上，ReAct 与 CoT 的 prompting 结果相比如何？",
+      "query_en": null,
+      "paper_id": "ReAct",
+      "question_type": "experiment",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.2 METHODS"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.2 METHODS"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        }
+      ]
+    },
+    {
+      "question_id": "9",
+      "question": "ReAct 相比 CoT 在推理形式上有什么局限？",
+      "query_en": null,
+      "paper_id": "ReAct",
+      "question_type": "limitation",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "ReAct",
+          "section": "3.2 METHODS"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.2 METHODS"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        }
+      ]
+    },
+    {
+      "question_id": "10",
+      "question": "GraphRAG 如何构建图索引并生成社区摘要？",
+      "query_en": null,
+      "paper_id": "GraphRAG",
+      "question_type": "method",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "GraphRAG",
+          "section": "2.1 RAG Approaches and Systems"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "5.1 Experiment 1"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "6.2 Future work"
+        }
+      ]
+    },
+    {
+      "question_id": "11",
+      "question": "在 Experiment 1 中，global approaches 与 conventional vector RAG (SS) 在 comprehensiveness 和 diversity 上的表现相比如何？",
+      "query_en": null,
+      "paper_id": "GraphRAG",
+      "question_type": "experiment",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "GraphRAG",
+          "section": "5.1 Experiment 1"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "5.2 Experiment 2"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "5.1 Experiment 1"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "Abstract"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "2.1 RAG Approaches and Systems"
+        }
+      ]
+    },
+    {
+      "question_id": "12",
+      "question": "论文指出的评估局限是什么？",
+      "query_en": null,
+      "paper_id": "GraphRAG",
+      "question_type": "limitation",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "1911.09753",
+          "section": "Experiments ::: Evaluations ::: Side-by-side caption evaluation"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "4. When finished, output {completion delimiter}"
+        },
+        {
+          "source": "1805.04833",
+          "section": "Results"
+        },
+        {
+          "source": "1809.08899",
+          "section": "Introduction"
+        },
+        {
+          "source": "1908.10461",
+          "section": "Methods ::: Evaluation"
+        }
+      ]
+    },
+    {
+      "question_id": "13",
+      "question": "相比 GPT-3 175B 使用 Adam 进行全量微调，LoRA 能将可训练参数量和 GPU 内存需求分别降低多少？",
+      "query_en": null,
+      "paper_id": "LoRA",
+      "question_type": "fact",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "LoRA",
+          "section": "Abstract"
+        },
+        {
+          "source": "LoRA",
+          "section": "5.4 GPT-2 MEDIUM/LARGE"
+        },
+        {
+          "source": "LoRA",
+          "section": "5.1 BASELINES"
+        },
+        {
+          "source": "LoRA",
+          "section": "4.2 APPLYING LORA TO TRANSFORMER"
+        },
+        {
+          "source": "LoRA",
+          "section": "5.5 SCALING UP TO GPT-3 175B"
+        }
+      ]
+    },
+    {
+      "question_id": "14",
+      "question": "LoRA 如何对预训练权重更新进行低秩参数化，并且矩阵 A 和 B 的初始化方式是什么？",
+      "query_en": null,
+      "paper_id": "LoRA",
+      "question_type": "method",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "LoRA",
+          "section": "4.2 APPLYING LORA TO TRANSFORMER"
+        },
+        {
+          "source": "LoRA",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "LoRA",
+          "section": "4.1 LOW-RANK-PARAMETRIZED UPDATE MATRICES"
+        },
+        {
+          "source": "LoRA",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "LoRA",
+          "section": "8 CONCLUSION AND FUTURE WORK"
+        }
+      ]
+    },
+    {
+      "question_id": "15",
+      "question": "在 GPT-3 175B 上应用 LoRA 时，适配哪些注意力权重矩阵能取得最佳整体性能？",
+      "query_en": null,
+      "paper_id": "LoRA",
+      "question_type": "experiment",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "LoRA",
+          "section": "Abstract"
+        },
+        {
+          "source": "LoRA",
+          "section": "5.4 GPT-2 MEDIUM/LARGE"
+        },
+        {
+          "source": "LoRA",
+          "section": "8 CONCLUSION AND FUTURE WORK"
+        },
+        {
+          "source": "LoRA",
+          "section": "7.1 WHICH WEIGHT MATRICES IN TRANSFORMER SHOULD WE APPLY LORA TO?"
+        },
+        {
+          "source": "LoRA",
+          "section": "4.2 APPLYING LORA TO TRANSFORMER"
+        }
+      ]
+    },
+    {
+      "question_id": "16",
+      "question": "RAG模型的参数记忆和非参数记忆分别是什么？",
+      "query_en": null,
+      "paper_id": "RAG_Original_Paper",
+      "question_type": "fact",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "RAG_Original_Paper",
+          "section": "6 Discussion"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.5 Additional Results"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.5 Additional Results"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "2 Methods"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.1 Open-domain Question Answering"
+        }
+      ]
+    },
+    {
+      "question_id": "17",
+      "question": "RAG-Sequence和RAG-Token在边际化检索文档时有什么不同？",
+      "query_en": null,
+      "paper_id": "RAG_Original_Paper",
+      "question_type": "method",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "RAG_Original_Paper",
+          "section": "2.1 Models"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "2.5 Decoding"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "2 Methods"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.3 Jeopardy Question Generation"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.5 Additional Results"
+        }
+      ]
+    },
+    {
+      "question_id": "18",
+      "question": "在Jeopardy问题生成任务上，人类评估显示RAG和BART在事实性上的对比如何？",
+      "query_en": null,
+      "paper_id": "RAG_Original_Paper",
+      "question_type": "comparison",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.3 Jeopardy Question Generation"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.5 Additional Results"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "3.3 Jeopardy Question Generation"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.4 Fact Veriﬁcation"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.5 Additional Results"
+        }
+      ]
+    },
+    {
+      "question_id": "19",
+      "question": "RoPE 与以往的位置编码方法在注入位置信息的方式上有何根本区别？",
+      "query_en": null,
+      "paper_id": "RoFormer_RoPE",
+      "question_type": "comparison",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "RoFormer_RoPE",
+          "section": "3 Proposed approach"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "4.4.1 Implementation details"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "4.2.3 Results"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "Abstract"
+        }
+      ]
+    },
+    {
+      "question_id": "20",
+      "question": "在 GLUE 下游任务微调中，RoFormer 相对 BERT 的整体表现如何？",
+      "query_en": null,
+      "paper_id": "RoFormer_RoPE",
+      "question_type": "experiment",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "RoFormer_RoPE",
+          "section": "4.3 Fine-tuning on GLUE tasks"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "4.2.3 Results"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "4 Experiments and Evaluation"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "4.5.4 Results"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "4.3.3 Results"
+        }
+      ]
+    },
+    {
+      "question_id": "21",
+      "question": "作者在论文中承认了 RoPE/RoFormer 的哪些主要局限性？",
+      "query_en": null,
+      "paper_id": "RoFormer_RoPE",
+      "question_type": "limitation",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "RoFormer_RoPE",
+          "section": "4.2.3 Results"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "4 Experiments and Evaluation"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "4.5.1 Implementation"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "4.2.2 Implementation details"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "1 Introduction"
+        }
+      ]
+    },
+    {
+      "question_id": "22",
+      "question": "Transformer 在 WMT 2014 英德和英法翻译任务上分别取得了多少 BLEU 分数，训练成本相对于此前最佳模型如何？",
+      "query_en": null,
+      "paper_id": "Attention_Is_All_You_Need",
+      "question_type": "fact",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "6.1 Machine Translation"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "Abstract"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "4.1.1 Experimental Settings"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "4 Experiments and Evaluation"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "7 Conclusion"
+        }
+      ]
+    },
+    {
+      "question_id": "23",
+      "question": "Transformer 为什么要用多头注意力（Multi-Head Attention）而不是单头注意力？具体用了多少个头、每个头的维度是多少？",
+      "query_en": null,
+      "paper_id": "Attention_Is_All_You_Need",
+      "question_type": "method",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.2.2 Multi-Head Attention"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.2.3 Applications of Attention in our Model"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "2 Background"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "Abstract"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.1 Encoder and Decoder Stacks"
+        }
+      ]
+    },
+    {
+      "question_id": "24",
+      "question": "与循环层和卷积层相比，自注意力层在每层计算复杂度、可并行程度和最大路径长度上有哪些优势？",
+      "query_en": null,
+      "paper_id": "Attention_Is_All_You_Need",
+      "question_type": "comparison",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "4 Why Self-Attention"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "4 Why Self-Attention"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "2 Background"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.4 Embeddings and Softmax"
+        },
+        {
+          "source": "1805.04833",
+          "section": "Modeling Unbounded Context with Gated Multi-Scale Self-attention"
+        }
+      ]
+    },
+    {
+      "question_id": "25",
+      "question": "这篇论文采用什么方法自动检测网络欺凌？使用了哪些分类器和特征？",
+      "query_en": null,
+      "paper_id": "1801.05617",
+      "question_type": "method",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "1801.05617",
+          "section": "Introduction"
+        },
+        {
+          "source": "1801.05617",
+          "section": "Results"
+        },
+        {
+          "source": "2004.01820",
+          "section": "Experimental Evaluation"
+        },
+        {
+          "source": "1801.05617",
+          "section": "Conclusions and Future Research"
+        },
+        {
+          "source": "2004.01820",
+          "section": "Feature Engineering"
+        }
+      ]
+    },
+    {
+      "question_id": "26",
+      "question": "在实验中，优化后的模型与哪些基线系统进行了比较？结果如何？",
+      "query_en": null,
+      "paper_id": "1801.05617",
+      "question_type": "experiment",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": false,
+      "paper_hit": false,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "LoRA",
+          "section": "5.1 BASELINES"
+        },
+        {
+          "source": "BERT",
+          "section": "4.3 SQuAD v2.0"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "4.1.3 Results"
+        },
+        {
+          "source": "1911.09753",
+          "section": "Experiments ::: Evaluations ::: Side-by-side caption evaluation"
+        },
+        {
+          "source": "LoRA",
+          "section": "5.1 BASELINES"
+        }
+      ]
+    },
+    {
+      "question_id": "27",
+      "question": "与以往研究相比，这篇论文在检测网络欺凌信号方面有什么独特之处或主要贡献？",
+      "query_en": null,
+      "paper_id": "1801.05617",
+      "question_type": "comparison",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "1801.05617",
+          "section": "Conclusions and Future Research"
+        },
+        {
+          "source": "1801.05617",
+          "section": "Introduction"
+        },
+        {
+          "source": "2004.01820",
+          "section": "Background ::: Modeling Cyberbullying Behavior"
+        },
+        {
+          "source": "2004.01820",
+          "section": "Feature Engineering ::: Social Network Features"
+        },
+        {
+          "source": "2004.01820",
+          "section": "Discussion ::: Future Directions"
+        }
+      ]
+    },
+    {
+      "question_id": "28",
+      "question": "Vinyals 等人提出的序列到序列对话模型在生成回复时，编码器和解码器分别起什么作用？",
+      "query_en": null,
+      "paper_id": "1803.08419",
+      "question_type": "method",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "1803.08419",
+          "section": "Sequence to Sequence approaches for dialogue modelling"
+        },
+        {
+          "source": "GPT2",
+          "section": "7. Conclusion"
+        },
+        {
+          "source": "GPT2",
+          "section": "7. Conclusion"
+        },
+        {
+          "source": "1909.07873",
+          "section": "Proposed Attack Strategy ::: Background and Notations"
+        },
+        {
+          "source": "1803.08419",
+          "section": "Sequence to Sequence approaches for dialogue modelling"
+        }
+      ]
+    },
+    {
+      "question_id": "29",
+      "question": "KB-InfoBot 在小型知识库以及中大型知识库上的任务成功率分别是多少？",
+      "query_en": null,
+      "paper_id": "1803.08419",
+      "question_type": "experiment",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "1803.08419",
+          "section": "End-to-End Reinforcement Learning of Dialogue Agents for Information Access"
+        },
+        {
+          "source": "1803.08419",
+          "section": "End-to-End Reinforcement Learning of Dialogue Agents for Information Access"
+        },
+        {
+          "source": "1803.08419",
+          "section": "Knowledge augmented models"
+        },
+        {
+          "source": "GPT2",
+          "section": "3.2. Children’s Book Test"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "7 Conclusion"
+        }
+      ]
+    },
+    {
+      "question_id": "30",
+      "question": "论文认为序列到序列模型相比早期基于规则的模型解决了哪些问题，同时又存在什么根本局限？",
+      "query_en": null,
+      "paper_id": "1803.08419",
+      "question_type": "multi_hop",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "1803.08419",
+          "section": "Sequence to Sequence approaches for dialogue modelling"
+        },
+        {
+          "source": "1803.08419",
+          "section": "Conclusion"
+        },
+        {
+          "source": "1805.04833",
+          "section": "Efficient Learning with Convolutional Sequence-to-Sequence Model"
+        },
+        {
+          "source": "1805.04833",
+          "section": "Fusion Models"
+        },
+        {
+          "source": "1803.08419",
+          "section": "Sequence to Sequence approaches for dialogue modelling"
+        }
+      ]
+    },
+    {
+      "question_id": "31",
+      "question": "AEG 在强化学习训练中使用了什么算法，并且它计算哪三类奖励？",
+      "query_en": null,
+      "paper_id": "1909.07873",
+      "question_type": "method",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "1909.07873",
+          "section": "Training ::: Supervised Pretraining with Teacher Forcing ::: Training Objective"
+        },
+        {
+          "source": "1909.07873",
+          "section": "Training ::: Training with Reinforcement learning ::: Rewards ::: Adversarial Reward"
+        },
+        {
+          "source": "1909.07873",
+          "section": "Proposed Attack Strategy"
+        },
+        {
+          "source": "1909.07873",
+          "section": "Training ::: Supervised Pretraining with Teacher Forcing"
+        },
+        {
+          "source": "1803.08419",
+          "section": "Reinforcement Learning based models"
+        }
+      ]
+    },
+    {
+      "question_id": "32",
+      "question": "在 IMDB 情感分类的 CNN-Word 目标模型上，DeepWordBug 与 AEG 分别将准确率降到多少？",
+      "query_en": null,
+      "paper_id": "1909.07873",
+      "question_type": "experiment",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "1909.07873",
+          "section": "Experiments ::: Setup"
+        },
+        {
+          "source": "1909.07873",
+          "section": "Experiments ::: Quantitative Analysis"
+        },
+        {
+          "source": "1909.07873",
+          "section": "Related Work"
+        },
+        {
+          "source": "1909.07873",
+          "section": "Training ::: Supervised Pretraining with Teacher Forcing ::: Training Objective"
+        },
+        {
+          "source": "1909.07873",
+          "section": "Experiments ::: Setup"
+        }
+      ]
+    },
+    {
+      "question_id": "33",
+      "question": "与 SCPNs 和 DeepWordBug 相比，AEG 在扰动生成方式上有什么不同？",
+      "query_en": null,
+      "paper_id": "1909.07873",
+      "question_type": "comparison",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "1909.07873",
+          "section": "Related Work"
+        },
+        {
+          "source": "1909.07873",
+          "section": "Related Work"
+        },
+        {
+          "source": "1909.07873",
+          "section": "Experiments ::: Quantitative Analysis"
+        },
+        {
+          "source": "1909.07873",
+          "section": "Training ::: Supervised Pretraining with Teacher Forcing"
+        },
+        {
+          "source": "1909.07873",
+          "section": "Experiments ::: Setup"
+        }
+      ]
+    },
+    {
+      "question_id": "34",
+      "question": "GPT-2 最大模型的参数规模是多少？它在多少个语言建模数据集上取得了零样本 state-of-the-art 结果？",
+      "query_en": null,
+      "paper_id": "GPT2",
+      "question_type": "fact",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "GPT2",
+          "section": "3.3. LAMBADA"
+        },
+        {
+          "source": "GPT2",
+          "section": "6. Discussion"
+        },
+        {
+          "source": "GPT2",
+          "section": "7. Conclusion"
+        },
+        {
+          "source": "GPT2",
+          "section": "6. Discussion"
+        },
+        {
+          "source": "LoRA",
+          "section": "6 RELATED WORKS"
+        }
+      ]
+    },
+    {
+      "question_id": "35",
+      "question": "论文中的 WebText 数据集是怎样构建的？为什么要从 Reddit 链接入手？",
+      "query_en": null,
+      "paper_id": "GPT2",
+      "question_type": "method",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "GPT2",
+          "section": "2.1. Training Dataset"
+        },
+        {
+          "source": "GPT2",
+          "section": "8.1. Model capacity"
+        },
+        {
+          "source": "1805.04833",
+          "section": "Writing Prompts Dataset"
+        },
+        {
+          "source": "GPT2",
+          "section": "8.3. Diversity"
+        },
+        {
+          "source": "GPT2",
+          "section": "4. Generalization vs Memorization"
+        }
+      ]
+    },
+    {
+      "question_id": "36",
+      "question": "GPT-2 在 CoQA 零样本阅读理解任务上达到什么 F1，与那些用大量监督数据训练的基线相比如何？",
+      "query_en": null,
+      "paper_id": "GPT2",
+      "question_type": "comparison",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "GPT2",
+          "section": "3.5. Reading Comprehension"
+        },
+        {
+          "source": "GPT2",
+          "section": "4. Generalization vs Memorization"
+        },
+        {
+          "source": "GPT2",
+          "section": "Abstract"
+        },
+        {
+          "source": "BERT",
+          "section": "4.2 SQuAD v1.1"
+        },
+        {
+          "source": "GPT2",
+          "section": "6. Discussion"
+        }
+      ]
+    },
+    {
+      "question_id": "37",
+      "question": "BERT 在预训练阶段使用了哪两个无监督任务？其中 Masked LM 的核心做法是什么？",
+      "query_en": null,
+      "paper_id": "BERT",
+      "question_type": "method",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "BERT",
+          "section": "3.1 Pre-training BERT"
+        },
+        {
+          "source": "BERT",
+          "section": "2.2 Unsupervised Fine-tuning Approaches"
+        },
+        {
+          "source": "BERT",
+          "section": "6 Conclusion"
+        },
+        {
+          "source": "BERT",
+          "section": "5.3 Feature-based Approach with BERT"
+        },
+        {
+          "source": "BERT",
+          "section": "1 Introduction"
+        }
+      ]
+    },
+    {
+      "question_id": "38",
+      "question": "论文摘要称 BERT 在多少个 NLP 任务上取得了新的 state-of-the-art？它在 GLUE、MultiNLI、SQuAD v1.1 和 SQuAD v2.0 上分别报告了哪些具体提升？",
+      "query_en": null,
+      "paper_id": "BERT",
+      "question_type": "experiment",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "BERT",
+          "section": "Abstract"
+        },
+        {
+          "source": "BERT",
+          "section": "4.1 GLUE"
+        },
+        {
+          "source": "BERT",
+          "section": "4.3 SQuAD v2.0"
+        },
+        {
+          "source": "BERT",
+          "section": "4.1 GLUE"
+        },
+        {
+          "source": "BERT",
+          "section": "4.2 SQuAD v1.1"
+        }
+      ]
+    },
+    {
+      "question_id": "39",
+      "question": "BERT 的 Masked LM 预训练存在什么预训练-微调不匹配问题？作者采用什么策略来缓解？",
+      "query_en": null,
+      "paper_id": "BERT",
+      "question_type": "limitation",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "BERT",
+          "section": "3.1 Pre-training BERT"
+        },
+        {
+          "source": "BERT",
+          "section": "2.2 Unsupervised Fine-tuning Approaches"
+        },
+        {
+          "source": "BERT",
+          "section": "6 Conclusion"
+        },
+        {
+          "source": "BERT",
+          "section": "6 Conclusion"
+        },
+        {
+          "source": "BERT",
+          "section": "1 Introduction"
+        }
+      ]
+    },
+    {
+      "question_id": "40",
+      "question": "论文将网络欺凌拆解为哪五个关键判据？它们的英文缩写分别是什么？",
+      "query_en": null,
+      "paper_id": "2004.01820",
+      "question_type": "fact",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "2004.01820",
+          "section": "Curating a Comprehensive Cyberbullying Dataset"
+        },
+        {
+          "source": "2004.01820",
+          "section": "Feature Engineering ::: Social Network Features"
+        },
+        {
+          "source": "2004.01820",
+          "section": "Curating a Comprehensive Cyberbullying Dataset ::: Annotation Task"
+        },
+        {
+          "source": "2004.01820",
+          "section": "Discussion ::: Limitations"
+        },
+        {
+          "source": "1801.05617",
+          "section": "A Definition of Cyberbullying"
+        }
+      ]
+    },
+    {
+      "question_id": "41",
+      "question": "在标注任务中，论文如何为每条推文提供社交语境，并要求标注者据此给出哪些标签？",
+      "query_en": null,
+      "paper_id": "2004.01820",
+      "question_type": "method",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "1605.05156",
+          "section": "Data Collection and Datasets"
+        },
+        {
+          "source": "2004.01820",
+          "section": "Background ::: Existing Sources of Cyberbullying Data"
+        },
+        {
+          "source": "1605.05156",
+          "section": "Data Collection and Datasets"
+        },
+        {
+          "source": "1908.07491",
+          "section": "Estimating a concept's controversiality level ::: Datasets"
+        },
+        {
+          "source": "2003.07459",
+          "section": "The OGTD Dataset ::: Pre-processing and annotation"
+        }
+      ]
+    },
+    {
+      "question_id": "42",
+      "question": "基于文本的基线方法与论文提出的社会特征在检测重复、伤害意图、同伴可见性和权力不平衡时表现有何差异？",
+      "query_en": null,
+      "paper_id": "2004.01820",
+      "question_type": "comparison",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "2004.01820",
+          "section": "Experimental Evaluation"
+        },
+        {
+          "source": "2004.01820",
+          "section": "Feature Engineering ::: Timeline Features ::: Timeline Similarity"
+        },
+        {
+          "source": "2004.01820",
+          "section": "Feature Engineering ::: Social Network Features"
+        },
+        {
+          "source": "2004.01820",
+          "section": "Feature Engineering ::: Timeline Features ::: Message Behavior"
+        },
+        {
+          "source": "2004.01820",
+          "section": "Curating a Comprehensive Cyberbullying Dataset ::: Annotation Task"
+        }
+      ]
+    }
+  ]
+}
