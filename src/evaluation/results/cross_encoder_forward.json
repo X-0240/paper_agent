@@ -1,0 +1,878 @@
+{
+  "n": 42,
+  "base_hits": 27,
+  "rerank_hits": 35,
+  "avg_latency_ms": 1004.6781222025554,
+  "rows": [
+    {
+      "question_id": "1",
+      "base_hit": true,
+      "rerank_hit": true
+    },
+    {
+      "question_id": "2",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.4 Robustness of Chain of Thought"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "2 OOD: 3 OOD: 4 2 OOD: 3 OOD: 4"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.2 Results"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.3 Ablation Study"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "1 Introduction"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "Chain_of_Thought",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.2 Results"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.3 Ablation Study"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "Abstract"
+        }
+      ]
+    },
+    {
+      "question_id": "3",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.3 Ablation Study"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "2 Chain-of-Thought Prompting"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "6 Discussion"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "6 Discussion"
+        }
+      ]
+    },
+    {
+      "question_id": "4",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "3.2 Analysis: IO Complexity of FlashAttention"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "5 Limitations and Future Directions"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "Abstract"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "3 FlashAttention: Algorithm, Analysis, and Extensions"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        }
+      ]
+    },
+    {
+      "question_id": "5",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "FlashAttention",
+          "section": "4 Experiments"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "4.1 Faster Models with FlashAttention"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "4.1 Faster Models with FlashAttention"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "5 Limitations and Future Directions"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "4.2 Better Models with Longer Sequences"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "FlashAttention",
+          "section": "4 Experiments"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "4.1 Faster Models with FlashAttention"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "4.1 Faster Models with FlashAttention"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "Abstract"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "4.2 Better Models with Longer Sequences"
+        }
+      ]
+    },
+    {
+      "question_id": "6",
+      "base_hit": true,
+      "rerank_hit": true
+    },
+    {
+      "question_id": "7",
+      "base_hit": true,
+      "rerank_hit": true
+    },
+    {
+      "question_id": "8",
+      "base_hit": true,
+      "rerank_hit": true
+    },
+    {
+      "question_id": "9",
+      "base_hit": true,
+      "rerank_hit": true
+    },
+    {
+      "question_id": "10",
+      "base_hit": true,
+      "rerank_hit": true
+    },
+    {
+      "question_id": "11",
+      "base_hit": true,
+      "rerank_hit": true
+    },
+    {
+      "question_id": "12",
+      "base_hit": true,
+      "rerank_hit": true
+    },
+    {
+      "question_id": "13",
+      "base_hit": true,
+      "rerank_hit": true
+    },
+    {
+      "question_id": "14",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "LoRA",
+          "section": "4.2 APPLYING LORA TO TRANSFORMER"
+        },
+        {
+          "source": "LoRA",
+          "section": "4.1 LOW-RANK-PARAMETRIZED UPDATE MATRICES"
+        },
+        {
+          "source": "LoRA",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "LoRA",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "LoRA",
+          "section": "8 CONCLUSION AND FUTURE WORK"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "LoRA",
+          "section": "4.1 LOW-RANK-PARAMETRIZED UPDATE MATRICES"
+        },
+        {
+          "source": "LoRA",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "LoRA",
+          "section": "Abstract"
+        },
+        {
+          "source": "LoRA",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "LoRA",
+          "section": "4.1 LOW-RANK-PARAMETRIZED UPDATE MATRICES"
+        }
+      ]
+    },
+    {
+      "question_id": "15",
+      "base_hit": true,
+      "rerank_hit": true
+    },
+    {
+      "question_id": "16",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.5 Additional Results"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.5 Additional Results"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "2.1 RAG Approaches and Systems"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "2 Methods"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "2.1 Models"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "RAG_Original_Paper",
+          "section": "Abstract"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "6 Discussion"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "6 Discussion"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.5 Additional Results"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "6 Discussion"
+        }
+      ]
+    },
+    {
+      "question_id": "17",
+      "base_hit": true,
+      "rerank_hit": true
+    },
+    {
+      "question_id": "18",
+      "base_hit": true,
+      "rerank_hit": true
+    },
+    {
+      "question_id": "19",
+      "base_hit": true,
+      "rerank_hit": true
+    },
+    {
+      "question_id": "20",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "RoFormer_RoPE",
+          "section": "4.5.4 Results"
+        },
+        {
+          "source": "BERT",
+          "section": "4.1 GLUE"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "4.3 Fine-tuning on GLUE tasks"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "4 Experiments and Evaluation"
+        },
+        {
+          "source": "BERT",
+          "section": "4.1 GLUE"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "RoFormer_RoPE",
+          "section": "4.3.2 Implementation details"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "4.3.3 Results"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "4 Experiments and Evaluation"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "4.5.4 Results"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "4.2.3 Results"
+        }
+      ]
+    },
+    {
+      "question_id": "21",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "RoFormer_RoPE",
+          "section": "Abstract"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "Abstract"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "4.2.3 Results"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "RoFormer_RoPE",
+          "section": "4.5.5 Limitations of the work"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "Abstract"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "4 Experiments and Evaluation"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "4.2.3 Results"
+        }
+      ]
+    },
+    {
+      "question_id": "22",
+      "base_hit": true,
+      "rerank_hit": true
+    },
+    {
+      "question_id": "23",
+      "base_hit": true,
+      "rerank_hit": true
+    },
+    {
+      "question_id": "24",
+      "base_hit": true,
+      "rerank_hit": true
+    },
+    {
+      "question_id": "25",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "2004.01820",
+          "section": "Conclusion"
+        },
+        {
+          "source": "2004.01820",
+          "section": "Introduction"
+        },
+        {
+          "source": "2004.01820",
+          "section": "Background"
+        },
+        {
+          "source": "1905.08067",
+          "section": "Conclusion and Future Work"
+        },
+        {
+          "source": "2004.01820",
+          "section": "Feature Engineering ::: Thread Features ::: Aggression"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "1801.05617",
+          "section": "Conclusions and Future Research"
+        },
+        {
+          "source": "1801.05617",
+          "section": "Experimental Setup"
+        },
+        {
+          "source": "2004.01820",
+          "section": "Feature Engineering"
+        },
+        {
+          "source": "2004.01820",
+          "section": "Conclusion"
+        },
+        {
+          "source": "2004.01820",
+          "section": "Introduction"
+        }
+      ]
+    },
+    {
+      "question_id": "26",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "RoFormer_RoPE",
+          "section": "4.1.2 Implementation details"
+        },
+        {
+          "source": "LoRA",
+          "section": "5.1 BASELINES"
+        },
+        {
+          "source": "1908.10461",
+          "section": "Methods ::: Model comparison"
+        },
+        {
+          "source": "BERT",
+          "section": "4.2 SQuAD v1.1"
+        },
+        {
+          "source": "1803.06745",
+          "section": "Baseline"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "LoRA",
+          "section": "5.2 ROBERTA BASE/LARGE"
+        },
+        {
+          "source": "LoRA",
+          "section": "5.1 BASELINES"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "4.1.3 Results"
+        },
+        {
+          "source": "1801.05617",
+          "section": "Results"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "4.1.2 Implementation details"
+        }
+      ]
+    },
+    {
+      "question_id": "27",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "2004.01820",
+          "section": "Conclusion"
+        },
+        {
+          "source": "1905.08067",
+          "section": "Conclusion and Future Work"
+        },
+        {
+          "source": "2004.01820",
+          "section": "Background ::: Modeling Cyberbullying Behavior"
+        },
+        {
+          "source": "2004.01820",
+          "section": "Introduction"
+        },
+        {
+          "source": "2004.01820",
+          "section": "Discussion ::: Limitations"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "1801.05617",
+          "section": "Conclusions and Future Research"
+        },
+        {
+          "source": "1801.05617",
+          "section": "Experimental Setup"
+        },
+        {
+          "source": "1801.05617",
+          "section": "Results"
+        },
+        {
+          "source": "1809.08899",
+          "section": "Conclusions"
+        },
+        {
+          "source": "2004.01820",
+          "section": "Conclusion"
+        }
+      ]
+    },
+    {
+      "question_id": "28",
+      "base_hit": true,
+      "rerank_hit": true
+    },
+    {
+      "question_id": "29",
+      "base_hit": true,
+      "rerank_hit": true
+    },
+    {
+      "question_id": "30",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "6 Discussion"
+        },
+        {
+          "source": "1803.08419",
+          "section": "Conclusion"
+        },
+        {
+          "source": "2004.02334",
+          "section": "Classifier based NLG ::: Shorter Sequences for Autoregressor"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "1 Introduction"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "1803.08419",
+          "section": "Conclusion"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "2004.02334",
+          "section": "Classifier based NLG ::: Shorter Sequences for Autoregressor"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "6 Discussion"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.2 Results"
+        }
+      ]
+    },
+    {
+      "question_id": "31",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "1909.07873",
+          "section": "Proposed Attack Strategy"
+        },
+        {
+          "source": "1909.07873",
+          "section": "Training ::: Training with Reinforcement learning ::: Rewards ::: Adversarial Reward"
+        },
+        {
+          "source": "1909.07873",
+          "section": "Conclusion"
+        },
+        {
+          "source": "1909.07873",
+          "section": "Proposed Attack Strategy"
+        },
+        {
+          "source": "1909.07873",
+          "section": "Experiments ::: Quantitative Analysis"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "1909.07873",
+          "section": "Training ::: Supervised Pretraining with Teacher Forcing ::: Training Objective"
+        },
+        {
+          "source": "1909.07873",
+          "section": "Conclusion"
+        },
+        {
+          "source": "1909.07873",
+          "section": "Training ::: Training with Reinforcement learning ::: Rewards"
+        },
+        {
+          "source": "1909.07873",
+          "section": "Proposed Attack Strategy"
+        },
+        {
+          "source": "1909.07873",
+          "section": "Training ::: Training with Reinforcement learning ::: Rewards ::: Adversarial Reward"
+        }
+      ]
+    },
+    {
+      "question_id": "32",
+      "base_hit": true,
+      "rerank_hit": true
+    },
+    {
+      "question_id": "33",
+      "base_hit": true,
+      "rerank_hit": true
+    },
+    {
+      "question_id": "34",
+      "base_hit": true,
+      "rerank_hit": true
+    },
+    {
+      "question_id": "35",
+      "base_hit": true,
+      "rerank_hit": true
+    },
+    {
+      "question_id": "36",
+      "base_hit": true,
+      "rerank_hit": true
+    },
+    {
+      "question_id": "37",
+      "base_hit": true,
+      "rerank_hit": true
+    },
+    {
+      "question_id": "38",
+      "base_hit": true,
+      "rerank_hit": true
+    },
+    {
+      "question_id": "39",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "BERT",
+          "section": "3.1 Pre-training BERT"
+        },
+        {
+          "source": "BERT",
+          "section": "2.2 Unsupervised Fine-tuning Approaches"
+        },
+        {
+          "source": "BERT",
+          "section": "5.3 Feature-based Approach with BERT"
+        },
+        {
+          "source": "BERT",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "BERT",
+          "section": "6 Conclusion"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "BERT",
+          "section": "6 Conclusion"
+        },
+        {
+          "source": "BERT",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "BERT",
+          "section": "6 Conclusion"
+        },
+        {
+          "source": "BERT",
+          "section": "5.1 Effect of Pre-training Tasks"
+        },
+        {
+          "source": "BERT",
+          "section": "3.1 Pre-training BERT"
+        }
+      ]
+    },
+    {
+      "question_id": "40",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "2004.01820",
+          "section": "Curating a Comprehensive Cyberbullying Dataset"
+        },
+        {
+          "source": "2004.01820",
+          "section": "Conclusion"
+        },
+        {
+          "source": "2004.01820",
+          "section": "Introduction"
+        },
+        {
+          "source": "LoRA",
+          "section": "8 CONCLUSION AND FUTURE WORK"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "7 Conclusion"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "2004.01820",
+          "section": "Curating a Comprehensive Cyberbullying Dataset"
+        },
+        {
+          "source": "2004.01820",
+          "section": "Conclusion"
+        },
+        {
+          "source": "2004.01820",
+          "section": "Introduction"
+        },
+        {
+          "source": "2004.01820",
+          "section": "Background"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        }
+      ]
+    },
+    {
+      "question_id": "41",
+      "base_hit": true,
+      "rerank_hit": true
+    },
+    {
+      "question_id": "42",
+      "base_hit": true,
+      "rerank_hit": true
+    }
+  ]
+}
