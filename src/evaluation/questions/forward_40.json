@@ -1,0 +1,454 @@
+[
+  {
+    "question": "Chain-of-Thought Prompting 的核心思想是什么？它的提示格式由什么构成？",
+    "evidence_sentences": [
+      "Speciﬁcally, we explore the ability of language models to perform few-shot prompting for reasoning tasks, given a prompt that consists of triples: ⟨input, chain of thought, output⟩.",
+      "A chain of thought is a series of intermediate natural language reasoning steps that lead to the ﬁnal output, and we refer to this approach as chain-of-thought prompting."
+    ],
+    "section": "1 Introduction",
+    "question_type": "method",
+    "paper_id": "Chain_of_Thought",
+    "source": "forward"
+  },
+  {
+    "question": "使用链式思考提示在GSM8K数学应用题基准上取得了怎样的效果？",
+    "evidence_sentences": [
+      "For instance, prompting a PaLM 540B with just eight chain-of-thought exemplars achieves state-of-the-art accuracy on the GSM8K benchmark of math word problems, surpassing even ﬁnetuned GPT-3 with a veriﬁer."
+    ],
+    "section": "Abstract",
+    "question_type": "experiment",
+    "paper_id": "Chain_of_Thought",
+    "source": "forward"
+  },
+  {
+    "question": "论文中提到了链式思考提示的哪些局限性？",
+    "evidence_sentences": [
+      "As for limitations, we ﬁrst qualify that although chain of thought emulates the thought processes of human reasoners, this does not answer whether the neural network is actually “reasoning,” which we leave as an open question.",
+      "Finally, the emergence of chain-of-thought reasoning only at large model scales makes it costly to serve in real-world applications; further research could explore how to induce reasoning in smaller models."
+    ],
+    "section": "6 Discussion",
+    "question_type": "limitation",
+    "paper_id": "Chain_of_Thought",
+    "source": "forward"
+  },
+  {
+    "question": "FlashAttention 通过哪些技术实现精确注意力，同时避免将 N×N 注意力矩阵写入 HBM？",
+    "evidence_sentences": [
+      "We apply two established techniques (tiling, recomputation) to overcome the technical challenge of computing exact attention in sub-quadratic HBM accesses.",
+      "The main idea is that we split the inputs Q, K, V into blocks, load them from slow HBM to fast SRAM, then compute the attention output with respect to those blocks."
+    ],
+    "section": "3.1 An Eﬃcient Attention Algorithm With Tiling and Recomputation",
+    "question_type": "method",
+    "paper_id": "FlashAttention",
+    "source": "forward"
+  },
+  {
+    "question": "FlashAttention 在训练 BERT、GPT-2 和长程竞技场（LRA）任务上分别取得了怎样的加速效果？",
+    "evidence_sentences": [
+      "FlashAttention trains Transformers faster than existing baselines: 15% end-to-end wall-clock speedup on BERT-large (seq. length 512) compared to the MLPerf 1.1 training speed record, 3× speedup on GPT-2 (seq. length 1K), and 2.4× speedup on long-range arena (seq. length 1K-4K)."
+    ],
+    "section": "Abstract",
+    "question_type": "experiment",
+    "paper_id": "FlashAttention",
+    "source": "forward"
+  },
+  {
+    "question": "在序列长度增长时，近似注意力方法相比 FlashAttention 会在什么情况下变得更快？",
+    "evidence_sentences": [
+      "The runtimes of many approximate/sparse attention mechanisms grow linearly with sequence length, but FlashAttention still runs faster than approximate and sparse attention for short sequences due to fewer memory accesses.",
+      "The approximate attention runtimes begin to cross over with FlashAttention at sequences between 512 and 1024."
+    ],
+    "section": "4.3 Benchmarking Attention",
+    "question_type": "comparison",
+    "paper_id": "FlashAttention",
+    "source": "forward"
+  },
+  {
+    "question": "ReAct 是如何把推理和行动结合起来以协同工作的？",
+    "evidence_sentences": [
+      "ReAct prompts LLMs to generate both verbal reasoning traces and actions pertaining to a task in an interleaved manner, which allows the model to perform dynamic reasoning to create, maintain, and adjust high-level plans for acting (reason to act), while also interact with the external environments (e.g. Wikipedia) to incorporate additional information into reasoning (act to reason)."
+    ],
+    "section": "1 INTRODUCTION",
+    "question_type": "method",
+    "paper_id": "ReAct",
+    "source": "forward"
+  },
+  {
+    "question": "在 HotpotQA 和 Fever 上，ReAct 与 CoT 的 prompting 结果相比如何？",
+    "evidence_sentences": [
+      "On the other hand, ReAct outperforms CoT on Fever (60.9 vs. 56.3) and slightly lags behind CoT on HotpotQA (27.4 vs. 29.4)."
+    ],
+    "section": "3.3 RESULTS AND OBSERVATIONS",
+    "question_type": "experiment",
+    "paper_id": "ReAct",
+    "source": "forward"
+  },
+  {
+    "question": "ReAct 相比 CoT 在推理形式上有什么局限？",
+    "evidence_sentences": [
+      "B) While interleaving reasoning, action and observation steps improves ReAct’s groundedness and trustworthiness, such a structural constraint also reduces its ﬂexibility in formulating reasoning steps, leading to more reasoning error rate than CoT."
+    ],
+    "section": "3.3 RESULTS AND OBSERVATIONS",
+    "question_type": "limitation",
+    "paper_id": "ReAct",
+    "source": "forward"
+  },
+  {
+    "question": "GraphRAG 如何构建图索引并生成社区摘要？",
+    "evidence_sentences": [
+      "GraphRAG first uses an LLM to construct a knowledge graph, where nodes correspond to key entities in the corpus and edges represent relationships between those entities.",
+      "Next, it partitions the graph into a hierarchy of communities of closely related entities, before using an LLM to generate community-level summaries."
+    ],
+    "section": "1 Introduction",
+    "question_type": "method",
+    "paper_id": "GraphRAG",
+    "source": "forward"
+  },
+  {
+    "question": "在 Experiment 1 中，global approaches 与 conventional vector RAG (SS) 在 comprehensiveness 和 diversity 上的表现相比如何？",
+    "evidence_sentences": [
+      "As shown in Figure 2 and Table 6, global approaches significantly outperformed conventional vector RAG (SS) in both comprehensiveness and diversity criteria across datasets."
+    ],
+    "section": "5.1 Experiment 1",
+    "question_type": "experiment",
+    "paper_id": "GraphRAG",
+    "source": "forward"
+  },
+  {
+    "question": "论文指出的评估局限是什么？",
+    "evidence_sentences": [
+      "Our evaluation to date has focused on sensemaking questions specific to two corpora each containing approximately 1 million tokens.",
+      "More work is needed to understand how performance generalizes to datasets from various domains with different use cases."
+    ],
+    "section": "6.1 Limitations of evaluation approach",
+    "question_type": "limitation",
+    "paper_id": "GraphRAG",
+    "source": "forward"
+  },
+  {
+    "question": "相比 GPT-3 175B 使用 Adam 进行全量微调，LoRA 能将可训练参数量和 GPU 内存需求分别降低多少？",
+    "evidence_sentences": [
+      "Compared to GPT-3 175B ﬁne-tuned with Adam, LoRA can reduce the number of trainable parameters by 10,000 times and the GPU memory requirement by 3 times."
+    ],
+    "section": "ABSTRACT",
+    "question_type": "fact",
+    "paper_id": "LoRA",
+    "source": "forward"
+  },
+  {
+    "question": "LoRA 如何对预训练权重更新进行低秩参数化，并且矩阵 A 和 B 的初始化方式是什么？",
+    "evidence_sentences": [
+      "For a pre-trained weight matrix W0 ∈Rd×k, we constrain its update by representing the latter with a low-rank decomposition W0 + ∆W = W0 + BA, where B ∈Rd×r, A ∈Rr×k, and the rank r ≪min(d, k).",
+      "We use a random Gaussian initialization for A and zero for B, so ∆W = BA is zero at the beginning of training."
+    ],
+    "section": "4.1 LOW-RANK-PARAMETRIZED UPDATE MATRICES",
+    "question_type": "method",
+    "paper_id": "LoRA",
+    "source": "forward"
+  },
+  {
+    "question": "在 GPT-3 175B 上应用 LoRA 时，适配哪些注意力权重矩阵能取得最佳整体性能？",
+    "evidence_sentences": [
+      "Note that putting all the parameters in ∆Wq or ∆Wk results in signiﬁcantly lower performance, while adapting both Wq and Wv yields the best result.",
+      "Adapting both Wq and Wv gives the best performance overall."
+    ],
+    "section": "7.1 WHICH WEIGHT MATRICES IN TRANSFORMER SHOULD WE APPLY LORA TO?",
+    "question_type": "experiment",
+    "paper_id": "LoRA",
+    "source": "forward"
+  },
+  {
+    "question": "RAG模型的参数记忆和非参数记忆分别是什么？",
+    "evidence_sentences": [
+      "We build RAG models where the parametric memory is a pre-trained seq2seq transformer, and the non-parametric memory is a dense vector index of Wikipedia, accessed with a pre-trained neural retriever."
+    ],
+    "section": "1 Introduction",
+    "question_type": "fact",
+    "paper_id": "RAG_Original_Paper",
+    "source": "forward"
+  },
+  {
+    "question": "RAG-Sequence和RAG-Token在边际化检索文档时有什么不同？",
+    "evidence_sentences": [
+      "In one approach, RAG-Sequence, the model uses the same document to predict each target token. The second approach, RAG-Token, can predict each target token based on a different document."
+    ],
+    "section": "2 Methods",
+    "question_type": "method",
+    "paper_id": "RAG_Original_Paper",
+    "source": "forward"
+  },
+  {
+    "question": "在Jeopardy问题生成任务上，人类评估显示RAG和BART在事实性上的对比如何？",
+    "evidence_sentences": [
+      "Evaluators indicated that BART was more factual than RAG in only 7.1% of cases, while RAG was more factual in 42.7% of cases, and both RAG and BART were factual in a further 17% of cases"
+    ],
+    "section": "4.3 Jeopardy Question Generation",
+    "question_type": "comparison",
+    "paper_id": "RAG_Original_Paper",
+    "source": "forward"
+  },
+  {
+    "question": "RoPE 与以往的位置编码方法在注入位置信息的方式上有何根本区别？",
+    "evidence_sentences": [
+      "In contrast to the additive nature of position embedding method adopted in the previous works, i.e., Equations (3) to (10), our approach is multiplicative.",
+      "Moreover, RoPE naturally incorporates relative position information through rotation matrix product instead of altering terms in the expanded formulation of additive position encoding when applied with self-attention."
+    ],
+    "section": "3.2.2 General form",
+    "question_type": "comparison",
+    "paper_id": "RoFormer_RoPE",
+    "source": "forward"
+  },
+  {
+    "question": "在 GLUE 下游任务微调中，RoFormer 相对 BERT 的整体表现如何？",
+    "evidence_sentences": [
+      "The evaluation results of the fine-tuning tasks are reported in Table (2). As can be seen, RoFormer can significantly outperform BERT in three out of six datasets, and the improvements are considerable."
+    ],
+    "section": "4.3.3 Results",
+    "question_type": "experiment",
+    "paper_id": "RoFormer_RoPE",
+    "source": "forward"
+  },
+  {
+    "question": "作者在论文中承认了 RoPE/RoFormer 的哪些主要局限性？",
+    "evidence_sentences": [
+      "Although we provide theoretical groundings as well as promising experimental justifications, our method is limited by following facts:",
+      "Despite the fact that we mathematically format the relative position relations as rotations under 2D sub-spaces, there lacks of thorough explanations on why it converges faster than baseline models that incorporates other position encoding strategies.",
+      "Although we have proved that our model has favourable property of long-term decay for intern-token products, Section (3.3), which is similar to the existing position encoding mechanisms, our model shows superior performance on long texts than peer models, we have not come up with a faithful explanation."
+    ],
+    "section": "4.5.5 Limitations of the work",
+    "question_type": "limitation",
+    "paper_id": "RoFormer_RoPE",
+    "source": "forward"
+  },
+  {
+    "question": "Transformer 在 WMT 2014 英德和英法翻译任务上分别取得了多少 BLEU 分数，训练成本相对于此前最佳模型如何？",
+    "evidence_sentences": [
+      "Our model achieves 28.4 BLEU on the WMT 2014 English-to-German translation task, improving over the existing best results, including ensembles, by over 2 BLEU.",
+      "On the WMT 2014 English-to-French translation task, our model establishes a new single-model state-of-the-art BLEU score of 41.8 after training for 3.5 days on eight GPUs, a small fraction of the training costs of the best models from the literature."
+    ],
+    "section": "Abstract",
+    "question_type": "fact",
+    "paper_id": "Attention_Is_All_You_Need",
+    "source": "forward"
+  },
+  {
+    "question": "Transformer 为什么要用多头注意力（Multi-Head Attention）而不是单头注意力？具体用了多少个头、每个头的维度是多少？",
+    "evidence_sentences": [
+      "Instead of performing a single attention function with dmodel-dimensional keys, values and queries, we found it beneficial to linearly project the queries, keys and values h times with different, learned linear projections to dk, dk and dv dimensions, respectively.",
+      "Multi-head attention allows the model to jointly attend to information from different representation subspaces at different positions. With a single attention head, averaging inhibits this.",
+      "In this work we employ h = 8 parallel attention layers, or heads. For each of these we use dk = dv = dmodel/h = 64."
+    ],
+    "section": "3.2.2 Multi-Head Attention",
+    "question_type": "method",
+    "paper_id": "Attention_Is_All_You_Need",
+    "source": "forward"
+  },
+  {
+    "question": "与循环层和卷积层相比，自注意力层在每层计算复杂度、可并行程度和最大路径长度上有哪些优势？",
+    "evidence_sentences": [
+      "As noted in Table 1, a self-attention layer connects all positions with a constant number of sequentially executed operations, whereas a recurrent layer requires O(n) sequential operations.",
+      "In terms of computational complexity, self-attention layers are faster than recurrent layers when the sequence length n is smaller than the representation dimensionality d, which is most often the case with sentence representations used by state-of-the-art models in machine translations, such as word-piece [38] and byte-pair [31] representations.",
+      "A single convolutional layer with kernel width k < n does not connect all pairs of input and output positions."
+    ],
+    "section": "4 Why Self-Attention",
+    "question_type": "comparison",
+    "paper_id": "Attention_Is_All_You_Need",
+    "source": "forward"
+  },
+  {
+    "question": "这篇论文采用什么方法自动检测网络欺凌？使用了哪些分类器和特征？",
+    "evidence_sentences": [
+      "We propose a machine learning method to cyberbullying detection by making use of a linear SVM classifier BIBREF14 , BIBREF15 exploiting a varied set of features.",
+      "For the automatic detection of cyberbullying, we performed binary classification experiments using a linear kernel support vector machine (SVM) implemented in LIBLINEAR BIBREF57 by making use of Scikit-learn BIBREF58 , a machine learning library for Python."
+    ],
+    "section": "Introduction; Experimental Setup",
+    "question_type": "method",
+    "paper_id": "1801.05617",
+    "source": "forward"
+  },
+  {
+    "question": "在实验中，优化后的模型与哪些基线系统进行了比较？结果如何？",
+    "evidence_sentences": [
+      "The optimised models are evaluated against two baseline systems: i) an unoptimised linear-kernel SVM (configured with default parameter settings) based on word INLINEFORM0 -grams only and, ii) a keyword-based system that marks posts as positive for cyberbullying if they contain a word from existing vocabulary lists composed by aggressive language and profanity terms.",
+      "In short, the experiments show that our classifier clearly outperforms both a keyword-based and word INLINEFORM0 -gram baseline."
+    ],
+    "section": "Experimental Setup; Results",
+    "question_type": "experiment",
+    "paper_id": "1801.05617",
+    "source": "forward"
+  },
+  {
+    "question": "与以往研究相比，这篇论文在检测网络欺凌信号方面有什么独特之处或主要贡献？",
+    "evidence_sentences": [
+      "The main contribution of this paper is that it presents a system for detecting signals of cyberbullying on social media, including posts from bullies, victims and bystanders.",
+      "Given that we present the first elaborate research on detecting signals of cyberbullying regardless of the author role instead of bully posts alone, crude comparison with the state of the art would be irrelevant."
+    ],
+    "section": "Conclusions and Future Research; Results",
+    "question_type": "comparison",
+    "paper_id": "1801.05617",
+    "source": "forward"
+  },
+  {
+    "question": "Vinyals 等人提出的序列到序列对话模型在生成回复时，编码器和解码器分别起什么作用？",
+    "evidence_sentences": [
+      "The encoder summarizes the input utterance into a fixed length vector representation which is input to the decoder, which itself is again a RNN.",
+      "The Decoder netwroks takes this as input and output's an output utterance word-by-word until it generates an end-of-speech INLINEFORM0 token."
+    ],
+    "section": "Sequence to Sequence approaches for dialogue modelling",
+    "question_type": "method",
+    "paper_id": "1803.08419",
+    "source": "forward"
+  },
+  {
+    "question": "KB-InfoBot 在小型知识库以及中大型知识库上的任务成功率分别是多少？",
+    "evidence_sentences": [
+      "Their system returns a success rate of 0.66 for small knowledge bases and a great success rate of 0.83 for medium and large knowledge bases."
+    ],
+    "section": "End-to-End Reinforcement Learning of Dialogue Agents for Information Access",
+    "question_type": "experiment",
+    "paper_id": "1803.08419",
+    "source": "forward"
+  },
+  {
+    "question": "论文认为序列到序列模型相比早期基于规则的模型解决了哪些问题，同时又存在什么根本局限？",
+    "evidence_sentences": [
+      "The problem with rule-based models was that they were often domain dependent and could not be easily ported to a new domain.",
+      "Their model was the first model which could be trained end-to-end, and could generate a new output utterance based on just the input sentence and no other hand crafted features.",
+      "Even though most of the modern work in the field is built on this approach there is a significant drawback to this idea. This model can theoretically never solve the problem of modelling dialogues due to various simplifications, the most important of them being the objective function that is being optimized does not capture the actual objective achieved through human communication, which is typically longer term and based on exchange of information rather than next step prediction."
+    ],
+    "section": "Sequence to Sequence approaches for dialogue modelling",
+    "question_type": "multi_hop",
+    "paper_id": "1803.08419",
+    "source": "forward"
+  },
+  {
+    "question": "AEG 在强化学习训练中使用了什么算法，并且它计算哪三类奖励？",
+    "evidence_sentences": [
+      "In our work, we use the self-critical approach of Rennie et al. BIBREF36 as our policy gradient training algorithm.",
+      "Since our model operates at word and character levels, we therefore compute three rewards: adversarial reward, semantic similarity and lexical similarity reward."
+    ],
+    "section": "Training ::: Training with Reinforcement learning",
+    "question_type": "method",
+    "paper_id": "1909.07873",
+    "source": "forward"
+  },
+  {
+    "question": "在 IMDB 情感分类的 CNN-Word 目标模型上，DeepWordBug 与 AEG 分别将准确率降到多少？",
+    "evidence_sentences": [
+      "For the CNN-Word, DeepWordBug decreases the accuracy from 89.95% to 28.13% while AEG model further reduces it to 18.5%."
+    ],
+    "section": "Experiments ::: Quantitative Analysis",
+    "question_type": "experiment",
+    "paper_id": "1909.07873",
+    "source": "forward"
+  },
+  {
+    "question": "与 SCPNs 和 DeepWordBug 相比，AEG 在扰动生成方式上有什么不同？",
+    "evidence_sentences": [
+      "While SCPNs and DeepWordBug primary rely only on paraphrases and character transformations respectively to fool the classifier, our model uses a hybrid word-character encoder-decoder approach to introduce both paraphrases and character-level perturbations as a part of our attack strategy."
+    ],
+    "section": "Related Work",
+    "question_type": "comparison",
+    "paper_id": "1909.07873",
+    "source": "forward"
+  },
+  {
+    "question": "GPT-2 最大模型的参数规模是多少？它在多少个语言建模数据集上取得了零样本 state-of-the-art 结果？",
+    "evidence_sentences": [
+      "Our largest model, GPT-2, is a 1.5B parameter Transformer that achieves state of the art results on 7 out of 8 tested language modeling datasets in a zero-shot setting but still underﬁts WebText."
+    ],
+    "section": "Abstract",
+    "question_type": "fact",
+    "paper_id": "GPT2",
+    "source": "forward"
+  },
+  {
+    "question": "论文中的 WebText 数据集是怎样构建的？为什么要从 Reddit 链接入手？",
+    "evidence_sentences": [
+      "To do this we only scraped web pages which have been curated/ﬁltered by humans.",
+      "Manually ﬁltering a full web scrape would be exceptionally expensive so as a starting point, we scraped all outbound links from Reddit, a social media platform, which received at least 3 karma."
+    ],
+    "section": "2.1. Training Dataset",
+    "question_type": "method",
+    "paper_id": "GPT2",
+    "source": "forward"
+  },
+  {
+    "question": "GPT-2 在 CoQA 零样本阅读理解任务上达到什么 F1，与那些用大量监督数据训练的基线相比如何？",
+    "evidence_sentences": [
+      "Greedy decoding from GPT-2 when conditioned on a document, the history of the associated conversation, and a ﬁnal token A: achieves 55 F1 on the development set.",
+      "This matches or exceeds the performance of 3 out of 4 baseline systems without using the 127,000+ manually collected question answer pairs those baselines were trained on."
+    ],
+    "section": "3.5. Reading Comprehension",
+    "question_type": "comparison",
+    "paper_id": "GPT2",
+    "source": "forward"
+  },
+  {
+    "question": "BERT 在预训练阶段使用了哪两个无监督任务？其中 Masked LM 的核心做法是什么？",
+    "evidence_sentences": [
+      "Instead, we pre-train BERT using two unsupervised tasks, described in this section.",
+      "In order to train a deep bidirectional representation, we simply mask some percentage of the input tokens at random, and then predict those masked tokens.",
+      "In order to train a model that understands sentence relationships, we pre-train for a binarized next sentence prediction task that can be trivially generated from any monolingual corpus."
+    ],
+    "section": "3.1 Pre-training BERT",
+    "question_type": "method",
+    "paper_id": "BERT",
+    "source": "forward"
+  },
+  {
+    "question": "论文摘要称 BERT 在多少个 NLP 任务上取得了新的 state-of-the-art？它在 GLUE、MultiNLI、SQuAD v1.1 和 SQuAD v2.0 上分别报告了哪些具体提升？",
+    "evidence_sentences": [
+      "It obtains new state-of-the-art results on eleven natural language processing tasks, including pushing the GLUE score to 80.5% (7.7% point absolute improvement), MultiNLI accuracy to 86.7% (4.6% absolute improvement), SQuAD v1.1 question answering Test F1 to 93.2 (1.5 point absolute improvement) and SQuAD v2.0 Test F1 to 83.1 (5.1 point absolute improvement)."
+    ],
+    "section": "Abstract",
+    "question_type": "experiment",
+    "paper_id": "BERT",
+    "source": "forward"
+  },
+  {
+    "question": "BERT 的 Masked LM 预训练存在什么预训练-微调不匹配问题？作者采用什么策略来缓解？",
+    "evidence_sentences": [
+      "Although this allows us to obtain a bidirectional pre-trained model, a downside is that we are creating a mismatch between pre-training and ﬁne-tuning, since the [MASK] token does not appear during ﬁne-tuning.",
+      "To mitigate this, we do not always replace “masked” words with the actual [MASK] token."
+    ],
+    "section": "3.1 Pre-training BERT",
+    "question_type": "limitation",
+    "paper_id": "BERT",
+    "source": "forward"
+  },
+  {
+    "question": "论文将网络欺凌拆解为哪五个关键判据？它们的英文缩写分别是什么？",
+    "evidence_sentences": [
+      "Upon review, however, we found that all available definitions contained a strict subset of the following criteria: aggression (aggr), repetition (rep), harmful intent (harm), visibility among peers (peer), and power imbalance (power)."
+    ],
+    "section": "Background ::: Defining Cyberbullying",
+    "question_type": "fact",
+    "paper_id": "2004.01820",
+    "source": "forward"
+  },
+  {
+    "question": "在标注任务中，论文如何为每条推文提供社交语境，并要求标注者据此给出哪些标签？",
+    "evidence_sentences": [
+      "We asked our annotators to consider the full message thread for each tweet as displayed on Twitter's web interface.",
+      "We also gave them a list of up to 15 recent mentions by the author of the tweet, directed towards any of the other accounts mentioned in the original thread.",
+      "Then we asked annotators to interpret each tweet in light of this social context, and had them provide us with labels for five key cyberbullying criteria."
+    ],
+    "section": "Curating a Comprehensive Cyberbullying Dataset ::: Annotation Task",
+    "question_type": "method",
+    "paper_id": "2004.01820",
+    "source": "forward"
+  },
+  {
+    "question": "基于文本的基线方法与论文提出的社会特征在检测重复、伤害意图、同伴可见性和权力不平衡时表现有何差异？",
+    "evidence_sentences": [
+      "We find that these same baseline methods fail to reliably detect repetition, harmful intent, visibility among peers, and power imbalance, as shown by the low recall scores in Table TABREF64.",
+      "Our proposed set of features beats recall scores for lexically trained baselines in all but the aggression criterion.",
+      "When we combine all features, we see our $F_1$ scores beat baselines for each criterion."
+    ],
+    "section": "Experimental Evaluation",
+    "question_type": "comparison",
+    "paper_id": "2004.01820",
+    "source": "forward"
+  }
+]

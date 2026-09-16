@@ -1,0 +1,449 @@
+{
+  "k": 5,
+  "forward": {
+    "path": "evaluation/questions/forward_40.json",
+    "n": 42,
+    "hits": 27,
+    "rate": 0.6428571428571429,
+    "ci95": [
+      0.4916608928707938,
+      0.7701100749837315
+    ],
+    "rows": [
+      {
+        "question_id": "1",
+        "question": "Chain-of-Thought Prompting 的核心思想是什么？它的提示格式由什么构成？",
+        "hit": true
+      },
+      {
+        "question_id": "2",
+        "question": "使用链式思考提示在GSM8K数学应用题基准上取得了怎样的效果？",
+        "hit": false
+      },
+      {
+        "question_id": "3",
+        "question": "论文中提到了链式思考提示的哪些局限性？",
+        "hit": false
+      },
+      {
+        "question_id": "4",
+        "question": "FlashAttention 通过哪些技术实现精确注意力，同时避免将 N×N 注意力矩阵写入 HBM？",
+        "hit": false
+      },
+      {
+        "question_id": "5",
+        "question": "FlashAttention 在训练 BERT、GPT-2 和长程竞技场（LRA）任务上分别取得了怎样的加速效果？",
+        "hit": false
+      },
+      {
+        "question_id": "6",
+        "question": "在序列长度增长时，近似注意力方法相比 FlashAttention 会在什么情况下变得更快？",
+        "hit": true
+      },
+      {
+        "question_id": "7",
+        "question": "ReAct 是如何把推理和行动结合起来以协同工作的？",
+        "hit": true
+      },
+      {
+        "question_id": "8",
+        "question": "在 HotpotQA 和 Fever 上，ReAct 与 CoT 的 prompting 结果相比如何？",
+        "hit": true
+      },
+      {
+        "question_id": "9",
+        "question": "ReAct 相比 CoT 在推理形式上有什么局限？",
+        "hit": true
+      },
+      {
+        "question_id": "10",
+        "question": "GraphRAG 如何构建图索引并生成社区摘要？",
+        "hit": true
+      },
+      {
+        "question_id": "11",
+        "question": "在 Experiment 1 中，global approaches 与 conventional vector RAG (SS) 在 comprehensiveness 和 diversity 上的表现相比如何？",
+        "hit": true
+      },
+      {
+        "question_id": "12",
+        "question": "论文指出的评估局限是什么？",
+        "hit": true
+      },
+      {
+        "question_id": "13",
+        "question": "相比 GPT-3 175B 使用 Adam 进行全量微调，LoRA 能将可训练参数量和 GPU 内存需求分别降低多少？",
+        "hit": true
+      },
+      {
+        "question_id": "14",
+        "question": "LoRA 如何对预训练权重更新进行低秩参数化，并且矩阵 A 和 B 的初始化方式是什么？",
+        "hit": false
+      },
+      {
+        "question_id": "15",
+        "question": "在 GPT-3 175B 上应用 LoRA 时，适配哪些注意力权重矩阵能取得最佳整体性能？",
+        "hit": true
+      },
+      {
+        "question_id": "16",
+        "question": "RAG模型的参数记忆和非参数记忆分别是什么？",
+        "hit": false
+      },
+      {
+        "question_id": "17",
+        "question": "RAG-Sequence和RAG-Token在边际化检索文档时有什么不同？",
+        "hit": true
+      },
+      {
+        "question_id": "18",
+        "question": "在Jeopardy问题生成任务上，人类评估显示RAG和BART在事实性上的对比如何？",
+        "hit": true
+      },
+      {
+        "question_id": "19",
+        "question": "RoPE 与以往的位置编码方法在注入位置信息的方式上有何根本区别？",
+        "hit": true
+      },
+      {
+        "question_id": "20",
+        "question": "在 GLUE 下游任务微调中，RoFormer 相对 BERT 的整体表现如何？",
+        "hit": false
+      },
+      {
+        "question_id": "21",
+        "question": "作者在论文中承认了 RoPE/RoFormer 的哪些主要局限性？",
+        "hit": false
+      },
+      {
+        "question_id": "22",
+        "question": "Transformer 在 WMT 2014 英德和英法翻译任务上分别取得了多少 BLEU 分数，训练成本相对于此前最佳模型如何？",
+        "hit": true
+      },
+      {
+        "question_id": "23",
+        "question": "Transformer 为什么要用多头注意力（Multi-Head Attention）而不是单头注意力？具体用了多少个头、每个头的维度是多少？",
+        "hit": true
+      },
+      {
+        "question_id": "24",
+        "question": "与循环层和卷积层相比，自注意力层在每层计算复杂度、可并行程度和最大路径长度上有哪些优势？",
+        "hit": true
+      },
+      {
+        "question_id": "25",
+        "question": "这篇论文采用什么方法自动检测网络欺凌？使用了哪些分类器和特征？",
+        "hit": false
+      },
+      {
+        "question_id": "26",
+        "question": "在实验中，优化后的模型与哪些基线系统进行了比较？结果如何？",
+        "hit": false
+      },
+      {
+        "question_id": "27",
+        "question": "与以往研究相比，这篇论文在检测网络欺凌信号方面有什么独特之处或主要贡献？",
+        "hit": false
+      },
+      {
+        "question_id": "28",
+        "question": "Vinyals 等人提出的序列到序列对话模型在生成回复时，编码器和解码器分别起什么作用？",
+        "hit": true
+      },
+      {
+        "question_id": "29",
+        "question": "KB-InfoBot 在小型知识库以及中大型知识库上的任务成功率分别是多少？",
+        "hit": true
+      },
+      {
+        "question_id": "30",
+        "question": "论文认为序列到序列模型相比早期基于规则的模型解决了哪些问题，同时又存在什么根本局限？",
+        "hit": false
+      },
+      {
+        "question_id": "31",
+        "question": "AEG 在强化学习训练中使用了什么算法，并且它计算哪三类奖励？",
+        "hit": false
+      },
+      {
+        "question_id": "32",
+        "question": "在 IMDB 情感分类的 CNN-Word 目标模型上，DeepWordBug 与 AEG 分别将准确率降到多少？",
+        "hit": true
+      },
+      {
+        "question_id": "33",
+        "question": "与 SCPNs 和 DeepWordBug 相比，AEG 在扰动生成方式上有什么不同？",
+        "hit": true
+      },
+      {
+        "question_id": "34",
+        "question": "GPT-2 最大模型的参数规模是多少？它在多少个语言建模数据集上取得了零样本 state-of-the-art 结果？",
+        "hit": true
+      },
+      {
+        "question_id": "35",
+        "question": "论文中的 WebText 数据集是怎样构建的？为什么要从 Reddit 链接入手？",
+        "hit": true
+      },
+      {
+        "question_id": "36",
+        "question": "GPT-2 在 CoQA 零样本阅读理解任务上达到什么 F1，与那些用大量监督数据训练的基线相比如何？",
+        "hit": true
+      },
+      {
+        "question_id": "37",
+        "question": "BERT 在预训练阶段使用了哪两个无监督任务？其中 Masked LM 的核心做法是什么？",
+        "hit": true
+      },
+      {
+        "question_id": "38",
+        "question": "论文摘要称 BERT 在多少个 NLP 任务上取得了新的 state-of-the-art？它在 GLUE、MultiNLI、SQuAD v1.1 和 SQuAD v2.0 上分别报告了哪些具体提升？",
+        "hit": true
+      },
+      {
+        "question_id": "39",
+        "question": "BERT 的 Masked LM 预训练存在什么预训练-微调不匹配问题？作者采用什么策略来缓解？",
+        "hit": false
+      },
+      {
+        "question_id": "40",
+        "question": "论文将网络欺凌拆解为哪五个关键判据？它们的英文缩写分别是什么？",
+        "hit": false
+      },
+      {
+        "question_id": "41",
+        "question": "在标注任务中，论文如何为每条推文提供社交语境，并要求标注者据此给出哪些标签？",
+        "hit": true
+      },
+      {
+        "question_id": "42",
+        "question": "基于文本的基线方法与论文提出的社会特征在检测重复、伤害意图、同伴可见性和权力不平衡时表现有何差异？",
+        "hit": true
+      }
+    ]
+  },
+  "reverse": {
+    "path": "evaluation/questions/reverse_42.json",
+    "n": 42,
+    "hits": 31,
+    "rate": 0.7380952380952381,
+    "ci95": [
+      0.5893098001502445,
+      0.8469751462739642
+    ],
+    "rows": [
+      {
+        "question_id": "1",
+        "question": "在特征工程中，作者为荷兰语和英语的主观性词典特征分别使用了哪些情感词典？",
+        "hit": true
+      },
+      {
+        "question_id": "2",
+        "question": "RoPE 是如何编码绝对位置并在自注意力中引入相对位置依赖的？",
+        "hit": true
+      },
+      {
+        "question_id": "3",
+        "question": "在 FlashAttention 论文该片段的参考文献中，哪篇文献指出自注意力不需要 O(n^2) 内存？",
+        "hit": false
+      },
+      {
+        "question_id": "4",
+        "question": "ReAct 论文的参考文献列表中是否引用了 Micheli 和 Fleuret 的《Language models are few-shot butlers》？",
+        "hit": true
+      },
+      {
+        "question_id": "5",
+        "question": "根据该片段，为什么在 Figure 4 的 HotpotQA 示例中只有 ReAct 能获得最新答案？",
+        "hit": true
+      },
+      {
+        "question_id": "6",
+        "question": "在缺乏黄金标准时，GraphRAG 论文如何评估针对全局意义构建问题的 RAG 生成答案？",
+        "hit": false
+      },
+      {
+        "question_id": "7",
+        "question": "在 RoFormer 论文结论部分的参考文献中，哪项工作研究了自注意力的相对位置表示？",
+        "hit": false
+      },
+      {
+        "question_id": "8",
+        "question": "LoRA论文中，用于衡量两个列正交矩阵子空间相似度的指标与标准Projection Metric是什么关系？",
+        "hit": true
+      },
+      {
+        "question_id": "9",
+        "question": "根据该片段，成功的思维链（Chain of Thought）使用是否依赖特定的语言风格？",
+        "hit": true
+      },
+      {
+        "question_id": "10",
+        "question": "根据该片段，最终返回实体和关系列表时应使用什么作为列表分隔符？",
+        "hit": true
+      },
+      {
+        "question_id": "11",
+        "question": "论文在 F.3 节中旨在评估不同适应方法在什么数据条件下的性能？",
+        "hit": true
+      },
+      {
+        "question_id": "12",
+        "question": "在评估全局意义建构时，GraphRAG 采用了哪三个目标标准？",
+        "hit": false
+      },
+      {
+        "question_id": "13",
+        "question": "在该论文的参考文献中，哪篇工作提出用自洽性（self-consistency）改进语言模型中的思维链推理？",
+        "hit": true
+      },
+      {
+        "question_id": "14",
+        "question": "根据该片段，为什么 LoRA 在 GPT-3 下游任务中使用 r = 1 也能表现良好？",
+        "hit": false
+      },
+      {
+        "question_id": "15",
+        "question": "片段提到 ReAct 建立在哪个闭环系统工作之上？作者对它的“inner thoughts”有何批评？",
+        "hit": true
+      },
+      {
+        "question_id": "16",
+        "question": "这篇论文为什么使用非参数检验来分析不同条件下的性能差异？",
+        "hit": true
+      },
+      {
+        "question_id": "17",
+        "question": "这篇论文在结论中指出，其网络欺凌检测方法目前还存在什么主要局限？",
+        "hit": true
+      },
+      {
+        "question_id": "18",
+        "question": "在图7中，用于展示思维链提示提升常识推理能力的语言模型是哪一个？",
+        "hit": true
+      },
+      {
+        "question_id": "19",
+        "question": "该片段中哪篇参考文献提出了用于开放域问答的稠密段落检索方法？",
+        "hit": true
+      },
+      {
+        "question_id": "20",
+        "question": "GraphRAG 参考文献中，Wang 等人 2022 年关于语言模型思维链推理的论文标题是什么？",
+        "hit": true
+      },
+      {
+        "question_id": "21",
+        "question": "该片段中，哪篇文献提出了Winograd Schema Challenge？",
+        "hit": true
+      },
+      {
+        "question_id": "22",
+        "question": "GPT-2在什么条件下能够复现葛底斯堡演说？",
+        "hit": true
+      },
+      {
+        "question_id": "23",
+        "question": "论文在实验部分如何预训练模型以生成对抗样本？",
+        "hit": true
+      },
+      {
+        "question_id": "24",
+        "question": "在 BERT 中，给定 token 的输入表示是如何构造的？",
+        "hit": true
+      },
+      {
+        "question_id": "25",
+        "question": "在 LoRA 论文中，WikiSQL 和 SAMSum 数据集分别包含多少训练/验证与训练/测试样本？",
+        "hit": true
+      },
+      {
+        "question_id": "26",
+        "question": "在短序列场景下，FlashAttention 相比 Apex FMHA 的整体运行时间表现如何？",
+        "hit": true
+      },
+      {
+        "question_id": "27",
+        "question": "根据该片段，作者计划未来在哪些基准上研究微调 GPT？",
+        "hit": true
+      },
+      {
+        "question_id": "28",
+        "question": "在 MultiArith (MAWPS) 和 Sports Understanding 任务上，该片段比较了哪两种提示方法随 few-shot 示例数量变化的表现？",
+        "hit": true
+      },
+      {
+        "question_id": "29",
+        "question": "在GLUE基准上，LoRA被用来评估是否能匹配哪个全微调模型的性能？",
+        "hit": true
+      },
+      {
+        "question_id": "30",
+        "question": "Chain-of-thought prompting 使大语言模型能够处理哪些任务？",
+        "hit": false
+      },
+      {
+        "question_id": "31",
+        "question": "在 DART 数据集上，当可训练参数量相同时，LoRA 与基于前缀的方法相比表现如何？",
+        "hit": true
+      },
+      {
+        "question_id": "32",
+        "question": "根据片段，GPT-2 在零样本设置下在多少个数据集上达到了当时的最优结果？",
+        "hit": false
+      },
+      {
+        "question_id": "33",
+        "question": "根据该片段，AdapterH 和 AdapterL 在适配器层插入位置上的主要区别是什么？",
+        "hit": true
+      },
+      {
+        "question_id": "34",
+        "question": "根据该片段，对话系统可以分为哪两类？其中哪一类更难构建？",
+        "hit": false
+      },
+      {
+        "question_id": "35",
+        "question": "根据该片段，对话系统可以分为哪两类？",
+        "hit": false
+      },
+      {
+        "question_id": "36",
+        "question": "论文指出，在 few-shot prompting 中，语言模型需要满足什么条件才能生成 chain of thought？",
+        "hit": false
+      },
+      {
+        "question_id": "37",
+        "question": "根据该片段，商用对话智能体的一个主要不足是什么？",
+        "hit": false
+      },
+      {
+        "question_id": "38",
+        "question": "该片段指出系统存在哪些主要局限性？",
+        "hit": true
+      },
+      {
+        "question_id": "39",
+        "question": "在 ReAct 的这段示例轨迹中，智能体最终把 knife 1 放在了哪里？",
+        "hit": true
+      },
+      {
+        "question_id": "40",
+        "question": "在英语成分句法分析实验中，作者为 WSJ only 和 semi-supervised 设置选择的 beam size 和 α 分别是多少？",
+        "hit": true
+      },
+      {
+        "question_id": "41",
+        "question": "GPT-2 在 WMT-14 英法翻译测试集上的 BLEU 分数是多少？",
+        "hit": true
+      },
+      {
+        "question_id": "42",
+        "question": "BERT 与 Radford et al. (2018) 使用的预训练语言模型有何不同？",
+        "hit": true
+      }
+    ]
+  },
+  "gap_pp": 9.523809523809524,
+  "need_fix": false
+}

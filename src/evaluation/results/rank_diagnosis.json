@@ -1,0 +1,451 @@
+{
+  "buckets": {
+    "top5": 57,
+    "6-10": 9,
+    "11-20": 9,
+    "21-100": 8,
+    "not_in_top100": 5
+  },
+  "rows": [
+    {
+      "question_id": "legacy-1",
+      "question": "Transformer架构抛弃了RNN与卷积模块，完全依靠什么机制搭建模型？",
+      "rank": 3
+    },
+    {
+      "question_id": "legacy-2",
+      "question": "缩放点积注意力中，为什么要对QKᵀ除以√dₖ做缩放操作？",
+      "rank": 1
+    },
+    {
+      "question_id": "legacy-3",
+      "question": "原文中多头注意力设置的头数h、单头维度dₖ、模型总维度d_model分别是多少？",
+      "rank": 1
+    },
+    {
+      "question_id": "legacy-4",
+      "question": "Transformer解码器的自注意力层增加了什么掩码操作，保证生成的自回归属性？",
+      "rank": 2
+    },
+    {
+      "question_id": "legacy-5",
+      "question": "原文中前馈网络FFN的计算公式是什么，输入输出维度与中间隐层维度分别是？",
+      "rank": 1
+    },
+    {
+      "question_id": "legacy-6",
+      "question": "论文采用哪种位置编码方案，该方案相比可学习位置嵌入有什么优势？",
+      "rank": 1
+    },
+    {
+      "question_id": "legacy-7",
+      "question": "单层自注意力、循环网络、卷积网络三者每层复杂度、最小顺序操作数分别是什么？",
+      "rank": 1
+    },
+    {
+      "question_id": "legacy-8",
+      "question": "在WMT2014英德翻译任务上，Big Transformer取得的单模型BLEU值是多少？",
+      "rank": 1
+    },
+    {
+      "question_id": "legacy-9",
+      "question": "Transformer每层子层输出的标准化操作顺序是残差连接后层归一化还是先归一化再残差？",
+      "rank": 1
+    },
+    {
+      "question_id": "legacy-10",
+      "question": "原文可视化实验中，编码器第5层多头注意力能捕捉哪两类语言现象？",
+      "rank": 2
+    },
+    {
+      "question_id": "legacy-11",
+      "question": "B区别于GPT的核心预训练任务是什么，该任务如何实现双向上下文建模？",
+      "rank": 2
+    },
+    {
+      "question_id": "legacy-12",
+      "question": "BERT输入序列新增哪两个特殊标记，各自作用是什么？",
+      "rank": 1
+    },
+    {
+      "question_id": "legacy-13",
+      "question": "BERT预训练的第二个无监督任务NSP全称与目标是什么？",
+      "rank": 16
+    },
+    {
+      "question_id": "legacy-14",
+      "question": "MLM掩码时，选中待预测token后三种替换策略的占比分别是多少？",
+      "rank": 5
+    },
+    {
+      "question_id": "legacy-15",
+      "question": "BERT-BASE与BERT-LARGE的层数L、隐藏维度H、注意力头数A分别是？",
+      "rank": 1
+    },
+    {
+      "question_id": "legacy-16",
+      "question": "消融实验中移除NSP任务后，哪些下游任务性能出现明显下降？",
+      "rank": 2
+    },
+    {
+      "question_id": "legacy-17",
+      "question": "BERT支持两种使用范式，分别是微调范式与哪种特征提取范式？",
+      "rank": 5
+    },
+    {
+      "question_id": "legacy-18",
+      "question": "SQuAD v2.0任务中，BERT如何处理无答案的问答样本？",
+      "rank": 2
+    },
+    {
+      "question_id": "legacy-19",
+      "question": "BERT预训练使用的两大语料库分别是什么？",
+      "rank": 5
+    },
+    {
+      "question_id": "legacy-20",
+      "question": "单句分类、句对分类、抽取式问答、序列标注四类任务分别复用BERT哪部分输出？",
+      "rank": 12
+    },
+    {
+      "question_id": "legacy-21",
+      "question": "CoT提示词的构造形式是哪三元组，区别于标准问答提示？",
+      "rank": 1
+    },
+    {
+      "question_id": "legacy-22",
+      "question": "CoT提升模型推理能力是哪种模型涌现能力，多少参数规模下才会显现正向效果？",
+      "rank": 2
+    },
+    {
+      "question_id": "legacy-23",
+      "question": "在GSM8K小学数学数据集上，PaLM540B标准提示与CoT提示的解题准确率分别是多少？",
+      "rank": 20
+    },
+    {
+      "question_id": "legacy-24",
+      "question": "论文做的消融实验中，仅输出数学公式、先答案后推理两种变体为什么效果弱于完整CoT？",
+      "rank": 1
+    },
+    {
+      "question_id": "legacy-25",
+      "question": "CoT可以泛化推理到输入样例步数更长的测试样本，论文在哪两类符号任务验证该特性？",
+      "rank": 2
+    },
+    {
+      "question_id": "legacy-26",
+      "question": "人工撰写不同风格、不同数量的CoT示例后，模型性能有小幅波动但均显著优于标准提示，说明CoT具备什么特性？",
+      "rank": 1
+    },
+    {
+      "question_id": "legacy-27",
+      "question": "论文将模型推理错误分为三大类，分别是什么？",
+      "rank": 2
+    },
+    {
+      "question_id": "legacy-28",
+      "question": "CoT适用度最高的任务满足哪三个条件？",
+      "rank": 12
+    },
+    {
+      "question_id": "legacy-29",
+      "question": "常识推理评测使用了CSQA、StrategyQA等数据集，CoT在哪类常识任务提升幅度最大？",
+      "rank": 1
+    },
+    {
+      "question_id": "legacy-30",
+      "question": "仅8个CoT示例就能大幅提升数学推理，是否需要针对每个数据集单独制作示例？",
+      "rank": 27
+    },
+    {
+      "question_id": "legacy-31",
+      "question": "标准自注意力的内存瓶颈来自哪个中间矩阵，其空间复杂度与序列长度N是什么关系？",
+      "rank": 4
+    },
+    {
+      "question_id": "legacy-32",
+      "question": "FlashAttention核心两大优化技术分别是什么？",
+      "rank": 9
+    },
+    {
+      "question_id": "legacy-33",
+      "question": "GPU内存层级从快到慢排序，FlashAttention主要优化哪两层之间的数据读写？",
+      "rank": 2
+    },
+    {
+      "question_id": "legacy-34",
+      "question": "FlashAttention相比标准注意力，HBM读写量降低多少倍（GPT2实验数据）？",
+      "rank": 6
+    },
+    {
+      "question_id": "legacy-35",
+      "question": "FlashAttention是否改变注意力数学计算结果？",
+      "rank": 8
+    },
+    {
+      "question_id": "legacy-36",
+      "question": "分块计算softmax时，为保证数值正确性，需要缓存哪两个逐行统计量？",
+      "rank": 2
+    },
+    {
+      "question_id": "legacy-37",
+      "question": "Block-Sparse FlashAttention的IO复杂度相比稠密Flash，会乘以什么稀疏系数？",
+      "rank": 3
+    },
+    {
+      "question_id": "legacy-38",
+      "question": "使用Flash训练BERT-Large相比MLPerf基准提速多少？GPT2（1K序列）提速倍数？",
+      "rank": 3
+    },
+    {
+      "question_id": "legacy-39",
+      "question": "FlashAttention的IO复杂度公式是什么，M代表什么硬件参数？",
+      "rank": 1
+    },
+    {
+      "question_id": "legacy-40",
+      "question": "Flash支持超长序列，哪两个长文本基准首次通过它实现高于随机的效果？",
+      "rank": 5
+    },
+    {
+      "question_id": "legacy-41",
+      "question": "LoRA微调仅冻结预训练大模型权重，只训练哪两组低秩矩阵？",
+      "rank": 5
+    },
+    {
+      "question_id": "legacy-42",
+      "question": "LoRA推理时是否引入额外延迟，原因是什么？",
+      "rank": 1
+    },
+    {
+      "question_id": "legacy-43",
+      "question": "LoRA的权重更新公式是什么，训练初始化矩阵A、B策略是？",
+      "rank": 3
+    },
+    {
+      "question_id": "legacy-44",
+      "question": "论文为什么仅针对注意力矩阵做低秩适配，不作用于FFN层？",
+      "rank": 11
+    },
+    {
+      "question_id": "legacy-45",
+      "question": "LoRA超参数r代表什么，r越大模型适配能力与参数量如何变化？",
+      "rank": 6
+    },
+    {
+      "question_id": "legacy-46",
+      "question": "相比全参数微调、Prefix Tuning，LoRA在存储开销上的优势是什么？",
+      "rank": 8
+    },
+    {
+      "question_id": "legacy-47",
+      "question": "LoRA训练阶段是否使用dropout、偏置项等辅助参数？",
+      "rank": null
+    },
+    {
+      "question_id": "legacy-48",
+      "question": "在GPT-3 175B实验中，同等性能下LoRA相比全微调节省多少显存？",
+      "rank": 13
+    },
+    {
+      "question_id": "legacy-49",
+      "question": "多任务场景下LoRA如何切换不同任务适配权重？",
+      "rank": 3
+    },
+    {
+      "question_id": "legacy-50",
+      "question": "GraphR相比传统向量RAG，核心新增哪一类结构化存储单元？",
+      "rank": 4
+    },
+    {
+      "question_id": "legacy-51",
+      "question": "GraphRAG对原始文档做分层抽取，哪两级图结构用于检索？",
+      "rank": 3
+    },
+    {
+      "question_id": "legacy-52",
+      "question": "GraphRAG构建图时，通过什么步骤从文本抽取实体与关系三元组？",
+      "rank": 3
+    },
+    {
+      "question_id": "legacy-53",
+      "question": "GraphRAG中社区检测算法的作用是什么？",
+      "rank": 5
+    },
+    {
+      "question_id": "legacy-54",
+      "question": "传统向量RAG的缺陷是什么，GraphRAG通过图结构弥补？",
+      "rank": 5
+    },
+    {
+      "question_id": "legacy-55",
+      "question": "全局社区摘要如何生成？",
+      "rank": 4
+    },
+    {
+      "question_id": "legacy-56",
+      "question": "GraphRAG在多文档综合问答任务上相比普通RAG提升的核心原因？",
+      "rank": 1
+    },
+    {
+      "question_id": "legacy-57",
+      "question": "GraphRAG的完整处理流水线包含哪五大核心步骤？",
+      "rank": 1
+    },
+    {
+      "question_id": "legacy-58",
+      "question": "原始RAG模型由哪两个核心模块组合而成？",
+      "rank": 31
+    },
+    {
+      "question_id": "legacy-59",
+      "question": "RAG两种变体RAG-Sequence与RAG-Token的区别是什么？",
+      "rank": 1
+    },
+    {
+      "question_id": "legacy-60",
+      "question": "RAG的核心设计动机是什么，解决大模型什么固有缺陷？",
+      "rank": null
+    },
+    {
+      "question_id": "legacy-61",
+      "question": "检索阶段使用的稠密检索模型DPR，输入分别是什么？",
+      "rank": 1
+    },
+    {
+      "question_id": "legacy-62",
+      "question": "RAG训练时联合优化哪两类损失？",
+      "rank": 1
+    },
+    {
+      "question_id": "legacy-63",
+      "question": "论文评测哪四类知识密集型NLP任务验证RAG效果？",
+      "rank": 6
+    },
+    {
+      "question_id": "legacy-64",
+      "question": "RAG相比纯预训练生成模型，在哪类指标提升最显著？",
+      "rank": 1
+    },
+    {
+      "question_id": "legacy-65",
+      "question": "推理阶段RAG检索多少个top-k文档融合进生成上下文？",
+      "rank": 9
+    },
+    {
+      "question_id": "legacy-66",
+      "question": "为什么RAG不需要微调海量模型参数就能注入新知识？",
+      "rank": 2
+    },
+    {
+      "question_id": "legacy-67",
+      "question": "消融实验中移除检索模块后，模型哪项性能断崖下跌？",
+      "rank": 2
+    },
+    {
+      "question_id": "legacy-68",
+      "question": "Re框架交替生成哪两类内容，实现推理与工具调用协同？",
+      "rank": 20
+    },
+    {
+      "question_id": "legacy-69",
+      "question": "ReAct相比纯CoT、纯工具调用Prompt的核心优势是什么？",
+      "rank": null
+    },
+    {
+      "question_id": "legacy-70",
+      "question": "ReAct完整交互循环流程是什么？",
+      "rank": 16
+    },
+    {
+      "question_id": "legacy-71",
+      "question": "论文使用的外部工具主要是什么检索类工具？",
+      "rank": 35
+    },
+    {
+      "question_id": "legacy-72",
+      "question": "纯CoT模型在需要外部实时知识的任务上存在什么致命缺陷？",
+      "rank": 29
+    },
+    {
+      "question_id": "legacy-73",
+      "question": "ReAct的提示示例由哪四元组样例构成？",
+      "rank": 9
+    },
+    {
+      "question_id": "legacy-74",
+      "question": "在HotpotQA多跳问答数据集，ReAct相比仅CoT基线提升的核心原因？",
+      "rank": 1
+    },
+    {
+      "question_id": "legacy-75",
+      "question": "ReAct何时终止Thought-Action循环并输出最终答案？",
+      "rank": 30
+    },
+    {
+      "question_id": "legacy-76",
+      "question": "消融实验移除Action工具调用后，模型会出现什么问题？",
+      "rank": 2
+    },
+    {
+      "question_id": "legacy-77",
+      "question": "ReAct解决了工具调用模型的什么问题？",
+      "rank": 29
+    },
+    {
+      "question_id": "legacy-78",
+      "question": "GPT1模型基础架构基于哪篇论文提出的解码器Transformer？",
+      "rank": 31
+    },
+    {
+      "question_id": "legacy-79",
+      "question": "GPT1预训练采用什么无监督语言建模目标？",
+      "rank": null
+    },
+    {
+      "question_id": "legacy-80",
+      "question": "GPT1的Transformer解码器堆叠层数、隐藏维度、注意力头数是多少？",
+      "rank": 14
+    },
+    {
+      "question_id": "legacy-81",
+      "question": "论文核心论点是什么，即大模型无监督预训练后可零样本适配多种NLP任务？",
+      "rank": 5
+    },
+    {
+      "question_id": "legacy-82",
+      "question": "RoFormer提出的位置编码全称是什么，缩写RoPE？",
+      "rank": 2
+    },
+    {
+      "question_id": "legacy-83",
+      "question": "RoPE编码的核心数学操作是对token向量执行什么变换？",
+      "rank": 4
+    },
+    {
+      "question_id": "legacy-84",
+      "question": "RoPE相比正弦位置编码、可学习位置编码的核心优势？",
+      "rank": 6
+    },
+    {
+      "question_id": "legacy-85",
+      "question": "标准绝对位置编码存在什么缺陷，RoPE予以解决？",
+      "rank": 2
+    },
+    {
+      "question_id": "legacy-86",
+      "question": "RoPE如何计算两个token间基于相对位置的注意力分数？",
+      "rank": 3
+    },
+    {
+      "question_id": "legacy-87",
+      "question": "RoFormer基础模型的主干网络采用Transformer编码器还是解码器？",
+      "rank": null
+    },
+    {
+      "question_id": "legacy-88",
+      "question": "RoPE旋转计算的频率基底参数作用是什么？",
+      "rank": 25
+    }
+  ]
+}

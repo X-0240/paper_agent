@@ -1,0 +1,643 @@
+{
+  "n": 13,
+  "recovered": 2,
+  "rows": [
+    {
+      "question_id": "legacy-30",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "Abstract"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.1 Experimental Setup"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.4 Robustness of Chain of Thought"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "Abstract"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.1 Experimental Setup"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.4 Robustness of Chain of Thought"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-47",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "LoRA",
+          "section": "4.1 LOW-RANK-PARAMETRIZED UPDATE MATRICES"
+        },
+        {
+          "source": "LoRA",
+          "section": "4.2 APPLYING LORA TO TRANSFORMER"
+        },
+        {
+          "source": "LoRA",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "LoRA",
+          "section": "5.5 SCALING UP TO GPT-3 175B"
+        },
+        {
+          "source": "LoRA",
+          "section": "8 CONCLUSION AND FUTURE WORK"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "LoRA",
+          "section": "4.1 LOW-RANK-PARAMETRIZED UPDATE MATRICES"
+        },
+        {
+          "source": "LoRA",
+          "section": "4.2 APPLYING LORA TO TRANSFORMER"
+        },
+        {
+          "source": "LoRA",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "LoRA",
+          "section": "5.5 SCALING UP TO GPT-3 175B"
+        },
+        {
+          "source": "LoRA",
+          "section": "8 CONCLUSION AND FUTURE WORK"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-58",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "RAG_Original_Paper",
+          "section": "2 Methods"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "2.1 RAG Approaches and Systems"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "2.1 Models"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "6 Discussion"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "RAG_Original_Paper",
+          "section": "2 Methods"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "Abstract"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "6 Discussion"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-60",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "Chain_of_Thought",
+          "section": "6 Discussion"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "Abstract"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "1801.05617",
+          "section": "A Definition of Cyberbullying"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "Chain_of_Thought",
+          "section": "6 Discussion"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "Abstract"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "1801.05617",
+          "section": "A Definition of Cyberbullying"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-69",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "ReAct",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "ReAct",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "ReAct",
+          "section": "4 DECISION MAKING TASKS"
+        },
+        {
+          "source": "ReAct",
+          "section": "Abstract"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "ReAct",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "ReAct",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "ReAct",
+          "section": "4 DECISION MAKING TASKS"
+        },
+        {
+          "source": "ReAct",
+          "section": "Abstract"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-71",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "ReAct",
+          "section": "4 DECISION MAKING TASKS"
+        },
+        {
+          "source": "ReAct",
+          "section": "2 REAC T: SYNERGIZING REASONING + ACTING"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        },
+        {
+          "source": "ReAct",
+          "section": "4 DECISION MAKING TASKS"
+        },
+        {
+          "source": "ReAct",
+          "section": "5 RELATED WORK"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "ReAct",
+          "section": "4 DECISION MAKING TASKS"
+        },
+        {
+          "source": "ReAct",
+          "section": "2 REAC T: SYNERGIZING REASONING + ACTING"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        },
+        {
+          "source": "ReAct",
+          "section": "4 DECISION MAKING TASKS"
+        },
+        {
+          "source": "ReAct",
+          "section": "5 RELATED WORK"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-72",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "Chain_of_Thought",
+          "section": "4 Commonsense Reasoning"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        },
+        {
+          "source": "ReAct",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "2 OOD: 3 OOD: 4 2 OOD: 3 OOD: 4"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "ReAct",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        },
+        {
+          "source": "ReAct",
+          "section": "6 CONCLUSION"
+        },
+        {
+          "source": "ReAct",
+          "section": "Abstract"
+        },
+        {
+          "source": "ReAct",
+          "section": "1 INTRODUCTION"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-75",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "ReAct",
+          "section": "6 CONCLUSION"
+        },
+        {
+          "source": "ReAct",
+          "section": "2 REAC T: SYNERGIZING REASONING + ACTING"
+        },
+        {
+          "source": "ReAct",
+          "section": "2 REAC T: SYNERGIZING REASONING + ACTING"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.2 METHODS"
+        },
+        {
+          "source": "ReAct",
+          "section": "4 DECISION MAKING TASKS"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "ReAct",
+          "section": "6 CONCLUSION"
+        },
+        {
+          "source": "ReAct",
+          "section": "2 REAC T: SYNERGIZING REASONING + ACTING"
+        },
+        {
+          "source": "ReAct",
+          "section": "2 REAC T: SYNERGIZING REASONING + ACTING"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.2 METHODS"
+        },
+        {
+          "source": "ReAct",
+          "section": "4 DECISION MAKING TASKS"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-77",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "ReAct",
+          "section": "4 DECISION MAKING TASKS"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        },
+        {
+          "source": "ReAct",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "ReAct",
+          "section": "5 RELATED WORK"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "ReAct",
+          "section": "4 DECISION MAKING TASKS"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        },
+        {
+          "source": "ReAct",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "ReAct",
+          "section": "5 RELATED WORK"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-78",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "LoRA",
+          "section": "6 RELATED WORKS"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3 Model Architecture"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "Abstract"
+        },
+        {
+          "source": "BERT",
+          "section": "6 Conclusion"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "7 Conclusion"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "LoRA",
+          "section": "6 RELATED WORKS"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3 Model Architecture"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "Abstract"
+        },
+        {
+          "source": "BERT",
+          "section": "6 Conclusion"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "7 Conclusion"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-79",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "LoRA",
+          "section": "2 PROBLEM STATEMENT"
+        },
+        {
+          "source": "GPT2",
+          "section": "2. Approach"
+        },
+        {
+          "source": "BERT",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "BERT",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "BERT",
+          "section": "2.2 Unsupervised Fine-tuning Approaches"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "LoRA",
+          "section": "2 PROBLEM STATEMENT"
+        },
+        {
+          "source": "GPT2",
+          "section": "2. Approach"
+        },
+        {
+          "source": "BERT",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "BERT",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "BERT",
+          "section": "2.2 Unsupervised Fine-tuning Approaches"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-87",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "1911.09753",
+          "section": "Experiments ::: Experimental Settings ::: Model architecture"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3 Model Architecture"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "Abstract"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "Abstract"
+        },
+        {
+          "source": "1909.07873",
+          "section": "Proposed Attack Strategy"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "1911.09753",
+          "section": "Experiments ::: Experimental Settings ::: Model architecture"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3 Model Architecture"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "Abstract"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "Abstract"
+        },
+        {
+          "source": "1909.07873",
+          "section": "Proposed Attack Strategy"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-88",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "RoFormer_RoPE",
+          "section": "3.3 Properties of RoPE"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "3.2.2 General form"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "2.2 Absolute position embedding"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "1 Introduction"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "RoFormer_RoPE",
+          "section": "3.3 Properties of RoPE"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "3.2.2 General form"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "2.2 Absolute position embedding"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "1 Introduction"
+        }
+      ]
+    }
+  ]
+}
