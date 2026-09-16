@@ -1,4 +1,5 @@
 import json
+import os
 import re
 import faiss
 import numpy as np
@@ -26,7 +27,11 @@ class Retriever:
                 "section":self.sections[idx],"text":self.chunks[idx]}
 
     def _query_vec(self,query):
-        v=self.model.encode([query])[0]
+        prompt_name=os.getenv("QUERY_PROMPT_NAME")
+        if prompt_name:
+            v=self.model.encode([query],prompt_name=prompt_name)[0]
+        else:
+            v=self.model.encode([query])[0]
         return (v/np.linalg.norm(v)).astype("float32")
 
     def vector_search(self,query,k):
