@@ -15,6 +15,7 @@ import requests
 from dotenv import load_dotenv
 
 sys.path.insert(0,os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+load_dotenv()
 
 BASE=Path(__file__).resolve().parents[1]
 MANIFEST_PATH=BASE/"evaluation"/"v150"/"manifest.json"
@@ -86,7 +87,11 @@ def sha256_file(path):
 
 def resolve_manifest_path(path):
     p=Path(path)
-    return p if p.is_absolute() else BASE/p
+    if p.is_absolute():
+        return p
+    if path.startswith("papers_pdf/"):
+        return Path(os.getenv("PAPERS_DIR",""))/p.name
+    return BASE/p
 
 
 def parse_entry(entry):
@@ -354,7 +359,6 @@ def normalize_manifest_paths():
 
 def generate_questions(split="dev",output="",per_paper=2,limit=0):
     #只生成候选题目；人工审核前不得标记为正式评测集
-    os.environ["PAPERS_DIR"]=str(PDF_DIR)
     os.environ["SECTIONS_DIR"]=str(SECTIONS_DIR)
     from evaluation.generate_questions import forward
     manifest=load_json(MANIFEST_PATH,[])
@@ -430,7 +434,6 @@ def freeze_snapshot():
 
 
 def build_index():
-    os.environ["PAPERS_DIR"]=str(PDF_DIR)
     os.environ["SECTIONS_DIR"]=str(SECTIONS_DIR)
     os.environ["FAISS_PATH"]=V150_INDEX_PREFIX
     from doc_ingest import DocumentRecord,chunk_splitter,parse_document
