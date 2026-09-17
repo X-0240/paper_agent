@@ -13,10 +13,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "在 WMT 2014 英德翻译任务上，Transformer 的 big 模型取得了多少 BLEU 分数，相比之前最佳结果提升多少？它的训练时间和硬件配置是什么？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "论文中提出的 chain-of-thought prompting 具体是什么？它由哪些要素构成？",
@@ -31,10 +32,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "论文中提出的 chain-of-thought prompting 具体是什么？它由哪些要素构成？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "在 GSM8K 数学应用题基准上，chain-of-thought prompting 相比标准提示取得了怎样的效果？",
@@ -49,10 +51,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "在 GSM8K 数学应用题基准上，chain-of-thought prompting 相比标准提示取得了怎样的效果？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "在 GPT-3 175B 的三个数据集上，LoRA 与全量微调基线相比表现如何？",
@@ -67,10 +70,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "在 GPT-3 175B 的三个数据集上，LoRA 与全量微调基线相比表现如何？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "RAG-Sequence 与 RAG-Token 两种模型在利用检索到的文档生成答案时，其边际化（marginalization）方式的核心区别是什么？",
@@ -86,10 +90,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "RAG-Sequence 与 RAG-Token 两种模型在利用检索到的文档生成答案时，其边际化（marginalization）方式的核心区别是什么？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "RAG 在四个开放域问答任务上的表现如何？它是否需要像 REALM 或 T5+SSM 那样进行昂贵的、专门的显著跨度掩码（salient span masking）预训练？",
@@ -105,10 +110,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "RAG 在四个开放域问答任务上的表现如何？它是否需要像 REALM 或 T5+SSM 那样进行昂贵的、专门的显著跨度掩码（salient span masking）预训练？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "在 HotpotQA 和 FEVER 两个知识密集型任务上，把 ReAct 与 CoT-SC 结合的最佳提示方法分别是什么？这种结合相比单纯使用 CoT-SC 的效果如何？",
@@ -124,10 +130,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "在 HotpotQA 和 FEVER 两个知识密集型任务上，把 ReAct 与 CoT-SC 结合的最佳提示方法分别是什么？这种结合相比单纯使用 CoT-SC 的效果如何？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "RoPE 与以往将位置信息加到上下文表示中的位置编码方法相比，在实现方式上有什么根本不同？它如何将位置信息注入自注意力？",
@@ -143,10 +150,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "RoPE 与以往将位置信息加到上下文表示中的位置编码方法相比，在实现方式上有什么根本不同？它如何将位置信息注入自注意力？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "在中文法律相似案例匹配任务 CAIL2019-SCM 上，RoFormer 与 BERT、WoBERT 相比表现如何？当最大输入长度增加到 1024 时有什么提升？",
@@ -162,10 +170,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "在中文法律相似案例匹配任务 CAIL2019-SCM 上，RoFormer 与 BERT、WoBERT 相比表现如何？当最大输入长度增加到 1024 时有什么提升？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "论文如何量化 Zipfian 分布下训练类别的不平衡程度？",
@@ -182,10 +191,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "论文如何量化 Zipfian 分布下训练类别的不平衡程度？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "论文发现 BPE 词表大小如何同时影响分类器期望的类别平衡程度和自回归器期望的序列长度？",
@@ -202,10 +212,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "论文发现 BPE 词表大小如何同时影响分类器期望的类别平衡程度和自回归器期望的序列长度？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "根据论文，Let’s Go 项目在向公众开放后最初取得的任务成功率是多少？后来经过改进，完整对话的成功率达到了多少？",
@@ -221,10 +232,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "根据论文，Let’s Go 项目在向公众开放后最初取得的任务成功率是多少？后来经过改进，完整对话的成功率达到了多少？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "KB-InfoBot 为支持端到端训练，如何处理传统的符号查询？其神经组件用什么算法训练？",
@@ -240,10 +252,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "KB-InfoBot 为支持端到端训练，如何处理传统的符号查询？其神经组件用什么算法训练？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "论文中提出的 fusion 机制是如何让 seq2seq 模型更好地依赖输入 prompt 的？其核心训练方式是什么？",
@@ -259,10 +272,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "论文中提出的 fusion 机制是如何让 seq2seq 模型更好地依赖输入 prompt 的？其核心训练方式是什么？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "论文承认融合模型在故事生成质量上存在哪些具体局限？",
@@ -278,10 +292,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "论文承认融合模型在故事生成质量上存在哪些具体局限？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "在 RAVAESum 中，评论权重（comment weight）的基本计算思想是什么，它在框架中起到怎样的作用？",
@@ -297,10 +312,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "在 RAVAESum 中，评论权重（comment weight）的基本计算思想是什么，它在框架中起到怎样的作用？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "与去除评论相关组件的 RAVAESum-noC 相比，RAVAESum 在实验中的表现如何？",
@@ -315,10 +331,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "与去除评论相关组件的 RAVAESum-noC 相比，RAVAESum 在实验中的表现如何？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "根据论文的结果讨论，其事件span识别召回率较低的主要原因是什么？",
@@ -333,10 +350,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "根据论文的结果讨论，其事件span识别召回率较低的主要原因是什么？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "论文为处理学生回答中的拼写错误，采用了什么词嵌入策略？该嵌入的维度和词表规模分别是多少？",
@@ -352,10 +370,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "论文为处理学生回答中的拼写错误，采用了什么词嵌入策略？该嵌入的维度和词表规模分别是多少？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "论文采用什么验证方案和指标来评估不同模型识别 alert 的效果？",
@@ -372,10 +391,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "论文采用什么验证方案和指标来评估不同模型识别 alert 的效果？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "论文提出用什么核心思路来估计一个维基百科概念的争议程度？",
@@ -390,10 +410,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "论文提出用什么核心思路来估计一个维基百科概念的争议程度？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "与依赖复杂元数据和编辑历史的已有分类器相比，本文提出的估计方案主要优势是什么？",
@@ -408,10 +429,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "与依赖复杂元数据和编辑历史的已有分类器相比，本文提出的估计方案主要优势是什么？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "论文采用哪两种方法从 Dabiq 宣传语料中提取激进语言特征？",
@@ -427,10 +449,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "论文采用哪两种方法从 Dabiq 宣传语料中提取激进语言特征？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "在特征重要性分析中，区分激进推文的最重要特征是什么，其次是什么？",
@@ -446,10 +469,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "在特征重要性分析中，区分激进推文的最重要特征是什么，其次是什么？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "与 FEVER 数据集相比，这篇论文构建的新语料在 claim validation（声明验证）问题设定上有何关键区别？",
@@ -466,10 +490,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "与 FEVER 数据集相比，这篇论文构建的新语料在 claim validation（声明验证）问题设定上有何关键区别？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "在证据抽取（evidence extraction）任务的排序评估中，哪些模型在 recall@5 上表现最好，哪个模型在 precision 上最好？",
@@ -486,10 +511,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "在证据抽取（evidence extraction）任务的排序评估中，哪些模型在 recall@5 上表现最好，哪个模型在 precision 上最好？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "论文提出的 on-policy 与 off-policy 两种策略梯度方法在获取和利用评分信号时有什么关键区别？",
@@ -505,10 +531,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "论文提出的 on-policy 与 off-policy 两种策略梯度方法在获取和利用评分信号时有什么关键区别？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "在 alpha 超参数的消融实验中，OnPG 方法在较大 alpha 值时暴露了什么失败现象，作者将其归因于什么？",
@@ -524,10 +551,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "在 alpha 超参数的消融实验中，OnPG 方法在较大 alpha 值时暴露了什么失败现象，作者将其归因于什么？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "根据论文的实验结果，sum 聚合与 max 聚合相比表现如何？作者认为原因是什么？",
@@ -542,10 +570,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "根据论文的实验结果，sum 聚合与 max 聚合相比表现如何？作者认为原因是什么？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "论文中 EE-AS Reader 与本文模型都使用聚合，但为什么 EE-AS Reader 在该事件抽取任务上表现最差？",
@@ -561,10 +590,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "论文中 EE-AS Reader 与本文模型都使用聚合，但为什么 EE-AS Reader 在该事件抽取任务上表现最差？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "在SAIL_Code-Mixed共享任务中，提交的系统是根据什么指标进行排名的？为什么选择这个指标？",
@@ -579,10 +609,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "在SAIL_Code-Mixed共享任务中，提交的系统是根据什么指标进行排名的？为什么选择这个指标？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "在HI-EN和BN-EN数据集上，哪个数据集的f-measure更好？原因是什么？",
@@ -597,10 +628,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "在HI-EN和BN-EN数据集上，哪个数据集的f-measure更好？原因是什么？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "论文中不同数据来源的 SES 推断模型在预测性能上有什么差异，哪种数据来源表现最好？",
@@ -616,10 +648,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "论文中不同数据来源的 SES 推断模型在预测性能上有什么差异，哪种数据来源表现最好？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "论文在 Limitations 部分指出了哪些数据偏差可能限制 SES 推断的准确性？",
@@ -636,10 +669,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "论文在 Limitations 部分指出了哪些数据偏差可能限制 SES 推断的准确性？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "在CNN-Word目标模型上，DeepWordBug和本文提出的AEG模型分别将准确率从89.95%降低到了多少？",
@@ -654,10 +688,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "在CNN-Word目标模型上，DeepWordBug和本文提出的AEG模型分别将准确率从89.95%降低到了多少？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "本文的AEG模型在强化学习训练阶段使用了哪三种奖励，它们是如何组合的？",
@@ -673,10 +708,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "本文的AEG模型在强化学习训练阶段使用了哪三种奖励，它们是如何组合的？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "为了减少预测模型对演讲者种族和性别的偏差，作者在分析中采取了哪些措施？",
@@ -692,10 +728,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "为了减少预测模型对演讲者种族和性别的偏差，作者在分析中采取了哪些措施？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "在预测 TED 演讲评分时，基于依存树的模型与词序列模型的平均 F-score 分别是多少，哪个表现更好？",
@@ -711,10 +748,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "在预测 TED 演讲评分时，基于依存树的模型与词序列模型的平均 F-score 分别是多少，哪个表现更好？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "UIT-ViIC 数据集总共包含多少张图像和多少条越南语描述？每张图像提供了几条描述？",
@@ -729,10 +767,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "UIT-ViIC 数据集总共包含多少张图像和多少条越南语描述？每张图像提供了几条描述？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "在 Pytorch-tutorial 模型的实验中，随着 BLEU n-gram 增大，UIT-ViIC 的 BLEU 评分与 English-sportball 相比呈现怎样的变化趋势？其 ROUGE-L 和 CIDEr-D 结果又如何？",
@@ -747,10 +786,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "在 Pytorch-tutorial 模型的实验中，随着 BLEU n-gram 增大，UIT-ViIC 的 BLEU 评分与 English-sportball 相比呈现怎样的变化趋势？其 ROUGE-L 和 CIDEr-D 结果又如何？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "论文提出的Figure-Caption Correspondence (FCC)任务本质上是什么任务？它的训练正负样本如何构造？",
@@ -766,10 +806,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "论文提出的Figure-Caption Correspondence (FCC)任务本质上是什么任务？它的训练正负样本如何构造？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "在Figure-Caption Correspondence任务上，FCC与两种监督基线相比表现如何？论文从该结果得出了什么结论？",
@@ -785,10 +826,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "在Figure-Caption Correspondence任务上，FCC与两种监督基线相比表现如何？论文从该结果得出了什么结论？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "该论文在 AZ 任务中比较了哪三种句子向量表示模型？",
@@ -803,10 +845,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "该论文在 AZ 任务中比较了哪三种句子向量表示模型？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "论文的讨论部分如何概括词嵌入方法在 AZ 分类上的整体表现及其相对 Teufel 2002 人工特征的不足？",
@@ -821,10 +864,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "论文的讨论部分如何概括词嵌入方法在 AZ 分类上的整体表现及其相对 Teufel 2002 人工特征的不足？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "论文将网络欺凌拆解为哪五个关键标准？",
@@ -839,10 +883,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "论文将网络欺凌拆解为哪五个关键标准？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "在实验中，论文提出的特征集与仅使用词汇特征的基线相比，在五个网络欺凌标准上的 F1 表现如何？",
@@ -858,10 +903,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "在实验中，论文提出的特征集与仅使用词汇特征的基线相比，在五个网络欺凌标准上的 F1 表现如何？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "PICONET数据集是如何构建的，与BIBREF12的方法相比有哪些具体改进？",
@@ -878,10 +924,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "PICONET数据集是如何构建的，与BIBREF12的方法相比有哪些具体改进？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "在使用LGBM进行模型提升（boosting）时，最高平均ROC_AUC得分是多少，是在什么特征组合下取得的？",
@@ -896,10 +943,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "在使用LGBM进行模型提升（boosting）时，最高平均ROC_AUC得分是多少，是在什么特征组合下取得的？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "LGI网络中的PFC子系统使用什么损失函数训练，并且该损失函数使PFC能够根据图像预测文本、根据文本命令预测被操纵的图像吗？",
@@ -914,10 +962,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "LGI网络中的PFC子系统使用什么损失函数训练，并且该损失函数使PFC能够根据图像预测文本、根据文本命令预测被操纵的图像吗？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "在LGI的累积学习实验中，学习‘the size is not small/big’与先学习‘the size is big/small’相比需要多少训练步数，作者将其类比为什么过程？",
@@ -932,10 +981,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "在LGI的累积学习实验中，学习‘the size is not small/big’与先学习‘the size is big/small’相比需要多少训练步数，作者将其类比为什么过程？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "论文中用于区分typo编辑和语义编辑的分类器在F1值上表现如何？",
@@ -950,10 +1000,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "论文中用于区分typo编辑和语义编辑的分类器在F1值上表现如何？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "在句子级 BERT 嵌入评估中，哪种池化方法在所有任务类别上表现最好？",
@@ -968,10 +1019,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "在句子级 BERT 嵌入评估中，哪种池化方法在所有任务类别上表现最好？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "在 passage-level QA 任务中，将 BERT 在 SNLI 上微调是否像句子级任务那样能带来显著提升？",
@@ -986,10 +1038,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "在 passage-level QA 任务中，将 BERT 在 SNLI 上微调是否像句子级任务那样能带来显著提升？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "论文提出了哪三种减少性别偏见的方法？",
@@ -1004,10 +1057,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "论文提出了哪三种减少性别偏见的方法？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "在降低性别偏见的实验中，作者发现最有效的减少偏见方法是什么，取得了怎样的效果？",
@@ -1022,10 +1076,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "在降低性别偏见的实验中，作者发现最有效的减少偏见方法是什么，取得了怎样的效果？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "论文指出，将RNN结构应用于个性化语言建模主要受到哪两个限制？",
@@ -1041,10 +1096,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "论文指出，将RNN结构应用于个性化语言建模主要受到哪两个限制？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "在基于“Friends”剧本的消息回复预测实验中，提出的scheme_2和scheme_3与baseline scheme_1相比，验证困惑度表现如何？",
@@ -1061,10 +1117,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "在基于“Friends”剧本的消息回复预测实验中，提出的scheme_2和scheme_3与baseline scheme_1相比，验证困惑度表现如何？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "论文使用的IAC语料中，用于事实/情感论证分类的Quote-Response对数量、标注标尺范围和标注者数量分别是什么？",
@@ -1081,10 +1138,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "论文使用的IAC语料中，用于事实/情感论证分类的Quote-Response对数量、标注标尺范围和标注者数量分别是什么？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "在事实与情感论证分类任务上，词法句法模式学习器与Naive Bayes分类器的精确率和召回率表现有何不同？",
@@ -1100,10 +1158,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "在事实与情感论证分类任务上，词法句法模式学习器与Naive Bayes分类器的精确率和召回率表现有何不同？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "在 EVISCOPE 的实验里，两个本地开放模型上，显式的 evidence-action gate 与 vanilla RAG 在 QCS 上的表现差异如何？",
@@ -1118,10 +1177,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "在 EVISCOPE 的实验里，两个本地开放模型上，显式的 evidence-action gate 与 vanilla RAG 在 QCS 上的表现差异如何？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "DRPG 框架在每个时间步的具体运行流程是怎样的？其策略生成器默认采用何种检索策略来构造输入？",
@@ -1137,10 +1197,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "DRPG 框架在每个时间步的具体运行流程是怎样的？其策略生成器默认采用何种检索策略来构造输入？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "论文的局限性部分如何评价其“每一步都能获得二元正确性反馈”这一实验设定？在真实部署中作者预期会出现什么情况？",
@@ -1156,10 +1217,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "论文的局限性部分如何评价其“每一步都能获得二元正确性反馈”这一实验设定？在真实部署中作者预期会出现什么情况？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "SPLICE 方法是如何构建长上下文训练样本的？它如何利用检索来组织文档？",
@@ -1175,10 +1237,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "SPLICE 方法是如何构建长上下文训练样本的？它如何利用检索来组织文档？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "获胜方案的 Stage A 是如何利用多个 donor 模型的预测统计（而非参数）来初始化目标模型的输入嵌入和输出头的？",
@@ -1195,10 +1258,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "获胜方案的 Stage A 是如何利用多个 donor 模型的预测统计（而非参数）来初始化目标模型的输入嵌入和输出头的？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "作者在结论中指出这次 12 天运行在因果性上未能确立什么？他们承认缺少哪种对照实验？",
@@ -1214,10 +1278,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "作者在结论中指出这次 12 天运行在因果性上未能确立什么？他们承认缺少哪种对照实验？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "论文如何用信号检测理论来评估LLM监督者，而不仅仅看准确率？",
@@ -1234,10 +1299,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "论文如何用信号检测理论来评估LLM监督者，而不仅仅看准确率？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "论文承认哪些主要局限，特别是对“无轻信”结论和机制解释的限制？",
@@ -1254,10 +1320,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "论文承认哪些主要局限，特别是对“无轻信”结论和机制解释的限制？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "XConf 的 Recall 阶段如何定义“相似”的历史 episode，并据此读出历史成功率？",
@@ -1273,10 +1340,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "XConf 的 Recall 阶段如何定义“相似”的历史 episode，并据此读出历史成功率？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "与 self-consistency 相比，XConf 在哪些任务上仍然不占优势？",
@@ -1292,10 +1360,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "与 self-consistency 相比，XConf 在哪些任务上仍然不占优势？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "Keqing 框架的工作流程主要包含哪四个阶段？",
@@ -1310,10 +1379,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "Keqing 框架的工作流程主要包含哪四个阶段？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "在 WebQSP 基准上，Keqing-ChatGPT 与 Keqing-LLaMA 的对比结果如何？",
@@ -1328,10 +1398,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "在 WebQSP 基准上，Keqing-ChatGPT 与 Keqing-LLaMA 的对比结果如何？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "论文如何定义 Personality、Persona 和 Profile，并如何处理这三个术语之间的关系？",
@@ -1349,10 +1420,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "论文如何定义 Personality、Persona 和 Profile，并如何处理这三个术语之间的关系？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "在 4.1 节中，Shumanov 和 Lester 如何检验消费者与聊天机器人人格一致性对参与度和购买行为的影响？",
@@ -1369,10 +1441,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "在 4.1 节中，Shumanov 和 Lester 如何检验消费者与聊天机器人人格一致性对参与度和购买行为的影响？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "论文中研究者是如何对 Zo 的用户动机进行分类的？当评审员意见不一致时会采取什么措施？",
@@ -1387,10 +1460,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "论文中研究者是如何对 Zo 的用户动机进行分类的？当评审员意见不一致时会采取什么措施？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "论文关于用户对 Zo 的“技能”（Skills）功能的参与度，发现了与常规预期相反的什么结果？",
@@ -1405,10 +1479,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "论文关于用户对 Zo 的“技能”（Skills）功能的参与度，发现了与常规预期相反的什么结果？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "这篇论文证明了在历史依赖日志（history-dependent logging）下，即使候选模型和目标策略都已知，评估一个已知确定性目标策略需要多少样本？这一下界对 horizon H 和置信度 δ 的依赖是什么？",
@@ -1423,10 +1498,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "这篇论文证明了在历史依赖日志（history-dependent logging）下，即使候选模型和目标策略都已知，评估一个已知确定性目标策略需要多少样本？这一下界对 horizon H 和置信度 δ 的依赖是什么？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "为什么仅靠当前隐状态的信息或 belief coverage 不足以完成 off-policy evaluation？论文指出的关键机制是什么？",
@@ -1443,10 +1519,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "为什么仅靠当前隐状态的信息或 belief coverage 不足以完成 off-policy evaluation？论文指出的关键机制是什么？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "论文证明了稀疏线性解释问题的计算复杂度有多高？是针对哪类模型？",
@@ -1461,10 +1538,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "论文证明了稀疏线性解释问题的计算复杂度有多高？是针对哪类模型？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "论文中，相关性误差与保真度误差之间的理论上界依据哪一类局部邻域分布？其概率如何随 Hamming 距离变化？",
@@ -1481,10 +1559,11 @@
     "reject_reason": "",
     "review_decision": "修改",
     "review_comment": "问题第二问“该结论依据哪一族分布给出”无法从证据作答：证据句只写 “this parameterized family”，未给出该参数分布族的具体名称；建议在证据中补充分布族名称，或删除问题第二问。",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "论文中相关性误差（relevance error）与保真度误差（fidelity error）之间的理论上界关系是什么？该结论依据哪一族分布给出？",
-    "review_status": "reviewed_modified"
+    "review_status": "model_reviewed_modified",
+    "review_type": "model_review"
   },
   {
     "question": "HOPE 与 REAP 在理论上是什么关系？在什么情况下 HOPE 会退化为 REAP？",
@@ -1500,10 +1579,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "HOPE 与 REAP 在理论上是什么关系？在什么情况下 HOPE 会退化为 REAP？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "HOPE 方法存在哪些主要局限性？",
@@ -1520,10 +1600,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "HOPE 方法存在哪些主要局限性？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "论文如何界定最小证书（minimum certificate）的大小，并在池子任意大时给出什么可计算保证？",
@@ -1539,10 +1620,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "论文如何界定最小证书（minimum certificate）的大小，并在池子任意大时给出什么可计算保证？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "在108个特征面板比较实验中，预标签下界提前排除了多少条件在10%、20%和30%的标签预算下？",
@@ -1558,10 +1640,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "在108个特征面板比较实验中，预标签下界提前排除了多少条件在10%、20%和30%的标签预算下？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "论文在实验评估部分承认了哪个关于公平比较DP-SGD与目标扰动（Algorithm 1）的限制？",
@@ -1577,10 +1660,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "论文在实验评估部分承认了哪个关于公平比较DP-SGD与目标扰动（Algorithm 1）的限制？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "论文提出RDP分析（Theorem 3.2）的主要动机是什么？它与基于隐私轮廓的(ε,δ)-DP分析（Theorem 3.1）有何不同？",
@@ -1597,10 +1681,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "论文提出RDP分析（Theorem 3.2）的主要动机是什么？它与基于隐私轮廓的(ε,δ)-DP分析（Theorem 3.1）有何不同？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "根据论文的实验结果，哪个模型在比特币收盘价预测的MAE指标上表现最好？",
@@ -1615,10 +1700,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "根据论文的实验结果，哪个模型在比特币收盘价预测的MAE指标上表现最好？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "论文中LSTM模型在训练过程中遇到了什么问题？作者认为可能的原因是什么？",
@@ -1634,10 +1720,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "论文中LSTM模型在训练过程中遇到了什么问题？作者认为可能的原因是什么？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "论文针对 ICU 前 24 小时生命体征和实验室数据缺失问题，采用了哪三种建模处理方式？",
@@ -1652,10 +1739,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "论文针对 ICU 前 24 小时生命体征和实验室数据缺失问题，采用了哪三种建模处理方式？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "在按保险类型评估模型时，Medicare 与 Medicaid 患者在短住院和长住院预测上的精确率与召回率表现有何不同？",
@@ -1671,10 +1759,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "在按保险类型评估模型时，Medicare 与 Medicaid 患者在短住院和长住院预测上的精确率与召回率表现有何不同？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "在 Flight 数据集上，MSGNet 相比当时的 SOTA 模型 TimesNet，平均 MSE 和 MAE 分别降低了多少？",
@@ -1689,10 +1778,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "在 Flight 数据集上，MSGNet 相比当时的 SOTA 模型 TimesNet，平均 MSE 和 MAE 分别降低了多少？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "ComPO 的离线实用方案在计算上做了哪些简化，以便应用于大语言模型微调？",
@@ -1708,10 +1798,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "ComPO 的离线实用方案在计算上做了哪些简化，以便应用于大语言模型微调？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "论文中 7.4B 的 Untied-Grow 模型在 CORE 基准上的表现如何？与 GPT-3 13B 相比，它用了多少训练算力？",
@@ -1727,10 +1818,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "论文中 7.4B 的 Untied-Grow 模型在 CORE 基准上的表现如何？与 GPT-3 13B 相比，它用了多少训练算力？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "这篇论文提出的多示例学习（MIL）框架是如何把单个细胞层面的预测结果转化为患者层面的突变预测的？",
@@ -1745,10 +1837,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "这篇论文提出的多示例学习（MIL）框架是如何把单个细胞层面的预测结果转化为患者层面的突变预测的？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "该模型在外部测试集上预测 FLT3-ITD 时存在什么局限，作者认为这限制了它的哪种临床用途？",
@@ -1764,10 +1857,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "该模型在外部测试集上预测 FLT3-ITD 时存在什么局限，作者认为这限制了它的哪种临床用途？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "为什么论文认为在 Pedriza 上的跨区域测试不足以证明模型的可迁移性？",
@@ -1783,10 +1877,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "为什么论文认为在 Pedriza 上的跨区域测试不足以证明模型的可迁移性？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "在 SAXS 数据实验中，作者是如何解释 SLE 相较 sliced Wasserstein 基线的精度提升来源的？",
@@ -1802,10 +1897,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "在 SAXS 数据实验中，作者是如何解释 SLE 相较 sliced Wasserstein 基线的精度提升来源的？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "这篇论文提出的谱方法具体是如何利用含边翻转噪声的符号邻接矩阵来判定每个节点的标签的？其计算主特征向量的时间复杂度是多少？",
@@ -1821,10 +1917,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "这篇论文提出的谱方法具体是如何利用含边翻转噪声的符号邻接矩阵来判定每个节点的标签的？其计算主特征向量的时间复杂度是多少？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "实验部分把该谱方法与半正定规划（SDP）做了哪些比较，得到了什么结论（运行速度与高噪声下的恢复效果）？",
@@ -1840,10 +1937,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "实验部分把该谱方法与半正定规划（SDP）做了哪些比较，得到了什么结论（运行速度与高噪声下的恢复效果）？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "论文的 47 个模型训练实验覆盖了多大的参数量和数据预算范围？关于增加 tokens per parameter 时模型质量是否会出现饱和点，主要结论是什么？",
@@ -1861,10 +1959,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "论文的 47 个模型训练实验覆盖了多大的参数量和数据预算范围？关于增加 tokens per parameter 时模型质量是否会出现饱和点，主要结论是什么？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "GraphGPT 在 PCQM4Mv2 图回归任务上的测试 MAE 是多少，与之前 SOTA 相比表现如何？",
@@ -1879,10 +1978,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "GraphGPT 在 PCQM4Mv2 图回归任务上的测试 MAE 是多少，与之前 SOTA 相比表现如何？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "Viz 系统在初始阶段如何避免版权问题，并随后让内容提供者用 QLoRA 进行内容专属微调？",
@@ -1898,10 +1998,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "Viz 系统在初始阶段如何避免版权问题，并随后让内容提供者用 QLoRA 进行内容专属微调？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "论文承认 Viz 系统在计算资源和法律伦理方面还存在哪些主要挑战或局限？",
@@ -1917,10 +2018,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "论文承认 Viz 系统在计算资源和法律伦理方面还存在哪些主要挑战或局限？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "在 ECtHR-NPD 基准上，哪个模型取得了最好的整体表现，其 MAE 比训练集基线好多少？",
@@ -1935,10 +2037,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "在 ECtHR-NPD 基准上，哪个模型取得了最好的整体表现，其 MAE 比训练集基线好多少？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "在匹配词汇条件下，Character 3-gram BM25 的 top-1 准确率、索引大小和 CPU 中位延迟分别是多少？",
@@ -1953,10 +2056,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "在匹配词汇条件下，Character 3-gram BM25 的 top-1 准确率、索引大小和 CPU 中位延迟分别是多少？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "在 ScienceIDE-Hard 评测中，领先模型的科学任务成功率与成本/资源开销之间呈现怎样的关系？",
@@ -1972,10 +2076,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "在 ScienceIDE-Hard 评测中，领先模型的科学任务成功率与成本/资源开销之间呈现怎样的关系？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "这篇论文最终保留的六个过程测量指标分别是什么？它们是从多少个候选统计量中筛选出来的？",
@@ -1991,10 +2096,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "这篇论文最终保留的六个过程测量指标分别是什么？它们是从多少个候选统计量中筛选出来的？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "与最直接的预测式基线 SparseEval 相比，DualViewEval 在跨基准平均结果上把 MAE 和 Kendall’s τ 改善了多少？",
@@ -2010,10 +2116,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "与最直接的预测式基线 SparseEval 相比，DualViewEval 在跨基准平均结果上把 MAE 和 Kendall’s τ 改善了多少？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "论文提出用专有 LLM 生成合成数据时，采用的两步提示策略具体是什么？",
@@ -2029,10 +2136,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "论文提出用专有 LLM 生成合成数据时，采用的两步提示策略具体是什么？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "在H8单场景作者归属实验中，作者使用了哪种分类器和哪些特征集？",
@@ -2047,10 +2155,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "在H8单场景作者归属实验中，作者使用了哪种分类器和哪些特征集？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "根据论文结论，本文的归属结果与Spedding的归属之间的主要差异是什么？",
@@ -2066,10 +2175,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "根据论文结论，本文的归属结果与Spedding的归属之间的主要差异是什么？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "在越战和9/11之后，within-artist层面的语言变化在后续十年间的恢复轨迹有何不同？",
@@ -2085,10 +2195,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "在越战和9/11之后，within-artist层面的语言变化在后续十年间的恢复轨迹有何不同？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "GeoGalactica 的模型规模、基础模型和预训练语料 token 数分别是多少？",
@@ -2105,10 +2216,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "GeoGalactica 的模型规模、基础模型和预训练语料 token 数分别是多少？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "在构建 GeoSignal 的域内通用自然语言指令时，从原文中检索图表/表格引用句的方法有哪些已知局限？",
@@ -2125,10 +2237,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "在构建 GeoSignal 的域内通用自然语言指令时，从原文中检索图表/表格引用句的方法有哪些已知局限？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "这篇论文认为标准 PPO 中 critic 损失为什么会把同一个 response 内不同状态的价值预测“压平”？具体是哪一项导致了这种隐含的惩罚？",
@@ -2144,10 +2257,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "这篇论文认为标准 PPO 中 critic 损失为什么会把同一个 response 内不同状态的价值预测“压平”？具体是哪一项导致了这种隐含的惩罚？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "论文提出的 SP3O 具体是如何改的？它改变了训练的哪些部分、又保留了什么不变？",
@@ -2163,10 +2277,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "论文提出的 SP3O 具体是如何改的？它改变了训练的哪些部分、又保留了什么不变？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "在 CoRe-MARL 中，每个救济中心作为智能体的动作空间是如何定义的？其策略为何采用 Dirichlet 分布输出？",
@@ -2182,10 +2297,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "在 CoRe-MARL 中，每个救济中心作为智能体的动作空间是如何定义的？其策略为何采用 Dirichlet 分布输出？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "RLLBC-Lib 的 Jupyter notebooks 采用怎样的统一结构？这种结构如何帮助体现表格 RL 与深度 RL 方法之间的相似性？",
@@ -2201,10 +2317,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "RLLBC-Lib 的 Jupyter notebooks 采用怎样的统一结构？这种结构如何帮助体现表格 RL 与深度 RL 方法之间的相似性？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "论文如何定义 policy geometry（策略几何），它由哪两个部分组成？",
@@ -2220,10 +2337,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "论文如何定义 policy geometry（策略几何），它由哪两个部分组成？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "LaFFi 框架包含哪四个关键阶段？",
@@ -2238,10 +2356,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "LaFFi 框架包含哪四个关键阶段？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "在 SQuAD 2.0 基准上，LaFFi 相对于 SFT 和未微调基线表现如何？",
@@ -2257,10 +2376,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "在 SQuAD 2.0 基准上，LaFFi 相对于 SFT 和未微调基线表现如何？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "论文中提出的 Number of Transpositions (NoT) 指标是什么？它如何用来量化一个排列的幅度？",
@@ -2276,10 +2396,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "论文中提出的 Number of Transpositions (NoT) 指标是什么？它如何用来量化一个排列的幅度？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "根据 Table 1 的实验结果，qr(W) 与 qd(W) 相比在逼近 HMC 样本时表现如何？论文由此得出什么结论？",
@@ -2294,10 +2415,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "根据 Table 1 的实验结果，qr(W) 与 qd(W) 相比在逼近 HMC 样本时表现如何？论文由此得出什么结论？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "论文在构建用于句子相似度的Siamese Neural Network时，嵌入向量被送入什么样的网络，并采用哪种损失函数？",
@@ -2313,10 +2435,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "论文在构建用于句子相似度的Siamese Neural Network时，嵌入向量被送入什么样的网络，并采用哪种损失函数？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "论文在结论中如何权衡OpenAI和PaLM在准确率与碳足迹方面的表现？",
@@ -2333,10 +2456,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "论文在结论中如何权衡OpenAI和PaLM在准确率与碳足迹方面的表现？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "论文指出多类量化中基于直方图的表示存在哪些主要局限？",
@@ -2353,10 +2477,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "论文指出多类量化中基于直方图的表示存在哪些主要局限？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "OPETRL 框架如何降低动作空间和计算复杂度？其中离散变量与连续变量分别由什么方法处理？",
@@ -2373,10 +2498,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "OPETRL 框架如何降低动作空间和计算复杂度？其中离散变量与连续变量分别由什么方法处理？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "在仿真实验中，作者将 OPETRL 与哪些基线策略进行了比较？总体比较结果如何？",
@@ -2393,10 +2519,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "在仿真实验中，作者将 OPETRL 与哪些基线策略进行了比较？总体比较结果如何？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "与 ConvS2S 和 ByteNet 相比，Transformer 在关联任意两个输入或输出位置所需操作数上有何不同？为了缓解由此可能带来的有效分辨率下降，论文采用了什么机制？",
@@ -2412,10 +2539,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "与 ConvS2S 和 ByteNet 相比，Transformer 在关联任意两个输入或输出位置所需操作数上有何不同？为了缓解由此可能带来的有效分辨率下降，论文采用了什么机制？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "论文中的 WebText 数据集是如何构建和过滤的？",
@@ -2432,10 +2560,11 @@
     "reject_reason": "",
     "review_decision": "修改",
     "review_comment": "论文标题与论文ID不符：ID “GPT2” 对应论文应为 “Language Models are Unsupervised Multitask Learners”；表中标题 “Responsible AI by Design in Practice” 为错误引用，需更正标题字段（问题、证据句、证据章节本身确为 GPT-2 §2.1 Training Dataset 的 WebText 内容，可保留）。",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "论文中的 WebText 数据集是如何构建和过滤的？",
-    "review_status": "reviewed_modified"
+    "review_status": "model_reviewed_modified",
+    "review_type": "model_review"
   },
   {
     "question": "在LoRA中，低秩矩阵A和B是如何初始化的？这样初始化的目的是什么？",
@@ -2450,10 +2579,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "在LoRA中，低秩矩阵A和B是如何初始化的？这样初始化的目的是什么？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "在 HotpotQA 和 FEVER 这类知识密集型推理任务上，ReAct 与 CoT 相比表现如何，论文又如何解释二者在幻觉与事实性上的差异？",
@@ -2469,10 +2599,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "在 HotpotQA 和 FEVER 这类知识密集型推理任务上，ReAct 与 CoT 相比表现如何，论文又如何解释二者在幻觉与事实性上的差异？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "这篇论文提出的临床信息抽取系统与传统依赖 cTAKES 的方法相比，在工具依赖和开发成本方面有什么优势？",
@@ -2489,10 +2620,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "这篇论文提出的临床信息抽取系统与传统依赖 cTAKES 的方法相比，在工具依赖和开发成本方面有什么优势？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "在Twitter言语行为分类任务中，论文提出的TweetAct分类器与Zhang等人的分类器相比表现如何？",
@@ -2507,10 +2639,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "在Twitter言语行为分类任务中，论文提出的TweetAct分类器与Zhang等人的分类器相比表现如何？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "论文如何自动区分真正的拼写/语法错误编辑（typo）与语义编辑，分类效果如何？",
@@ -2526,10 +2659,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "论文如何自动区分真正的拼写/语法错误编辑（typo）与语义编辑，分类效果如何？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "根据论文结论，Cartridges、Compaction 和参数型适配器各自的主要优缺点是什么？",
@@ -2546,10 +2680,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "根据论文结论，Cartridges、Compaction 和参数型适配器各自的主要优缺点是什么？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "作者为什么强调需要区分 within-artist 和 between-artist 效应？以9/11为例，这两种效应在 self-references 上呈现怎样的方向差异？",
@@ -2565,10 +2700,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "作者为什么强调需要区分 within-artist 和 between-artist 效应？以9/11为例，这两种效应在 self-references 上呈现怎样的方向差异？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "在 EVISCOPE 的实验中，显式 evidence-action gate 与 vanilla RAG 在两个本地开源模型上的 QCS 表现差异如何？Gemini 是否彻底消除了冲突盲视？",
@@ -2584,10 +2720,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "在 EVISCOPE 的实验中，显式 evidence-action gate 与 vanilla RAG 在两个本地开源模型上的 QCS 表现差异如何？Gemini 是否彻底消除了冲突盲视？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "SALVE 方法分为哪两个阶段，以及它用什么机制来提高 verbalization 的可靠性？",
@@ -2602,10 +2739,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "SALVE 方法分为哪两个阶段，以及它用什么机制来提高 verbalization 的可靠性？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "论文在 Data Curation 这一未来工作方向中指出，使用高度相关的样本可能带来什么潜在问题？实验中是否观察到性能下降？",
@@ -2622,10 +2760,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "论文在 Data Curation 这一未来工作方向中指出，使用高度相关的样本可能带来什么潜在问题？实验中是否观察到性能下降？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "在DualSQL的消融实验中，与仅训练SQL生成的单智能体RL设置相比，联合训练Schema Linking和SQL生成的多智能体RL在BIRD-Dev上带来了多少EX和REX提升？",
@@ -2640,10 +2779,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "在DualSQL的消融实验中，与仅训练SQL生成的单智能体RL设置相比，联合训练Schema Linking和SQL生成的多智能体RL在BIRD-Dev上带来了多少EX和REX提升？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "在论文提出的输入-输出分类法中，weakening neuron 和 strengthening neuron 的定义区别是什么？",
@@ -2659,10 +2799,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "在论文提出的输入-输出分类法中，weakening neuron 和 strengthening neuron 的定义区别是什么？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "ComPO 在实践中如何区分“干净”与“噪声”偏好对，并且对这两类数据分别采用怎样的训练流程？",
@@ -2679,10 +2820,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "ComPO 在实践中如何区分“干净”与“噪声”偏好对，并且对这两类数据分别采用怎样的训练流程？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "论文在单轮（single-epoch）与多轮（multi-epoch）训练设置下，关于权重共享（weight sharing）和loop数的结论有何不同？",
@@ -2698,10 +2840,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "论文在单轮（single-epoch）与多轮（multi-epoch）训练设置下，关于权重共享（weight sharing）和loop数的结论有何不同？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "SLE 核在数学上是如何保证对任意距离度量（包括非 CND 距离）都能得到正半定核矩阵的？",
@@ -2717,10 +2860,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "SLE 核在数学上是如何保证对任意距离度量（包括非 CND 距离）都能得到正半定核矩阵的？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "论文为验证极端的 tokens per parameter 比率下 transformer 的行为，训练了多少个模型？模型规模和数据预算范围分别是多少？",
@@ -2736,10 +2880,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "论文为验证极端的 tokens per parameter 比率下 transformer 的行为，训练了多少个模型？模型规模和数据预算范围分别是多少？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "在论文的弃权（in-catalog vs out-of-catalog）评估中，BM25 分数特征组合 G3 与冻结编码器在 paraphrase/mismatch 切片上的 AUC 表现差异如何？",
@@ -2755,10 +2900,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "在论文的弃权（in-catalog vs out-of-catalog）评估中，BM25 分数特征组合 G3 与冻结编码器在 paraphrase/mismatch 切片上的 AUC 表现差异如何？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "RLLBC-Lib 的深度强化学习实现主要基于哪个代码库，并使用什么框架进行神经网络训练？",
@@ -2773,10 +2919,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "RLLBC-Lib 的深度强化学习实现主要基于哪个代码库，并使用什么框架进行神经网络训练？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "这篇论文的核心主张是什么？它认为策略重构的复杂度主要由什么决定？",
@@ -2792,10 +2939,11 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "这篇论文的核心主张是什么？它认为策略重构的复杂度主要由什么决定？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   },
   {
     "question": "论文提出的KDEy方法通过什么方式改进了传统分布匹配方法在多类量化中的不足？",
@@ -2811,9 +2959,10 @@
     "reject_reason": "",
     "review_decision": "通过",
     "review_comment": "",
-    "reviewer": "AI",
+    "reviewer": "Doubao/AI",
     "review_date": "2026-09-17",
     "original_question": "论文提出的KDEy方法通过什么方式改进了传统分布匹配方法在多类量化中的不足？",
-    "review_status": "reviewed_pass"
+    "review_status": "model_reviewed_pass",
+    "review_type": "model_review"
   }
 ]

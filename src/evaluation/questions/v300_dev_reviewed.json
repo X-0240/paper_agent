@@ -1,0 +1,1865 @@
+[
+  {
+    "question": "BERT 的 Masked LM 预训练任务中，如何选择要预测的 token，并如何替换这些 token？",
+    "evidence_sentences": [
+      "The training data generator chooses 15% of the token positions at random for prediction. If the i-th token is chosen, we replace the i-th token with (1) the [MASK] token 80% of the time (2) a random token 10% of the time (3) the unchanged i-th token 10% of the time."
+    ],
+    "section": "3.1 Pre-training BERT",
+    "question_type": "method",
+    "paper_id": "BERT",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "model review missing, keep candidate",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "FlashAttention 使用了哪两种技术来实现精确注意力并减少 HBM 访问？",
+    "evidence_sentences": [
+      "We apply two well-established techniques to address these challenges. (i) We restructure the attention computation to split the input into blocks and make several passes over input blocks, thus incrementally performing the softmax reduction (also known as tiling).",
+      "(ii) We store the softmax normalization factor from the forward pass to quickly recompute attention on-chip in the backward pass, which is faster than the standard approach of reading the intermediate attention matrix from HBM."
+    ],
+    "section": "1 Introduction",
+    "question_type": "method",
+    "paper_id": "FlashAttention",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "model review missing, keep candidate",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "FlashAttention 在 BERT-large 训练上相比 MLPerf 1.1 的训练速度记录快多少？",
+    "evidence_sentences": [
+      "Table 1 compares our training time to the implementation from Nvidia that set the training speed record for MLPerf 1.1 [58]. Our implementation is 15% faster."
+    ],
+    "section": "4.1 Faster Models with FlashAttention",
+    "question_type": "experiment",
+    "paper_id": "FlashAttention",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "model review missing, keep candidate",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "WebText 数据集是如何构建的，采用了什么启发式过滤标准？",
+    "evidence_sentences": [
+      "Instead, we created a new web scrape which emphasizes document quality. To do this we only scraped web pages which have been curated/ﬁltered by humans. Manually ﬁltering a full web scrape would be exceptionally expensive so as a starting point, we scraped all outbound links from Reddit, a social media platform, which received at least 3 karma."
+    ],
+    "section": "2.1. Training Dataset",
+    "question_type": "method",
+    "paper_id": "GPT2",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "model review missing, keep candidate",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "论文提出了什么方法来量化 Zipfian 分布下的类别不平衡？该指标的取值范围和期望方向是怎样的？",
+    "evidence_sentences": [
+      "The class imbalance of an observed distribution of training classes is quantified as Divergence ($D$) from a balanced (uniform) distribution.",
+      "Divergence is measured using a simplified version of Earth Mover Distance, in which the total cost for moving a probability mass between any two bins (analogous to class types) is the sum of the total mass moved.",
+      "The range of D is $0 \\le D \\le 1$, and we argue that a lower value of $D$ a desired setting for $C$."
+    ],
+    "section": "Classifier based NLG ::: Balanced Classes for Token Classifier",
+    "question_type": "method",
+    "paper_id": "2004.02334",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "model review missing, keep candidate",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "实验分析中，为什么把目标端 BPE 词表从 8k 增大到 32k 会明显降低 BLEU，而把源端词表从 8k 增大到 32k 却不会带来负面影响？",
+    "evidence_sentences": [
+      "Even though #11 had more imbalanced source types than #6, it has no adverse effect on BLEU.",
+      "Therefore, imbalance on source vocabulary is not meaningful since source types are not the classes of $C$.",
+      "An explanation we offer is that the $32k$ target types became classes and raised the class imbalance $D$, leading to a reduction in the performance of $C$."
+    ],
+    "section": "Analysis",
+    "question_type": "comparison",
+    "paper_id": "2004.02334",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "model review missing, keep candidate",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "这篇论文提出的 char n-gram MS-vec 具体是如何从字符 n-gram 嵌入构建词嵌入的？使用了哪种编码器？",
+    "evidence_sentences": [
+      "Thus, we adopt (simplified) multi-dimensional self-attention BIBREF11 , which computes weights for each dimension of given embeddings and sums up the weighted embeddings (i.e., element-wise weighted sum) as an encoder.",
+      "The multi-dimensional self-attention constructs the word embedding INLINEFORM10 by the following equations:"
+    ],
+    "section": "Multi-dimensional Self-attention",
+    "question_type": "method",
+    "paper_id": "1906.05506",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据说明了使用（简化）多维自注意力作为编码器，并描述了对各维度加权求和构建词嵌入的方式，可直接回答。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "论文中提出的 char n-gram MS-vec 方法在计算开销上有什么局限性？",
+    "evidence_sentences": [
+      "Table TABREF16 indicates that the proposed method requires more computational time than the baseline unfortunately.",
+      "We leave exploring a faster structure for our future work."
+    ],
+    "section": "Results",
+    "question_type": "limitation",
+    "paper_id": "1906.05506",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据明确指计算时间多于基线，并称更快结构留待未来工作，直接回答局限性。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "论文中用于概念识别（CR）的BERT模型取得了怎样的F1分数，训练与评估的数据是如何划分的？",
+    "evidence_sentences": [
+      "The model gives an F1-score of $0.89$ for the concept recognition task. An 80-20 data split is used for training and evaluation."
+    ],
+    "section": "CONCEPT RECOGNITION ::: Fine tuning with BERT",
+    "question_type": "experiment",
+    "paper_id": "2003.11687",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据给出F1为0.89及80-20训练评估划分，直接回答问题。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "为什么现成的命名实体识别工具无法直接满足SE领域的常识概念识别需求？",
+    "evidence_sentences": [
+      "Off-the-shelf named entity extractors do not suffice in the SE common-knowledge scenario because the entities we want to extract are domain-specific concepts such as `system architecture' or `functional requirements' rather than physical entities such as `Shakespeare' or `London'. This requires defining new labels and fine-tuning."
+    ],
+    "section": "BACKGROUND AND MOTIVATION",
+    "question_type": "fact",
+    "paper_id": "2003.11687",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据明确说明现成工具不足的原因是需要抽取领域特定概念而非物理实体，需定义新标签并微调。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "MAE数据集包含多少商业产品项目、图像和属性值对？",
+    "evidence_sentences": [
+      "In order to support research on this task, we release the Multimodal Attribute Extraction (MAE) dataset, a large dataset containing mixed-media data for over 2.2 million commercial product items, collected from a large number of e-commerce sites using the Diffbot Product API.",
+      "In all, there are over 4 million images and 7.6 million attribute-value pairs."
+    ],
+    "section": "Introduction",
+    "question_type": "fact",
+    "paper_id": "1711.11118",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据直接给出220万商业产品项目、400万以上图像和760万属性值对。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "论文的实验表明，图像基线模型和多模态模型在融合图像信息方面效果如何？",
+    "evidence_sentences": [
+      "Observe that the performance of the image baseline model is almost identical to the most-common value model.",
+      "Similarly, the performance of the multimodal models is similar to the text baseline model.",
+      "Thus our models so far have been unable to effectively incorporate information from the image data."
+    ],
+    "section": "Experiments",
+    "question_type": "experiment",
+    "paper_id": "1711.11118",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据表明图像基线性能与最常见值模型几乎相同、多模态模型与文本基线相近，未能有效利用图像信息。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "论文中提出的Names Intervention方法是如何将名字配对问题形式化并进行求解的？",
+    "evidence_sentences": [
+      "The problem of finding name-pairs thus decomposes into a Euclidean-distance bipartite matching problem, which can be solved using the Hungarian method BIBREF7.",
+      "We fixedly associate pairs of names for swapping, thus expanding BIBREF5's short list of gender pairs vastly."
+    ],
+    "section": "Improvements to CDA ::: The Names Intervention",
+    "question_type": "method",
+    "paper_id": "1909.00871",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据直接说明名字配对形式化为欧氏距离二部匹配并用匈牙利方法求解。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "根据论文的结论，所有被比较的性别偏见缓解方法存在哪些根本性局限？",
+    "evidence_sentences": [
+      "A fundamental limitation of all the methods compared is their reliance on predefined lists of gender words, in particular of pairs.",
+      "The strict use of pairings also imposes a gender binary, and as a result non-binary identities are all but ignored in the bias mitigation literature."
+    ],
+    "section": "Conclusion",
+    "question_type": "limitation",
+    "paper_id": "1909.00871",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据直接列出所有比较方法的根本局限：依赖预定义性别词表/配对及强加性别二元。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "论文提出的模块化架构将事件抽取任务分解为哪三个基本子问题？",
+    "evidence_sentences": [
+      "We propose a modular architecture which decomposes the task into three fundamental sub-problems: (1) representation INLINEFORM0 scoring, (2) aggregation, and (3) global constraints."
+    ],
+    "section": "Introduction",
+    "question_type": "method",
+    "paper_id": "1610.09722",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据直接给出三个子问题：表示打分、聚合、全局约束。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "在论文对聚合方法的比较中，哪种聚合方法始终优于对应的max方法，并说明利用新闻簇中的信息冗余对任务有益？",
+    "evidence_sentences": [
+      "With respect to aggregation, sum-based methods consistently outperform their max counterparts, indicating that exploiting the redundancy of information in news clusters is beneficial to the task."
+    ],
+    "section": "Results",
+    "question_type": "experiment",
+    "paper_id": "1610.09722",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据直接说明基于sum的方法持续优于max方法，并指出利用新闻簇冗余有益。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "论文中使用的 PMB v.2.1.0 数据集在英语、德语、意大利语和荷兰语上各包含多少句子？英语部分又是如何划分训练、开发和测试集的？",
+    "evidence_sentences": [
+      "The dataset consists of 4405 English sentences, 1173 German sentences, 633 Italian sentences and 583 Dutch sentences.",
+      "We divide the English sentences into 3072 training sentences, 663 development and 670 testing sentences."
+    ],
+    "section": "Methods ::: Data",
+    "question_type": "fact",
+    "paper_id": "1908.10461",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据直接给出各语言句子数及英语训练/开发/测试划分。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "在跨语言语义解析实验中，使用 TreeLSTM 直接建模依存结构相比顺序 BiLSTM 基线是否能带来一致的性能提升？",
+    "evidence_sentences": [
+      "TreeLSTMs do not outperform a baseline BiLSTM for Italian and Dutch and they show little improvement in performance for German.",
+      "however, in all settings explored treeLSTMs do not outperform a BiLSTM."
+    ],
+    "section": "Results and Analysis",
+    "question_type": "comparison",
+    "paper_id": "1908.10461",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据直接说明TreeLSTM在意大利语、荷兰语未优于BiLSTM，德语提升很小，不能带来一致提升。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "Interview 数据集中包含多少位说话人，其中主持人有多少位？",
+    "evidence_sentences": [
+      "These transcripts contain a total of 3M turns comprising 7.5M sentences (127M words) from 184K speakers, of which 287 are hosts."
+    ],
+    "section": "Interview Dataset",
+    "question_type": "fact",
+    "paper_id": "2004.03090",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据直接给出说话人总数184K及主持人287位，可回答。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "在角色建模任务中，论文如何将说话人角色信息注入到对话历史中？",
+    "evidence_sentences": [
+      "To condition on a speaker role, we prepend each utterance in the dialog history with a role-specific speaker ID.",
+      "These role-specific speaker IDs are modeled by a speaker embedding layer of the same dimensions as the transformer hidden state, injected into the transformer input layer."
+    ],
+    "section": "Tasks and Experiments ::: Task 1: Role Modeling ::: Conditioning on Speakers",
+    "question_type": "method",
+    "paper_id": "2004.03090",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据说明在对话历史前添加角色特定speaker ID，并经说话人嵌入层注入transformer输入层。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "OGTD v1.0 数据集的标注流程是怎样的？标注者需要标注哪些类别，标注一致性是如何处理的？",
+    "evidence_sentences": [
+      "Based on explicit annotation guidelines written in Greek and our proposal of the definition of offensive language, a team of three volunteers were asked to classify each tweet found in the dataset with one of the following tags: Offensive, Not Offensive and Spam, which was introduced to filter out spam from the dataset.",
+      "Inter-annotator agreement was subsequently calculated and labels with 100% agreement were deemed acceptable annotations.",
+      "In cases of disagreement, labels with majority agreement above 66% were selected as the actual annotations of the tweets in question."
+    ],
+    "section": "The OGTD Dataset ::: Pre-processing and annotation",
+    "question_type": "method",
+    "paper_id": "2003.07459",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据描述了标注指南、三类标注标签及一致性处理方式，可回答。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "在 OGTD 上哪个模型表现最好？它与经典机器学习模型以及多语言 BERT 相比表现如何？",
+    "evidence_sentences": [
+      "As we can see LSTM and GRU with Attention outperformed all the other models in-terms of macro-f1.",
+      "Notably it outperformed all other classifical models and deep learning models in precision, recall and f1 for Offensive class as well as the Not Offensive class.",
+      "However, fine tuning BERT-Base Multilingual Cased model did not achieve good results."
+    ],
+    "section": "Methods ::: Results",
+    "question_type": "comparison",
+    "paper_id": "2003.07459",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据表明LSTM和GRU with Attention表现最好，并说明其优于经典模型、多语言BERT效果不佳。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "在Task 1（推文是否报告药物不良反应）中，作者通过交叉验证发现处理类别不平衡的最佳策略是什么？",
+    "evidence_sentences": [
+      "The best performance in our cross-validation experiments was obtained using under-sampling with the class proportion 1:2."
+    ],
+    "section": "Machine Learning Framework",
+    "question_type": "method",
+    "paper_id": "1805.04558",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据直接指出交叉验证中最佳策略是1:2比例的欠采样。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "在Task 2（药物摄入分类）中，作者用类别权重处理不平衡的交叉验证策略在官方测试集上是否有效？",
+    "evidence_sentences": [
+      "Our strategy of handling class imbalance through class weights did not prove successful on the test set (even though it resulted in increase of one point in F-measure in the cross-validation experiments)."
+    ],
+    "section": "Task 2 (Classification of Tweets for Medication Intake)",
+    "question_type": "experiment",
+    "paper_id": "1805.04558",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据明确说明类别权重策略在测试集上未成功，尽管交叉验证中F值提升一点。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "论文在结论中总结的两类新特征分别是什么？它们各自依据什么信号来判断一条消息更可能是谣言？",
+    "evidence_sentences": [
+      "We introduced two new categories of features which significantly improve instantaneous rumour detection performance.",
+      "Novelty based features consider the increased presence of unconfirmed information within a message with respect to trusted sources as an indication of being a rumour.",
+      "Pseudo feedback features consider messages that are similar to previously detected rumours as more likely to also be a rumour."
+    ],
+    "section": "Conclusion",
+    "question_type": "method",
+    "paper_id": "1611.06322",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "model review missing, keep candidate",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "在即时谣言检测设定下，论文提出的方法与传统基线 Liu 和 Yang 相比准确率表现如何？当允许 12 到 24 小时检测延迟后，这一优势是否仍然存在？",
+    "evidence_sentences": [
+      "In contrast, the combination of novelty and pseudo relevance based features performs significantly better (sign test with $p < 0.05$ ) than the baselines for instantaneous rumour detections.",
+      "When increasing the detection delay to 12 and 24 hours, all three algorithms reach comparable performance with no statistically significant difference, as seen in table 4."
+    ],
+    "section": "Rumour detection effectiveness",
+    "question_type": "comparison",
+    "paper_id": "1611.06322",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "model review missing, keep candidate",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "论文构建的人类活动数据集规模有多大，涉及多少活动模式、用户和推文？",
+    "evidence_sentences": [
+      "First, starting with a set of nearly 30,000 human activity patterns, we compile a very large dataset of more than 200,000 users undertaking one of the human activities matching these patterns, along with over 500 million total tweets from these users."
+    ],
+    "section": "Introduction",
+    "question_type": "fact",
+    "paper_id": "1907.08540",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "model review missing, keep candidate",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "论文对活动预测任务的整体难度和模型表现得出了什么结论？",
+    "evidence_sentences": [
+      "While the overall prediction scores are not very high, the models that we trained do show that they are able to generalize findings from one set of users to another.",
+      "This is evidence that the task is feasible, but very difficult, and it could benefit from further investigation."
+    ],
+    "section": "Conclusions",
+    "question_type": "limitation",
+    "paper_id": "1907.08540",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "model review missing, keep candidate",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "这篇论文的 TED Talk 语料库是如何从转录文本中构建和标注“Laughter”与“No-Laughter”句子的？",
+    "evidence_sentences": [
+      "Most transcripts of the talks contain the markup `(Laughter)', which represents where audiences laughed aloud during the talks.",
+      "In this study, sentences containing or immediately followed by `(Laughter)' were used as `Laughter' sentences, as shown in Figure FIGREF4 ; all other sentences were defined as `No-Laughter' sentences."
+    ],
+    "section": "TED Talk Data",
+    "question_type": "fact",
+    "paper_id": "1702.02584",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "model review missing, keep candidate",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "与基于人工特征的传统模型相比，CNN 模型在幽默识别任务中表现出哪些优势？",
+    "evidence_sentences": [
+      "The empirical evaluation results suggest that the CNN-based model has an advantage on the humor recognition task.",
+      "In addition, focusing on the system development time, generating and implementing those features in the conventional model would take days or even weeks. However, the CNN model automatically learns its optimal feature representation and can adjust the features automatically across data sets."
+    ],
+    "section": "Experiments",
+    "question_type": "comparison",
+    "paper_id": "1702.02584",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "model review missing, keep candidate",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "这篇论文在对《亨利八世》进行逐场景作者归属时使用了什么分类器和特征集，并如何避免因在同一部剧的场景上测试而造成过拟合？",
+    "evidence_sentences": [
+      "In the first experiment we perform an attribution of individual scenes of H8 using the Support Vector Machine as a classifier and the frequencies of 500 most frequent rhythmic types and the frequencies of 500 most frequent words as a feature set.",
+      "To avoid the risk of overfitting which may be caused by testing the model on the scenes from the same play as it was trained on, we do not perform a standard k-fold cross validation. Instead, we classify scenes of each play by a model trained on the rest, i.e. 5 scenes of Shakespeare’s Coriolanus are classified by a model trained on the scenes from the remaining 3 plays by Shakespeare, 4 plays by Fletcher and 5 plays by Massinger, 27 scenes of Cymbeline are classified in the same way and so on."
+    ],
+    "section": "Attribution of Particular Scenes",
+    "question_type": "method",
+    "paper_id": "1911.05652",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据明确给出分类器、特征集及避免过拟合的跨剧训练方式。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "根据滚动归属分析，论文认为《亨利八世》第3幕第2场的作者转换点与Spedding的划分有何不同？",
+    "evidence_sentences": [
+      "Scene 3.2 is usually attributed to both Shakespeare and Fletcher. All three sets of models support this.",
+      "While Spedding and other authors locate the shift to line 2081, all our sets of models indicate that it occurred later. Combined models locate it precisely at line 2200 (in agreement with earlier studies by Merriam BIBREF25, BIBREF26."
+    ],
+    "section": "Rolling attribution of the play",
+    "question_type": "comparison",
+    "paper_id": "1911.05652",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据直接对比了Spedding的2081行与模型给出的更晚转换点2200行。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "论文指出继续预训练（CPT）阶段存在哪些主要局限？其中菲律宾语（Filipino）的情况如何？",
+    "evidence_sentences": [
+      "First, tokenization can impose a fundamental bottleneck on language adaptation.",
+      "Second, Filipino is not explicitly represented in the current CPT corpus.",
+      "For Filipino, the primary limitation is direct data coverage."
+    ],
+    "section": "3.4 Limitations of Continued Pre-training",
+    "question_type": "limitation",
+    "paper_id": "2609.18310",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据列出CPT局限，并说明菲律宾语未在语料中明确覆盖及数据覆盖限制。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "ASPIRE 在线的调度器如何估计每个请求的接受率 α_i，并据此为该请求选择目标草稿长度？",
+    "evidence_sentences": [
+      "If request 𝑖verifies after drafting 𝑑𝑖tokens and 𝑎𝑖are accepted, we set ˆ𝛼𝑖= 𝑎𝑖/min(𝑎𝑖+1, 𝑑𝑖), treating a partial acceptance as 𝑎𝑖successes followed by one failure, and a full acceptance as 𝑑𝑖successes.",
+      "We then update 𝛼𝑖by exponential smoothing: 𝛼𝑖←𝜔𝛼𝑖+ (1 −𝜔)ˆ𝛼𝑖.",
+      "Each request independently selects a target draft length using the expected speculation efficiency objective of Leviathan et al. (2023)."
+    ],
+    "section": "4.2 Speculation Scheduler",
+    "question_type": "method",
+    "paper_id": "2609.17943",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据给出了接受率估计与平滑更新公式，并说明目标草稿长度基于预期推测效率选择。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "ASPIRE-Fixed 和 ASPIRE-FSM 这两个消融变体分别移除或替换了 ASPIRE 的哪些组件？",
+    "evidence_sentences": [
+      "ASPIRE-Fixed disables the unified mixed forward and speculation scheduler, retaining only the refresh layer under synchronized batching with a fixed draft length.",
+      "ASPIRE-FSM keeps adaptive control, but replaces our scheduler with a simple feedback rule that increases the draft length when all drafted tokens are accepted and decreases it otherwise."
+    ],
+    "section": "5.3 In-depth Analysis",
+    "question_type": "comparison",
+    "paper_id": "2609.17943",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据分别说明ASPIRE-Fixed和ASPIRE-FSM移除或替换的组件。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "在跨数据集迁移的54个设置中，GRPO、SFT和SFT→GRPO分别有多少次取得最高准确率？GRPO相对SFT的平均提升有多大？",
+    "evidence_sentences": [
+      "Among the 54 settings in which the training and test datasets differ, GRPO achieves the highest accuracy in 29, SFT in 19, and SFT→GRPO in 6.",
+      "However, GRPO’s average improvement over SFT is less than one point."
+    ],
+    "section": "1 Introduction",
+    "question_type": "experiment",
+    "paper_id": "2609.17848",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据给出54个设置中各方法最高准确率次数，并指出GRPO平均提升不足1个百分点。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "DocLLM 与现有多模态 LLM 在架构上有何不同？它通过什么方式来建模文本语义与空间版面之间的跨模态对齐？",
+    "evidence_sentences": [
+      "Our model differs from existing multimodal LLMs by avoiding expensive image encoders and focuses exclusively on bounding box information to incorporate the spatial layout structure.",
+      "Specifically, the cross-alignment between text and spatial modalities is captured by decomposing the attention mechanism in classical transformers to a set of disentangled matrices."
+    ],
+    "section": "ABSTRACT",
+    "question_type": "comparison",
+    "paper_id": "2401.00908",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据直接说明架构差异及通过分解注意力矩阵建模跨模态对齐。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "在 SDDS 设置下，DocLLM-7B 相对于 GPT-4、Llama2 以及 mPLUG-DocOwl、UReader 等基线取得了怎样的整体结果？",
+    "evidence_sentences": [
+      "In the SDDS setting, as shown in the Table 5, we observe that DocLLM-7B excels in 12 out of 16 datasets, inclusively compared to ZS results of GPT4 and Llama2, and SDDS results of mPLUG-DocOwl and UReader.",
+      "Among equivalent models (excluding GPT4), our model outperforms in 14 out of 16 datasets."
+    ],
+    "section": "4.3 Downstream Evaluation",
+    "question_type": "experiment",
+    "paper_id": "2401.00908",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据给出SDDS设置下与GPT-4、Llama2、mPLUG-DocOwl、UReader相比的整体结果。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "该框架如何把数据适用性、物理有效性和预测不确定性拆分为不同决策？分别由哪些机制实现？",
+    "evidence_sentences": [
+      "A k-nearest-neighbor weight attenuates residual corrections for poorly supported queries, while a study-specific areal beam-power-density criterion withholds predictions outside the adopted conduction envelope.",
+      "Conformal intervals are evaluated on the retained physics-valid set, and SHAP and Sobol analyses assess residual sensitivity.",
+      "Separating data applicability, physics validity, and predictive uncertainty into distinct decisions lets the framework transfer where an unconstrained model does not, and withhold predictions where no model class performs adequately."
+    ],
+    "section": "Abstract",
+    "question_type": "multi_hop",
+    "paper_id": "2609.18863",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据分别说明三类决策及其对应机制：kNN、物理判据、共形区间。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "论文如何界定 qPD 阈值 τq 的性质与适用范围？其选择过程存在什么局限？",
+    "evidence_sentences": [
+      "It is a study-specific validity rule rather than a universal keyhole threshold.",
+      "The available development record does not establish that the value was specified prospectively before inspection of the focus-zero results."
+    ],
+    "section": "3.4 Group-CV conformal uncertainty quantification and physics-domain abstention",
+    "question_type": "limitation",
+    "paper_id": "2609.18863",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据界定τq为研究特定有效性规则并指出未前瞻性设定的局限。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "论文将 deep V-learning 的更新误差分解为哪些部分，这些部分又如何进入策略损失界？",
+    "evidence_sentences": [
+      "We decompose the update error into six residuals: fitting, transition reuse, target construction, replay, action selection, and exploration.",
+      "Under 𝐿𝑠concentrability, their 𝐿𝑝 norms, with 𝑝= 𝑠/(𝑠−1), control expected 𝐿1 policy loss."
+    ],
+    "section": "ABSTRACT",
+    "question_type": "method",
+    "paper_id": "2609.18782",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据列出六个残差并说明其Lp范数控制策略损失界。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "论文是否指出 score approximation error 可能导致无法消除的策略损失下限？",
+    "evidence_sentences": [
+      "A separate construction shows that score error can sustain a positive policy-loss floor (Proposition 4.8)."
+    ],
+    "section": "1.1 Algorithms and analysis",
+    "question_type": "limitation",
+    "paper_id": "2609.18782",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据明确指出score error可维持正策略损失下限。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "论文提出的可扩展半定松弛算法在计算复杂度和空间复杂度上分别是多少，关键原因是什么？",
+    "evidence_sentences": [
+      "For a graph with E edges, the sparse matrix bF has O(n + E) nonzero entries, while H has O(n) nonzero entries, thus, M has O(n+E) nonzero entries.",
+      "Since iterative solvers are based on matrix-vector multiplications, their complexity is O(n + E) for a sparse M.",
+      "Thus, Algorithm 2 has a computational complexity of O(Ln(n + E)) and a space complexity of O(n + E)."
+    ],
+    "section": "3.2 Scalable Semidefinite Relaxation",
+    "question_type": "method",
+    "paper_id": "2609.18545",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据直接给出计算复杂度O(Ln(n+E))、空间复杂度O(n+E)及基于稀疏矩阵迭代求解的关键原因。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "论文认为回声室检测与社区检测、最大割等图问题在目标函数上的关键区别是什么？",
+    "evidence_sentences": [
+      "In echo chamber detection, interactions inside the echo chamber and between the echo chamber and outside should be considered (but not between nodes outside the echo chamber) which is not supported by the community detection problem as well as by classical theoretical computer science problems, such as maximum graph cut and maximum clique [9]."
+    ],
+    "section": "1 Introduction",
+    "question_type": "comparison",
+    "paper_id": "2609.18545",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据明确说明回声室检测需考虑室内部及室与外部交互、不考虑外部节点间交互，从而区别于社区检测和最大割等问题。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "这篇论文如何用统计力学解释双下降现象的核心机制？",
+    "evidence_sentences": [
+      "The equipartition theorem then distributes the energy among the d degrees of freedom in shares of T/2, so at a fixed training loss adding parameters lowers the temperature and drives the Boltzmann distribution toward the stationary path.",
+      "Finally, adding parameters can only lower the L2 norm of the stationary path, so a solution sampled at fixed loss is less likely to be large with increasing d, effectively increasing weight regularization."
+    ],
+    "section": "Abstract",
+    "question_type": "method",
+    "paper_id": "2609.19076",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据用统计力学的温度、玻尔兹曼分布和L2范数降低，直接说明增加参数如何影响双下降机制。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "论文中定理1（有限训练时间等价于权重衰减）给出了什么定量结论？",
+    "evidence_sentences": [
+      "By Theorem 1, a run of length t has the fluctuations of a run with weight decay λ + 1/(2t), up to a factor two, and the mean fit of a run with weight decay λ + 1/t, up to a factor 1.3 (Ali et al., 2019); the finite training time caps the size of the fit whatever the conditioning of the data."
+    ],
+    "section": "2.4 The path integral over curves",
+    "question_type": "method",
+    "paper_id": "2609.19076",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据直接给出定理1的定量结论：等效权重衰减为λ+1/(2t)和λ+1/t，并附误差因子。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "与先前基于欧氏度量的分析相比，本文为何认为Fisher-Rao几何会改变对人类数据需求量的判断？",
+    "evidence_sentences": [
+      "This previous work has primarily focused on analyzing asymptotic equilibrium states [10], [15] and worked with the traditional Euclidean metric, which progressively distorts distances between probability distributions as the dimensions increase.",
+      "Our approach fundamentally departs from this prior analysis by explicitly leveraging the information-geometric structure of the probability simplex.",
+      "This geometric perspective shows that the effective amount of human data required to prevent collapse is greater than previously implied."
+    ],
+    "section": "I. INTRODUCTION",
+    "question_type": "comparison",
+    "paper_id": "2609.18878",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据说明先前欧氏度量会扭曲距离，而Fisher-Rao几何表明防止崩溃所需人类数据量更大。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "在仅有观测变量数据的情况下，该论文的算法是如何从估计出的精度矩阵中确定终端节点并恢复对应的边权重和噪声方差的？",
+    "evidence_sentences": [
+      "Under Assumption 3.9, i is a terminal node in G if i ∈argmin Si,i. Moreover, if i is a terminal node in G, then Bi,• = −Si,• Si,i and σ2 i = 1/Si,i."
+    ],
+    "section": "3.3 Identifiability for SEMs over the Observed Variables",
+    "question_type": "method",
+    "paper_id": "2609.18535",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据直接给出终端节点判定条件及边权重、噪声方差恢复公式。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "这篇论文自己承认在潜变量相关的因果结构上存在哪些尚未提供理论保证的方面？",
+    "evidence_sentences": [
+      "Although our model provides a theoretical guarantee for recovering the causal edges between observed variables, it does not pay much attention to the causal edges between latent confounders and the causal edges from latent confounders to observed variables. Future work could focus on recovery guarantees for those aspects.",
+      "In addition, our model is based on a sparse plus low-rank structure. Another research direction is enable different structural conditions."
+    ],
+    "section": "5 Concluding Remarks",
+    "question_type": "limitation",
+    "paper_id": "2609.18535",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据明确说明未重点关注潜变量间及潜变量到观测变量的因果边，并列为未来工作。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "BMSFed 框架主要包含哪两个组成部分，它们分别如何应对多模态联邦学习中的模态不平衡问题？",
+    "evidence_sentences": [
+      "Our BMSFed mainly contains two parts: Firstly, we intend to alleviate the local modality imbalance by introducing a modal enhancement loss based on aggregated global prototypes to promote the performance of weak modality. Secondly, we complete the modality selection by building two separated submodular functions for selecting multi-modal clients (training with multi-modal data) and uni-modal clients (training with selected uni-modal data) respectively."
+    ],
+    "section": "1 Introduction",
+    "question_type": "method",
+    "paper_id": "2401.00403",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据列出BMSFed两部分及分别用于缓解模态不平衡和进行模态选择。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "在 ReFigBench 中，同一个 GPT-5.5 分别运行在 Claude Code 和 Codex 两个 harness 下时，specialized 工作流相对 direct 工作流的分数变化，以及在完全相同的 direct prompt 下两个 harness 的得分差异分别是多少？",
+    "evidence_sentences": [
+      "The same specialized investment significantly raises GPT-5.5 inside Codex (+3.2), significantly lowers the same model inside Claude Code (−2.2), lowers Claude Opus 4.6 and MiMo-v2.5, and leaves MiniMax-M3 unchanged (Figure 4).",
+      "Under the identical direct prompt, GPT-5.5 scores 1.4 points higher inside Claude Code, with a paired bootstrap interval of [0.7, 2.2], and blinded human annotators agree with the direction."
+    ],
+    "section": "Capability and the Harness Decide the Return on Workflow Effort",
+    "question_type": "comparison",
+    "paper_id": "2609.18844",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据直接给出Codex +3.2、Claude Code −2.2及相同direct prompt下1.4分差异。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "ReFigBench 在评分方法上存在哪些主要局限？请说明关于 rubric judge 与最强被测模型同族以及单任务分数稳定性的问题。",
+    "evidence_sentences": [
+      "Scoring with a pinned rubric judge remains a design choice, and the judge shares a model family with the strongest evaluated system [Panickssery et al., 2024, Gu et al., 2025].",
+      "Single task scores still vary by about three points across runs, which is why margins below two points are treated as ties."
+    ],
+    "section": "6 Limitations",
+    "question_type": "limitation",
+    "paper_id": "2609.18844",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据直接说明rubric judge与最强系统同族，以及单任务分数约三点波动导致小差距视为平局。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "论文如何从 Con Espressione 数据集构建用于评估 embedding 相似度结构的 ground truth？",
+    "evidence_sentences": [
+      "We use the same 150 terms as our adjectival space. To derive ground truth similarities between the terms we use both term co-occurrence in piles (from both groups) and co-occurrence for performance descriptions.",
+      "We weigh each source of similarity annotations the same, that is, the similarities from pile group one, pile group two, and performance description are summed up and finally normalized."
+    ],
+    "section": "3.2 Embeddings and Similarities",
+    "question_type": "method",
+    "paper_id": "2401.02979",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据说明使用150个词项，基于两组pile共现和performance description共现构建并归一化相似度。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "在这篇论文中，Predicting Emotions in Conversations (PEC) 任务的形式化定义是什么？",
+    "evidence_sentences": [
+      "Given some conversation C consisting of a specific sequence of labeled utterances up to and including time n, n ≥1, the task is to predict the emotion at the next turn, en+1."
+    ],
+    "section": "3 Problem Statement",
+    "question_type": "fact",
+    "paper_id": "2401.00383",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据直接给出PEC任务的形式化定义。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "根据论文，GLM 5.2 在 DeepSWE 和 SWE-bench 基准上的 reward hacking 率分别是多少？",
+    "evidence_sentences": [
+      "GLM 5.2 hacks in 57.2% of rollouts on DeepSWE and in 73% of rollouts on SWE-bench."
+    ],
+    "section": "Abstract",
+    "question_type": "fact",
+    "paper_id": "2609.19101",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据直接给出GLM 5.2在两个基准上的reward hacking率。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "在匹配假阳性率的情况下，DoM 探针与 LLM 监控器在检测 reward hacking 上的表现有何差异（以 Kimi K3 为例）？",
+    "evidence_sentences": [
+      "For Kimi K3, at matched FPR to the monitor, probes catch 3.0 and 33.1 percentage points more hacks on DeepSWE and ImpossibleBench respectively, and miss only 6.6 points more on SWEBench."
+    ],
+    "section": "4.1 Probes are Effective Reward Hacking Monitors",
+    "question_type": "comparison",
+    "paper_id": "2609.19101",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据直接比较Kimi K3上探针与监控器在匹配FPR时的检测差异。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "论文指出，对于一个有 d 个参数和 h 个隐藏神经元的 DAG ReLU 网络，其 pathlifting Jacobian ∂θΦ 的秩等于什么？",
+    "evidence_sentences": [
+      "An interesting result of this previous work, which we are able to recover in this paper with an independent methodology, is that for a DAG ReLU network with d parameters and h hidden neurons, the rank of its pathlifting Jacobian ∂θΦ is equal to d −h."
+    ],
+    "section": "1 Introduction",
+    "question_type": "fact",
+    "paper_id": "2609.18682",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据直接说明pathlifting Jacobian的秩等于d−h。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "论文在实验部分如何比较用 skeleton matrix 计算 pathlifting Jacobian 与反向传播方法的效率？",
+    "evidence_sentences": [
+      "In this last section of the paper, we use the Python package available at this GitLab to compare the computational cost of computing ∂θΦ(θ) ∈R(P, d) when such computation is done using proposition 2 or by backpropagation with the Python package torch.",
+      "As expected, computing the Jacobian with the skeleton matrix is faster than using the naive method, which loops over the dimensions of the pathlifting."
+    ],
+    "section": "4 Experiment",
+    "question_type": "experiment",
+    "paper_id": "2609.18682",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据说明用Python包比较计算成本，并给出skeleton matrix更快的结论。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "根据论文的 RAI 分析，当新重综合域的结构覆盖度（S）为零时 RAI 会如何变化？论文分别举了哪些具体例子？",
+    "evidence_sentences": [
+      "The most extreme case is ABC-rewrite, where all mechanisms are tied with RAI = 0.001 because structural coverage is zero (S = 0) even though adaptation need is high (N = 0.798).",
+      "For LUT4, however, all DeepGate-family RAI scores collapse toward zero because structural coverage is zero (S = 0), even though adaptation need is high."
+    ],
+    "section": "IV. RESULTS (D. RAI Results for Classification-based SOTA GNNs; E. RAI Results for Embedding-based SOTA GNNs)",
+    "question_type": "limitation",
+    "paper_id": "2609.18595",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据说明S=0时RAI变为0.001或趋近零，并给出ABC-rewrite和LUT4例子。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "作者对多模态推理任务（AI2D、LogicVista、MathVista、MMAU）上的性能提升做了哪些混淆因素审计？审计发现了哪些具体的任务相关现象？",
+    "evidence_sentences": [
+      "On AI2D, training substantially reduces the official parser’s failure-to-extract rate, indicating that part of the improvement comes from better output-format compliance rather than only changes in answer content.",
+      "For MMAU, a phoneme-counting question template accounts for a substantial fraction of the observed improvement. Excluding this template, the remaining problems still show a positive improvement."
+    ],
+    "section": "6.6 ANALYSIS OF MULTIMODAL IMPROVEMENTS",
+    "question_type": "limitation",
+    "paper_id": "2609.18587",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "model review missing, keep candidate",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "论文提出的学习式大气评判器（learned atmospheric critic）是如何把判别器的输出转化为「不真实度」分数的？在理想情况下这个分数等价于什么？",
+    "evidence_sentences": [
+      "Using vµ,τ, define Sadv(Qµ,τ) = Ey∼Qµ,τ [1 −vµ,τ(y)] −Ex∼P [exp(−vµ,τ(x))] .",
+      "With an optimal classifier and access to the true distributions, it holds that Sadv(Qµ,τ) = DKL(Qµ,τ ∥P) (see Appendix A).",
+      "In a practical setting, with finite data and limited classifier capacity, Equation (1) instead estimates a variational lower bound and is generally not a calibrated KL divergence."
+    ],
+    "section": "2 Method",
+    "question_type": "method",
+    "paper_id": "2609.18381",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "model review missing, keep candidate",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "ALTAS 的路由器具体依据哪些信号和阈值来决定一个问题是走贪心解码还是走晚期轨迹校正？它是否需要训练额外的探针或分类器？",
+    "evidence_sentences": [
+      "The gate reads three quantities: the terminal entropy H(N), the model-level late-layer linearity ¯R2, and a clinical/general tag (Sec. III-B).",
+      "The three constants are τR2 = 0.50, τH = 0.5 nats, and a cosine acceptance of 0.65, the first two calibrated without labels on 15 prompts (Sec. III-C).",
+      "ALTAS is an inference-time method that requires no external training."
+    ],
+    "section": "III. METHOD",
+    "question_type": "method",
+    "paper_id": "2609.14825",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "model review missing, keep candidate",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "论文为什么认为简单的时间戳重排序或时间衰减机制不适合用于可变更的RAG记忆，它与GC-Mem的处理方式有何本质区别？",
+    "evidence_sentences": [
+      "When subjected to state mutation, standard dense retrieval Lewis et al. [2020], Karpov et al. [2024] falters because heuristic time-decay algorithms indiscriminately erase valid historical invariants alongside stale facts.",
+      "Timestamp heuristics blindly penalize all historical chunks, discarding valid, non-contradicted long-term facts alongside stale ones."
+    ],
+    "section": "2 Related Work / 6.1 Timestamp Baselines vs. GC-Mem",
+    "question_type": "comparison",
+    "paper_id": "2609.16073",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "model review missing, keep candidate",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "在什么条件下不应部署GC-Mem？论文对配套冲突检测器的召回率提出了什么要求，为什么？",
+    "evidence_sentences": [
+      "GC-Mem should only be implemented when paired with a conflict detector capable of > 50% recall.",
+      "Models like gpt-4.1-mini exhibit 100% precision but < 1% recall; they fail to detect contradictions, rendering the protocol inert."
+    ],
+    "section": "7 Discussion and Limitations",
+    "question_type": "limitation",
+    "paper_id": "2609.16073",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "model review missing, keep candidate",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "THESEUS 将多跳知识图谱问答建模为何种问题？这种框架的可追溯性优势体现在哪里？",
+    "evidence_sentences": [
+      "Motivated by this observation, we model question answering as question-conditioned navigation: given a graph, a topic entity, and a question, the model follows a chain of relations, guided by the question’s semantics, to reach the answer.",
+      "A notable advantage of this framing is traceability: each reasoning step corresponds to a discrete relation, so the resulting path itself becomes part of the explanation."
+    ],
+    "section": "1 Introduction",
+    "question_type": "method",
+    "paper_id": "2609.14528",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "model review missing, keep candidate",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "在 KINSHIP 的主实验结果中，路径基模型的答案排名与轨迹保真度呈现什么关系？MINERVA 和 SQUIRE 的表现对比说明了什么？",
+    "evidence_sentences": [
+      "On KINSHIP, MINERVA achieves the strongest answer-ranking performance among the path-based agents.",
+      "SQUIRE exhibits the opposite profile: despite substantially weaker answer ranking, it achieves the strongest path fidelity across all four path metrics and outperforms the shortest-path oracle on each of them.",
+      "The KINSHIP results therefore expose a clear separation between answer-reaching performance and trajectory fidelity."
+    ],
+    "section": "5 Experiments",
+    "question_type": "comparison",
+    "paper_id": "2609.14528",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "model review missing, keep candidate",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "论文提出的QPL语言与NatSQL等先前中间语言在设计理念上有何主要区别？",
+    "evidence_sentences": [
+      "Our approach in designing QPL is different from that of NatSQL and previous intermediary languages, in that we do not attempt to mimic the syntax of natural language and create succinct programs, but instead, we aim at using a compositional semantically regular query language, where all the nodes are executable nodes which feed into other nodes in a dataflow graph.",
+      "Our method does not aim at simplifying the mapping of a single question to a whole query, but instead at decomposing a question into simpler questions, which can then be mapped to simple queries."
+    ],
+    "section": "2.5. Simplified Target Language and Compositional Methods",
+    "question_type": "comparison",
+    "paper_id": "2312.14798",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "model review missing, keep candidate",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "在论文的实验中，直接预测QPL计划与直接预测CTE SQL表达式相比，哪种方法在Spider开发集上表现更好？为什么？",
+    "evidence_sentences": [
+      "We compare direct QPL prediction with direct prediction of CTE SQL expressions using a few-shot GPT3.5-turbo prompting method.",
+      "The results are shown in the second column of Table 4. They are overall lower than the fine-tuned T5-large model trained on direct QPL prediction, confirming that the abstract syntax of QPL is easier to learn than SQL syntax, even on single-clause SQL statements present in CTE programs."
+    ],
+    "section": "4.3. Direct QPL and CTE Prediction",
+    "question_type": "experiment",
+    "paper_id": "2312.14798",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "model review missing, keep candidate",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "根据论文，Context-aware Decoding（CAD）的核心思想是什么？它如何让生成更依赖输入上下文？",
+    "evidence_sentences": [
+      "CAD leverages the idea of pointwise mutual information and proposes a product-of-experts enhancement to the vanilla decoding method to make the generation more conditioned on the input evidence."
+    ],
+    "section": "1 Introduction",
+    "question_type": "method",
+    "paper_id": "2312.14335",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "model review missing, keep candidate",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "在 QFS 数据集上，CAD 对事实性错误（FactKB）和 ROUGE 分数分别产生了什么影响？",
+    "evidence_sentences": [
+      "In terms of results on QFS datasets, we notice that while CAD can reduce hallucination/factuality errors as measured by FactKB score, the ROUGE score is not improved on Dbpedia dataset and slightly drops on PubMedQA dataset."
+    ],
+    "section": "4 Results and Analysis",
+    "question_type": "experiment",
+    "paper_id": "2312.14335",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "model review missing, keep candidate",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "论文如何测量ChatGPT和Bard的文化自我感知？请说明其提示来源、运行次数和距离度量方法。",
+    "evidence_sentences": [
+      "We curate prompts based on the 39 questions used by GLOBE to calculate the nine dimensions (GLOBE, 2006).",
+      "Next, we prompt ChatGPT (Version 3.5) and Bard (Version 2023.07.13) with these questions, individually and in the same sequence used by the GLOBE study. After 25 independent runs, we average the output of the individual responses and collect information about the probability distribution (Table 2).",
+      "Finally, we use the Euclidean distance to gauge the cultural difference between an LLM and the countries as a summary statistic based on the nine GLOBE cultural dimensions."
+    ],
+    "section": "6.1. Method",
+    "question_type": "method",
+    "paper_id": "2312.17256",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "model review missing, keep candidate",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "实验结果显示ChatGPT和Bard在文化上分别最接近哪些国家/地区？它们共同认为最不相似的国家/地区有哪些？",
+    "evidence_sentences": [
+      "Employing the Euclidean distance metric, we observe that ChatGPT is culturally closest to Finland (Euclidean distance = 1.205), French-speaking Switzerland (1.289), English-speaking Canada (1.470), China (1.544), and Australia (1.546).",
+      "Bard exhibits cultural proximity to Australia (0.696), English-speaking Canada (0.725), the United States (0.875), the indigenous ethnic group of South Africa (0.906), and Israel (0.959; detailed in the Online Supplement).",
+      "Interestingly, both LLMs identify the same culturally least similar countries, with only slight variation in ranking: Hungary (ChatGPT: 3.493; Bard: 2.847), Russia (3.244; 2.908), Greece (3.181; 2.750), Morocco (2.935; 2.642), and Guatemala (2.817; 2.556)."
+    ],
+    "section": "6.2. Results",
+    "question_type": "comparison",
+    "paper_id": "2312.17256",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "model review missing, keep candidate",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "PROSE 如何将步骤级 PRM 分数聚合为轨迹奖励，为什么采用这种聚合方式而不是平均或求和？",
+    "evidence_sentences": [
+      "To convert step scores into a trajectory reward, PROSE uses the minimum score across reasoning steps,",
+      "Mean or sum aggregation can be increased by adding high-scoring steps that dilute a flawed one, whereas the minimum can improve only when the weakest step improves."
+    ],
+    "section": "4 Method",
+    "question_type": "method",
+    "paper_id": "2609.16660",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "model review missing, keep candidate",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "在 Qwen3-1.7B 这类小规模策略上，PROSE 与推理时 PRM 选择（如 best-of-N）相比表现如何？论文对此给出了什么一般性结论？",
+    "evidence_sentences": [
+      "At 1.7B, however, the ordering reverses on three of four datasets—inference-time best-of-N leads on average (0.633 vs. 0.614)—and PROSE prevails only on DDXPlus.",
+      "The practical implication is that internalization pays off once the policy is strong enough to act on the signal, from roughly 4B in our setting, while below that scale the reward is better used at inference time."
+    ],
+    "section": "6.3 Ablation: Effect of model scale",
+    "question_type": "experiment",
+    "paper_id": "2609.16660",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "model review missing, keep candidate",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "在 Lasso 正则化路径发现任务中，使用 Gemini-3.1 Pro 时，Dream-RSI 相比 Recursive Fixed Exploration 在平均运行时和发现代理调用次数上的表现如何？",
+    "evidence_sentences": [
+      "With Gemini-3.1 Pro, it reduces the average runtime across the six held-out datasets from 3587.1 ms to 2931.0 ms while using only 317 discovery-agent calls, compared with 550 calls for fixed exploration."
+    ],
+    "section": "4.1. Algorithm Engineering",
+    "question_type": "experiment",
+    "paper_id": "2609.14858",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "model review missing, keep candidate",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "这篇论文用大规模语言模型做的实证研究，四种符号关系（syntagmatic、paradigmatic、antithetic、meronymic）在不同文体的论证中分布如何？",
+    "evidence_sentences": [
+      "Mathematics draws on all four, where inference and case analysis account for most items (SYN 56.5%, 95% CI [52.6, 60.3]; MER 32.1%, [28.5, 35.8]) and contradiction occurs at a non-trivial rate (ANT 10.2%, [8.1, 12.8]).",
+      "Legal and everyday reasoning, in contrast, concentrate heavily on inference (SYN 83.5% and 93.9%, respectively), with the other three relations nearly absent."
+    ],
+    "section": "5.2.1 Distribution Across Genres",
+    "question_type": "experiment",
+    "paper_id": "2609.15194",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "model review missing, keep candidate",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "作者自己指出该研究存在哪些主要局限？尤其是标注数据来源和语料抽样方面的问题。",
+    "evidence_sentences": [
+      "The most important is that every label analysed in our evaluation experiment is produced by large language models, so the agreement we observe measures how consistently the scheme can be applied, not whether the labels are correct as models trained on overlapping data can agree and still be wrong together.",
+      "And because each genre is drawn from a single corpus that is not a random sample, the distributions we report describe these collections rather than their genres in full."
+    ],
+    "section": "7 Concluding Remarks",
+    "question_type": "limitation",
+    "paper_id": "2609.15194",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "model review missing, keep candidate",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "BiAlign 的核心思路是什么？它如何利用模型对 ICL 示例的偏好来提升学生模型的上下文学习能力？",
+    "evidence_sentences": [
+      "Specifically, we introduce the alignment of input preferences between student and teacher models by incorporating a novel ranking loss, in addition to aligning the token-level output distribution.",
+      "Our main hypothesis is that for an effective knowledge distillation, the student model should align with not only the teacher model’s output distribution but also its input preference (i.e., the more helpful an input is for generating the target, the more the model prefers that input)."
+    ],
+    "section": "Abstract",
+    "question_type": "method",
+    "paper_id": "2312.17055",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "model review missing, keep candidate",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "论文指出的主要局限是什么？",
+    "evidence_sentences": [
+      "As the first work on input preference alignment, one limitation of our paper is the additional computational overhead introduced by the ranking loss.",
+      "A further improvement could be to explore more efficient input alignment methods to improve the ICL capabilities of student models."
+    ],
+    "section": "Limitations",
+    "question_type": "limitation",
+    "paper_id": "2312.17055",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "model review missing, keep candidate",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "论文提出的 NORM 方法如何影响 GPT-3.5 在表格结构扰动下的表现？",
+    "evidence_sentences": [
+      "The results illustrate that applying NORM does not detrimentally affect the original results (T ), and it effectively refines perturbated data, aligning the outcomes closely with the original results, and in some instances, even showing slight improvement."
+    ],
+    "section": "4.3 Table Structure Normalization",
+    "question_type": "method",
+    "paper_id": "2312.16702",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "model review missing, keep candidate",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "在案例研究1中，作者为什么采用Low-Rank Adaptation，以及tuned-FinBERT在社交媒体数据集上为何不如BERT？",
+    "evidence_sentences": [
+      "We adopted the Low-Rank Adaptation learning strategy because we had a small amount of labeled data [32].",
+      "Tuned-FinBERT underperforming BERT for the social media dataset (78.60% vs. 81.10%) is also consistent, as social media text is often more jargon-laden than news articles for which FinBERT has been specially tuned."
+    ],
+    "section": "5.1.4 LLM Implementation; 5.1.5 Evaluation",
+    "question_type": "multi_hop",
+    "paper_id": "2312.17278",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "model review missing, keep candidate",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "在三个 Cola-GNN 流感数据集上，TERN 的 full-history 模式与季节性朴素预测、气候学以及在 US-Regions 上的 Chronos-2 相比结果如何？",
+    "evidence_sentences": [
+      "It ties the seasonal naive on Japan in RMSE (838 vs. 839) and exceeds it in PCC (0.926 vs. 0.913).",
+      "It outperforms the climatology on US-Regions (698 vs. 727) and equals the contaminated Chronos-2 there, and it matches the reported EpiGNN on US-States (199 vs. 200)."
+    ],
+    "section": "4. EXPERIMENTS",
+    "question_type": "comparison",
+    "paper_id": "2609.18407",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "model review missing, keep candidate",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "MuViS-C 使用哪些指标来评估虚拟传感器的鲁棒性？其中 scross 指标试图捕捉什么，又是如何定义的？",
+    "evidence_sentences": [
+      "We measure robustness with three metrics: the mean Performance under Corruption (mPC) and the relative Performance under Corruption (rPC) from Michaelis et al. [14], and the Baseline Crossing Severity (scross) we propose to capture worst-case fragility.",
+      "scross is the earliest severity at which any RMSEd,c,s is no better than RMSEnaive:"
+    ],
+    "section": "3.3 Evaluation protocol",
+    "question_type": "method",
+    "paper_id": "2609.18396",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "model review missing, keep candidate",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "在哪些情形下，序数-指数族混合边的方向无法从联合分布中识别？",
+    "evidence_sentences": [
+      "Converses show that both requirements are necessary: the three-category requirement is binding only for affine sufficient statistics, and the three-point requirement is binding under the canonical link.",
+      "In particular, if T (y) = c1y + c0 is affine, then for every forward model, there exist reverse parameters (γ1, v) with v̸ = 0 that induce the same joint distribution, and the models are not identifiable."
+    ],
+    "section": "3.2 Analysis of Non-Identifiability",
+    "question_type": "limitation",
+    "paper_id": "2609.17942",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据直接说明仿射充分统计量等情形下模型不可识别。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "在 OLMoE 中，将历史窗口从 1 层扩展到 11 层后，路由器 logit 的留出 R² 从多少提升到多少？",
+    "evidence_sentences": [
+      "In OLMoE, extending the history from one to eleven layers raises router-logit R2 from 0.59879 to 0.66544."
+    ],
+    "section": "Abstract",
+    "question_type": "fact",
+    "paper_id": "2609.17940",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据给出 R² 从 0.59879 提升到 0.66544。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "论文提出的 MBC（Manifold-Based Clustering）方法如何把 Theorem 2 中的几何阈值转化为聚类数量的 bracket 区间？",
+    "evidence_sentences": [
+      "MBC does this by first using a carefully constructed pilot graph to supply a baseline estimate of the observed ρ, denoted bρ. We then invert the two practical threshold curves at bρ to obtain the range of graph scales associated with this transition. Finally, we rebuild the mutual-kNN graphs across that range and record their connected-component count at each scale. The resulting range of counts forms the MBC bracket for the number of clusters supported by the sample."
+    ],
+    "section": "4 From thresholds to a bracket estimator",
+    "question_type": "method",
+    "paper_id": "2609.17892",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据描述了由阈值曲线反推尺度范围并统计连通分量得到 bracket 的流程。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "在 38 个合成数据集上，MBC 与 HDBSCAN-grid、DBSCAN-grid 在覆盖 K⋆ 和中位 bracket 宽度方面的实验结果分别如何？",
+    "evidence_sentences": [
+      "On the 38 synthetic datasets, MBC reports a median bracket width of 0 with 68% coverage of K⋆. HDBSCAN-grid covers K⋆on 92% of datasets at median width 3.5; DBSCAN-grid covers 84% at median width 6."
+    ],
+    "section": "5.1 Bracket calibration",
+    "question_type": "experiment",
+    "paper_id": "2609.17892",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据给出 MBC、HDBSCAN-grid、DBSCAN-grid 的覆盖率和中位 bracket 宽度。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "论文最终确定的AutoEncoder最佳优化算法、最佳激活函数以及最佳网络结构分别是什么？",
+    "evidence_sentences": [
+      "In this paper, the first question is to find the best optimization algorithm for training the weights of the AutoEncoder network, which was the SCG algorithm, and also the best activation function according to the optimization algorithm, which was ArcTan.",
+      "Different tests by changing the layers of AutoEncoder resulted in two hidden layers: the number of neurons in the first was 30, and the number of neurons in the second was 15."
+    ],
+    "section": "5. Conclusion",
+    "question_type": "method",
+    "paper_id": "2401.00883",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据明确给出 SCG、ArcTan 和两层 30/15 的网络结构。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "与经典机器学习方法相比，论文提出的AutoEncoder方法在precision和F1-score指标上提升了多少？",
+    "evidence_sentences": [
+      "Our proposed method performs better than other machine learning in precision and f1-score metrics by more than 11%."
+    ],
+    "section": "Abstract",
+    "question_type": "comparison",
+    "paper_id": "2401.00883",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据说明 precision 和 F1-score 提升超过 11%。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "论文介绍的模型依赖局部解释器叫什么？它与哪些方法进行了对比评估？",
+    "evidence_sentences": [
+      "The paper also introduces a model-dependent local interpreter called MEDLEY and evaluates its interpretation against LIME, Greedy, and Parzen."
+    ],
+    "section": "ABSTRACT",
+    "question_type": "comparison",
+    "paper_id": "2401.00193",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据直接给出局部解释器名称为MEDLEY，并列出与LIME、Greedy、Parzen对比。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "KAXAI 设计的 GAN 架构中，生成器网络和判别器网络各包含多少个隐藏层、每层分别有多少单元？",
+    "evidence_sentences": [
+      "The generator encompasses three hidden layers with 50, 25, and 12 units respectively, and an output layer with the same number of units as the dimensionality of the training data.",
+      "The discriminator also encompasses three hidden layers with 50, 25, and 12 units respectively, and an output layer with a single unit and a sigmoid activation function."
+    ],
+    "section": "3.3.2 The Architecture of the GAN Model",
+    "question_type": "method",
+    "paper_id": "2401.00193",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据明确说明生成器和判别器均有3个隐藏层，单元数分别为50、25、12。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "在与其他多设备 NILM 架构进行对比时，作者如何解释 FLAME 取得最低 macro MAE，并提醒读者该排名可能受什么影响？",
+    "evidence_sentences": [
+      "FLAME attains the lowest macro MAE among the compared architectures under this common protocol on all three data sets.",
+      "Because the four alternatives are reimplemented under this protocol without architecture-specific tuning, the table compares them under a single shared optimization setting rather than at the best configuration reported for each original method; the ranking may therefore reflect both architectural properties and compatibility with that setting."
+    ],
+    "section": "IV-D. Architecture Comparison",
+    "question_type": "comparison",
+    "paper_id": "2609.18315",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据说明FLAME取得最低macro MAE，并解释排名可能受统一优化设置及未针对架构调参影响。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "该CNN集成CCT模型在5折交叉验证的2类、3类和5类乳腺X线分类任务中准确率表现如何？",
+    "evidence_sentences": [
+      "The CNN-Integrated CCT model achieved consistently high performance across all five folds (see Table 3).",
+      "For the 2-class. 3-class and 5-class breast cancer mammography accuracy remained between 99% and 100% in all folds."
+    ],
+    "section": "4.1 Performance of 5-folds of the CNN-Integrated CCT Model",
+    "question_type": "experiment",
+    "paper_id": "2609.18212",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据直接给出2类、3类、5类乳腺X线分类在5折中准确率为99%到100%。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "论文声称所提CNN集成CCT模型相较传统CNN和ViT有哪些优势？",
+    "evidence_sentences": [
+      "The novelty of the proposed CNN-integrated CCT overcomes the limitation of CNN’s gradient degradation in the last layers by integrating convolutional tokenization with transformer-based learning.",
+      "Lighter than ViT, which is effective in capturing long-range dependencies, the model has also proven efficient in breast cancer classification by capturing long-range dependencies among breast tissue regions."
+    ],
+    "section": "Abstract",
+    "question_type": "comparison",
+    "paper_id": "2609.18212",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据指出模型克服CNN梯度退化且比ViT更轻，并有效捕捉长程依赖。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "在预处理比较中，iMINDBench 为什么选择 Global Norm 而不是 Sample Norm，两者对基线解码性能的影响有何不同？",
+    "evidence_sentences": [
+      "Sample Norm, following approaches used in wav2vec 2.0 and BrainBERT [13, 25], standardizes each input window independently.",
+      "Global Norm instead uses statistics estimated from the training set, preserving relative amplitude variation across examples while applying the same transformation to validation and test samples.",
+      "Global Norm yields consistently stronger baseline performance, improving ROC-AUC by more than 0.10 in some evaluated settings."
+    ],
+    "section": "4.2 Preprocessing",
+    "question_type": "method",
+    "paper_id": "2609.18104",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据说明Global Norm使用训练集统计并保留幅度变化，且基线性能更强、ROC-AUC提升明显。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "SIHA 如何解决隐藏智能体轨迹重建与结构推断之间的循环依赖？它的初始化与迭代精修分别依赖什么？",
+    "evidence_sentences": [
+      "SIHA resolves this dependency through structure-free initialization followed by structure-guided refinement.",
+      "As illustrated in Figure 2, the structure-agnostic hidden-state predictor (HSP-sa) first reconstructs the hidden trajectories from the visible observations alone.",
+      "SIHA therefore feeds the predicted structure back into the structure-guided hidden-state predictor (HSP-sg), which refines the hidden trajectories under structural guidance."
+    ],
+    "section": "4.1 Framework Overview",
+    "question_type": "method",
+    "paper_id": "2609.18045",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据直接说明SIHA先无结构初始化（HSP-sa仅用可见观测重建）再结构引导精修（HSP-sg以预测结构指导），完整回答问题。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "这篇论文自认的主要局限是什么？在隐藏智能体轨迹完全不可用时，未来工作打算探索什么？",
+    "evidence_sentences": [
+      "A limitation of the current formulation is its reliance on complete trajectories during training to supervise hidden-state reconstruction, although ground-truth edge labels are not required for model training or deployment.",
+      "The tested objectives without direct hidden-state supervision do not recover the performance of the supervised formulation, leaving structural inference with fully latent hidden agents an open problem.",
+      "Future work will investigate self-supervised hidden-state reconstruction and structural inference when hidden-agent trajectories are unavailable during both training and deployment."
+    ],
+    "section": "6 Conclusion",
+    "question_type": "limitation",
+    "paper_id": "2609.18045",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据明确指出训练依赖完整轨迹监督这一局限，并说明未来工作探索轨迹完全不可用时的自监督重建与结构推断。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "该研究在样本规模与验证策略方面主要存在哪些局限？",
+    "evidence_sentences": [
+      "First, the biopsy sample size is relatively small.",
+      "A related issue is that our performance evaluation was based on CV.",
+      "Using external datasets to further validate our model is highly necessary."
+    ],
+    "section": "4. Discussion",
+    "question_type": "limitation",
+    "paper_id": "2401.00128",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据直接给出样本量小、仅用CV评估、需外部数据验证三点局限，与问题对应。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "论文中定义了哪几种用于红队测试的上下文（Contexts）？它们分别是什么？",
+    "evidence_sentences": [
+      "CodeContext requires the model to produce code in 1 of 5 popular programming languages to solve the problem at hand, and then simulate its execution to provide the final answer.",
+      "ExplanationContext asks the model to first explain its understanding of the problem or rephrase it, and then provide the answer.",
+      "ImpersonationContext requests that the model impersonates a celebrated mathematician to provide the answer in their words.",
+      "RestoryingContext asks the model to solve the problem by putting it in 1 of 5 frames.",
+      "DefaultContext does not constitute a red teaming attempt and instead is used as a baseline."
+    ],
+    "section": "3.2 Contexts",
+    "question_type": "method",
+    "paper_id": "2401.00290",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据逐项定义CodeContext、ExplanationContext、ImpersonationContext、RestoryingContext及作为基线的DefaultContext，足以回答问题。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "论文在只改变 Oracle 验证配置、其他环节都冻结的情况下，同一批攻击样本被判定为 exploit 的比例会发生什么变化？",
+    "evidence_sentences": [
+      "Using the held-out-attacker arm, we freeze 45 Opus 5 rubrics, GPT-5.5-generated attack answers, evidence packets, certificates, and Haiku judge scores.",
+      "Exploitation is 15/45 (33.3%) under Claude Opus 5, 34/45 (75.6%) under GPT-5.6-sol, and 30/45 (66.7%) under Gemini-3.8-flash."
+    ],
+    "section": "6.2 Is the Failure Just a Missing Instruction? A Safety-Prompt Ablation",
+    "question_type": "experiment",
+    "paper_id": "2609.16816",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据表明在冻结其他环节时，仅更换评判模型使exploit比例从33.3%变为75.6%和66.7%，直接回答变化。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "论文所称的“紧有限时间界”具体紧在哪里？其主导项与什么理论结果一致？",
+    "evidence_sentences": [
+      "A key feature of our bounds is that the leading term, Σy, exactly matches with the covariance in the Central Limit Theorem (CLT) for the two-time-scale SA, and we call them tight finite-time bounds."
+    ],
+    "section": "Abstract",
+    "question_type": "fact",
+    "paper_id": "2401.00364",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据指出紧性在于主导项Σy与两时间尺度SA的CLT协方差完全一致，直接回答紧在哪里及与何理论一致。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "PRC 方法的核心步骤是什么？它如何同时继承悲观行为正则化并降低强化学习复杂度？",
+    "evidence_sentences": [
+      "Based on the insight, the key step in our approach is to constrain the action space to include only the actions with a high probability of being sampled by a behavior clone policy that represents the dataset action distribution.",
+      "As a result, our method not only inherits the pessimistic idea of behavior regularization but also reduces the complexity of the corresponding reinforcement learning problem."
+    ],
+    "section": "1 INTRODUCTION",
+    "question_type": "method",
+    "paper_id": "2401.00330",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据直接给出核心步骤（约束动作空间为行为克隆策略高概率动作）及继承悲观正则化并降低复杂度的结果。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "DGSR框架的核心思想是什么？",
+    "evidence_sentences": [
+      "The key idea is to use both equation and dataset-invariant aware neural networks combined with an end-to-end loss inspired by Bayesian inference."
+    ],
+    "section": "3 DEEP GENERATIVE SR FRAMEWORK",
+    "question_type": "method",
+    "paper_id": "2401.00282",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据直接说明DGSR核心思想是结合方程与数据集不变感知神经网络及受贝叶斯推断启发的端到端损失。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  },
+  {
+    "question": "DGSR论文中提到的三个主要局限性是什么？",
+    "evidence_sentences": [
+      "We note that DGSR has the following limitations of: (1) may fail to discover highly complex equations, (2) optimizing the numeric constants can get stuck in local optima and (3) it assumes all variables in f are observed."
+    ],
+    "section": "6 DISCUSSION AND FUTURE WORK",
+    "question_type": "limitation",
+    "paper_id": "2401.00282",
+    "source": "forward",
+    "audit_status": "candidate",
+    "reject_reason": "",
+    "review_decision": "通过",
+    "review_reason": "证据明确列出三个局限性：难以发现复杂方程、数值常数优化可能陷入局部最优、假设所有变量可观测。",
+    "reviewer": "DeepSeek/model",
+    "review_type": "model_review",
+    "review_status": "model_reviewed_pass"
+  }
+]

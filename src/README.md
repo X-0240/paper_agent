@@ -97,11 +97,13 @@ python -m pytest tests -q
 
 | 维度 | 指标 | 当前结果 |
 |---|---|---|
+| v300 检索 | 证据级 HitRate@5 / @10 | 候选 81.7% / 88.6%（202/202 test，模型复核），基线 72.8% / 82.2% |
+| v300 语料 | 论文/切片/split | 300 篇 / 16121 切片 / 100 dev + 200 test |
 | 检索 | QASPER 证据级 HitRate@5 | 33.1% 基线 / 39.2%（Rerank+邻接），2026-08-23 重测 |
 | 检索 | QASPER 章节级 / 论文级 HitRate@5 | 39.9% / 56.3%（2026-08-23） |
 | 中文题（88题，翻译成英文） | 证据级 / 章节级 HitRate@5 | 61.4% / 67.0%（2026-08-25，主指标证据级） |
 | 中文题（88题，原生英文改写） | 证据级 HitRate@5 / @10 / @20 | 64.8% / 75.0% / 85.2%（双AI交叉，章节级@5=72.7%） |
-| 中文题可靠性 | 99题双AI校验+人工复核 | 31题修正章节、11题判无效/无答案，有效88题 |
+| 中文题可靠性 | 99题双AI交叉校验+模型复核 | 31题修正章节、11题判无效/无答案，有效88题 |
 | 多格式 | multi_format_samples 解析通过率 | pytest 覆盖 6 类样例 |
 | 冲突粗筛 | 合成小集 P/R/F1 | 1.00 / 1.00 / 1.00 |
 | 综述质量 | LLM 评测（完整性/准确性/清晰度） | 7 / 9 / 8，avg 8.0（合成样例） |
@@ -125,6 +127,7 @@ docker build -t paper-agent .
 - `survey_agent.py`：单 ReAct Agent 综述编排，复用 agent_react 循环，工具前置/后置校验、pending_conflicts 聚合、预算降级
 - `retrieval_service.py`：唯一检索服务入口，统一查询计划、召回、重排、去重、稳定 chunk_id、缓存和预算边界
 - `evaluation/v150_pipeline.py`：v150语料的manifest、arXiv版本固定、PDF下载、分层split、候选出题审计和快照冻结入口
+- `evaluation/v300/manifest.json`、`evaluation/questions/v300_*`：v300 300篇论文和冻结评测题
 - `scripts/run_acceptance.py`：6 条固定 query 的验收脚本（简单/综述/冲突/超预算/无结果 + Transformer对比）
 - `rag_tool.py`：混合检索（BM25 + FAISS + 条件触发 Cross-Encoder 重排）
 - `web_search.py`：外网检索并发（Wikipedia/arXiv），统一来源结构与降级

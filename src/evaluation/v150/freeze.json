@@ -1,9 +1,11 @@
 {
   "version": "v150",
-  "created_at": "2026-09-17 22:51:06",
+  "created_at": "2026-09-18 04:03:32",
   "question_generation": {
     "model": "deepseek-v4-flash",
     "prompt_sha256": "ab0abd08bf53f7d9c71cf1016918648783f2ffbb3d32a4ae56ea7cb649903824",
+    "review_type": "model_review",
+    "reviewer": "Doubao/AI",
     "dev_reviewed": 68,
     "dev_passed": 64,
     "dev_modified": 4,
@@ -18,10 +20,10 @@
   "questions": {
     "v150_dev_candidates.json": "0ac1a6d965603cea874455f3209c3aeee9935c9941227dbd7880dc1eff782346",
     "v150_dev_valid.json": "b6e072d65a3d86b4e7a3920dc78426bcfa62c5ca40a089ed0723926e5c630dd8",
-    "v150_dev_reviewed.json": "c2ad90d38e2b5b8b3e741ea57906a62eeabdb3e876ff03b8c4c88e8cd54bbb18",
+    "v150_dev_reviewed.json": "dbf17f8a4b09db06c7edf05c85c69be753cec8ae8d23cdb76f7693ebbb4f38a2",
     "v150_test_candidates.json": "781aa9b7867afd11f0e65b7259a7224ff6a12df4f97c629cd8949c8d7569cbaf",
     "v150_test_valid.json": "44ab2918e229b13c72f7060de518694597bc483b0f90826800519694aa5f27f6",
-    "v150_test_reviewed.json": "ab1620f1d6d3f75a8123a94e6dc058688b4bc72bc5c56cd77245680ede941395"
+    "v150_test_reviewed.json": "f7d1d1b54d4cbf691fdd9af57eaabbdb32a70c64eedde62c06395aaa1999fef1"
   },
   "test_results": {
     "sealed_sha256": "9149e27f1b5bab509af615f37a1eb17b01fec1b4b4db1fe9d5cb6c032df9ad64",
@@ -29,6 +31,34 @@
     "forward_candidate_sha256": "31aa002bb7303bedc96644cbed711155936b5ce4dd2fdd9d21c8463f6e1c344d",
     "legacy88_candidate_sha256": "a4cf2766e5db14f004e1d84e0bd05d83717381e1850a8300a40f91faeb6f3e49",
     "latency_sha256": "f46b7db5758d52cedcfc10c4eee2b4e41c9ceb3f715ab4d5fcfdebece44207ee"
+  },
+  "sealed_summary": {
+    "baseline": {
+      "hits": 118,
+      "n": 149,
+      "rate": 0.7919463087248322,
+      "ci95": [
+        0.719838067248006,
+        0.8493786904933418
+      ]
+    },
+    "candidate": {
+      "hits": 126,
+      "n": 149,
+      "rate": 0.8456375838926175,
+      "ci95": [
+        0.7790157269833944,
+        0.8948845724115349
+      ]
+    },
+    "paired": {
+      "both": 112,
+      "baseline_only": 6,
+      "candidate_only": 14,
+      "neither": 17
+    },
+    "elapsed_s": 244.0,
+    "mode": "v150-sealed"
   },
   "retrieval_gate": {
     "legacy88_hits": 45,
