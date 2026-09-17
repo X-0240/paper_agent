@@ -22,12 +22,12 @@ def get_reranker():
         _MODEL=CrossEncoder(model_name)
     return _MODEL
 
-def rerank(query,items,top_n=5,snapshot="",max_chars=None):
+def rerank(query,items,top_n=5,snapshot="",max_chars=None,cache_scope=""):
     #Cross-Encoder精排：query和片段拼一起打分，比向量粗排更准
     if not items:
         return []
     max_chars=max_chars or RERANK_MAX_CHARS
-    key=cache_key(query,snapshot)
+    key=cache_key(f"{query}||{cache_scope}",snapshot)
     cached=_CACHE.get(key)
     if cached is not None:
         logger.info("Rerank缓存命中")
@@ -41,6 +41,9 @@ def rerank(query,items,top_n=5,snapshot="",max_chars=None):
     #全文片段参与打分，过长的再截断，避免证据在片段后半段被忽略
     pairs=[[query,it["text"][:max_chars]] for it in items]
     scores=model.predict(pairs)
-    ranked=[it for it,_ in sorted(zip(items,scores),key=lambda x:x[1],reverse=True)]
+    ranked=[]
+    for item,score in sorted(zip(items,scores),key=lambda x:x[1],reverse=True):
+        item["rerank_score"]=float(score)
+        ranked.append(item)
     _CACHE.set(key,ranked)
     return ranked[:top_n]

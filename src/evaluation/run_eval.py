@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 from evaluation.schema import load_questions
 from evaluation.metrics import evidence_hit,paper_hit,section_hit,wilson_ci
 from evaluation.retrievers import Retriever
+from retrieval_service import get_service
 
 #常见术语扩展：缩写补全，缓解中英文跨语言检索的词汇缺口
 TERM_MAP={
@@ -45,6 +46,9 @@ def main():
     parser.add_argument("--split",default=None)
     parser.add_argument("--limit",type=int,default=0)
     parser.add_argument("--output",default=None)
+    parser.add_argument("--engine",default="legacy",choices=["legacy","service"])
+    parser.add_argument("--query-source",default="original",choices=["original","literal","generated","offline_en"])
+    parser.add_argument("--rerank-mode",default="none",choices=["none","always","conditional"])
     args=parser.parse_args()
 
     load_dotenv()
@@ -56,11 +60,24 @@ def main():
     if args.limit:
         questions=questions[:args.limit]
     retriever=Retriever(faiss_path,model_path,mode=args.mode,alpha=args.alpha,candidates=args.candidates)
+    service=get_service() if args.engine=="service" else None
 
     rows=[]
     for q in questions:
         queries=build_queries(q,args.query_field)
-        if args.mode=="multi":
+        if service is not None:
+            plan=service.prepare(
+                q.question,
+                mode=args.query_source,
+                offline_query=q.query_en if args.query_source=="offline_en" else None
+            )
+            retrieved=service.search_prepared(
+                plan,
+                candidate_k=args.candidates,
+                rerank_mode=args.rerank_mode,
+                top_k=args.k
+            )
+        elif args.mode=="multi":
             retrieved=retriever.multi_query_search(queries,args.k,args.candidates,args.alpha)
         else:
             retrieved=retriever.search(queries[0],args.k)
@@ -81,7 +98,8 @@ def main():
     lo,hi=wilson_ci(hits,n)
     result={
         "config":{"questions":args.questions,"mode":args.mode,"k":args.k,"alpha":args.alpha,
-                  "candidates":args.candidates,"query_field":args.query_field,"split":args.split},
+                  "candidates":args.candidates,"query_field":args.query_field,"split":args.split,
+                  "engine":args.engine,"query_source":args.query_source,"rerank_mode":args.rerank_mode},
         "n":n,"hits":hits,"rate":hits/n if n else 0.0,"ci95":[lo,hi],"rows":rows
     }
     print(f"证据级@{args.k}={result['rate']:.1%}（{hits}/{n}，95%CI {lo:.1%}-{hi:.1%}）")
