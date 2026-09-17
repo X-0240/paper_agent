@@ -18,11 +18,12 @@ sys.path.insert(0,os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 load_dotenv()
 
 BASE=Path(__file__).resolve().parents[1]
-MANIFEST_PATH=BASE/"evaluation"/"v150"/"manifest.json"
-V150_ROOT=BASE/"datasets"/"v150"
+VERSION=os.getenv("CORPUS_VERSION","v150")
+MANIFEST_PATH=BASE/"evaluation"/VERSION/"manifest.json"
+V150_ROOT=BASE/"datasets"/VERSION
 PDF_DIR=V150_ROOT/"pdfs"
 SECTIONS_DIR=V150_ROOT/"sections"
-V150_INDEX_PREFIX=os.getenv("V150_FAISS_PATH",r"C:\Users\Public\papers_faiss_v150")
+V150_INDEX_PREFIX=os.getenv("V150_FAISS_PATH",rf"C:\Users\Public\papers_faiss_{VERSION}")
 ATOM="{http://www.w3.org/2005/Atom}"
 ARXIV="{http://arxiv.org/schemas/atom}"
 
@@ -141,7 +142,7 @@ def fetch_by_ids(ids):
     return out
 
 
-def fetch_candidates(existing_ids,per_stratum=40):
+def fetch_candidates(existing_ids,per_stratum=120):
     candidates={}
     for stratum,query in STRATA.items():
         for start,end in PERIODS.values():
@@ -191,13 +192,16 @@ def enrich_existing_metadata():
 
 def choose_candidates(candidates,total=100,recent=70):
     buckets=defaultdict(list)
+    recent_per_stratum=max(1,(recent+len(STRATA)-1)//len(STRATA))
+    older_per_stratum=max(1,(total-recent+len(STRATA)-1)//len(STRATA))
     for item in candidates:
         period="recent" if item["year"]>=2024 else "older"
         buckets[(item["selection_stratum"],period)].append(item)
     chosen=[]
     for stratum in STRATA:
         for period in ("recent","older"):
-            chosen.extend(sorted(buckets[(stratum,period)],key=lambda x:x.get("published_at",""),reverse=True)[:12 if period=="recent" else 5])
+            limit=recent_per_stratum if period=="recent" else older_per_stratum
+            chosen.extend(sorted(buckets[(stratum,period)],key=lambda x:x.get("published_at",""),reverse=True)[:limit])
     if len(chosen)<total:
         chosen_ids={x["arxiv_id"] for x in chosen}
         rest=[x for x in candidates if x["arxiv_id"] not in chosen_ids]
@@ -256,12 +260,18 @@ def build_existing_manifest(faiss_meta,qasper_titles):
 
 
 def refresh_manifest():
-    faiss_meta=load_json(os.getenv("FAISS_PATH","C:\\Users\\Public\\papers_faiss")+".json")
-    qasper_titles=load_json(BASE/"qasper_titles.json",{})
-    existing=build_existing_manifest(faiss_meta,qasper_titles)
+    seed_path=os.getenv("CORPUS_SEED_MANIFEST","")
+    if VERSION!="v150" and seed_path and os.path.exists(seed_path):
+        existing=load_json(seed_path,[])
+    else:
+        faiss_meta=load_json(os.getenv("FAISS_PATH","C:\\Users\\Public\\papers_faiss")+".json")
+        qasper_titles=load_json(BASE/"qasper_titles.json",{})
+        existing=build_existing_manifest(faiss_meta,qasper_titles)
     existing_ids={row["arxiv_id"] for row in existing}
     candidates=fetch_candidates(existing_ids)
-    new_rows=choose_candidates(candidates,100,70)
+    target=int(os.getenv("CORPUS_TARGET",str(len(existing)+100)))
+    new_count=max(0,target-len(existing))
+    new_rows=choose_candidates(candidates,new_count,int(new_count*0.7))
     for row in new_rows:
         row["source_family"]="arxiv_pdf"
         row["license"]="unknown"
@@ -300,8 +310,10 @@ def download_pdfs(limit=0):
 def split_manifest():
     #主题为主分层，系列不跨split；年份和来源只做分布检查
     manifest=load_json(MANIFEST_PATH,[])
-    if len(manifest)!=150:
-        raise RuntimeError(f"v150需要150篇，当前{len(manifest)}篇")
+    total=len(manifest)
+    dev_target=int(os.getenv("DEV_TARGET",str(round(total/3))))
+    if dev_target<=0 or dev_target>=total:
+        raise RuntimeError(f"split目标不合理：total={total},dev={dev_target}")
     groups=defaultdict(list)
     for item in manifest:
         groups[item["series_id"]].append(item)
@@ -312,7 +324,7 @@ def split_manifest():
     for stratum in sorted(quota):
         candidates=[g for g in groups.values() if g[0]["selection_stratum"]==stratum]
         candidates.sort(key=lambda g:hashlib.sha1(g[0]["series_id"].encode()).hexdigest())
-        need=round(len(candidates)/3)
+        need=round(len(candidates)*dev_target/total)
         for group in candidates[:need]:
             dev_groups.add(group[0]["series_id"])
     #补齐到50篇，并保持series整体移动
@@ -320,18 +332,18 @@ def split_manifest():
     remaining.sort(key=lambda g:hashlib.sha1(g[0]["series_id"].encode()).hexdigest())
     dev_count=sum(len(groups[sid]) for sid in dev_groups)
     for group in remaining:
-        if dev_count>=50:
+        if dev_count>=dev_target:
             break
-        if dev_count+len(group)<=50:
+        if dev_count+len(group)<=dev_target:
             dev_groups.add(group[0]["series_id"])
             dev_count+=len(group)
     #修正分组取整造成的1-2篇偏差，优先移动单篇论文的series
-    while dev_count>50:
-        movable=[sid for sid in dev_groups if dev_count-len(groups[sid])>=50]
+    while dev_count>dev_target:
+        movable=[sid for sid in dev_groups if dev_count-len(groups[sid])>=dev_target]
         if not movable:
             movable=[sid for sid in dev_groups if len(groups[sid])==1]
         if not movable:
-            raise RuntimeError("无法在不拆分series的前提下精确切分50/100")
+            raise RuntimeError(f"无法在不拆分series的前提下精确切分{dev_target}/{total-dev_target}")
         sid=sorted(movable,key=lambda x:hashlib.sha1(x.encode()).hexdigest())[0]
         dev_groups.remove(sid)
         dev_count-=len(groups[sid])
@@ -361,20 +373,20 @@ def normalize_manifest_paths():
 
 
 def generate_questions(split="dev",output="",per_paper=2,limit=0):
-    #只生成候选题目；人工审核前不得标记为正式评测集
+    #只生成候选题目；模型或人工审核前不得标记为正式评测集
     os.environ["SECTIONS_DIR"]=str(SECTIONS_DIR)
     from evaluation.generate_questions import forward
     manifest=load_json(MANIFEST_PATH,[])
     papers=[x["paper_id"] for x in manifest if x.get("split")==split and x.get("parse_status")=="ok"]
     if limit:
         papers=papers[:limit]
-    output=output or str(BASE/"evaluation"/"questions"/f"v150_{split}_candidates.json")
+    output=output or str(BASE/"evaluation"/"questions"/f"{VERSION}_{split}_candidates.json")
     forward(papers,per_paper,output,append=True)
 
 
 def audit_questions(split="dev"):
-    #候选题必须先通过证据存在性审计；人工复核前不得成为正式dev/test
-    path=BASE/"evaluation"/"questions"/f"v150_{split}_candidates.json"
+    #候选题必须先通过证据存在性审计；审核前不得成为正式dev/test
+    path=BASE/"evaluation"/"questions"/f"{VERSION}_{split}_candidates.json"
     questions=load_json(path,[])
     if not questions:
         raise RuntimeError(f"候选文件不存在或为空：{path}")
@@ -416,30 +428,39 @@ def audit_questions(split="dev"):
     for item in questions:
         counts[item.get("audit_status","unknown")]+=1
     valid=[item for item in questions if item.get("audit_status")=="candidate"]
-    save_json(BASE/"evaluation"/"questions"/f"v150_{split}_valid.json",valid)
+    save_json(BASE/"evaluation"/"questions"/f"{VERSION}_{split}_valid.json",valid)
     print("audit",dict(counts),"->",path)
 
 
 def freeze_snapshot():
     #冻结manifest和索引哈希，后续test运行必须引用同一版本
     manifest=load_json(MANIFEST_PATH,[])
-    reviewed=load_json(BASE/"evaluation"/"questions"/"v150_dev_reviewed.json",[])
-    test_reviewed=load_json(BASE/"evaluation"/"questions"/"v150_test_reviewed.json",[])
-    sealed_path=BASE/"evaluation"/"results"/"v150_sealed_test.json"
-    forward_baseline=BASE/"evaluation"/"results"/"v150_forward42_baseline.json"
-    forward_candidate=BASE/"evaluation"/"results"/"v150_forward42_candidate.json"
-    legacy88_path=BASE/"evaluation"/"results"/"v150_legacy88_candidate.json"
-    latency_path=BASE/"evaluation"/"results"/"v150_dev_latency.json"
+    reviewed=load_json(BASE/"evaluation"/"questions"/f"{VERSION}_dev_reviewed.json",[])
+    test_reviewed=load_json(BASE/"evaluation"/"questions"/f"{VERSION}_test_reviewed.json",[])
+    sealed_path=BASE/"evaluation"/"results"/f"{VERSION}_sealed_test.json"
+    forward_baseline=BASE/"evaluation"/"results"/f"{VERSION}_forward42_baseline.json"
+    forward_candidate=BASE/"evaluation"/"results"/f"{VERSION}_forward42_candidate.json"
+    legacy88_path=BASE/"evaluation"/"results"/f"{VERSION}_legacy88_candidate.json"
+    latency_path=BASE/"evaluation"/"results"/f"{VERSION}_dev_latency.json"
     legacy88=load_json(legacy88_path,{})
     legacy42=load_json(forward_candidate,{})
     latency=load_json(latency_path,{})
+    sealed=load_json(sealed_path,{})
+    if VERSION=="v150":
+        production_switch=False
+        block_reason="统一Service旧88题未达到66/88，且旧42题未达到36/42"
+    else:
+        production_switch=bool(sealed.get("summary"))
+        block_reason="" if production_switch else f"{VERSION}密封评测尚未执行"
     from evaluation.generate_questions import FORWARD_PROMPT
     meta={
-        "version":"v150",
+            "version":VERSION,
         "created_at":time.strftime("%Y-%m-%d %H:%M:%S"),
         "question_generation":{
             "model":"deepseek-v4-flash",
             "prompt_sha256":hashlib.sha256(FORWARD_PROMPT.encode("utf-8")).hexdigest(),
+            "review_type":"model_review",
+            "reviewer":"DeepSeek/model" if VERSION!="v150" else "Doubao/AI",
             "dev_reviewed":len(reviewed),
             "dev_passed":sum(1 for x in reviewed if x.get("review_decision")=="通过"),
             "dev_modified":sum(1 for x in reviewed if x.get("review_decision")=="修改"),
@@ -459,6 +480,7 @@ def freeze_snapshot():
             "legacy88_candidate_sha256":sha256_file(legacy88_path) if legacy88_path.exists() else "",
             "latency_sha256":sha256_file(latency_path) if latency_path.exists() else "",
         },
+        "sealed_summary":sealed.get("summary",{}),
         "retrieval_gate":{
             "legacy88_hits":legacy88.get("hits"),
             "legacy88_required":66,
@@ -469,8 +491,8 @@ def freeze_snapshot():
             "cold_p95_ms":latency.get("cold",{}).get("p95_ms"),
             "hot_p95_ms":latency.get("hot",{}).get("p95_ms"),
         },
-        "production_switch":False,
-        "production_block_reason":"统一Service旧88题未达到66/88，且旧42题未达到36/42",
+        "production_switch":production_switch,
+        "production_block_reason":block_reason,
         "counts":{
             "papers":len(manifest),
             "dev":sum(1 for x in manifest if x.get("split")=="dev"),
@@ -479,13 +501,13 @@ def freeze_snapshot():
         }
     }
     for name in (
-        "v150_dev_candidates.json","v150_dev_valid.json","v150_dev_reviewed.json",
-        "v150_test_candidates.json","v150_test_valid.json","v150_test_reviewed.json",
+        f"{VERSION}_dev_candidates.json",f"{VERSION}_dev_valid.json",f"{VERSION}_dev_reviewed.json",
+        f"{VERSION}_test_candidates.json",f"{VERSION}_test_valid.json",f"{VERSION}_test_reviewed.json",
     ):
         path=BASE/"evaluation"/"questions"/name
         if path.exists():
             meta["questions"][name]=sha256_file(path)
-    save_json(BASE/"evaluation"/"v150"/"freeze.json",meta)
+    save_json(BASE/"evaluation"/VERSION/"freeze.json",meta)
     print("freeze",json.dumps(meta,ensure_ascii=False))
 
 
@@ -500,7 +522,11 @@ def build_index():
     sections=[]; sources=[]; documents=[]; chunk_ids=[]; paper_ids=[]
     for item in manifest:
         paper_id=item["paper_id"]
-        if item.get("source_family")=="qasper":
+        section_path=SECTIONS_DIR/f"{paper_id}.json"
+        if section_path.exists():
+            #已有章节缓存直接复用，避免版本扩展时重复解析旧论文
+            record=DocumentRecord(source=paper_id,doc_type=item.get("source_family","cached"),text="",sections=load_json(section_path,[]))
+        elif item.get("source_family")=="qasper":
             path=BASE/"papers_sections"/f"{paper_id}.json"
             if not path.exists():
                 continue

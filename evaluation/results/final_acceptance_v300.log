@@ -1,0 +1,651 @@
+INFO:faiss.loader:Loading faiss with AVX512 support.
+INFO:faiss.loader:Could not load library with AVX512 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx512'")
+INFO:faiss.loader:Loading faiss with AVX2 support.
+INFO:faiss.loader:Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+INFO:faiss.loader:Loading faiss.
+INFO:faiss.loader:Successfully loaded faiss.
+INFO:sentence_transformers.base.model:No device provided, using cuda:0
+INFO:sentence_transformers.base.model:Loading SentenceTransformer model from D:\Users\徐海生\Documents\agent项目\bce-embedding-model.
+
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 199/199 [00:00<00:00, 3262.28it/s]
+WARNING:web_search:arXiv请求失败：Client error '406 Not Acceptable' for url 'https://export.arxiv.org/api/query?search_query=all%3ABERT&start=0&max_results=3'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/406
+
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]
+Batches: 100%|██████████| 1/1 [00:00<00:00,  2.95it/s]
+Batches: 100%|██████████| 1/1 [00:00<00:00,  2.95it/s]
+INFO:rerank:加载Rerank模型：D:\Users\徐海生\Documents\agent项目\bge-reranker-v2-m3
+INFO:sentence_transformers.base.model:No device provided, using cuda:0
+INFO:sentence_transformers.base.model:No modules.json found for D:\Users\徐海生\Documents\agent项目\bge-reranker-v2-m3, initializing a new CrossEncoder model.
+
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]
+Loading weights:  67%|██████▋   | 262/393 [00:00<00:00, 2600.66it/s]
+Loading weights: 100%|██████████| 393/393 [00:00<00:00, 3605.11it/s]
+
+Batches:   0%|          | 0/2 [00:00<?, ?it/s]
+Batches:  50%|█████     | 1/2 [00:01<00:01,  1.73s/it]
+Batches: 100%|██████████| 2/2 [00:02<00:00,  1.21s/it]
+Batches: 100%|██████████| 2/2 [00:02<00:00,  1.29s/it]
+INFO:llm_api:LLM调用 token=3606 约0.0072元 今日累计7.9760元
+INFO:agent_react:步骤1:调用LLM
+INFO:llm_api:LLM调用 token=647 约0.0016元 今日累计7.9776元
+INFO:agent_react:LLM输出:Thought: 用户要对比 Transformer 和 BERT。先检索核心论文，定位 Transformer 原始论文与 BERT 论文。
+Action: search_papers
+Action Input: {"query": "Transformer BERT comparison Attention Is All You Need BERT pre-training"}
+
+<｜｜DSML｜｜ calls>
+<｜｜DSML｜｜ invoke name="search_papers">
+  <query>Transformer BERT comparison Attention Is All You Need BERT pre-training</query>
+</｜｜DSML｜｜ invoke>
+</｜｜DSML｜｜ calls>
+[simple] BERT输入最大长度 -> 回答501字 耗时22.3s
+根据现有资料，**BERT 的输入最大长度通常为 512 个 token（词元/子词）**，超过部分一般需要截断。
+
+依据如下：
+
+- **本地论文（RoFormer_RoPE）**：在 CAIL2019-SCM 实验中，短文本截断长度设为 **512**，并直接列出 `BERT-512`、`WoBERT-512`、`RoFormer-512` 的对比；其下游任务微调也设置最大序列长度为 **512**。这说明 BERT 相关实验以 512 作为最大输入/截断长度。
+- **本地论文（BERT）**：该片段说明 BERT 输入是 WordPiece 词元序列，可表示单句或句对，并用 `[CLS
+----------------------------------------
+
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]
+Batches: 100%|██████████| 1/1 [00:00<00:00, 20.76it/s]
+
+Batches:   0%|          | 0/2 [00:00<?, ?it/s]
+Batches:  50%|█████     | 1/2 [00:00<00:00,  6.43it/s]
+Batches: 100%|██████████| 2/2 [00:01<00:00,  1.07s/it]
+Batches: 100%|██████████| 2/2 [00:01<00:00,  1.08it/s]
+INFO:agent_react:工具返回:检索完成，当前论文：1906.11085, BERT, FlashAttention, 2401.00908
+INFO:agent_react:步骤2:调用LLM
+INFO:llm_api:LLM调用 token=952 约0.0023元 今日累计7.9799元
+WARNING:agent_react:LLM输出为空，要求重新输出
+INFO:agent_react:步骤3:调用LLM
+INFO:llm_api:LLM调用 token=879 约0.0018元 今日累计7.9817元
+INFO:agent_react:LLM输出:Thought: 检索返回的论文里没有 Transformer 原始论文，需要再搜一次定位它，同时建卡 BERT。
+Action: search_papers
+Action Input: {"query": "Attention Is All You Need Transformer architecture self-attention"}
+
+<｜｜DSML｜｜ calls>
+<｜｜DSML｜｜ invoke name="search_papers">
+  <query>Attention Is All You Need Transformer architecture self-attention</query>
+</｜｜DSML｜｜ invoke>
+</｜｜DSML｜｜ calls>
+
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]
+Batches: 100%|██████████| 1/1 [00:00<00:00, 21.30it/s]
+
+Batches:   0%|          | 0/2 [00:00<?, ?it/s]
+Batches:  50%|█████     | 1/2 [00:00<00:00,  6.75it/s]
+Batches: 100%|██████████| 2/2 [00:01<00:00,  1.05s/it]
+Batches: 100%|██████████| 2/2 [00:01<00:00,  1.09it/s]
+INFO:agent_react:工具返回:检索完成，当前论文：1906.11085, BERT, FlashAttention, 2401.00908, Attention_Is_All_You_Need, 2312.12740, 2401.
+INFO:agent_react:步骤4:调用LLM
+INFO:llm_api:LLM调用 token=817 约0.0008元 今日累计7.9825元
+INFO:agent_react:LLM输出:Thought: 已定位 Transformer 原论文（Attention_Is_All_You_Need）和 BERT。分别建卡片以获取结构与关键信息。
+Action: build_paper_card
+Action Input: {"paper_id": "Attention_Is_All_You_Need"}
+
+Action: build_paper_card
+Action Input: {"paper_id": "BERT"}
+INFO:agent_react:工具返回:卡片已生成：BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding
+INFO:agent_react:步骤5:调用LLM
+INFO:llm_api:LLM调用 token=780 约0.0010元 今日累计7.9835元
+INFO:agent_react:LLM输出:Thought: BERT 卡片已建好，还需 Transformer 原论文的卡片。
+Action: build_paper_card
+Action Input: {"paper_id": "Attention_Is_All_You_Need"}
+INFO:agent_react:工具返回:卡片已生成：Attention Is All You Need
+INFO:agent_react:步骤6:调用LLM
+INFO:llm_api:LLM调用 token=820 约0.0012元 今日累计7.9847元
+INFO:agent_react:LLM输出:Thought: 两张卡片已就绪，直接用关系分析抽取对比事实。
+Action: analyze_paper_relations
+Action Input: {"paper_ids": ["Attention_Is_All_You_Need", "BERT"]}
+INFO:llm_api:LLM调用 token=4187 约0.0138元 今日累计7.9985元
+INFO:llm_api:LLM调用 token=3312 约0.0104元 今日累计8.0089元
+INFO:llm_api:LLM调用 token=4317 约0.0151元 今日累计8.0240元
+WARNING:tools:事实抽取第1次原始输出：
+INFO:llm_api:LLM调用 token=2869 约0.0072元 今日累计8.0312元
+INFO:agent_react:工具返回:抽取事实15条，当前facts=15，待核实冲突=0
+INFO:agent_react:步骤7:调用LLM
+INFO:llm_api:LLM调用 token=650 约0.0007元 今日累计8.0319元
+INFO:agent_react:LLM输出:Thought: facts=15，无冲突，直接生成对比综述。
+Action: write_review
+Action Input: {"query": "对比Transformer和BERT"}
+INFO:llm_api:LLM调用 token=3889 约0.0112元 今日累计8.0431元
+INFO:agent_react:工具返回:综述已生成：Transformer与BERT对比综述：架构、预训练与微调范式（4条共识，0条分歧，3条被推翻结论）
+INFO:agent_react:步骤8:调用LLM
+INFO:llm_api:LLM调用 token=978 约0.0023元 今日累计8.0454元
+INFO:agent_react:LLM输出:Thought: 综述已生成，证据充分，任务完成。
+
+**Transformer 与 BERT 对比综述**
+
+**共识（4 条）**
+1. **基础架构同源**：BERT 直接沿用 Transformer 的 Encoder 结构（多层自注意力 + 前馈网络），两者共享多头自注意力与位置编码的核心设计。
+2. **注意力机制核心地位**：自注意力是二者提取上下文关系的关键，均摆脱了 RNN 的序列递归依赖，支持并行计算。
+3. **预训练—微调范式**：BERT 在 Transformer Encoder 基础上引入大规模预训练（MLM + NSP）与下游微调，是其相较原始 Transformer 的核心范式创新。
+4. **目标不同**：Transformer 原论文定位为通用序列到序列的机器翻译架构（Encoder-Decoder），BERT 定位为通用语言理解预训练模型（仅 Encoder）。
+
+**分歧（0 条）**：本次抽取未发现冲突性事实主张。
+
+**被推翻/修正的结论（3 条）**
+- “Transformer 仅用于翻译任务”——已被 BERT 及后续模型扩展至广泛 NLP 任务所推翻。
+- “双向上下文不可用于预训练”——BERT 的 MLM 掩码语言建模证明双向表示可有效训练。
+- “预训练需大量标注数据”——BERT 证明无标注语料自监督预训练即可获得强迁移能力。
+INFO:agent_react:步骤9:调用LLM
+INFO:llm_api:LLM调用 token=992 约0.0021元 今日累计8.0475元
+INFO:agent_react:LLM输出:Thought: 综述已成功生成，facts=15且无未解决冲突，任务完成。
+Action: Finish
+Action Input: {"answer": "已完成《Transformer与BERT对比综述：架构、预训练与微调范式》，共抽取15条事实，形成4条共识、0条分歧，并推翻3条常见结论。\n\n核心对比：\n1. 定位不同：Transformer是一种通用序列建模架构（编码器-解码器，基于多头自注意力，无循环/卷积）；BERT是基于Transformer编码器堆叠的预训练语言模型。\n2. 训练范式不同：Transformer从头训练用于机器翻译等具体任务；BERT采用「预训练+微调」两阶段范式，通过MLM和NSP在大规模无标注语料上预训练。\n3. 结构差异：BERT仅使用Transformer的编码器部分（双向），舍弃了解码器；原版Transformer含编码器和解码器，解码器带掩码注意力。\n4. 目标不同：Transformer强调用纯注意力替代RNN/CNN以提升并行性与长程依赖建模；BERT强调通用语言表示的可迁移性，微调后适配多下游任务。\n\n被推翻的常见结论包括：如「BERT是完整Transformer」等简化说法——BERT只继承其编码器结构。"}
+INFO:agent_react:步骤1:调用LLM
+INFO:llm_api:LLM调用 token=441 约0.0007元 今日累计8.0481元
+INFO:agent_react:LLM输出:Thought: 用户想了解Transformer的改进变体。我先搜索相关论文，找到代表性工作后再决定读章节/建卡。
+
+Action: search_papers
+Action Input: {"query": "Transformer variants improvements efficient attention"}
+[survey] 对比Transformer和BERT -> papers=9 facts=15 conflicts=0 pending=0 review=True 耗时74.0s
+title: Transformer与BERT对比综述：架构、预训练与微调范式
+refs: 4 consensus: 4 disagreements: 0 superseded: 3
+conflict_marks: []
+trace_last: {'step': 9, 'action': 'Finish', 'input': {'answer': '已完成《Transformer与BERT对比综述：架构、预训练与微调范式》，共抽取15条事实，形成4条共识、0条分歧，并推翻3条常见结论。\n\n核心对比：\n1. 定位不同：Transformer是一种通用序列建模架构（编码器-解码器，基于多头自注意力，无循环/卷积）；BERT是基于Transformer编码器堆叠的预训练语言模型。\n2. 训练范式不同：Transformer从头训练用于机器翻译等具体任务；BERT采用「预训练+微调」两阶段范式，通过MLM和NSP在大规模无标注语料上预训练。\n3. 结构差异：BERT仅使用Transformer的编码器部分（双向），舍弃了解码器；原版Transformer含编码器和解码器，解码器带掩码注意力。\n4. 目标不同：Transformer强调用纯注意力替代RNN/CNN以提升并行性与长程依赖建模；BERT强调通用语言表示的可迁移性，微调后适配多下游任务。\n\n被推翻的常见结论包括：如「BERT是完整Transformer」等简化说法——BERT只继承其编码器结构。'}}
+----------------------------------------
+
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]
+Batches: 100%|██████████| 1/1 [00:00<00:00, 21.04it/s]
+
+Batches:   0%|          | 0/2 [00:00<?, ?it/s]
+Batches:  50%|█████     | 1/2 [00:00<00:00,  6.75it/s]
+Batches: 100%|██████████| 2/2 [00:01<00:00,  1.10s/it]
+Batches: 100%|██████████| 2/2 [00:01<00:00,  1.04it/s]
+INFO:agent_react:工具返回:检索完成，当前论文：FlashAttention, 2312.14798, 2401.00907, 2609.14320, Attention_Is_All_You_Need, 2609.18212
+INFO:agent_react:步骤2:调用LLM
+INFO:llm_api:LLM调用 token=636 约0.0010元 今日累计8.0492元
+INFO:agent_react:LLM输出:Thought: 已获得一批论文。再补充一次检索，覆盖稀疏/线性注意力、状态空间等更广的变体方向。
+
+Action: search_papers
+Action Input: {"query": "sparse attention linear attention state space model alternative to Transformer architecture survey"}
+
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]
+Batches: 100%|██████████| 1/1 [00:00<00:00, 79.39it/s]
+
+Batches:   0%|          | 0/2 [00:00<?, ?it/s]
+Batches: 100%|██████████| 2/2 [00:01<00:00,  1.24it/s]
+Batches: 100%|██████████| 2/2 [00:01<00:00,  1.24it/s]
+INFO:agent_react:工具返回:检索完成，当前论文：FlashAttention, 2312.14798, 2401.00907, 2609.14320, Attention_Is_All_You_Need, 2609.18212,
+INFO:agent_react:步骤3:调用LLM
+INFO:llm_api:LLM调用 token=825 约0.0013元 今日累计8.0505元
+INFO:agent_react:LLM输出:Thought: 现在有8篇论文。我先为核心论文建卡，获取主要贡献与变体方向的信息。
+
+Action: build_paper_card
+Action Input: {"paper_id": "Attention_Is_All_You_Need"}
+
+Action: build_paper_card
+Action Input: {"paper_id": "FlashAttention"}
+INFO:llm_api:LLM调用 token=2247 约0.0065元 今日累计8.0570元
+INFO:agent2_parse:已生成卡片:FlashAttention
+INFO:agent_react:工具返回:卡片已生成：FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness
+INFO:agent_react:步骤4:调用LLM
+INFO:llm_api:LLM调用 token=843 约0.0009元 今日累计8.0579元
+INFO:agent_react:LLM输出:Thought: 需要更多变体方向的卡片。继续为其余论文建卡。
+
+Action: build_paper_card
+Action Input: {"paper_id": "2312.14798"}
+
+Action: build_paper_card
+Action Input: {"paper_id": "2401.00907"}
+
+Action: build_paper_card
+Action Input: {"paper_id": "2609.14320"}
+
+Action: build_paper_card
+Action Input: {"paper_id": "2609.18212"}
+INFO:llm_api:LLM调用 token=2638 约0.0073元 今日累计8.0652元
+INFO:agent2_parse:已生成卡片:2609.18212
+INFO:agent_react:工具返回:卡片已生成：A Lightweight CNN Integrated Compact Convolutional Transformer for Multi-Scale Feature Learnin
+INFO:agent_react:步骤5:调用LLM
+INFO:llm_api:LLM调用 token=1028 约0.0018元 今日累计8.0671元
+INFO:agent_react:LLM输出:Thought: 还剩3篇论文未建卡，补充完成后进入事实抽取。
+
+Action: build_paper_card
+Action Input: {"paper_id": "2609.17997"}
+
+Action: build_paper_card
+Action Input: {"paper_id": "2609.18320"}
+
+Action: build_paper_card
+Action Input: {"paper_id": "2609.16183"}
+INFO:llm_api:LLM调用 token=3782 约0.0117元 今日累计8.0787元
+INFO:llm_api:LLM调用 token=3804 约0.0093元 今日累计8.0880元
+INFO:llm_api:LLM调用 token=3825 约0.0093元 今日累计8.0973元
+INFO:agent_react:工具返回:工具执行失败：LLM未输出JSON
+INFO:agent_react:步骤6:调用LLM
+INFO:llm_api:LLM调用 token=921 约0.0014元 今日累计8.0988元
+INFO:agent_react:LLM输出:Thought: 上次调用失败，重试为剩余论文建卡。
+
+Action: build_paper_card
+Action Input: {"paper_id": "2609.17997"}
+INFO:llm_api:LLM调用 token=2116 约0.0077元 今日累计8.1065元
+INFO:agent2_parse:已生成卡片:2609.17997
+INFO:agent_react:工具返回:卡片已生成：The Attention Within: Consensus Dynamics in Selective State Space Models
+INFO:agent_react:步骤7:调用LLM
+INFO:llm_api:LLM调用 token=1184 约0.0027元 今日累计8.1092元
+INFO:agent_react:LLM输出:Thought: 继续为剩余两篇论文建卡。
+
+Action: build_paper_card
+Action Input: {"paper_id": "2609.18320"}
+
+Action: build_paper_card
+Action Input: {"paper_id": "2609.16183"}
+INFO:llm_api:LLM调用 token=3782 约0.0094元 今日累计8.1187元
+INFO:llm_api:LLM调用 token=3215 约0.0066元 今日累计8.1253元
+INFO:agent2_parse:已生成卡片:2609.16183
+INFO:agent_react:工具返回:卡片已生成：Anatomy of Associative Recall in Fixed-State Recurrences: A Matched-State Decomposition, an In
+INFO:agent_react:步骤8:调用LLM
+INFO:llm_api:LLM调用 token=742 约0.0009元 今日累计8.1262元
+INFO:agent_react:LLM输出:Thought: 还剩一篇论文未建卡，完成后进入事实抽取。
+
+Action: build_paper_card
+Action Input: {"paper_id": "2609.16183"}
+INFO:agent_react:工具返回:卡片已生成：Anatomy of Associative Recall in Fixed-State Recurrences: A Matched-State Decomposition, an In
+INFO:agent_react:步骤9:调用LLM
+INFO:llm_api:LLM调用 token=730 约0.0009元 今日累计8.1271元
+INFO:agent_react:LLM输出:Thought: 卡片已足够，现在抽取事实。
+
+Action: analyze_paper_relations
+Action Input: {"paper_ids": ["2609.17997", "2609.18320", "2609.16183"]}
+INFO:llm_api:LLM调用 token=3847 约0.0118元 今日累计8.1388元
+INFO:llm_api:LLM调用 token=3006 约0.0055元 今日累计8.1443元
+INFO:agent2_parse:已生成卡片:2609.18320
+INFO:llm_api:LLM调用 token=5209 约0.0166元 今日累计8.1609元
+INFO:llm_api:LLM调用 token=5095 约0.0166元 今日累计8.1776元
+WARNING:tools:事实抽取第1次原始输出：
+INFO:llm_api:LLM调用 token=4706 约0.0121元 今日累计8.1896元
+INFO:llm_api:LLM调用 token=4071 约0.0151元 今日累计8.2047元
+WARNING:tools:事实抽取第1次原始输出：
+INFO:llm_api:LLM调用 token=3254 约0.0101元 今日累计8.2148元
+INFO:llm_api:LLM调用 token=4857 约0.0163元 今日累计8.2311元
+WARNING:tools:事实抽取第1次原始输出：
+INFO:llm_api:LLM调用 token=3858 约0.0093元 今日累计8.2404元
+INFO:agent_react:工具返回:抽取事实26条，当前facts=26，待核实冲突=0
+WARNING:agent_react:任务超时，终止循环
+INFO:llm_api:LLM调用 token=5286 约0.0146元 今日累计8.2550元
+INFO:agent_react:步骤1:调用LLM
+INFO:llm_api:LLM调用 token=488 约0.0009元 今日累计8.2558元
+INFO:agent_react:LLM输出:Thought: 用户想了解 LLaMA-1 的参数量信息。我需要先检索相关论文，找到 LLaMA 的原始论文，然后读取章节、建立卡片、抽取事实，最终生成综述。
+
+Action: search_papers
+Action Input: {"query": "LLaMA open and efficient foundation language models"}
+[survey] Transformer的改进变体有哪些 -> papers=9 facts=26 conflicts=0 pending=0 review=True 耗时186.1s
+title: Transformer改进与替代架构综述：选择性状态空间模型、注意力诊断与训练课程
+refs: 13 consensus: 9 disagreements: 0 superseded: 3
+conflict_marks: []
+trace_last: {'step': 9, 'action': 'analyze_paper_relations', 'input': {'paper_ids': ['2609.17997', '2609.18320', '2609.16183']}, 'observation': '抽取事实26条，当前facts=26，待核实冲突=0', 'search_count': 2, 'step_count': 9, 'facts_count': 26, 'conflicts_count': 0, 'pending_count': 0}
+----------------------------------------
+
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]
+Batches: 100%|██████████| 1/1 [00:00<00:00, 21.23it/s]
+
+Batches:   0%|          | 0/2 [00:00<?, ?it/s]
+Batches:  50%|█████     | 1/2 [00:00<00:00,  7.66it/s]
+Batches: 100%|██████████| 2/2 [00:01<00:00,  1.06s/it]
+Batches: 100%|██████████| 2/2 [00:01<00:00,  1.09it/s]
+INFO:agent_react:工具返回:检索完成，当前论文：2401.00595, 2312.17296, 2609.18612, 2312.17055, 2312.16702, 2312.14335, 2401.00907, 2401.0
+INFO:agent_react:步骤2:调用LLM
+INFO:llm_api:LLM调用 token=815 约0.0017元 今日累计8.2576元
+INFO:agent_react:LLM输出:Thought: 检索结果中没有明显出现 LLaMA-1 原始论文（Meta 的 LLaMA 论文），需要更精准地检索。
+
+Action: search_papers
+Action Input: {"query": "LLaMA parameter sizes 7B 13B 33B 65B foundation model"}
+
+<｜｜DSML｜｜ calls>
+<｜｜DSML｜｜ invoke name="search_papers">
+<｜｜DSML｜｜ parameter name="query" string="true">LLaMA parameter sizes 7B 13B 33B 65B foundation model</｜｜DSML｜｜ parameter>
+</｜｜DSML｜｜ invoke>
+</｜｜DSML｜｜ calls>
+
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]
+Batches: 100%|██████████| 1/1 [00:00<00:00, 78.97it/s]
+
+Batches:   0%|          | 0/2 [00:00<?, ?it/s]
+Batches: 100%|██████████| 2/2 [00:01<00:00,  1.09it/s]
+Batches: 100%|██████████| 2/2 [00:01<00:00,  1.09it/s]
+INFO:agent_react:工具返回:检索完成，当前论文：2401.00595, 2312.17296, 2609.18612, 2312.17055, 2312.16702, 2312.14335, 2401.00907, 2401.0
+INFO:agent_react:步骤3:调用LLM
+INFO:llm_api:LLM调用 token=1051 约0.0017元 今日累计8.2593元
+INFO:agent_react:LLM输出:Thought: 检索结果仍未直接返回 LLaMA-1 原始论文。我用第三次搜索更精准地定位讨论 LLaMA 参数规模的论文。
+
+Action: search_papers
+Action Input: {"query": "LLaMA Meta original model family 7B 13B 33B 65B training tokens"}
+
+<｜｜DSML｜｜ calls>
+<｜｜DSML｜｜ invoke name="search_papers">
+<｜｜DSML｜｜ parameter name="query" string="true">LLaMA Meta original model family 7B 13B 33B 65B training tokens</｜｜DSML｜｜ parameter>
+</｜｜DSML｜｜ invoke>
+</｜｜DSML｜｜ calls>
+
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]
+Batches: 100%|██████████| 1/1 [00:00<00:00, 76.67it/s]
+
+Batches:   0%|          | 0/2 [00:00<?, ?it/s]
+Batches: 100%|██████████| 2/2 [00:01<00:00,  1.13it/s]
+Batches: 100%|██████████| 2/2 [00:01<00:00,  1.13it/s]
+INFO:agent_react:工具返回:检索完成，当前论文：2401.00595, 2312.17296, 2609.18612, 2312.17055, 2312.16702, 2312.14335, 2401.00907, 2401.0
+INFO:agent_react:步骤4:调用LLM
+INFO:llm_api:LLM调用 token=1388 约0.0022元 今日累计8.2614元
+INFO:agent_react:LLM输出:Thought: 三次搜索已用完，检索结果没有直接返回 LLaMA-1 原始论文。我需要在现有论文中寻找提及 LLaMA 参数量的内容。先为几篇可能相关的论文建立卡片。
+
+Action: build_paper_card
+Action Input: {"paper_id": "2401.00595"}
+
+<｜｜DSML｜｜ calls>
+<｜｜DSML｜｜ invoke name="build_paper_card">
+<｜｜DSML｜｜ parameter name="paper_id" string="true">2401.00595</｜｜DSML｜｜ parameter>
+</｜｜DSML｜｜ invoke>
+</｜｜DSML｜｜ calls>
+INFO:llm_api:LLM调用 token=3773 约0.0117元 今日累计8.2731元
+INFO:llm_api:LLM调用 token=3794 约0.0095元 今日累计8.2826元
+INFO:llm_api:LLM调用 token=2645 约0.0040元 今日累计8.2866元
+INFO:agent2_parse:已生成卡片:2401.00595
+INFO:agent_react:工具返回:卡片已生成：State of What Art? A Call for Multi-Prompt LLM Evaluation
+INFO:agent_react:步骤5:调用LLM
+INFO:llm_api:LLM调用 token=1340 约0.0024元 今日累计8.2890元
+INFO:agent_react:LLM输出:Thought: 这篇是 LLM 评估论文，可能提及 LLaMA 作为被评估模型。再为几篇可能以 LLaMA 为基线的论文建卡。
+
+Action: build_paper_card
+Action Input: {"paper_id": "2312.17296"}
+
+<｜｜DSML｜｜ calls>
+<｜｜DSML｜｜ invoke name="build_paper_card">
+<｜｜DSML｜｜ parameter name="paper_id" string="true">2312.17296</｜｜DSML｜｜ parameter>
+</｜｜DSML｜｜ invoke>
+</｜｜DSML｜｜ calls>
+INFO:agent_react:工具返回:卡片已生成：Structured Packing in LLM Training Improves Long Context Utilization
+INFO:agent_react:步骤6:调用LLM
+INFO:llm_api:LLM调用 token=1150 约0.0018元 今日累计8.2909元
+INFO:agent_react:LLM输出:Thought: 这篇也提及 LLaMA。再建一张卡，然后进入关系抽取。
+
+Action: build_paper_card
+Action Input: {"paper_id": "2312.17055"}
+
+<｜｜DSML｜｜ calls>
+<｜｜DSML｜｜ invoke name="build_paper_card">
+<｜｜DSML｜｜ parameter name="paper_id" string="true">2312.17055</｜｜DSML｜｜ parameter>
+</｜｜DSML｜｜ invoke>
+</｜｜DSML｜｜ calls>
+INFO:llm_api:LLM调用 token=3343 约0.0101元 今日累计8.3010元
+INFO:agent2_parse:已生成卡片:2312.17055
+INFO:agent_react:工具返回:卡片已生成：Beyond Output Matching: Bidirectional Alignment for Enhanced In-Context Learning
+INFO:agent_react:步骤7:调用LLM
+INFO:llm_api:LLM调用 token=910 约0.0012元 今日累计8.3022元
+INFO:agent_react:LLM输出:Thought: 三张卡片已建立，现在抽取论文关系与事实。
+
+Action: analyze_paper_relations
+Action Input: {"paper_ids": ["2401.00595", "2312.17296", "2312.17055"]}
+INFO:llm_api:LLM调用 token=4787 约0.0162元 今日累计8.3184元
+INFO:llm_api:LLM调用 token=4412 约0.0156元 今日累计8.3340元
+WARNING:tools:事实抽取第1次原始输出：
+INFO:llm_api:LLM调用 token=4429 约0.0138元 今日累计8.3478元
+WARNING:tools:事实抽取第2次原始输出：
+WARNING:tools:事实抽取两次均失败，本次返回空事实列表
+INFO:llm_api:LLM调用 token=4280 约0.0150元 今日累计8.3628元
+WARNING:tools:事实抽取第1次原始输出：[
+  {
+    "paper_id": "2312.17296",
+    "entity": "SPLICE",
+    "attribute": "method_type",
+    "value": "long-context training sample construction method",
+    "content": "SPLICE（Structured Packing for Long Context）是一种构造长上下文训练样本的方法。",
+    "section_name": "2 Method",
+    "raw_quote": "SPLICE（Structured Packing for Long Context）是一种构造长上下文训练样本的方法。"
+  },
+  {
+    "paper_id": "2312.17296",
+    "entity": "SPLICE",
+    "attribute": "retrieval_methods",
+    "value": "BM25, Contriever-MSMARCO",
+    "conte
+INFO:llm_api:LLM调用 token=4512 约0.0134元 今日累计8.3762元
+INFO:llm_api:LLM调用 token=4365 约0.0155元 今日累计8.3918元
+WARNING:tools:事实抽取第1次原始输出：
+INFO:llm_api:LLM调用 token=3747 约0.0110元 今日累计8.4028元
+INFO:agent_react:工具返回:抽取事实18条，当前facts=18，待核实冲突=0
+WARNING:agent_react:任务超时，终止循环
+INFO:llm_api:LLM调用 token=3305 约0.0074元 今日累计8.4102元
+INFO:agent_react:步骤1:调用LLM
+INFO:llm_api:LLM调用 token=547 约0.0011元 今日累计8.4113元
+INFO:agent_react:LLM输出:Thought: 用户要求对比十余种目标检测模型。我先检索目标检测相关的综述或对比论文，建立论文池。
+
+Action: search_papers
+Action Input: {"query": "object detection models comparison survey"}
+
+Action: search_papers
+Action Input: {"query": "目标检测模型 对比 综述"}
+
+Thought: 先执行第一次检索，看看返回结果再决定后续。
+
+Action: search_papers
+Action Input: {"query": "object detection models comparison survey survey"}
+[survey] LLaMA-1参数量 -> papers=16 facts=18 conflicts=0 pending=0 review=True 耗时135.0s
+title: LLaMA-1参数量综述：现有事实覆盖情况说明
+refs: 3 consensus: 4 disagreements: 0 superseded: 0
+conflict_marks: []
+trace_last: {'step': 7, 'action': 'analyze_paper_relations', 'input': {'paper_ids': ['2401.00595', '2312.17296', '2312.17055']}, 'observation': '抽取事实18条，当前facts=18，待核实冲突=0', 'search_count': 3, 'step_count': 7, 'facts_count': 18, 'conflicts_count': 0, 'pending_count': 0}
+----------------------------------------
+
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]
+Batches: 100%|██████████| 1/1 [00:00<00:00, 20.22it/s]
+
+Batches:   0%|          | 0/2 [00:00<?, ?it/s]
+Batches:  50%|█████     | 1/2 [00:00<00:00,  7.52it/s]
+Batches: 100%|██████████| 2/2 [00:01<00:00,  1.07s/it]
+Batches: 100%|██████████| 2/2 [00:01<00:00,  1.07it/s]
+INFO:agent_react:工具返回:检索完成，当前论文：2609.18281, 2312.16054, 2401.00193, 2609.18107, 2609.19134, GraphRAG, 2609.18396
+INFO:agent_react:步骤2:调用LLM
+INFO:llm_api:LLM调用 token=831 约0.0017元 今日累计8.4131元
+INFO:agent_react:LLM输出:Thought: 检索返回了7篇论文。我需要为最可能相关的目标检测论文建立卡片。先为几篇候选建立卡片。
+
+Action: build_paper_card
+Action Input: {"paper_id": "2609.18281"}
+
+Action: build_paper_card
+Action Input: {"paper_id": "2312.16054"}
+
+Action: build_paper_card
+Action Input: {"paper_id": "2401.00193"}
+
+Thought: 继续为其余候选建卡。
+
+Action: build_paper_card
+Action Input: {"paper_id": "2609.18107"}
+
+Action: build_paper_card
+Action Input: {"paper_id": "2609.19134"}
+
+Action: build_paper_card
+Action Input: {"paper_id": "2609.18396"}
+INFO:llm_api:LLM调用 token=3771 约0.0117元 今日累计8.4247元
+INFO:llm_api:LLM调用 token=2954 约0.0057元 今日累计8.4304元
+INFO:agent2_parse:已生成卡片:2609.18396
+INFO:agent_react:工具返回:卡片已生成：Reliable Virtual Sensing: A Multi-Domain Benchmark for Robustness Under Sensor Failures
+INFO:agent_react:步骤3:调用LLM
+INFO:llm_api:LLM调用 token=989 约0.0015元 今日累计8.4319元
+INFO:agent_react:LLM输出:Thought: 还需要为剩余候选建卡，然后进行关系抽取。
+
+Action: build_paper_card
+Action Input: {"paper_id": "GraphRAG"}
+
+Action: build_paper_card
+Action Input: {"paper_id": "2609.18107"}
+
+Action: build_paper_card
+Action Input: {"paper_id": "2609.19134"}
+
+Thought: 现在建卡基本完成，调用关系抽取获取事实。
+
+Action: analyze_paper_relations
+Action Input: {"paper_ids": ["2609.18281", "2312.16054", "2401.00193", "2609.18107", "2609.19134", "2609.18396"]}
+INFO:llm_api:LLM调用 token=1931 约0.0068元 今日累计8.4388元
+INFO:agent2_parse:已生成卡片:2609.18281
+INFO:llm_api:LLM调用 token=2802 约0.0074元 今日累计8.4461元
+INFO:agent2_parse:已生成卡片:2312.16054
+INFO:llm_api:LLM调用 token=3136 约0.0089元 今日累计8.4550元
+INFO:agent2_parse:已生成卡片:2401.00193
+INFO:llm_api:LLM调用 token=1335 约0.0042元 今日累计8.4592元
+INFO:agent2_parse:已生成卡片:2609.18107
+INFO:llm_api:LLM调用 token=3291 约0.0090元 今日累计8.4682元
+INFO:agent2_parse:已生成卡片:2609.19134
+INFO:llm_api:LLM调用 token=6688 约0.0190元 今日累计8.4872元
+INFO:llm_api:LLM调用 token=3640 约0.0145元 今日累计8.5017元
+WARNING:tools:事实抽取第1次原始输出：
+INFO:llm_api:LLM调用 token=1501 约0.0040元 今日累计8.5057元
+INFO:llm_api:LLM调用 token=3832 约0.0147元 今日累计8.5205元
+INFO:llm_api:LLM调用 token=5299 约0.0169元 今日累计8.5374元
+WARNING:tools:事实抽取第1次原始输出：
+INFO:llm_api:LLM调用 token=5316 约0.0138元 今日累计8.5513元
+WARNING:tools:事实抽取第2次原始输出：
+WARNING:tools:事实抽取两次均失败，本次返回空事实列表
+INFO:llm_api:LLM调用 token=4277 约0.0154元 今日累计8.5667元
+WARNING:tools:事实抽取第1次原始输出：
+INFO:llm_api:LLM调用 token=2812 约0.0071元 今日累计8.5738元
+INFO:llm_api:LLM调用 token=5631 约0.0174元 今日累计8.5912元
+WARNING:tools:事实抽取第1次原始输出：
+INFO:llm_api:LLM调用 token=4281 约0.0078元 今日累计8.5990元
+INFO:llm_api:LLM调用 token=4549 约0.0158元 今日累计8.6148元
+WARNING:tools:事实抽取第1次原始输出：[{"paper_id":"2609.18396","entity":"virtual sensing","attribute":"definition","value":"从可用传感器测量中估计难以直接测量的量","content":"虚拟传感是从可用传感器测量中估计难以直接测量的量。","section_name":"Abstract","raw_quote":"虚拟传感是从可用传感器测量中估计难以直接测量的量"},{"paper_id":"2609.18396","entity":"learning-based virtual sensing","attribute":"evaluation_gap","value":"现有工作多在名义条件下评估，缺乏传感器失效下的多域鲁棒性基准","content":"现有工作多在名义条件下评估学习型虚拟传感模型，缺乏针对传感器失效的多域鲁棒性基准。","section_name":"Abstract","raw_quote":"现有工作多在名义条件下评估学习型虚拟传感模型，缺乏针对传感器失效的多域鲁棒性基准。"},{"paper_id":"2
+INFO:llm_api:LLM调用 token=3696 约0.0080元 今日累计8.6228元
+INFO:agent_react:工具返回:抽取事实32条，当前facts=32，待核实冲突=0
+WARNING:agent_react:任务超时，终止循环
+INFO:llm_api:LLM调用 token=4274 约0.0102元 今日累计8.6330元
+INFO:agent_react:步骤1:调用LLM
+INFO:llm_api:LLM调用 token=447 约0.0007元 今日累计8.6337元
+INFO:agent_react:LLM输出:Thought: 用户想调研一个冷门模型XYZ，我先检索相关论文看看是否存在。
+
+Action: search_papers
+Action Input: {"query": "XYZ model"}
+[survey] 对比十余种目标检测模型 -> papers=7 facts=32 conflicts=0 pending=0 review=True 耗时180.9s
+title: 目标检测模型对比综述：证据覆盖不足与可执行对比框架说明
+refs: 19 consensus: 3 disagreements: 0 superseded: 0
+conflict_marks: []
+trace_last: {'step': 3, 'action': 'analyze_paper_relations', 'input': {'paper_ids': ['2609.18281', '2312.16054', '2401.00193', '2609.18107', '2609.19134', '2609.18396']}, 'observation': '抽取事实32条，当前facts=32，待核实冲突=0', 'search_count': 1, 'step_count': 3, 'facts_count': 32, 'conflicts_count': 0, 'pending_count': 0}
+----------------------------------------
+
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]
+Batches: 100%|██████████| 1/1 [00:00<00:00, 16.47it/s]
+
+Batches:   0%|          | 0/2 [00:00<?, ?it/s]
+Batches:  50%|█████     | 1/2 [00:00<00:00,  6.38it/s]
+Batches: 100%|██████████| 2/2 [00:02<00:00,  1.15s/it]
+Batches: 100%|██████████| 2/2 [00:02<00:00,  1.00s/it]
+INFO:agent_react:工具返回:检索完成，当前论文：2609.17942, 2609.17895, 2609.18396, 2312.17256, 2609.14739, 2401.00368, 2609.18605, 2609.1
+INFO:agent_react:步骤2:调用LLM
+INFO:llm_api:LLM调用 token=631 约0.0010元 今日累计8.6347元
+INFO:agent_react:LLM输出:Thought: 检索返回了一些论文，但需要确认是否真的与XYZ模型相关。再用更精确的关键词检索一次。
+
+Action: search_papers
+Action Input: {"query": "cold-start rare model XYZ benchmark"}
+
+<｜｜DSML｜｜ calls>
+<｜｜DSML｜｜ invoke name="search_papers">
+<｜｜DSML｜｜ parameter name="query" string="true">cold-start rare model XYZ benchmark</｜｜DSML｜｜ parameter>
+</｜｜DSML｜｜ invoke>
+</｜｜DSML｜｜ calls>
+
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]
+Batches: 100%|██████████| 1/1 [00:00<00:00, 86.19it/s]
+
+Batches:   0%|          | 0/2 [00:00<?, ?it/s]
+Batches: 100%|██████████| 2/2 [00:01<00:00,  1.26it/s]
+Batches: 100%|██████████| 2/2 [00:01<00:00,  1.26it/s]
+INFO:agent_react:工具返回:检索完成，当前论文：2609.17942, 2609.17895, 2609.18396, 2312.17256, 2609.14739, 2401.00368, 2609.18605, 2609.1
+INFO:agent_react:步骤3:调用LLM
+INFO:llm_api:LLM调用 token=1035 约0.0020元 今日累计8.6367元
+INFO:agent_react:LLM输出:Thought: 检索结果仍是通用论文ID，需要查看论文内容确认是否涉及XYZ模型。先给其中几篇建卡。
+
+Action: build_paper_card
+Action Input: {"paper_id": "2609.17942"}
+
+<｜｜DSML｜｜ calls>
+<｜｜DSML｜｜ invoke name="build_paper_card">
+<｜｜DSML｜｜ parameter name="paper_id" string="true">2609.17942</｜｜DSML｜｜ parameter>
+</｜｜DSML｜｜ invoke>
+<｜｜DSML｜｜ invoke name="build_paper_card">
+<｜｜DSML｜｜ parameter name="paper_id" string="true">2609.17895</｜｜DSML｜｜ parameter>
+</｜｜DSML｜｜ invoke>
+</｜｜DSML｜｜ calls>
+INFO:llm_api:LLM调用 token=4008 约0.0120元 今日累计8.6487元
+INFO:llm_api:LLM调用 token=3110 约0.0053元 今日累计8.6541元
+INFO:agent2_parse:已生成卡片:2609.17942
+INFO:agent_react:工具返回:卡片已生成：On the Identifiability of Mixed Ordinal and Exponential Family Causal DAGs under Linear Parame
+INFO:agent_react:步骤4:调用LLM
+INFO:llm_api:LLM调用 token=1160 约0.0015元 今日累计8.6556元
+INFO:agent_react:LLM输出:Thought: 该论文是关于因果DAG的，与"XYZ模型"无关。再看几篇确认是否有所涉及。
+
+Action: build_paper_card
+Action Input: {"paper_id": "2312.17256"}
+
+<｜｜DSML｜｜ calls>
+<｜｜DSML｜｜ invoke name="build_paper_card">
+<｜｜DSML｜｜ parameter name="paper_id" string="true">2312.17256</｜｜DSML｜｜ parameter>
+</｜｜DSML｜｜ invoke>
+<｜｜DSML｜｜ invoke name="build_paper_card">
+<｜｜DSML｜｜ parameter name="paper_id" string="true">2609.18396</｜｜DSML｜｜ parameter>
+</｜｜DSML｜｜ invoke>
+</｜｜DSML｜｜ calls>
+INFO:llm_api:LLM调用 token=4006 约0.0120元 今日累计8.6676元
+INFO:llm_api:LLM调用 token=4028 约0.0094元 今日累计8.6770元
+INFO:llm_api:LLM调用 token=4049 约0.0095元 今日累计8.6865元
+INFO:agent_react:工具返回:工具执行失败：LLM未输出JSON
+INFO:agent_react:步骤5:调用LLM
+INFO:llm_api:LLM调用 token=1189 约0.0018元 今日累计8.6883元
+INFO:agent_react:LLM输出:Thought: 建卡工具调用失败（格式问题）。再试一次，并对另一篇建卡。
+
+Action: build_paper_card
+Action Input: {"paper_id": "2312.17256"}
+
+<｜｜DSML｜｜ calls>
+<｜｜DSML｜｜ invoke name="build_paper_card">
+<｜｜DSML｜｜ parameter name="paper_id" string="true">2312.17256</｜｜DSML｜｜ parameter>
+</｜｜DSML｜｜ invoke>
+</｜｜DSML｜｜ calls>
+INFO:llm_api:LLM调用 token=3532 约0.0073元 今日累计8.6956元
+INFO:agent2_parse:已生成卡片:2312.17256
+INFO:agent_react:工具返回:卡片已生成：From Bytes to Biases: Investigating the Cultural Self-Perception of Large Language Models
+INFO:agent_react:步骤6:调用LLM
+INFO:llm_api:LLM调用 token=1127 约0.0017元 今日累计8.6973元
+INFO:agent_react:LLM输出:Thought: 目前所有论文均与"XYZ模型"无关。再做一次针对性检索确认。
+
+Action: search_papers
+Action Input: {"query": "XYZ model"}
+
+<｜｜DSML｜｜ calls>
+<｜｜DSML｜｜ invoke name="search_papers">
+<｜｜DSML｜｜ parameter name="query" string="true">XYZ model</｜｜DSML｜｜ parameter>
+</｜｜DSML｜｜ invoke>
+</｜｜DSML｜｜ calls>
+
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]
+Batches: 100%|██████████| 1/1 [00:00<00:00, 20.75it/s]
+INFO:rerank:Rerank缓存命中
+INFO:agent_react:工具返回:检索完成，当前论文：2609.17942, 2609.17895, 2609.18396, 2312.17256, 2609.14739, 2401.00368, 2609.18605, 2609.1
+INFO:agent_react:步骤7:调用LLM
+INFO:llm_api:LLM调用 token=1034 约0.0013元 今日累计8.6986元
+INFO:agent_react:LLM输出:Thought: 检索到的论文均与"XYZ模型"无关，且未抽取到任何相关事实（facts=0）。按规则，facts为空时不应调用write_review，直接Finish，答案为"证据不足"。
+
+Action: Finish
+Action Input: {"答案": "证据不足"}
+INFO:llm_api:LLM调用 token=4239 约0.0154元 今日累计8.7140元
+INFO:llm_api:LLM调用 token=5114 约0.0167元 今日累计8.7307元
+WARNING:tools:事实抽取第1次原始输出：
+INFO:llm_api:LLM调用 token=5131 约0.0139元 今日累计8.7446元
+WARNING:tools:事实抽取第2次原始输出：[
+  {
+    "paper_id
+WARNING:tools:事实抽取两次均失败，本次返回空事实列表
+INFO:llm_api:LLM调用 token=4606 约0.0149元 今日累计8.7595元
+INFO:llm_api:LLM调用 token=3055 约0.0105元 今日累计8.7700元
+[survey] 不存在的冷门模型XYZ -> papers=13 facts=6 conflicts=0 pending=0 review=True 耗时128.8s
+title: 关于查询“不存在的冷门模型XYZ”的综述：无直接事实支撑与LLM偏见相关证据
+refs: 2 consensus: 4 disagreements: 0 superseded: 0
+conflict_marks: []
+trace_last: {'step': 7, 'action': 'Finish', 'input': {'答案': '证据不足'}}
+----------------------------------------
