@@ -411,9 +411,18 @@ def audit_questions(split="dev"):
 def freeze_snapshot():
     #冻结manifest和索引哈希，后续test运行必须引用同一版本
     manifest=load_json(MANIFEST_PATH,[])
+    reviewed=load_json(BASE/"evaluation"/"questions"/"v150_dev_reviewed.json",[])
+    from evaluation.generate_questions import FORWARD_PROMPT
     meta={
         "version":"v150",
         "created_at":time.strftime("%Y-%m-%d %H:%M:%S"),
+        "question_generation":{
+            "model":"deepseek-v4-flash",
+            "prompt_sha256":hashlib.sha256(FORWARD_PROMPT.encode("utf-8")).hexdigest(),
+            "dev_reviewed":len(reviewed),
+            "dev_passed":sum(1 for x in reviewed if x.get("review_decision")=="通过"),
+            "dev_modified":sum(1 for x in reviewed if x.get("review_decision")=="修改"),
+        },
         "manifest_sha256":sha256_file(MANIFEST_PATH),
         "index_sha256":sha256_file(V150_INDEX_PREFIX+".faiss") if os.path.exists(V150_INDEX_PREFIX+".faiss") else "",
         "index_meta_sha256":sha256_file(V150_INDEX_PREFIX+".json") if os.path.exists(V150_INDEX_PREFIX+".json") else "",
@@ -425,7 +434,7 @@ def freeze_snapshot():
             "parsed":sum(1 for x in manifest if x.get("parse_status")=="ok"),
         }
     }
-    for name in ("v150_dev_candidates.json","v150_dev_valid.json"):
+    for name in ("v150_dev_candidates.json","v150_dev_valid.json","v150_dev_reviewed.json"):
         path=BASE/"evaluation"/"questions"/name
         if path.exists():
             meta["questions"][name]=sha256_file(path)
