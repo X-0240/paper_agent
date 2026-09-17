@@ -382,7 +382,7 @@ class RetrievalService:
         mode=(rerank_mode or self.rerank_mode).lower()
         use_rerank=self._should_rerank(items,top_k,mode)
         if use_rerank:
-            scope=f"c{len(items)}|{items[0]['chunk_id']}|{question}"
+            scope=f"c{len(items)}|{items[0]['chunk_id']}|{retrieval_query}|{question}"
             items=rerank(question,items,top_n=max(top_k,len(items)),snapshot=self.index_snapshot(),cache_scope=scope)
             for item in items:
                 item["rerank_triggered"]=True

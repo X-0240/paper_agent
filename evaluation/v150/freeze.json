@@ -1,6 +1,6 @@
 {
   "version": "v150",
-  "created_at": "2026-09-17 22:07:48",
+  "created_at": "2026-09-17 22:21:39",
   "question_generation": {
     "model": "deepseek-v4-flash",
     "prompt_sha256": "ab0abd08bf53f7d9c71cf1016918648783f2ffbb3d32a4ae56ea7cb649903824",
@@ -10,7 +10,7 @@
     "test_reviewed": 149,
     "test_passed": 147,
     "test_modified": 2,
-    "test_evaluated": false
+    "test_evaluated": true
   },
   "manifest_sha256": "1975ad29ba25089f07a6c2afe8513a5a2d23ca66aec2edeb98bf4269d6c8e7f1",
   "index_sha256": "f9a1a8a12e595c21d270cae3290ac7f6b526cde9afefee8798c9c55b6fc563b4",
@@ -23,6 +23,13 @@
     "v150_test_valid.json": "44ab2918e229b13c72f7060de518694597bc483b0f90826800519694aa5f27f6",
     "v150_test_reviewed.json": "ab1620f1d6d3f75a8123a94e6dc058688b4bc72bc5c56cd77245680ede941395"
   },
+  "test_results": {
+    "sealed_sha256": "9149e27f1b5bab509af615f37a1eb17b01fec1b4b4db1fe9d5cb6c032df9ad64",
+    "forward_baseline_sha256": "e375a07fbc1ee572a9fd4694daa47b04574aa6a78ed753f682af05948ff96898",
+    "forward_candidate_sha256": "31aa002bb7303bedc96644cbed711155936b5ce4dd2fdd9d21c8463f6e1c344d"
+  },
+  "production_switch": false,
+  "production_block_reason": "旧42题绝对门禁30/42低于预注册36/42",
   "counts": {
     "papers": 150,
     "dev": 50,
