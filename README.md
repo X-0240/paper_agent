@@ -31,6 +31,8 @@ uvicorn api_server:app --host 127.0.0.1 --port 8000
 - 配置：`USE_RERANK` / `RERANK_MODEL_NAME` / `RERANK_MAX_CHARS` / `RERANK_TRIGGER_MARGIN` / `RERANK_CACHE_SIZE`
 - 实测：88 题 64.8%→72.7%（+8.0pp），正向 42 题 64.3%→83.3%（+19.0pp）；候选 25 约 1.0s/题，候选 10 约 0.44s/题
 
+当前统一 `RetrievalService` 已接入，但 Top-50 和检索专用英文 query 尚未达到可部署门槛，默认关闭；生产参数仍为候选 25、条件重排、原问题查询。
+
 ## 接口
 
 ### POST /login
@@ -121,6 +123,7 @@ docker build -t paper-agent .
 - `doc_ingest.py`：统一文档解析入口（PDF/Word/Excel/CSV/图片），章节加载/标题映射的唯一实现
 - `tools.py`：执行层工具入口，6 个工具已全部落地（search_papers / read_section / build_paper_card / analyze_paper_relations / verify_claim / write_review）；引用由 facts 确定性生成，LLM 不编引用
 - `survey_agent.py`：单 ReAct Agent 综述编排，复用 agent_react 循环，工具前置/后置校验、pending_conflicts 聚合、预算降级
+- `retrieval_service.py`：唯一检索服务入口，统一查询计划、召回、重排、去重、稳定 chunk_id、缓存和预算边界
 - `scripts/run_acceptance.py`：6 条固定 query 的验收脚本（简单/综述/冲突/超预算/无结果 + Transformer对比）
 - `rag_tool.py`：混合检索（BM25 + FAISS + 条件触发 Cross-Encoder 重排）
 - `web_search.py`：外网检索并发（Wikipedia/arXiv），统一来源结构与降级

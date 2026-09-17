@@ -299,3 +299,128 @@ simple 路径本地 + 外网双路并行检索，外网源为 Wikipedia REST API
 - 150 test 观测 80% 时单侧 95% 下界约 74%，80% 只能作为点估计/复合里程碑
 - 区分 75% 与 80% 统计显著需要约 560 题，当前规模做不到，报告中必须写清
 - 人工正向标注成本约 250-350 人时；Phase 0 先用 LLM 辅助 + 人工复核压缩成本
+
+## 十二、统一检索服务（2026-09-17）
+
+### 目标与冻结口径
+
+- 唯一目标：把当前离线英文 query 的质量收益变成可部署能力，不换索引、embedding、reranker 或向量库
+- 统一 Service 的原中文 query 基线：88 题 34/88；旧离线口径为 35/88，42 题为 27/42
+- 普通直译 query 的离线上限：54/88
+- 检索专用英文 query 的离线上限：55/88
+- Top50 全量重排未通过：统一 Service 中文重排 51/88，英文重排 57/88，分数融合最好 59/88
+- 0.1 分差条件重排：53/88；当前可见特征无法复现“只重排失败题”的离线 oracle 结果
+- 离线英文 query 只根据问题生成，不看论文、证据句、章节或正确论文信息
+- `offline_en` 仅用于评测上限对照，生产环境禁止选择
+
+### RetrievalService 接口
+
+```python
+class QueryPlan:
+    question: str
+    retrieval_query: str
+    query_source: str
+    query_cache_hit: bool
+    fallback_reason: str
+    prompt_version: str
+
+prepare(question,mode="generated",offline_query=None) -> QueryPlan
+search_prepared(plan,candidate_k=50,rerank_mode="always",top_k=5) -> list[dict]
+search(question,candidate_k=50,rerank_mode="always",top_k=5) -> list[dict]
+search_async(question,...) -> list[dict]
+```
+
+- QueryPlan 来源固定为 `original`、`literal`、`generated`、`offline_en`
+- 四种来源只改变 `retrieval_query`，召回、重排、去重、Top-K 和返回字段必须共用同一实现
+- `search_prepared()` 是唯一执行入口；`search()` 只负责 `prepare + search_prepared`
+
+### 结果契约
+
+每条结果至少包含：
+
+```text
+source
+section
+text
+recall_score
+rerank_score
+chunk_id
+final_rank
+retrieval_query
+query_source
+query_cache_hit
+rerank_triggered
+fallback_reason
+service_version
+```
+
+- `text` 返回完整原始切片，输出给 Agent 或 WebUI 时再由调用方截断
+- 论文标题、章节名和查询前缀只允许进入 `retrieval_text`，不得拼接进证据 `text`
+- `chunk_id` 从索引元数据透传；缺失时由 `source + section + index + text hash` 生成稳定 ID
+- 重排后只去完全重复 chunk；不在 Top-K 内执行章节限流
+
+### QueryPlan 生成与缓存
+
+- 纯英文高质量问题直接使用 `original`
+- 含中文问题默认使用 `generated`；普通直译和离线英文只作评测对照
+- 生成 prompt 保留实体、缩写、术语、数值、比较关系和任务目标，优先论文原词，不逐字直译
+- 生成客户端关闭 thinking、单次请求、不重试、3 秒超时、`max_tokens=120`
+- 缓存 key 包含规范化问题、规范化版本、供应商、模型、prompt 哈希、temperature、max_tokens、目标语言和校验规则版本
+- 相同完整缓存 key 使用 single-flight，避免并发重复调用
+- 含中文、多行、Markdown、解释文本、超长内容判为非法，不写正向缓存
+- 生成失败、超时、预算不足或非法输出时回退原问题，并写短 TTL 负缓存
+
+### 预算与并发
+
+- 查询生成调用前通过统一预算账本原子预留，成功后按 usage 结算，失败释放
+- 查询生成低层客户端不重复检查预算，也不重复记账
+- LLM 生成与本地 CPU 推理使用独立 Semaphore
+- API 异步入口使用 `asyncio.to_thread()` 调用同步 Service，事件循环不执行模型推理
+- 同一完整缓存 key 的并发请求只允许一次生成
+
+### 召回与重排
+
+- BCEmbedding 与 BM25 只使用 `QueryPlan.retrieval_query`
+- Top50 是候选能力，不代表已经通过生产质量验收
+- 重排 query 使用原始问题，语言差异作为独立 A/B，不混入 P0 切换
+- P0 不执行旧 `filter_results` 的章节限流和重叠过滤；如后续启用，生产与评测必须同步并重新测量
+- 全量重排、条件重排和融合重排均必须重新达到验收门槛后才允许启用
+- 当前生产默认保持 `RETRIEVAL_CANDIDATES=25`、`RERANK_MODE=conditional`、`QUERY_GENERATION_ENABLED=0`
+
+### 调用边界
+
+- `rag_tool` 保留字符串、结构化列表和重排列表三种旧接口，内部全部委托 Service
+- `tools.search_papers` 只做 State 结构转换，不再决定检索实现
+- `web_search` 继续负责 Wikipedia/arXiv 并发，本地检索委托 `RetrievalService.search_async`
+- `read_section` 保持章节读取职责，不经过查询生成
+- `evaluation.Retriever` 改为 Service 适配器，不再维护平行 BM25、FAISS 和排序实现
+
+### 上下文与成本边界
+
+- Agent 工具 Observation 单条截断 300 字，回答 LLM 的本地来源预算不超过现有 1500 字
+- 评测使用完整 `text` 做证据匹配
+- query 生成冷缓存失败率必须低于 5%，不因生成失败中断 API
+
+### 验收门槛
+
+- 最终验收必须使用运行时生成 query，`offline_en` 只能报告上限
+- 88 题证据级@5 至少 66/88（75.0%）
+- 42 题回归至少 36/42，同时报告相对离线 39/42 的逐题胜负
+- 报告配对胜负矩阵、Wilson CI、query 失败率、缓存命中率、冷缓存生成延迟、重排延迟和本地总延迟
+- query 生成新增 p95 不高于约 2 秒，本地检索总 p95 不高于约 4 秒
+- 当前尚未达到门槛，禁止把离线 77.3% 或 92.9% 写成生产结果
+
+### 当前实现状态
+
+- 已完成统一 `RetrievalService`、旧 `rag_tool` 委托层、稳定 chunk_id、查询计划缓存、预算预留/结算和评测适配
+- 新能力默认关闭，生产行为保持旧候选 25、条件重排和原问题查询
+- 尚未完成：找到不依赖 ground truth 的可靠重排触发或融合策略，使统一 Service 达到 75%
+
+### 回滚
+
+- `QUERY_GENERATION_ENABLED=0`：回退原问题 query
+- `QUERY_PLAN_MODE=original/literal/generated`：切换查询计划
+- `RERANK_MODE=always/conditional`：切换重排模式
+- `RETRIEVAL_CANDIDATES=25/50`：切换候选池
+- 配置在进程启动时加载，切换需要重启，不实现热切换
+- 回滚不修改索引，不需要重建 FAISS

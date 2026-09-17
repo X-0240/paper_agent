@@ -1,119 +1,92 @@
-import json
-import os
 import re
-import faiss
-import numpy as np
-from rank_bm25 import BM25Okapi
-from sentence_transformers import SentenceTransformer
+
+from retrieval_service import QueryPlan,RetrievalService
+
 
 def tokenize(text):
     return re.findall(r"[a-z0-9]+",text.lower())
 
+
 class Retriever:
+    #评测适配器：底层召回和模型全部委托RetrievalService，只保留实验用融合模式
     def __init__(self,faiss_path,model_path,mode="hybrid",alpha=0.5,candidates=25):
-        self.meta=json.load(open(faiss_path+".json",encoding="utf-8"))
-        self.chunks=self.meta["documents"]
-        self.sources=self.meta["sources"]
-        self.sections=self.meta["sections"]
-        self.index=faiss.read_index(faiss_path+".faiss")
-        self.model=SentenceTransformer(model_path)
-        self.bm25=BM25Okapi([tokenize(c) for c in self.chunks])
+        self.service=RetrievalService(faiss_path,model_path)
+        self.meta=self.service.meta
+        self.chunks=self.service.documents
+        self.sources=self.service.sources
+        self.sections=self.service.sections
         self.mode=mode
         self.alpha=alpha
         self.candidates=candidates
 
-    def _item(self,idx,score):
-        return {"idx":int(idx),"score":float(score),"source":self.sources[idx],
-                "section":self.sections[idx],"text":self.chunks[idx]}
+    def _make_items(self,query,scores,ids,offset=0):
+        plan=QueryPlan(query,query,"original")
+        return [self.service._make_item(int(idx),float(score),plan) for idx,score in zip(ids,scores) if int(idx)>=0]
 
     def _query_vec(self,query):
-        prompt_name=os.getenv("QUERY_PROMPT_NAME")
-        if prompt_name:
-            v=self.model.encode([query],prompt_name=prompt_name)[0]
-        else:
-            v=self.model.encode([query])[0]
-        return (v/np.linalg.norm(v)).astype("float32")
+        return self.service._encode_query(query)
 
     def vector_search(self,query,k):
-        scores,idx=self.index.search(self._query_vec(query)[None,:],k)
-        return [self._item(j,s) for j,s in zip(idx[0],scores[0]) if j>=0]
+        scores,ids=self.service._vector_search(query,k)
+        return self._make_items(query,scores,ids)
 
     def bm25_search(self,query,k):
-        scores=self.bm25.get_scores(tokenize(query))
-        order=sorted(range(len(scores)),key=lambda i:scores[i],reverse=True)[:k]
-        return [self._item(i,scores[i]) for i in order]
+        scores,ids=self.service._bm25_search(query,k)
+        return self._make_items(query,scores,ids)
 
     def hybrid_search(self,query,k,candidates=None,alpha=None):
-        #现有加权融合：向量与BM25各自归一化后线性加权
-        candidates=candidates or self.candidates
-        alpha=self.alpha if alpha is None else alpha
-        scores,idx=self.index.search(self._query_vec(query)[None,:],candidates)
-        vs=idx[0]; ss=scores[0]
-        bm=self.bm25.get_scores(tokenize(query))
-        bm_idx=sorted(range(len(bm)),key=lambda i:bm[i],reverse=True)[:candidates]
-        comb={}
-        if len(ss)>0 and max(ss)>0:
-            ss=ss/max(ss)
-        for s,j in zip(ss,vs):
-            comb[j]=comb.get(j,0.0)+alpha*float(s)
-        bm_scores=np.array([bm[j] for j in bm_idx])
-        if len(bm_scores)>0 and max(bm_scores)>0:
-            bm_scores=bm_scores/max(bm_scores)
-        for s,j in zip(bm_scores,bm_idx):
-            comb[j]=comb.get(j,0.0)+(1-alpha)*float(s)
-        rank=sorted(comb.items(),key=lambda x:x[1],reverse=True)[:k]
-        return [self._item(j,s) for j,s in rank]
+        #hybrid底层完全复用Service，不在评测侧重新实现向量或BM25
+        items,status=self.service.recall(query,candidates or self.candidates,alpha)
+        return items[:k]
 
     def rrf_search(self,query,k,candidates=None,k_rrf=60):
-        #RRF：按排名融合，不依赖分数尺度
         candidates=candidates or self.candidates
-        vec=self.index.search(self._query_vec(query)[None,:],candidates)
-        vs,vi=vec[0][0],vec[1][0]
-        bm=self.bm25.get_scores(tokenize(query))
-        bm_idx=sorted(range(len(bm)),key=lambda i:bm[i],reverse=True)[:candidates]
+        vec=self.vector_search(query,candidates)
+        bm=self.bm25_search(query,candidates)
         comb={}
-        for rank,j in enumerate(vi):
-            comb[j]=comb.get(j,0.0)+1.0/(k_rrf+rank+1)
-        for rank,j in enumerate(bm_idx):
-            comb[j]=comb.get(j,0.0)+1.0/(k_rrf+rank+1)
-        rank=sorted(comb.items(),key=lambda x:x[1],reverse=True)[:k]
-        return [self._item(j,s) for j,s in rank]
+        for rank,item in enumerate(vec):
+            key=item["chunk_id"]
+            comb[key]={"item":item,"score":comb.get(key,{}).get("score",0)+1.0/(k_rrf+rank+1)}
+        for rank,item in enumerate(bm):
+            key=item["chunk_id"]
+            comb[key]={"item":item,"score":comb.get(key,{}).get("score",0)+1.0/(k_rrf+rank+1)}
+        ranked=sorted(comb.values(),key=lambda x:x["score"],reverse=True)[:k]
+        return [x["item"] for x in ranked]
 
     def section_aggregated_search(self,query,k,candidates=None,alpha=None,title_bonus=0.15):
-        #先按论文+章节聚合，再选每章最高分片段，缓解同章证据被挤出top5
         candidates=candidates or self.candidates
         items=self.hybrid_search(query,candidates,candidates,alpha)
         q_tokens=set(tokenize(query))
         grouped={}
-        for it in items:
-            key=(it["source"],it["section"])
-            title_tokens=set(tokenize(it["section"]))
+        for item in items:
+            key=(item["source"],item["section"])
+            title_tokens=set(tokenize(item["section"]))
             overlap=len(q_tokens&title_tokens)/max(1,len(q_tokens))
-            score=it["score"]+title_bonus*overlap
-            if key not in grouped or score>grouped[key]["score"]:
-                grouped[key]={**it,"score":score}
-        return sorted(grouped.values(),key=lambda x:x["score"],reverse=True)[:k]
+            score=item["recall_score"]+title_bonus*overlap
+            if key not in grouped or score>grouped[key][0]:
+                grouped[key]=(score,item)
+        return [item for _,item in sorted(grouped.values(),key=lambda x:x[0],reverse=True)[:k]]
 
     def multi_query_search(self,queries,k,candidates=None,alpha=None,k_rrf=60):
-        #多query：每个query做混合召回，再用RRF融合
         candidates=candidates or self.candidates
         comb={}
-        for qi,query in enumerate(queries):
+        for query in queries:
             items=self.hybrid_search(query,candidates,candidates,alpha)
-            for rank,it in enumerate(items):
-                j=it["idx"]
-                comb[j]=comb.get(j,0.0)+1.0/(k_rrf+rank+1)
-        rank=sorted(comb.items(),key=lambda x:x[1],reverse=True)[:k]
-        return [self._item(j,s) for j,s in rank]
+            for rank,item in enumerate(items):
+                key=item["chunk_id"]
+                if key not in comb:
+                    comb[key]={"item":item,"score":0.0}
+                comb[key]["score"]+=1.0/(k_rrf+rank+1)
+        ranked=sorted(comb.values(),key=lambda x:x["score"],reverse=True)[:k]
+        return [x["item"] for x in ranked]
 
     def search(self,query,k=5):
-        mode=self.mode
-        if mode=="vector":
+        if self.mode=="vector":
             return self.vector_search(query,k)
-        if mode=="bm25":
+        if self.mode=="bm25":
             return self.bm25_search(query,k)
-        if mode=="rrf":
+        if self.mode=="rrf":
             return self.rrf_search(query,k)
-        if mode=="section":
+        if self.mode=="section":
             return self.section_aggregated_search(query,k)
         return self.hybrid_search(query,k)

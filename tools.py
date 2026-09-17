@@ -47,7 +47,7 @@ def build_search_result(results):
     papers=[]
     seen=set()
     chunks=[]
-    for i,r in enumerate(results):
+    for r in results:
         paper_id=r["source"]
         if paper_id not in seen:
             seen.add(paper_id)
@@ -55,26 +55,27 @@ def build_search_result(results):
             papers.append(PaperMeta(paper_id=paper_id,title=title))
         section=r.get("section","")
         text=r.get("text","")
+        chunk_id=r.get("chunk_id") or f"{paper_id}::{section}::{len(chunks)}"
         chunks.append(Chunk(
-            chunk_id=f"{paper_id}::{section}::{i}",
+            chunk_id=chunk_id,
             doc_id=paper_id,
             section_name=section,
             text=text,
             token_len=token_len(text),
-            page_num=None,
-            parent_id=f"{paper_id}::{section}",
+            page_num=r.get("page_num"),
+            parent_id=r.get("parent_id") or f"{paper_id}::{section}",
             position=""
         ))
     return {"papers":papers,"chunks":chunks}
 
 def search_papers(query,limit=MAX_PAPER_PER_QUERY):
     #本地检索入口：复用rag_tool混合检索，输出契约化的papers+chunks
-    #rag_tool顶层会加载SentenceTransformer，保持函数内导入避免拖慢测试与导入
-    from rag_tool import search_papers_rerank, search_papers_structured
-    if os.getenv("USE_RERANK")=="1":
-        results=search_papers_rerank(query,k=limit)
-    else:
-        results=search_papers_structured(query,k=limit)
+    from retrieval_service import get_service
+    service=get_service()
+    mode="always" if os.getenv("USE_RERANK")=="1" else "none"
+    results=service.search(query,candidate_k=service.candidate_k,rerank_mode=mode,top_k=limit)
+    for item in results:
+        item["text"]=item["text"][:300]
     return build_search_result(results)
 
 def read_section(paper_id,section_name,cache=None,max_chars=4000):
@@ -114,8 +115,15 @@ def build_paper_card(paper_id,cache=None):
     #旧建卡逻辑待移植到新链前暂时保留依赖
     card=old_build_card(paper_id)
     sections_ref=[]
+    from retrieval_service import get_service
+    service=get_service()
     for sec in load_sections(paper_id):
-        sections_ref.append(SectionRef(name=sec.get("title",""),page=sec.get("page"),chunk_ids=[]))
+        title=sec.get("title","")
+        sections_ref.append(SectionRef(
+            name=title,
+            page=sec.get("page"),
+            chunk_ids=service.get_section_chunk_ids(paper_id,title)
+        ))
     key_findings=card.get("innovation",[])
     if isinstance(key_findings,str):
         key_findings=[key_findings] if key_findings!="未提及" else []
@@ -212,6 +220,11 @@ def _extract_facts(cards_text):
 
 def _resolve_chunk_id(paper_id,section_name):
     #章节名映射到真实chunk_id：精确→模糊→None，来源不可追溯的事实直接丢弃
+    from retrieval_service import get_service
+    service=get_service()
+    direct=service.get_section_chunk_ids(paper_id,section_name)
+    if direct:
+        return direct[0]
     if paper_id not in _chunk_cache:
         sections=load_sections(paper_id)
         _chunk_cache[paper_id]=chunk_splitter(DocumentRecord(source=paper_id,doc_type="pdf_text",text="",sections=sections)) if sections else []

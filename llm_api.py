@@ -2,6 +2,7 @@ import logging
 import json
 import os
 import datetime
+import threading
 import requests
 from dotenv import load_dotenv
 from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
@@ -19,6 +20,8 @@ headers={
 TRACKER=None
 USAGE_FILE=os.getenv("LLM_USAGE_FILE","llm_usage.jsonl")
 DAILY_COST_BUDGET=float(os.getenv("DAILY_COST_BUDGET","5"))
+_BUDGET_LOCK=threading.Lock()
+_RESERVED_COST=0.0
 
 #DeepSeek V4-Flash峰谷价：高峰9-12点、14-18点，闲时半价（2026-08-17生效）
 PEAK_PRICE={"in_hit":0.1,"in_miss":3.0,"out":9.0}
@@ -79,30 +82,64 @@ def enforce_budget():
     if today_spent()>=DAILY_COST_BUDGET:
         raise BudgetExceeded(f"当日API预算已用尽：{DAILY_COST_BUDGET}元，可在.env调高或明天再试")
 
+def reserve_budget(estimate=0.005):
+    #并发调用前先预留预算，避免多个请求同时穿透每日硬闸
+    global _RESERVED_COST
+    if DAILY_COST_BUDGET<=0:
+        return 0.0
+    with _BUDGET_LOCK:
+        if today_spent()+_RESERVED_COST+estimate>DAILY_COST_BUDGET:
+            raise BudgetExceeded(f"当日API预算不足以预留：{DAILY_COST_BUDGET}元")
+        _RESERVED_COST+=estimate
+    return estimate
+
+def release_budget(reserved):
+    #失败或未产生计费时释放预留额度
+    global _RESERVED_COST
+    if reserved<=0:
+        return
+    with _BUDGET_LOCK:
+        _RESERVED_COST=max(0.0,_RESERVED_COST-reserved)
+
+def settle_budget(reserved,data):
+    #成功后释放预留并按真实usage记账，保证只有一个预算入口
+    try:
+        log_usage(data)
+    finally:
+        if reserved>0:
+            release_budget(reserved)
+
 def set_tracker(tracker):
     #设置指标追踪器，记录每次LLM调用的次数和token
     global TRACKER
     TRACKER=tracker
 
-def call_deepseek(messages,temperature=0.1,max_tokens=None):
-    #通用LLM调用：默认低温保证稳定，超时60秒防网络挂起
-    enforce_budget()
+def call_deepseek_once(messages,temperature=0.1,max_tokens=None,timeout=60,thinking=None,record_usage=True):
+    #低层单次调用：可选关闭thinking，供检索query生成等短超时场景使用
     payload={"model":"deepseek-v4-flash","messages":messages,"temperature":temperature}
     if max_tokens:
         payload["max_tokens"]=max_tokens
+    if thinking:
+        payload["thinking"]={"type":thinking}
     response=requests.post(
         "https://api.deepseek.com/v1/chat/completions",
         headers=headers,
         json=payload,
-        timeout=60
+        timeout=timeout
     )
     response.raise_for_status()
     data=response.json()
-    log_usage(data)
+    if record_usage:
+        log_usage(data)
     if TRACKER is not None:
         TRACKER["calls"]=TRACKER.get("calls",0)+1
         TRACKER["tokens"]=TRACKER.get("tokens",0)+data.get("usage",{}).get("total_tokens",0)
     return data
+
+def call_deepseek(messages,temperature=0.1,max_tokens=None):
+    #通用LLM调用：默认低温保证稳定，超时60秒防网络挂起
+    enforce_budget()
+    return call_deepseek_once(messages,temperature,max_tokens)
 
 def call_deepseek_stream(messages,temperature=0.1):
     #SSE流式：逐token产出内容，供接口实时推送

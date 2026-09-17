@@ -63,11 +63,12 @@ def add_record(record,source):
     for c in chunk_splitter(record,chunk_tokens=CHUNK_TOKENS,overlap=CHUNK_OVERLAP):
         if len(c.text.strip())<20:
             continue
+        chunk_ids.append(c.chunk_id)
         chunks.append(c.text)
         sources.append(source)
         sections.append(c.section_name)
 
-chunks=[]; sources=[]; sections=[]
+chunks=[]; sources=[]; sections=[]; chunk_ids=[]
 
 #主项目10篇：只读papers_pdf里的论文，QASPER缓存不能重复计入
 main_sources=sorted(f[:-4] for f in os.listdir(os.getenv("PAPERS_DIR")) if f.endswith(".pdf"))
@@ -105,5 +106,5 @@ index=faiss.IndexFlatIP(embeddings.shape[1])
 index.add(embeddings.astype("float32"))
 faiss.write_index(index,FAISS_PATH+".faiss")
 with open(FAISS_PATH+".json","w",encoding="utf-8") as f:
-    json.dump({"sources":sources,"sections":sections,"documents":chunks},f,ensure_ascii=False)
+    json.dump({"sources":sources,"sections":sections,"documents":chunks,"chunk_ids":chunk_ids},f,ensure_ascii=False)
 print(f"已保存合并索引：{len(chunks)}条到{FAISS_PATH}")
