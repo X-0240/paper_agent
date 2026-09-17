@@ -1,0 +1,3015 @@
+{
+  "config": {
+    "questions": "evaluation/questions/legacy_88.json",
+    "mode": "hybrid",
+    "k": 5,
+    "alpha": 0.5,
+    "candidates": 100,
+    "query_field": "question",
+    "split": null,
+    "engine": "service",
+    "query_source": "offline_en",
+    "rerank_mode": "none"
+  },
+  "n": 88,
+  "hits": 56,
+  "rate": 0.6363636363636364,
+  "ci95": [
+    0.5321109452578119,
+    0.7292085439496931
+  ],
+  "rows": [
+    {
+      "question_id": "legacy-1",
+      "question": "Transformer架构抛弃了RNN与卷积模块，完全依靠什么机制搭建模型？",
+      "query_en": "What mechanism does the Transformer architecture rely on exclusively, without using RNNs or convolutions?",
+      "paper_id": "Attention_Is_All_You_Need",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "Abstract"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "2 Background"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "2004.02334",
+          "section": "Classifier based NLG"
+        },
+        {
+          "source": "2004.02334",
+          "section": "Classifier based NLG"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-2",
+      "question": "缩放点积注意力中，为什么要对QKᵀ除以√dₖ做缩放操作？",
+      "query_en": "Why is the dot product in scaled dot-product attention divided by the square root of d_k?",
+      "paper_id": "Attention_Is_All_You_Need",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.2.1 Scaled Dot-Product Attention"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.2.2 Multi-Head Attention"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.2 Attention"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "5 Limitations and Future Directions"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "6.2 Model Variations"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-3",
+      "question": "原文中多头注意力设置的头数h、单头维度dₖ、模型总维度d_model分别是多少？",
+      "query_en": "What are the values of h, d_k, and d_model for multi-head attention in the Transformer paper?",
+      "paper_id": "Attention_Is_All_You_Need",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.2.2 Multi-Head Attention"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "6.2 Model Variations"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.2 Attention"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.4 Embeddings and Softmax"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.2.1 Scaled Dot-Product Attention"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-4",
+      "question": "Transformer解码器的自注意力层增加了什么掩码操作，保证生成的自回归属性？",
+      "query_en": "What masking operation is applied to the self-attention layers in the Transformer decoder to ensure autoregressive generation?",
+      "paper_id": "Attention_Is_All_You_Need",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.2.3 Applications of Attention in our Model"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.1 Encoder and Decoder Stacks"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.4 Embeddings and Softmax"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3 Model Architecture"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "2 Background"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-5",
+      "question": "原文中前馈网络FFN的计算公式是什么，输入输出维度与中间隐层维度分别是？",
+      "query_en": "What is the FFN formula in the Transformer paper, and what are its input, output, and inner-layer dimensions?",
+      "paper_id": "Attention_Is_All_You_Need",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.3 Position-wise Feed-Forward Networks"
+        },
+        {
+          "source": "LoRA",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.4 Embeddings and Softmax"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "7 Conclusion"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "2 Background"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-6",
+      "question": "论文采用哪种位置编码方案，该方案相比可学习位置嵌入有什么优势？",
+      "query_en": "What positional encoding scheme does the Transformer use, and how does it compare to learned positional embeddings?",
+      "paper_id": "Attention_Is_All_You_Need",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.5 Positional Encoding"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "Abstract"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "6.2 Model Variations"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "4.2 Better Models with Longer Sequences"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-7",
+      "question": "单层自注意力、循环网络、卷积网络三者每层复杂度、最小顺序操作数分别是什么？",
+      "query_en": "What are the per-layer complexity and minimum sequential operations for self-attention, RNNs, and CNNs?",
+      "paper_id": "Attention_Is_All_You_Need",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.4 Embeddings and Softmax"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "4 Why Self-Attention"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "2 Background"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "4 Why Self-Attention"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "1 Introduction"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-8",
+      "question": "在WMT2014英德翻译任务上，Big Transformer取得的单模型BLEU值是多少？",
+      "query_en": "What BLEU score did the Big Transformer model achieve as a single model on the WMT 2014 English-to-German translation task?",
+      "paper_id": "Attention_Is_All_You_Need",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "6.1 Machine Translation"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "Abstract"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "7 Conclusion"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "6.2 Model Variations"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "4 Experiments and Evaluation"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-9",
+      "question": "Transformer每层子层输出的标准化操作顺序是残差连接后层归一化还是先归一化再残差？",
+      "query_en": "Does the Transformer apply layer normalization after the residual connection, or before it, for each sub-layer output?",
+      "paper_id": "Attention_Is_All_You_Need",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.1 Encoder and Decoder Stacks"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "5.4 Regularization"
+        },
+        {
+          "source": "GPT2",
+          "section": "2.3. Model"
+        },
+        {
+          "source": "LoRA",
+          "section": "5.1 BASELINES"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.2.3 Applications of Attention in our Model"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-10",
+      "question": "原文可视化实验中，编码器第5层多头注意力能捕捉哪两类语言现象？",
+      "query_en": "What two linguistic phenomena do the 5th layer multi-head attention heads capture in the Transformer's visualization experiments?",
+      "paper_id": "Attention_Is_All_You_Need",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "7 Conclusion"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "7 Conclusion"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.2.3 Applications of Attention in our Model"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.1 Encoder and Decoder Stacks"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.2.2 Multi-Head Attention"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-11",
+      "question": "B区别于GPT的核心预训练任务是什么，该任务如何实现双向上下文建模？",
+      "query_en": "What is the core pre-training task that distinguishes BERT from GPT, and how does it enable bidirectional context modeling?",
+      "paper_id": "BERT",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "BERT",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "BERT",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "BERT",
+          "section": "5.1 Effect of Pre-training Tasks"
+        },
+        {
+          "source": "BERT",
+          "section": "6 Conclusion"
+        },
+        {
+          "source": "BERT",
+          "section": "Abstract"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-12",
+      "question": "BERT输入序列新增哪两个特殊标记，各自作用是什么？",
+      "query_en": "What two special tokens are added to BERT's input sequence, and what are their respective purposes?",
+      "paper_id": "BERT",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "BERT",
+          "section": "3 BERT"
+        },
+        {
+          "source": "BERT",
+          "section": "2.2 Unsupervised Fine-tuning Approaches"
+        },
+        {
+          "source": "BERT",
+          "section": "6 Conclusion"
+        },
+        {
+          "source": "BERT",
+          "section": "3 BERT"
+        },
+        {
+          "source": "BERT",
+          "section": "6 Conclusion"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-13",
+      "question": "BERT预训练的第二个无监督任务NSP全称与目标是什么？",
+      "query_en": "What is the full name and objective of BERT's second unsupervised pre-training task, NSP?",
+      "paper_id": "BERT",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "BERT",
+          "section": "3.1 Pre-training BERT"
+        },
+        {
+          "source": "BERT",
+          "section": "5.1 Effect of Pre-training Tasks"
+        },
+        {
+          "source": "BERT",
+          "section": "2.2 Unsupervised Fine-tuning Approaches"
+        },
+        {
+          "source": "BERT",
+          "section": "5 Ablation Studies"
+        },
+        {
+          "source": "BERT",
+          "section": "6 Conclusion"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-14",
+      "question": "MLM掩码时，选中待预测token后三种替换策略的占比分别是多少？",
+      "query_en": "What are the three replacement strategies and their proportions when a token is selected for prediction in BERT's MLM?",
+      "paper_id": "BERT",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "BERT",
+          "section": "6 Conclusion"
+        },
+        {
+          "source": "BERT",
+          "section": "6 Conclusion"
+        },
+        {
+          "source": "BERT",
+          "section": "6 Conclusion"
+        },
+        {
+          "source": "BERT",
+          "section": "6 Conclusion"
+        },
+        {
+          "source": "BERT",
+          "section": "3.1 Pre-training BERT"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-15",
+      "question": "BERT-BASE与BERT-LARGE的层数L、隐藏维度H、注意力头数A分别是？",
+      "query_en": "What are the layer count L, hidden size H, and number of attention heads A for BERT-BASE and BERT-LARGE?",
+      "paper_id": "BERT",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "BERT",
+          "section": "3 BERT"
+        },
+        {
+          "source": "BERT",
+          "section": "5.2 Effect of Model Size"
+        },
+        {
+          "source": "BERT",
+          "section": "5.3 Feature-based Approach with BERT"
+        },
+        {
+          "source": "BERT",
+          "section": "3 BERT"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "5 Limitations and Future Directions"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-16",
+      "question": "消融实验中移除NSP任务后，哪些下游任务性能出现明显下降？",
+      "query_en": "Which downstream tasks show significant performance degradation when the NSP task is removed in BERT ablation experiments?",
+      "paper_id": "BERT",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "BERT",
+          "section": "5 Ablation Studies"
+        },
+        {
+          "source": "BERT",
+          "section": "5.1 Effect of Pre-training Tasks"
+        },
+        {
+          "source": "BERT",
+          "section": "6 Conclusion"
+        },
+        {
+          "source": "BERT",
+          "section": "3.1 Pre-training BERT"
+        },
+        {
+          "source": "1611.06322",
+          "section": "Feature analysis"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-17",
+      "question": "BERT支持两种使用范式，分别是微调范式与哪种特征提取范式？",
+      "query_en": "What are the two usage paradigms supported by BERT, and what is the feature-based approach called?",
+      "paper_id": "BERT",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "BERT",
+          "section": "5.3 Feature-based Approach with BERT"
+        },
+        {
+          "source": "BERT",
+          "section": "5.3 Feature-based Approach with BERT"
+        },
+        {
+          "source": "BERT",
+          "section": "6 Conclusion"
+        },
+        {
+          "source": "BERT",
+          "section": "2.2 Unsupervised Fine-tuning Approaches"
+        },
+        {
+          "source": "1909.09070",
+          "section": "Figure-Caption Correspondence"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-18",
+      "question": "SQuAD v2.0任务中，BERT如何处理无答案的问答样本？",
+      "query_en": "How does BERT handle unanswerable question samples in the SQuAD v2.0 task?",
+      "paper_id": "BERT",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "BERT",
+          "section": "Abstract"
+        },
+        {
+          "source": "BERT",
+          "section": "4.3 SQuAD v2.0"
+        },
+        {
+          "source": "BERT",
+          "section": "4.2 SQuAD v1.1"
+        },
+        {
+          "source": "GPT2",
+          "section": "3.8. Question Answering"
+        },
+        {
+          "source": "BERT",
+          "section": "4.2 SQuAD v1.1"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-19",
+      "question": "BERT预训练使用的两大语料库分别是什么？",
+      "query_en": "What are the two major corpora used for pre-training BERT?",
+      "paper_id": "BERT",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "1906.11085",
+          "section": "Background"
+        },
+        {
+          "source": "BERT",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "BERT",
+          "section": "2.2 Unsupervised Fine-tuning Approaches"
+        },
+        {
+          "source": "BERT",
+          "section": "5.3 Feature-based Approach with BERT"
+        },
+        {
+          "source": "BERT",
+          "section": "3.1 Pre-training BERT"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-20",
+      "question": "单句分类、句对分类、抽取式问答、序列标注四类任务分别复用BERT哪部分输出？",
+      "query_en": "Which BERT output representations are used for single-sentence classification, sentence-pair classification, extractive QA, and sequence labeling?",
+      "paper_id": "BERT",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "BERT",
+          "section": "3 BERT"
+        },
+        {
+          "source": "BERT",
+          "section": "2.2 Unsupervised Fine-tuning Approaches"
+        },
+        {
+          "source": "BERT",
+          "section": "6 Conclusion"
+        },
+        {
+          "source": "1910.07973",
+          "section": "Introduction"
+        },
+        {
+          "source": "BERT",
+          "section": "3.2 Fine-tuning BERT"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-21",
+      "question": "CoT提示词的构造形式是哪三元组，区别于标准问答提示？",
+      "query_en": "What is the triplet structure of chain-of-thought prompting that distinguishes it from standard QA prompting?",
+      "paper_id": "Chain_of_Thought",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "Chain_of_Thought",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.3 Ablation Study"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.3 Ablation Study"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "6 Discussion"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-22",
+      "question": "CoT提升模型推理能力是哪种模型涌现能力，多少参数规模下才会显现正向效果？",
+      "query_en": "What type of emergent ability is chain-of-thought prompting, and at what model scale does it start to show positive effects on reasoning?",
+      "paper_id": "Chain_of_Thought",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "Chain_of_Thought",
+          "section": "6 Discussion"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.2 Results"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "6 Discussion"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "Abstract"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "1 Introduction"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-23",
+      "question": "在GSM8K小学数学数据集上，PaLM540B标准提示与CoT提示的解题准确率分别是多少？",
+      "query_en": "What are the solve rates of PaLM 540B on GSM8K using standard prompting vs. chain-of-thought prompting?",
+      "paper_id": "Chain_of_Thought",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "Chain_of_Thought",
+          "section": "4 Commonsense Reasoning"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.2 Results"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.3 Ablation Study"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.2 Results"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.4 Robustness of Chain of Thought"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-24",
+      "question": "论文做的消融实验中，仅输出数学公式、先答案后推理两种变体为什么效果弱于完整CoT？",
+      "query_en": "Why do equation-only and reasoning-after-answer variants perform worse than full chain-of-thought prompting in the ablation study?",
+      "paper_id": "Chain_of_Thought",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.3 Ablation Study"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.3 Ablation Study"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "2 OOD: 3 OOD: 4 2 OOD: 3 OOD: 4"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "5 Symbolic Reasoning"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-25",
+      "question": "CoT可以泛化推理到输入样例步数更长的测试样本，论文在哪两类符号任务验证该特性？",
+      "query_en": "On which two symbolic reasoning tasks does the paper demonstrate that CoT generalizes to test samples with more steps than the input exemplars?",
+      "paper_id": "Chain_of_Thought",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "Chain_of_Thought",
+          "section": "5 Symbolic Reasoning"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "5 Symbolic Reasoning"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "ReAct",
+          "section": "5 RELATED WORK"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-26",
+      "question": "人工撰写不同风格、不同数量的CoT示例后，模型性能有小幅波动但均显著优于标准提示，说明CoT具备什么特性？",
+      "query_en": "What property of chain-of-thought prompting is shown by its robustness to different styles and numbers of manually written exemplars?",
+      "paper_id": "Chain_of_Thought",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.4 Robustness of Chain of Thought"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.4 Robustness of Chain of Thought"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "2 OOD: 3 OOD: 4 2 OOD: 3 OOD: 4"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-27",
+      "question": "论文将模型推理错误分为三大类，分别是什么？",
+      "query_en": "What are the three major categories of reasoning errors identified in the paper?",
+      "paper_id": "Chain_of_Thought",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        },
+        {
+          "source": "1911.12893",
+          "section": "Conclusion"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "6 Discussion"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-28",
+      "question": "CoT适用度最高的任务满足哪三个条件？",
+      "query_en": "What three conditions make a task most suitable for chain-of-thought prompting?",
+      "paper_id": "Chain_of_Thought",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "Abstract"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.2 Results"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-29",
+      "question": "常识推理评测使用了CSQA、StrategyQA等数据集，CoT在哪类常识任务提升幅度最大？",
+      "query_en": "On which commonsense reasoning tasks does chain-of-thought prompting show the largest improvements?",
+      "paper_id": "Chain_of_Thought",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "Chain_of_Thought",
+          "section": "4 Commonsense Reasoning"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "2 Chain-of-Thought Prompting"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "6 Discussion"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "Abstract"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-30",
+      "question": "仅8个CoT示例就能大幅提升数学推理，是否需要针对每个数据集单独制作示例？",
+      "query_en": "Does chain-of-thought prompting require dataset-specific exemplars, or do 8 exemplars suffice for large math reasoning gains?",
+      "paper_id": "Chain_of_Thought",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "Abstract"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.1 Experimental Setup"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.4 Robustness of Chain of Thought"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-31",
+      "question": "标准自注意力的内存瓶颈来自哪个中间矩阵，其空间复杂度与序列长度N是什么关系？",
+      "query_en": "Which intermediate matrix causes the memory bottleneck in standard self-attention, and what is its space complexity in terms of sequence length N?",
+      "paper_id": "FlashAttention",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "FlashAttention",
+          "section": "5 Limitations and Future Directions"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "2.2 Standard Attention Implementation"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "4 Why Self-Attention"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-32",
+      "question": "FlashAttention核心两大优化技术分别是什么？",
+      "query_en": "What are the two core optimization techniques used in FlashAttention?",
+      "paper_id": "FlashAttention",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "5 Limitations and Future Directions"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "5 Limitations and Future Directions"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "5 Limitations and Future Directions"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "4 Experiments"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-33",
+      "question": "GPU内存层级从快到慢排序，FlashAttention主要优化哪两层之间的数据读写？",
+      "query_en": "What are the GPU memory hierarchy levels from fastest to slowest, and which two levels does FlashAttention primarily optimize data movement between?",
+      "paper_id": "FlashAttention",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "FlashAttention",
+          "section": "Abstract"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "5 Limitations and Future Directions"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "5 Limitations and Future Directions"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-34",
+      "question": "FlashAttention相比标准注意力，HBM读写量降低多少倍（GPT2实验数据）？",
+      "query_en": "How many times does FlashAttention reduce HBM read/write compared to standard attention, based on GPT-2 experimental results?",
+      "paper_id": "FlashAttention",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "3.2 Analysis: IO Complexity of FlashAttention"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "2.2 Standard Attention Implementation"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "3.2 Analysis: IO Complexity of FlashAttention"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-35",
+      "question": "FlashAttention是否改变注意力数学计算结果？",
+      "query_en": "Does FlashAttention change the mathematical result of the attention computation?",
+      "paper_id": "FlashAttention",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "FlashAttention",
+          "section": "5 Limitations and Future Directions"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "5 Limitations and Future Directions"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "3.2 Analysis: IO Complexity of FlashAttention"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-36",
+      "question": "分块计算softmax时，为保证数值正确性，需要缓存哪两个逐行统计量？",
+      "query_en": "What two per-row statistics need to be cached when computing softmax in blocks to ensure numerical correctness?",
+      "paper_id": "FlashAttention",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "FlashAttention",
+          "section": "3.1 An Eﬃcient Attention Algorithm With Tiling and Recomputation"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "3.1 An Eﬃcient Attention Algorithm With Tiling and Recomputation"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "5 Limitations and Future Directions"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "5 Limitations and Future Directions"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "5 Limitations and Future Directions"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-37",
+      "question": "Block-Sparse FlashAttention的IO复杂度相比稠密Flash，会乘以什么稀疏系数？",
+      "query_en": "By what sparsity factor is the IO complexity of block-sparse FlashAttention multiplied compared to dense FlashAttention?",
+      "paper_id": "FlashAttention",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "FlashAttention",
+          "section": "3.3 Extension: Block-Sparse FlashAttention"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "3.3 Extension: Block-Sparse FlashAttention"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "3.2 Analysis: IO Complexity of FlashAttention"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "5 Limitations and Future Directions"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-38",
+      "question": "使用Flash训练BERT-Large相比MLPerf基准提速多少？GPT2（1K序列）提速倍数？",
+      "query_en": "What is the speedup of BERT-Large training with FlashAttention over the MLPerf baseline, and how many times faster is GPT-2 (1K sequence) with FlashAttention?",
+      "paper_id": "FlashAttention",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "FlashAttention",
+          "section": "4.1 Faster Models with FlashAttention"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "4 Experiments"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "4.2 Better Models with Longer Sequences"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-39",
+      "question": "FlashAttention的IO复杂度公式是什么，M代表什么硬件参数？",
+      "query_en": "What is the IO complexity formula for FlashAttention, and what hardware parameter does M represent?",
+      "paper_id": "FlashAttention",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "FlashAttention",
+          "section": "3.3 Extension: Block-Sparse FlashAttention"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "Abstract"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "3.2 Analysis: IO Complexity of FlashAttention"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "3 FlashAttention: Algorithm, Analysis, and Extensions"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "5 Limitations and Future Directions"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-40",
+      "question": "Flash支持超长序列，哪两个长文本基准首次通过它实现高于随机的效果？",
+      "query_en": "Which two long-sequence benchmarks achieve better-than-random performance for the first time using FlashAttention and block-sparse FlashAttention?",
+      "paper_id": "FlashAttention",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "FlashAttention",
+          "section": "4 Experiments"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "4.2 Better Models with Longer Sequences"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "Abstract"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-41",
+      "question": "LoRA微调仅冻结预训练大模型权重，只训练哪两组低秩矩阵？",
+      "query_en": "In LoRA, which two low-rank matrices are trained while the pre-trained model weights are frozen?",
+      "paper_id": "LoRA",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "LoRA",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "LoRA",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "LoRA",
+          "section": "4.1 LOW-RANK-PARAMETRIZED UPDATE MATRICES"
+        },
+        {
+          "source": "LoRA",
+          "section": "7 UNDERSTANDING THE LOW-RANK UPDATES"
+        },
+        {
+          "source": "LoRA",
+          "section": "4.1 LOW-RANK-PARAMETRIZED UPDATE MATRICES"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-42",
+      "question": "LoRA推理时是否引入额外延迟，原因是什么？",
+      "query_en": "Does LoRA introduce additional inference latency, and why or why not?",
+      "paper_id": "LoRA",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "LoRA",
+          "section": "4.1 LOW-RANK-PARAMETRIZED UPDATE MATRICES"
+        },
+        {
+          "source": "LoRA",
+          "section": "4.2 APPLYING LORA TO TRANSFORMER"
+        },
+        {
+          "source": "LoRA",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "LoRA",
+          "section": "Abstract"
+        },
+        {
+          "source": "LoRA",
+          "section": "3 AREN’T EXISTING SOLUTIONS GOOD ENOUGH?"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-43",
+      "question": "LoRA的权重更新公式是什么，训练初始化矩阵A、B策略是？",
+      "query_en": "What is LoRA's weight update formula, and how are matrices A and B initialized during training?",
+      "paper_id": "LoRA",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "LoRA",
+          "section": "4.1 LOW-RANK-PARAMETRIZED UPDATE MATRICES"
+        },
+        {
+          "source": "LoRA",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "LoRA",
+          "section": "4.1 LOW-RANK-PARAMETRIZED UPDATE MATRICES"
+        },
+        {
+          "source": "LoRA",
+          "section": "5.1 BASELINES"
+        },
+        {
+          "source": "LoRA",
+          "section": "8 CONCLUSION AND FUTURE WORK"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-44",
+      "question": "论文为什么仅针对注意力矩阵做低秩适配，不作用于FFN层？",
+      "query_en": "Why does the LoRA paper apply low-rank adaptation only to attention matrices and not to FFN layers?",
+      "paper_id": "LoRA",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "LoRA",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "LoRA",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "LoRA",
+          "section": "4.1 LOW-RANK-PARAMETRIZED UPDATE MATRICES"
+        },
+        {
+          "source": "LoRA",
+          "section": "5.1 BASELINES"
+        },
+        {
+          "source": "LoRA",
+          "section": "8 CONCLUSION AND FUTURE WORK"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-45",
+      "question": "LoRA超参数r代表什么，r越大模型适配能力与参数量如何变化？",
+      "query_en": "What does LoRA's hyperparameter r represent, and how do model adaptability and parameter count scale with r?",
+      "paper_id": "LoRA",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "LoRA",
+          "section": "4.1 LOW-RANK-PARAMETRIZED UPDATE MATRICES"
+        },
+        {
+          "source": "LoRA",
+          "section": "7.2 WHAT IS THE OPTIMAL RANK r FOR LORA?"
+        },
+        {
+          "source": "LoRA",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "LoRA",
+          "section": "8 CONCLUSION AND FUTURE WORK"
+        },
+        {
+          "source": "LoRA",
+          "section": "7.2 WHAT IS THE OPTIMAL RANK r FOR LORA?"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-46",
+      "question": "相比全参数微调、Prefix Tuning，LoRA在存储开销上的优势是什么？",
+      "query_en": "What is LoRA's storage advantage over full fine-tuning and Prefix Tuning?",
+      "paper_id": "LoRA",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "LoRA",
+          "section": "8 CONCLUSION AND FUTURE WORK"
+        },
+        {
+          "source": "LoRA",
+          "section": "8 CONCLUSION AND FUTURE WORK"
+        },
+        {
+          "source": "LoRA",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "LoRA",
+          "section": "4.1 LOW-RANK-PARAMETRIZED UPDATE MATRICES"
+        },
+        {
+          "source": "LoRA",
+          "section": "1 INTRODUCTION"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-47",
+      "question": "LoRA训练阶段是否使用dropout、偏置项等辅助参数？",
+      "query_en": "Does LoRA use auxiliary parameters like dropout and bias terms during training?",
+      "paper_id": "LoRA",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "LoRA",
+          "section": "4.1 LOW-RANK-PARAMETRIZED UPDATE MATRICES"
+        },
+        {
+          "source": "LoRA",
+          "section": "4.2 APPLYING LORA TO TRANSFORMER"
+        },
+        {
+          "source": "LoRA",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "LoRA",
+          "section": "5.5 SCALING UP TO GPT-3 175B"
+        },
+        {
+          "source": "LoRA",
+          "section": "8 CONCLUSION AND FUTURE WORK"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-48",
+      "question": "在GPT-3 175B实验中，同等性能下LoRA相比全微调节省多少显存？",
+      "query_en": "How much GPU memory does LoRA save compared to full fine-tuning at equal performance on GPT-3 175B?",
+      "paper_id": "LoRA",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "LoRA",
+          "section": "Abstract"
+        },
+        {
+          "source": "LoRA",
+          "section": "4.2 APPLYING LORA TO TRANSFORMER"
+        },
+        {
+          "source": "LoRA",
+          "section": "5.1 BASELINES"
+        },
+        {
+          "source": "LoRA",
+          "section": "5.4 GPT-2 MEDIUM/LARGE"
+        },
+        {
+          "source": "LoRA",
+          "section": "4.1 LOW-RANK-PARAMETRIZED UPDATE MATRICES"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-49",
+      "question": "多任务场景下LoRA如何切换不同任务适配权重？",
+      "query_en": "How does LoRA switch between different task adaptation weights in multi-task scenarios?",
+      "paper_id": "LoRA",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "LoRA",
+          "section": "4.1 LOW-RANK-PARAMETRIZED UPDATE MATRICES"
+        },
+        {
+          "source": "LoRA",
+          "section": "4.2 APPLYING LORA TO TRANSFORMER"
+        },
+        {
+          "source": "LoRA",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "LoRA",
+          "section": "7 UNDERSTANDING THE LOW-RANK UPDATES"
+        },
+        {
+          "source": "LoRA",
+          "section": "8 CONCLUSION AND FUTURE WORK"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-50",
+      "question": "GraphR相比传统向量RAG，核心新增哪一类结构化存储单元？",
+      "query_en": "What new structured storage component does GraphRAG add compared to traditional vector RAG?",
+      "paper_id": "GraphRAG",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "GraphRAG",
+          "section": "2.1 RAG Approaches and Systems"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "6.2 Future work"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "7 Conclusion"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-51",
+      "question": "GraphRAG对原始文档做分层抽取，哪两级图结构用于检索？",
+      "query_en": "Which two hierarchical graph structures are used for retrieval in GraphRAG?",
+      "paper_id": "GraphRAG",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "GraphRAG",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "2.1 RAG Approaches and Systems"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "Abstract"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "6.2 Future work"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "2.2 Using Knowledge Graphs with LLMs and RAG"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-52",
+      "question": "GraphRAG构建图时，通过什么步骤从文本抽取实体与关系三元组？",
+      "query_en": "What is the step in GraphRAG that extracts entity-relationship triples from text chunks?",
+      "paper_id": "GraphRAG",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "GraphRAG",
+          "section": "7 Conclusion"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "3.1.3 Entities & Relationships →Knowledge Graph"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "3.1.2 Text Chunks →Entities & Relationships"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "4.1.2 Conditions"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "3.1.1 Source Documents →Text Chunks"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-53",
+      "question": "GraphRAG中社区检测算法的作用是什么？",
+      "query_en": "What is the role of the community detection algorithm in GraphRAG?",
+      "paper_id": "GraphRAG",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "GraphRAG",
+          "section": "3.1.5 Graph Communities →Community Summaries"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "Abstract"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "2.1 RAG Approaches and Systems"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "2.2 Using Knowledge Graphs with LLMs and RAG"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-54",
+      "question": "传统向量RAG的缺陷是什么，GraphRAG通过图结构弥补？",
+      "query_en": "What are the limitations of traditional vector RAG that GraphRAG addresses with its graph-based structure?",
+      "paper_id": "GraphRAG",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "GraphRAG",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "6.2 Future work"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "2.1 RAG Approaches and Systems"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "2.2 Using Knowledge Graphs with LLMs and RAG"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "Abstract"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-55",
+      "question": "全局社区摘要如何生成？",
+      "query_en": "How are global community summaries generated in GraphRAG?",
+      "paper_id": "GraphRAG",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "GraphRAG",
+          "section": "Abstract"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "2.1 RAG Approaches and Systems"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "3.1.5 Graph Communities →Community Summaries"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "3.1.6 Community Summaries →Community Answers →Global Answer"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-56",
+      "question": "GraphRAG在多文档综合问答任务上相比普通RAG提升的核心原因？",
+      "query_en": "What is the core reason for GraphRAG's improvement over standard RAG on multi-document global sensemaking tasks?",
+      "paper_id": "GraphRAG",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "GraphRAG",
+          "section": "Abstract"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "6.2 Future work"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "2.1 RAG Approaches and Systems"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "1 Introduction"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-57",
+      "question": "GraphRAG的完整处理流水线包含哪五大核心步骤？",
+      "query_en": "What are the five core steps in GraphRAG's complete processing pipeline?",
+      "paper_id": "GraphRAG",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "GraphRAG",
+          "section": "3.1 GraphRAG Workflow"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "7 Conclusion"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "2.1 RAG Approaches and Systems"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "3.1.3 Entities & Relationships →Knowledge Graph"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-58",
+      "question": "原始RAG模型由哪两个核心模块组合而成？",
+      "query_en": "What are the two core modules that compose the original RAG model?",
+      "paper_id": "RAG_Original_Paper",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "RAG_Original_Paper",
+          "section": "2 Methods"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "2.1 RAG Approaches and Systems"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "2.1 Models"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "6 Discussion"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-59",
+      "question": "RAG两种变体RAG-Sequence与RAG-Token的区别是什么？",
+      "query_en": "What is the difference between RAG-Sequence and RAG-Token, the two RAG variants?",
+      "paper_id": "RAG_Original_Paper",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "RAG_Original_Paper",
+          "section": "2.1 Models"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "2 Methods"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.3 Jeopardy Question Generation"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.4 Fact Veriﬁcation"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "2.5 Decoding"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-60",
+      "question": "RAG的核心设计动机是什么，解决大模型什么固有缺陷？",
+      "query_en": "What is the core design motivation behind RAG, and what inherent limitations of large language models does it address?",
+      "paper_id": "RAG_Original_Paper",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "Chain_of_Thought",
+          "section": "6 Discussion"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "Abstract"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.4 Fact Veriﬁcation"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "1 Introduction"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-61",
+      "question": "检索阶段使用的稠密检索模型DPR，输入分别是什么？",
+      "query_en": "What are the inputs to DPR, the dense retriever used in RAG?",
+      "paper_id": "RAG_Original_Paper",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "RAG_Original_Paper",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "2.2 Retriever: DPR"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.1 Open-domain Question Answering"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.5 Additional Results"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "2.1 Models"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-62",
+      "question": "RAG训练时联合优化哪两类损失？",
+      "query_en": "What two losses are jointly optimized during RAG training?",
+      "paper_id": "RAG_Original_Paper",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "RAG_Original_Paper",
+          "section": "2.4 Training"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "6 Discussion"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "6 Discussion"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.5 Additional Results"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "2 Methods"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-63",
+      "question": "论文评测哪四类知识密集型NLP任务验证RAG效果？",
+      "query_en": "What four categories of knowledge-intensive NLP tasks are used to evaluate RAG?",
+      "paper_id": "RAG_Original_Paper",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "RAG_Original_Paper",
+          "section": "3.1 Open-domain Question Answering"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "Abstract"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "Abstract"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "3.3 Jeopardy Question Generation"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "3.2 Abstractive Question Answering"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-64",
+      "question": "RAG相比纯预训练生成模型，在哪类指标提升最显著？",
+      "query_en": "On which metrics does RAG show the most significant improvement over purely parametric generation models?",
+      "paper_id": "RAG_Original_Paper",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "RAG_Original_Paper",
+          "section": "6 Discussion"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "6 Discussion"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "Abstract"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.3 Jeopardy Question Generation"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.5 Additional Results"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-65",
+      "question": "推理阶段RAG检索多少个top-k文档融合进生成上下文？",
+      "query_en": "How many top-k documents are retrieved and incorporated into the generation context during RAG inference?",
+      "paper_id": "RAG_Original_Paper",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "RAG_Original_Paper",
+          "section": "2.1 Models"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.4 Fact Veriﬁcation"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.5 Additional Results"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "3 Experiments"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "2.1 RAG Approaches and Systems"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-66",
+      "question": "为什么RAG不需要微调海量模型参数就能注入新知识？",
+      "query_en": "Why can RAG inject new knowledge without fine-tuning massive model parameters?",
+      "paper_id": "RAG_Original_Paper",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "RAG_Original_Paper",
+          "section": "Abstract"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "6 Discussion"
+        },
+        {
+          "source": "LoRA",
+          "section": "4.1 LOW-RANK-PARAMETRIZED UPDATE MATRICES"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "3.2 Abstractive Question Answering"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.3 Jeopardy Question Generation"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-67",
+      "question": "消融实验中移除检索模块后，模型哪项性能断崖下跌？",
+      "query_en": "Which performance metric drops sharply when the retrieval module is removed in RAG ablation experiments?",
+      "paper_id": "RAG_Original_Paper",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "RAG_Original_Paper",
+          "section": "6 Discussion"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.5 Additional Results"
+        },
+        {
+          "source": "1611.06322",
+          "section": "Feature analysis"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.1 Open-domain Question Answering"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.5 Additional Results"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-68",
+      "question": "Re框架交替生成哪两类内容，实现推理与工具调用协同？",
+      "query_en": "What two types of content does ReAct interleave to synergize reasoning and tool use?",
+      "paper_id": "ReAct",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "ReAct",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "ReAct",
+          "section": "3 KNOWLEDGE-INTENSIVE REASONING TASKS"
+        },
+        {
+          "source": "ReAct",
+          "section": "4 DECISION MAKING TASKS"
+        },
+        {
+          "source": "ReAct",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "ReAct",
+          "section": "Abstract"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-69",
+      "question": "ReAct相比纯CoT、纯工具调用Prompt的核心优势是什么？",
+      "query_en": "What is the key advantage of ReAct over chain-of-thought-only and action-only prompting approaches?",
+      "paper_id": "ReAct",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "ReAct",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "ReAct",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "ReAct",
+          "section": "4 DECISION MAKING TASKS"
+        },
+        {
+          "source": "ReAct",
+          "section": "Abstract"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-70",
+      "question": "ReAct完整交互循环流程是什么？",
+      "query_en": "What is the complete interactive loop workflow of ReAct?",
+      "paper_id": "ReAct",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "ReAct",
+          "section": "4 DECISION MAKING TASKS"
+        },
+        {
+          "source": "ReAct",
+          "section": "5 RELATED WORK"
+        },
+        {
+          "source": "ReAct",
+          "section": "5 RELATED WORK"
+        },
+        {
+          "source": "ReAct",
+          "section": "6 CONCLUSION"
+        },
+        {
+          "source": "ReAct",
+          "section": "1 INTRODUCTION"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-71",
+      "question": "论文使用的外部工具主要是什么检索类工具？",
+      "query_en": "What kind of retrieval tool does ReAct primarily use as its external environment?",
+      "paper_id": "ReAct",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "ReAct",
+          "section": "4 DECISION MAKING TASKS"
+        },
+        {
+          "source": "ReAct",
+          "section": "6 CONCLUSION"
+        },
+        {
+          "source": "ReAct",
+          "section": "2 REAC T: SYNERGIZING REASONING + ACTING"
+        },
+        {
+          "source": "ReAct",
+          "section": "Abstract"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-72",
+      "question": "纯CoT模型在需要外部实时知识的任务上存在什么致命缺陷？",
+      "query_en": "What critical weakness do chain-of-thought models have on tasks that require external, up-to-date knowledge?",
+      "paper_id": "ReAct",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "Chain_of_Thought",
+          "section": "4 Commonsense Reasoning"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        },
+        {
+          "source": "ReAct",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "2 OOD: 3 OOD: 4 2 OOD: 3 OOD: 4"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-73",
+      "question": "ReAct的提示示例由哪四元组样例构成？",
+      "query_en": "What four components make up the demonstration examples in ReAct's prompts?",
+      "paper_id": "ReAct",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        },
+        {
+          "source": "ReAct",
+          "section": "4 DECISION MAKING TASKS"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        },
+        {
+          "source": "ReAct",
+          "section": "2 REAC T: SYNERGIZING REASONING + ACTING"
+        },
+        {
+          "source": "ReAct",
+          "section": "6 CONCLUSION"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-74",
+      "question": "在HotpotQA多跳问答数据集，ReAct相比仅CoT基线提升的核心原因？",
+      "query_en": "What is the core reason for ReAct's improvement over CoT-only baselines on the HotpotQA multi-hop QA dataset?",
+      "paper_id": "ReAct",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.2 METHODS"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-75",
+      "question": "ReAct何时终止Thought-Action循环并输出最终答案？",
+      "query_en": "When does ReAct terminate its Thought-Action loop and produce the final answer?",
+      "paper_id": "ReAct",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "ReAct",
+          "section": "6 CONCLUSION"
+        },
+        {
+          "source": "ReAct",
+          "section": "2 REAC T: SYNERGIZING REASONING + ACTING"
+        },
+        {
+          "source": "ReAct",
+          "section": "2 REAC T: SYNERGIZING REASONING + ACTING"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.2 METHODS"
+        },
+        {
+          "source": "ReAct",
+          "section": "4 DECISION MAKING TASKS"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-76",
+      "question": "消融实验移除Action工具调用后，模型会出现什么问题？",
+      "query_en": "What problem arises when Action tool calls are removed in ReAct ablation experiments?",
+      "paper_id": "ReAct",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "ReAct",
+          "section": "4 DECISION MAKING TASKS"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        },
+        {
+          "source": "ReAct",
+          "section": "6 CONCLUSION"
+        },
+        {
+          "source": "ReAct",
+          "section": "6 CONCLUSION"
+        },
+        {
+          "source": "ReAct",
+          "section": "1 INTRODUCTION"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-77",
+      "question": "ReAct解决了工具调用模型的什么问题？",
+      "query_en": "What specific limitation of tool-use models does ReAct address?",
+      "paper_id": "ReAct",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "ReAct",
+          "section": "4 DECISION MAKING TASKS"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        },
+        {
+          "source": "ReAct",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "3.3 Criteria for Evaluating Global Sensemaking"
+        },
+        {
+          "source": "ReAct",
+          "section": "5 RELATED WORK"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-78",
+      "question": "GPT1模型基础架构基于哪篇论文提出的解码器Transformer？",
+      "query_en": "Which paper's decoder Transformer architecture is GPT-1's model based on?",
+      "paper_id": "GPT2",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": false,
+      "paper_hit": false,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "LoRA",
+          "section": "6 RELATED WORKS"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3 Model Architecture"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "Abstract"
+        },
+        {
+          "source": "BERT",
+          "section": "6 Conclusion"
+        },
+        {
+          "source": "BERT",
+          "section": "3 BERT"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-79",
+      "question": "GPT1预训练采用什么无监督语言建模目标？",
+      "query_en": "What unsupervised language modeling objective is used during GPT-1 pre-training?",
+      "paper_id": "GPT2",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "LoRA",
+          "section": "2 PROBLEM STATEMENT"
+        },
+        {
+          "source": "GPT2",
+          "section": "2. Approach"
+        },
+        {
+          "source": "BERT",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "BERT",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "BERT",
+          "section": "2.2 Unsupervised Fine-tuning Approaches"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-80",
+      "question": "GPT1的Transformer解码器堆叠层数、隐藏维度、注意力头数是多少？",
+      "query_en": "How many stacked layers, hidden dimensions, and attention heads does GPT-1's Transformer decoder have?",
+      "paper_id": "GPT2",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": false,
+      "paper_hit": false,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "1805.04833",
+          "section": "GCNN Language Model + Self-Attention"
+        },
+        {
+          "source": "1805.04833",
+          "section": "Conv seq2seq + self-attention"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3 Model Architecture"
+        },
+        {
+          "source": "1805.04833",
+          "section": "Fusion: Conv seq2seq + self-attention"
+        },
+        {
+          "source": "2004.02334",
+          "section": "Experimental Setup ::: Hyperparameters"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-81",
+      "question": "论文核心论点是什么，即大模型无监督预训练后可零样本适配多种NLP任务？",
+      "query_en": "What is the central thesis that large language models can adapt to diverse NLP tasks in a zero-shot manner after unsupervised pre-training?",
+      "paper_id": "GPT2",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "GPT2",
+          "section": "6. Discussion"
+        },
+        {
+          "source": "GPT2",
+          "section": "7. Conclusion"
+        },
+        {
+          "source": "GPT2",
+          "section": "2. Approach"
+        },
+        {
+          "source": "GPT2",
+          "section": "1. Introduction"
+        },
+        {
+          "source": "GPT2",
+          "section": "Abstract"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-82",
+      "question": "RoFormer提出的位置编码全称是什么，缩写RoPE？",
+      "query_en": "What is the full name of the positional encoding introduced by RoFormer, abbreviated as RoPE?",
+      "paper_id": "RoFormer_RoPE",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "RoFormer_RoPE",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "Abstract"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "4.4 Performer with RoPE"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "4.2.2 Implementation details"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-83",
+      "question": "RoPE编码的核心数学操作是对token向量执行什么变换？",
+      "query_en": "What mathematical transformation does RoPE apply to token vectors?",
+      "paper_id": "RoFormer_RoPE",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "RoFormer_RoPE",
+          "section": "2.2 Absolute position embedding"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.4 Embeddings and Softmax"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "Abstract"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "3.3 Properties of RoPE"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-84",
+      "question": "RoPE相比正弦位置编码、可学习位置编码的核心优势？",
+      "query_en": "What are RoPE's core advantages over sinusoidal and learnable position encodings?",
+      "paper_id": "RoFormer_RoPE",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "RoFormer_RoPE",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.5 Positional Encoding"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "2.2 Absolute position embedding"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "4.2.2 Implementation details"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-85",
+      "question": "标准绝对位置编码存在什么缺陷，RoPE予以解决？",
+      "query_en": "What defect of standard absolute position encodings does RoPE address?",
+      "paper_id": "RoFormer_RoPE",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "RoFormer_RoPE",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "Abstract"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.5 Positional Encoding"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "3.2.2 General form"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-86",
+      "question": "RoPE如何计算两个token间基于相对位置的注意力分数？",
+      "query_en": "How does RoPE compute the relative position-based attention score between two tokens?",
+      "paper_id": "RoFormer_RoPE",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "RoFormer_RoPE",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "Abstract"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "3.3 Properties of RoPE"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "3.2.2 General form"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-87",
+      "question": "RoFormer基础模型的主干网络采用Transformer编码器还是解码器？",
+      "query_en": "Does RoFormer's backbone use a Transformer encoder or decoder architecture?",
+      "paper_id": "RoFormer_RoPE",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "1911.09753",
+          "section": "Experiments ::: Experimental Settings ::: Model architecture"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3 Model Architecture"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "Abstract"
+        },
+        {
+          "source": "2004.02334",
+          "section": "Experimental Setup"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "Abstract"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-88",
+      "question": "RoPE旋转计算的频率基底参数作用是什么？",
+      "query_en": "What is the role of the frequency base parameter in RoPE's rotation computation?",
+      "paper_id": "RoFormer_RoPE",
+      "question_type": "legacy",
+      "split": "dev",
+      "source": "legacy",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "RoFormer_RoPE",
+          "section": "3.3 Properties of RoPE"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "3.2.2 General form"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "2.2 Absolute position embedding"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "3.2.2 General form"
+        }
+      ]
+    }
+  ]
+}
