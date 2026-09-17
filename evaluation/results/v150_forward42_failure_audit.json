@@ -1,0 +1,93 @@
+{
+  "buckets": {
+    "rank6_25": 5,
+    "top5_but_miss": 3,
+    "outside_top100": 4
+  },
+  "details": [
+    {
+      "question": "FlashAttention 通过哪些技术实现精确注意力，同时避免将 N×N 注意力矩阵写入 HBM？",
+      "paper_id": "FlashAttention",
+      "bucket": "rank6_25",
+      "rank": 25,
+      "query": "FlashAttention 通过哪些技术实现精确注意力，同时避免将 N×N 注意力矩阵写入 HBM？"
+    },
+    {
+      "question": "GraphRAG 如何构建图索引并生成社区摘要？",
+      "paper_id": "GraphRAG",
+      "bucket": "top5_but_miss",
+      "rank": 1,
+      "query": "GraphRAG 如何构建图索引并生成社区摘要？"
+    },
+    {
+      "question": "论文指出的评估局限是什么？",
+      "paper_id": "GraphRAG",
+      "bucket": "rank6_25",
+      "rank": 25,
+      "query": "论文指出的评估局限是什么？"
+    },
+    {
+      "question": "在 GLUE 下游任务微调中，RoFormer 相对 BERT 的整体表现如何？",
+      "paper_id": "RoFormer_RoPE",
+      "bucket": "rank6_25",
+      "rank": 8,
+      "query": "在 GLUE 下游任务微调中，RoFormer 相对 BERT 的整体表现如何？"
+    },
+    {
+      "question": "作者在论文中承认了 RoPE/RoFormer 的哪些主要局限性？",
+      "paper_id": "RoFormer_RoPE",
+      "bucket": "top5_but_miss",
+      "rank": 3,
+      "query": "作者在论文中承认了 RoPE/RoFormer 的哪些主要局限性？"
+    },
+    {
+      "question": "这篇论文采用什么方法自动检测网络欺凌？使用了哪些分类器和特征？",
+      "paper_id": "1801.05617",
+      "bucket": "rank6_25",
+      "rank": 8,
+      "query": "这篇论文采用什么方法自动检测网络欺凌？使用了哪些分类器和特征？"
+    },
+    {
+      "question": "在实验中，优化后的模型与哪些基线系统进行了比较？结果如何？",
+      "paper_id": "1801.05617",
+      "bucket": "outside_top100",
+      "rank": null,
+      "query": "在实验中，优化后的模型与哪些基线系统进行了比较？结果如何？"
+    },
+    {
+      "question": "Vinyals 等人提出的序列到序列对话模型在生成回复时，编码器和解码器分别起什么作用？",
+      "paper_id": "1803.08419",
+      "bucket": "top5_but_miss",
+      "rank": 2,
+      "query": "Vinyals 等人提出的序列到序列对话模型在生成回复时，编码器和解码器分别起什么作用？"
+    },
+    {
+      "question": "论文认为序列到序列模型相比早期基于规则的模型解决了哪些问题，同时又存在什么根本局限？",
+      "paper_id": "1803.08419",
+      "bucket": "outside_top100",
+      "rank": null,
+      "query": "论文认为序列到序列模型相比早期基于规则的模型解决了哪些问题，同时又存在什么根本局限？"
+    },
+    {
+      "question": "AEG 在强化学习训练中使用了什么算法，并且它计算哪三类奖励？",
+      "paper_id": "1909.07873",
+      "bucket": "outside_top100",
+      "rank": null,
+      "query": "AEG 在强化学习训练中使用了什么算法，并且它计算哪三类奖励？"
+    },
+    {
+      "question": "BERT 的 Masked LM 预训练存在什么预训练-微调不匹配问题？作者采用什么策略来缓解？",
+      "paper_id": "BERT",
+      "bucket": "rank6_25",
+      "rank": 18,
+      "query": "BERT 的 Masked LM 预训练存在什么预训练-微调不匹配问题？作者采用什么策略来缓解？"
+    },
+    {
+      "question": "论文将网络欺凌拆解为哪五个关键判据？它们的英文缩写分别是什么？",
+      "paper_id": "2004.01820",
+      "bucket": "outside_top100",
+      "rank": null,
+      "query": "论文将网络欺凌拆解为哪五个关键判据？它们的英文缩写分别是什么？"
+    }
+  ]
+}

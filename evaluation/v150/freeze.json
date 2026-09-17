@@ -1,6 +1,6 @@
 {
   "version": "v150",
-  "created_at": "2026-09-17 22:21:39",
+  "created_at": "2026-09-17 22:51:06",
   "question_generation": {
     "model": "deepseek-v4-flash",
     "prompt_sha256": "ab0abd08bf53f7d9c71cf1016918648783f2ffbb3d32a4ae56ea7cb649903824",
@@ -26,10 +26,22 @@
   "test_results": {
     "sealed_sha256": "9149e27f1b5bab509af615f37a1eb17b01fec1b4b4db1fe9d5cb6c032df9ad64",
     "forward_baseline_sha256": "e375a07fbc1ee572a9fd4694daa47b04574aa6a78ed753f682af05948ff96898",
-    "forward_candidate_sha256": "31aa002bb7303bedc96644cbed711155936b5ce4dd2fdd9d21c8463f6e1c344d"
+    "forward_candidate_sha256": "31aa002bb7303bedc96644cbed711155936b5ce4dd2fdd9d21c8463f6e1c344d",
+    "legacy88_candidate_sha256": "a4cf2766e5db14f004e1d84e0bd05d83717381e1850a8300a40f91faeb6f3e49",
+    "latency_sha256": "f46b7db5758d52cedcfc10c4eee2b4e41c9ceb3f715ab4d5fcfdebece44207ee"
+  },
+  "retrieval_gate": {
+    "legacy88_hits": 45,
+    "legacy88_required": 66,
+    "legacy88_passed": false,
+    "legacy42_hits": 30,
+    "legacy42_required": 36,
+    "legacy42_passed": false,
+    "cold_p95_ms": 3661.8256450015906,
+    "hot_p95_ms": 97.66607999554253
   },
   "production_switch": false,
-  "production_block_reason": "旧42题绝对门禁30/42低于预注册36/42",
+  "production_block_reason": "统一Service旧88题未达到66/88，且旧42题未达到36/42",
   "counts": {
     "papers": 150,
     "dev": 50,

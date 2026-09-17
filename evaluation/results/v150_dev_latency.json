@@ -1,0 +1,26 @@
+{
+  "cold": {
+    "label": "cold_query_cache",
+    "n": 68,
+    "avg_ms": 1494.7443911768298,
+    "p50_ms": 882.8208499980974,
+    "p95_ms": 3661.8256450015906,
+    "max_ms": 9984.085300005972,
+    "query_cache_hit_rate": 0.0,
+    "rerank_trigger_rate": 0.20588235294117646,
+    "empty_queries": 0,
+    "query_cache_path": "C:\\Users\\徐海生\\AppData\\Local\\Temp\\v150_dev_latency_cache_14f0a18eaeb5437699f59a8fb8503ef4.json"
+  },
+  "hot": {
+    "label": "warm_query_cache_and_rerank_cache",
+    "n": 68,
+    "avg_ms": 66.34622352976294,
+    "p50_ms": 66.32625000202097,
+    "p95_ms": 97.66607999554253,
+    "max_ms": 109.98799999651965,
+    "query_cache_hit_rate": 0.0,
+    "rerank_trigger_rate": 0.20588235294117646,
+    "empty_queries": 0,
+    "query_cache_path": "C:\\Users\\徐海生\\AppData\\Local\\Temp\\v150_dev_latency_cache_14f0a18eaeb5437699f59a8fb8503ef4.json"
+  }
+}

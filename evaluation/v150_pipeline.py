@@ -428,6 +428,11 @@ def freeze_snapshot():
     sealed_path=BASE/"evaluation"/"results"/"v150_sealed_test.json"
     forward_baseline=BASE/"evaluation"/"results"/"v150_forward42_baseline.json"
     forward_candidate=BASE/"evaluation"/"results"/"v150_forward42_candidate.json"
+    legacy88_path=BASE/"evaluation"/"results"/"v150_legacy88_candidate.json"
+    latency_path=BASE/"evaluation"/"results"/"v150_dev_latency.json"
+    legacy88=load_json(legacy88_path,{})
+    legacy42=load_json(forward_candidate,{})
+    latency=load_json(latency_path,{})
     from evaluation.generate_questions import FORWARD_PROMPT
     meta={
         "version":"v150",
@@ -451,9 +456,21 @@ def freeze_snapshot():
             "sealed_sha256":sha256_file(sealed_path) if sealed_path.exists() else "",
             "forward_baseline_sha256":sha256_file(forward_baseline) if forward_baseline.exists() else "",
             "forward_candidate_sha256":sha256_file(forward_candidate) if forward_candidate.exists() else "",
+            "legacy88_candidate_sha256":sha256_file(legacy88_path) if legacy88_path.exists() else "",
+            "latency_sha256":sha256_file(latency_path) if latency_path.exists() else "",
+        },
+        "retrieval_gate":{
+            "legacy88_hits":legacy88.get("hits"),
+            "legacy88_required":66,
+            "legacy88_passed":bool(legacy88 and legacy88.get("hits",0)>=66),
+            "legacy42_hits":legacy42.get("hits"),
+            "legacy42_required":36,
+            "legacy42_passed":bool(legacy42 and legacy42.get("hits",0)>=36),
+            "cold_p95_ms":latency.get("cold",{}).get("p95_ms"),
+            "hot_p95_ms":latency.get("hot",{}).get("p95_ms"),
         },
         "production_switch":False,
-        "production_block_reason":"旧42题绝对门禁30/42低于预注册36/42",
+        "production_block_reason":"统一Service旧88题未达到66/88，且旧42题未达到36/42",
         "counts":{
             "papers":len(manifest),
             "dev":sum(1 for x in manifest if x.get("split")=="dev"),
