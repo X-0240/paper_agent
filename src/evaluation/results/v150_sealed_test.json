@@ -1,0 +1,3310 @@
+{
+  "summary": {
+    "baseline": {
+      "hits": 118,
+      "n": 149,
+      "rate": 0.7919463087248322,
+      "ci95": [
+        0.719838067248006,
+        0.8493786904933418
+      ]
+    },
+    "candidate": {
+      "hits": 126,
+      "n": 149,
+      "rate": 0.8456375838926175,
+      "ci95": [
+        0.7790157269833944,
+        0.8948845724115349
+      ]
+    },
+    "paired": {
+      "both": 112,
+      "baseline_only": 6,
+      "candidate_only": 14,
+      "neither": 17
+    },
+    "elapsed_s": 244.0,
+    "mode": "v150-sealed"
+  },
+  "rows": [
+    {
+      "question_id": null,
+      "paper_id": "Attention_Is_All_You_Need",
+      "question": "在 WMT 2014 英德翻译任务上，Transformer 的 big 模型取得了多少 BLEU 分数，相比之前最佳结果提升多少？它的训练时间和硬件配置是什么？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "Attention_Is_All_You_Need.pdf-21",
+        "Attention_Is_All_You_Need.pdf-1",
+        "Attention_Is_All_You_Need.pdf-26",
+        "Attention_Is_All_You_Need.pdf-20",
+        "Attention_Is_All_You_Need.pdf-22"
+      ],
+      "candidate_sources": [
+        "Attention_Is_All_You_Need.pdf-21",
+        "Attention_Is_All_You_Need.pdf-1",
+        "Attention_Is_All_You_Need.pdf-26",
+        "RoFormer_RoPE.pdf-24",
+        "Attention_Is_All_You_Need.pdf-20"
+      ],
+      "retrieval_query": "Transformer big model WMT 2014 English-German translation BLEU score improvement over previous best result training time hardware configuration"
+    },
+    {
+      "question_id": null,
+      "paper_id": "Chain_of_Thought",
+      "question": "论文中提出的 chain-of-thought prompting 具体是什么？它由哪些要素构成？",
+      "baseline_hit": true,
+      "candidate_hit": false,
+      "baseline_sources": [
+        "Chain_of_Thought.pdf-4",
+        "Chain_of_Thought.pdf-28",
+        "Chain_of_Thought.pdf-31",
+        "Chain_of_Thought.pdf-9",
+        "Chain_of_Thought.pdf-62"
+      ],
+      "candidate_sources": [
+        "Chain_of_Thought.pdf-17",
+        "Chain_of_Thought.pdf-28",
+        "Chain_of_Thought.pdf-16",
+        "Chain_of_Thought.pdf-13",
+        "Chain_of_Thought.pdf-53"
+      ],
+      "retrieval_query": "chain-of-thought prompting definition components elements"
+    },
+    {
+      "question_id": null,
+      "paper_id": "Chain_of_Thought",
+      "question": "在 GSM8K 数学应用题基准上，chain-of-thought prompting 相比标准提示取得了怎样的效果？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "Chain_of_Thought.pdf-5",
+        "Chain_of_Thought.pdf-13",
+        "Chain_of_Thought.pdf-1",
+        "Chain_of_Thought.pdf-61",
+        "Chain_of_Thought.pdf-16"
+      ],
+      "candidate_sources": [
+        "Chain_of_Thought.pdf-5",
+        "Chain_of_Thought.pdf-13",
+        "Chain_of_Thought.pdf-77",
+        "Chain_of_Thought.pdf-1",
+        "Chain_of_Thought.pdf-61"
+      ],
+      "retrieval_query": "GSM8K math word problems chain-of-thought prompting vs standard prompting effect"
+    },
+    {
+      "question_id": null,
+      "paper_id": "LoRA",
+      "question": "在 GPT-3 175B 的三个数据集上，LoRA 与全量微调基线相比表现如何？",
+      "baseline_hit": false,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "LoRA.pdf-1",
+        "LoRA.pdf-27",
+        "LoRA.pdf-14",
+        "LoRA.pdf-24",
+        "LoRA.pdf-15"
+      ],
+      "candidate_sources": [
+        "LoRA.pdf-24",
+        "LoRA.pdf-26",
+        "LoRA.pdf-21",
+        "LoRA.pdf-62",
+        "LoRA.pdf-25"
+      ],
+      "retrieval_query": "How does LoRA perform compared to full fine-tuning baselines on three datasets with GPT-3 175B?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "RAG_Original_Paper",
+      "question": "RAG-Sequence 与 RAG-Token 两种模型在利用检索到的文档生成答案时，其边际化（marginalization）方式的核心区别是什么？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "RAG_Original_Paper.pdf-7",
+        "RAG_Original_Paper.pdf-6",
+        "RAG_Original_Paper.pdf-11",
+        "RAG_Original_Paper.pdf-18",
+        "RAG_Original_Paper.pdf-20"
+      ],
+      "candidate_sources": [
+        "RAG_Original_Paper.pdf-7",
+        "RAG_Original_Paper.pdf-26",
+        "RAG_Original_Paper.pdf-20",
+        "RAG_Original_Paper.pdf-6",
+        "RAG_Original_Paper.pdf-18"
+      ],
+      "retrieval_query": "What is the core difference between RAG-Sequence and RAG-Token in marginalization over retrieved documents for answer generation?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "RAG_Original_Paper",
+      "question": "RAG 在四个开放域问答任务上的表现如何？它是否需要像 REALM 或 T5+SSM 那样进行昂贵的、专门的显著跨度掩码（salient span masking）预训练？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "RAG_Original_Paper.pdf-17",
+        "RAG_Original_Paper.pdf-18",
+        "RAG_Original_Paper.pdf-13",
+        "2401.00396.pdf-29",
+        "RAG_Original_Paper.pdf-4"
+      ],
+      "candidate_sources": [
+        "RAG_Original_Paper.pdf-17",
+        "RAG_Original_Paper.pdf-13",
+        "RAG_Original_Paper.pdf-24",
+        "2609.17888.pdf-40",
+        "2609.17346.pdf-6"
+      ],
+      "retrieval_query": "RAG performance on four open-domain QA tasks and whether it requires expensive specialized salient span masking pretraining like REALM or T5+SSM"
+    },
+    {
+      "question_id": null,
+      "paper_id": "ReAct",
+      "question": "在 HotpotQA 和 FEVER 两个知识密集型任务上，把 ReAct 与 CoT-SC 结合的最佳提示方法分别是什么？这种结合相比单纯使用 CoT-SC 的效果如何？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "ReAct.pdf-16",
+        "ReAct.pdf-21",
+        "ReAct.pdf-18",
+        "ReAct.pdf-17",
+        "ReAct.pdf-19"
+      ],
+      "candidate_sources": [
+        "ReAct.pdf-21",
+        "ReAct.pdf-16",
+        "ReAct.pdf-17",
+        "ReAct.pdf-18",
+        "ReAct.pdf-19"
+      ],
+      "retrieval_query": "HotpotQA FEVER knowledge-intensive tasks ReAct combined with CoT-SC best prompting method compared to CoT-SC alone"
+    },
+    {
+      "question_id": null,
+      "paper_id": "RoFormer_RoPE",
+      "question": "RoPE 与以往将位置信息加到上下文表示中的位置编码方法相比，在实现方式上有什么根本不同？它如何将位置信息注入自注意力？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "RoFormer_RoPE.pdf-4",
+        "RoFormer_RoPE.pdf-3",
+        "RoFormer_RoPE.pdf-1",
+        "RoFormer_RoPE.pdf-15",
+        "RoFormer_RoPE.pdf-17"
+      ],
+      "candidate_sources": [
+        "RoFormer_RoPE.pdf-4",
+        "RoFormer_RoPE.pdf-3",
+        "RoFormer_RoPE.pdf-1",
+        "RoFormer_RoPE.pdf-10",
+        "RoFormer_RoPE.pdf-15"
+      ],
+      "retrieval_query": "How does RoPE fundamentally differ from previous positional encoding methods that add position information to context representations, and how does it inject position information into self-attention?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "RoFormer_RoPE",
+      "question": "在中文法律相似案例匹配任务 CAIL2019-SCM 上，RoFormer 与 BERT、WoBERT 相比表现如何？当最大输入长度增加到 1024 时有什么提升？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "RoFormer_RoPE.pdf-44",
+        "BERT.pdf-34",
+        "2609.18908.pdf-29",
+        "2401.00503.pdf-10",
+        "2609.18908.pdf-23"
+      ],
+      "candidate_sources": [
+        "RoFormer_RoPE.pdf-44",
+        "RoFormer_RoPE.pdf-54",
+        "RoFormer_RoPE.pdf-43",
+        "RoFormer_RoPE.pdf-41",
+        "2609.18908.pdf-23"
+      ],
+      "retrieval_query": "CAIL2019-SCM Chinese legal similar case matching RoFormer vs BERT WoBERT performance max input length 1024 improvement"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2004.02334",
+      "question": "论文如何量化 Zipfian 分布下训练类别的不平衡程度？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2004.02334-24",
+        "2004.02334-6",
+        "2004.02334-23",
+        "2004.02334-2",
+        "2004.02334-0"
+      ],
+      "candidate_sources": [
+        "2004.02334-6",
+        "2004.02334-23",
+        "2004.02334-24",
+        "2401.00403.pdf-39",
+        "2401.00902.pdf-8"
+      ],
+      "retrieval_query": "How to quantify training class imbalance under Zipfian distribution?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2004.02334",
+      "question": "论文发现 BPE 词表大小如何同时影响分类器期望的类别平衡程度和自回归器期望的序列长度？",
+      "baseline_hit": false,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2004.02334-22",
+        "2004.02334-24",
+        "2609.19145.pdf-65",
+        "2609.19145.pdf-29",
+        "2609.19145.pdf-64"
+      ],
+      "candidate_sources": [
+        "2004.02334-24",
+        "2004.02334-22",
+        "2004.02334-1",
+        "2004.02334-9",
+        "GPT2.pdf-11"
+      ],
+      "retrieval_query": "How does BPE vocabulary size affect the class balance expected by the classifier and the sequence length expected by the autoregressor?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "1803.08419",
+      "question": "根据论文，Let’s Go 项目在向公众开放后最初取得的任务成功率是多少？后来经过改进，完整对话的成功率达到了多少？",
+      "baseline_hit": false,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2609.16777.pdf-15",
+        "2609.18282.pdf-59",
+        "2401.02978.pdf-61",
+        "2609.19113.pdf-35",
+        "2609.18812.pdf-16"
+      ],
+      "candidate_sources": [
+        "1803.08419-8",
+        "2609.16777.pdf-15",
+        "2609.19134.pdf-90",
+        "2609.19134.pdf-28",
+        "2609.17708.pdf-15"
+      ],
+      "retrieval_query": "Let's Go project initial task success rate after public release and improved full dialogue success rate"
+    },
+    {
+      "question_id": null,
+      "paper_id": "1803.08419",
+      "question": "KB-InfoBot 为支持端到端训练，如何处理传统的符号查询？其神经组件用什么算法训练？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "1803.08419-27",
+        "2401.00158.pdf-47",
+        "2609.18317.pdf-25",
+        "2609.18317.pdf-8",
+        "2609.18310.pdf-30"
+      ],
+      "candidate_sources": [
+        "1803.08419-27",
+        "RAG_Original_Paper.pdf-2",
+        "2609.18852.pdf-9",
+        "2609.16912.pdf-18",
+        "2401.00158.pdf-47"
+      ],
+      "retrieval_query": "KB-InfoBot end-to-end training symbolic query handling neural components training algorithm"
+    },
+    {
+      "question_id": null,
+      "paper_id": "1805.04833",
+      "question": "论文中提出的 fusion 机制是如何让 seq2seq 模型更好地依赖输入 prompt 的？其核心训练方式是什么？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "1805.04833-8",
+        "1805.04833-0",
+        "1805.04833-13",
+        "2609.17888.pdf-43",
+        "2609.17888.pdf-45"
+      ],
+      "candidate_sources": [
+        "1805.04833-8",
+        "1805.04833-1",
+        "1805.04833-13",
+        "1805.04833-0",
+        "2401.00908.pdf-3"
+      ],
+      "retrieval_query": "How does the proposed fusion mechanism enable seq2seq models to better rely on input prompts, and what is its core training method?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "1805.04833",
+      "question": "论文承认融合模型在故事生成质量上存在哪些具体局限？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "1805.04833-18",
+        "1805.04833-0",
+        "2609.18878.pdf-2",
+        "2609.17888.pdf-43",
+        "2609.18560.pdf-47"
+      ],
+      "candidate_sources": [
+        "1805.04833-18",
+        "1805.04833-0",
+        "2401.00368.pdf-24",
+        "2609.18274.pdf-27",
+        "2609.17398.pdf-42"
+      ],
+      "retrieval_query": "What specific limitations of fusion models in story generation quality are acknowledged in the paper?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "1708.01065",
+      "question": "在 RAVAESum 中，评论权重（comment weight）的基本计算思想是什么，它在框架中起到怎样的作用？",
+      "baseline_hit": true,
+      "candidate_hit": false,
+      "baseline_sources": [
+        "1708.01065-8",
+        "1708.01065-2",
+        "2609.18844.pdf-60",
+        "2401.00503.pdf-10",
+        "1708.01065-4"
+      ],
+      "candidate_sources": [
+        "2609.18612.pdf-11",
+        "2609.19077.pdf-19",
+        "2609.18905.pdf-11",
+        "2609.19107.pdf-44",
+        "2609.19077.pdf-88"
+      ],
+      "retrieval_query": "What is the basic computation idea of comment weight in RAVAESum and what role does it play in the framework?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "1708.01065",
+      "question": "与去除评论相关组件的 RAVAESum-noC 相比，RAVAESum 在实验中的表现如何？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "1708.01065-18",
+        "1708.01065-19",
+        "1708.01065-17",
+        "2609.17043.pdf-18",
+        "2609.19099.pdf-12"
+      ],
+      "candidate_sources": [
+        "1708.01065-18",
+        "1708.01065-17",
+        "2609.19101.pdf-11",
+        "2401.00426.pdf-29",
+        "2609.17708.pdf-89"
+      ],
+      "retrieval_query": "How does RAVAESum perform compared to RAVAESum-noC without comment-related components in experiments?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "1603.09381",
+      "question": "根据论文的结果讨论，其事件span识别召回率较低的主要原因是什么？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "1603.09381-10",
+        "2609.19113.pdf-10",
+        "2401.00396.pdf-24",
+        "2609.18863.pdf-44",
+        "2609.18595.pdf-29"
+      ],
+      "candidate_sources": [
+        "1603.09381-10",
+        "2609.18595.pdf-28",
+        "2401.00165.pdf-38",
+        "2312.17581.pdf-31",
+        "2609.18595.pdf-29"
+      ],
+      "retrieval_query": "What are the main reasons for the low recall of event span identification according to the paper's results and discussion?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "1809.08899",
+      "question": "论文为处理学生回答中的拼写错误，采用了什么词嵌入策略？该嵌入的维度和词表规模分别是多少？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "1809.08899-7",
+        "1809.08899-6",
+        "2609.18317.pdf-21",
+        "2609.18587.pdf-61",
+        "2609.16557.pdf-33"
+      ],
+      "candidate_sources": [
+        "1809.08899-7",
+        "1809.08899-6",
+        "1701.03578-13",
+        "BERT.pdf-23",
+        "Attention_Is_All_You_Need.pdf-12"
+      ],
+      "retrieval_query": "What word embedding strategy is used to handle spelling errors in student responses, and what are the embedding dimension and vocabulary size?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "1809.08899",
+      "question": "论文采用什么验证方案和指标来评估不同模型识别 alert 的效果？",
+      "baseline_hit": false,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "1809.08899-11",
+        "2401.00902.pdf-11",
+        "1809.08899-19",
+        "2609.18863.pdf-7",
+        "2609.18852.pdf-72"
+      ],
+      "candidate_sources": [
+        "1809.08899-20",
+        "2609.18908.pdf-17",
+        "2609.19134.pdf-32",
+        "2609.18863.pdf-28",
+        "1809.08899-11"
+      ],
+      "retrieval_query": "What validation schemes and metrics are used to evaluate different models for alert recognition?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "1908.07491",
+      "question": "论文提出用什么核心思路来估计一个维基百科概念的争议程度？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "1908.07491-1",
+        "2609.18317.pdf-5",
+        "2609.16912.pdf-8",
+        "2401.00448.pdf-40",
+        "2401.00532.pdf-23"
+      ],
+      "candidate_sources": [
+        "1908.07491-1",
+        "1908.07491-0",
+        "1908.07491-4",
+        "2401.00532.pdf-25",
+        "2401.00532.pdf-16"
+      ],
+      "retrieval_query": "What core idea is proposed to estimate the controversy level of a Wikipedia concept?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "1908.07491",
+      "question": "与依赖复杂元数据和编辑历史的已有分类器相比，本文提出的估计方案主要优势是什么？",
+      "baseline_hit": false,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2609.19135.pdf-20",
+        "2609.18825.pdf-22",
+        "2609.19077.pdf-12",
+        "2609.19077.pdf-80",
+        "2401.00490.pdf-29"
+      ],
+      "candidate_sources": [
+        "1908.07491-11",
+        "2004.01820-1",
+        "2609.18825.pdf-22",
+        "2609.17708.pdf-9",
+        "2609.18745.pdf-1"
+      ],
+      "retrieval_query": "What are the main advantages of the proposed estimation scheme compared with existing classifiers that rely on complex metadata and edit history?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "1905.08067",
+      "question": "论文采用哪两种方法从 Dabiq 宣传语料中提取激进语言特征？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "1905.08067-7",
+        "1905.08067-8",
+        "1905.08067-6",
+        "1905.08067-3",
+        "1905.08067-9"
+      ],
+      "candidate_sources": [
+        "1905.08067-8",
+        "1905.08067-6",
+        "1905.08067-7",
+        "1905.08067-9",
+        "2003.07459-8"
+      ],
+      "retrieval_query": "What two methods are used to extract radical language features from the Dabiq propaganda corpus?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "1905.08067",
+      "question": "在特征重要性分析中，区分激进推文的最重要特征是什么，其次是什么？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "1905.08067-20",
+        "1905.08067-19",
+        "1905.08067-21",
+        "1611.06322-22",
+        "1611.06322-3"
+      ],
+      "candidate_sources": [
+        "1905.08067-19",
+        "1905.08067-20",
+        "1611.06322-22",
+        "1611.06322-12",
+        "1909.09070-33"
+      ],
+      "retrieval_query": "feature importance analysis most important features distinguishing aggressive tweets second most important"
+    },
+    {
+      "question_id": null,
+      "paper_id": "1911.01214",
+      "question": "与 FEVER 数据集相比，这篇论文构建的新语料在 claim validation（声明验证）问题设定上有何关键区别？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "1911.01214-15",
+        "RAG_Original_Paper.pdf-16",
+        "RAG_Original_Paper.pdf-54",
+        "1911.01214-2",
+        "1911.01214-26"
+      ],
+      "candidate_sources": [
+        "1911.01214-15",
+        "1911.01214-27",
+        "RAG_Original_Paper.pdf-54",
+        "1911.01214-26",
+        "RAG_Original_Paper.pdf-16"
+      ],
+      "retrieval_query": "Compared to the FEVER dataset, what are the key differences in the claim validation problem setting of the new corpus constructed in this paper?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "1911.01214",
+      "question": "在证据抽取（evidence extraction）任务的排序评估中，哪些模型在 recall@5 上表现最好，哪个模型在 precision 上最好？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "1911.01214-21",
+        "2609.18905.pdf-35",
+        "2609.16557.pdf-25",
+        "RAG_Original_Paper.pdf-18",
+        "2401.00383.pdf-23"
+      ],
+      "candidate_sources": [
+        "1911.01214-21",
+        "RAG_Original_Paper.pdf-18",
+        "2609.17081.pdf-6",
+        "2609.17708.pdf-17",
+        "2609.17043.pdf-37"
+      ],
+      "retrieval_query": "evidence extraction ranking evaluation recall@5 best models precision best model"
+    },
+    {
+      "question_id": null,
+      "paper_id": "1911.09753",
+      "question": "论文提出的 on-policy 与 off-policy 两种策略梯度方法在获取和利用评分信号时有什么关键区别？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "1911.09753-16",
+        "1911.09753-31",
+        "2609.19134.pdf-102",
+        "2609.18310.pdf-30",
+        "1911.09753-12"
+      ],
+      "candidate_sources": [
+        "1911.09753-31",
+        "1911.09753-16",
+        "1911.09753-21",
+        "1911.09753-15",
+        "2609.19101.pdf-5"
+      ],
+      "retrieval_query": "What are the key differences between on-policy and off-policy policy gradient methods in obtaining and utilizing reward signals?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "1911.09753",
+      "question": "在 alpha 超参数的消融实验中，OnPG 方法在较大 alpha 值时暴露了什么失败现象，作者将其归因于什么？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "1911.09753-28",
+        "1911.09753-29",
+        "2609.18612.pdf-40",
+        "2401.00448.pdf-14",
+        "2609.19099.pdf-12"
+      ],
+      "candidate_sources": [
+        "1911.09753-28",
+        "1911.09753-29",
+        "2609.18612.pdf-40",
+        "2609.18612.pdf-83",
+        "2609.18612.pdf-82"
+      ],
+      "retrieval_query": "In the ablation study on the alpha hyperparameter, what failure phenomenon did the OnPG method exhibit at larger alpha values, and to what did the authors attribute it?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "1610.09722",
+      "question": "根据论文的实验结果，sum 聚合与 max 聚合相比表现如何？作者认为原因是什么？",
+      "baseline_hit": true,
+      "candidate_hit": false,
+      "baseline_sources": [
+        "1610.09722-18",
+        "2609.17708.pdf-89",
+        "2401.00403.pdf-54",
+        "2401.00423.pdf-30",
+        "2401.00448.pdf-14"
+      ],
+      "candidate_sources": [
+        "2609.18588.pdf-12",
+        "2609.18588.pdf-4",
+        "2609.18908.pdf-82",
+        "2609.19099.pdf-11",
+        "2609.18588.pdf-15"
+      ],
+      "retrieval_query": "sum aggregation vs max aggregation performance experimental results reasons"
+    },
+    {
+      "question_id": null,
+      "paper_id": "1610.09722",
+      "question": "论文中 EE-AS Reader 与本文模型都使用聚合，但为什么 EE-AS Reader 在该事件抽取任务上表现最差？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "1610.09722-16",
+        "1610.09722-18",
+        "2401.00582.pdf-25",
+        "2609.18852.pdf-22",
+        "2609.18908.pdf-82"
+      ],
+      "candidate_sources": [
+        "1610.09722-16",
+        "1610.09722-18",
+        "1610.09722-15",
+        "1610.09722-1",
+        "2609.18588.pdf-13"
+      ],
+      "retrieval_query": "EE-AS Reader aggregation event extraction worst performance compared with proposed model"
+    },
+    {
+      "question_id": null,
+      "paper_id": "1803.06745",
+      "question": "在SAIL_Code-Mixed共享任务中，提交的系统是根据什么指标进行排名的？为什么选择这个指标？",
+      "baseline_hit": false,
+      "candidate_hit": false,
+      "baseline_sources": [
+        "1803.06745-2",
+        "1803.06745-5",
+        "2609.18672.pdf-30",
+        "2609.18844.pdf-57",
+        "2609.18844.pdf-44"
+      ],
+      "candidate_sources": [
+        "2609.18812.pdf-18",
+        "2609.18812.pdf-24",
+        "2609.19134.pdf-18",
+        "2609.19107.pdf-112",
+        "2609.18908.pdf-17"
+      ],
+      "retrieval_query": "SAIL Code-Mixed shared task submitted systems ranked by which evaluation metric and why was this metric chosen"
+    },
+    {
+      "question_id": null,
+      "paper_id": "1803.06745",
+      "question": "在HI-EN和BN-EN数据集上，哪个数据集的f-measure更好？原因是什么？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "1803.06745-14",
+        "1803.06745-16",
+        "2401.00383.pdf-22",
+        "2401.00403.pdf-61",
+        "1803.06745-9"
+      ],
+      "candidate_sources": [
+        "1803.06745-14",
+        "1803.06745-16",
+        "1803.06745-13",
+        "2401.00490.pdf-66",
+        "GPT2.pdf-16"
+      ],
+      "retrieval_query": "On HI-EN and BN-EN datasets, which dataset has better f-measure and why?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "1901.05389",
+      "question": "论文中不同数据来源的 SES 推断模型在预测性能上有什么差异，哪种数据来源表现最好？",
+      "baseline_hit": false,
+      "candidate_hit": false,
+      "baseline_sources": [
+        "1901.05389-3",
+        "2401.00423.pdf-23",
+        "1901.05389-17",
+        "2401.00534.pdf-14",
+        "2609.18852.pdf-22"
+      ],
+      "candidate_sources": [
+        "1901.05389-31",
+        "1901.05389-2",
+        "2401.00423.pdf-23",
+        "2609.16557.pdf-26",
+        "2609.18852.pdf-22"
+      ],
+      "retrieval_query": "SES inference models different data sources prediction performance comparison which data source performs best"
+    },
+    {
+      "question_id": null,
+      "paper_id": "1901.05389",
+      "question": "论文在 Limitations 部分指出了哪些数据偏差可能限制 SES 推断的准确性？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "1901.05389-30",
+        "2609.18106.pdf-35",
+        "2401.00902.pdf-14",
+        "1901.05389-6",
+        "1901.05389-3"
+      ],
+      "candidate_sources": [
+        "1901.05389-28",
+        "1901.05389-29",
+        "1901.05389-6",
+        "1901.05389-31",
+        "1901.05389-30"
+      ],
+      "retrieval_query": "What data biases in the Limitations section may limit the accuracy of SES inference?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "1909.07873",
+      "question": "在CNN-Word目标模型上，DeepWordBug和本文提出的AEG模型分别将准确率从89.95%降低到了多少？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "1909.07873-33",
+        "2609.19134.pdf-99",
+        "2609.16800.pdf-51",
+        "2609.17888.pdf-47",
+        "1909.07873-37"
+      ],
+      "candidate_sources": [
+        "1909.07873-33",
+        "1909.07873-37",
+        "1909.07873-7",
+        "2609.19134.pdf-99",
+        "2401.00583.pdf-29"
+      ],
+      "retrieval_query": "On the CNN-Word target model, what accuracy do DeepWordBug and the proposed AEG model reduce from 89.95% to?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "1909.07873",
+      "question": "本文的AEG模型在强化学习训练阶段使用了哪三种奖励，它们是如何组合的？",
+      "baseline_hit": false,
+      "candidate_hit": false,
+      "baseline_sources": [
+        "1909.07873-10",
+        "1909.07873-37",
+        "1909.07873-33",
+        "2609.17686.pdf-14",
+        "2609.19134.pdf-40"
+      ],
+      "candidate_sources": [
+        "1909.07873-10",
+        "1909.07873-37",
+        "2609.18587.pdf-1",
+        "2609.18587.pdf-2",
+        "2609.18135.pdf-1"
+      ],
+      "retrieval_query": "AEG model reinforcement learning training three rewards combination"
+    },
+    {
+      "question_id": null,
+      "paper_id": "1905.08392",
+      "question": "为了减少预测模型对演讲者种族和性别的偏差，作者在分析中采取了哪些措施？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "1905.08392-1",
+        "2609.18106.pdf-34",
+        "2401.00902.pdf-7",
+        "2401.00902.pdf-6",
+        "2609.18106.pdf-36"
+      ],
+      "candidate_sources": [
+        "1905.08392-2",
+        "1905.08392-1",
+        "1808.07231-12",
+        "1808.07231-6",
+        "1808.07231-1"
+      ],
+      "retrieval_query": "What measures were taken in the analysis to reduce prediction model bias with respect to speaker race and gender?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "1905.08392",
+      "question": "在预测 TED 演讲评分时，基于依存树的模型与词序列模型的平均 F-score 分别是多少，哪个表现更好？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "1905.08392-3",
+        "2401.00383.pdf-23",
+        "2401.00383.pdf-41",
+        "2401.00383.pdf-24",
+        "2401.00582.pdf-25"
+      ],
+      "candidate_sources": [
+        "1905.08392-3",
+        "2401.00383.pdf-23",
+        "2003.07459-12",
+        "2003.07459-15",
+        "1905.08067-17"
+      ],
+      "retrieval_query": "dependency tree based model vs word sequence model average F-score TED talk rating prediction which performs better"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2002.00175",
+      "question": "UIT-ViIC 数据集总共包含多少张图像和多少条越南语描述？每张图像提供了几条描述？",
+      "baseline_hit": false,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2002.00175-18",
+        "2002.00175-6",
+        "2002.00175-19",
+        "2002.00175-15",
+        "2002.00175-8"
+      ],
+      "candidate_sources": [
+        "2002.00175-19",
+        "2002.00175-4",
+        "2002.00175-6",
+        "2002.00175-18",
+        "2002.00175-8"
+      ],
+      "retrieval_query": "How many images and Vietnamese captions does the UIT-ViIC dataset contain in total, and how many captions are provided per image?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2002.00175",
+      "question": "在 Pytorch-tutorial 模型的实验中，随着 BLEU n-gram 增大，UIT-ViIC 的 BLEU 评分与 English-sportball 相比呈现怎样的变化趋势？其 ROUGE-L 和 CIDEr-D 结果又如何？",
+      "baseline_hit": true,
+      "candidate_hit": false,
+      "baseline_sources": [
+        "2002.00175-16",
+        "2002.00175-17",
+        "2004.02334-14",
+        "2609.17398.pdf-28",
+        "LoRA.pdf-68"
+      ],
+      "candidate_sources": [
+        "2002.00175-19",
+        "2004.02334-14",
+        "2401.00448.pdf-17",
+        "2609.19145.pdf-55",
+        "2609.16927.pdf-25"
+      ],
+      "retrieval_query": "PyTorch-tutorial model experiments BLEU n-gram increase UIT-ViIC BLEU score trend compared with English-sportball ROUGE-L CIDEr-D results"
+    },
+    {
+      "question_id": null,
+      "paper_id": "1909.09070",
+      "question": "论文提出的Figure-Caption Correspondence (FCC)任务本质上是什么任务？它的训练正负样本如何构造？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "1909.09070-4",
+        "1909.09070-0",
+        "1909.09070-13",
+        "1909.09070-2",
+        "1909.09070-22"
+      ],
+      "candidate_sources": [
+        "1909.09070-4",
+        "1909.09070-0",
+        "1909.09070-2",
+        "1909.09070-13",
+        "1909.09070-22"
+      ],
+      "retrieval_query": "What is the Figure-Caption Correspondence (FCC) task and how are its positive and negative training samples constructed?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "1909.09070",
+      "question": "在Figure-Caption Correspondence任务上，FCC与两种监督基线相比表现如何？论文从该结果得出了什么结论？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "1909.09070-16",
+        "1909.09070-4",
+        "1909.09070-15",
+        "1909.09070-0",
+        "1909.09070-17"
+      ],
+      "candidate_sources": [
+        "1909.09070-16",
+        "1909.09070-13",
+        "1909.09070-15",
+        "1909.09070-0",
+        "1909.09070-4"
+      ],
+      "retrieval_query": "On the Figure-Caption Correspondence task, how does FCC perform compared with two supervised baselines, and what conclusion does the paper draw from these results?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "1703.10152",
+      "question": "该论文在 AZ 任务中比较了哪三种句子向量表示模型？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "1703.10152-16",
+        "1703.10152-0",
+        "1703.10152-7",
+        "1703.10152-6",
+        "1703.10152-18"
+      ],
+      "candidate_sources": [
+        "1703.10152-7",
+        "1703.10152-18",
+        "1703.10152-0",
+        "1910.07973-3",
+        "1703.10152-12"
+      ],
+      "retrieval_query": "Which three sentence embedding models are compared in the AZ task in this paper?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "1703.10152",
+      "question": "论文的讨论部分如何概括词嵌入方法在 AZ 分类上的整体表现及其相对 Teufel 2002 人工特征的不足？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "1703.10152-16",
+        "1703.10152-17",
+        "2401.00503.pdf-25",
+        "BERT.pdf-45",
+        "2401.00503.pdf-19"
+      ],
+      "candidate_sources": [
+        "1703.10152-16",
+        "1703.10152-17",
+        "1703.10152-18",
+        "2003.07459-16",
+        "1703.10152-15"
+      ],
+      "retrieval_query": "How does the discussion section summarize the overall performance of word embedding methods on AZ classification and their shortcomings compared with Teufel 2002 manual features?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2004.01820",
+      "question": "论文将网络欺凌拆解为哪五个关键标准？",
+      "baseline_hit": false,
+      "candidate_hit": false,
+      "baseline_sources": [
+        "2004.01820-9",
+        "2004.01820-1",
+        "2004.01820-35",
+        "2609.16777.pdf-23",
+        "2004.01820-11"
+      ],
+      "candidate_sources": [
+        "2004.01820-9",
+        "2004.01820-1",
+        "2004.01820-35",
+        "2004.01820-11",
+        "2004.01820-12"
+      ],
+      "retrieval_query": "What are the five key criteria for cyberbullying?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2004.01820",
+      "question": "在实验中，论文提出的特征集与仅使用词汇特征的基线相比，在五个网络欺凌标准上的 F1 表现如何？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2003.07459-15",
+        "2003.07459-14",
+        "2004.01820-31",
+        "BERT.pdf-24",
+        "2609.18812.pdf-23"
+      ],
+      "candidate_sources": [
+        "2004.01820-30",
+        "2004.01820-31",
+        "2004.01820-32",
+        "2004.01820-33",
+        "2004.01820-1"
+      ],
+      "retrieval_query": "How does the proposed feature set perform in F1 on five cyberbullying criteria compared with a lexical-feature-only baseline in experiments?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "1906.11085",
+      "question": "PICONET数据集是如何构建的，与BIBREF12的方法相比有哪些具体改进？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "1906.11085-3",
+        "1906.11085-2",
+        "1906.11085-5",
+        "1906.11085-4",
+        "1906.11085-10"
+      ],
+      "candidate_sources": [
+        "1906.11085-3",
+        "2002.00175-2",
+        "1911.12893-3",
+        "1911.09753-3",
+        "1911.09753-2"
+      ],
+      "retrieval_query": "How is the PICONET dataset constructed and what specific improvements does it have compared with the BIBREF12 method?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "1906.11085",
+      "question": "在使用LGBM进行模型提升（boosting）时，最高平均ROC_AUC得分是多少，是在什么特征组合下取得的？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "1906.11085-9",
+        "2609.18672.pdf-15",
+        "2609.17708.pdf-72",
+        "2609.18916.pdf-67",
+        "2609.19144.pdf-42"
+      ],
+      "candidate_sources": [
+        "1906.11085-9",
+        "2609.18672.pdf-15",
+        "1611.06322-22",
+        "GraphRAG.pdf-31",
+        "2609.16800.pdf-27"
+      ],
+      "retrieval_query": "When using LGBM for boosting, what is the highest average ROC_AUC score and under which feature combination is it achieved?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "1905.07562",
+      "question": "LGI网络中的PFC子系统使用什么损失函数训练，并且该损失函数使PFC能够根据图像预测文本、根据文本命令预测被操纵的图像吗？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "1905.07562-17",
+        "1905.07562-9",
+        "1905.07562-6",
+        "1905.07562-2",
+        "1905.07562-13"
+      ],
+      "candidate_sources": [
+        "1905.07562-17",
+        "1905.07562-9",
+        "1905.07562-8",
+        "1905.07562-5",
+        "1905.07562-10"
+      ],
+      "retrieval_query": "What loss function is used to train the PFC subsystem in the LGI network, and does it enable PFC to predict text from images and manipulated images from text commands?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "1905.07562",
+      "question": "在LGI的累积学习实验中，学习‘the size is not small/big’与先学习‘the size is big/small’相比需要多少训练步数，作者将其类比为什么过程？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "1905.07562-11",
+        "1905.07562-12",
+        "1905.07562-14",
+        "1905.07562-13",
+        "1905.07562-15"
+      ],
+      "candidate_sources": [
+        "1905.07562-11",
+        "1905.07562-12",
+        "1905.07562-14",
+        "1905.07562-15",
+        "1905.07562-13"
+      ],
+      "retrieval_query": "LGI cumulative learning \"the size is not small/big\" vs \"the size is big/small\" training steps analogy"
+    },
+    {
+      "question_id": null,
+      "paper_id": "1911.12893",
+      "question": "论文中用于区分typo编辑和语义编辑的分类器在F1值上表现如何？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "1911.12893-2",
+        "1911.12893-15",
+        "2609.18812.pdf-23",
+        "2609.16557.pdf-26",
+        "2609.17398.pdf-37"
+      ],
+      "candidate_sources": [
+        "1911.12893-15",
+        "1911.12893-2",
+        "1911.12893-20",
+        "1605.05156-12",
+        "1605.05156-14"
+      ],
+      "retrieval_query": "classifier distinguishing typo edits from semantic edits F1 score"
+    },
+    {
+      "question_id": null,
+      "paper_id": "1910.07973",
+      "question": "在句子级 BERT 嵌入评估中，哪种池化方法在所有任务类别上表现最好？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "1910.07973-11",
+        "1910.07973-5",
+        "1910.07973-6",
+        "1910.07973-4",
+        "1910.07973-10"
+      ],
+      "candidate_sources": [
+        "1910.07973-5",
+        "1910.07973-6",
+        "1910.07973-11",
+        "1910.07973-10",
+        "BERT.pdf-50"
+      ],
+      "retrieval_query": "Which pooling method performs best across all task categories in sentence-level BERT embedding evaluation?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "1910.07973",
+      "question": "在 passage-level QA 任务中，将 BERT 在 SNLI 上微调是否像句子级任务那样能带来显著提升？",
+      "baseline_hit": false,
+      "candidate_hit": false,
+      "baseline_sources": [
+        "1910.07973-11",
+        "1910.07973-2",
+        "1910.07973-7",
+        "BERT.pdf-18",
+        "BERT.pdf-50"
+      ],
+      "candidate_sources": [
+        "1910.07973-11",
+        "1910.07973-2",
+        "BERT.pdf-50",
+        "BERT.pdf-18",
+        "BERT.pdf-8"
+      ],
+      "retrieval_query": "Does fine-tuning BERT on SNLI yield significant gains for passage-level QA as in sentence-level tasks?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "1808.07231",
+      "question": "论文提出了哪三种减少性别偏见的方法？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "1808.07231-1",
+        "1909.00871-26",
+        "1808.07231-10",
+        "1808.07231-6",
+        "1909.00871-5"
+      ],
+      "candidate_sources": [
+        "1808.07231-1",
+        "1909.00871-26",
+        "1909.00871-1",
+        "1909.00871-5",
+        "1909.00871-3"
+      ],
+      "retrieval_query": "What three methods for reducing gender bias are proposed in the paper?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "1808.07231",
+      "question": "在降低性别偏见的实验中，作者发现最有效的减少偏见方法是什么，取得了怎样的效果？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "1808.07231-11",
+        "1909.00871-26",
+        "1909.00871-20",
+        "1808.07231-1",
+        "1808.07231-10"
+      ],
+      "candidate_sources": [
+        "1909.00871-26",
+        "2609.18106.pdf-34",
+        "1808.07231-11",
+        "1909.00871-27",
+        "1909.00871-20"
+      ],
+      "retrieval_query": "In experiments on reducing gender bias, what was the most effective debiasing method found by the authors and what effect did it achieve?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "1701.03578",
+      "question": "论文指出，将RNN结构应用于个性化语言建模主要受到哪两个限制？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "1701.03578-0",
+        "1701.03578-1",
+        "1701.03578-19",
+        "1701.03578-3",
+        "1701.03578-2"
+      ],
+      "candidate_sources": [
+        "1701.03578-0",
+        "1701.03578-1",
+        "1701.03578-2",
+        "1701.03578-3",
+        "1701.03578-19"
+      ],
+      "retrieval_query": "What are the two main limitations of applying RNN structures to personalized language modeling?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "1701.03578",
+      "question": "在基于“Friends”剧本的消息回复预测实验中，提出的scheme_2和scheme_3与baseline scheme_1相比，验证困惑度表现如何？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "1701.03578-15",
+        "1701.03578-14",
+        "1701.03578-16",
+        "1701.03578-11",
+        "1701.03578-12"
+      ],
+      "candidate_sources": [
+        "1701.03578-14",
+        "1701.03578-15",
+        "1701.03578-16",
+        "1701.03578-13",
+        "2609.17686.pdf-25"
+      ],
+      "retrieval_query": "Friends script message reply prediction scheme_2 scheme_3 baseline scheme_1 validation perplexity comparison"
+    },
+    {
+      "question_id": null,
+      "paper_id": "1709.05295",
+      "question": "论文使用的IAC语料中，用于事实/情感论证分类的Quote-Response对数量、标注标尺范围和标注者数量分别是什么？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "1709.05295-6",
+        "2609.18852.pdf-73",
+        "2609.18905.pdf-25",
+        "1709.05295-1",
+        "2609.18905.pdf-22"
+      ],
+      "candidate_sources": [
+        "1709.05295-1",
+        "1709.05295-6",
+        "1709.05295-0",
+        "1709.05295-5",
+        "2609.18905.pdf-24"
+      ],
+      "retrieval_query": "IAC corpus fact/emotion argument classification Quote-Response pairs number annotation scale range number of annotators"
+    },
+    {
+      "question_id": null,
+      "paper_id": "1709.05295",
+      "question": "在事实与情感论证分类任务上，词法句法模式学习器与Naive Bayes分类器的精确率和召回率表现有何不同？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "1709.05295-14",
+        "2003.07459-12",
+        "2003.07459-14",
+        "2401.00534.pdf-14",
+        "1908.07491-6"
+      ],
+      "candidate_sources": [
+        "1709.05295-14",
+        "2003.07459-12",
+        "1605.05156-12",
+        "2003.07459-14",
+        "2401.00383.pdf-23"
+      ],
+      "retrieval_query": "factual vs emotional argument classification lexical syntactic pattern learner vs Naive Bayes precision recall comparison"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2609.17081",
+      "question": "在 EVISCOPE 的实验里，两个本地开放模型上，显式的 evidence-action gate 与 vanilla RAG 在 QCS 上的表现差异如何？",
+      "baseline_hit": false,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2609.17081.pdf-10",
+        "2609.17081.pdf-9",
+        "2609.17081.pdf-13",
+        "2609.17081.pdf-8",
+        "2609.17081.pdf-7"
+      ],
+      "candidate_sources": [
+        "2609.17081.pdf-1",
+        "2609.17081.pdf-10",
+        "2609.17081.pdf-9",
+        "2609.17081.pdf-13",
+        "2609.17081.pdf-2"
+      ],
+      "retrieval_query": "EVISCOPE experiments explicit evidence-action gate vs vanilla RAG QCS performance difference on two local open models"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2609.16800",
+      "question": "DRPG 框架在每个时间步的具体运行流程是怎样的？其策略生成器默认采用何种检索策略来构造输入？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2609.16800.pdf-8",
+        "2609.16800.pdf-47",
+        "2609.16800.pdf-3",
+        "2609.16800.pdf-1",
+        "2609.16800.pdf-29"
+      ],
+      "candidate_sources": [
+        "2609.16800.pdf-8",
+        "2609.16800.pdf-47",
+        "2609.16800.pdf-3",
+        "2609.16800.pdf-1",
+        "2609.16800.pdf-29"
+      ],
+      "retrieval_query": "DRPG framework per time step execution process; default retrieval strategy of DRPG policy generator for input construction"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2609.16800",
+      "question": "论文的局限性部分如何评价其“每一步都能获得二元正确性反馈”这一实验设定？在真实部署中作者预期会出现什么情况？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2609.16800.pdf-39",
+        "2609.18204.pdf-34",
+        "2609.18612.pdf-40",
+        "2609.18135.pdf-30",
+        "2609.17686.pdf-10"
+      ],
+      "candidate_sources": [
+        "2609.16800.pdf-38",
+        "2609.16800.pdf-39",
+        "2609.18219.pdf-2",
+        "2609.18852.pdf-36",
+        "2609.18106.pdf-35"
+      ],
+      "retrieval_query": "limitations binary correctness feedback at every step experimental setup real-world deployment expected"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2312.17296",
+      "question": "SPLICE 方法是如何构建长上下文训练样本的？它如何利用检索来组织文档？",
+      "baseline_hit": false,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2312.17296.pdf-5",
+        "2312.17296.pdf-3",
+        "2312.17296.pdf-25",
+        "2312.17296.pdf-1",
+        "2312.17296.pdf-4"
+      ],
+      "candidate_sources": [
+        "2312.17296.pdf-5",
+        "2312.17296.pdf-25",
+        "2312.17296.pdf-3",
+        "2312.17296.pdf-4",
+        "2312.17296.pdf-6"
+      ],
+      "retrieval_query": "How does SPLICE construct long-context training samples and use retrieval to organize documents?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2609.18094",
+      "question": "获胜方案的 Stage A 是如何利用多个 donor 模型的预测统计（而非参数）来初始化目标模型的输入嵌入和输出头的？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2609.18094.pdf-19",
+        "2609.19107.pdf-78",
+        "2609.19135.pdf-6",
+        "2609.18908.pdf-72",
+        "2609.18094.pdf-21"
+      ],
+      "candidate_sources": [
+        "2609.18094.pdf-19",
+        "2609.18094.pdf-1",
+        "2609.18094.pdf-14",
+        "2609.18745.pdf-37",
+        "2609.18595.pdf-11"
+      ],
+      "retrieval_query": "How does the winning solution's Stage A initialize the target model's input embeddings and output head using prediction statistics from multiple donor models rather than parameters?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2609.18094",
+      "question": "作者在结论中指出这次 12 天运行在因果性上未能确立什么？他们承认缺少哪种对照实验？",
+      "baseline_hit": false,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2609.18094.pdf-2",
+        "2609.19134.pdf-95",
+        "2609.18560.pdf-48",
+        "2609.18863.pdf-40",
+        "2609.17686.pdf-9"
+      ],
+      "candidate_sources": [
+        "2609.18094.pdf-4",
+        "2609.18094.pdf-2",
+        "2609.18094.pdf-29",
+        "2609.18094.pdf-1",
+        "2609.19101.pdf-90"
+      ],
+      "retrieval_query": "What did the authors conclude the 12-day run failed to establish causally, and what kind of control experiment did they acknowledge was lacking?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2609.18204",
+      "question": "论文如何用信号检测理论来评估LLM监督者，而不仅仅看准确率？",
+      "baseline_hit": false,
+      "candidate_hit": false,
+      "baseline_sources": [
+        "2609.18204.pdf-6",
+        "2609.18204.pdf-1",
+        "2609.18204.pdf-31",
+        "2609.18204.pdf-7",
+        "2609.19101.pdf-5"
+      ],
+      "candidate_sources": [
+        "2609.18204.pdf-1",
+        "2609.18204.pdf-4",
+        "2609.18204.pdf-3",
+        "2609.18204.pdf-6",
+        "2609.18204.pdf-7"
+      ],
+      "retrieval_query": "How to evaluate LLM supervisors using signal detection theory beyond accuracy?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2609.18204",
+      "question": "论文承认哪些主要局限，特别是对“无轻信”结论和机制解释的限制？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2609.18204.pdf-34",
+        "2609.17686.pdf-11",
+        "2609.17686.pdf-3",
+        "2609.16777.pdf-20",
+        "Chain_of_Thought.pdf-44"
+      ],
+      "candidate_sources": [
+        "2609.18204.pdf-34",
+        "2609.19077.pdf-3",
+        "2609.17686.pdf-11",
+        "Chain_of_Thought.pdf-43",
+        "2609.19077.pdf-5"
+      ],
+      "retrieval_query": "What main limitations do the papers acknowledge, especially regarding the \"no credulity\" conclusion and mechanistic explanations?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2609.17708",
+      "question": "XConf 的 Recall 阶段如何定义“相似”的历史 episode，并据此读出历史成功率？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2609.17708.pdf-2",
+        "2609.17708.pdf-12",
+        "2609.17708.pdf-115",
+        "2609.17708.pdf-16",
+        "2609.17708.pdf-3"
+      ],
+      "candidate_sources": [
+        "2609.17708.pdf-3",
+        "2609.17708.pdf-12",
+        "2609.17708.pdf-2",
+        "2609.17708.pdf-16",
+        "2609.17708.pdf-32"
+      ],
+      "retrieval_query": "XConf Recall stage define similar historical episodes and read historical success rate"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2609.17708",
+      "question": "与 self-consistency 相比，XConf 在哪些任务上仍然不占优势？",
+      "baseline_hit": false,
+      "candidate_hit": false,
+      "baseline_sources": [
+        "2609.17708.pdf-3",
+        "2609.17708.pdf-35",
+        "2609.17708.pdf-7",
+        "2609.17708.pdf-98",
+        "2609.17708.pdf-2"
+      ],
+      "candidate_sources": [
+        "2609.17708.pdf-7",
+        "2609.17708.pdf-35",
+        "2609.17708.pdf-8",
+        "2609.17708.pdf-3",
+        "2609.17708.pdf-98"
+      ],
+      "retrieval_query": "On which tasks does XConf still not outperform self-consistency?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2401.00426",
+      "question": "Keqing 框架的工作流程主要包含哪四个阶段？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2401.00426.pdf-32",
+        "2401.00426.pdf-12",
+        "2401.00426.pdf-4",
+        "2401.00426.pdf-24",
+        "2401.00426.pdf-10"
+      ],
+      "candidate_sources": [
+        "2401.00426.pdf-32",
+        "2401.00426.pdf-12",
+        "2401.00426.pdf-4",
+        "2401.00426.pdf-10",
+        "2401.00426.pdf-9"
+      ],
+      "retrieval_query": "Keqing framework workflow four stages"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2401.00426",
+      "question": "在 WebQSP 基准上，Keqing-ChatGPT 与 Keqing-LLaMA 的对比结果如何？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2401.00426.pdf-29",
+        "2401.00426.pdf-27",
+        "2401.00426.pdf-28",
+        "2401.00426.pdf-30",
+        "2401.00426.pdf-26"
+      ],
+      "candidate_sources": [
+        "2401.00426.pdf-29",
+        "2401.00426.pdf-27",
+        "2401.00426.pdf-30",
+        "2401.00426.pdf-25",
+        "2401.00426.pdf-26"
+      ],
+      "retrieval_query": "How does Keqing-ChatGPT compare with Keqing-LLaMA on the WebQSP benchmark?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2401.00609",
+      "question": "论文如何定义 Personality、Persona 和 Profile，并如何处理这三个术语之间的关系？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2401.00609.pdf-5",
+        "2401.00609.pdf-1",
+        "2401.00609.pdf-77",
+        "2401.00609.pdf-4",
+        "2401.00609.pdf-7"
+      ],
+      "candidate_sources": [
+        "2401.00609.pdf-5",
+        "2401.00609.pdf-1",
+        "2401.00609.pdf-0",
+        "2401.00609.pdf-4",
+        "2401.00609.pdf-56"
+      ],
+      "retrieval_query": "Personality Persona Profile definitions relationships in papers"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2401.00609",
+      "question": "在 4.1 节中，Shumanov 和 Lester 如何检验消费者与聊天机器人人格一致性对参与度和购买行为的影响？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2401.00609.pdf-28",
+        "2401.00609.pdf-69",
+        "2609.16777.pdf-23",
+        "2401.00609.pdf-29",
+        "2401.00609.pdf-65"
+      ],
+      "candidate_sources": [
+        "2401.00609.pdf-28",
+        "2401.00609.pdf-63",
+        "2401.02978.pdf-20",
+        "2401.00609.pdf-32",
+        "2401.00609.pdf-69"
+      ],
+      "retrieval_query": "How do Shumanov and Lester test the effect of consumer-chatbot personality congruence on engagement and purchase behavior in Section 4.1?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2401.02978",
+      "question": "论文中研究者是如何对 Zo 的用户动机进行分类的？当评审员意见不一致时会采取什么措施？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2401.02978.pdf-18",
+        "2401.02978.pdf-20",
+        "2401.02978.pdf-13",
+        "2401.02978.pdf-30",
+        "2401.02978.pdf-17"
+      ],
+      "candidate_sources": [
+        "2401.02978.pdf-18",
+        "2401.02978.pdf-20",
+        "2401.02978.pdf-13",
+        "2401.02978.pdf-30",
+        "2401.02978.pdf-17"
+      ],
+      "retrieval_query": "How did researchers classify Zo users' motivations, and what measures were taken when reviewer opinions were inconsistent?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2401.02978",
+      "question": "论文关于用户对 Zo 的“技能”（Skills）功能的参与度，发现了与常规预期相反的什么结果？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2401.02978.pdf-27",
+        "2401.02978.pdf-38",
+        "2401.02978.pdf-42",
+        "2401.02978.pdf-10",
+        "2401.02978.pdf-45"
+      ],
+      "candidate_sources": [
+        "2401.02978.pdf-27",
+        "2401.02978.pdf-38",
+        "2401.02978.pdf-45",
+        "2401.02978.pdf-13",
+        "2401.02978.pdf-10"
+      ],
+      "retrieval_query": "Zo Skills feature user engagement counterintuitive findings"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2609.19135",
+      "question": "这篇论文证明了在历史依赖日志（history-dependent logging）下，即使候选模型和目标策略都已知，评估一个已知确定性目标策略需要多少样本？这一下界对 horizon H 和置信度 δ 的依赖是什么？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2609.19135.pdf-1",
+        "2609.19135.pdf-7",
+        "2609.19135.pdf-8",
+        "2609.19135.pdf-21",
+        "2609.19135.pdf-20"
+      ],
+      "candidate_sources": [
+        "2609.19135.pdf-1",
+        "2609.19135.pdf-11",
+        "2609.19135.pdf-7",
+        "2609.19135.pdf-20",
+        "2609.19135.pdf-3"
+      ],
+      "retrieval_query": "sample complexity lower bound for evaluating a known deterministic target policy under history-dependent logging with known candidate model and target policy, dependence on horizon H and confidence δ"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2609.19135",
+      "question": "为什么仅靠当前隐状态的信息或 belief coverage 不足以完成 off-policy evaluation？论文指出的关键机制是什么？",
+      "baseline_hit": false,
+      "candidate_hit": false,
+      "baseline_sources": [
+        "2609.19135.pdf-2",
+        "2609.19135.pdf-1",
+        "2609.17686.pdf-21",
+        "2609.17686.pdf-20",
+        "2609.18863.pdf-45"
+      ],
+      "candidate_sources": [
+        "2609.19135.pdf-2",
+        "2609.19135.pdf-1",
+        "2609.17686.pdf-21",
+        "2609.19135.pdf-7",
+        "2609.19135.pdf-8"
+      ],
+      "retrieval_query": "Why is current hidden state information or belief coverage alone insufficient for off-policy evaluation, and what key mechanism does the paper identify?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2609.19077",
+      "question": "论文证明了稀疏线性解释问题的计算复杂度有多高？是针对哪类模型？",
+      "baseline_hit": false,
+      "candidate_hit": false,
+      "baseline_sources": [
+        "2609.19077.pdf-18",
+        "2609.19077.pdf-103",
+        "2609.19077.pdf-12",
+        "2609.19077.pdf-115",
+        "2609.19077.pdf-0"
+      ],
+      "candidate_sources": [
+        "2609.19077.pdf-0",
+        "2609.19077.pdf-103",
+        "2609.19077.pdf-28",
+        "2609.19077.pdf-10",
+        "2609.19077.pdf-6"
+      ],
+      "retrieval_query": "computational complexity of sparse linear explanation problem for which models"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2609.19077",
+      "question": "论文中，相关性误差与保真度误差之间的理论上界依据哪一类局部邻域分布？其概率如何随 Hamming 距离变化？",
+      "baseline_hit": false,
+      "candidate_hit": false,
+      "baseline_sources": [
+        "2609.19077.pdf-44",
+        "2609.18610.pdf-116",
+        "2609.19077.pdf-59",
+        "2609.18610.pdf-99",
+        "2609.18610.pdf-135"
+      ],
+      "candidate_sources": [
+        "2609.19077.pdf-44",
+        "2609.19077.pdf-12",
+        "2609.19077.pdf-98",
+        "2609.19077.pdf-46",
+        "2609.18610.pdf-99"
+      ],
+      "retrieval_query": "theoretical upper bound between relevance error and fidelity error local neighborhood distribution probability as a function of Hamming distance"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2609.18916",
+      "question": "HOPE 与 REAP 在理论上是什么关系？在什么情况下 HOPE 会退化为 REAP？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2609.18916.pdf-16",
+        "2609.18916.pdf-27",
+        "2609.18916.pdf-19",
+        "2609.18916.pdf-20",
+        "2609.18916.pdf-72"
+      ],
+      "candidate_sources": [
+        "2609.18916.pdf-27",
+        "2609.18916.pdf-16",
+        "2609.18916.pdf-20",
+        "2609.18916.pdf-19",
+        "2609.18916.pdf-72"
+      ],
+      "retrieval_query": "What is the theoretical relationship between HOPE and REAP, and under what conditions does HOPE degenerate to REAP?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2609.18916",
+      "question": "HOPE 方法存在哪些主要局限性？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2609.18916.pdf-27",
+        "2609.18916.pdf-19",
+        "2609.18916.pdf-85",
+        "2609.18916.pdf-28",
+        "2609.18916.pdf-4"
+      ],
+      "candidate_sources": [
+        "2609.18916.pdf-27",
+        "2609.18916.pdf-19",
+        "2609.18916.pdf-85",
+        "2609.18612.pdf-39",
+        "2609.18612.pdf-40"
+      ],
+      "retrieval_query": "What are the main limitations of the HOPE method?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2609.18622",
+      "question": "论文如何界定最小证书（minimum certificate）的大小，并在池子任意大时给出什么可计算保证？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2609.18622.pdf-10",
+        "2609.18622.pdf-13",
+        "2609.18622.pdf-34",
+        "2609.18622.pdf-3",
+        "2609.18622.pdf-52"
+      ],
+      "candidate_sources": [
+        "2609.18622.pdf-10",
+        "2609.18622.pdf-3",
+        "2609.18622.pdf-53",
+        "2609.18622.pdf-2",
+        "2609.18622.pdf-47"
+      ],
+      "retrieval_query": "How do papers define the size of a minimum certificate and what computable guarantees are given when the pool is arbitrarily large?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2609.18622",
+      "question": "在108个特征面板比较实验中，预标签下界提前排除了多少条件在10%、20%和30%的标签预算下？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2609.18622.pdf-32",
+        "2609.18622.pdf-33",
+        "2609.18863.pdf-9",
+        "2609.18622.pdf-45",
+        "2609.18622.pdf-36"
+      ],
+      "candidate_sources": [
+        "2609.18622.pdf-32",
+        "2609.18622.pdf-31",
+        "2609.18622.pdf-33",
+        "2609.18622.pdf-45",
+        "2609.18622.pdf-42"
+      ],
+      "retrieval_query": "In the 108-feature panel comparison experiments, how many conditions were pruned early by the pre-label lower bound under 10%, 20%, and 30% label budgets?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2401.00583",
+      "question": "论文在实验评估部分承认了哪个关于公平比较DP-SGD与目标扰动（Algorithm 1）的限制？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2401.00583.pdf-24",
+        "2401.00583.pdf-30",
+        "2401.00583.pdf-32",
+        "2401.00583.pdf-94",
+        "2401.00583.pdf-27"
+      ],
+      "candidate_sources": [
+        "2401.00583.pdf-24",
+        "2401.00583.pdf-30",
+        "2401.00583.pdf-94",
+        "2401.00583.pdf-32",
+        "2401.00583.pdf-93"
+      ],
+      "retrieval_query": "What limitation is acknowledged in the experimental evaluation regarding fair comparison between DP-SGD and objective perturbation (Algorithm 1)?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2401.00583",
+      "question": "论文提出RDP分析（Theorem 3.2）的主要动机是什么？它与基于隐私轮廓的(ε,δ)-DP分析（Theorem 3.1）有何不同？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2401.00583.pdf-15",
+        "2401.00583.pdf-43",
+        "2401.00583.pdf-94",
+        "2401.00583.pdf-30",
+        "2401.00583.pdf-31"
+      ],
+      "candidate_sources": [
+        "2401.00583.pdf-15",
+        "2401.00583.pdf-43",
+        "2401.00583.pdf-94",
+        "2401.00583.pdf-30",
+        "2401.00583.pdf-16"
+      ],
+      "retrieval_query": "What is the main motivation for the RDP analysis in Theorem 3.2, and how does it differ from the privacy-profile-based (ε,δ)-DP analysis in Theorem 3.1?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2401.00534",
+      "question": "根据论文的实验结果，哪个模型在比特币收盘价预测的MAE指标上表现最好？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2401.00534.pdf-14",
+        "2401.00490.pdf-63",
+        "2401.00490.pdf-62",
+        "2401.00490.pdf-76",
+        "2401.00423.pdf-23"
+      ],
+      "candidate_sources": [
+        "2401.00534.pdf-14",
+        "2401.00534.pdf-12",
+        "2401.00534.pdf-1",
+        "2401.00490.pdf-66",
+        "2401.00423.pdf-23"
+      ],
+      "retrieval_query": "Which model achieves the best MAE for Bitcoin closing price prediction based on experimental results?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2401.00534",
+      "question": "论文中LSTM模型在训练过程中遇到了什么问题？作者认为可能的原因是什么？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2401.00534.pdf-13",
+        "BERT.pdf-46",
+        "1701.03578-19",
+        "1905.07562-17",
+        "1906.05506-10"
+      ],
+      "candidate_sources": [
+        "2401.00534.pdf-13",
+        "2401.00434.pdf-146",
+        "BERT.pdf-46",
+        "2401.00579.pdf-36",
+        "2401.00579.pdf-35"
+      ],
+      "retrieval_query": "LSTM model training problems and possible causes in the paper"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2401.00902",
+      "question": "论文针对 ICU 前 24 小时生命体征和实验室数据缺失问题，采用了哪三种建模处理方式？",
+      "baseline_hit": false,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2401.00902.pdf-5",
+        "2401.00902.pdf-4",
+        "2401.00902.pdf-0",
+        "2401.00902.pdf-1",
+        "2401.00902.pdf-3"
+      ],
+      "candidate_sources": [
+        "2401.00902.pdf-5",
+        "2401.00902.pdf-4",
+        "2401.00902.pdf-6",
+        "2401.00902.pdf-9",
+        "2401.00902.pdf-1"
+      ],
+      "retrieval_query": "ICU first 24 hours vital signs laboratory data missing three modeling approaches"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2401.00902",
+      "question": "在按保险类型评估模型时，Medicare 与 Medicaid 患者在短住院和长住院预测上的精确率与召回率表现有何不同？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2401.00902.pdf-14",
+        "2401.00902.pdf-13",
+        "2401.00902.pdf-22",
+        "2401.00902.pdf-3",
+        "2401.00902.pdf-12"
+      ],
+      "candidate_sources": [
+        "2401.00902.pdf-13",
+        "2401.00902.pdf-22",
+        "2401.00902.pdf-12",
+        "2401.00902.pdf-14",
+        "2401.00902.pdf-21"
+      ],
+      "retrieval_query": "Medicare vs Medicaid short-stay and long-stay hospitalization prediction precision and recall by insurance type"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2401.00423",
+      "question": "在 Flight 数据集上，MSGNet 相比当时的 SOTA 模型 TimesNet，平均 MSE 和 MAE 分别降低了多少？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2401.00423.pdf-23",
+        "2401.00423.pdf-28",
+        "2401.00423.pdf-30",
+        "2401.00423.pdf-27",
+        "2401.00423.pdf-43"
+      ],
+      "candidate_sources": [
+        "2401.00423.pdf-23",
+        "2401.00423.pdf-28",
+        "2401.00423.pdf-43",
+        "2401.00423.pdf-39",
+        "2401.00423.pdf-27"
+      ],
+      "retrieval_query": "On the Flight dataset, how much did MSGNet reduce average MSE and MAE compared with the then SOTA model TimesNet?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2609.19144",
+      "question": "ComPO 的离线实用方案在计算上做了哪些简化，以便应用于大语言模型微调？",
+      "baseline_hit": false,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2609.19144.pdf-1",
+        "2609.19144.pdf-31",
+        "2609.19144.pdf-50",
+        "2609.19144.pdf-7",
+        "2609.19144.pdf-6"
+      ],
+      "candidate_sources": [
+        "2609.19144.pdf-19",
+        "2609.19144.pdf-1",
+        "2609.19144.pdf-24",
+        "2609.19144.pdf-6",
+        "2609.19144.pdf-49"
+      ],
+      "retrieval_query": "What computational simplifications does ComPO's offline practical scheme make for large language model fine-tuning?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2609.19107",
+      "question": "论文中 7.4B 的 Untied-Grow 模型在 CORE 基准上的表现如何？与 GPT-3 13B 相比，它用了多少训练算力？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2609.19107.pdf-36",
+        "2609.19107.pdf-35",
+        "2609.19107.pdf-37",
+        "2609.19107.pdf-115",
+        "2609.19107.pdf-6"
+      ],
+      "candidate_sources": [
+        "2609.19107.pdf-36",
+        "2609.19107.pdf-35",
+        "2609.19107.pdf-6",
+        "2609.19107.pdf-38",
+        "2609.19107.pdf-101"
+      ],
+      "retrieval_query": "7.4B Untied-Grow model CORE benchmark performance vs GPT-3 13B training compute"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2609.18825",
+      "question": "这篇论文提出的多示例学习（MIL）框架是如何把单个细胞层面的预测结果转化为患者层面的突变预测的？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2609.18825.pdf-5",
+        "2609.18825.pdf-8",
+        "2609.18825.pdf-4",
+        "2609.18825.pdf-22",
+        "2609.18825.pdf-23"
+      ],
+      "candidate_sources": [
+        "2609.18825.pdf-8",
+        "2609.18825.pdf-9",
+        "2609.18825.pdf-4",
+        "2609.18825.pdf-1",
+        "2609.18825.pdf-5"
+      ],
+      "retrieval_query": "How does the multiple instance learning (MIL) framework in this paper aggregate single-cell-level predictions into patient-level mutation prediction?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2609.18825",
+      "question": "该模型在外部测试集上预测 FLT3-ITD 时存在什么局限，作者认为这限制了它的哪种临床用途？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2609.18825.pdf-1",
+        "2609.18825.pdf-2",
+        "2609.18825.pdf-25",
+        "2609.18825.pdf-27",
+        "2609.18825.pdf-26"
+      ],
+      "candidate_sources": [
+        "2609.18825.pdf-25",
+        "2609.18825.pdf-1",
+        "2609.18825.pdf-24",
+        "2609.18825.pdf-27",
+        "2609.18825.pdf-4"
+      ],
+      "retrieval_query": "What limitations does the model have in predicting FLT3-ITD on external test sets, and which clinical use do the authors believe this limits?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2609.18555",
+      "question": "为什么论文认为在 Pedriza 上的跨区域测试不足以证明模型的可迁移性？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2609.18555.pdf-24",
+        "2609.18555.pdf-25",
+        "2609.18555.pdf-9",
+        "2609.18555.pdf-26",
+        "2609.18555.pdf-27"
+      ],
+      "candidate_sources": [
+        "2609.18555.pdf-26",
+        "2609.18555.pdf-25",
+        "2609.18555.pdf-24",
+        "2609.18555.pdf-9",
+        "2609.18555.pdf-29"
+      ],
+      "retrieval_query": "Why cross-region testing on Pedriza is insufficient to demonstrate model transferability?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2609.19083",
+      "question": "在 SAXS 数据实验中，作者是如何解释 SLE 相较 sliced Wasserstein 基线的精度提升来源的？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2609.19083.pdf-28",
+        "2609.19083.pdf-29",
+        "2609.19083.pdf-30",
+        "2609.19083.pdf-32",
+        "2609.19083.pdf-31"
+      ],
+      "candidate_sources": [
+        "2609.19083.pdf-28",
+        "2609.19083.pdf-32",
+        "2609.19083.pdf-29",
+        "2609.19083.pdf-33",
+        "2609.19083.pdf-30"
+      ],
+      "retrieval_query": "How do authors explain the source of accuracy improvement of SLE over sliced Wasserstein baseline in SAXS data experiments?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2609.18527",
+      "question": "这篇论文提出的谱方法具体是如何利用含边翻转噪声的符号邻接矩阵来判定每个节点的标签的？其计算主特征向量的时间复杂度是多少？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2609.18527.pdf-9",
+        "2609.18527.pdf-1",
+        "2609.18527.pdf-26",
+        "2609.18527.pdf-7",
+        "2609.18527.pdf-3"
+      ],
+      "candidate_sources": [
+        "2609.18527.pdf-1",
+        "2609.18527.pdf-3",
+        "2609.18527.pdf-9",
+        "2609.18527.pdf-7",
+        "2609.18527.pdf-25"
+      ],
+      "retrieval_query": "spectral method signed adjacency matrix edge flip noise node label recovery computational complexity of computing leading eigenvector"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2609.18527",
+      "question": "实验部分把该谱方法与半正定规划（SDP）做了哪些比较，得到了什么结论（运行速度与高噪声下的恢复效果）？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2609.18527.pdf-25",
+        "2609.18527.pdf-42",
+        "2609.18527.pdf-43",
+        "2609.18527.pdf-24",
+        "2609.18527.pdf-23"
+      ],
+      "candidate_sources": [
+        "2609.18527.pdf-24",
+        "2609.18527.pdf-25",
+        "2609.18527.pdf-42",
+        "2609.18527.pdf-23",
+        "2609.18527.pdf-43"
+      ],
+      "retrieval_query": "spectral method versus semidefinite programming SDP comparison runtime recovery performance under high noise"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2401.00448",
+      "question": "论文的 47 个模型训练实验覆盖了多大的参数量和数据预算范围？关于增加 tokens per parameter 时模型质量是否会出现饱和点，主要结论是什么？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2401.00448.pdf-5",
+        "2401.00448.pdf-11",
+        "2401.00448.pdf-14",
+        "2401.00448.pdf-1",
+        "2401.00448.pdf-25"
+      ],
+      "candidate_sources": [
+        "2401.00448.pdf-5",
+        "2401.00448.pdf-1",
+        "2401.00448.pdf-11",
+        "2401.00448.pdf-14",
+        "2401.00448.pdf-7"
+      ],
+      "retrieval_query": "47 model training experiments parameter count and data budget range; effect of increasing tokens per parameter on model quality saturation point"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2401.00529",
+      "question": "GraphGPT 在 PCQM4Mv2 图回归任务上的测试 MAE 是多少，与之前 SOTA 相比表现如何？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2401.00529.pdf-22",
+        "2401.00529.pdf-21",
+        "2401.00529.pdf-37",
+        "2401.00529.pdf-5",
+        "2401.00529.pdf-42"
+      ],
+      "candidate_sources": [
+        "2401.00529.pdf-22",
+        "2401.00529.pdf-21",
+        "2401.00529.pdf-37",
+        "2401.00529.pdf-30",
+        "2401.00529.pdf-38"
+      ],
+      "retrieval_query": "GraphGPT PCQM4Mv2 graph regression test MAE compared with previous SOTA"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2401.00503",
+      "question": "Viz 系统在初始阶段如何避免版权问题，并随后让内容提供者用 QLoRA 进行内容专属微调？",
+      "baseline_hit": false,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2401.00503.pdf-10",
+        "2401.00503.pdf-11",
+        "2401.00503.pdf-17",
+        "2401.00503.pdf-3",
+        "2401.00503.pdf-9"
+      ],
+      "candidate_sources": [
+        "2401.00503.pdf-8",
+        "2401.00503.pdf-10",
+        "2401.00503.pdf-3",
+        "2401.00503.pdf-9",
+        "2401.00503.pdf-1"
+      ],
+      "retrieval_query": "Viz system initial stage copyright avoidance and content provider QLoRA content-specific fine-tuning"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2401.00503",
+      "question": "论文承认 Viz 系统在计算资源和法律伦理方面还存在哪些主要挑战或局限？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2401.00503.pdf-25",
+        "2401.00503.pdf-1",
+        "2401.00503.pdf-23",
+        "2401.00503.pdf-4",
+        "2401.00503.pdf-19"
+      ],
+      "candidate_sources": [
+        "2401.00503.pdf-23",
+        "2401.00503.pdf-17",
+        "2401.00503.pdf-26",
+        "2401.00503.pdf-7",
+        "2401.00503.pdf-4"
+      ],
+      "retrieval_query": "What are the main challenges and limitations of Viz systems in computational resources and legal ethics?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2609.18908",
+      "question": "在 ECtHR-NPD 基准上，哪个模型取得了最好的整体表现，其 MAE 比训练集基线好多少？",
+      "baseline_hit": false,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2609.18908.pdf-22",
+        "2401.00490.pdf-66",
+        "2401.00423.pdf-23",
+        "2609.18908.pdf-3",
+        "2609.18588.pdf-13"
+      ],
+      "candidate_sources": [
+        "2609.18908.pdf-18",
+        "2609.18588.pdf-13",
+        "2609.18655.pdf-13",
+        "2609.18908.pdf-22",
+        "2609.18909.pdf-21"
+      ],
+      "retrieval_query": "On the ECtHR-NPD benchmark, which model achieves the best overall performance, and how much better is its MAE than the training set baseline?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2609.18672",
+      "question": "在匹配词汇条件下，Character 3-gram BM25 的 top-1 准确率、索引大小和 CPU 中位延迟分别是多少？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2609.18672.pdf-12",
+        "2609.18672.pdf-36",
+        "2609.18672.pdf-19",
+        "2609.18672.pdf-21",
+        "2609.18672.pdf-26"
+      ],
+      "candidate_sources": [
+        "2609.18672.pdf-12",
+        "2609.18672.pdf-26",
+        "2609.18672.pdf-5",
+        "2609.18672.pdf-28",
+        "2609.18672.pdf-36"
+      ],
+      "retrieval_query": "Character 3-gram BM25 top-1 accuracy index size CPU median latency under matched vocabulary"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2609.19134",
+      "question": "在 ScienceIDE-Hard 评测中，领先模型的科学任务成功率与成本/资源开销之间呈现怎样的关系？",
+      "baseline_hit": false,
+      "candidate_hit": false,
+      "baseline_sources": [
+        "2609.19134.pdf-26",
+        "2609.19134.pdf-86",
+        "2609.19134.pdf-89",
+        "2609.19134.pdf-30",
+        "2609.19134.pdf-3"
+      ],
+      "candidate_sources": [
+        "2609.19134.pdf-86",
+        "2609.19134.pdf-26",
+        "2609.19134.pdf-18",
+        "2609.19134.pdf-30",
+        "2609.19134.pdf-3"
+      ],
+      "retrieval_query": "ScienceIDE-Hard leading models scientific task success rate vs cost/resource overhead relationship"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2609.18909",
+      "question": "这篇论文最终保留的六个过程测量指标分别是什么？它们是从多少个候选统计量中筛选出来的？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2609.18909.pdf-3",
+        "2609.18863.pdf-15",
+        "2609.18863.pdf-73",
+        "2609.18622.pdf-31",
+        "2609.18622.pdf-54"
+      ],
+      "candidate_sources": [
+        "2609.18622.pdf-31",
+        "2609.18622.pdf-33",
+        "2609.18863.pdf-53",
+        "2609.18622.pdf-54",
+        "2609.18909.pdf-3"
+      ],
+      "retrieval_query": "What are the six process measurement indicators finally retained in this paper, and from how many candidate statistics were they selected?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2609.18909",
+      "question": "与最直接的预测式基线 SparseEval 相比，DualViewEval 在跨基准平均结果上把 MAE 和 Kendall’s τ 改善了多少？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2609.18909.pdf-21",
+        "2609.18909.pdf-28",
+        "2609.18909.pdf-29",
+        "2609.18909.pdf-26",
+        "2609.18909.pdf-27"
+      ],
+      "candidate_sources": [
+        "2609.18909.pdf-21",
+        "2609.18909.pdf-26",
+        "2609.18909.pdf-29",
+        "2609.18909.pdf-28",
+        "2609.18909.pdf-27"
+      ],
+      "retrieval_query": "DualViewEval vs SparseEval predictive baseline average across benchmarks improvement in MAE and Kendall's tau"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2401.00368",
+      "question": "论文提出用专有 LLM 生成合成数据时，采用的两步提示策略具体是什么？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2401.00368.pdf-4",
+        "2401.00368.pdf-3",
+        "2401.00368.pdf-10",
+        "2401.00368.pdf-8",
+        "2401.00368.pdf-24"
+      ],
+      "candidate_sources": [
+        "2401.00368.pdf-4",
+        "2401.00368.pdf-8",
+        "2401.00368.pdf-24",
+        "2401.00368.pdf-3",
+        "2401.00368.pdf-10"
+      ],
+      "retrieval_query": "What is the two-step prompting strategy for proprietary LLM synthetic data generation?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "1911.05652",
+      "question": "在H8单场景作者归属实验中，作者使用了哪种分类器和哪些特征集？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "1911.05652-4",
+        "1911.05652-7",
+        "1911.05652-6",
+        "1911.05652-8",
+        "1911.05652-11"
+      ],
+      "candidate_sources": [
+        "1911.05652-4",
+        "1911.05652-8",
+        "1911.05652-5",
+        "1911.05652-7",
+        "1911.05652-11"
+      ],
+      "retrieval_query": "In the H8 single-scenario authorship attribution experiment, which classifier and feature sets were used by the authors?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "1911.05652",
+      "question": "根据论文结论，本文的归属结果与Spedding的归属之间的主要差异是什么？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "1911.05652-6",
+        "1911.05652-14",
+        "2609.18204.pdf-28",
+        "2609.18863.pdf-47",
+        "2609.18863.pdf-77"
+      ],
+      "candidate_sources": [
+        "1911.05652-14",
+        "1911.05652-6",
+        "2609.18863.pdf-47",
+        "2609.18204.pdf-28",
+        "2609.18204.pdf-10"
+      ],
+      "retrieval_query": "What are the main differences between the attribution results of this paper and Spedding's attribution?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2609.17225",
+      "question": "在越战和9/11之后，within-artist层面的语言变化在后续十年间的恢复轨迹有何不同？",
+      "baseline_hit": false,
+      "candidate_hit": false,
+      "baseline_sources": [
+        "2609.17225.pdf-18",
+        "2609.17225.pdf-19",
+        "2609.17225.pdf-20",
+        "2609.17225.pdf-14",
+        "2609.17225.pdf-5"
+      ],
+      "candidate_sources": [
+        "2609.17225.pdf-18",
+        "2609.17225.pdf-19",
+        "2609.17225.pdf-20",
+        "2609.17225.pdf-14",
+        "2609.17225.pdf-5"
+      ],
+      "retrieval_query": "within-artist linguistic changes recovery trajectories in the decade after the Vietnam War versus 9/11"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2401.00434",
+      "question": "GeoGalactica 的模型规模、基础模型和预训练语料 token 数分别是多少？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2401.00434.pdf-1",
+        "2401.00434.pdf-21",
+        "2401.00434.pdf-108",
+        "2401.00434.pdf-107",
+        "2401.00434.pdf-47"
+      ],
+      "candidate_sources": [
+        "2401.00434.pdf-1",
+        "2401.00434.pdf-21",
+        "2401.00434.pdf-108",
+        "2401.00434.pdf-107",
+        "2401.00434.pdf-47"
+      ],
+      "retrieval_query": "GeoGalactica model size base model pretraining corpus token count"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2401.00434",
+      "question": "在构建 GeoSignal 的域内通用自然语言指令时，从原文中检索图表/表格引用句的方法有哪些已知局限？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2401.00434.pdf-28",
+        "2401.00434.pdf-20",
+        "2609.18317.pdf-2",
+        "2401.00434.pdf-53",
+        "2401.00434.pdf-40"
+      ],
+      "candidate_sources": [
+        "2401.00434.pdf-40",
+        "2401.00434.pdf-38",
+        "2401.00434.pdf-37",
+        "2401.00434.pdf-53",
+        "2401.00434.pdf-20"
+      ],
+      "retrieval_query": "What are the known limitations of methods for retrieving figure/table reference sentences from source text when constructing in-domain general natural language instructions for GeoSignal?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2609.18708",
+      "question": "这篇论文认为标准 PPO 中 critic 损失为什么会把同一个 response 内不同状态的价值预测“压平”？具体是哪一项导致了这种隐含的惩罚？",
+      "baseline_hit": false,
+      "candidate_hit": false,
+      "baseline_sources": [
+        "2609.18708.pdf-14",
+        "2609.18708.pdf-1",
+        "2609.18708.pdf-28",
+        "2609.18708.pdf-4",
+        "2609.18708.pdf-11"
+      ],
+      "candidate_sources": [
+        "2609.18708.pdf-14",
+        "2609.18708.pdf-1",
+        "2609.18708.pdf-28",
+        "2609.18708.pdf-4",
+        "2609.18708.pdf-11"
+      ],
+      "retrieval_query": "Why does the critic loss in standard PPO flatten value predictions across different states within the same response, and which term causes this implicit penalty?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2609.18708",
+      "question": "论文提出的 SP3O 具体是如何改的？它改变了训练的哪些部分、又保留了什么不变？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2609.18708.pdf-20",
+        "2609.18708.pdf-17",
+        "2609.18708.pdf-24",
+        "2609.18708.pdf-27",
+        "2609.18708.pdf-5"
+      ],
+      "candidate_sources": [
+        "2609.18708.pdf-17",
+        "2609.18708.pdf-24",
+        "2609.18708.pdf-20",
+        "2609.18708.pdf-27",
+        "2609.18708.pdf-26"
+      ],
+      "retrieval_query": "How does SP3O modify training, which parts are changed and what remains unchanged?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2609.18639",
+      "question": "在 CoRe-MARL 中，每个救济中心作为智能体的动作空间是如何定义的？其策略为何采用 Dirichlet 分布输出？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2609.18639.pdf-1",
+        "2609.18639.pdf-19",
+        "2609.18639.pdf-8",
+        "2609.18639.pdf-15",
+        "2609.19107.pdf-116"
+      ],
+      "candidate_sources": [
+        "2609.18639.pdf-1",
+        "2609.18639.pdf-15",
+        "2609.18639.pdf-19",
+        "2609.18639.pdf-13",
+        "2609.18639.pdf-23"
+      ],
+      "retrieval_query": "In CoRe-MARL, how is the action space of each relief center agent defined, and why does its policy use a Dirichlet distribution output?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2609.19074",
+      "question": "RLLBC-Lib 的 Jupyter notebooks 采用怎样的统一结构？这种结构如何帮助体现表格 RL 与深度 RL 方法之间的相似性？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2609.19074.pdf-15",
+        "2609.19074.pdf-4",
+        "2609.19074.pdf-6",
+        "2609.19074.pdf-2",
+        "2609.19074.pdf-7"
+      ],
+      "candidate_sources": [
+        "2609.19074.pdf-6",
+        "2609.19074.pdf-4",
+        "2609.19074.pdf-15",
+        "2609.19074.pdf-2",
+        "2609.19074.pdf-7"
+      ],
+      "retrieval_query": "What is the unified structure of Jupyter notebooks in RLLBC-Lib, and how does this structure help reveal similarities between tabular RL and deep RL methods?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2609.18610",
+      "question": "论文如何定义 policy geometry（策略几何），它由哪两个部分组成？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2609.18610.pdf-30",
+        "2609.18610.pdf-31",
+        "2609.18610.pdf-33",
+        "2609.18610.pdf-52",
+        "2609.18610.pdf-63"
+      ],
+      "candidate_sources": [
+        "2609.18610.pdf-30",
+        "2609.18610.pdf-52",
+        "2609.18610.pdf-31",
+        "2609.18610.pdf-33",
+        "2609.18610.pdf-94"
+      ],
+      "retrieval_query": "How is policy geometry defined in the paper, and what two components does it consist of?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2401.00907",
+      "question": "LaFFi 框架包含哪四个关键阶段？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2401.00907.pdf-3",
+        "2401.00907.pdf-11",
+        "2401.00907.pdf-5",
+        "2401.00907.pdf-9",
+        "2401.00907.pdf-4"
+      ],
+      "candidate_sources": [
+        "2401.00907.pdf-3",
+        "2401.00426.pdf-32",
+        "2401.00907.pdf-5",
+        "2401.00907.pdf-11",
+        "2609.19107.pdf-28"
+      ],
+      "retrieval_query": "LaFFi framework four key stages"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2401.00907",
+      "question": "在 SQuAD 2.0 基准上，LaFFi 相对于 SFT 和未微调基线表现如何？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2401.00907.pdf-11",
+        "2401.00907.pdf-6",
+        "2401.00907.pdf-5",
+        "2401.00907.pdf-1",
+        "2401.00907.pdf-7"
+      ],
+      "candidate_sources": [
+        "2401.00907.pdf-6",
+        "2401.00907.pdf-11",
+        "2401.00907.pdf-5",
+        "2401.00907.pdf-7",
+        "2609.19134.pdf-34"
+      ],
+      "retrieval_query": "LaFFi vs SFT and untuned baselines on SQuAD 2.0 benchmark"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2401.00611",
+      "question": "论文中提出的 Number of Transpositions (NoT) 指标是什么？它如何用来量化一个排列的幅度？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2401.00611.pdf-5",
+        "2401.00611.pdf-3",
+        "2401.00611.pdf-6",
+        "2609.18745.pdf-44",
+        "2609.17764.pdf-12"
+      ],
+      "candidate_sources": [
+        "2401.00611.pdf-5",
+        "2401.00611.pdf-3",
+        "2401.00611.pdf-6",
+        "2609.18909.pdf-42",
+        "2609.18745.pdf-14"
+      ],
+      "retrieval_query": "What is the Number of Transpositions (NoT) metric proposed in the paper and how is it used to quantify the magnitude of a permutation?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2401.00611",
+      "question": "根据 Table 1 的实验结果，qr(W) 与 qd(W) 相比在逼近 HMC 样本时表现如何？论文由此得出什么结论？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2401.00611.pdf-9",
+        "2401.00611.pdf-10",
+        "2401.00611.pdf-8",
+        "2401.00611.pdf-4",
+        "LoRA.pdf-36"
+      ],
+      "candidate_sources": [
+        "2401.00611.pdf-9",
+        "2401.00611.pdf-10",
+        "2401.00611.pdf-8",
+        "2401.00611.pdf-4",
+        "LoRA.pdf-37"
+      ],
+      "retrieval_query": "According to Table 1, how does qr(W) perform compared with qd(W) in approximating HMC samples, and what conclusion does the paper draw?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2401.00582",
+      "question": "论文在构建用于句子相似度的Siamese Neural Network时，嵌入向量被送入什么样的网络，并采用哪种损失函数？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2401.00582.pdf-17",
+        "2401.00582.pdf-16",
+        "2401.00582.pdf-15",
+        "2401.00582.pdf-20",
+        "2401.00582.pdf-1"
+      ],
+      "candidate_sources": [
+        "2401.00582.pdf-16",
+        "2401.00582.pdf-17",
+        "2401.00582.pdf-15",
+        "2401.00582.pdf-1",
+        "2401.00582.pdf-0"
+      ],
+      "retrieval_query": "Siamese Neural Network sentence similarity embedding vector network architecture loss function"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2401.00582",
+      "question": "论文在结论中如何权衡OpenAI和PaLM在准确率与碳足迹方面的表现？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2401.00582.pdf-26",
+        "2401.00582.pdf-23",
+        "2401.00582.pdf-24",
+        "Chain_of_Thought.pdf-14",
+        "2401.00582.pdf-22"
+      ],
+      "candidate_sources": [
+        "2401.00582.pdf-26",
+        "2401.00582.pdf-23",
+        "2401.00582.pdf-22",
+        "2401.00582.pdf-24",
+        "2401.00582.pdf-19"
+      ],
+      "retrieval_query": "How do conclusions weigh OpenAI versus PaLM in terms of accuracy and carbon footprint?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2401.00490",
+      "question": "论文指出多类量化中基于直方图的表示存在哪些主要局限？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2401.00490.pdf-24",
+        "2401.00490.pdf-20",
+        "2401.00490.pdf-6",
+        "2401.00490.pdf-5",
+        "2401.00490.pdf-1"
+      ],
+      "candidate_sources": [
+        "2401.00490.pdf-24",
+        "2401.00490.pdf-6",
+        "2401.00490.pdf-17",
+        "2401.00490.pdf-23",
+        "2401.00490.pdf-5"
+      ],
+      "retrieval_query": "What are the main limitations of histogram-based representations in multi-class quantization?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2401.00445",
+      "question": "OPETRL 框架如何降低动作空间和计算复杂度？其中离散变量与连续变量分别由什么方法处理？",
+      "baseline_hit": false,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2401.00445.pdf-17",
+        "2401.00445.pdf-16",
+        "2401.00445.pdf-30",
+        "2401.00445.pdf-29",
+        "2609.19107.pdf-33"
+      ],
+      "candidate_sources": [
+        "2401.00445.pdf-16",
+        "2401.00445.pdf-17",
+        "2401.00445.pdf-1",
+        "2401.00445.pdf-6",
+        "2609.16627.pdf-3"
+      ],
+      "retrieval_query": "OPETRL framework reduce action space and computational complexity discrete variables continuous variables handling methods"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2401.00445",
+      "question": "在仿真实验中，作者将 OPETRL 与哪些基线策略进行了比较？总体比较结果如何？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2401.00445.pdf-28",
+        "2609.16800.pdf-20",
+        "2401.00445.pdf-30",
+        "2609.18639.pdf-24",
+        "2609.18219.pdf-11"
+      ],
+      "candidate_sources": [
+        "2401.00445.pdf-28",
+        "2401.00445.pdf-29",
+        "2609.18825.pdf-12",
+        "2609.18825.pdf-16",
+        "2609.18639.pdf-24"
+      ],
+      "retrieval_query": "In simulation experiments, which baseline policies were compared with OPETRL, and what were the overall comparison results?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "Attention_Is_All_You_Need",
+      "question": "与 ConvS2S 和 ByteNet 相比，Transformer 在关联任意两个输入或输出位置所需操作数上有何不同？为了缓解由此可能带来的有效分辨率下降，论文采用了什么机制？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "Attention_Is_All_You_Need.pdf-4",
+        "2609.17888.pdf-29",
+        "LoRA.pdf-13",
+        "BERT.pdf-11",
+        "2401.00503.pdf-25"
+      ],
+      "candidate_sources": [
+        "Attention_Is_All_You_Need.pdf-4",
+        "Attention_Is_All_You_Need.pdf-3",
+        "Attention_Is_All_You_Need.pdf-14",
+        "Attention_Is_All_You_Need.pdf-10",
+        "Attention_Is_All_You_Need.pdf-11"
+      ],
+      "retrieval_query": "Transformer vs ConvS2S ByteNet number of operations to relate two arbitrary input or output positions effective resolution reduction mechanism"
+    },
+    {
+      "question_id": null,
+      "paper_id": "GPT2",
+      "question": "论文中的 WebText 数据集是如何构建和过滤的？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "GPT2.pdf-9",
+        "GPT2.pdf-28",
+        "GPT2.pdf-25",
+        "GPT2.pdf-10",
+        "GPT2.pdf-30"
+      ],
+      "candidate_sources": [
+        "GPT2.pdf-28",
+        "GPT2.pdf-9",
+        "GPT2.pdf-29",
+        "GPT2.pdf-30",
+        "2002.00175-19"
+      ],
+      "retrieval_query": "How is the WebText dataset constructed and filtered in the paper?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "LoRA",
+      "question": "在LoRA中，低秩矩阵A和B是如何初始化的？这样初始化的目的是什么？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "LoRA.pdf-4",
+        "LoRA.pdf-65",
+        "LoRA.pdf-11",
+        "LoRA.pdf-3",
+        "LoRA.pdf-14"
+      ],
+      "candidate_sources": [
+        "LoRA.pdf-4",
+        "LoRA.pdf-65",
+        "LoRA.pdf-11",
+        "LoRA.pdf-53",
+        "LoRA.pdf-3"
+      ],
+      "retrieval_query": "How are low-rank matrices A and B initialized in LoRA, and what is the purpose of this initialization?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "ReAct",
+      "question": "在 HotpotQA 和 FEVER 这类知识密集型推理任务上，ReAct 与 CoT 相比表现如何，论文又如何解释二者在幻觉与事实性上的差异？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "ReAct.pdf-19",
+        "ReAct.pdf-18",
+        "ReAct.pdf-21",
+        "ReAct.pdf-20",
+        "ReAct.pdf-17"
+      ],
+      "candidate_sources": [
+        "ReAct.pdf-19",
+        "ReAct.pdf-21",
+        "ReAct.pdf-20",
+        "ReAct.pdf-16",
+        "ReAct.pdf-18"
+      ],
+      "retrieval_query": "ReAct vs CoT performance on HotpotQA and FEVER knowledge-intensive reasoning tasks hallucination factuality"
+    },
+    {
+      "question_id": null,
+      "paper_id": "1603.09381",
+      "question": "这篇论文提出的临床信息抽取系统与传统依赖 cTAKES 的方法相比，在工具依赖和开发成本方面有什么优势？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "1603.09381-11",
+        "2401.00503.pdf-25",
+        "1603.09381-1",
+        "2609.19099.pdf-13",
+        "2312.17296.pdf-23"
+      ],
+      "candidate_sources": [
+        "1603.09381-11",
+        "2609.19099.pdf-3",
+        "2609.18852.pdf-43",
+        "2609.18852.pdf-36",
+        "2609.18852.pdf-5"
+      ],
+      "retrieval_query": "clinical information extraction system advantages over cTAKES in tool dependency and development cost"
+    },
+    {
+      "question_id": null,
+      "paper_id": "1605.05156",
+      "question": "在Twitter言语行为分类任务中，论文提出的TweetAct分类器与Zhang等人的分类器相比表现如何？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "1605.05156-13",
+        "1907.08540-25",
+        "2312.16054.pdf-19",
+        "2609.16927.pdf-89",
+        "2401.00383.pdf-37"
+      ],
+      "candidate_sources": [
+        "1605.05156-13",
+        "1605.05156-14",
+        "1605.05156-12",
+        "1605.05156-2",
+        "2609.16627.pdf-9"
+      ],
+      "retrieval_query": "TweetAct classifier vs Zhang classifier performance Twitter speech act classification"
+    },
+    {
+      "question_id": null,
+      "paper_id": "1911.12893",
+      "question": "论文如何自动区分真正的拼写/语法错误编辑（typo）与语义编辑，分类效果如何？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "1911.12893-2",
+        "1911.12893-15",
+        "1911.12893-20",
+        "1911.12893-9",
+        "1911.12893-19"
+      ],
+      "candidate_sources": [
+        "1911.12893-2",
+        "1911.12893-20",
+        "1911.12893-15",
+        "2609.19101.pdf-74",
+        "2609.18745.pdf-38"
+      ],
+      "retrieval_query": "How do papers automatically distinguish true spelling/grammar error edits (typos) from semantic edits, and what is the classification performance?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2609.17346",
+      "question": "根据论文结论，Cartridges、Compaction 和参数型适配器各自的主要优缺点是什么？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2609.17346.pdf-32",
+        "2609.17346.pdf-33",
+        "2609.17346.pdf-31",
+        "2609.17346.pdf-29",
+        "2609.17943.pdf-26"
+      ],
+      "candidate_sources": [
+        "2609.17346.pdf-31",
+        "2609.17346.pdf-1",
+        "2609.17346.pdf-33",
+        "2609.17346.pdf-29",
+        "2609.17346.pdf-14"
+      ],
+      "retrieval_query": "Cartridges vs Compaction vs parameter-efficient adapters advantages disadvantages"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2609.17225",
+      "question": "作者为什么强调需要区分 within-artist 和 between-artist 效应？以9/11为例，这两种效应在 self-references 上呈现怎样的方向差异？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2609.17225.pdf-19",
+        "2609.17225.pdf-18",
+        "2609.17225.pdf-20",
+        "2609.17225.pdf-14",
+        "2609.17225.pdf-13"
+      ],
+      "candidate_sources": [
+        "2609.17225.pdf-14",
+        "2609.17225.pdf-19",
+        "2609.17225.pdf-20",
+        "2609.17225.pdf-18",
+        "2609.17225.pdf-39"
+      ],
+      "retrieval_query": "Why distinguish within-artist and between-artist effects? 9/11 self-references direction differences"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2609.17081",
+      "question": "在 EVISCOPE 的实验中，显式 evidence-action gate 与 vanilla RAG 在两个本地开源模型上的 QCS 表现差异如何？Gemini 是否彻底消除了冲突盲视？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2609.17081.pdf-1",
+        "2609.17081.pdf-10",
+        "2609.17081.pdf-9",
+        "2609.17081.pdf-13",
+        "2609.17081.pdf-8"
+      ],
+      "candidate_sources": [
+        "2609.17081.pdf-1",
+        "2609.17081.pdf-13",
+        "2609.17081.pdf-10",
+        "2609.17081.pdf-9",
+        "2609.17081.pdf-2"
+      ],
+      "retrieval_query": "EVISCOPE explicit evidence-action gate vs vanilla RAG QCS local open-source models Gemini conflict blindness elimination"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2609.16927",
+      "question": "SALVE 方法分为哪两个阶段，以及它用什么机制来提高 verbalization 的可靠性？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2609.16927.pdf-11",
+        "2609.16927.pdf-4",
+        "2609.16927.pdf-120",
+        "2609.16927.pdf-42",
+        "2609.16927.pdf-15"
+      ],
+      "candidate_sources": [
+        "2609.16927.pdf-11",
+        "2609.18812.pdf-3",
+        "2609.17686.pdf-3",
+        "2609.17686.pdf-30",
+        "2609.18861.pdf-16"
+      ],
+      "retrieval_query": "SALVE method two stages mechanism improve verbalization reliability"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2312.17296",
+      "question": "论文在 Data Curation 这一未来工作方向中指出，使用高度相关的样本可能带来什么潜在问题？实验中是否观察到性能下降？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2312.17296.pdf-25",
+        "2609.18863.pdf-60",
+        "2609.18825.pdf-29",
+        "2401.00368.pdf-41",
+        "2312.17296.pdf-26"
+      ],
+      "candidate_sources": [
+        "2312.17296.pdf-25",
+        "2609.18825.pdf-28",
+        "2312.17296.pdf-27",
+        "2401.00423.pdf-30",
+        "2401.00902.pdf-3"
+      ],
+      "retrieval_query": "Data Curation future work highly relevant samples potential issues performance degradation observed"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2609.18135",
+      "question": "在DualSQL的消融实验中，与仅训练SQL生成的单智能体RL设置相比，联合训练Schema Linking和SQL生成的多智能体RL在BIRD-Dev上带来了多少EX和REX提升？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2609.18135.pdf-24",
+        "2609.18135.pdf-25",
+        "2609.18135.pdf-21",
+        "2609.18135.pdf-22",
+        "2609.18135.pdf-23"
+      ],
+      "candidate_sources": [
+        "2609.18135.pdf-24",
+        "2609.18135.pdf-25",
+        "2609.18135.pdf-42",
+        "2609.18135.pdf-21",
+        "2609.18135.pdf-29"
+      ],
+      "retrieval_query": "DualSQL ablation study multi-agent RL joint training Schema Linking and SQL generation vs single-agent RL SQL generation only BIRD-Dev EX REX improvement"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2609.18612",
+      "question": "在论文提出的输入-输出分类法中，weakening neuron 和 strengthening neuron 的定义区别是什么？",
+      "baseline_hit": true,
+      "candidate_hit": false,
+      "baseline_sources": [
+        "2609.18612.pdf-1",
+        "2609.18612.pdf-14",
+        "2609.18612.pdf-33",
+        "2609.18612.pdf-15",
+        "2609.18612.pdf-34"
+      ],
+      "candidate_sources": [
+        "2609.18612.pdf-3",
+        "2609.18612.pdf-1",
+        "2609.18612.pdf-15",
+        "2609.18612.pdf-35",
+        "2609.18612.pdf-86"
+      ],
+      "retrieval_query": "weakening neuron strengthening neuron definition difference input-output taxonomy"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2609.19144",
+      "question": "ComPO 在实践中如何区分“干净”与“噪声”偏好对，并且对这两类数据分别采用怎样的训练流程？",
+      "baseline_hit": true,
+      "candidate_hit": false,
+      "baseline_sources": [
+        "2609.19144.pdf-43",
+        "2609.19144.pdf-36",
+        "2609.19144.pdf-25",
+        "2609.19144.pdf-74",
+        "2609.19144.pdf-6"
+      ],
+      "candidate_sources": [
+        "2609.19144.pdf-46",
+        "2609.19144.pdf-5",
+        "2609.19144.pdf-43",
+        "2609.19144.pdf-19",
+        "2609.19144.pdf-74"
+      ],
+      "retrieval_query": "How does ComPO distinguish clean from noisy preference pairs in practice, and what training procedures are used for these two types of data respectively?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2609.19107",
+      "question": "论文在单轮（single-epoch）与多轮（multi-epoch）训练设置下，关于权重共享（weight sharing）和loop数的结论有何不同？",
+      "baseline_hit": false,
+      "candidate_hit": false,
+      "baseline_sources": [
+        "2609.19107.pdf-47",
+        "2609.19107.pdf-43",
+        "2609.19107.pdf-48",
+        "2609.19107.pdf-39",
+        "2609.19107.pdf-41"
+      ],
+      "candidate_sources": [
+        "2609.19107.pdf-47",
+        "2609.19107.pdf-14",
+        "2609.19107.pdf-43",
+        "2609.19107.pdf-48",
+        "2609.19107.pdf-41"
+      ],
+      "retrieval_query": "single-epoch vs multi-epoch training weight sharing loop number conclusions"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2609.19083",
+      "question": "SLE 核在数学上是如何保证对任意距离度量（包括非 CND 距离）都能得到正半定核矩阵的？",
+      "baseline_hit": false,
+      "candidate_hit": false,
+      "baseline_sources": [
+        "2609.19083.pdf-6",
+        "2609.19083.pdf-1",
+        "2609.19083.pdf-94",
+        "2609.19083.pdf-57",
+        "2609.19083.pdf-5"
+      ],
+      "candidate_sources": [
+        "2609.19083.pdf-6",
+        "2609.19083.pdf-1",
+        "2609.19083.pdf-94",
+        "2609.19083.pdf-57",
+        "2609.19083.pdf-3"
+      ],
+      "retrieval_query": "SLE kernel positive semidefinite kernel matrix arbitrary distance metric non-CND distance"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2401.00448",
+      "question": "论文为验证极端的 tokens per parameter 比率下 transformer 的行为，训练了多少个模型？模型规模和数据预算范围分别是多少？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2401.00448.pdf-11",
+        "2401.00448.pdf-5",
+        "2401.00448.pdf-4",
+        "2401.00448.pdf-16",
+        "2609.19145.pdf-25"
+      ],
+      "candidate_sources": [
+        "2401.00448.pdf-11",
+        "2401.00448.pdf-5",
+        "2401.00448.pdf-44",
+        "2401.00448.pdf-15",
+        "2401.00448.pdf-19"
+      ],
+      "retrieval_query": "How many models were trained to verify transformer behavior at extreme tokens per parameter ratios, and what were the model size and data budget ranges?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2609.18672",
+      "question": "在论文的弃权（in-catalog vs out-of-catalog）评估中，BM25 分数特征组合 G3 与冻结编码器在 paraphrase/mismatch 切片上的 AUC 表现差异如何？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2609.18672.pdf-15",
+        "2609.18672.pdf-17",
+        "2609.18672.pdf-16",
+        "2609.18672.pdf-1",
+        "2609.18672.pdf-12"
+      ],
+      "candidate_sources": [
+        "2609.18672.pdf-15",
+        "2609.18672.pdf-17",
+        "2609.18672.pdf-16",
+        "2609.18672.pdf-1",
+        "2609.18672.pdf-18"
+      ],
+      "retrieval_query": "BM25 score feature combination G3 vs frozen encoder AUC on paraphrase/mismatch slices in in-catalog vs out-of-catalog abstention evaluation"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2609.19074",
+      "question": "RLLBC-Lib 的深度强化学习实现主要基于哪个代码库，并使用什么框架进行神经网络训练？",
+      "baseline_hit": false,
+      "candidate_hit": false,
+      "baseline_sources": [
+        "2609.19074.pdf-2",
+        "2609.19074.pdf-5",
+        "2609.19074.pdf-15",
+        "2609.19074.pdf-4",
+        "2609.19074.pdf-0"
+      ],
+      "candidate_sources": [
+        "2609.19074.pdf-2",
+        "2609.19074.pdf-4",
+        "2609.19074.pdf-15",
+        "2609.19074.pdf-6",
+        "2609.19074.pdf-22"
+      ],
+      "retrieval_query": "RLLBC-Lib deep reinforcement learning implementation based on which codebase and neural network training framework?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2609.18610",
+      "question": "这篇论文的核心主张是什么？它认为策略重构的复杂度主要由什么决定？",
+      "baseline_hit": false,
+      "candidate_hit": false,
+      "baseline_sources": [
+        "2609.18610.pdf-1",
+        "2609.18610.pdf-47",
+        "2609.18610.pdf-91",
+        "2609.18610.pdf-51",
+        "2609.18610.pdf-20"
+      ],
+      "candidate_sources": [
+        "2609.18610.pdf-1",
+        "2609.18610.pdf-20",
+        "2609.18610.pdf-19",
+        "2609.18610.pdf-14",
+        "2609.17686.pdf-31"
+      ],
+      "retrieval_query": "What is the core claim of this paper and what does it argue primarily determines the complexity of strategy reconstruction?"
+    },
+    {
+      "question_id": null,
+      "paper_id": "2401.00490",
+      "question": "论文提出的KDEy方法通过什么方式改进了传统分布匹配方法在多类量化中的不足？",
+      "baseline_hit": true,
+      "candidate_hit": true,
+      "baseline_sources": [
+        "2401.00490.pdf-74",
+        "2401.00490.pdf-86",
+        "2401.00490.pdf-6",
+        "2401.00490.pdf-25",
+        "2401.00490.pdf-1"
+      ],
+      "candidate_sources": [
+        "2401.00490.pdf-1",
+        "2401.00490.pdf-78",
+        "2401.00490.pdf-6",
+        "2401.00490.pdf-74",
+        "2401.00490.pdf-86"
+      ],
+      "retrieval_query": "KDEy method improve traditional distribution matching for multiclass quantification"
+    }
+  ]
+}

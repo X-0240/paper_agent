@@ -1,0 +1,2335 @@
+{
+  "config": {
+    "questions": "evaluation/questions/v150_dev_reviewed.json",
+    "mode": "hybrid",
+    "k": 5,
+    "alpha": 0.5,
+    "candidates": 25,
+    "query_field": "question",
+    "split": null,
+    "engine": "service",
+    "query_source": "original",
+    "rerank_mode": "conditional"
+  },
+  "n": 68,
+  "hits": 52,
+  "rate": 0.7647058823529411,
+  "ci95": [
+    0.6514460690450258,
+    0.8496563562907128
+  ],
+  "rows": [
+    {
+      "question_id": "1",
+      "question": "标准注意力和 FlashAttention 各自需要多少 HBM 访问复杂度？",
+      "query_en": null,
+      "paper_id": "FlashAttention",
+      "question_type": "comparison",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "FlashAttention",
+          "section": "3.2 Analysis: IO Complexity of FlashAttention"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "3.2 Analysis: IO Complexity of FlashAttention"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "4. Compute 𝑑𝑘𝑗for all 𝑗according to Eq. (6), which takes 𝑂(𝑑) extra memory."
+        },
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        }
+      ]
+    },
+    {
+      "question_id": "2",
+      "question": "FlashAttention 在反向传播中如何避免存储 O(N^2) 的中间注意力矩阵？",
+      "query_en": null,
+      "paper_id": "FlashAttention",
+      "question_type": "method",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "FlashAttention",
+          "section": "4. Compute 𝑑𝑘𝑗for all 𝑗according to Eq. (6), which takes 𝑂(𝑑) extra memory."
+        },
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "4. Compute 𝑑𝑘𝑗for all 𝑗according to Eq. (6), which takes 𝑂(𝑑) extra memory."
+        },
+        {
+          "source": "FlashAttention",
+          "section": "4. Compute 𝑑𝑘𝑗for all 𝑗according to Eq. (6), which takes 𝑂(𝑑) extra memory."
+        },
+        {
+          "source": "FlashAttention",
+          "section": "4. Compute 𝑑𝑘𝑗for all 𝑗according to Eq. (6), which takes 𝑂(𝑑) extra memory."
+        }
+      ]
+    },
+    {
+      "question_id": "3",
+      "question": "在 GPT-3 175B 上，LoRA 将训练时 VRAM 从多少降到多少？当 r=4 且只适配 query/value 投影矩阵时，checkpoint 大小约缩小多少倍？",
+      "query_en": null,
+      "paper_id": "LoRA",
+      "question_type": "fact",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "LoRA",
+          "section": "4.2 APPLYING LORA TO TRANSFORMER"
+        },
+        {
+          "source": "LoRA",
+          "section": "4.2 APPLYING LORA TO TRANSFORMER"
+        },
+        {
+          "source": "LoRA",
+          "section": "ABSTRACT"
+        },
+        {
+          "source": "LoRA",
+          "section": "Method"
+        },
+        {
+          "source": "LoRA",
+          "section": "REFERENCES"
+        }
+      ]
+    },
+    {
+      "question_id": "4",
+      "question": "LoRA 中低秩更新矩阵 A 和 B 是如何初始化的，这样初始化有什么效果？",
+      "query_en": null,
+      "paper_id": "LoRA",
+      "question_type": "method",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "LoRA",
+          "section": "REFERENCES"
+        },
+        {
+          "source": "LoRA",
+          "section": "4.1 LOW-RANK-PARAMETRIZED UPDATE MATRICES"
+        },
+        {
+          "source": "LoRA",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "LoRA",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "LoRA",
+          "section": "4.1 LOW-RANK-PARAMETRIZED UPDATE MATRICES"
+        }
+      ]
+    },
+    {
+      "question_id": "5",
+      "question": "ReAct 的核心思想是什么？它如何在语言模型中协同推理与行动？",
+      "query_en": null,
+      "paper_id": "ReAct",
+      "question_type": "method",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "ReAct",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "ReAct",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "ReAct",
+          "section": "4 DECISION MAKING TASKS"
+        },
+        {
+          "source": "ReAct",
+          "section": "2 REAC T: SYNERGIZING REASONING + ACTING"
+        },
+        {
+          "source": "ReAct",
+          "section": "ABSTRACT"
+        }
+      ]
+    },
+    {
+      "question_id": "6",
+      "question": "在 HotpotQA 和 Fever 这类知识密集型任务上，ReAct 与 CoT 的表现有何差异，它们各自的主要失败模式是什么？",
+      "query_en": null,
+      "paper_id": "ReAct",
+      "question_type": "comparison",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.2 METHODS"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.2 METHODS"
+        }
+      ]
+    },
+    {
+      "question_id": "7",
+      "question": "论文提出的门控多尺度自注意力机制中，多头注意力的各个头是如何在不同时间尺度上处理输入的？此外，模型被允许在每个时间步做出什么特殊选择来忽略过去信息？",
+      "query_en": null,
+      "paper_id": "1805.04833",
+      "question_type": "method",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "1805.04833",
+          "section": "Modeling Unbounded Context with Gated Multi-Scale Self-attention"
+        },
+        {
+          "source": "1805.04833",
+          "section": "Modeling Unbounded Context with Gated Multi-Scale Self-attention"
+        },
+        {
+          "source": "2401.00423",
+          "section": "Abstract"
+        },
+        {
+          "source": "2609.17888",
+          "section": "References"
+        },
+        {
+          "source": "2401.00908",
+          "section": "3.2 Disentangled Spatial Attention"
+        }
+      ]
+    },
+    {
+      "question_id": "8",
+      "question": "论文在分析生成质量时，指出所提出的融合模型存在哪些具体的局限性？",
+      "query_en": null,
+      "paper_id": "1805.04833",
+      "question_type": "limitation",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "1805.04833",
+          "section": "Generation Quality"
+        },
+        {
+          "source": "2609.18878",
+          "section": "Abstract"
+        },
+        {
+          "source": "2609.18560",
+          "section": "39 specialist pairs (13 conditions × 3 seeds), Qwen2.5-0.5B"
+        },
+        {
+          "source": "2609.18560",
+          "section": "3  test all six skills"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "References"
+        }
+      ]
+    },
+    {
+      "question_id": "9",
+      "question": "论文在语言建模实验中使用了哪些基准数据集，并报告了所提方法在这些数据集上的总体表现？",
+      "query_en": null,
+      "paper_id": "1906.05506",
+      "question_type": "experiment",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": false,
+      "paper_hit": false,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "Chain_of_Thought",
+          "section": "100 Coin Flip"
+        },
+        {
+          "source": "GPT2",
+          "section": "3.1. Language Modeling"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.1 Experimental Setup"
+        },
+        {
+          "source": "2312.16144",
+          "section": "4 EVALUATION"
+        },
+        {
+          "source": "2312.16144",
+          "section": "4 EVALUATION"
+        }
+      ]
+    },
+    {
+      "question_id": "10",
+      "question": "论文使用什么机制将字符 n-gram 嵌入编码成词嵌入，其权重计算方式是什么？",
+      "query_en": null,
+      "paper_id": "1906.05506",
+      "question_type": "method",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": false,
+      "paper_hit": false,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "BERT",
+          "section": "References"
+        },
+        {
+          "source": "2609.18612",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "1701.03578",
+          "section": "General-Style to Personal-Style Message-Reply Prediction"
+        },
+        {
+          "source": "GPT2",
+          "section": "References"
+        },
+        {
+          "source": "2609.18612",
+          "section": "4.1 Approach"
+        }
+      ]
+    },
+    {
+      "question_id": "11",
+      "question": "论文在概念识别（CR）任务中为什么选择BERT，以及微调后达到的F1分数是多少？",
+      "query_en": null,
+      "paper_id": "2003.11687",
+      "question_type": "method",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "2003.11687",
+          "section": "CONCEPT RECOGNITION ::: Fine tuning with BERT"
+        },
+        {
+          "source": "BERT",
+          "section": "5.3 Feature-based Approach with BERT"
+        },
+        {
+          "source": "BERT",
+          "section": "5.3 Feature-based Approach with BERT"
+        },
+        {
+          "source": "BERT",
+          "section": "Abstract"
+        },
+        {
+          "source": "BERT",
+          "section": "4.2 SQuAD v1.1"
+        }
+      ]
+    },
+    {
+      "question_id": "12",
+      "question": "论文在关系抽取方面有哪些尚未完成、留作未来工作的局限？",
+      "query_en": null,
+      "paper_id": "2003.11687",
+      "question_type": "limitation",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": false,
+      "paper_hit": false,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "2609.16777",
+          "section": "7 Limitations & Responsible Release"
+        },
+        {
+          "source": "2609.19101",
+          "section": "8 Limitations"
+        },
+        {
+          "source": "1909.00871",
+          "section": "Conclusion"
+        },
+        {
+          "source": "2401.00165",
+          "section": "6.3 Detailed Analysis"
+        },
+        {
+          "source": "2609.16800",
+          "section": "67.5 HotpotQA (QA)"
+        }
+      ]
+    },
+    {
+      "question_id": "13",
+      "question": "与FEVER数据集相比，本文构建的语料库在claim validation问题设定上为什么更困难？claim的verdict与证据stance之间的关系如何？",
+      "query_en": null,
+      "paper_id": "1911.01214",
+      "question_type": "comparison",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "1911.01214",
+          "section": "Corpus analysis ::: Discussion"
+        },
+        {
+          "source": "1911.01214",
+          "section": "Conclusion"
+        },
+        {
+          "source": "1911.01214",
+          "section": "Introduction"
+        },
+        {
+          "source": "1911.01214",
+          "section": "Experiments and error analysis ::: Claim validation ::: Error analysis"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "3.4 Fact Veriﬁcation"
+        }
+      ]
+    },
+    {
+      "question_id": "14",
+      "question": "论文在claim validation任务上考虑了哪些模型，最佳模型是哪一个，与FEVER上的表现相比如何？",
+      "query_en": null,
+      "paper_id": "1911.01214",
+      "question_type": "experiment",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "1911.01214",
+          "section": "Experiments and error analysis ::: Claim validation ::: Experiments"
+        },
+        {
+          "source": "1911.01214",
+          "section": "Corpus analysis ::: Discussion"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "3.4 Fact Veriﬁcation"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "References"
+        },
+        {
+          "source": "1911.01214",
+          "section": "Experiments and error analysis ::: Claim validation ::: Error analysis"
+        }
+      ]
+    },
+    {
+      "question_id": "15",
+      "question": "在语言建模实验中，用 Interview 训练的模型在 DailyDialog 和 CALLHOME 上的跨域表现如何？",
+      "query_en": null,
+      "paper_id": "2004.03090",
+      "question_type": "comparison",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "2004.03090",
+          "section": "Interview Dataset ::: Comparison with Other Datasets"
+        },
+        {
+          "source": "1701.03578",
+          "section": "General-Style to Personal-Style Message-Reply Prediction"
+        },
+        {
+          "source": "2312.16144",
+          "section": "5 RESULTS"
+        },
+        {
+          "source": "2609.19113",
+          "section": "Abstract"
+        },
+        {
+          "source": "2609.18905",
+          "section": "6.3 Cross-Model Generalization"
+        }
+      ]
+    },
+    {
+      "question_id": "16",
+      "question": "在角色建模任务中，作者如何对说话者角色进行条件化？",
+      "query_en": null,
+      "paper_id": "2004.03090",
+      "question_type": "method",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "2004.03090",
+          "section": "Tasks and Experiments ::: Task 1: Role Modeling"
+        },
+        {
+          "source": "2004.03090",
+          "section": "Tasks and Experiments ::: Task 1: Role Modeling ::: Conditioning on Speakers"
+        },
+        {
+          "source": "2401.00609",
+          "section": "4.8 Implicit – Using Dialogues/Monologues"
+        },
+        {
+          "source": "2401.00609",
+          "section": "3 Personality Datasets"
+        },
+        {
+          "source": "2004.03090",
+          "section": "Tasks and Experiments ::: Task 1: Role Modeling ::: Performance"
+        }
+      ]
+    },
+    {
+      "question_id": "17",
+      "question": "在 OGTD v1.0 上，作者认为性能最好的模型是哪一个？它的 F1-macro 是多少？",
+      "query_en": null,
+      "paper_id": "2003.07459",
+      "question_type": "experiment",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "2003.07459",
+          "section": "Methods ::: Discussion"
+        },
+        {
+          "source": "2609.18595",
+          "section": "1.00 F1"
+        },
+        {
+          "source": "2312.16054",
+          "section": "4 Experiment"
+        },
+        {
+          "source": "2609.16912",
+          "section": "3 Experiments"
+        },
+        {
+          "source": "2003.07459",
+          "section": "Conclusion ::: Ongoing - OGTD v2.0 and OffensEval 2020"
+        }
+      ]
+    },
+    {
+      "question_id": "18",
+      "question": "在标注 OGTD v1.0 时，如果标注者之间出现分歧，作者如何确定最终标签？",
+      "query_en": null,
+      "paper_id": "2003.07459",
+      "question_type": "method",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "2609.17081",
+          "section": "3 Benchmark Construction"
+        },
+        {
+          "source": "2609.18204",
+          "section": "4.4 Measures and identification"
+        },
+        {
+          "source": "2003.07459",
+          "section": "Conclusion ::: Ongoing - OGTD v2.0 and OffensEval 2020"
+        },
+        {
+          "source": "2401.00532",
+          "section": "2.2 IGNORING BIASES LEADS TO ILL-CONDITIONED LEARNING PROBLEMS"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "5.2 Experiment 2"
+        }
+      ]
+    },
+    {
+      "question_id": "19",
+      "question": "在 SMM4H 2017 Task 1 中，该团队如何处理 ADR 类别严重不平衡的问题，最终选用的多数类与少数类比例是多少？",
+      "query_en": null,
+      "paper_id": "1805.04558",
+      "question_type": "method",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "1805.04558",
+          "section": "Conclusion"
+        },
+        {
+          "source": "1805.04558",
+          "section": "Introduction"
+        },
+        {
+          "source": "1805.04558",
+          "section": "Machine Learning Framework"
+        },
+        {
+          "source": "1805.04558",
+          "section": "Results and Discussion"
+        },
+        {
+          "source": "1805.04558",
+          "section": "Machine Learning Framework"
+        }
+      ]
+    },
+    {
+      "question_id": "20",
+      "question": "该论文在 Task 2 中使用 class weights 处理类别不平衡，这一策略在测试集上的效果如何？",
+      "query_en": null,
+      "paper_id": "1805.04558",
+      "question_type": "experiment",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "1805.04558",
+          "section": "Machine Learning Framework"
+        },
+        {
+          "source": "1805.04558",
+          "section": "Results and Discussion"
+        },
+        {
+          "source": "2401.00383",
+          "section": "References"
+        },
+        {
+          "source": "2609.18555",
+          "section": "6 Experimental Setup"
+        },
+        {
+          "source": "2401.00902",
+          "section": "Abstract"
+        }
+      ]
+    },
+    {
+      "question_id": "21",
+      "question": "这篇论文使用哪两种神经网络架构来预测 TED 演讲评分，它们的实验性能如何？",
+      "query_en": null,
+      "paper_id": "1905.08392",
+      "question_type": "experiment",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "1905.08392",
+          "section": "Introduction"
+        },
+        {
+          "source": "1702.02584",
+          "section": "Discussion"
+        },
+        {
+          "source": "2401.00383",
+          "section": "References"
+        },
+        {
+          "source": "1905.08392",
+          "section": "Predicting the TED Talk Performance"
+        },
+        {
+          "source": "2609.17043",
+          "section": "References"
+        }
+      ]
+    },
+    {
+      "question_id": "22",
+      "question": "为降低数据偏差，论文在方法上采取了哪些措施？",
+      "query_en": null,
+      "paper_id": "1905.08392",
+      "question_type": "method",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "2401.00383",
+          "section": "References"
+        },
+        {
+          "source": "1905.08392",
+          "section": "Introduction"
+        },
+        {
+          "source": "2401.00902",
+          "section": "Abstract"
+        },
+        {
+          "source": "2609.18587",
+          "section": "7 CONCLUSION"
+        },
+        {
+          "source": "2401.00902",
+          "section": "Abstract"
+        }
+      ]
+    },
+    {
+      "question_id": "23",
+      "question": "FCC 架构中视觉子网络与语言子网络最终输出的特征维度分别是多少，融合子网络又如何用这两个特征进行二分类？",
+      "query_en": null,
+      "paper_id": "1909.09070",
+      "question_type": "method",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "1909.09070",
+          "section": "Figure-Caption Correspondence ::: FCC Architecture and Model"
+        },
+        {
+          "source": "1909.09070",
+          "section": "Qualitative Analysis"
+        },
+        {
+          "source": "1909.09070",
+          "section": "Qualitative Analysis"
+        },
+        {
+          "source": "1909.09070",
+          "section": "Results and Discussion ::: Figure-Caption Correspondence"
+        },
+        {
+          "source": "1909.09070",
+          "section": "Results and Discussion ::: Figure-Caption Correspondence"
+        }
+      ]
+    },
+    {
+      "question_id": "24",
+      "question": "在 FCC 任务中，Vecsigrafo 语义嵌入与 HolE 相比效果如何，论文如何解释 HolE 的表现较差？",
+      "query_en": null,
+      "paper_id": "1909.09070",
+      "question_type": "comparison",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "1909.09070",
+          "section": "Results and Discussion ::: Figure-Caption Correspondence"
+        },
+        {
+          "source": "1909.09070",
+          "section": "Results and Discussion ::: Figure-Caption Correspondence"
+        },
+        {
+          "source": "2401.00582",
+          "section": "4 Conclusion"
+        },
+        {
+          "source": "1909.09070",
+          "section": "Figure-Caption Correspondence ::: Semantic Embeddings"
+        },
+        {
+          "source": "2401.00503",
+          "section": "7 Conclusion"
+        }
+      ]
+    },
+    {
+      "question_id": "25",
+      "question": "论文在综述现有定义后，将网络欺凌判定归纳为哪五个关键标准？",
+      "query_en": null,
+      "paper_id": "2004.01820",
+      "question_type": "fact",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "2004.01820",
+          "section": "Curating a Comprehensive Cyberbullying Dataset"
+        },
+        {
+          "source": "2004.01820",
+          "section": "Conclusion"
+        },
+        {
+          "source": "2004.01820",
+          "section": "Introduction"
+        },
+        {
+          "source": "2609.19101",
+          "section": "2.1 Defining Reward Hacking"
+        },
+        {
+          "source": "2609.18782",
+          "section": "2 Model and algorithm"
+        }
+      ]
+    },
+    {
+      "question_id": "26",
+      "question": "论文的实验表明，标准词袋/文本特征在攻击性语言检测和其他网络欺凌标准检测上的表现有何差异？",
+      "query_en": null,
+      "paper_id": "2004.01820",
+      "question_type": "experiment",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "2004.01820",
+          "section": "Feature Engineering"
+        },
+        {
+          "source": "2004.01820",
+          "section": "Experimental Evaluation"
+        },
+        {
+          "source": "2004.01820",
+          "section": "Introduction"
+        },
+        {
+          "source": "2004.01820",
+          "section": "Conclusion"
+        },
+        {
+          "source": "2004.01820",
+          "section": "Experimental Evaluation"
+        }
+      ]
+    },
+    {
+      "question_id": "27",
+      "question": "论文提出的 PICONET 数据集包含哪些标签类别，它是如何构建的？",
+      "query_en": null,
+      "paper_id": "1906.11085",
+      "question_type": "fact",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "1906.11085",
+          "section": "Discussion and Conclusion"
+        },
+        {
+          "source": "1906.11085",
+          "section": "Datasets"
+        },
+        {
+          "source": "2609.16557",
+          "section": "4.1 Data Preparation"
+        },
+        {
+          "source": "2401.00490",
+          "section": "5.2 Datasets"
+        },
+        {
+          "source": "2401.00403",
+          "section": "6.1 Datasets"
+        }
+      ]
+    },
+    {
+      "question_id": "28",
+      "question": "在 PIO 分类实验中，使用 BioBERT 嵌入相比通用 BERT 嵌入的 ROC_AUC 分数有何变化？",
+      "query_en": null,
+      "paper_id": "1906.11085",
+      "question_type": "comparison",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "1906.11085",
+          "section": "Performance Comparison"
+        },
+        {
+          "source": "1906.11085",
+          "section": "Discussion and Conclusion"
+        },
+        {
+          "source": "2401.00902",
+          "section": "Abstract"
+        },
+        {
+          "source": "2401.00902",
+          "section": "Abstract"
+        },
+        {
+          "source": "2401.00902",
+          "section": "Abstract"
+        }
+      ]
+    },
+    {
+      "question_id": "29",
+      "question": "在 TED 数据上，CNN 模型相比传统模型帮助提升了哪些性能指标？",
+      "query_en": null,
+      "paper_id": "1702.02584",
+      "question_type": "experiment",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "1702.02584",
+          "section": "Discussion"
+        },
+        {
+          "source": "2401.00582",
+          "section": "4 Conclusion"
+        },
+        {
+          "source": "1702.02584",
+          "section": "Experiments"
+        },
+        {
+          "source": "2401.00423",
+          "section": "20 Autoformer"
+        },
+        {
+          "source": "GPT2",
+          "section": "3.2. Children’s Book Test"
+        }
+      ]
+    },
+    {
+      "question_id": "30",
+      "question": "作者认为，本文构建的 TED Talk 语料与现有幽默识别语料相比有哪些优势？",
+      "query_en": null,
+      "paper_id": "1702.02584",
+      "question_type": "comparison",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "1702.02584",
+          "section": "Experiments"
+        },
+        {
+          "source": "1702.02584",
+          "section": "Discussion"
+        },
+        {
+          "source": "1702.02584",
+          "section": "Introduction"
+        },
+        {
+          "source": "1905.08392",
+          "section": "Predicting the TED Talk Performance"
+        },
+        {
+          "source": "2401.00403",
+          "section": "4 Y. Fan et al."
+        }
+      ]
+    },
+    {
+      "question_id": "31",
+      "question": "论文比较了哪三种从组织网站检测环境行动的方法，它们与专家人工分类的 Cohen’s κ 和原始一致率分别是多少？",
+      "query_en": null,
+      "paper_id": "2609.16627",
+      "question_type": "comparison",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "2609.16627",
+          "section": "3.3 Secondary Classification Validation"
+        },
+        {
+          "source": "2609.16627",
+          "section": "2.3.5 Human Validation and Method Selection"
+        },
+        {
+          "source": "2609.16627",
+          "section": "3.2 Environmental Action Classification Method Comparison and Validation"
+        },
+        {
+          "source": "2609.18905",
+          "section": "10.9 Structured Discourse Prediction Prompts"
+        },
+        {
+          "source": "2609.16627",
+          "section": "2.4 Secondary Classification and Contextual Variables"
+        }
+      ]
+    },
+    {
+      "question_id": "32",
+      "question": "论文在 4.5 节指出了哪些与网站可及性和爬取覆盖率相关的局限性？",
+      "query_en": null,
+      "paper_id": "2609.16627",
+      "question_type": "limitation",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "2609.16627",
+          "section": "4.5 Limitations"
+        },
+        {
+          "source": "2609.18204",
+          "section": "6.3 Limitations and future work"
+        },
+        {
+          "source": "2609.17043",
+          "section": "7 Conclusion"
+        },
+        {
+          "source": "2609.18861",
+          "section": "4.3 Results"
+        },
+        {
+          "source": "2312.17296",
+          "section": "References"
+        }
+      ]
+    },
+    {
+      "question_id": "33",
+      "question": "SEA-LION-v4.8 的两个模型（30B-A3B 和 120B-A12B）在 SEA-HELM 上的整体 SEA 分数相比各自的 Nemotron 3 基线提升了多少？逐语言的提升主要体现在哪些语言上？",
+      "query_en": null,
+      "paper_id": "2609.18310",
+      "question_type": "experiment",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "2609.18310",
+          "section": "6.1 Language Performance"
+        },
+        {
+          "source": "2609.18310",
+          "section": "Abstract"
+        },
+        {
+          "source": "2609.18310",
+          "section": "7 Conclusion"
+        },
+        {
+          "source": "2609.18310",
+          "section": "6.2 Task Performance"
+        },
+        {
+          "source": "2609.18310",
+          "section": "1 Introduction"
+        }
+      ]
+    },
+    {
+      "question_id": "34",
+      "question": "论文在讨论继续预训练的局限时，主要指出了哪两个问题？它们分别对哪些语言造成了什么影响？",
+      "query_en": null,
+      "paper_id": "2609.18310",
+      "question_type": "limitation",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "2609.18310",
+          "section": "7 Conclusion"
+        },
+        {
+          "source": "2609.18310",
+          "section": "3.2 Tokenizer"
+        },
+        {
+          "source": "2609.18310",
+          "section": "3.4 Limitations of Continued Pre-training"
+        },
+        {
+          "source": "2609.18310",
+          "section": "3 Continual Pre-training 5"
+        },
+        {
+          "source": "BERT",
+          "section": "1 Introduction"
+        }
+      ]
+    },
+    {
+      "question_id": "35",
+      "question": "ASPIRE 的在线推测调度器是如何为每个请求单独决定目标草稿长度（target draft length）的？其中接受率 𝛼𝑖 是怎么估计和更新的？",
+      "query_en": null,
+      "paper_id": "2609.17943",
+      "question_type": "method",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "2609.17943",
+          "section": "4.2 Speculation Scheduler"
+        },
+        {
+          "source": "2609.17943",
+          "section": "4.1 Unified Mixed Forward"
+        },
+        {
+          "source": "2609.17943",
+          "section": "4.2 Speculation Scheduler"
+        },
+        {
+          "source": "2609.17943",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "2609.17943",
+          "section": "References"
+        }
+      ]
+    },
+    {
+      "question_id": "36",
+      "question": "与 Vegas、SparseSpec 这类同样利用验证阶段信息做稀疏上下文选择的自推测解码方法相比，ASPIRE 在稀疏草稿上下文的刷新时机上有何不同？这会带来什么问题？",
+      "query_en": null,
+      "paper_id": "2609.17943",
+      "question_type": "comparison",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "2609.17943",
+          "section": "6 Related Work"
+        },
+        {
+          "source": "2609.17943",
+          "section": "5.2 Overall Throughput Results"
+        },
+        {
+          "source": "2609.17943",
+          "section": "References"
+        },
+        {
+          "source": "2609.17943",
+          "section": "Abstract"
+        },
+        {
+          "source": "2609.17943",
+          "section": "5.3 In-depth Analysis"
+        }
+      ]
+    },
+    {
+      "question_id": "37",
+      "question": "在 DocLLM 的消融实验中，哪种跨模态注意力交互组合在 NTP 准确率上表现最好？作者最终为正式实验选择了怎样的 λ 设置？",
+      "query_en": null,
+      "paper_id": "2401.00908",
+      "question_type": "method",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "2401.00908",
+          "section": "5 Ablation Studies"
+        },
+        {
+          "source": "2401.00908",
+          "section": "5 Ablation Studies"
+        },
+        {
+          "source": "2609.17764",
+          "section": "0.8 NevIR"
+        },
+        {
+          "source": "2609.17764",
+          "section": "5.1 Calibration Across Content Types"
+        },
+        {
+          "source": "2609.17764",
+          "section": "5.1 Calibration Across Content Types"
+        }
+      ]
+    },
+    {
+      "question_id": "38",
+      "question": "在 STDD 设置下，DocLLM 的文档分类表现存在什么局限？作者认为可能原因是什么？",
+      "query_en": null,
+      "paper_id": "2401.00908",
+      "question_type": "limitation",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "2401.00908",
+          "section": "4.3 Downstream Evaluation"
+        },
+        {
+          "source": "2401.00908",
+          "section": "4.3 Downstream Evaluation"
+        },
+        {
+          "source": "2401.00908",
+          "section": "4.3 Downstream Evaluation"
+        },
+        {
+          "source": "2401.00908",
+          "section": "6 Discussion and Findings"
+        },
+        {
+          "source": "2401.00908",
+          "section": "7 Conclusions"
+        }
+      ]
+    },
+    {
+      "question_id": "39",
+      "question": "在提出的两阶段框架中，数据支持权重 w(x) 与物理有效性阈值 τq 分别控制什么？",
+      "query_en": null,
+      "paper_id": "2609.18863",
+      "question_type": "method",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "2609.18863",
+          "section": "3.4  roup- V conformal uncertainty quantification and physics-domain abstention"
+        },
+        {
+          "source": "2609.17686",
+          "section": "5 A Concrete Proposal"
+        },
+        {
+          "source": "2609.18863",
+          "section": "3.1 Overall physics-based modeling framework"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "3.2.1 A 2D case"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "2.3 Relative position embedding"
+        }
+      ]
+    },
+    {
+      "question_id": "40",
+      "question": "论文如何描述 +80 mm 与 focus-zero 留出评估的验证性质和局限？",
+      "query_en": null,
+      "paper_id": "2609.18863",
+      "question_type": "limitation",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "2609.18863",
+          "section": "4.2  eliability under withheld-defocus regime shift"
+        },
+        {
+          "source": "2609.18863",
+          "section": "4.2  eliability under withheld-defocus regime shift"
+        },
+        {
+          "source": "2609.18863",
+          "section": "4.1  rouped generalization performance"
+        },
+        {
+          "source": "2609.18863",
+          "section": "4.5  roup- V conformal uncertainty and physics-validity abstention"
+        },
+        {
+          "source": "2609.18863",
+          "section": "3.5 Validation protocol and statistical analysis"
+        }
+      ]
+    },
+    {
+      "question_id": "41",
+      "question": "这篇论文把深度 V-learning 的更新误差分解成了哪六个残差项？在 L_s 集中性（concentrability）假设下，这些残差的 L_p 范数是如何控制期望 L1 策略损失的？",
+      "query_en": null,
+      "paper_id": "2609.18782",
+      "question_type": "method",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": false,
+      "paper_hit": false,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "2609.17888",
+          "section": "3.1 Learning the State Space Models"
+        },
+        {
+          "source": "2609.18560",
+          "section": "6 generations × 3 lineages: obligate merging collapses,"
+        },
+        {
+          "source": "2609.18535",
+          "section": "3.3 Identifiability for SEMs over the Observed Variables"
+        },
+        {
+          "source": "2401.00490",
+          "section": "2.2 Previous Distribution Matching Methods for Multiclass Quantification"
+        },
+        {
+          "source": "2609.19107",
+          "section": "1 nj"
+        }
+      ]
+    },
+    {
+      "question_id": "42",
+      "question": "论文用哪个真实数据集、通过什么方式独立验证其目标函数，以及结果如何？",
+      "query_en": null,
+      "paper_id": "2609.18545",
+      "question_type": "experiment",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "2609.18545",
+          "section": "Abstract"
+        },
+        {
+          "source": "2609.18545",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "2609.19077",
+          "section": "4. Dealing with PP-Hardness"
+        },
+        {
+          "source": "2609.19135",
+          "section": "6 Gridworld experiments"
+        },
+        {
+          "source": "2609.18610",
+          "section": "1 Introduction"
+        }
+      ]
+    },
+    {
+      "question_id": "43",
+      "question": "论文中基于聚类的概念结构化元学习方法是依据什么原则，并用哪两个新度量来评估聚类解的质量？",
+      "query_en": null,
+      "paper_id": "2401.00532",
+      "question_type": "method",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "2401.00532",
+          "section": "3.3 CONCEPTS STRUCTURING BASED ON CLUSTERING"
+        },
+        {
+          "source": "2401.00532",
+          "section": "3 STRUCTURING THE CONCEPTS TO LEARN"
+        },
+        {
+          "source": "2401.00532",
+          "section": "3.4 CONCEPTS STRUCTURING BASED ON TRANSFER AFFINITY"
+        },
+        {
+          "source": "2401.00532",
+          "section": "3.2.1 . . . BUT THE SIZE OF THE SEARCH SPACE IS IMPRACTICAL"
+        },
+        {
+          "source": "2609.18445",
+          "section": "6 Conclusion"
+        }
+      ]
+    },
+    {
+      "question_id": "44",
+      "question": "在 MNIST 数据集实验中，作者如何比较经典扁平学习与由概念层级结构引导的学习，并用什么训练样本数量设置来评估性能？",
+      "query_en": null,
+      "paper_id": "2401.00532",
+      "question_type": "experiment",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "2401.00532",
+          "section": "3.1 CONCEPTS DEPENDENCY IN REAL-WORLD APPLICATIONS"
+        },
+        {
+          "source": "2401.00532",
+          "section": "3.1 CONCEPTS DEPENDENCY IN REAL-WORLD APPLICATIONS"
+        },
+        {
+          "source": "2401.00611",
+          "section": "References"
+        },
+        {
+          "source": "2401.00403",
+          "section": "6.4 Experiment setting"
+        },
+        {
+          "source": "2401.00532",
+          "section": "3.1 CONCEPTS DEPENDENCY IN REAL-WORLD APPLICATIONS"
+        }
+      ]
+    },
+    {
+      "question_id": "45",
+      "question": "这篇论文如何用统计力学解释双下降现象？",
+      "query_en": null,
+      "paper_id": "2609.19076",
+      "question_type": "method",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "2609.19076",
+          "section": "Abstract"
+        },
+        {
+          "source": "2609.19076",
+          "section": "3 Conclusion"
+        },
+        {
+          "source": "2609.19076",
+          "section": "2.1 Microstates and the fundamental postulate"
+        },
+        {
+          "source": "2609.19076",
+          "section": "2.1 Microstates and the fundamental postulate"
+        },
+        {
+          "source": "2609.19076",
+          "section": "Abstract"
+        }
+      ]
+    },
+    {
+      "question_id": "46",
+      "question": "在论文的多项式拟合例子中，d = 20 与 d = 1000 都经过所有训练数据，但二者的拟合行为有什么差异？",
+      "query_en": null,
+      "paper_id": "2609.19076",
+      "question_type": "comparison",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "2609.19076",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "2609.17346",
+          "section": "5.2 Multiple retrieved documents"
+        },
+        {
+          "source": "2401.00448",
+          "section": "2023. Accessed 2023-10-02."
+        },
+        {
+          "source": "2609.19113",
+          "section": "6.4 Decomposing losses: answer, discrimination, and prediction"
+        },
+        {
+          "source": "2609.18908",
+          "section": "3. The Law section"
+        }
+      ]
+    },
+    {
+      "question_id": "47",
+      "question": "与之前基于欧氏度量的分析相比，这篇论文在所需人类数据的增长量级上给出了怎样不同的结论？",
+      "query_en": null,
+      "paper_id": "2609.18878",
+      "question_type": "comparison",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "2609.18878",
+          "section": "Abstract"
+        },
+        {
+          "source": "2609.18878",
+          "section": "2 p"
+        },
+        {
+          "source": "2609.18878",
+          "section": "0 as the set of nonnegative real numbers, N as the set of natural"
+        },
+        {
+          "source": "2609.18878",
+          "section": "0 as the set of nonnegative real numbers, N as the set of natural"
+        },
+        {
+          "source": "2609.18560",
+          "section": "6 generations × 3 lineages: obligate merging collapses,"
+        }
+      ]
+    },
+    {
+      "question_id": "48",
+      "question": "EvoFlows 的时钟归一化（clock normalisation）存在什么关键局限，为什么难以精确控制编辑预算？",
+      "query_en": null,
+      "paper_id": "2609.18745",
+      "question_type": "limitation",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "2609.18745",
+          "section": "5 Discussion and Limitations"
+        },
+        {
+          "source": "2609.18745",
+          "section": "4 Results"
+        },
+        {
+          "source": "2609.18745",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "2609.18745",
+          "section": "5 Discussion and Limitations"
+        },
+        {
+          "source": "2609.18745",
+          "section": "1 Introduction"
+        }
+      ]
+    },
+    {
+      "question_id": "49",
+      "question": "作者通过扫描发现，时钟归一化速率取大约多少时可以复现 EvoFlows 论文中报告的 0.43 编辑比例？",
+      "query_en": null,
+      "paper_id": "2609.18745",
+      "question_type": "experiment",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "2609.18745",
+          "section": "References"
+        },
+        {
+          "source": "2609.18745",
+          "section": "4 Results"
+        },
+        {
+          "source": "2609.18745",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "2609.18745",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "2609.18745",
+          "section": "1 Introduction"
+        }
+      ]
+    },
+    {
+      "question_id": "50",
+      "question": "BMSFed 通过哪两方面来克服多模态联邦学习中的全局模态偏差？",
+      "query_en": null,
+      "paper_id": "2401.00403",
+      "question_type": "method",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "2401.00403",
+          "section": "4 Y. Fan et al."
+        },
+        {
+          "source": "2401.00403",
+          "section": "8 Y. Fan et al."
+        },
+        {
+          "source": "2401.00403",
+          "section": "4.3 Comparison with baselines"
+        },
+        {
+          "source": "2401.00403",
+          "section": "Abstract"
+        },
+        {
+          "source": "2401.00403",
+          "section": "4.3 Comparison with baselines"
+        }
+      ]
+    },
+    {
+      "question_id": "51",
+      "question": "论文为了分离优化目标与搜索过程两个轴，引入了哪两个新的 tokeniser？它们分别对应什么目标和搜索过程？",
+      "query_en": null,
+      "paper_id": "2609.19145",
+      "question_type": "method",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "2609.19145",
+          "section": "8 Conclusion"
+        },
+        {
+          "source": "2609.19145",
+          "section": "Abstract"
+        },
+        {
+          "source": "2609.19145",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "2609.19145",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "2609.19145",
+          "section": "4 Analysed Tokenisers: Old and New"
+        }
+      ]
+    },
+    {
+      "question_id": "52",
+      "question": "EVIGEN 相比最强基线，在预测性能上提升最明显的两项指标分别是什么？提升幅度各有多大？",
+      "query_en": null,
+      "paper_id": "2609.18852",
+      "question_type": "experiment",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "2609.18852",
+          "section": "5.1 Prediction Performance"
+        },
+        {
+          "source": "2609.18852",
+          "section": "References"
+        },
+        {
+          "source": "2609.18852",
+          "section": "5.4 Additional Baseline Comparisons"
+        },
+        {
+          "source": "2609.18852",
+          "section": "5.2 Rationale Faithfulness"
+        },
+        {
+          "source": "2609.18852",
+          "section": "6.1 Isolating evidence selection and scaffold"
+        }
+      ]
+    },
+    {
+      "question_id": "53",
+      "question": "论文将五个领先模型的胜率随集合大小下降拟合为什么函数形式？拟合出的单参数 p 是多少？",
+      "query_en": null,
+      "paper_id": "2609.19113",
+      "question_type": "fact",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "2609.17686",
+          "section": "5 A Concrete Proposal"
+        },
+        {
+          "source": "2609.19113",
+          "section": "6.1 Win rate follows plog2 N with a single reliability parameter"
+        },
+        {
+          "source": "2401.00529",
+          "section": "1. Connectivity Check:"
+        },
+        {
+          "source": "2401.00583",
+          "section": "References"
+        },
+        {
+          "source": "2401.00583",
+          "section": "2. Let ℓ(θ; (x, y)) = f(ux(θ); y) for any θ, z = (x, y). Then we have"
+        }
+      ]
+    },
+    {
+      "question_id": "54",
+      "question": "哪些模型在提问中使用了基于标题的词汇二分策略？这种策略在多大的集合规模以下完全缺失？它与信息量指标有何关联？",
+      "query_en": null,
+      "paper_id": "2609.19113",
+      "question_type": "method",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "2609.19113",
+          "section": "6.3 A scale-invariant deficit in opening questions"
+        },
+        {
+          "source": "2609.19113",
+          "section": "6.3 A scale-invariant deficit in opening questions"
+        },
+        {
+          "source": "2609.19113",
+          "section": "2 Task"
+        },
+        {
+          "source": "2609.19113",
+          "section": "2 Task"
+        },
+        {
+          "source": "2609.19113",
+          "section": "10 Future work"
+        }
+      ]
+    },
+    {
+      "question_id": "55",
+      "question": "论文把失败分为哪三类？在三名评判者下各类占比大约是多少？",
+      "query_en": null,
+      "paper_id": "2609.19113",
+      "question_type": "experiment",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "2609.19113",
+          "section": "6.4 Decomposing losses: answer, discrimination, and prediction"
+        },
+        {
+          "source": "2609.19113",
+          "section": "6.4 Decomposing losses: answer, discrimination, and prediction"
+        },
+        {
+          "source": "2609.19113",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "2609.19113",
+          "section": "Abstract"
+        },
+        {
+          "source": "2609.19113",
+          "section": "7 Communication failure as the dominant failure mode"
+        }
+      ]
+    },
+    {
+      "question_id": "56",
+      "question": "为什么论文认为 Opus 5 不应被纳入 §6.1 的复利拟合，它的信息量赤字有多大？",
+      "query_en": null,
+      "paper_id": "2609.19113",
+      "question_type": "limitation",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "2609.19113",
+          "section": "6.2 Information per question predicts the ordering"
+        },
+        {
+          "source": "2609.19113",
+          "section": "6.3 A scale-invariant deficit in opening questions"
+        },
+        {
+          "source": "2609.19113",
+          "section": "6.2 Information per question predicts the ordering"
+        },
+        {
+          "source": "2609.19113",
+          "section": "6.3 A scale-invariant deficit in opening questions"
+        },
+        {
+          "source": "2609.19113",
+          "section": "6.6 Reasoning expenditure does not track performance"
+        }
+      ]
+    },
+    {
+      "question_id": "57",
+      "question": "论文如何回应对其 LLM 评判者高一致性的质疑？它承认缺少什么来支撑更强的结论？",
+      "query_en": null,
+      "paper_id": "2609.19113",
+      "question_type": "limitation",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": false,
+      "paper_hit": false,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "GraphRAG",
+          "section": "3.3 Criteria for Evaluating Global Sensemaking"
+        },
+        {
+          "source": "2609.17043",
+          "section": "2 Related Work"
+        },
+        {
+          "source": "2609.16627",
+          "section": "4 Discussion"
+        },
+        {
+          "source": "2609.18852",
+          "section": "3.3 Rationale Generation Layer"
+        },
+        {
+          "source": "2609.18852",
+          "section": "4.3 Evaluation"
+        }
+      ]
+    },
+    {
+      "question_id": "58",
+      "question": "论文报告了哪些由提供商内容过滤导致的工程问题？受影响的模型和文档分别是什么？",
+      "query_en": null,
+      "paper_id": "2609.19113",
+      "question_type": "comparison",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "2609.19113",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "2609.19113",
+          "section": "9 Limitations"
+        },
+        {
+          "source": "2609.19113",
+          "section": "8 Relation to published benchmarks"
+        },
+        {
+          "source": "2609.19134",
+          "section": "References"
+        },
+        {
+          "source": "2401.00383",
+          "section": "1 Introduction"
+        }
+      ]
+    },
+    {
+      "question_id": "59",
+      "question": "论文是如何构建用于评估嵌入空间的领域特定语义相似度 ground truth 的？（提示：数据来源与加权方式）",
+      "query_en": null,
+      "paper_id": "2401.02979",
+      "question_type": "method",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "2609.19101",
+          "section": "2.2 Monitoring Procedure"
+        },
+        {
+          "source": "2401.02979",
+          "section": "4.3 The Effect of Hubness"
+        },
+        {
+          "source": "2401.02979",
+          "section": "4.1 Similarity Structure Correspondence"
+        },
+        {
+          "source": "2401.02979",
+          "section": "3.2 Embeddings and Similarities"
+        },
+        {
+          "source": "2401.02979",
+          "section": "ABSTRACT"
+        }
+      ]
+    },
+    {
+      "question_id": "60",
+      "question": "在加入语境提示（context prompts）后，各个嵌入模型的相似度结构表现有何差异？",
+      "query_en": null,
+      "paper_id": "2401.02979",
+      "question_type": "experiment",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "2401.02979",
+          "section": "4.4 The Effect of Context"
+        },
+        {
+          "source": "2401.02979",
+          "section": "4.1 Similarity Structure Correspondence"
+        },
+        {
+          "source": "2609.17888",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "2609.19113",
+          "section": "9 Limitations"
+        },
+        {
+          "source": "2401.00582",
+          "section": "3 Results"
+        }
+      ]
+    },
+    {
+      "question_id": "61",
+      "question": "论文所定义的 PEC（Predicting Evoked Emotions in Conversations）任务，其输入和预测目标分别是什么？",
+      "query_en": null,
+      "paper_id": "2401.00383",
+      "question_type": "fact",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "2401.00383",
+          "section": "Abstract"
+        },
+        {
+          "source": "2401.00383",
+          "section": "7 Conclusions"
+        },
+        {
+          "source": "2401.00383",
+          "section": "Abstract"
+        },
+        {
+          "source": "2401.00383",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "2401.00383",
+          "section": "4 Modeling Dimensions"
+        }
+      ]
+    },
+    {
+      "question_id": "62",
+      "question": "在匹配 LLM monitor 的假阳性率后，DoM 探针与 LLM monitor 的检测性能相比如何？探针能否跨环境泛化？",
+      "query_en": null,
+      "paper_id": "2609.19101",
+      "question_type": "comparison",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "2609.19101",
+          "section": "4.1 Probes are Effective Reward Hacking Monitors"
+        },
+        {
+          "source": "2609.19101",
+          "section": "5 Reward Hacking Across (Non-SWE) Environments"
+        },
+        {
+          "source": "2609.19101",
+          "section": "Abstract"
+        },
+        {
+          "source": "2609.19101",
+          "section": "Abstract"
+        },
+        {
+          "source": "2609.19101",
+          "section": "4.1 Probes are Effective Reward Hacking Monitors"
+        }
+      ]
+    },
+    {
+      "question_id": "63",
+      "question": "根据这篇论文，对于有 d 个参数和 h 个隐藏神经元的 DAG ReLU 网络，其 pathlifting Jacobian ∂θΦ 的秩等于什么？",
+      "query_en": null,
+      "paper_id": "2609.18682",
+      "question_type": "fact",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "2609.18682",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "2609.18682",
+          "section": "Abstract"
+        },
+        {
+          "source": "2609.18682",
+          "section": "Abstract"
+        },
+        {
+          "source": "2609.18682",
+          "section": "1.1 General notations and objects"
+        },
+        {
+          "source": "2609.18682",
+          "section": "1 Introduction"
+        }
+      ]
+    },
+    {
+      "question_id": "64",
+      "question": "实验结果表明，用 skeleton matrix 计算 pathlifting Jacobian 与用 PyTorch 自动微分逐元素计算相比，速度如何？",
+      "query_en": null,
+      "paper_id": "2609.18682",
+      "question_type": "experiment",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "2609.18682",
+          "section": "4 Experiment"
+        },
+        {
+          "source": "2609.18682",
+          "section": "1. Removing the edge e↔ Note Eu"
+        },
+        {
+          "source": "2609.18682",
+          "section": "4 Experiment"
+        },
+        {
+          "source": "2609.18682",
+          "section": "Abstract"
+        },
+        {
+          "source": "2609.18682",
+          "section": "1. Removing the edge e↔ Note Eu"
+        }
+      ]
+    },
+    {
+      "question_id": "65",
+      "question": "ReDIL-GNN 提出的 Resynthesis Adaptability Index (RAI) 由哪四个归一化分量组成？其几何平均形式如何体现保守性？",
+      "query_en": null,
+      "paper_id": "2609.18595",
+      "question_type": "method",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": true,
+      "paper_hit": true,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "2609.18595",
+          "section": "Abstract"
+        },
+        {
+          "source": "2609.18595",
+          "section": "Abstract"
+        },
+        {
+          "source": "2609.18595",
+          "section": "Abstract"
+        },
+        {
+          "source": "2609.18595",
+          "section": "Abstract"
+        },
+        {
+          "source": "2609.18595",
+          "section": "1.00 Recall@5"
+        }
+      ]
+    },
+    {
+      "question_id": "66",
+      "question": "论文提出的“learned atmospheric critic”是如何把判别器的输出转化为真实感分数（realism score）的？在理想最优分类器与真实分布可得的条件下，该分数等价于什么？",
+      "query_en": null,
+      "paper_id": "2609.18381",
+      "question_type": "method",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": true,
+      "top_sources": [
+        {
+          "source": "2609.18381",
+          "section": "Abstract"
+        },
+        {
+          "source": "2609.18381",
+          "section": "4 Unrealism score"
+        },
+        {
+          "source": "2609.18381",
+          "section": "Abstract"
+        },
+        {
+          "source": "2609.18381",
+          "section": "4 Conclusion"
+        },
+        {
+          "source": "2609.18381",
+          "section": "2 Method"
+        }
+      ]
+    },
+    {
+      "question_id": "67",
+      "question": "在与固定分布度量（global-mean WD、SCWD、zonal log-spectrum、MMD）的对比中，作者为什么断言“每个已有指标都有盲点”？具体有哪些失败表现？",
+      "query_en": null,
+      "paper_id": "2609.18381",
+      "question_type": "comparison",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": false,
+      "paper_hit": true,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "2609.18381",
+          "section": "2 Method"
+        },
+        {
+          "source": "2609.18381",
+          "section": "References"
+        },
+        {
+          "source": "2609.18381",
+          "section": "References"
+        },
+        {
+          "source": "2609.18282",
+          "section": "3.2 AI Preference–User Engagement Gap Diagnosis"
+        },
+        {
+          "source": "2401.00403",
+          "section": "4 Y. Fan et al."
+        }
+      ]
+    },
+    {
+      "question_id": "68",
+      "question": "这篇论文在实验评估范围上存在什么局限？作者打算如何弥补？",
+      "query_en": null,
+      "paper_id": "2609.18219",
+      "question_type": "limitation",
+      "split": "dev",
+      "source": "forward",
+      "evidence_hit": false,
+      "paper_hit": false,
+      "section_hit": false,
+      "top_sources": [
+        {
+          "source": "2609.18204",
+          "section": "6.3 Limitations and future work"
+        },
+        {
+          "source": "2609.16777",
+          "section": "7 Limitations & Responsible Release"
+        },
+        {
+          "source": "2609.19083",
+          "section": "6 Discussion and conclusion"
+        },
+        {
+          "source": "2609.19101",
+          "section": "8 Limitations"
+        },
+        {
+          "source": "2609.18381",
+          "section": "4 Conclusion"
+        }
+      ]
+    }
+  ]
+}

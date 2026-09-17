@@ -425,6 +425,9 @@ def freeze_snapshot():
     manifest=load_json(MANIFEST_PATH,[])
     reviewed=load_json(BASE/"evaluation"/"questions"/"v150_dev_reviewed.json",[])
     test_reviewed=load_json(BASE/"evaluation"/"questions"/"v150_test_reviewed.json",[])
+    sealed_path=BASE/"evaluation"/"results"/"v150_sealed_test.json"
+    forward_baseline=BASE/"evaluation"/"results"/"v150_forward42_baseline.json"
+    forward_candidate=BASE/"evaluation"/"results"/"v150_forward42_candidate.json"
     from evaluation.generate_questions import FORWARD_PROMPT
     meta={
         "version":"v150",
@@ -438,12 +441,19 @@ def freeze_snapshot():
             "test_reviewed":len(test_reviewed),
             "test_passed":sum(1 for x in test_reviewed if x.get("review_decision")=="通过"),
             "test_modified":sum(1 for x in test_reviewed if x.get("review_decision")=="修改"),
-            "test_evaluated":False,
+            "test_evaluated":sealed_path.exists(),
         },
         "manifest_sha256":sha256_file(MANIFEST_PATH),
         "index_sha256":sha256_file(V150_INDEX_PREFIX+".faiss") if os.path.exists(V150_INDEX_PREFIX+".faiss") else "",
         "index_meta_sha256":sha256_file(V150_INDEX_PREFIX+".json") if os.path.exists(V150_INDEX_PREFIX+".json") else "",
         "questions":{},
+        "test_results":{
+            "sealed_sha256":sha256_file(sealed_path) if sealed_path.exists() else "",
+            "forward_baseline_sha256":sha256_file(forward_baseline) if forward_baseline.exists() else "",
+            "forward_candidate_sha256":sha256_file(forward_candidate) if forward_candidate.exists() else "",
+        },
+        "production_switch":False,
+        "production_block_reason":"旧42题绝对门禁30/42低于预注册36/42",
         "counts":{
             "papers":len(manifest),
             "dev":sum(1 for x in manifest if x.get("split")=="dev"),
