@@ -71,6 +71,10 @@ def forward(paper_ids,per_paper,out_path,append=False):
     questions=[]
     if append and os.path.exists(out_path):
         questions=json.load(open(out_path,encoding="utf-8"))
+    def save_progress():
+        os.makedirs(os.path.dirname(out_path),exist_ok=True)
+        with open(out_path,"w",encoding="utf-8") as f:
+            json.dump(questions,f,ensure_ascii=False,indent=2)
     for paper_id in paper_ids:
         sections=load_sections(paper_id)
         if not sections:
@@ -94,13 +98,16 @@ def forward(paper_ids,per_paper,out_path,append=False):
             print(f"正向出题失败 {paper_id}：{e}")
             continue
         for item in items:
+            if not isinstance(item,dict):
+                continue
+            if not item.get("question") or not item.get("evidence_sentences"):
+                continue
             item["paper_id"]=paper_id
             item["source"]="forward"
             questions.append(item)
         print(f"{paper_id}: 生成 {len(items)} 题")
-    os.makedirs(os.path.dirname(out_path),exist_ok=True)
-    with open(out_path,"w",encoding="utf-8") as f:
-        json.dump(questions,f,ensure_ascii=False,indent=2)
+        save_progress()
+    save_progress()
     print(f"共 {len(questions)} 题 -> {out_path}")
 
 def reverse(chunks,out_path):

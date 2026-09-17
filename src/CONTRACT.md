@@ -405,6 +405,68 @@ service_version
 - 新能力默认关闭，生产行为保持旧候选 25、条件重排和原问题查询
 - 尚未完成：找到不依赖 ground truth 的可靠重排触发或融合策略，使统一 Service 达到 75%
 
+## 十三、v150 语料与评测集（2026-09-17）
+
+### 目标与边界
+
+- 合并现有 50 篇与新增 100 篇组成 150 篇冻结语料
+- 新增论文按主题为主、年份配额分层；不为追求“最新”堆满 2024-2026
+- 现有 88 题和 42 题只作为历史回归集，不参与新 test 口径
+- 建立唯一版本化 v150 流水线，旧脚本只保留历史入口
+- QASPER 只作 sanity/regression，不混入主指标
+
+### Manifest 契约
+
+每篇论文必须记录：
+
+```text
+paper_id
+source_family
+arxiv_id
+arxiv_version
+title
+published_at
+updated_at
+primary_category
+selection_stratum
+series_id
+license
+pdf_sha256
+downloaded_at
+parse_status
+```
+
+- 现有 10 篇本地 PDF 和 40 篇 QASPER 必须回填同等级字段
+- `series_id` 使用可确定规则，不靠人工模糊判断同系列
+- arXiv 论文固定具体版本，不记录漂移的基础 id
+
+### 分层与 split
+
+- 主分层变量：主题
+- 年份只做配额：约 70 篇 2024-2026，约 30 篇 2020-2023
+- 来源、论文长度、解析器类型和 `series_id` 作为分布检查变量
+- 合并 150 篇后切分 50 篇 dev、100 篇 test，论文不重叠
+- 同论文不同版本及同 series 不得跨 split
+
+### 出题与审核
+
+- 出题只允许读取完整论文，禁止读取 chunk、检索排名、gold section 或 source query
+- dev 约 50-60 题，test 约 140-150 题，总候选 250-300 后剔除至约 200
+- dev 人工复核 50%，test 人工复核 100%，其中 20% 双标注并报告 Cohen's kappa
+- 主 test 以单论文、单证据组问题为主
+- 跨论文对比和多跳使用 required_papers/evidence_groups 表达，全证据覆盖单独报告
+- 审核人不得查看检索排名或模型输出，争议题按预注册规则仲裁
+- 未完成人工审核的题目只能标记为候选，不能冻结为 test
+
+### 版本与验收
+
+- 索引快照使用独立路径，不覆盖现有 FAISS
+- 快照指纹包含 parser、chunk、embedding、manifest 和 question 版本
+- dev 调优完成后封存 test；启动一次密封验收任务
+- 同批次计算旧基线与候选方案，结果封存后才允许查看
+- test 运行后不得修改；修正必须提升版本并全量重跑
+- 150 题上的 80% 只能作为点估计，不能宣称强统计结论
+
 ### 回滚
 
 - `QUERY_GENERATION_ENABLED=0`：回退原问题 query
