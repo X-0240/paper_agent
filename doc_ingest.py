@@ -32,7 +32,8 @@ def paper_title(paper_id):
 
 def load_sections(paper_id):
     #章节唯一入口：优先读缓存，其次doc_ingest解析PDF；统一为dict列表
-    path=os.path.join(SECTIONS_DIR,f"{paper_id}.json")
+    sections_dir=os.getenv("SECTIONS_DIR",SECTIONS_DIR)
+    path=os.path.join(sections_dir,f"{paper_id}.json")
     if os.path.exists(path):
         data=json.load(open(path,encoding="utf-8"))
         out=[]
