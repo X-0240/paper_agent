@@ -31,12 +31,15 @@ LOCAL_ARXIV={
     "BERT":"1810.04805",
     "Chain_of_Thought":"2201.11903",
     "FlashAttention":"2205.14135",
-    "GPT2":"1909.12838",
+    "GPT2":"",
     "GraphRAG":"2404.16130",
     "LoRA":"2106.09685",
     "RAG_Original_Paper":"2005.11401",
     "ReAct":"2210.03629",
     "RoFormer_RoPE":"2104.09864",
+}
+LOCAL_TITLES={
+    "GPT2":"Language Models are Unsupervised Multitask Learners",
 }
 
 STRATA={
@@ -219,7 +222,7 @@ def build_existing_manifest(faiss_meta,qasper_titles):
                 "source_family":"local_pdf",
                 "arxiv_id":arxiv_id,
                 "arxiv_version":None,
-                "title":clean_text(qasper_titles.get(arxiv_id,"") or source),
+                "title":clean_text(LOCAL_TITLES.get(source) or qasper_titles.get(arxiv_id,"") or source),
                 "published_at":"",
                 "updated_at":"",
                 "primary_category":"",
@@ -400,6 +403,15 @@ def audit_questions(split="dev"):
             item["audit_status"]="candidate"
             item["reject_reason"]=""
     save_json(path,questions)
+    per_paper=defaultdict(int)
+    for item in questions:
+        if item.get("audit_status")!="candidate":
+            continue
+        paper_id=item.get("paper_id","")
+        per_paper[paper_id]+=1
+        if per_paper[paper_id]>2:
+            item["audit_status"]="rejected"
+            item["reject_reason"]="per_paper_limit"
     counts=defaultdict(int)
     for item in questions:
         counts[item.get("audit_status","unknown")]+=1
@@ -412,6 +424,7 @@ def freeze_snapshot():
     #冻结manifest和索引哈希，后续test运行必须引用同一版本
     manifest=load_json(MANIFEST_PATH,[])
     reviewed=load_json(BASE/"evaluation"/"questions"/"v150_dev_reviewed.json",[])
+    test_reviewed=load_json(BASE/"evaluation"/"questions"/"v150_test_reviewed.json",[])
     from evaluation.generate_questions import FORWARD_PROMPT
     meta={
         "version":"v150",
@@ -422,6 +435,10 @@ def freeze_snapshot():
             "dev_reviewed":len(reviewed),
             "dev_passed":sum(1 for x in reviewed if x.get("review_decision")=="通过"),
             "dev_modified":sum(1 for x in reviewed if x.get("review_decision")=="修改"),
+            "test_reviewed":len(test_reviewed),
+            "test_passed":sum(1 for x in test_reviewed if x.get("review_decision")=="通过"),
+            "test_modified":sum(1 for x in test_reviewed if x.get("review_decision")=="修改"),
+            "test_evaluated":False,
         },
         "manifest_sha256":sha256_file(MANIFEST_PATH),
         "index_sha256":sha256_file(V150_INDEX_PREFIX+".faiss") if os.path.exists(V150_INDEX_PREFIX+".faiss") else "",
@@ -434,7 +451,10 @@ def freeze_snapshot():
             "parsed":sum(1 for x in manifest if x.get("parse_status")=="ok"),
         }
     }
-    for name in ("v150_dev_candidates.json","v150_dev_valid.json","v150_dev_reviewed.json"):
+    for name in (
+        "v150_dev_candidates.json","v150_dev_valid.json","v150_dev_reviewed.json",
+        "v150_test_candidates.json","v150_test_valid.json","v150_test_reviewed.json",
+    ):
         path=BASE/"evaluation"/"questions"/name
         if path.exists():
             meta["questions"][name]=sha256_file(path)
