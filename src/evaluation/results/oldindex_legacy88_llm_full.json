@@ -1,0 +1,4319 @@
+{
+  "n": 88,
+  "base_hits": 56,
+  "rerank_hits": 56,
+  "rows": [
+    {
+      "question_id": "legacy-1",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "Abstract"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "2 Background"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "2004.02334",
+          "section": "Classifier based NLG"
+        },
+        {
+          "source": "2004.02334",
+          "section": "Classifier based NLG"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "Abstract"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "2 Background"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "2004.02334",
+          "section": "Classifier based NLG"
+        },
+        {
+          "source": "2004.02334",
+          "section": "Classifier based NLG"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-2",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.2.1 Scaled Dot-Product Attention"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.2.2 Multi-Head Attention"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.2 Attention"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "5 Limitations and Future Directions"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "6.2 Model Variations"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.2.1 Scaled Dot-Product Attention"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.2.2 Multi-Head Attention"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.2 Attention"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "5 Limitations and Future Directions"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "6.2 Model Variations"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-3",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.2.2 Multi-Head Attention"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "6.2 Model Variations"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.2 Attention"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.4 Embeddings and Softmax"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.2.1 Scaled Dot-Product Attention"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.2.2 Multi-Head Attention"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "6.2 Model Variations"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.2 Attention"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.4 Embeddings and Softmax"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.2.1 Scaled Dot-Product Attention"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-4",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.2.3 Applications of Attention in our Model"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.1 Encoder and Decoder Stacks"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.4 Embeddings and Softmax"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3 Model Architecture"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "2 Background"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.2.3 Applications of Attention in our Model"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.1 Encoder and Decoder Stacks"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.4 Embeddings and Softmax"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3 Model Architecture"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "2 Background"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-5",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.3 Position-wise Feed-Forward Networks"
+        },
+        {
+          "source": "LoRA",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.4 Embeddings and Softmax"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "7 Conclusion"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "3.1 Formulation"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.3 Position-wise Feed-Forward Networks"
+        },
+        {
+          "source": "LoRA",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.4 Embeddings and Softmax"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "7 Conclusion"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "3.1 Formulation"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-6",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.5 Positional Encoding"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "Abstract"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "6.2 Model Variations"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "4.2 Better Models with Longer Sequences"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.5 Positional Encoding"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "Abstract"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "6.2 Model Variations"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "4.2 Better Models with Longer Sequences"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-7",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.4 Embeddings and Softmax"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "4 Why Self-Attention"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "2 Background"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "4 Why Self-Attention"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "1 Introduction"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.4 Embeddings and Softmax"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "4 Why Self-Attention"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "2 Background"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "4 Why Self-Attention"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "1 Introduction"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-8",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "6.1 Machine Translation"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "Abstract"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "7 Conclusion"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "6.2 Model Variations"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "4 Experiments and Evaluation"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "6.1 Machine Translation"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "5.4 Regularization"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "7 Conclusion"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "6.2 Model Variations"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "4.1.2 Implementation details"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-9",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.1 Encoder and Decoder Stacks"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "5.4 Regularization"
+        },
+        {
+          "source": "GPT2",
+          "section": "2.3. Model"
+        },
+        {
+          "source": "LoRA",
+          "section": "5.1 BASELINES"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.2.3 Applications of Attention in our Model"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.1 Encoder and Decoder Stacks"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "5.4 Regularization"
+        },
+        {
+          "source": "GPT2",
+          "section": "2.3. Model"
+        },
+        {
+          "source": "LoRA",
+          "section": "5.1 BASELINES"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.2.3 Applications of Attention in our Model"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-10",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "7 Conclusion"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "7 Conclusion"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.2.3 Applications of Attention in our Model"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.2.2 Multi-Head Attention"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "2 Background"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "7 Conclusion"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "7 Conclusion"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.2.3 Applications of Attention in our Model"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.2.2 Multi-Head Attention"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "2 Background"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-11",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "BERT",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "BERT",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "BERT",
+          "section": "5.1 Effect of Pre-training Tasks"
+        },
+        {
+          "source": "BERT",
+          "section": "6 Conclusion"
+        },
+        {
+          "source": "BERT",
+          "section": "Abstract"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "BERT",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "BERT",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "BERT",
+          "section": "5.1 Effect of Pre-training Tasks"
+        },
+        {
+          "source": "BERT",
+          "section": "6 Conclusion"
+        },
+        {
+          "source": "BERT",
+          "section": "Abstract"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-12",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "BERT",
+          "section": "3 BERT"
+        },
+        {
+          "source": "BERT",
+          "section": "2.2 Unsupervised Fine-tuning Approaches"
+        },
+        {
+          "source": "BERT",
+          "section": "6 Conclusion"
+        },
+        {
+          "source": "BERT",
+          "section": "3 BERT"
+        },
+        {
+          "source": "BERT",
+          "section": "6 Conclusion"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "BERT",
+          "section": "3 BERT"
+        },
+        {
+          "source": "BERT",
+          "section": "2.2 Unsupervised Fine-tuning Approaches"
+        },
+        {
+          "source": "BERT",
+          "section": "6 Conclusion"
+        },
+        {
+          "source": "BERT",
+          "section": "3 BERT"
+        },
+        {
+          "source": "BERT",
+          "section": "6 Conclusion"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-13",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "BERT",
+          "section": "3.1 Pre-training BERT"
+        },
+        {
+          "source": "BERT",
+          "section": "5.1 Effect of Pre-training Tasks"
+        },
+        {
+          "source": "BERT",
+          "section": "2.2 Unsupervised Fine-tuning Approaches"
+        },
+        {
+          "source": "BERT",
+          "section": "5 Ablation Studies"
+        },
+        {
+          "source": "BERT",
+          "section": "6 Conclusion"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "BERT",
+          "section": "3.1 Pre-training BERT"
+        },
+        {
+          "source": "BERT",
+          "section": "5.1 Effect of Pre-training Tasks"
+        },
+        {
+          "source": "BERT",
+          "section": "2.2 Unsupervised Fine-tuning Approaches"
+        },
+        {
+          "source": "BERT",
+          "section": "5 Ablation Studies"
+        },
+        {
+          "source": "BERT",
+          "section": "6 Conclusion"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-14",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "BERT",
+          "section": "6 Conclusion"
+        },
+        {
+          "source": "BERT",
+          "section": "6 Conclusion"
+        },
+        {
+          "source": "BERT",
+          "section": "6 Conclusion"
+        },
+        {
+          "source": "BERT",
+          "section": "6 Conclusion"
+        },
+        {
+          "source": "BERT",
+          "section": "3.1 Pre-training BERT"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "BERT",
+          "section": "6 Conclusion"
+        },
+        {
+          "source": "BERT",
+          "section": "6 Conclusion"
+        },
+        {
+          "source": "BERT",
+          "section": "6 Conclusion"
+        },
+        {
+          "source": "BERT",
+          "section": "6 Conclusion"
+        },
+        {
+          "source": "BERT",
+          "section": "3.1 Pre-training BERT"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-15",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "BERT",
+          "section": "3 BERT"
+        },
+        {
+          "source": "BERT",
+          "section": "5.2 Effect of Model Size"
+        },
+        {
+          "source": "BERT",
+          "section": "5.3 Feature-based Approach with BERT"
+        },
+        {
+          "source": "BERT",
+          "section": "3 BERT"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "5 Limitations and Future Directions"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "BERT",
+          "section": "3 BERT"
+        },
+        {
+          "source": "BERT",
+          "section": "5.2 Effect of Model Size"
+        },
+        {
+          "source": "BERT",
+          "section": "3 BERT"
+        },
+        {
+          "source": "BERT",
+          "section": "4.1 GLUE"
+        },
+        {
+          "source": "BERT",
+          "section": "5.3 Feature-based Approach with BERT"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-16",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "BERT",
+          "section": "5 Ablation Studies"
+        },
+        {
+          "source": "BERT",
+          "section": "5.1 Effect of Pre-training Tasks"
+        },
+        {
+          "source": "BERT",
+          "section": "6 Conclusion"
+        },
+        {
+          "source": "BERT",
+          "section": "3.1 Pre-training BERT"
+        },
+        {
+          "source": "1611.06322",
+          "section": "Feature analysis"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "BERT",
+          "section": "5 Ablation Studies"
+        },
+        {
+          "source": "BERT",
+          "section": "5.1 Effect of Pre-training Tasks"
+        },
+        {
+          "source": "BERT",
+          "section": "3.1 Pre-training BERT"
+        },
+        {
+          "source": "BERT",
+          "section": "6 Conclusion"
+        },
+        {
+          "source": "BERT",
+          "section": "6 Conclusion"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-17",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "BERT",
+          "section": "5.3 Feature-based Approach with BERT"
+        },
+        {
+          "source": "BERT",
+          "section": "5.3 Feature-based Approach with BERT"
+        },
+        {
+          "source": "BERT",
+          "section": "6 Conclusion"
+        },
+        {
+          "source": "1605.05156",
+          "section": "Syntactic Features"
+        },
+        {
+          "source": "BERT",
+          "section": "3 BERT"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "BERT",
+          "section": "5.3 Feature-based Approach with BERT"
+        },
+        {
+          "source": "BERT",
+          "section": "5.3 Feature-based Approach with BERT"
+        },
+        {
+          "source": "BERT",
+          "section": "6 Conclusion"
+        },
+        {
+          "source": "1605.05156",
+          "section": "Syntactic Features"
+        },
+        {
+          "source": "BERT",
+          "section": "3 BERT"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-18",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "BERT",
+          "section": "Abstract"
+        },
+        {
+          "source": "BERT",
+          "section": "4.3 SQuAD v2.0"
+        },
+        {
+          "source": "BERT",
+          "section": "4.2 SQuAD v1.1"
+        },
+        {
+          "source": "GPT2",
+          "section": "3.8. Question Answering"
+        },
+        {
+          "source": "BERT",
+          "section": "4.2 SQuAD v1.1"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "BERT",
+          "section": "4.3 SQuAD v2.0"
+        },
+        {
+          "source": "BERT",
+          "section": "2.2 Unsupervised Fine-tuning Approaches"
+        },
+        {
+          "source": "BERT",
+          "section": "4.2 SQuAD v1.1"
+        },
+        {
+          "source": "BERT",
+          "section": "4.2 SQuAD v1.1"
+        },
+        {
+          "source": "BERT",
+          "section": "5 Ablation Studies"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-19",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "1906.11085",
+          "section": "Background"
+        },
+        {
+          "source": "BERT",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "BERT",
+          "section": "2.2 Unsupervised Fine-tuning Approaches"
+        },
+        {
+          "source": "BERT",
+          "section": "5.3 Feature-based Approach with BERT"
+        },
+        {
+          "source": "BERT",
+          "section": "3.1 Pre-training BERT"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "1906.11085",
+          "section": "Background"
+        },
+        {
+          "source": "BERT",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "BERT",
+          "section": "2.2 Unsupervised Fine-tuning Approaches"
+        },
+        {
+          "source": "BERT",
+          "section": "5.3 Feature-based Approach with BERT"
+        },
+        {
+          "source": "BERT",
+          "section": "3.1 Pre-training BERT"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-20",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "BERT",
+          "section": "3 BERT"
+        },
+        {
+          "source": "BERT",
+          "section": "2.2 Unsupervised Fine-tuning Approaches"
+        },
+        {
+          "source": "BERT",
+          "section": "6 Conclusion"
+        },
+        {
+          "source": "BERT",
+          "section": "3.2 Fine-tuning BERT"
+        },
+        {
+          "source": "BERT",
+          "section": "6 Conclusion"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "BERT",
+          "section": "3 BERT"
+        },
+        {
+          "source": "BERT",
+          "section": "2.2 Unsupervised Fine-tuning Approaches"
+        },
+        {
+          "source": "BERT",
+          "section": "6 Conclusion"
+        },
+        {
+          "source": "BERT",
+          "section": "3.2 Fine-tuning BERT"
+        },
+        {
+          "source": "BERT",
+          "section": "6 Conclusion"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-21",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "Chain_of_Thought",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.3 Ablation Study"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.3 Ablation Study"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "6 Discussion"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "Chain_of_Thought",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.3 Ablation Study"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.3 Ablation Study"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "6 Discussion"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-22",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "Chain_of_Thought",
+          "section": "6 Discussion"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.2 Results"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "6 Discussion"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "Abstract"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "1 Introduction"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "Chain_of_Thought",
+          "section": "6 Discussion"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.2 Results"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "6 Discussion"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "Abstract"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "1 Introduction"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-23",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "Chain_of_Thought",
+          "section": "4 Commonsense Reasoning"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.2 Results"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.3 Ablation Study"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.2 Results"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.4 Robustness of Chain of Thought"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "Chain_of_Thought",
+          "section": "4 Commonsense Reasoning"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.2 Results"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.3 Ablation Study"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.2 Results"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.4 Robustness of Chain of Thought"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-24",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.3 Ablation Study"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.3 Ablation Study"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "2 OOD: 3 OOD: 4 2 OOD: 3 OOD: 4"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "5 Symbolic Reasoning"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.3 Ablation Study"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.3 Ablation Study"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "2 OOD: 3 OOD: 4 2 OOD: 3 OOD: 4"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "5 Symbolic Reasoning"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-25",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "Chain_of_Thought",
+          "section": "5 Symbolic Reasoning"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "5 Symbolic Reasoning"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "ReAct",
+          "section": "5 RELATED WORK"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "Chain_of_Thought",
+          "section": "5 Symbolic Reasoning"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "5 Symbolic Reasoning"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "ReAct",
+          "section": "5 RELATED WORK"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-26",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.4 Robustness of Chain of Thought"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.4 Robustness of Chain of Thought"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "2 OOD: 3 OOD: 4 2 OOD: 3 OOD: 4"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.4 Robustness of Chain of Thought"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.4 Robustness of Chain of Thought"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "2 OOD: 3 OOD: 4 2 OOD: 3 OOD: 4"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-27",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        },
+        {
+          "source": "1911.12893",
+          "section": "Conclusion"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "6 Discussion"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        },
+        {
+          "source": "1911.12893",
+          "section": "Conclusion"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "6 Discussion"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-28",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "Abstract"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.2 Results"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "Abstract"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.2 Results"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-29",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "Chain_of_Thought",
+          "section": "4 Commonsense Reasoning"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "2 Chain-of-Thought Prompting"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "6 Discussion"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "Abstract"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "Chain_of_Thought",
+          "section": "4 Commonsense Reasoning"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "2 Chain-of-Thought Prompting"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "6 Discussion"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "Abstract"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-30",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "Abstract"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.1 Experimental Setup"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.4 Robustness of Chain of Thought"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "Abstract"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.1 Experimental Setup"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "3.4 Robustness of Chain of Thought"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-31",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "FlashAttention",
+          "section": "5 Limitations and Future Directions"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "2.2 Standard Attention Implementation"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "4 Why Self-Attention"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "FlashAttention",
+          "section": "2.2 Standard Attention Implementation"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "3.2 Analysis: IO Complexity of FlashAttention"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-32",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "5 Limitations and Future Directions"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "5 Limitations and Future Directions"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "5 Limitations and Future Directions"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "4 Experiments"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "FlashAttention",
+          "section": "3.1 An Eﬃcient Attention Algorithm With Tiling and Recomputation"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "3.1 An Eﬃcient Attention Algorithm With Tiling and Recomputation"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "5 Limitations and Future Directions"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-33",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "FlashAttention",
+          "section": "Abstract"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "5 Limitations and Future Directions"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "5 Limitations and Future Directions"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "2.1 Hardware Performance"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "3.2 Analysis: IO Complexity of FlashAttention"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-34",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "3.2 Analysis: IO Complexity of FlashAttention"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "2.2 Standard Attention Implementation"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "3.2 Analysis: IO Complexity of FlashAttention"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "3.2 Analysis: IO Complexity of FlashAttention"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "2.2 Standard Attention Implementation"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "3.2 Analysis: IO Complexity of FlashAttention"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-35",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "FlashAttention",
+          "section": "5 Limitations and Future Directions"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "5 Limitations and Future Directions"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "3.2 Analysis: IO Complexity of FlashAttention"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "FlashAttention",
+          "section": "5 Limitations and Future Directions"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "5 Limitations and Future Directions"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "3.2 Analysis: IO Complexity of FlashAttention"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-36",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "FlashAttention",
+          "section": "3.1 An Eﬃcient Attention Algorithm With Tiling and Recomputation"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "3.1 An Eﬃcient Attention Algorithm With Tiling and Recomputation"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "5 Limitations and Future Directions"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "5 Limitations and Future Directions"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "5 Limitations and Future Directions"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "FlashAttention",
+          "section": "3.1 An Eﬃcient Attention Algorithm With Tiling and Recomputation"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "3.1 An Eﬃcient Attention Algorithm With Tiling and Recomputation"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "5 Limitations and Future Directions"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "5 Limitations and Future Directions"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "5 Limitations and Future Directions"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-37",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "FlashAttention",
+          "section": "3.3 Extension: Block-Sparse FlashAttention"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "3.3 Extension: Block-Sparse FlashAttention"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "3.2 Analysis: IO Complexity of FlashAttention"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "5 Limitations and Future Directions"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "FlashAttention",
+          "section": "3.3 Extension: Block-Sparse FlashAttention"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "5 Limitations and Future Directions"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "3.3 Extension: Block-Sparse FlashAttention"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "5 Limitations and Future Directions"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "3.2 Analysis: IO Complexity of FlashAttention"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-38",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "FlashAttention",
+          "section": "4.1 Faster Models with FlashAttention"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "4 Experiments"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "4.2 Better Models with Longer Sequences"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "FlashAttention",
+          "section": "4 Experiments"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "4.1 Faster Models with FlashAttention"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "Abstract"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "4.1 Faster Models with FlashAttention"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-39",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "FlashAttention",
+          "section": "3.3 Extension: Block-Sparse FlashAttention"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "Abstract"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "3.2 Analysis: IO Complexity of FlashAttention"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "3 FlashAttention: Algorithm, Analysis, and Extensions"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "5 Limitations and Future Directions"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "FlashAttention",
+          "section": "3.2 Analysis: IO Complexity of FlashAttention"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "5 Limitations and Future Directions"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "3.2 Analysis: IO Complexity of FlashAttention"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "3.2 Analysis: IO Complexity of FlashAttention"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "5 Limitations and Future Directions"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-40",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "FlashAttention",
+          "section": "4 Experiments"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "4.2 Better Models with Longer Sequences"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "Abstract"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "FlashAttention",
+          "section": "4 Experiments"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "4.2 Better Models with Longer Sequences"
+        },
+        {
+          "source": "FlashAttention",
+          "section": "Abstract"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-41",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "LoRA",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "LoRA",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "LoRA",
+          "section": "4.1 LOW-RANK-PARAMETRIZED UPDATE MATRICES"
+        },
+        {
+          "source": "LoRA",
+          "section": "7 UNDERSTANDING THE LOW-RANK UPDATES"
+        },
+        {
+          "source": "LoRA",
+          "section": "4.1 LOW-RANK-PARAMETRIZED UPDATE MATRICES"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "LoRA",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "LoRA",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "LoRA",
+          "section": "4.1 LOW-RANK-PARAMETRIZED UPDATE MATRICES"
+        },
+        {
+          "source": "LoRA",
+          "section": "7 UNDERSTANDING THE LOW-RANK UPDATES"
+        },
+        {
+          "source": "LoRA",
+          "section": "4.1 LOW-RANK-PARAMETRIZED UPDATE MATRICES"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-42",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "LoRA",
+          "section": "4.1 LOW-RANK-PARAMETRIZED UPDATE MATRICES"
+        },
+        {
+          "source": "LoRA",
+          "section": "4.2 APPLYING LORA TO TRANSFORMER"
+        },
+        {
+          "source": "LoRA",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "LoRA",
+          "section": "Abstract"
+        },
+        {
+          "source": "LoRA",
+          "section": "3 AREN’T EXISTING SOLUTIONS GOOD ENOUGH?"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "LoRA",
+          "section": "8 CONCLUSION AND FUTURE WORK"
+        },
+        {
+          "source": "LoRA",
+          "section": "8 CONCLUSION AND FUTURE WORK"
+        },
+        {
+          "source": "LoRA",
+          "section": "3 AREN’T EXISTING SOLUTIONS GOOD ENOUGH?"
+        },
+        {
+          "source": "LoRA",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "LoRA",
+          "section": "3 AREN’T EXISTING SOLUTIONS GOOD ENOUGH?"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-43",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "LoRA",
+          "section": "4.1 LOW-RANK-PARAMETRIZED UPDATE MATRICES"
+        },
+        {
+          "source": "LoRA",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "LoRA",
+          "section": "4.1 LOW-RANK-PARAMETRIZED UPDATE MATRICES"
+        },
+        {
+          "source": "LoRA",
+          "section": "5.1 BASELINES"
+        },
+        {
+          "source": "LoRA",
+          "section": "8 CONCLUSION AND FUTURE WORK"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "LoRA",
+          "section": "4.1 LOW-RANK-PARAMETRIZED UPDATE MATRICES"
+        },
+        {
+          "source": "LoRA",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "LoRA",
+          "section": "4.1 LOW-RANK-PARAMETRIZED UPDATE MATRICES"
+        },
+        {
+          "source": "LoRA",
+          "section": "5.1 BASELINES"
+        },
+        {
+          "source": "LoRA",
+          "section": "8 CONCLUSION AND FUTURE WORK"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-44",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "LoRA",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "LoRA",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "LoRA",
+          "section": "4.1 LOW-RANK-PARAMETRIZED UPDATE MATRICES"
+        },
+        {
+          "source": "LoRA",
+          "section": "5.1 BASELINES"
+        },
+        {
+          "source": "LoRA",
+          "section": "8 CONCLUSION AND FUTURE WORK"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "LoRA",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "LoRA",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "LoRA",
+          "section": "4.1 LOW-RANK-PARAMETRIZED UPDATE MATRICES"
+        },
+        {
+          "source": "LoRA",
+          "section": "5.1 BASELINES"
+        },
+        {
+          "source": "LoRA",
+          "section": "8 CONCLUSION AND FUTURE WORK"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-45",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "LoRA",
+          "section": "4.1 LOW-RANK-PARAMETRIZED UPDATE MATRICES"
+        },
+        {
+          "source": "LoRA",
+          "section": "7.2 WHAT IS THE OPTIMAL RANK r FOR LORA?"
+        },
+        {
+          "source": "LoRA",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "LoRA",
+          "section": "8 CONCLUSION AND FUTURE WORK"
+        },
+        {
+          "source": "LoRA",
+          "section": "7.2 WHAT IS THE OPTIMAL RANK r FOR LORA?"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "LoRA",
+          "section": "4.1 LOW-RANK-PARAMETRIZED UPDATE MATRICES"
+        },
+        {
+          "source": "LoRA",
+          "section": "7.2 WHAT IS THE OPTIMAL RANK r FOR LORA?"
+        },
+        {
+          "source": "LoRA",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "LoRA",
+          "section": "8 CONCLUSION AND FUTURE WORK"
+        },
+        {
+          "source": "LoRA",
+          "section": "7.2 WHAT IS THE OPTIMAL RANK r FOR LORA?"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-46",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "LoRA",
+          "section": "8 CONCLUSION AND FUTURE WORK"
+        },
+        {
+          "source": "LoRA",
+          "section": "8 CONCLUSION AND FUTURE WORK"
+        },
+        {
+          "source": "LoRA",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "LoRA",
+          "section": "4.1 LOW-RANK-PARAMETRIZED UPDATE MATRICES"
+        },
+        {
+          "source": "LoRA",
+          "section": "1 INTRODUCTION"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "LoRA",
+          "section": "8 CONCLUSION AND FUTURE WORK"
+        },
+        {
+          "source": "LoRA",
+          "section": "8 CONCLUSION AND FUTURE WORK"
+        },
+        {
+          "source": "LoRA",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "LoRA",
+          "section": "4.1 LOW-RANK-PARAMETRIZED UPDATE MATRICES"
+        },
+        {
+          "source": "LoRA",
+          "section": "1 INTRODUCTION"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-47",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "LoRA",
+          "section": "4.1 LOW-RANK-PARAMETRIZED UPDATE MATRICES"
+        },
+        {
+          "source": "LoRA",
+          "section": "4.2 APPLYING LORA TO TRANSFORMER"
+        },
+        {
+          "source": "LoRA",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "LoRA",
+          "section": "5.5 SCALING UP TO GPT-3 175B"
+        },
+        {
+          "source": "LoRA",
+          "section": "8 CONCLUSION AND FUTURE WORK"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "LoRA",
+          "section": "4.1 LOW-RANK-PARAMETRIZED UPDATE MATRICES"
+        },
+        {
+          "source": "LoRA",
+          "section": "4.2 APPLYING LORA TO TRANSFORMER"
+        },
+        {
+          "source": "LoRA",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "LoRA",
+          "section": "5.5 SCALING UP TO GPT-3 175B"
+        },
+        {
+          "source": "LoRA",
+          "section": "8 CONCLUSION AND FUTURE WORK"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-48",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "LoRA",
+          "section": "Abstract"
+        },
+        {
+          "source": "LoRA",
+          "section": "4.2 APPLYING LORA TO TRANSFORMER"
+        },
+        {
+          "source": "LoRA",
+          "section": "5.1 BASELINES"
+        },
+        {
+          "source": "LoRA",
+          "section": "5.4 GPT-2 MEDIUM/LARGE"
+        },
+        {
+          "source": "LoRA",
+          "section": "4.1 LOW-RANK-PARAMETRIZED UPDATE MATRICES"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "LoRA",
+          "section": "Abstract"
+        },
+        {
+          "source": "LoRA",
+          "section": "4.2 APPLYING LORA TO TRANSFORMER"
+        },
+        {
+          "source": "LoRA",
+          "section": "5.1 BASELINES"
+        },
+        {
+          "source": "LoRA",
+          "section": "5.4 GPT-2 MEDIUM/LARGE"
+        },
+        {
+          "source": "LoRA",
+          "section": "4.1 LOW-RANK-PARAMETRIZED UPDATE MATRICES"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-49",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "LoRA",
+          "section": "4.1 LOW-RANK-PARAMETRIZED UPDATE MATRICES"
+        },
+        {
+          "source": "LoRA",
+          "section": "4.2 APPLYING LORA TO TRANSFORMER"
+        },
+        {
+          "source": "LoRA",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "LoRA",
+          "section": "7 UNDERSTANDING THE LOW-RANK UPDATES"
+        },
+        {
+          "source": "LoRA",
+          "section": "8 CONCLUSION AND FUTURE WORK"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "LoRA",
+          "section": "4.1 LOW-RANK-PARAMETRIZED UPDATE MATRICES"
+        },
+        {
+          "source": "LoRA",
+          "section": "4.2 APPLYING LORA TO TRANSFORMER"
+        },
+        {
+          "source": "LoRA",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "LoRA",
+          "section": "7 UNDERSTANDING THE LOW-RANK UPDATES"
+        },
+        {
+          "source": "LoRA",
+          "section": "8 CONCLUSION AND FUTURE WORK"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-50",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "GraphRAG",
+          "section": "2.1 RAG Approaches and Systems"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "6.2 Future work"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "7 Conclusion"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "GraphRAG",
+          "section": "2.1 RAG Approaches and Systems"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "6.2 Future work"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "7 Conclusion"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-51",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "GraphRAG",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "2.1 RAG Approaches and Systems"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "Abstract"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "6.2 Future work"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "2.2 Using Knowledge Graphs with LLMs and RAG"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "GraphRAG",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "2.1 RAG Approaches and Systems"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "Abstract"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "6.2 Future work"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "2.2 Using Knowledge Graphs with LLMs and RAG"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-52",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "GraphRAG",
+          "section": "7 Conclusion"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "3.1.3 Entities & Relationships →Knowledge Graph"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "3.1.2 Text Chunks →Entities & Relationships"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "4.1.2 Conditions"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "3.1.1 Source Documents →Text Chunks"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "GraphRAG",
+          "section": "3.1.2 Text Chunks →Entities & Relationships"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "7 Conclusion"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "3.1.3 Entities & Relationships →Knowledge Graph"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "3.1.1 Source Documents →Text Chunks"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "7 Conclusion"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-53",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "GraphRAG",
+          "section": "3.1.5 Graph Communities →Community Summaries"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "Abstract"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "2.1 RAG Approaches and Systems"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "2.2 Using Knowledge Graphs with LLMs and RAG"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "GraphRAG",
+          "section": "3.1.4 Knowledge Graph →Graph Communities"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "2.2 Using Knowledge Graphs with LLMs and RAG"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "3.1.5 Graph Communities →Community Summaries"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "Abstract"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "3.1.6 Community Summaries →Community Answers →Global Answer"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-54",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "GraphRAG",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "6.2 Future work"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "2.1 RAG Approaches and Systems"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "2.2 Using Knowledge Graphs with LLMs and RAG"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "Abstract"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "GraphRAG",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "6.2 Future work"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "2.1 RAG Approaches and Systems"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "2.2 Using Knowledge Graphs with LLMs and RAG"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "Abstract"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-55",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "GraphRAG",
+          "section": "Abstract"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "2.1 RAG Approaches and Systems"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "3.1.5 Graph Communities →Community Summaries"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "3.1.6 Community Summaries →Community Answers →Global Answer"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "GraphRAG",
+          "section": "Abstract"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "2.1 RAG Approaches and Systems"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "3.1.5 Graph Communities →Community Summaries"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "3.1.6 Community Summaries →Community Answers →Global Answer"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-56",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "GraphRAG",
+          "section": "Abstract"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "6.2 Future work"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "2.1 RAG Approaches and Systems"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "1 Introduction"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "GraphRAG",
+          "section": "Abstract"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "6.2 Future work"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "2.1 RAG Approaches and Systems"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "1 Introduction"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-57",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "GraphRAG",
+          "section": "3.1 GraphRAG Workflow"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "7 Conclusion"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "2.1 RAG Approaches and Systems"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "3.1.3 Entities & Relationships →Knowledge Graph"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "GraphRAG",
+          "section": "3.1 GraphRAG Workflow"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "7 Conclusion"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "2.1 RAG Approaches and Systems"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "3.1.3 Entities & Relationships →Knowledge Graph"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-58",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "RAG_Original_Paper",
+          "section": "2 Methods"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "2.1 RAG Approaches and Systems"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "2.1 Models"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "6 Discussion"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "RAG_Original_Paper",
+          "section": "2 Methods"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "6 Discussion"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "2.1 Models"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.1 Open-domain Question Answering"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-59",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "RAG_Original_Paper",
+          "section": "2.1 Models"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "2 Methods"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.3 Jeopardy Question Generation"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.4 Fact Veriﬁcation"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "2.5 Decoding"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "RAG_Original_Paper",
+          "section": "2.1 Models"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "2 Methods"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.3 Jeopardy Question Generation"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.4 Fact Veriﬁcation"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "2.5 Decoding"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-60",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "Chain_of_Thought",
+          "section": "6 Discussion"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "Abstract"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.4 Fact Veriﬁcation"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "1 Introduction"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "Chain_of_Thought",
+          "section": "6 Discussion"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "Abstract"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.4 Fact Veriﬁcation"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "1 Introduction"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-61",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "RAG_Original_Paper",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "2.2 Retriever: DPR"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.1 Open-domain Question Answering"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.5 Additional Results"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "2.1 Models"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "RAG_Original_Paper",
+          "section": "2.2 Retriever: DPR"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "2 Methods"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "2.1 Models"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "1 Introduction"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-62",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "RAG_Original_Paper",
+          "section": "2.4 Training"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "6 Discussion"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "6 Discussion"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.5 Additional Results"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "2 Methods"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "RAG_Original_Paper",
+          "section": "2.4 Training"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "6 Discussion"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "6 Discussion"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.5 Additional Results"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "2 Methods"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-63",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "RAG_Original_Paper",
+          "section": "3.1 Open-domain Question Answering"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "Abstract"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "Abstract"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "3.3 Jeopardy Question Generation"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "3.2 Abstractive Question Answering"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "RAG_Original_Paper",
+          "section": "3.1 Open-domain Question Answering"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "3.2 Abstractive Question Answering"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "3.3 Jeopardy Question Generation"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.4 Fact Veriﬁcation"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "3 Experiments"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-64",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "RAG_Original_Paper",
+          "section": "6 Discussion"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "6 Discussion"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "Abstract"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.3 Jeopardy Question Generation"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.5 Additional Results"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "RAG_Original_Paper",
+          "section": "6 Discussion"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "6 Discussion"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "Abstract"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.3 Jeopardy Question Generation"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.5 Additional Results"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-65",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "RAG_Original_Paper",
+          "section": "2.1 Models"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.4 Fact Veriﬁcation"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.5 Additional Results"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "3 Experiments"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "2.1 RAG Approaches and Systems"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "RAG_Original_Paper",
+          "section": "2.1 Models"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.4 Fact Veriﬁcation"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.5 Additional Results"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "3 Experiments"
+        },
+        {
+          "source": "GraphRAG",
+          "section": "2.1 RAG Approaches and Systems"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-66",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "RAG_Original_Paper",
+          "section": "Abstract"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "6 Discussion"
+        },
+        {
+          "source": "LoRA",
+          "section": "4.1 LOW-RANK-PARAMETRIZED UPDATE MATRICES"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "3.2 Abstractive Question Answering"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.3 Jeopardy Question Generation"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "RAG_Original_Paper",
+          "section": "Abstract"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "6 Discussion"
+        },
+        {
+          "source": "LoRA",
+          "section": "4.1 LOW-RANK-PARAMETRIZED UPDATE MATRICES"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "3.2 Abstractive Question Answering"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.3 Jeopardy Question Generation"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-67",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "RAG_Original_Paper",
+          "section": "6 Discussion"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.5 Additional Results"
+        },
+        {
+          "source": "1611.06322",
+          "section": "Feature analysis"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.1 Open-domain Question Answering"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.5 Additional Results"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "RAG_Original_Paper",
+          "section": "6 Discussion"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.5 Additional Results"
+        },
+        {
+          "source": "1611.06322",
+          "section": "Feature analysis"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.1 Open-domain Question Answering"
+        },
+        {
+          "source": "RAG_Original_Paper",
+          "section": "4.5 Additional Results"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-68",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "ReAct",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "ReAct",
+          "section": "3 KNOWLEDGE-INTENSIVE REASONING TASKS"
+        },
+        {
+          "source": "ReAct",
+          "section": "4 DECISION MAKING TASKS"
+        },
+        {
+          "source": "ReAct",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "ReAct",
+          "section": "Abstract"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "ReAct",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "ReAct",
+          "section": "3 KNOWLEDGE-INTENSIVE REASONING TASKS"
+        },
+        {
+          "source": "ReAct",
+          "section": "4 DECISION MAKING TASKS"
+        },
+        {
+          "source": "ReAct",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "ReAct",
+          "section": "Abstract"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-69",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "ReAct",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "ReAct",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "ReAct",
+          "section": "4 DECISION MAKING TASKS"
+        },
+        {
+          "source": "ReAct",
+          "section": "Abstract"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "ReAct",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "ReAct",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        },
+        {
+          "source": "ReAct",
+          "section": "4 DECISION MAKING TASKS"
+        },
+        {
+          "source": "ReAct",
+          "section": "4 DECISION MAKING TASKS"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-70",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "ReAct",
+          "section": "4 DECISION MAKING TASKS"
+        },
+        {
+          "source": "ReAct",
+          "section": "5 RELATED WORK"
+        },
+        {
+          "source": "ReAct",
+          "section": "5 RELATED WORK"
+        },
+        {
+          "source": "ReAct",
+          "section": "6 CONCLUSION"
+        },
+        {
+          "source": "ReAct",
+          "section": "1 INTRODUCTION"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "ReAct",
+          "section": "4 DECISION MAKING TASKS"
+        },
+        {
+          "source": "ReAct",
+          "section": "5 RELATED WORK"
+        },
+        {
+          "source": "ReAct",
+          "section": "5 RELATED WORK"
+        },
+        {
+          "source": "ReAct",
+          "section": "6 CONCLUSION"
+        },
+        {
+          "source": "ReAct",
+          "section": "1 INTRODUCTION"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-71",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "ReAct",
+          "section": "4 DECISION MAKING TASKS"
+        },
+        {
+          "source": "ReAct",
+          "section": "6 CONCLUSION"
+        },
+        {
+          "source": "ReAct",
+          "section": "2 REAC T: SYNERGIZING REASONING + ACTING"
+        },
+        {
+          "source": "ReAct",
+          "section": "Abstract"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "ReAct",
+          "section": "4 DECISION MAKING TASKS"
+        },
+        {
+          "source": "ReAct",
+          "section": "6 CONCLUSION"
+        },
+        {
+          "source": "ReAct",
+          "section": "2 REAC T: SYNERGIZING REASONING + ACTING"
+        },
+        {
+          "source": "ReAct",
+          "section": "Abstract"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-72",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "Chain_of_Thought",
+          "section": "4 Commonsense Reasoning"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        },
+        {
+          "source": "ReAct",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "2 OOD: 3 OOD: 4 2 OOD: 3 OOD: 4"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "Chain_of_Thought",
+          "section": "4 Commonsense Reasoning"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "8 Conclusions"
+        },
+        {
+          "source": "ReAct",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "Chain_of_Thought",
+          "section": "2 OOD: 3 OOD: 4 2 OOD: 3 OOD: 4"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-73",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        },
+        {
+          "source": "ReAct",
+          "section": "4 DECISION MAKING TASKS"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        },
+        {
+          "source": "ReAct",
+          "section": "2 REAC T: SYNERGIZING REASONING + ACTING"
+        },
+        {
+          "source": "ReAct",
+          "section": "6 CONCLUSION"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        },
+        {
+          "source": "ReAct",
+          "section": "4 DECISION MAKING TASKS"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        },
+        {
+          "source": "ReAct",
+          "section": "2 REAC T: SYNERGIZING REASONING + ACTING"
+        },
+        {
+          "source": "ReAct",
+          "section": "6 CONCLUSION"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-74",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.2 METHODS"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.2 METHODS"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-75",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "ReAct",
+          "section": "6 CONCLUSION"
+        },
+        {
+          "source": "ReAct",
+          "section": "2 REAC T: SYNERGIZING REASONING + ACTING"
+        },
+        {
+          "source": "ReAct",
+          "section": "2 REAC T: SYNERGIZING REASONING + ACTING"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.2 METHODS"
+        },
+        {
+          "source": "ReAct",
+          "section": "4 DECISION MAKING TASKS"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "ReAct",
+          "section": "6 CONCLUSION"
+        },
+        {
+          "source": "ReAct",
+          "section": "2 REAC T: SYNERGIZING REASONING + ACTING"
+        },
+        {
+          "source": "ReAct",
+          "section": "2 REAC T: SYNERGIZING REASONING + ACTING"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.2 METHODS"
+        },
+        {
+          "source": "ReAct",
+          "section": "4 DECISION MAKING TASKS"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-76",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "ReAct",
+          "section": "4 DECISION MAKING TASKS"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        },
+        {
+          "source": "ReAct",
+          "section": "6 CONCLUSION"
+        },
+        {
+          "source": "ReAct",
+          "section": "6 CONCLUSION"
+        },
+        {
+          "source": "ReAct",
+          "section": "1 INTRODUCTION"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "ReAct",
+          "section": "4 DECISION MAKING TASKS"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        },
+        {
+          "source": "ReAct",
+          "section": "6 CONCLUSION"
+        },
+        {
+          "source": "ReAct",
+          "section": "6 CONCLUSION"
+        },
+        {
+          "source": "ReAct",
+          "section": "1 INTRODUCTION"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-77",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "ReAct",
+          "section": "4 DECISION MAKING TASKS"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        },
+        {
+          "source": "ReAct",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "ReAct",
+          "section": "5 RELATED WORK"
+        },
+        {
+          "source": "ReAct",
+          "section": "1 INTRODUCTION"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "ReAct",
+          "section": "4 DECISION MAKING TASKS"
+        },
+        {
+          "source": "ReAct",
+          "section": "3.3 RESULTS AND OBSERVATIONS"
+        },
+        {
+          "source": "ReAct",
+          "section": "1 INTRODUCTION"
+        },
+        {
+          "source": "ReAct",
+          "section": "5 RELATED WORK"
+        },
+        {
+          "source": "ReAct",
+          "section": "1 INTRODUCTION"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-78",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "LoRA",
+          "section": "6 RELATED WORKS"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3 Model Architecture"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "Abstract"
+        },
+        {
+          "source": "BERT",
+          "section": "6 Conclusion"
+        },
+        {
+          "source": "BERT",
+          "section": "3 BERT"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "LoRA",
+          "section": "6 RELATED WORKS"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3 Model Architecture"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "Abstract"
+        },
+        {
+          "source": "BERT",
+          "section": "6 Conclusion"
+        },
+        {
+          "source": "BERT",
+          "section": "3 BERT"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-79",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "LoRA",
+          "section": "2 PROBLEM STATEMENT"
+        },
+        {
+          "source": "GPT2",
+          "section": "2. Approach"
+        },
+        {
+          "source": "BERT",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "BERT",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "BERT",
+          "section": "2.2 Unsupervised Fine-tuning Approaches"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "LoRA",
+          "section": "2 PROBLEM STATEMENT"
+        },
+        {
+          "source": "GPT2",
+          "section": "2. Approach"
+        },
+        {
+          "source": "BERT",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "BERT",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "BERT",
+          "section": "2.2 Unsupervised Fine-tuning Approaches"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-80",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "1805.04833",
+          "section": "GCNN Language Model + Self-Attention"
+        },
+        {
+          "source": "1805.04833",
+          "section": "Conv seq2seq + self-attention"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3 Model Architecture"
+        },
+        {
+          "source": "1805.04833",
+          "section": "Fusion: Conv seq2seq + self-attention"
+        },
+        {
+          "source": "2004.02334",
+          "section": "Experimental Setup ::: Hyperparameters"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "1805.04833",
+          "section": "GCNN Language Model + Self-Attention"
+        },
+        {
+          "source": "1805.04833",
+          "section": "Conv seq2seq + self-attention"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3 Model Architecture"
+        },
+        {
+          "source": "1805.04833",
+          "section": "Fusion: Conv seq2seq + self-attention"
+        },
+        {
+          "source": "2004.02334",
+          "section": "Experimental Setup ::: Hyperparameters"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-81",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "GPT2",
+          "section": "6. Discussion"
+        },
+        {
+          "source": "GPT2",
+          "section": "7. Conclusion"
+        },
+        {
+          "source": "GPT2",
+          "section": "2. Approach"
+        },
+        {
+          "source": "GPT2",
+          "section": "1. Introduction"
+        },
+        {
+          "source": "GPT2",
+          "section": "Abstract"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "GPT2",
+          "section": "6. Discussion"
+        },
+        {
+          "source": "GPT2",
+          "section": "7. Conclusion"
+        },
+        {
+          "source": "GPT2",
+          "section": "2. Approach"
+        },
+        {
+          "source": "GPT2",
+          "section": "1. Introduction"
+        },
+        {
+          "source": "GPT2",
+          "section": "Abstract"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-82",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "RoFormer_RoPE",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "Abstract"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "4.4 Performer with RoPE"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "4.2.2 Implementation details"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "RoFormer_RoPE",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "Abstract"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "4.4 Performer with RoPE"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "4.2.2 Implementation details"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-83",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "RoFormer_RoPE",
+          "section": "2.2 Absolute position embedding"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.4 Embeddings and Softmax"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "Abstract"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "3.3 Properties of RoPE"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "RoFormer_RoPE",
+          "section": "3.2.2 General form"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "3.2.1 A 2D case"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "3.3 Properties of RoPE"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "3.2.2 General form"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "3.4.3 Long-term decay of RoPE"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-84",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "RoFormer_RoPE",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.5 Positional Encoding"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "2.2 Absolute position embedding"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "4.2.2 Implementation details"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "RoFormer_RoPE",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.5 Positional Encoding"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "2.2 Absolute position embedding"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "4.2.2 Implementation details"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-85",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "RoFormer_RoPE",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "Abstract"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.5 Positional Encoding"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "3.2.2 General form"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "RoFormer_RoPE",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "Abstract"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3.5 Positional Encoding"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "3.2.2 General form"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-86",
+      "base_hit": false,
+      "rerank_hit": true,
+      "base_sources": [
+        {
+          "source": "RoFormer_RoPE",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "Abstract"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "3.3 Properties of RoPE"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "3.2.2 General form"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "RoFormer_RoPE",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "Abstract"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "3.3 Properties of RoPE"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "3.2.2 General form"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-87",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "1911.09753",
+          "section": "Experiments ::: Experimental Settings ::: Model architecture"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3 Model Architecture"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "Abstract"
+        },
+        {
+          "source": "2004.02334",
+          "section": "Experimental Setup"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "Abstract"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "1911.09753",
+          "section": "Experiments ::: Experimental Settings ::: Model architecture"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "3 Model Architecture"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "Abstract"
+        },
+        {
+          "source": "2004.02334",
+          "section": "Experimental Setup"
+        },
+        {
+          "source": "Attention_Is_All_You_Need",
+          "section": "Abstract"
+        }
+      ]
+    },
+    {
+      "question_id": "legacy-88",
+      "base_hit": false,
+      "rerank_hit": false,
+      "base_sources": [
+        {
+          "source": "RoFormer_RoPE",
+          "section": "3.3 Properties of RoPE"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "3.2.2 General form"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "2.2 Absolute position embedding"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "3.2.2 General form"
+        }
+      ],
+      "rerank_sources": [
+        {
+          "source": "RoFormer_RoPE",
+          "section": "3.3 Properties of RoPE"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "3.2.2 General form"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "1 Introduction"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "2.2 Absolute position embedding"
+        },
+        {
+          "source": "RoFormer_RoPE",
+          "section": "3.2.2 General form"
+        }
+      ]
+    }
+  ]
+}
