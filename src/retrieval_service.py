@@ -7,7 +7,6 @@ import re
 import threading
 import time
 from collections import OrderedDict
-from dataclasses import dataclass
 
 #国内网络直连HuggingFace可能超时，必须在加载模型前设置镜像
 os.environ.setdefault("HF_ENDPOINT","https://hf-mirror.com")
@@ -25,7 +24,6 @@ load_dotenv()
 logger=logging.getLogger(__name__)
 
 SERVICE_VERSION="retrieval-service-v1"
-QUERY_PROMPT_VERSION="retrieval-query-v1"
 QUERY_PROMPT=(
     "你是论文检索query生成器。根据中文问题生成一行英文检索query。"
     "保留实体、缩写、术语、数值、比较关系和任务目标；优先使用论文原词，不要逐字直译，不要解释。"
@@ -34,28 +32,8 @@ QUERY_PROMPT=(
 QUERY_PROMPT_HASH=hashlib.sha1(QUERY_PROMPT.encode("utf-8")).hexdigest()[:12]
 
 
-@dataclass(frozen=True)
-class QueryPlan:
-    question: str
-    retrieval_query: str
-    query_source: str
-    query_cache_hit: bool=False
-    fallback_reason: str=""
-    prompt_version: str=QUERY_PROMPT_VERSION
-
-    def as_dict(self):
-        return {
-            "question":self.question,
-            "retrieval_query":self.retrieval_query,
-            "query_source":self.query_source,
-            "query_cache_hit":self.query_cache_hit,
-            "fallback_reason":self.fallback_reason,
-            "prompt_version":self.prompt_version,
-        }
-
-
-class QueryPlanCache:
-    #查询计划缓存：正缓存长期，负缓存短TTL，完整key并发只生成一次
+class _QueryCache:
+    #查询缓存：正缓存长期，负缓存短TTL，完整key并发只生成一次
     def __init__(self,path="",negative_ttl=60):
         self.path=path
         self.negative_ttl=negative_ttl
@@ -66,48 +44,48 @@ class QueryPlanCache:
             try:
                 raw=json.load(open(self.path,encoding="utf-8"))
                 for key,item in raw.items():
-                    self._data[key]=(QueryPlan(**item["plan"]),float(item.get("expires_at",0)))
+                    self._data[key]=(dict(item["value"]),float(item.get("expires_at",0)))
             except Exception as e:
-                logger.warning(f"查询计划缓存加载失败：{e}")
+                logger.warning(f"查询缓存加载失败：{e}")
 
     def _lookup(self,key):
         item=self._data.get(key)
         if not item:
             return None
-        plan,expires_at=item
+        value,expires_at=item
         if expires_at and expires_at<time.time():
             self._data.pop(key,None)
             return None
-        return plan
+        return value
 
     def get(self,key):
         with self._lock:
             return self._lookup(key)
 
-    def set(self,key,plan):
+    def set(self,key,value):
         expires_at=0.0
-        if plan.fallback_reason:
+        if value.get("fallback_reason"):
             expires_at=time.time()+self.negative_ttl
         with self._lock:
-            self._data[key]=(plan,expires_at)
+            self._data[key]=(dict(value),expires_at)
             self._data.move_to_end(key)
             while len(self._data)>512:
                 self._data.popitem(last=False)
             if self.path:
-                payload={k:{"plan":v[0].as_dict(),"expires_at":v[1]} for k,v in self._data.items()}
+                payload={k:{"value":v[0],"expires_at":v[1]} for k,v in self._data.items()}
                 os.makedirs(os.path.dirname(os.path.abspath(self.path)),exist_ok=True)
                 with open(self.path,"w",encoding="utf-8") as f:
                     json.dump(payload,f,ensure_ascii=False,indent=2)
 
     def get_or_create(self,key,factory):
-        plan=self.get(key)
-        if plan:
-            return plan
+        value=self.get(key)
+        if value:
+            return value
         owner=False
         with self._lock:
-            plan=self._lookup(key)
-            if plan:
-                return plan
+            value=self._lookup(key)
+            if value:
+                return value
             event=self._inflight.get(key)
             if event is None:
                 event=threading.Event()
@@ -115,14 +93,14 @@ class QueryPlanCache:
                 owner=True
         if not owner:
             event.wait(timeout=10)
-            plan=self.get(key)
-            if plan:
-                return plan
+            value=self.get(key)
+            if value:
+                return value
             return factory()
         try:
-            plan=factory()
-            self.set(key,plan)
-            return plan
+            value=factory()
+            self.set(key,value)
+            return value
         finally:
             with self._lock:
                 self._inflight.pop(key,None)
@@ -167,12 +145,10 @@ class RetrievalService:
         self.candidate_k=int(os.getenv("RETRIEVAL_CANDIDATES","25"))
         self.alpha=float(os.getenv("RETRIEVAL_ALPHA","0.5"))
         self.rerank_mode=os.getenv("RERANK_MODE","conditional").lower()
-        self.query_plan_mode=os.getenv("QUERY_PLAN_MODE","generated").lower()
         self.query_generation_enabled=os.getenv("QUERY_GENERATION_ENABLED","0")=="1"
-        self.app_mode=os.getenv("APP_MODE","production").lower()
-        self.query_cache=QueryPlanCache(
-            path=os.getenv("QUERY_PLAN_CACHE_FILE",""),
-            negative_ttl=int(os.getenv("QUERY_PLAN_NEGATIVE_TTL","60"))
+        self.query_cache=_QueryCache(
+            path=os.getenv("QUERY_CACHE_FILE",""),
+            negative_ttl=int(os.getenv("QUERY_NEGATIVE_TTL","60"))
         )
 
     def _load_metadata(self):
@@ -269,39 +245,28 @@ class RetrievalService:
             release_budget(reserved)
             raise
 
-    def prepare(self,question,mode=None,offline_query=None):
+    def _build_retrieval_query(self,question,search_query=None):
+        #返回(实际检索query, 是否缓存命中, 回退原因)，只服务生产召回流程
         normalized=_normalize_question(question)
-        selected=(mode or self.query_plan_mode or "generated").lower()
-        if selected=="offline_en":
-            if self.app_mode!="evaluation" or os.getenv("ALLOW_OFFLINE_QUERY","0")!="1":
-                raise RuntimeError("offline_en只允许在评测模式显式开启")
-            return QueryPlan(normalized,offline_query or normalized,"offline_en")
-        if selected=="literal":
-            if self.app_mode!="evaluation":
-                raise RuntimeError("literal query只允许在评测模式使用")
-            path=os.getenv("QUERY_LITERAL_CACHE_PATH","")
-            if path and os.path.exists(path):
-                cache=json.load(open(path,encoding="utf-8"))
-                text=cache.get("translate|"+normalized)
-                if text:
-                    return QueryPlan(normalized,text,"literal")
-            return QueryPlan(normalized,normalized,"literal",fallback_reason="literal_cache_miss")
-        if selected=="original" or not _has_cjk(normalized) or not self.query_generation_enabled:
-            return QueryPlan(normalized,normalized,"original")
+        if search_query:
+            return _normalize_question(search_query),False,""
+        if not _has_cjk(normalized) or not self.query_generation_enabled:
+            return normalized,False,""
         key=self._query_cache_key(normalized)
         cached=self.query_cache.get(key)
         if cached:
-            return QueryPlan(cached.question,cached.retrieval_query,cached.query_source,True,cached.fallback_reason,cached.prompt_version)
+            return cached["query"],True,cached.get("fallback_reason","")
         def create():
             try:
                 generated=self._generate_query(normalized)
                 if not _valid_retrieval_query(generated):
-                    return QueryPlan(normalized,normalized,"original",False,"invalid_generated_query")
-                return QueryPlan(normalized,generated,"generated")
+                    return {"query":normalized,"fallback_reason":"invalid_generated_query"}
+                return {"query":generated,"fallback_reason":""}
             except Exception as e:
                 logger.warning(f"检索query生成失败，回退原问题：{e}")
-                return QueryPlan(normalized,normalized,"original",False,"query_generation_failed")
-        return self.query_cache.get_or_create(key,create)
+                return {"query":normalized,"fallback_reason":"query_generation_failed"}
+        value=self.query_cache.get_or_create(key,create)
+        return value["query"],False,value.get("fallback_reason","")
 
     def _normalize_scores(self,scores):
         max_score=max(scores) if len(scores) else 0
@@ -361,12 +326,12 @@ class RetrievalService:
 
     def recall(self,query,k=50,alpha=None):
         #仅供兼容层和离线路由使用：只做混合召回，不生成query、不重排
-        recalled,status=self._recall(_normalize_question(query),k,alpha)
-        plan=QueryPlan(_normalize_question(query),query,"original")
-        items=[self._make_item(idx,score,plan) for idx,score in recalled]
+        normalized=_normalize_question(query)
+        recalled,status=self._recall(normalized,k,alpha)
+        items=[self._make_item(idx,score,normalized,"") for idx,score in recalled]
         return items,status
 
-    def _make_item(self,idx,recall_score,plan):
+    def _make_item(self,idx,recall_score,retrieval_query,fallback_reason=""):
         return {
             "_index":int(idx),
             "source":self.sources[idx],
@@ -376,11 +341,9 @@ class RetrievalService:
             "rerank_score":None,
             "chunk_id":self.chunk_ids[idx],
             "final_rank":0,
-            "retrieval_query":plan.retrieval_query,
-            "query_source":plan.query_source,
-            "query_cache_hit":plan.query_cache_hit,
+            "retrieval_query":retrieval_query,
             "rerank_triggered":False,
-            "fallback_reason":plan.fallback_reason,
+            "fallback_reason":fallback_reason,
             "service_version":SERVICE_VERSION,
         }
 
@@ -406,28 +369,25 @@ class RetrievalService:
         margin=float(os.getenv("RERANK_TRIGGER_MARGIN","0.1"))
         return (items[0]["recall_score"]-items[min(top_k,len(items))-1]["recall_score"])<margin
 
-    def search_prepared(self,plan,candidate_k=None,rerank_mode=None,top_k=5):
+    def _execute_search(self,question,retrieval_query,fallback_reason="",candidate_k=None,rerank_mode=None,top_k=5):
         candidate_k=candidate_k or self.candidate_k
-        recalled,status=self._recall(plan.retrieval_query,candidate_k)
-        items=[self._make_item(idx,score,plan) for idx,score in recalled]
-        fallback_reason=plan.fallback_reason
-        if not items and plan.retrieval_query!=plan.question:
-            recalled,status=self._recall(plan.question,candidate_k)
-            items=[self._make_item(idx,score,plan) for idx,score in recalled]
+        recalled,status=self._recall(retrieval_query,candidate_k)
+        items=[self._make_item(idx,score,retrieval_query,fallback_reason) for idx,score in recalled]
+        if not items and retrieval_query!=question:
+            recalled,status=self._recall(question,candidate_k)
+            items=[self._make_item(idx,score,question,fallback_reason) for idx,score in recalled]
             fallback_reason="no_candidates_use_original"
         if not items:
             return []
         mode=(rerank_mode or self.rerank_mode).lower()
         use_rerank=self._should_rerank(items,top_k,mode)
         if use_rerank:
-            scope=f"c{len(items)}|{items[0]['chunk_id']}|{plan.question}"
-            items=rerank(plan.question,items,top_n=max(top_k,len(items)),snapshot=self.index_snapshot(),cache_scope=scope)
+            scope=f"c{len(items)}|{items[0]['chunk_id']}|{question}"
+            items=rerank(question,items,top_n=max(top_k,len(items)),snapshot=self.index_snapshot(),cache_scope=scope)
             for item in items:
                 item["rerank_triggered"]=True
                 item["fallback_reason"]=fallback_reason
-                item["retrieval_query"]=plan.retrieval_query
-                item["query_source"]=plan.query_source
-                item["query_cache_hit"]=plan.query_cache_hit
+                item["retrieval_query"]=retrieval_query
         else:
             items=sorted(items,key=lambda x:x["recall_score"],reverse=True)
         items=self._dedupe(items)[:top_k]
@@ -436,13 +396,13 @@ class RetrievalService:
             item["fallback_reason"]=fallback_reason if not item.get("fallback_reason") else item["fallback_reason"]
         return items
 
-    def search(self,question,candidate_k=None,rerank_mode=None,top_k=5,plan_mode=None,offline_query=None):
-        plan=self.prepare(question,mode=plan_mode,offline_query=offline_query)
-        return self.search_prepared(plan,candidate_k,rerank_mode,top_k)
+    def search(self,question,candidate_k=None,rerank_mode=None,top_k=5,search_query=None):
+        retrieval_query,cache_hit,fallback_reason=self._build_retrieval_query(question,search_query)
+        return self._execute_search(question,retrieval_query,fallback_reason,candidate_k,rerank_mode,top_k)
 
-    async def search_async(self,question,candidate_k=None,rerank_mode=None,top_k=5,plan_mode=None,offline_query=None):
+    async def search_async(self,question,candidate_k=None,rerank_mode=None,top_k=5,search_query=None):
         return await asyncio.to_thread(
-            self.search,question,candidate_k,rerank_mode,top_k,plan_mode,offline_query
+            self.search,question,candidate_k,rerank_mode,top_k,search_query
         )
 
 

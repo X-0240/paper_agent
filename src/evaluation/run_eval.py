@@ -66,13 +66,17 @@ def main():
     for q in questions:
         queries=build_queries(q,args.query_field)
         if service is not None:
-            plan=service.prepare(
+            search_query=None
+            if args.query_source=="offline_en":
+                search_query=q.query_en
+            elif args.query_source=="literal":
+                path=os.getenv("QUERY_LITERAL_CACHE_PATH","")
+                if path and os.path.exists(path):
+                    cache=json.load(open(path,encoding="utf-8"))
+                    search_query=cache.get("translate|"+q.question)
+            retrieved=service.search(
                 q.question,
-                mode=args.query_source,
-                offline_query=q.query_en if args.query_source=="offline_en" else None
-            )
-            retrieved=service.search_prepared(
-                plan,
+                search_query=search_query,
                 candidate_k=args.candidates,
                 rerank_mode=args.rerank_mode,
                 top_k=args.k
