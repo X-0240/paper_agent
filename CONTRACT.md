@@ -311,28 +311,19 @@ simple 路径本地 + 外网双路并行检索，外网源为 Wikipedia REST API
 - Top50 全量重排未通过：统一 Service 中文重排 51/88，英文重排 57/88，分数融合最好 59/88
 - 0.1 分差条件重排：53/88；当前可见特征无法复现“只重排失败题”的离线 oracle 结果
 - 离线英文 query 只根据问题生成，不看论文、证据句、章节或正确论文信息
-- `offline_en` 仅用于评测上限对照，生产环境禁止选择
+- 离线预生成 query 仅用于评测上限对照，不进入生产 Service
 
 ### RetrievalService 接口
 
 ```python
-class QueryPlan:
-    question: str
-    retrieval_query: str
-    query_source: str
-    query_cache_hit: bool
-    fallback_reason: str
-    prompt_version: str
-
-prepare(question,mode="generated",offline_query=None) -> QueryPlan
-search_prepared(plan,candidate_k=50,rerank_mode="always",top_k=5) -> list[dict]
-search(question,candidate_k=50,rerank_mode="always",top_k=5) -> list[dict]
+search(question,candidate_k=25,rerank_mode="conditional",top_k=5,search_query=None) -> list[dict]
 search_async(question,...) -> list[dict]
 ```
 
-- QueryPlan 来源固定为 `original`、`literal`、`generated`、`offline_en`
-- 四种来源只改变 `retrieval_query`，召回、重排、去重、Top-K 和返回字段必须共用同一实现
-- `search_prepared()` 是唯一执行入口；`search()` 只负责 `prepare + search_prepared`
+- 生产只暴露 `search/search_async` 两个入口
+- `search_query` 仅供评测注入预生成 query；生产默认不传，由 Service 内部决定原问题或生成query
+- 召回、重排、去重、Top-K 和返回字段在生产和评测中共用同一实现
+- 不再为查询来源建立公开类型或四套模式
 
 ### 结果契约
 
@@ -347,8 +338,6 @@ rerank_score
 chunk_id
 final_rank
 retrieval_query
-query_source
-query_cache_hit
 rerank_triggered
 fallback_reason
 service_version
@@ -359,10 +348,10 @@ service_version
 - `chunk_id` 从索引元数据透传；缺失时由 `source + section + index + text hash` 生成稳定 ID
 - 重排后只去完全重复 chunk；不在 Top-K 内执行章节限流
 
-### QueryPlan 生成与缓存
+### 查询生成与缓存
 
-- 纯英文高质量问题直接使用 `original`
-- 含中文问题默认使用 `generated`；普通直译和离线英文只作评测对照
+- 纯英文高质量问题直接使用原问题
+- 含中文问题且显式开启生成时，使用检索专用英文 query
 - 生成 prompt 保留实体、缩写、术语、数值、比较关系和任务目标，优先论文原词，不逐字直译
 - 生成客户端关闭 thinking、单次请求、不重试、3 秒超时、`max_tokens=120`
 - 缓存 key 包含规范化问题、规范化版本、供应商、模型、prompt 哈希、temperature、max_tokens、目标语言和校验规则版本
@@ -380,7 +369,7 @@ service_version
 
 ### 召回与重排
 
-- BCEmbedding 与 BM25 只使用 `QueryPlan.retrieval_query`
+- BCEmbedding 与 BM25 只使用内部得到的实际检索 query
 - Top50 是候选能力，不代表已经通过生产质量验收
 - 重排 query 使用原始问题，语言差异作为独立 A/B，不混入 P0 切换
 - P0 不执行旧 `filter_results` 的章节限流和重叠过滤；如后续启用，生产与评测必须同步并重新测量
@@ -403,7 +392,7 @@ service_version
 
 ### 验收门槛
 
-- 最终验收必须使用运行时生成 query，`offline_en` 只能报告上限
+- 最终验收必须使用运行时生成 query，离线预生成 query 只能报告上限
 - 88 题证据级@5 至少 66/88（75.0%）
 - 42 题回归至少 36/42，同时报告相对离线 39/42 的逐题胜负
 - 报告配对胜负矩阵、Wilson CI、query 失败率、缓存命中率、冷缓存生成延迟、重排延迟和本地总延迟
@@ -419,7 +408,6 @@ service_version
 ### 回滚
 
 - `QUERY_GENERATION_ENABLED=0`：回退原问题 query
-- `QUERY_PLAN_MODE=original/literal/generated`：切换查询计划
 - `RERANK_MODE=always/conditional`：切换重排模式
 - `RETRIEVAL_CANDIDATES=25/50`：切换候选池
 - 配置在进程启动时加载，切换需要重启，不实现热切换

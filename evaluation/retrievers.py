@@ -1,6 +1,6 @@
 import re
 
-from retrieval_service import QueryPlan,RetrievalService
+from retrieval_service import RetrievalService
 
 
 def tokenize(text):
@@ -20,8 +20,7 @@ class Retriever:
         self.candidates=candidates
 
     def _make_items(self,query,scores,ids,offset=0):
-        plan=QueryPlan(query,query,"original")
-        return [self.service._make_item(int(idx),float(score),plan) for idx,score in zip(ids,scores) if int(idx)>=0]
+        return [self.service._make_item(int(idx),float(score),query) for idx,score in zip(ids,scores) if int(idx)>=0]
 
     def _query_vec(self,query):
         return self.service._encode_query(query)
