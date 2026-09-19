@@ -2,6 +2,10 @@ import argparse
 import json
 import os
 import sys
+# 说明（2026-09-20 整合）：本文件是旧口径评测入口，仍被 compare_modes / cross_encoder_eval /
+# diagnose_rank / llm_rerank / llm_rerank_outside 五个历史脚本导入（提供 build_queries）。
+# 当前主口径入口是 repro_v300.py（复现与消融）、rank_metrics.py（MRR/NDCG/覆盖率）、gate_check.py（门禁）。
+# 新评测不要再往这里加逻辑，公共的查询构造逻辑如被更多地方使用，应抽成共享模块。
 sys.path.insert(0,os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from dotenv import load_dotenv
 from evaluation.schema import load_questions

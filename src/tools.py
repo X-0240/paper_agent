@@ -2,6 +2,7 @@ import json
 import logging
 import os
 import re
+from concurrent.futures import ThreadPoolExecutor,as_completed
 from dataclasses import asdict
 from agent2_parse import build_paper_card as old_build_card, compare_papers
 from config import MAX_CHUNKS_PER_PAPER, MAX_CONFLICT_PER_SESSION, MAX_FACTS_PER_SESSION, MAX_PAPER_PER_QUERY, MAX_PENDING_IN_REVIEW
@@ -200,23 +201,48 @@ def build_pending_conflicts(facts):
             })
     return pending
 
+#事实抽取重试次数：实测空输出是最常见的失败形态，两次不够
+EXTRACT_MAX_ATTEMPTS=3
+
+
 def _extract_facts(cards_text):
-    #LLM事实抽取：JSON格式失败时带纠正指令重试一次，仍失败返回空
+    #LLM事实抽取：空输出、空数组、非法JSON三种失败分别给纠正指令重试，仍失败返回空
     messages=[
         {"role":"system","content":FACT_EXTRACT_PROMPT},
         {"role":"user","content":cards_text}
     ]
-    for attempt in range(2):
+    for attempt in range(EXTRACT_MAX_ATTEMPTS):
         result=safe_call_deepseek(messages,temperature=0.2,max_tokens=3000)
-        items=_extract_json_array(result["choices"][0]["message"]["content"])
+        raw=result["choices"][0]["message"]["content"]
+        items=_extract_json_array(raw)
         if items:
             return items
-        logger.warning("事实抽取第%d次原始输出：%s",attempt+1,result["choices"][0]["message"]["content"][:500])
+        body=raw or ""
+        #空输出常见于调用异常，记录长度与usage便于区分"调用失败"和"模型不回内容"
+        logger.warning("事实抽取第%d次失败 len=%d usage=%s 原始输出：%s",
+                       attempt+1,len(body.strip()),result.get("usage"),body[:300])
         #把失败输出回填给LLM，让它看到自己的错误样板再纠正
-        messages.append({"role":"assistant","content":result["choices"][0]["message"]["content"]})
-        messages.append({"role":"user","content":"上述输出不是合法JSON数组，请只输出JSON数组。"})
-    logger.warning("事实抽取两次均失败，本次返回空事实列表")
+        messages.append({"role":"assistant","content":body})
+        #三类失败的原因不同，纠正指令必须分开，否则提示词对不上实际错误
+        if not body.strip():
+            messages.append({"role":"user","content":"上一次输出为空。请直接输出JSON数组，不要输出任何解释，也不要返回空内容。"})
+        elif _empty_json_array(body):
+            messages.append({"role":"user","content":"你输出的是空数组。请重新阅读卡片，至少抽取3条能支撑任务目标的关键事实（含来源章节名），只输出JSON数组。"})
+        else:
+            messages.append({"role":"user","content":"上述输出不是合法JSON数组，请只输出JSON数组。"})
+    logger.warning("事实抽取%d次均失败，本次返回空事实列表",EXTRACT_MAX_ATTEMPTS)
     return []
+
+
+def _empty_json_array(text):
+    #区分"合法但空数组"和"非法输出"
+    t=(text or "").strip()
+    if not t.startswith("["):
+        return False
+    try:
+        return json.loads(t)==[]
+    except Exception:
+        return False
 
 def _resolve_chunk_id(paper_id,section_name):
     #章节名映射到真实chunk_id：精确→模糊→None，来源不可追溯的事实直接丢弃
@@ -242,18 +268,49 @@ def _resolve_chunk_id(paper_id,section_name):
                 return c.chunk_id
     return None
 
-def analyze_paper_relations(paper_ids,cache=None):
+def analyze_paper_relations(paper_ids,cache=None,on_progress=None):
     #横向对比复用旧逻辑；事实抽取后必须带真实chunk_id，否则丢弃
     paper_ids=paper_ids[:MAX_PAPER_PER_QUERY]
     comparison=compare_papers(paper_ids)
     cards=[build_paper_card(pid,cache) for pid in paper_ids]
     items=[]
-    #逐篇抽取：一次只喂一张卡片，避免长输入导致LLM返回空
-    for card in cards:
+    #逐篇抽取：一次只喂一张卡片，避免长输入导致LLM返回空；多篇时并发，网络等待可重叠
+    total=len(cards)
+    def extract_one(card):
+        #单篇抽取：返回该篇的事实条目，异常由调用方兜住
         card_text=json.dumps(_trim_card(asdict(card)),ensure_ascii=False,default=str)
-        for it in _extract_facts(card_text):
+        got=_extract_facts(card_text)
+        for it in got:
             it["paper_id"]=card.paper_id
-            items.append(it)
+        return got
+    concurrency=max(1,int(os.getenv("EXTRACT_CONCURRENCY","3")))
+    if total<=1 or concurrency<=1:
+        for i,card in enumerate(cards,1):
+            try:
+                items.extend(extract_one(card))
+            except Exception as e:
+                logger.warning(f"事实抽取失败：{card.paper_id} {e}")
+            if on_progress:
+                try:
+                    on_progress(f"抽取事实 {i}/{total}：{card.paper_id}")
+                except Exception as e:
+                    logger.warning(f"进度回调失败：{e}")
+    else:
+        finished=0
+        with ThreadPoolExecutor(max_workers=min(concurrency,total)) as pool:
+            futures={pool.submit(extract_one,card):card for card in cards}
+            for fut in as_completed(futures):
+                card=futures[fut]
+                finished+=1
+                try:
+                    items.extend(fut.result())
+                except Exception as e:
+                    logger.warning(f"事实抽取失败：{card.paper_id} {e}")
+                if on_progress:
+                    try:
+                        on_progress(f"抽取事实 {finished}/{total}：{card.paper_id}")
+                    except Exception as e:
+                        logger.warning(f"进度回调失败：{e}")
     global _fact_counter
     facts=[]
     for it in items:
@@ -279,7 +336,8 @@ def analyze_paper_relations(paper_ids,cache=None):
         ))
     if items and not facts:
         logger.warning("事实解析到%d条，全部因来源解析失败丢弃",len(items))
-    return {"comparison":comparison,"facts":facts}
+    #卡片必须一并返回：调用方需要把内部建的卡片并回状态，否则卡片数会被低估
+    return {"comparison":comparison,"facts":facts,"cards":cards}
 
 def _extract_verdict(text):
     #遍历所有JSON对象候选，取带category的裁决对象，兼容前后缀和多个对象

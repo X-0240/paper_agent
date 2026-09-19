@@ -18,6 +18,53 @@ def test_analyze_paper_relations_filters_unresolvable_facts(monkeypatch):
     assert len(out["facts"])==1
     assert out["facts"][0].source_chunk_id=="P1::1 Introduction::0"
 
+def test_analyze_extracts_papers_in_parallel(monkeypatch):
+    #多篇抽取并发：单篇0.25秒，两篇串行需0.5秒，并发应明显更快
+    import time as _time
+    monkeypatch.setattr("tools.compare_papers",lambda paper_ids:"c")
+    monkeypatch.setattr("tools.build_paper_card",lambda paper_id,cache=None:PaperCard(paper_id=paper_id,title=paper_id))
+    monkeypatch.setattr("tools._resolve_chunk_id",lambda pid,sec:f"{pid}::c1")
+
+    def slow_extract(card_text):
+        _time.sleep(0.25)
+        return [{"paper_id":"","entity":"E","attribute":"A","value":"V","content":"C","section_name":"S","raw_quote":"q"}]
+
+    monkeypatch.setattr("tools._extract_facts",slow_extract)
+    monkeypatch.setenv("EXTRACT_CONCURRENCY","2")
+    seen=[]
+    started=_time.perf_counter()
+    out=analyze_paper_relations(["P1","P2"],on_progress=seen.append)
+    elapsed=_time.perf_counter()-started
+    assert elapsed<0.45
+    assert len(seen)==2
+    assert len(out["facts"])==2
+
+
+def test_analyze_returns_cards_and_reports_per_paper_progress(monkeypatch):
+    #内部建的卡片必须返回给调用方，同时逐篇上报进度
+    monkeypatch.setattr("tools.compare_papers",lambda paper_ids:"对比矩阵")
+    monkeypatch.setattr("tools.build_paper_card",lambda paper_id,cache=None:PaperCard(paper_id=paper_id,title=paper_id))
+    monkeypatch.setattr("tools._extract_facts",lambda card_text:[])
+    seen=[]
+    out=analyze_paper_relations(["P1","P2"],on_progress=seen.append)
+    assert [c.paper_id for c in out["cards"]]==["P1","P2"]
+    assert len(seen)==2 and "1/2" in seen[0]
+
+
+def test_extract_facts_retries_on_empty_output(monkeypatch):
+    #空输出是最常见的失败形态：必须用"输出为空"的提示重试，而不是当成非法JSON
+    calls={"n":0}
+    def fake(messages,**kw):
+        calls["n"]+=1
+        if calls["n"]==1:
+            return {"choices":[{"message":{"content":""}}],"usage":{"total_tokens":10}}
+        assert any(m.get("role")=="user" and "输出为空" in (m.get("content") or "") for m in messages)
+        return {"choices":[{"message":{"content":json.dumps([{"paper_id":"P1","entity":"E","attribute":"A","value":"V","content":"C","section_name":"S","raw_quote":"q"}])}}]}
+    monkeypatch.setattr("tools.safe_call_deepseek",fake)
+    items=_extract_facts("卡片")
+    assert len(items)==1 and calls["n"]==2
+
+
 def test_extract_facts_retry_on_bad_json(monkeypatch):
     #LLM第一次输出非法JSON时带纠正指令重试一次
     calls={"n":0}

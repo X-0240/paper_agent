@@ -3,6 +3,7 @@ import os
 import re
 import sys
 from agent_react import react
+from paper_entities import extract_named_papers as _extract_named, normalize_paper_name as _normalize_name
 from rag_tool import search_papers_rerank_text, search_papers_hybrid, search_papers_structured, sources, read_section
 
 #Windows控制台可能遇到特殊字符，统一兜底防崩溃
@@ -14,41 +15,13 @@ if sys.stderr and hasattr(sys.stderr,"reconfigure"):
 logging.basicConfig(level=logging.INFO)
 logger=logging.getLogger(__name__)
 
-PAPER_ALIASES={
-    "Attention_Is_All_You_Need":["attention is all you need","transformer"],
-    "BERT":["bert"],
-    "Chain_of_Thought":["chain of thought","chain-of-thought"],
-    "FlashAttention":["flashattention","flash attention"],
-    "GraphRAG":["graphrag","graph rag"],
-    "LoRA":["lora"],
-    "RAG_Original_Paper":["retrieval augmented generation","rag论文","rag原始论文"],
-    "ReAct":["react"],
-    "GPT2":["gpt2","gpt-2","gpt"],
-    "RoFormer_RoPE":["roformer","rope","rotary position","旋转位置"],
-}
-
-ALIAS_TO_SOURCE={alias:source for source,aliases in PAPER_ALIASES.items() for alias in aliases}
-
 def normalize_paper_name(name):
-    #模型可能输出可读标题，映射回库内source名
-    low=name.lower()
-    #按别名长度从长到短匹配，英文别名用词边界，避免"transformer"命中"transformers"
-    for alias in sorted(ALIAS_TO_SOURCE,key=len,reverse=True):
-        if re.search(r"[a-z]",alias):
-            if re.search(r"(?<![a-z0-9])"+re.escape(alias)+r"(?![a-z0-9])",low):
-                return ALIAS_TO_SOURCE[alias]
-        elif alias in low:
-            return ALIAS_TO_SOURCE[alias]
-    return name
+    #点名论文识别的唯一实现在 paper_entities，这里只做委托
+    return _normalize_name(name,set(sources))
 
 def extract_named_papers(question):
     #用户可能明确点名论文，检索不一定召回，需显式识别并优先加入
-    named=[]
-    q_low=question.lower()
-    for source,keys in PAPER_ALIASES.items():
-        if any(k in q_low for k in keys):
-            named.append(source)
-    return named
+    return _extract_named(question,set(sources))
 
 #Agent-1：检索，手写ReAct决定检索词和论文清单
 AGENT1_PROMPT="""你是检索Agent（Agent-1）。根据用户课题，从论文知识库检索并确定需要解析的论文。

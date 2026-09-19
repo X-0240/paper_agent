@@ -18,6 +18,7 @@ from rank_bm25 import BM25Okapi
 from sentence_transformers import SentenceTransformer
 
 from llm_api import call_deepseek_once,release_budget,reserve_budget,settle_budget
+from paper_entities import extract_named_papers
 from rerank import rerank
 
 load_dotenv()
@@ -30,6 +31,12 @@ QUERY_PROMPT=(
     "只输出一行英文query。"
 )
 QUERY_PROMPT_HASH=hashlib.sha1(QUERY_PROMPT.encode("utf-8")).hexdigest()[:12]
+
+#论文级筛选：问题没点名论文时，从已召回论文里挑出真正相关的，用于切片加权
+PAPER_RERANK_PROMPT=(
+    "你是论文筛选器。根据用户问题，从候选论文列表里选出与问题最相关的1到3篇。"
+    "只输出JSON数组，元素必须是候选列表里出现过的名字，不要解释。"
+)
 
 
 class _QueryCache:
@@ -150,6 +157,7 @@ class RetrievalService:
             path=os.getenv("QUERY_CACHE_FILE",""),
             negative_ttl=int(os.getenv("QUERY_NEGATIVE_TTL","60"))
         )
+        self._paper_rerank_cache={}
 
     def _load_metadata(self):
         if not self.meta:
@@ -294,7 +302,7 @@ class RetrievalService:
         top=sorted(range(len(scores)),key=lambda i:scores[i],reverse=True)[:k]
         return [scores[i] for i in top],top
 
-    def _recall(self,query,k,alpha=None):
+    def _recall(self,query,k,alpha=None,boost_sources=None):
         alpha=self.alpha if alpha is None else alpha
         vec=None
         bm=None
@@ -321,8 +329,59 @@ class RetrievalService:
             scores,ids=bm
             for score,idx in zip(self._normalize_scores(scores),ids):
                 combined[int(idx)]=combined.get(int(idx),0)+(1-alpha)*float(score)
+        #点名论文加权：问题里明确点到的论文，其切片在融合分上加固定增量
+        #软加权而不是硬过滤，避免"对比A和B"这类多论文问题被砍掉一半
+        if boost_sources:
+            bonus=float(os.getenv("ENTITY_BOOST_VALUE","0.2"))
+            for idx in combined:
+                if self.sources[idx] in boost_sources:
+                    combined[idx]+=bonus
         top=sorted(combined.items(),key=lambda x:x[1],reverse=True)[:k]
         return top,"+".join(status)
+
+    def named_papers(self,question):
+        #点名论文识别：开关关闭时返回空集合，保证检索行为与改造前一致
+        if os.getenv("ENTITY_BOOST","0")!="1":
+            return []
+        try:
+            return extract_named_papers(question,set(self.sources))
+        except Exception as e:
+            logger.warning(f"点名论文识别失败：{e}")
+            return []
+
+    def paper_rerank(self,question,sources):
+        #论文级筛选：只从已召回论文里选，不引入新候选；开关关闭或失败时返回空
+        if os.getenv("PAPER_RERANK","0")!="1" or not sources:
+            return []
+        key=(question,tuple(sources))
+        cached=self._paper_rerank_cache.get(key)
+        if cached is not None:
+            return cached
+        picked=[]
+        try:
+            limit=int(os.getenv("PAPER_RERANK_CANDIDATES","8"))
+            cand=list(sources[:limit])
+            result=call_deepseek_once(
+                [{"role":"system","content":PAPER_RERANK_PROMPT},
+                 {"role":"user","content":f"候选：{json.dumps(cand,ensure_ascii=False)}\n问题：{question}"}],
+                temperature=0.0,
+                max_tokens=120,
+                timeout=float(os.getenv("PAPER_RERANK_TIMEOUT","5")),
+                thinking="disabled",
+                record_usage=True
+            )
+            text=result["choices"][0]["message"]["content"] or ""
+            start=text.find("[")
+            end=text.rfind("]")
+            if start>=0 and end>start:
+                arr=json.loads(text[start:end+1])
+                picked=[c for c in arr if isinstance(c,str) and c in cand][:3]
+        except Exception as e:
+            logger.warning(f"论文级筛选失败，跳过加权：{e}")
+        if len(self._paper_rerank_cache)>256:
+            self._paper_rerank_cache.clear()
+        self._paper_rerank_cache[key]=picked
+        return picked
 
     def recall(self,query,k=50,alpha=None):
         #仅供兼容层和离线路由使用：只做混合召回，不生成query、不重排
@@ -371,16 +430,43 @@ class RetrievalService:
 
     def _execute_search(self,question,retrieval_query,fallback_reason="",candidate_k=None,rerank_mode=None,top_k=5):
         candidate_k=candidate_k or self.candidate_k
-        recalled,status=self._recall(retrieval_query,candidate_k)
+        boost_sources=self.named_papers(question)
+        #开关关闭时按原签名调用，保证既有调用方与测试替身不受影响
+        if boost_sources:
+            recalled,status=self._recall(retrieval_query,candidate_k,boost_sources=boost_sources)
+        else:
+            recalled,status=self._recall(retrieval_query,candidate_k)
         items=[self._make_item(idx,score,retrieval_query,fallback_reason) for idx,score in recalled]
+        for item in items:
+            item["entity_boost"]=list(boost_sources)
+        #未点名论文时用论文级筛选补位：从已召回论文里挑相关的，等价于"猜测这题在问哪篇"
+        if not boost_sources and items:
+            distinct=list(dict.fromkeys(item["source"] for item in items))
+            picked=self.paper_rerank(question,distinct)
+            if picked:
+                bonus=float(os.getenv("ENTITY_BOOST_VALUE","0.2"))
+                for item in items:
+                    if item["source"] in picked:
+                        item["recall_score"]=round(item["recall_score"]+bonus,6)
+                        item["entity_boost"]=picked
+                boost_sources=picked
         if not items and retrieval_query!=question:
-            recalled,status=self._recall(question,candidate_k)
+            if boost_sources:
+                recalled,status=self._recall(question,candidate_k,boost_sources=boost_sources)
+            else:
+                recalled,status=self._recall(question,candidate_k)
             items=[self._make_item(idx,score,question,fallback_reason) for idx,score in recalled]
+            for item in items:
+                item["entity_boost"]=list(boost_sources)
             fallback_reason="no_candidates_use_original"
         if not items:
             return []
         mode=(rerank_mode or self.rerank_mode).lower()
         use_rerank=self._should_rerank(items,top_k,mode)
+        #点名论文时跳过重排：实测重排会把用户点名论文的正确切片压到范围外段落之后
+        if boost_sources and use_rerank:
+            logger.info(f"已点名论文{boost_sources}，跳过重排以保持点名论文优先")
+            use_rerank=False
         if use_rerank:
             scope=f"c{len(items)}|{items[0]['chunk_id']}|{retrieval_query}|{question}"
             items=rerank(question,items,top_n=max(top_k,len(items)),snapshot=self.index_snapshot(),cache_scope=scope)

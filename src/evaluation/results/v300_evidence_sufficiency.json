@@ -1,0 +1,528 @@
+{
+ "rubric": "你是检索证据充分性判读员。只看给定证据，不使用外部常识。\n判定为“充分”必须同时满足三条：\n1) 问题涉及的所有核心信息点都能在证据里找到明确原文支撑；\n2) 证据内部不存在互相矛盾的表述；\n3) 不需要额外常识或外部资料即可从证据直接得出答案。\n任一条不满足即判“不充分”，并指出缺少哪个信息点。\n只输出一行JSON：{\"sufficient\":true/false,\"missing\":\"缺失的信息点，充分时留空\",\"reason\":\"简短理由\"}",
+ "rubric_sha": "1fe895d891a6cd47",
+ "config": "prod_candidate_k5",
+ "n": 50,
+ "sufficient": 34,
+ "rate": 0.68,
+ "by_bucket": {
+  "仅基线命中": {
+   "n": 10,
+   "sufficient": 4
+  },
+  "仅候选命中": {
+   "n": 18,
+   "sufficient": 16
+  },
+  "两边都没中": {
+   "n": 14,
+   "sufficient": 8
+  },
+  "两边都中": {
+   "n": 8,
+   "sufficient": 6
+  }
+ },
+ "rows": [
+  {
+   "question": "L2C 中的 same-instance reward 和 cross-instance reward 这两个奖励变体有什么区别？各自鼓励 LLM-as-a-Coach 学到什么？",
+   "paper_id": "2609.15851",
+   "bucket": "仅基线命中",
+   "config": "prod_candidate_k5",
+   "hit5": false,
+   "sufficient": true,
+   "missing": "",
+   "reason": "证据[4]明确给出两种奖励的定义：same-instance reward 提升原问题后续回答，cross-instance reward 引出可迁移到其他实例的知识；证据[5]进一步说明各自只提升其优化的准确率，足以回答区别与各自鼓励学到的内容。"
+  },
+  {
+   "question": "SPLICE 方法是如何从文档语料中构造长上下文训练样本的？",
+   "paper_id": "2312.17296",
+   "bucket": "仅基线命中",
+   "config": "prod_candidate_k5",
+   "hit5": false,
+   "sufficient": true,
+   "missing": "",
+   "reason": "证据[4]和[5]明确说明SPLICE通过检索（如BM25、Contriever）将相互相关的文档拼接到单个训练上下文中来构造训练样本，[3]补充使用BM25/Contriever-MSMARCO查找相关文档并以结构化方式输入模型，核心信息点均有原文支撑且无矛盾。"
+  },
+  {
+   "question": "在TED演讲评分预测实验中，依赖树模型与词序列模型的平均F-score分别是多少？与使用手工特征的经典机器学习基线相比，神经网络模型表现如何？",
+   "paper_id": "1905.08392",
+   "bucket": "仅基线命中",
+   "config": "prod_candidate_k5",
+   "hit5": false,
+   "sufficient": false,
+   "missing": "TED演讲评分预测实验中依赖树模型与词序列模型的平均F-score数值，以及神经网络模型与手工特征经典机器学习基线的对比结果",
+   "reason": "证据中没有任何关于TED演讲评分预测实验的内容，也未提及依赖树模型、词序列模型的F-score或与手工特征基线的比较。"
+  },
+  {
+   "question": "在作者自建数据集上，RAVAESum 与 RA-Sparse 以及不考虑读者评论的方法相比，实验结果如何？",
+   "paper_id": "1708.01065",
+   "bucket": "仅基线命中",
+   "config": "prod_candidate_k5",
+   "hit5": false,
+   "sufficient": false,
+   "missing": "RAVAESum、RA-Sparse 以及不考虑读者评论的方法在作者自建数据集上的实验结果对比",
+   "reason": "证据中未出现 RAVAESum 或 RA-Sparse，也没有在作者自建数据集上对这些方法进行对比实验结果的原文支撑。"
+  },
+  {
+   "question": "论文中如何评估模型在警报检测上的性能？使用了什么验证方法？",
+   "paper_id": "1809.08899",
+   "bucket": "仅基线命中",
+   "config": "prod_candidate_k5",
+   "hit5": true,
+   "sufficient": false,
+   "missing": "论文中评估警报检测性能的具体指标和验证方法（如交叉验证、留出法等）",
+   "reason": "证据涉及多篇论文，分别提到precision/recall/F1/ROC-AUC、检测率/误报率、阈值方法等，但未明确针对同一篇论文的警报检测性能评估指标与验证方法，且验证方法（如留出法、交叉验证）未在证据中明确说明。"
+  },
+  {
+   "question": "论文发现的长时程智能体“失败签名”（failure signature）具体包含哪三个特征，各自出现的比例是多少？",
+   "paper_id": "2609.17930",
+   "bucket": "仅基线命中",
+   "config": "prod_candidate_k5",
+   "hit5": false,
+   "sufficient": true,
+   "missing": "",
+   "reason": "证据[3]和[5]明确给出三个特征及比例：P1不恢复69.5%、P2不自我检测38.5%、P4继续行动72.6%，三者共现13.7%。"
+  },
+  {
+   "question": "论文在使用 QLoRA 进行微调时设定了哪些关键超参数？",
+   "paper_id": "2609.17398",
+   "bucket": "仅基线命中",
+   "config": "prod_candidate_k5",
+   "hit5": true,
+   "sufficient": true,
+   "missing": "",
+   "reason": "证据[1]明确列出了QLoRA微调的关键超参数，包括4bit量化配置、LoRA配置（r=64、lora_alpha=16、lora_dropout=0.1、bias='none'）以及训练参数（batch size=32、warmup steps=0.03、learning rate=2e-3、lr scheduler='constant'、bf16=True），无矛盾，可直接得出答案。"
+  },
+  {
+   "question": "论文对强化学习目标中的哪些组件做了消融实验？其中哪个组件最关键，去掉后性能变化如何？",
+   "paper_id": "2609.18677",
+   "bucket": "仅基线命中",
+   "config": "prod_candidate_k5",
+   "hit5": true,
+   "sufficient": false,
+   "missing": "强化学习目标中的组件消融实验信息，以及最关键组件及其去除后的性能变化",
+   "reason": "证据涉及的是检索/工作流/神经元等组件的消融，未提及强化学习目标中的组件消融，也未指出哪个组件最关键及其去除后的性能变化。"
+  },
+  {
+   "question": "论文指出基于深度学习的CFIL系统为何没有超过基于传统机器学习的系统？",
+   "paper_id": "1803.06745",
+   "bucket": "仅基线命中",
+   "config": "prod_candidate_k5",
+   "hit5": false,
+   "sufficient": false,
+   "missing": "论文中关于CFIL系统、其基于深度学习的实现为何未超过传统机器学习系统的具体原因或解释",
+   "reason": "检索证据中没有任何一条提及CFIL系统，也未提供深度学习未超过传统机器学习的原因，无法从证据直接得出答案。"
+  },
+  {
+   "question": "这篇论文在未来工作部分计划进一步研究哪些问题？",
+   "paper_id": "1905.08067",
+   "bucket": "仅基线命中",
+   "config": "prod_candidate_k5",
+   "hit5": false,
+   "sufficient": false,
+   "missing": "问题未指明具体论文，检索证据包含多篇不同论文（2609.17841、2609.18396、2609.17225、2312.17296、2609.17837）各自的未来工作内容，无法确定应依据哪一篇回答",
+   "reason": "证据涉及多篇论文且各自未来工作方向不同，缺少目标论文的限定信息，无法唯一确定答案"
+  },
+  {
+   "question": "DualViewEval 如何保证选出的 miniset 大小恰好为 K，并且让预测反馈能够传播到离散的任务选择过程中？",
+   "paper_id": "2609.18909",
+   "bucket": "仅候选命中",
+   "config": "prod_candidate_k5",
+   "hit5": true,
+   "sufficient": true,
+   "missing": "",
+   "reason": "证据[1]明确说明用TopK(θ,K)硬掩码保证恰好K个任务，并用直通门g=h+q−sg(q)将预测反馈梯度传播到离散选择。"
+  },
+  {
+   "question": "EdgeReMIND 如何从训练数据中校准多时间尺度 recency bank 的衰减率？",
+   "paper_id": "2609.17916",
+   "bucket": "仅候选命中",
+   "config": "prod_candidate_k5",
+   "hit5": true,
+   "sufficient": true,
+   "missing": "",
+   "reason": "证据[5]明确给出校准方法：从训练流中每个scope的连续同键事件间隔GX取中位数mX，按几何间距γ=2放置三个半衰期{mX/2, mX, 2mX}，衰减率λX,j=ln2/hX,j；证据[4]也确认衰减率由训练集inter-recurrence gaps校准，无矛盾。"
+  },
+  {
+   "question": "K-Bench 用什么方法校准其自动化评分器（judge），它与临床医生共识的一致程度如何？",
+   "paper_id": "2609.15855",
+   "bucket": "仅候选命中",
+   "config": "prod_candidate_k5",
+   "hit5": true,
+   "sufficient": true,
+   "missing": "",
+   "reason": "证据明确说明校准方法（用151份临床医生共识转录及完整条目级共识数据集校准，采用与临床共识相同的Q1门控和条目级不适用规则，提示包含评分标准、锚点、转录和适用性说明，使用确定性解码）以及一致程度（GPT-4o judge与临床医生共识在全部七个临床维度上一致率为94.2%，且高于临床医生彼此间的一致性）。"
+  },
+  {
+   "question": "MoME 是如何在保持 token 索引查找的同时实现上下文感知的记忆读取的？它包含哪两级索引器？",
+   "paper_id": "2609.15126",
+   "bucket": "仅候选命中",
+   "config": "prod_candidate_k5",
+   "hit5": true,
+   "sufficient": true,
+   "missing": "",
+   "reason": "证据[5]明确说明MoME由两级索引器组成：token indexer f(xt)选择行，context indexer gθ(ht)在该行内选择并加权槽位，从而在保持token索引查找的同时实现上下文感知读取。"
+  },
+  {
+   "question": "UIT-ViIC 数据集总共包含多少张图像和多少条越南语描述？",
+   "paper_id": "2002.00175",
+   "bucket": "仅候选命中",
+   "config": "prod_candidate_k5",
+   "hit5": true,
+   "sufficient": true,
+   "missing": "",
+   "reason": "证据[3]和[4]明确给出UIT-ViIC包含3,850张图像和19,250条越南语描述，信息一致且无需外部知识。"
+  },
+  {
+   "question": "为了研究极端 token/参数比下的行为，论文训练了多少个模型，这些模型的参数规模和数据预算范围分别是多少？",
+   "paper_id": "2401.00448",
+   "bucket": "仅候选命中",
+   "config": "prod_candidate_k5",
+   "hit5": true,
+   "sufficient": true,
+   "missing": "",
+   "reason": "证据[1]和[3]明确给出训练了47个模型，参数规模150M到6B，数据预算10到10,000 tokens/parameter，信息完整且无矛盾。"
+  },
+  {
+   "question": "在 ECtHR-NPD 的主要实验结果中，哪个系统取得了最低的总体 MAE，相比训练集 median 降低了多少？增大语言模型规模或使用复杂代理配置是否一致地改善 MAE？",
+   "paper_id": "2609.18908",
+   "bucket": "仅候选命中",
+   "config": "prod_candidate_k5",
+   "hit5": true,
+   "sufficient": true,
+   "missing": "",
+   "reason": "证据[1]明确给出CatBoost取得最低总体MAE（C9.9k），比训练集median低10.2%，并指出更大LM或复杂代理配置不会一致改善MAE，三个核心信息点均有原文支撑且无矛盾。"
+  },
+  {
+   "question": "在参数化局部分布族下，论文证明了 relevance error 与 fidelity error 之间存在怎样的乘性上界？",
+   "paper_id": "2609.19077",
+   "bucket": "仅候选命中",
+   "config": "prod_candidate_k5",
+   "hit5": true,
+   "sufficient": true,
+   "missing": "",
+   "reason": "证据[3]明确给出：对于该参数化分布族，任何可行解的 relevance error 至多为其 fidelity error 的 (1+e^{-σ})^k 倍，即乘性上界。"
+  },
+  {
+   "question": "在实验评估中，词汇基线模型在攻击性语言分类上达到什么F1分数，又在哪些网络欺凌标准上难以可靠检测？",
+   "paper_id": "2004.01820",
+   "bucket": "仅候选命中",
+   "config": "prod_candidate_k5",
+   "hit5": true,
+   "sufficient": true,
+   "missing": "",
+   "reason": "证据[2]明确给出词汇基线模型在攻击性语言分类上的F1分数为83.5%，并指出其在repetition、harmful intent、visibility among peers、power imbalance四个网络欺凌标准上难以可靠检测（低召回率），核心信息点均有原文支撑且无矛盾。"
+  },
+  {
+   "question": "论文作者指出了SLE核的哪些主要局限性？",
+   "paper_id": "2609.19083",
+   "bucket": "仅候选命中",
+   "config": "prod_candidate_k5",
+   "hit5": true,
+   "sufficient": true,
+   "missing": "",
+   "reason": "证据[1]的Limitations段落明确指出了SLE核的主要局限性：依赖所有测试点与所有|D|训练地标之间的成对距离计算，形成完整距离矩阵需要O(N·|D|)次距离计算。"
+  },
+  {
+   "question": "论文在比较两种文本模型（n-grams tf-idf 与 word embedding）时，发现哪种模型效果更好？作者认为这说明什么？",
+   "paper_id": "1905.08067",
+   "bucket": "仅候选命中",
+   "config": "prod_candidate_k5",
+   "hit5": true,
+   "sufficient": true,
+   "missing": "",
+   "reason": "证据[3]明确说明word embedding优于n-grams tf-idf，并指出这证实了上下文信息在检测激进化活动中的重要性。"
+  },
+  {
+   "question": "论文在讨论部分指出了 chain-of-thought prompting 的哪些主要局限？",
+   "paper_id": "Chain_of_Thought",
+   "bucket": "仅候选命中",
+   "config": "prod_candidate_k5",
+   "hit5": true,
+   "sufficient": true,
+   "missing": "",
+   "reason": "证据[1]的讨论部分明确列出了chain-of-thought prompting的四项主要局限：是否真正推理存疑、微调时标注成本可能过高、无法保证推理路径正确、仅在大模型规模下出现导致部署成本高。"
+  },
+  {
+   "question": "论文如何论证需要更多社交媒体 NER 数据集？常规 NER 模型在 MahaSocialNER 测试集上的零样本结果如何？",
+   "paper_id": "2401.00170",
+   "bucket": "仅候选命中",
+   "config": "prod_candidate_k5",
+   "hit5": true,
+   "sufficient": true,
+   "missing": "",
+   "reason": "证据[1]和[5]明确说明常规NER模型在MahaSocialNER测试集上零样本结果差（68.28%），并据此论证需要更多社交媒体NER数据集；证据[1]还给出具体零样本F1分数。"
+  },
+  {
+   "question": "论文对稀疏线性解释问题（SLE）在 ReLU 神经网络上的计算复杂度给出了什么结论？",
+   "paper_id": "2609.19077",
+   "bucket": "仅候选命中",
+   "config": "prod_candidate_k5",
+   "hit5": true,
+   "sufficient": true,
+   "missing": "",
+   "reason": "证据[1]明确给出SLE在ReLU神经网络上是NPPP-hard的结论，证据[3]也说明SLE属于NPPP且是hard for this class，信息点完整且无矛盾。"
+  },
+  {
+   "question": "论文提出的 factual perturbation pipeline 如何生成从正确到逐步错误的答案，并用于评估事实性指标？",
+   "paper_id": "2609.15561",
+   "bucket": "仅候选命中",
+   "config": "prod_candidate_k5",
+   "hit5": true,
+   "sufficient": true,
+   "missing": "",
+   "reason": "证据[1][3][4][5]明确描述了pipeline生成A0-A4从正确到逐步错误的答案，并用于评估事实性指标（如事实正确性随扰动下降、与ground truth相关性等）。"
+  },
+  {
+   "question": "论文提出的OPETRL框架如何将离散变量和连续变量的优化分离到两个时间尺度上，并分别采用什么方法进行求解？",
+   "paper_id": "2401.00445",
+   "bucket": "仅候选命中",
+   "config": "prod_candidate_k5",
+   "hit5": true,
+   "sufficient": true,
+   "missing": "",
+   "reason": "证据[1][2][3]明确说明OPETRL/TRL-OP框架将离散变量（传输模式选择）和连续变量（传输功率）分离到两个时间尺度，离散变量用tiny reinforcement learning (TRL)求解，连续变量用optimization programming (OP)求解，核心信息点均有原文支撑且无矛盾。"
+  },
+  {
+   "question": "论文的两个零假设测试分别用来定位什么故障？",
+   "paper_id": "2609.18005",
+   "bucket": "仅候选命中",
+   "config": "prod_candidate_k5",
+   "hit5": true,
+   "sufficient": false,
+   "missing": "两个零假设测试分别定位什么故障的明确对应关系（证据[1][2]提到两个null tests，但未清晰说明各自定位的故障类型）",
+   "reason": "证据[1]列出两个null tests但未说明各自定位的故障；证据[2]仅笼统说明差异非零时故障在judge/analysis或implementation，未与两个测试一一对应；证据[3][4][5]来自其他论文，不相关。"
+  },
+  {
+   "question": "这篇论文把构建 GitHub Typo Corpus 的流程概括为哪几个主要步骤？",
+   "paper_id": "1911.12893",
+   "bucket": "仅候选命中",
+   "config": "prod_candidate_k5",
+   "hit5": true,
+   "sufficient": false,
+   "missing": "构建 GitHub Typo Corpus 的完整主要步骤列表（证据仅零散提及部分步骤，未给出完整流程概括）",
+   "reason": "证据[3]只提到数据收集包含两步，但未覆盖整个构建流程；证据[5]列出过滤和分类等步骤，但未明确概括为完整的主要步骤，且各证据未形成一致完整的步骤列表。"
+  },
+  {
+   "question": "Fathom 是如何为每个查询、每个通道决定读取深度的？它依赖什么机制使得不同通道可以有不同的比特深度？",
+   "paper_id": "2609.17652",
+   "bucket": "两边都没中",
+   "config": "prod_candidate_k5",
+   "hit5": false,
+   "sufficient": true,
+   "missing": "",
+   "reason": "证据[2][5]明确说明Fathom按查询和通道决定读取深度，机制为按边际价值（分数方差）进行反向注水（reverse water-filling），并借助通道主序的4-bit位平面存储使前缀读取成为精确的低精度量化器，从而不同通道可有不同比特深度。"
+  },
+  {
+   "question": "SLE核如何在底层距离不满足条件负定（CND）的情况下仍保证核矩阵的半正定性？其关键构造是什么？",
+   "paper_id": "2609.19083",
+   "bucket": "两边都没中",
+   "config": "prod_candidate_k5",
+   "hit5": false,
+   "sufficient": true,
+   "missing": "",
+   "reason": "证据[3]摘要明确指出SLE核通过将输入嵌入到以所有训练点为中心的紧支撑bump函数构成的稀疏特征向量中，再在该嵌入空间应用任意标准PSD核，从而对任意距离度量可证明PSD；证据[1][5]也印证了该构造不依赖CND距离，核心信息点均有原文支撑且无矛盾。"
+  },
+  {
+   "question": "作者在讨论中承认自己工作存在哪些主要局限？",
+   "paper_id": "2609.15126",
+   "bucket": "两边都没中",
+   "config": "prod_candidate_k5",
+   "hit5": true,
+   "sufficient": false,
+   "missing": "问题未指明具体论文，证据包含多篇不同论文的局限讨论，无法确定作者所指",
+   "reason": "证据来自多篇论文，各自列出不同局限，缺少问题所指论文的明确对应信息，无法直接得出唯一答案"
+  },
+  {
+   "question": "在什么硬件/存储条件下 Fathom 并不能带来加速？原因是什么？",
+   "paper_id": "2609.17652",
+   "bucket": "两边都没中",
+   "config": "prod_candidate_k5",
+   "hit5": false,
+   "sufficient": false,
+   "missing": "Fathom在何种硬件/存储条件下不能带来加速及其原因",
+   "reason": "证据中未提及Fathom在特定硬件或存储条件下无法加速的相关内容"
+  },
+  {
+   "question": "在匹配的三随机种子实验中，完整模型相对于 full fine-tuning 在 FACED、ISRUC、SEED-V 和 PhysioNet-MI 上的平均平衡准确率变化分别是多少？",
+   "paper_id": "2609.17886",
+   "bucket": "两边都没中",
+   "config": "prod_candidate_k5",
+   "hit5": false,
+   "sufficient": true,
+   "missing": "",
+   "reason": "证据[3]明确给出完整模型相对Full FT的平均BA变化：FACED −0.12±1.24、ISRUC +1.27±1.46、SEED-V +0.77±0.74、PhysioNet-MI −1.27±0.26，且为三匹配种子实验，无矛盾。"
+  },
+  {
+   "question": "论文中对来自 TUCANA 的传感器数据进行了哪些预处理步骤？",
+   "paper_id": "2401.00112",
+   "bucket": "两边都没中",
+   "config": "prod_candidate_k5",
+   "hit5": false,
+   "sufficient": false,
+   "missing": "论文中对来自 TUCANA 的传感器数据所进行的具体预处理步骤",
+   "reason": "证据仅提及论文包含数据预处理章节，但未给出针对 TUCANA 传感器数据的具体预处理步骤内容；其他证据涉及不同论文或权重预处理，与问题无关。"
+  },
+  {
+   "question": "论文在结论部分指出了当前工作存在哪些局限，以及作者认为未来可以朝哪些方向扩展？",
+   "paper_id": "2609.18527",
+   "bucket": "两边都没中",
+   "config": "prod_candidate_k5",
+   "hit5": false,
+   "sufficient": false,
+   "missing": "问题所指的特定论文的结论部分内容；证据包含多篇不同论文的局限与未来方向，无法确定哪一篇是问题所指",
+   "reason": "证据来自5篇不同论文，未指明问题针对哪一篇，无法从证据直接得出唯一答案"
+  },
+  {
+   "question": "论文如何实现连续时间生成动力学的无模拟（simulation-free）训练？",
+   "paper_id": "2609.17901",
+   "bucket": "两边都没中",
+   "config": "prod_candidate_k5",
+   "hit5": false,
+   "sufficient": true,
+   "missing": "",
+   "reason": "证据[1][2][3]明确说明通过score-induced interpolation paths作为局部演化目标，用回归目标实现simulation-free训练，核心信息点均有原文支撑且无矛盾。"
+  },
+  {
+   "question": "论文将 EFS-LSTM-MOEA 与哪些最新的特征选择方法进行了比较，比较结果说明了什么？",
+   "paper_id": "2312.17517",
+   "bucket": "两边都没中",
+   "config": "prod_candidate_k5",
+   "hit5": false,
+   "sufficient": true,
+   "missing": "",
+   "reason": "证据[1]明确列出EFS-LSTM-MOEA与CancelOut、EAR-FS、Conventional LSTM比较，并给出win-loss排名结果，说明EFS-LSTM-MOEA统计上优于其余方法。"
+  },
+  {
+   "question": "论文提出的 RAVAESum 框架如何联合新闻文档与读者评论进行句子显著性估计，并处理评论中的噪声？",
+   "paper_id": "1708.01065",
+   "bucket": "两边都没中",
+   "config": "prod_candidate_k5",
+   "hit5": false,
+   "sufficient": false,
+   "missing": "RAVAESum 框架的具体名称及其联合新闻文档与读者评论进行句子显著性估计的机制细节；以及处理评论噪声的具体方法细节",
+   "reason": "证据仅提及VAESum/RA-MDS框架，未出现RAVAESum名称，且未提供联合建模与噪声处理的具体机制，无法直接回答。"
+  },
+  {
+   "question": "论文提出的基于决策树的多示例学习（MIL）模型是如何将单个细胞的预测结果聚合成患者层面的突变概率的？",
+   "paper_id": "2609.18825",
+   "bucket": "两边都没中",
+   "config": "prod_candidate_k5",
+   "hit5": false,
+   "sufficient": true,
+   "missing": "",
+   "reason": "证据[2]和[5]明确说明将多个管（每患者3管）的细胞级预测分数通过平均池化（average pooling）聚合成患者层面的突变概率，直接回答了聚合方式。"
+  },
+  {
+   "question": "论文通过 PCA 的渐近行为分析得出了关于高维数据内在维度的什么结论？",
+   "paper_id": "2401.00422",
+   "bucket": "两边都没中",
+   "config": "prod_candidate_k5",
+   "hit5": false,
+   "sufficient": true,
+   "missing": "",
+   "reason": "证据[2]明确给出结论：通过PCA的渐近行为发现高维数据必然呈现流形结构，即内在维度低于特征维度，直接回答了问题。"
+  },
+  {
+   "question": "这篇 Agora 运行报告在因果结论上的主要局限是什么？",
+   "paper_id": "2609.18094",
+   "bucket": "两边都没中",
+   "config": "prod_candidate_k5",
+   "hit5": true,
+   "sufficient": false,
+   "missing": "证据中没有任何一篇论文被明确标识为“Agora 运行报告”，也没有任何证据直接讨论该报告的因果结论局限",
+   "reason": "检索到的证据分别来自不同论文，其中没有一篇明确对应问题所指的 Agora 运行报告，因此无法从证据直接得出其因果结论的主要局限"
+  },
+  {
+   "question": "这篇论文提出的谱方法具体是如何从带边翻转噪声的符号邻接矩阵中恢复节点标签的？它的理论保证显式依赖于哪些图结构和噪声参数？",
+   "paper_id": "2609.18527",
+   "bucket": "两边都没中",
+   "config": "prod_candidate_k5",
+   "hit5": false,
+   "sufficient": true,
+   "missing": "",
+   "reason": "证据[1]明确说明谱方法通过带噪符号邻接矩阵主特征向量的符号解码节点标签，并显式给出理论保证依赖谱隙、节点数、度分布和噪声水平，[3]补充噪声参数p,q，核心信息点均有原文支撑且无矛盾。"
+  },
+  {
+   "question": "Zo 研究中的 2000 名用户样本是如何选取的？",
+   "paper_id": "2401.02978",
+   "bucket": "两边都中",
+   "config": "prod_candidate_k5",
+   "hit5": true,
+   "sufficient": true,
+   "missing": "",
+   "reason": "证据[1]和[2]明确说明2000名用户是从约百万与Zo一对一互动的用户中随机选取，且按行为维度分层（每个平台500人，并通过随机重采样平衡各维度），直接回答了样本选取方式。"
+  },
+  {
+   "question": "与朴素贝叶斯分类器相比，论文提出的词汇句法模式学习器在事实/情感分类上的精确率和召回率表现如何？",
+   "paper_id": "1709.05295",
+   "bucket": "两边都中",
+   "config": "prod_candidate_k5",
+   "hit5": true,
+   "sufficient": false,
+   "missing": "论文提出的词汇句法模式学习器在事实/情感分类上的精确率和召回率具体数值，以及与朴素贝叶斯分类器的直接对比数据",
+   "reason": "证据[1]虽提及词汇句法模式学习器和朴素贝叶斯分类器，但未给出两者在事实/情感分类上的精确率和召回率完整对比数据；其他证据涉及不同任务，无法支撑答案。"
+  },
+  {
+   "question": "在 BERT 句子嵌入实验中，哪种池化方法在所有任务类别中平均表现最好？",
+   "paper_id": "1910.07973",
+   "bucket": "两边都中",
+   "config": "prod_candidate_k5",
+   "hit5": true,
+   "sufficient": true,
+   "missing": "",
+   "reason": "证据[2]明确说明Mean-pooling在所有任务类别中表现最好。"
+  },
+  {
+   "question": "在H2变体中，Isolation Forest在检测全部异常和降低误报方面表现如何？",
+   "paper_id": "2609.18228",
+   "bucket": "两边都中",
+   "config": "prod_candidate_k5",
+   "hit5": true,
+   "sufficient": true,
+   "missing": "",
+   "reason": "证据[1]明确说明H2变体中Isolation Forest实现了全部异常的完整检测，同时将误报从10,019降至1,881，满足问题所有核心信息点。"
+  },
+  {
+   "question": "在多代语言模型社会中，与自己的祖先模型合并和与同时代模型合并相比，实验结果有何差异，作者如何解释这种差异？",
+   "paper_id": "2609.18560",
+   "bucket": "两边都中",
+   "config": "prod_candidate_k5",
+   "hit5": true,
+   "sufficient": true,
+   "missing": "",
+   "reason": "证据[2]明确给出与祖先合并优于同时代合并的数值（0.66对0.27）及解释（祖先提供时间上的互补性），证据[1]也支持该结论，无矛盾，可直接得出答案。"
+  },
+  {
+   "question": "根据论文讨论部分，词嵌入分类在哪些类别上不如Teufel等人提出的手工特征？",
+   "paper_id": "1703.10152",
+   "bucket": "两边都中",
+   "config": "prod_candidate_k5",
+   "hit5": true,
+   "sufficient": true,
+   "missing": "",
+   "reason": "证据[1]讨论部分明确提到词嵌入在AIM、BAS和OWN类别上不如Teufel等人提出的手工特征。"
+  },
+  {
+   "question": "论文如何为微调BERT-NER生成大规模训练数据？",
+   "paper_id": "2312.17180",
+   "bucket": "两边都中",
+   "config": "prod_candidate_k5",
+   "hit5": true,
+   "sufficient": false,
+   "missing": "论文中关于如何为微调BERT-NER生成大规模训练数据的具体方法（如句子模板、随机填充、生成速度等细节）",
+   "reason": "证据[1]和[2]来自同一论文，[2]提到通过句子模板和随机填充词生成大量数据，但[1]的句子在'we listed dozens of sentence'处截断，未完整说明生成方法；且证据[3][4][5]与问题无关或仅涉及其他模型，无法提供完整支撑。"
+  },
+  {
+   "question": "论文用于比特币价格预测的历史数据覆盖了哪个时间段，大约包含多少个交易日？",
+   "paper_id": "2401.00534",
+   "bucket": "两边都中",
+   "config": "prod_candidate_k5",
+   "hit5": true,
+   "sufficient": true,
+   "missing": "",
+   "reason": "证据[1]明确给出时间段2013至2018年及约3000个交易日，无矛盾，可直接得出答案。"
+  }
+ ]
+}

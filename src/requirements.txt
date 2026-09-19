@@ -14,3 +14,11 @@ tiktoken==0.14.0
 tenacity==9.1.4
 jieba==0.42.1
 numpy==2.0.1
+# 生产链路真正用到但此前漏声明的两个
+Pillow==12.3.0
+rank-bm25
+# 图片/OCR 分支：未装时走降级路径，需要处理扫描件或图片再装
+# pytesseract
+# paddleocr
+# 仅实验脚本使用，生产不依赖
+# jieba==0.42.1

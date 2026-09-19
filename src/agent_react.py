@@ -119,7 +119,10 @@ def react(question,tools,system_prompt,max_steps=6,timeout=120,repeat_limit=3,on
             #未知工具：提示可用列表让模型重新选择，不中断整轮任务
             messages.append({"role": "user", "content": f"工具{action}不存在，可用工具：{list(tools.keys())}，请重新选择"})
             continue
+        #记录工具调用耗时：供上层做工具归因与性能分析
+        tool_started=time.perf_counter()
         observation=run_tool(action,action_input,tools)
+        history[-1]["duration_ms"]=int((time.perf_counter()-tool_started)*1000)
         #Observation超长时截断，防上下文膨胀；LLM摘要压缩留待增强
         if isinstance(observation,str) and len(observation)>1500:
             observation=observation[:1000]+f"\n...[Observation过长，已截断，原文{len(observation)}字]"

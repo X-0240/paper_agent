@@ -73,7 +73,23 @@ def log_usage(data):
     }
     with open(USAGE_FILE,"a",encoding="utf-8") as f:
         f.write(json.dumps(item,ensure_ascii=False)+"\n")
+    _record_cost_attribution(item)
     logger.info(f"LLM调用 token={item['total_tokens']} 约{item['cost']:.4f}元 今日累计{today_spent():.4f}元")
+
+
+def _record_cost_attribution(item):
+    #把本次调用归因到当前任务；归因失败绝不能影响主流程，因此整体包在 try 里
+    try:
+        from run_context import current_run_context
+        ctx=current_run_context()
+        if not ctx:
+            return
+        import store
+        store.record_cost(ctx.get("task_id",""),ctx.get("thread_id",""),ctx.get("user",""),
+                          item.get("model",""),item.get("prompt_tokens",0),
+                          item.get("completion_tokens",0),item.get("total_tokens",0),item.get("cost",0))
+    except Exception as e:
+        logger.warning(f"成本归因写入失败（不影响主流程）：{e}")
 
 def enforce_budget():
     #每日预算硬闸：超过后直接拒绝新调用，防止无人值守烧钱

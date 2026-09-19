@@ -13,4 +13,5 @@ llm_usage.jsonl
 experiments/eval_query_transform_cache.json
 experiments/query_retrieval_v2_cache.json
 query_cache.json
+data/
 .git/

@@ -1,0 +1,85 @@
+{
+ "question": "对比 Transformer 和 BERT 的核心区别",
+ "runs": [
+  {
+   "run": 1,
+   "elapsed_s": 107.0,
+   "papers": 8,
+   "cards": 2,
+   "facts": 8,
+   "conflicts": 0,
+   "has_review": true,
+   "fallback": false,
+   "extract_fail": true,
+   "resolve_drop": false
+  },
+  {
+   "run": 2,
+   "elapsed_s": 202.8,
+   "papers": 2,
+   "cards": 2,
+   "facts": 0,
+   "conflicts": 0,
+   "has_review": false,
+   "fallback": true,
+   "extract_fail": true,
+   "resolve_drop": false
+  },
+  {
+   "run": 3,
+   "elapsed_s": 157.1,
+   "papers": 9,
+   "cards": 2,
+   "facts": 6,
+   "conflicts": 0,
+   "has_review": true,
+   "fallback": false,
+   "extract_fail": true,
+   "resolve_drop": false
+  },
+  {
+   "run": 4,
+   "elapsed_s": 7.0,
+   "papers": 0,
+   "cards": 0,
+   "facts": 0,
+   "conflicts": 0,
+   "has_review": false,
+   "fallback": false,
+   "extract_fail": false,
+   "resolve_drop": false
+  },
+  {
+   "run": 5,
+   "elapsed_s": 81.4,
+   "papers": 8,
+   "cards": 2,
+   "facts": 5,
+   "conflicts": 0,
+   "has_review": true,
+   "fallback": false,
+   "extract_fail": true,
+   "resolve_drop": false
+  },
+  {
+   "run": 6,
+   "elapsed_s": 75.2,
+   "papers": 6,
+   "cards": 2,
+   "facts": 5,
+   "conflicts": 0,
+   "has_review": true,
+   "fallback": false,
+   "extract_fail": true,
+   "resolve_drop": false
+  }
+ ],
+ "summary": {
+  "n": 6,
+  "review_ok": 4,
+  "fallback_fired": 1,
+  "extract_failed": 5,
+  "resolve_dropped": 0,
+  "avg_elapsed_s": 105.1
+ }
+}

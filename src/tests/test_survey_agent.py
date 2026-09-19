@@ -1,6 +1,48 @@
 from state import AgentState, Conflict, FactItem, PaperCard, PaperMeta, ReviewReport
-from survey_agent import _auto_finalize, _enrich_trace, _finalize_review, _make_tools, review_to_markdown
+from survey_agent import (TOOL_LABELS,_auto_finalize, _enrich_trace, _finalize_review, _make_tools,
+                          _merge_cards, _progress_text, _record_tool_call, review_to_markdown, run_survey)
 from tools import build_pending_conflicts
+
+
+def test_record_tool_call_uses_run_context(tmp_path,monkeypatch):
+    #设置任务上下文后，工具调用必须落到对应任务上
+    import store
+    from run_context import reset_run_context,set_run_context
+    monkeypatch.setenv("SQLITE_PATH",str(tmp_path/"a.db"))
+    store.close_conn()
+    store.init_db()
+    thread_id=store.create_thread("alice")
+    task_id=store.create_task(thread_id,"alice","survey")
+    token=set_run_context(task_id,thread_id,"alice")
+    try:
+        _record_tool_call({"action":"search_papers","action_input":{"query":"x"},
+                           "observation":"检索完成","duration_ms":12})
+    finally:
+        reset_run_context(token)
+    attr=store.task_attribution(task_id,"alice")
+    assert attr["tool_calls_total"]==1
+    assert attr["tools"][0]["tool"]=="search_papers" and attr["tools"][0]["duration_ms"]==12
+    store.close_conn()
+
+
+def test_merge_cards_dedupes_by_paper_id():
+    #工具内部建的卡片并回状态时要按论文去重，避免重复计数
+    state=AgentState(query="t",complexity="COMPLEX")
+    _merge_cards(state,[PaperCard(paper_id="P1",title="a"),PaperCard(paper_id="P1",title="b"),
+                        PaperCard(paper_id="P2",title="c")])
+    assert [c.paper_id for c in state.cards]==["P1","P2"]
+
+
+def test_all_tools_have_progress_label():
+    #每个注册工具都必须有中文进度文案，否则流式进度会直接露出原始工具名
+    tools=_make_tools(AgentState(query="t",complexity="COMPLEX"))
+    assert set(tools)<=set(TOOL_LABELS)
+
+
+def test_progress_text_carries_state_counts():
+    state=AgentState(query="t",complexity="COMPLEX")
+    text=_progress_text({"action":"search_papers"},state)
+    assert "检索候选论文" in text and "论文0篇" in text
 
 def test_build_pending_conflicts_groups_by_entity_attribute():
     #相同实体+属性、不同值才进入待核实候选
@@ -81,6 +123,43 @@ def test_auto_finalize_analyzes_when_cards_exist(monkeypatch):
     _auto_finalize(state,"q")
     assert state.review is not None
     assert state.review.title=="兜底综述"
+
+def test_auto_finalize_covers_papers_without_cards(monkeypatch):
+    #模型提前收尾时可能只检索到论文、没建卡片：兜底也要能补出事实与综述
+    monkeypatch.setattr("survey_agent._analyze",lambda ids,cache=None:{
+        "comparison":"c",
+        "cards":[PaperCard(paper_id="P1",title="T1")],
+        "facts":[FactItem(fact_id="f1",paper_id="P1",entity="E",attribute="A",value="1",
+                          content="c",source_chunk_id="c1",section_name="S")]})
+    monkeypatch.setattr("survey_agent._write_review",lambda query,facts,conflicts,pending=None:ReviewReport(title="兜底综述"))
+    state=AgentState(papers=[PaperMeta(paper_id="P1",title="T1")])
+    _auto_finalize(state,"q")
+    assert state.review is not None
+    assert [c.paper_id for c in state.cards]==["P1"]
+    assert len(state.facts)==1
+
+
+def test_run_survey_forces_search_when_no_papers(monkeypatch):
+    #C类兜底：循环结束一篇论文都没有时，用原问题强制检索一次再走兜底
+    monkeypatch.setattr("survey_agent.react",lambda *a,**kw:("",[]))
+    monkeypatch.setattr("survey_agent._search_papers",
+                        lambda query,limit=3:{"papers":[PaperMeta(paper_id="P1",title="T1")],"chunks":[]})
+    monkeypatch.setattr("survey_agent._analyze",lambda ids,cache=None:{
+        "comparison":"c","cards":[PaperCard(paper_id="P1",title="T1")],
+        "facts":[FactItem(fact_id="f1",paper_id="P1",entity="E",attribute="A",value="1",
+                          content="c",source_chunk_id="c1",section_name="S")]})
+    monkeypatch.setattr("survey_agent._write_review",lambda query,facts,conflicts,pending=None:ReviewReport(title="兜底综述"))
+    state=run_survey("对比 A 和 B")
+    assert [p.paper_id for p in state.papers]==["P1"]
+    assert state.review is not None
+
+
+def test_write_review_without_facts_guides_next_action():
+    #错误提示必须给出下一步动作，否则模型容易直接放弃并判证据不足
+    state=AgentState(query="t",complexity="COMPLEX")
+    msg=_make_tools(state)["write_review"]["func"](query="q")
+    assert "analyze_paper_relations" in msg
+
 
 def test_review_to_markdown_renders_sections():
     #综述对象渲染为Markdown，引用必须出现

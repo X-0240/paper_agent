@@ -1,0 +1,3692 @@
+{
+ "boost_value": "0.2",
+ "off": {
+  "n": 202,
+  "hit5": 172,
+  "top1_is_gold": 188,
+  "gold_in_top5": 192,
+  "rate_hit5": 0.8514851485148515,
+  "rate_top1": 0.9306930693069307,
+  "rate_gold_top5": 0.9504950495049505
+ },
+ "on": {
+  "n": 202,
+  "hit5": 172,
+  "top1_is_gold": 188,
+  "gold_in_top5": 192,
+  "rate_hit5": 0.8514851485148515,
+  "rate_top1": 0.9306930693069307,
+  "rate_gold_top5": 0.9504950495049505
+ },
+ "flipped_hit5": [],
+ "flipped_top1": [],
+ "boosted_questions": 14,
+ "rows_off": [
+  {
+   "question": "在 WMT 2014 英德翻译任务上，Transformer (big) 模型取得了多少 BLEU 分数？它比之前的最佳结果（包括集成模型）提升了多少？",
+   "paper_id": "Attention_Is_All_You_Need",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "Attention_Is_All_You_Need",
+   "entity_boost": []
+  },
+  {
+   "question": "chain-of-thought prompting 的核心思想是什么？它通过什么样的提示形式来激发大模型的推理能力？",
+   "paper_id": "Chain_of_Thought",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "Chain_of_Thought",
+   "entity_boost": []
+  },
+  {
+   "question": "论文在讨论部分指出了 chain-of-thought prompting 的哪些主要局限？",
+   "paper_id": "Chain_of_Thought",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "Chain_of_Thought",
+   "entity_boost": []
+  },
+  {
+   "question": "GraphRAG 与传统的 vector RAG 在适用查询类型上有何根本区别？",
+   "paper_id": "GraphRAG",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "GraphRAG",
+   "entity_boost": []
+  },
+  {
+   "question": "LoRA 相比 GPT-3 175B 全量微调，在可训练参数量和 GPU 内存需求上分别能减少多少？",
+   "paper_id": "LoRA",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "LoRA",
+   "entity_boost": []
+  },
+  {
+   "question": "在 GPT-3 实验中，LoRA 的秩 r 可以小到什么程度？适配 Wq 和 Wv 与只适配 Wq 时对 r 的需求有何不同？",
+   "paper_id": "LoRA",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "LoRA",
+   "entity_boost": []
+  },
+  {
+   "question": "RAG-Sequence 与 RAG-Token 在如何使用检索到的文档生成目标序列上有何区别？",
+   "paper_id": "RAG_Original_Paper",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "RAG_Original_Paper",
+   "entity_boost": []
+  },
+  {
+   "question": "在 FEVER 事实核查任务上，RAG 与当时的最优模型相比表现如何？",
+   "paper_id": "RAG_Original_Paper",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "RAG_Original_Paper",
+   "entity_boost": []
+  },
+  {
+   "question": "ReAct 的核心方法思想是什么？它如何把推理与行动结合起来？",
+   "paper_id": "ReAct",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "ReAct",
+   "entity_boost": []
+  },
+  {
+   "question": "在 HotpotQA 和 Fever 上，ReAct 与 CoT 的实验表现有什么差异？",
+   "paper_id": "ReAct",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "ReAct",
+   "entity_boost": []
+  },
+  {
+   "question": "RoPE 在将位置信息融入自注意力时，与以往基于加法位置编码的方法相比核心区别是什么？",
+   "paper_id": "RoFormer_RoPE",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "RoFormer_RoPE",
+   "entity_boost": []
+  },
+  {
+   "question": "论文作者在局限性部分承认了哪些尚未充分解释的问题？",
+   "paper_id": "RoFormer_RoPE",
+   "hit5": false,
+   "top1_is_gold": false,
+   "gold_in_top5": false,
+   "top1": "2609.18720",
+   "entity_boost": []
+  },
+  {
+   "question": "根据这篇综述，当前对话智能体的评估方法（如 perplexity 和 BLEU）存在哪些主要局限？作者认为哪类评估指标更有前景？",
+   "paper_id": "1803.08419",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1803.08419",
+   "entity_boost": []
+  },
+  {
+   "question": "KB-InfoBot 是如何替代符号查询以实现端到端训练的？它在不同规模知识库上的任务成功率如何，主要局限是什么？",
+   "paper_id": "1803.08419",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1803.08419",
+   "entity_boost": []
+  },
+  {
+   "question": "论文的融合模型在训练时如何处理预训练seq2seq模型？",
+   "paper_id": "1805.04833",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1805.04833",
+   "entity_boost": []
+  },
+  {
+   "question": "论文如何通过自动评估衡量生成故事对prompt的依赖？",
+   "paper_id": "1805.04833",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1805.04833",
+   "entity_boost": []
+  },
+  {
+   "question": "论文提出的 RAVAESum 框架如何联合新闻文档与读者评论进行句子显著性估计，并处理评论中的噪声？",
+   "paper_id": "1708.01065",
+   "hit5": false,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1708.01065",
+   "entity_boost": []
+  },
+  {
+   "question": "在作者自建数据集上，RAVAESum 与 RA-Sparse 以及不考虑读者评论的方法相比，实验结果如何？",
+   "paper_id": "1708.01065",
+   "hit5": false,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1708.01065",
+   "entity_boost": []
+  },
+  {
+   "question": "论文中作者为每个词附加了哪些额外特征来帮助临床事件跨度识别？",
+   "paper_id": "1603.09381",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1603.09381",
+   "entity_boost": []
+  },
+  {
+   "question": "论文指出系统在事件跨度识别上召回率较低的主要原因是什么？",
+   "paper_id": "1603.09381",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1603.09381",
+   "entity_boost": []
+  },
+  {
+   "question": "论文中定义的Tier A和Tier B警报有什么区别？系统如何处理这两类警报？",
+   "paper_id": "1809.08899",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1809.08899",
+   "entity_boost": []
+  },
+  {
+   "question": "论文中如何评估模型在警报检测上的性能？使用了什么验证方法？",
+   "paper_id": "1809.08899",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1809.08899",
+   "entity_boost": []
+  },
+  {
+   "question": "论文中的 Naive Bayes（NB）估计器是如何为一个概念计算争议性分数的？",
+   "paper_id": "1908.07491",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1908.07491",
+   "entity_boost": []
+  },
+  {
+   "question": "论文在比较两种文本模型（n-grams tf-idf 与 word embedding）时，发现哪种模型效果更好？作者认为这说明什么？",
+   "paper_id": "1905.08067",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1905.08067",
+   "entity_boost": []
+  },
+  {
+   "question": "这篇论文在未来工作部分计划进一步研究哪些问题？",
+   "paper_id": "1905.08067",
+   "hit5": false,
+   "top1_is_gold": false,
+   "gold_in_top5": false,
+   "top1": "2609.17841",
+   "entity_boost": []
+  },
+  {
+   "question": "这篇论文提出的新事实核查语料库包含多少条已验证声明和多少篇文档，并提供了哪些标注？",
+   "paper_id": "1911.01214",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1911.01214",
+   "entity_boost": []
+  },
+  {
+   "question": "在立场检测任务中，哪个模型得分最高？哪类模型优于基于词嵌入的神经网络？",
+   "paper_id": "1911.01214",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1911.01214",
+   "entity_boost": []
+  },
+  {
+   "question": "论文提出了哪两种利用人类评分训练图像描述模型的方法？它们分别如何处理评分数据稀疏的问题？",
+   "paper_id": "1911.09753",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1911.09753",
+   "entity_boost": []
+  },
+  {
+   "question": "在实验中，为什么On-policy策略梯度方法（OnPG）的表现不如Off-policy方法（OffPG）？论文指出了哪些具体原因？",
+   "paper_id": "1911.09753",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1911.09753",
+   "entity_boost": []
+  },
+  {
+   "question": "论文为 Twitter 言语行为分类选取的特征分为哪两大类，总共选用了多少个二进制特征？",
+   "paper_id": "1605.05156",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1605.05156",
+   "entity_boost": []
+  },
+  {
+   "question": "论文中的 TweetAct 分类器与 Zhang et al. 的监督式 Twitter 言语行为分类器相比，性能表现如何？",
+   "paper_id": "1605.05156",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1605.05156",
+   "entity_boost": []
+  },
+  {
+   "question": "在SAIL Code-Mixed共享任务中，HI-EN和BN-EN数据集上总体（overall）macro average f-score最高的系统是哪支队伍？两个数据集上的最高分数分别是多少？",
+   "paper_id": "1803.06745",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1803.06745",
+   "entity_boost": []
+  },
+  {
+   "question": "论文指出基于深度学习的CFIL系统为何没有超过基于传统机器学习的系统？",
+   "paper_id": "1803.06745",
+   "hit5": false,
+   "top1_is_gold": false,
+   "gold_in_top5": false,
+   "top1": "2609.17895",
+   "entity_boost": []
+  },
+  {
+   "question": "论文使用了哪三种数据集来推断Twitter用户的SES？它们分别基于什么数据源？",
+   "paper_id": "1901.05389",
+   "hit5": false,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1901.05389",
+   "entity_boost": []
+  },
+  {
+   "question": "在黑盒设置下，AEG 模型采用什么架构，并且基于哪些目标设计奖励来训练生成对抗文本？",
+   "paper_id": "1909.07873",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1909.07873",
+   "entity_boost": []
+  },
+  {
+   "question": "在 IMDB 情感分类任务上，与 DeepWordBug 相比，AEG 对 CNN-Word 模型的攻击效果如何？",
+   "paper_id": "1909.07873",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1909.07873",
+   "entity_boost": []
+  },
+  {
+   "question": "论文中提出的两种神经网络架构分别是什么？它们各自如何处理演讲转录文本的输入？",
+   "paper_id": "1905.08392",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1905.08392",
+   "entity_boost": []
+  },
+  {
+   "question": "在TED演讲评分预测实验中，依赖树模型与词序列模型的平均F-score分别是多少？与使用手工特征的经典机器学习基线相比，神经网络模型表现如何？",
+   "paper_id": "1905.08392",
+   "hit5": false,
+   "top1_is_gold": false,
+   "gold_in_top5": false,
+   "top1": "2401.00383",
+   "entity_boost": []
+  },
+  {
+   "question": "UIT-ViIC 数据集总共包含多少张图像和多少条越南语描述？",
+   "paper_id": "2002.00175",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2002.00175",
+   "entity_boost": []
+  },
+  {
+   "question": "在实验中，作者选择了哪三个 sportball 数据集进行对比，并且训练集、验证集和测试集是如何划分的？",
+   "paper_id": "2002.00175",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2002.00175",
+   "entity_boost": []
+  },
+  {
+   "question": "论文提出的Figure-Caption Correspondence（FCC）任务本质上是什么任务？它如何构造训练用的正负样本？",
+   "paper_id": "1909.09070",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1909.09070",
+   "entity_boost": []
+  },
+  {
+   "question": "该论文探索了哪三种模型来获得用于论辩区域分类的句子向量？",
+   "paper_id": "1703.10152",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1703.10152",
+   "entity_boost": []
+  },
+  {
+   "question": "根据论文讨论部分，词嵌入分类在哪些类别上不如Teufel等人提出的手工特征？",
+   "paper_id": "1703.10152",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1703.10152",
+   "entity_boost": []
+  },
+  {
+   "question": "在实验评估中，词汇基线模型在攻击性语言分类上达到什么F1分数，又在哪些网络欺凌标准上难以可靠检测？",
+   "paper_id": "2004.01820",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2004.01820",
+   "entity_boost": []
+  },
+  {
+   "question": "作者在局限性部分指出，其数据集中存在哪两个可能影响模型训练效果的主要问题？",
+   "paper_id": "2004.01820",
+   "hit5": false,
+   "top1_is_gold": false,
+   "gold_in_top5": false,
+   "top1": "2609.18212",
+   "entity_boost": []
+  },
+  {
+   "question": "在 PIO 分类任务中，使用通用 BERT 嵌入与 BioBERT 嵌入时，论文报告的 ROC_AUC 分数分别是多少？哪个嵌入效果更好？",
+   "paper_id": "1906.11085",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1906.11085",
+   "entity_boost": []
+  },
+  {
+   "question": "PICONET 数据集是如何构建的？与 BIBREF12 中基于关键词的方法相比，本文为避免歧义采取了什么策略？",
+   "paper_id": "1906.11085",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1906.11085",
+   "entity_boost": []
+  },
+  {
+   "question": "在“this is ...”语法任务中，LGI分类图形身份的准确率是多少？它的分类输出方式与传统的softmax有何不同？",
+   "paper_id": "1905.07562",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1905.07562",
+   "entity_boost": []
+  },
+  {
+   "question": "这篇论文把构建 GitHub Typo Corpus 的流程概括为哪几个主要步骤？",
+   "paper_id": "1911.12893",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1911.12893",
+   "entity_boost": []
+  },
+  {
+   "question": "作者如何评估现有拼写检查器在 GitHub Typo Corpus 上的表现，结果说明了什么？",
+   "paper_id": "1911.12893",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1911.12893",
+   "entity_boost": []
+  },
+  {
+   "question": "在 BERT 句子嵌入实验中，哪种池化方法在所有任务类别中平均表现最好？",
+   "paper_id": "1910.07973",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1910.07973",
+   "entity_boost": []
+  },
+  {
+   "question": "在 factoid 和非 factoid QA 数据集上，基于 BERT 段落嵌入的模型与 BM25 基线相比表现如何？",
+   "paper_id": "1910.07973",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1910.07973",
+   "entity_boost": []
+  },
+  {
+   "question": "论文针对滥用语言检测中的性别偏见提出了哪三种缓解方法？",
+   "paper_id": "1808.07231",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1808.07231",
+   "entity_boost": []
+  },
+  {
+   "question": "在性别偏见测量实验中，st 和 abt 两个数据集在公平性指标上表现有何对比？论文如何解释 abt 的偏见更少？",
+   "paper_id": "1808.07231",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1808.07231",
+   "entity_boost": []
+  },
+  {
+   "question": "论文提出了哪三种快速迁移学习方案，它们分别在迁移学习阶段更新哪些参数？",
+   "paper_id": "1701.03578",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1701.03578",
+   "entity_boost": []
+  },
+  {
+   "question": "论文指出将RNN结构用于个性化语言建模主要受哪两个限制约束，并提出什么方案来解决？",
+   "paper_id": "1701.03578",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1701.03578",
+   "entity_boost": []
+  },
+  {
+   "question": "论文使用什么方法从标注和未标注的在线辩论帖子中学习事实性与情感性论证的语言模式？",
+   "paper_id": "1709.05295",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1709.05295",
+   "entity_boost": []
+  },
+  {
+   "question": "与朴素贝叶斯分类器相比，论文提出的词汇句法模式学习器在事实/情感分类上的精确率和召回率表现如何？",
+   "paper_id": "1709.05295",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1709.05295",
+   "entity_boost": []
+  },
+  {
+   "question": "论文在使用 QLoRA 进行微调时设定了哪些关键超参数？",
+   "paper_id": "2609.17398",
+   "hit5": true,
+   "top1_is_gold": false,
+   "gold_in_top5": true,
+   "top1": "2312.12740",
+   "entity_boost": []
+  },
+  {
+   "question": "在9/11事件中，自指代词（self-references）的同一艺术家内效应与艺术家间效应方向是否相反？具体如何？",
+   "paper_id": "2609.17225",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.17225",
+   "entity_boost": []
+  },
+  {
+   "question": "在 Qwen2.5 7B 和 Llama 3.1 8B 这两个本地开放模型上，显式的 evidence-action gate 与 vanilla RAG 在 quartet consistency（QCS）上的实验结果分别是多少？",
+   "paper_id": "2609.17081",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.17081",
+   "entity_boost": []
+  },
+  {
+   "question": "在通过 activation steering 引入偏置的 subliminal learning 设置中，SALVE 的恢复效果如何？有哪些局限？",
+   "paper_id": "2609.16927",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.16927",
+   "entity_boost": []
+  },
+  {
+   "question": "在DRPG框架中，策略生成器默认采用什么样的检索策略来获取用于生成策略的示例？",
+   "paper_id": "2609.16800",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.16800",
+   "entity_boost": []
+  },
+  {
+   "question": "根据6.1节主实验结果，PunGraph为Qwen-2.5-7B在SemEval-2017和WebPun上的异形双关与同形双关分别带来了多大的相对F1提升？",
+   "paper_id": "2609.16557",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.16557",
+   "entity_boost": []
+  },
+  {
+   "question": "SPLICE 方法是如何从文档语料中构造长上下文训练样本的？",
+   "paper_id": "2312.17296",
+   "hit5": false,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2312.17296",
+   "entity_boost": []
+  },
+  {
+   "question": "Agora 如何避免某个 worker 通过不断延伸自己的分支来制造虚假影响力？",
+   "paper_id": "2609.18094",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18094",
+   "entity_boost": []
+  },
+  {
+   "question": "这篇 Agora 运行报告在因果结论上的主要局限是什么？",
+   "paper_id": "2609.18094",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18094",
+   "entity_boost": []
+  },
+  {
+   "question": "在这项审计实验中，作者是如何操纵“程序痕迹”（trace）与“证据标注”（attribution）这两个自变量的？",
+   "paper_id": "2609.18204",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18204",
+   "entity_boost": []
+  },
+  {
+   "question": "XConf 如何利用经验库来估计置信度？Recall 和 Reflect 两个阶段分别做什么？",
+   "paper_id": "2609.17708",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.17708",
+   "entity_boost": []
+  },
+  {
+   "question": "在九个基准和四个模型上，XConf 相对于十样本自洽性（self-consistency）在区分度和校准误差上的总体表现如何？",
+   "paper_id": "2609.17708",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.17708",
+   "entity_boost": []
+  },
+  {
+   "question": "论文如何将 transformer 的层分组，并为每组训练独立的 SSM 来预测 KV 状态？",
+   "paper_id": "2609.17888",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.17888",
+   "entity_boost": []
+  },
+  {
+   "question": "Keqing 框架的工作流程主要包含哪四个阶段？",
+   "paper_id": "2401.00426",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00426",
+   "entity_boost": []
+  },
+  {
+   "question": "这篇综述为什么将 Personality、Persona 和 Profile 这三个术语互换使用？",
+   "paper_id": "2401.00609",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00609",
+   "entity_boost": []
+  },
+  {
+   "question": "Zo 研究中的 2000 名用户样本是如何选取的？",
+   "paper_id": "2401.02978",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.02978",
+   "entity_boost": []
+  },
+  {
+   "question": "Zo 在对话记忆方面存在什么局限？",
+   "paper_id": "2401.02978",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.02978",
+   "entity_boost": []
+  },
+  {
+   "question": "论文如何解释其构造的指数级离线评估困难机制？",
+   "paper_id": "2609.19135",
+   "hit5": false,
+   "top1_is_gold": false,
+   "gold_in_top5": false,
+   "top1": "2609.18314",
+   "entity_boost": []
+  },
+  {
+   "question": "在网格世界实验中，最优估计器在解析选定的 90% 成功预算下的模拟失败率与解析预测是否一致？",
+   "paper_id": "2609.19135",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.19135",
+   "entity_boost": []
+  },
+  {
+   "question": "论文对稀疏线性解释问题（SLE）在 ReLU 神经网络上的计算复杂度给出了什么结论？",
+   "paper_id": "2609.19077",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.19077",
+   "entity_boost": []
+  },
+  {
+   "question": "在参数化局部分布族下，论文证明了 relevance error 与 fidelity error 之间存在怎样的乘性上界？",
+   "paper_id": "2609.19077",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.19077",
+   "entity_boost": []
+  },
+  {
+   "question": "HOPE 与 REAP 在方法上是什么关系？HOPE 相对 REAP 带来的改进主要来自哪里？",
+   "paper_id": "2609.18916",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18916",
+   "entity_boost": []
+  },
+  {
+   "question": "HOPE 的校准阶段有哪些额外开销？它在方法上有哪些主要局限？",
+   "paper_id": "2609.18916",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18916",
+   "entity_boost": []
+  },
+  {
+   "question": "论文如何界定最小证书（minimum certificate）的大小？该界限与最优解相差多少？",
+   "paper_id": "2609.18622",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18622",
+   "entity_boost": []
+  },
+  {
+   "question": "在预训练图像分类器的实验中，置信度分数选择在精确选择下需要读取多少比例的标签？而在 AUGRC 容差 5 × 10−4 下又是多少？",
+   "paper_id": "2609.18622",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18622",
+   "entity_boost": []
+  },
+  {
+   "question": "论文如何定义 weakening neuron？它依据什么权重向量的相似度来判断一个神经元会削弱其检测到的残差流方向？",
+   "paper_id": "2609.18612",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18612",
+   "entity_boost": []
+  },
+  {
+   "question": "消融实验中，ablate weakening neurons 相比其他 IO 类或同层随机神经元对模型指标有什么不同影响？负的 gate 值在这里是否重要？",
+   "paper_id": "2609.18612",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18612",
+   "entity_boost": []
+  },
+  {
+   "question": "论文对目标扰动机制提出了哪两种新的隐私分析，它们分别基于什么工具？",
+   "paper_id": "2401.00583",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00583",
+   "entity_boost": []
+  },
+  {
+   "question": "在实验评估中，论文如何安排与DP-SGD的公平比较，特别是如何处理超参数调优的隐私成本？",
+   "paper_id": "2401.00583",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00583",
+   "entity_boost": []
+  },
+  {
+   "question": "论文用于比特币价格预测的历史数据覆盖了哪个时间段，大约包含多少个交易日？",
+   "paper_id": "2401.00534",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00534",
+   "entity_boost": []
+  },
+  {
+   "question": "论文在评估模型对不同保险类型的公平性时，发现 Medicare 和 Medicaid 保险患者在预测短/长住院时有哪些主要性能差异？",
+   "paper_id": "2401.00902",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00902",
+   "entity_boost": []
+  },
+  {
+   "question": "在 Flight 数据集上，MSGNet 相比当前 SOTA 的 TimesNet 在平均 MSE 和 MAE 上分别降低了多少？",
+   "paper_id": "2401.00423",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00423",
+   "entity_boost": []
+  },
+  {
+   "question": "论文提出的基于决策树的多示例学习（MIL）模型是如何将单个细胞的预测结果聚合成患者层面的突变概率的？",
+   "paper_id": "2609.18825",
+   "hit5": false,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18825",
+   "entity_boost": []
+  },
+  {
+   "question": "根据论文，FLT3-ITD 预测的阳性预测值（PPV）目前存在什么局限？",
+   "paper_id": "2609.18825",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18825",
+   "entity_boost": []
+  },
+  {
+   "question": "论文如何重新形式化 Edit Flows 和 EvoFlows，并指出这种形式化带来了哪些必要约束？",
+   "paper_id": "2609.18745",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18745",
+   "entity_boost": []
+  },
+  {
+   "question": "在多代语言模型社会中，与自己的祖先模型合并和与同时代模型合并相比，实验结果有何差异，作者如何解释这种差异？",
+   "paper_id": "2609.18560",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18560",
+   "entity_boost": []
+  },
+  {
+   "question": "SLE核如何在底层距离不满足条件负定（CND）的情况下仍保证核矩阵的半正定性？其关键构造是什么？",
+   "paper_id": "2609.19083",
+   "hit5": false,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.19083",
+   "entity_boost": []
+  },
+  {
+   "question": "论文作者指出了SLE核的哪些主要局限性？",
+   "paper_id": "2609.19083",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.19083",
+   "entity_boost": []
+  },
+  {
+   "question": "这篇论文提出的谱方法具体是如何从带边翻转噪声的符号邻接矩阵中恢复节点标签的？它的理论保证显式依赖于哪些图结构和噪声参数？",
+   "paper_id": "2609.18527",
+   "hit5": false,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18527",
+   "entity_boost": []
+  },
+  {
+   "question": "论文在结论部分指出了当前工作存在哪些局限，以及作者认为未来可以朝哪些方向扩展？",
+   "paper_id": "2609.18527",
+   "hit5": false,
+   "top1_is_gold": false,
+   "gold_in_top5": false,
+   "top1": "2609.15126",
+   "entity_boost": []
+  },
+  {
+   "question": "为了研究极端 token/参数比下的行为，论文训练了多少个模型，这些模型的参数规模和数据预算范围分别是多少？",
+   "paper_id": "2401.00448",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00448",
+   "entity_boost": []
+  },
+  {
+   "question": "Viz 系统的核心运作流程是什么？它如何让内容提供者利用 QLoRA 创建专用模型并在市场中实现使用追踪与变现？",
+   "paper_id": "2401.00503",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00503",
+   "entity_boost": []
+  },
+  {
+   "question": "尽管 QLoRA 带来了效率提升，Viz 系统仍面临哪些主要挑战或局限？",
+   "paper_id": "2401.00503",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00503",
+   "entity_boost": []
+  },
+  {
+   "question": "在 ECtHR-NPD 的主要实验结果中，哪个系统取得了最低的总体 MAE，相比训练集 median 降低了多少？增大语言模型规模或使用复杂代理配置是否一致地改善 MAE？",
+   "paper_id": "2609.18908",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18908",
+   "entity_boost": []
+  },
+  {
+   "question": "DualViewEval 如何保证选出的 miniset 大小恰好为 K，并且让预测反馈能够传播到离散的任务选择过程中？",
+   "paper_id": "2609.18909",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18909",
+   "entity_boost": []
+  },
+  {
+   "question": "在 APEX-Agents 最紧的预算下，DualViewEval 相比 SparseEval 在 MAE 和 Kendall's τ 上分别取得了多大改进？",
+   "paper_id": "2609.18909",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18909",
+   "entity_boost": []
+  },
+  {
+   "question": "RAGTruth在人工标注环节采取了哪些措施来保证标注质量，标注者之间的一致性如何？",
+   "paper_id": "2401.00396",
+   "hit5": false,
+   "top1_is_gold": false,
+   "gold_in_top5": false,
+   "top1": "2609.18905",
+   "entity_boost": []
+  },
+  {
+   "question": "论文使用什么两步提示策略来生成合成训练数据？",
+   "paper_id": "2401.00368",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00368",
+   "entity_boost": []
+  },
+  {
+   "question": "GeoGalactica 的参数量、基础模型、进一步预训练所用的地学文本语料 token 量以及 SFT 数据量分别是多少？",
+   "paper_id": "2401.00434",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00434",
+   "entity_boost": []
+  },
+  {
+   "question": "在人工评估中，GeoGalactica 与哪些通用语言模型进行了对比？",
+   "paper_id": "2401.00434",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00434",
+   "entity_boost": []
+  },
+  {
+   "question": "论文提出的 Value Flattening 具体指什么现象？作者在哪个受控环境中发现它会随状态空间增大而更明显？",
+   "paper_id": "2609.18708",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18708",
+   "entity_boost": []
+  },
+  {
+   "question": "在 Qwen3-4B-Base 等模型上，SP3O 相比标准 PPO 在域内数学推理和分布外推理上分别取得了多少百分点提升？",
+   "paper_id": "2609.18708",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18708",
+   "entity_boost": []
+  },
+  {
+   "question": "CoRe-MARL 的共享奖励函数是如何在设计上同时兼顾“最差中心服务水平”和“各中心之间的公平性”，同时又避免所有中心一起服务得很差？",
+   "paper_id": "2609.18639",
+   "hit5": false,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18639",
+   "entity_boost": []
+  },
+  {
+   "question": "RLLBC-Lib 的各个 Jupyter notebook 是否遵循统一的代码结构？如果是，包含哪些固定的组成部分？",
+   "paper_id": "2609.19074",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.19074",
+   "entity_boost": []
+  },
+  {
+   "question": "RLLBC-Lib 基于自身代码库开发了几项编程作业？这些作业如何实现自动评分？",
+   "paper_id": "2609.19074",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.19074",
+   "entity_boost": []
+  },
+  {
+   "question": "论文在哪些假设下证明了最优策略的阈值表示？该阈值表示的具体形式是什么？",
+   "paper_id": "2609.18610",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18610",
+   "entity_boost": []
+  },
+  {
+   "question": "LaFFi 与传统的 SFT 在输入构造和训练标签上有什么本质区别？",
+   "paper_id": "2401.00907",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00907",
+   "entity_boost": []
+  },
+  {
+   "question": "KDEy 方法提出的核心表示机制是什么？",
+   "paper_id": "2401.00490",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00490",
+   "entity_boost": []
+  },
+  {
+   "question": "论文在评估量化方法时采用了哪种测试袋生成协议？",
+   "paper_id": "2401.00490",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00490",
+   "entity_boost": []
+  },
+  {
+   "question": "论文提出的OPETRL框架如何将离散变量和连续变量的优化分离到两个时间尺度上，并分别采用什么方法进行求解？",
+   "paper_id": "2401.00445",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00445",
+   "entity_boost": []
+  },
+  {
+   "question": "论文在仿真实验中与哪些基线策略进行了对比，主要实验结果如何？",
+   "paper_id": "2401.00445",
+   "hit5": false,
+   "top1_is_gold": false,
+   "gold_in_top5": false,
+   "top1": "2609.14858",
+   "entity_boost": []
+  },
+  {
+   "question": "如果去掉验证（validation）模块，系统的检索准确率、接地答案准确率和幻觉率会如何变化？这说明检索成功是否足以保证答案可靠？",
+   "paper_id": "2609.15830",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.15830",
+   "entity_boost": []
+  },
+  {
+   "question": "论文作者认为其验证框架存在哪些局限？阈值式词汇与语义相似度检查可能漏掉哪些情况？",
+   "paper_id": "2609.15830",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.15830",
+   "entity_boost": []
+  },
+  {
+   "question": "MoME 是如何在保持 token 索引查找的同时实现上下文感知的记忆读取的？它包含哪两级索引器？",
+   "paper_id": "2609.15126",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.15126",
+   "entity_boost": []
+  },
+  {
+   "question": "作者在讨论中承认自己工作存在哪些主要局限？",
+   "paper_id": "2609.15126",
+   "hit5": true,
+   "top1_is_gold": false,
+   "gold_in_top5": true,
+   "top1": "2609.18720",
+   "entity_boost": []
+  },
+  {
+   "question": "SoT 是如何把模型当前的内生推理状态用于历史证据筛选和停止决策的？",
+   "paper_id": "2609.16055",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.16055",
+   "entity_boost": []
+  },
+  {
+   "question": "在受限访问条件下（无训练控制器或只能拿到文本嵌入），SoT 相对完整版本的表现如何，说明其收益是否依赖特定实现或白盒访问？",
+   "paper_id": "2609.16055",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.16055",
+   "entity_boost": []
+  },
+  {
+   "question": "在记忆重整合（Memory Reconsolidation）阶段，REALM 是如何决定边权修改幅度的，这样设计的作用是什么？",
+   "paper_id": "2609.16053",
+   "hit5": false,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.16053",
+   "entity_boost": []
+  },
+  {
+   "question": "ShopEase 如何确定查询对应的政策类别？它是否依赖固定的意图到政策映射？",
+   "paper_id": "2609.13856",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.13856",
+   "entity_boost": []
+  },
+  {
+   "question": "微调后的 Mistral 7B 在零样本和单样本翻译上与 ChatGPT 及 NLLB 3.3B 相比表现如何？",
+   "paper_id": "2312.12740",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2312.12740",
+   "entity_boost": []
+  },
+  {
+   "question": "Fathom 是如何为每个查询、每个通道决定读取深度的？它依赖什么机制使得不同通道可以有不同的比特深度？",
+   "paper_id": "2609.17652",
+   "hit5": false,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.17652",
+   "entity_boost": []
+  },
+  {
+   "question": "在什么硬件/存储条件下 Fathom 并不能带来加速？原因是什么？",
+   "paper_id": "2609.17652",
+   "hit5": false,
+   "top1_is_gold": false,
+   "gold_in_top5": true,
+   "top1": "FlashAttention",
+   "entity_boost": []
+  },
+  {
+   "question": "HypoEvolve 的评估中 DepMap selectivity 这一指标是如何定义的？论文为什么在实验中不直接使用原始的目标依赖性（raw target dependency）作为指标？",
+   "paper_id": "2609.15938",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.15938",
+   "entity_boost": []
+  },
+  {
+   "question": "在保持科学算子与假设数量不变的前提下，如果把适应度引导的亲本选择替换为均匀随机选择，会对最终假设在两个外部指标上的表现造成怎样的差异？",
+   "paper_id": "2609.15938",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.15938",
+   "entity_boost": []
+  },
+  {
+   "question": "在981个共享问题上的配对五选项对十选项比较中，gpt-6-astra的源键准确率变化是多少？这一变化在负向题干和未标记题干上分别有多大？",
+   "paper_id": "2609.15467",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.15467",
+   "entity_boost": []
+  },
+  {
+   "question": "根据论文的 Limitations 部分，完成的200题人工审计有哪些主要证据局限，为什么不能将这些记录视为独立的专家评级？",
+   "paper_id": "2609.15467",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.15467",
+   "entity_boost": []
+  },
+  {
+   "question": "论文发布的Uthmani-to-Standard词映射包含多少词对？它是基于什么构建的？",
+   "paper_id": "2609.14967",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.14967",
+   "entity_boost": []
+  },
+  {
+   "question": "K-Bench 用什么方法校准其自动化评分器（judge），它与临床医生共识的一致程度如何？",
+   "paper_id": "2609.15855",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.15855",
+   "entity_boost": []
+  },
+  {
+   "question": "在匹配的模型配置中，治疗性提示（therapeutic prompt）与提升推理（elevated reasoning）对 combined-risk 分数分别产生了怎样的平均效果和配置差异？",
+   "paper_id": "2609.15855",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.15855",
+   "entity_boost": []
+  },
+  {
+   "question": "L2C 中的 same-instance reward 和 cross-instance reward 这两个奖励变体有什么区别？各自鼓励 LLM-as-a-Coach 学到什么？",
+   "paper_id": "2609.15851",
+   "hit5": false,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.15851",
+   "entity_boost": []
+  },
+  {
+   "question": "论文提出如何为全双工S2S模型添加流式ASR能力？需要引入什么额外模块，对原架构改动大吗？",
+   "paper_id": "2609.15759",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.15759",
+   "entity_boost": []
+  },
+  {
+   "question": "论文提出的 factual perturbation pipeline 如何生成从正确到逐步错误的答案，并用于评估事实性指标？",
+   "paper_id": "2609.15561",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.15561",
+   "entity_boost": []
+  },
+  {
+   "question": "根据论文实验，基于管道的 factual correctness 方法与 LLM-as-a-judge 在跟踪事实退化方面表现有何差异？模型规模是否总是提升评估表现？",
+   "paper_id": "2609.15561",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.15561",
+   "entity_boost": []
+  },
+  {
+   "question": "MUSE 如何把 McKee 的故事理论转化为可复用的创作规则？其中包含哪几个具体操作步骤？",
+   "paper_id": "2609.15188",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.15188",
+   "entity_boost": []
+  },
+  {
+   "question": "该研究从哪个在线平台采集数据，并使用了多少非威胁和威胁帖子样本？",
+   "paper_id": "2401.02974",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.02974",
+   "entity_boost": []
+  },
+  {
+   "question": "使用 PaLM API 的 Chat-Bison 进行威胁分类时出现了什么输出格式问题，作者建议如何改进？",
+   "paper_id": "2401.02974",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.02974",
+   "entity_boost": []
+  },
+  {
+   "question": "论文如何为微调BERT-NER生成大规模训练数据？",
+   "paper_id": "2312.17180",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2312.17180",
+   "entity_boost": []
+  },
+  {
+   "question": "论文认为现有聊天机器人或语音识别用于科学实验时的主要局限是什么？",
+   "paper_id": "2312.17180",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2312.17180",
+   "entity_boost": []
+  },
+  {
+   "question": "在合成计数任务中，旋转超立方体维度的稀疏连接与不旋转的固定稀疏连接（两者每层链接数相同）的准确率对比如何？",
+   "paper_id": "2609.18145",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18145",
+   "entity_boost": []
+  },
+  {
+   "question": "与现有的基于 PNS 的解释方法相比，SNRE 的主要不同点是什么？",
+   "paper_id": "2609.18049",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18049",
+   "entity_boost": []
+  },
+  {
+   "question": "EdgeReMIND 如何从训练数据中校准多时间尺度 recency bank 的衰减率？",
+   "paper_id": "2609.17916",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.17916",
+   "entity_boost": []
+  },
+  {
+   "question": "在匹配的三随机种子实验中，完整模型相对于 full fine-tuning 在 FACED、ISRUC、SEED-V 和 PhysioNet-MI 上的平均平衡准确率变化分别是多少？",
+   "paper_id": "2609.17886",
+   "hit5": false,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.17886",
+   "entity_boost": []
+  },
+  {
+   "question": "该框架如何判断一个样本应该被送入新意图发现模块，而不是直接归入已知意图？",
+   "paper_id": "2609.17866",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.17866",
+   "entity_boost": []
+  },
+  {
+   "question": "论文在 Minkowski 距离的经验分析中发现，增加数据点数量以及使用较低范数分别对距离集中效应有什么影响？",
+   "paper_id": "2401.00422",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00422",
+   "entity_boost": []
+  },
+  {
+   "question": "论文通过 PCA 的渐近行为分析得出了关于高维数据内在维度的什么结论？",
+   "paper_id": "2401.00422",
+   "hit5": false,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00422",
+   "entity_boost": []
+  },
+  {
+   "question": "论文提出的方差型不确定性度量中，标签级的总不确定性、偶然不确定性和认知不确定性分别被定义为什么？",
+   "paper_id": "2401.00276",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00276",
+   "entity_boost": []
+  },
+  {
+   "question": "在 out-of-distribution detection 实验中，论文如何评估方差型 epistemic uncertainty 度量，使用了哪些数据集和指标，结果说明什么？",
+   "paper_id": "2401.00276",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00276",
+   "entity_boost": []
+  },
+  {
+   "question": "在受控生成实验中，p-NCG 及其与 GwL 的混合采样器相比 FUDGE、SVS 等基线表现如何？它们在遵守控制目标和保持流畅度方面有什么结果？",
+   "paper_id": "2312.17710",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2312.17710",
+   "entity_boost": []
+  },
+  {
+   "question": "论文将 EFS-LSTM-MOEA 与哪些最新的特征选择方法进行了比较，比较结果说明了什么？",
+   "paper_id": "2312.17517",
+   "hit5": false,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2312.17517",
+   "entity_boost": []
+  },
+  {
+   "question": "对于超二次一维损失 L(x)=|x|^n (n>2)，论文指出的左边界理论解释还存在什么局限？",
+   "paper_id": "2609.18314",
+   "hit5": false,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18314",
+   "entity_boost": []
+  },
+  {
+   "question": "在干净的 CICDDoS2019 测试集上，随机森林（RF）、深度集成网络（DNE）和 Transformer（TF）三个基线模型的召回率表现如何？",
+   "paper_id": "2609.18281",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18281",
+   "entity_boost": []
+  },
+  {
+   "question": "论文提出的两种混合异常检测方法（H1和H2）分别如何结合日志分录测试（JET）与机器学习方法？",
+   "paper_id": "2609.18228",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18228",
+   "entity_boost": []
+  },
+  {
+   "question": "在H2变体中，Isolation Forest在检测全部异常和降低误报方面表现如何？",
+   "paper_id": "2609.18228",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18228",
+   "entity_boost": []
+  },
+  {
+   "question": "LIGE-GR 在 Instagram Reels 和 Facebook Video 上的线上验证中，time spent 分别提升多少？为此付出的额外推理资源和延迟代价大致是多少？",
+   "paper_id": "2609.18148",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18148",
+   "entity_boost": []
+  },
+  {
+   "question": "Palette 解码器引入的未来价值估计 bF 与普通 beam search 有何本质区别？时长感知的 bFdur 相比 step-based 的 bFstep 缓解了什么偏差？",
+   "paper_id": "2609.18148",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18148",
+   "entity_boost": []
+  },
+  {
+   "question": "在 Mamba-2 的实验中，保留输出门与移除输出门时 token 的聚集程度有何差异？这一差异说明了输出门的什么作用？",
+   "paper_id": "2609.17997",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.17997",
+   "entity_boost": []
+  },
+  {
+   "question": "QuanText 通过哪些步骤来扭曲秘密量及相关属性的分布，从而在保护数据集级秘密的同时保留数据效用？",
+   "paper_id": "2609.17995",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.17995",
+   "entity_boost": []
+  },
+  {
+   "question": "论文如何实现连续时间生成动力学的无模拟（simulation-free）训练？",
+   "paper_id": "2609.17901",
+   "hit5": false,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.17901",
+   "entity_boost": []
+  },
+  {
+   "question": "在 KTH Actions 视频外推任务中，本文方法与 Vid-ODE 的对比结果如何？",
+   "paper_id": "2609.17901",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.17901",
+   "entity_boost": []
+  },
+  {
+   "question": "在NINN-FOM的Schwarz耦合中，离线预训练的NINN参数在在线Schwarz迭代期间是否会更新？这与Snyder等人先前的PINN耦合框架有何关键区别？",
+   "paper_id": "2609.17841",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.17841",
+   "entity_boost": []
+  },
+  {
+   "question": "论文发现的长时程智能体“失败签名”（failure signature）具体包含哪三个特征，各自出现的比例是多少？",
+   "paper_id": "2609.17930",
+   "hit5": false,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.17930",
+   "entity_boost": []
+  },
+  {
+   "question": "这篇论文提出的光学PINN训练框架是如何避免反向传播（BP）并完成参数更新的？",
+   "paper_id": "2401.00413",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00413",
+   "entity_boost": []
+  },
+  {
+   "question": "在20维HJB PDE实验中，所提出的片上无BP张量压缩训练与离片训练在验证损失和硬件鲁棒性方面有何不同？",
+   "paper_id": "2401.00413",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00413",
+   "entity_boost": []
+  },
+  {
+   "question": "论文提出的 burstiness potential（突发性潜力）指标是用来衡量什么的？",
+   "paper_id": "2401.00329",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00329",
+   "entity_boost": []
+  },
+  {
+   "question": "在 server-based training 的 Linear-Allreduce 实验中，为什么所有 worker 到服务器的聚合流量没有比单个 worker 的流量更具突发性？",
+   "paper_id": "2401.00329",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00329",
+   "entity_boost": []
+  },
+  {
+   "question": "这篇论文提出的线性神经网络（LNNs）不实用的新解释是什么？",
+   "paper_id": "2401.00186",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00186",
+   "entity_boost": []
+  },
+  {
+   "question": "在实验中，作者如何构造带有噪声的合成数据集？",
+   "paper_id": "2401.00186",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00186",
+   "entity_boost": []
+  },
+  {
+   "question": "论文中对来自 TUCANA 的传感器数据进行了哪些预处理步骤？",
+   "paper_id": "2401.00112",
+   "hit5": false,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00112",
+   "entity_boost": []
+  },
+  {
+   "question": "在论文的实验中，LSTM AE 与 vanilla AE 在异常检测性能上有何差异？",
+   "paper_id": "2401.00112",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00112",
+   "entity_boost": []
+  },
+  {
+   "question": "论文对强化学习目标中的哪些组件做了消融实验？其中哪个组件最关键，去掉后性能变化如何？",
+   "paper_id": "2609.18677",
+   "hit5": true,
+   "top1_is_gold": false,
+   "gold_in_top5": true,
+   "top1": "2312.15883",
+   "entity_boost": []
+  },
+  {
+   "question": "经过数学领域后训练后，模型在域外任务（TriviaQA）上的表现有何变化？作者认为这种域外性能下降主要来源于什么？",
+   "paper_id": "2609.18677",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18677",
+   "entity_boost": []
+  },
+  {
+   "question": "论文的两个零假设测试分别用来定位什么故障？",
+   "paper_id": "2609.18005",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18005",
+   "entity_boost": []
+  },
+  {
+   "question": "在Qwen2.5-7B上，HQQ 3-bit量化在不同领域的质量损失表现如何？",
+   "paper_id": "2609.18005",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18005",
+   "entity_boost": []
+  },
+  {
+   "question": "REREF 如何通过 Generator 和 Verifier 的循环来生成替代参考报告？如果 Verifier 判定生成样本不合格，会怎么处理？",
+   "paper_id": "2609.19093",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.19093",
+   "entity_boost": []
+  },
+  {
+   "question": "论文报告了报告实践变化会改变模型排名的具体例子：在 MIMIC-CXR 上用 RadCliQ-v1 评估时，压缩参考报告中的正常发现会导致哪两个模型的排名发生什么变化？",
+   "paper_id": "2609.19093",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.19093",
+   "entity_boost": []
+  },
+  {
+   "question": "在 Astrophysics 领域中，频率方法与语义度量相比，在识别“趋势相关术语”上的人类判断对齐情况和 Precision@50 分别是多少？",
+   "paper_id": "2609.18804",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18804",
+   "entity_boost": []
+  },
+  {
+   "question": "BatchEval 的默认最优设置包括哪些核心设计？",
+   "paper_id": "2401.00437",
+   "hit5": false,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00437",
+   "entity_boost": []
+  },
+  {
+   "question": "论文中 QAGNN 方法达到的最佳测试准确率是多少，它与 LM-only 加入知识事实后的准确率相比如何？",
+   "paper_id": "2401.00388",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00388",
+   "entity_boost": []
+  },
+  {
+   "question": "L3Cube-MahaSocialNER 数据集是什么，它包含多少条人工标注句子以及多少个实体类别？",
+   "paper_id": "2401.00170",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00170",
+   "entity_boost": []
+  },
+  {
+   "question": "论文如何论证需要更多社交媒体 NER 数据集？常规 NER 模型在 MahaSocialNER 测试集上的零样本结果如何？",
+   "paper_id": "2401.00170",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00170",
+   "entity_boost": []
+  },
+  {
+   "question": "在童年志向作文中标注是否提及休闲活动时，表现最好的提示策略和模型是什么？其 kappa、准确率和宏平均 F1 分数分别是多少？",
+   "paper_id": "2401.00284",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00284",
+   "entity_boost": []
+  },
+  {
+   "question": "论文如何描述传统微调文本分类模型与未针对特定任务微调的生成式语言模型在标注任务中的性能对比？",
+   "paper_id": "2401.00284",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00284",
+   "entity_boost": []
+  },
+  {
+   "question": "在单层模算术任务中，与仅迁移表示载体（E+U）相比，额外迁移内部注意力/MLP权重矩阵（B）在早期准确率和确认延迟这两个指标上分别带来多少提升？统计显著性如何？",
+   "paper_id": "2609.18078",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18078",
+   "entity_boost": []
+  },
+  {
+   "question": "对于有限单子谓词词库，精确语义读出存在的充要条件是什么？其最小维度由什么量决定？",
+   "paper_id": "2609.18047",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18047",
+   "entity_boost": []
+  },
+  {
+   "question": "论文提出的 verified record 是什么？它如何用来区分“payout swap 但 reporter 诚实”与“payout 未变但 reporter 撒谎”这两种情况？",
+   "paper_id": "2609.17226",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.17226",
+   "entity_boost": []
+  },
+  {
+   "question": "论文定义的 honest-reporter penalty 是什么？在 Qwen 32B、Qwen 72B 和 Llama 70B 上的数值分别是多少？",
+   "paper_id": "2609.17226",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.17226",
+   "entity_boost": []
+  },
+  {
+   "question": "TabPFN-3.5 把模型宽度翻倍后，参数量和推理时间分别发生了什么变化？既然参数大约翻了几倍，为什么 KV cache 的大小还能基本保持不变？",
+   "paper_id": "2609.17895",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.17895",
+   "entity_boost": []
+  },
+  {
+   "question": "这篇论文最终SVM泛化误差界中的常数 C* 可以取什么具体值？是否可以用一个更粗略的数值常数来表述？",
+   "paper_id": "2609.17845",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.17845",
+   "entity_boost": []
+  },
+  {
+   "question": "论文如何把SVM风险界的统计问题归约到一个确定性的删除集计数问题？",
+   "paper_id": "2609.17845",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.17845",
+   "entity_boost": []
+  },
+  {
+   "question": "论文中 Free Inference（自由推断）是如何定义的？VM 智能体要满足哪些条件才算实现了 Free Inference？",
+   "paper_id": "2609.17816",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.17816",
+   "entity_boost": []
+  },
+  {
+   "question": "在 CGL 中，复合策略梯度被分解为哪两部分，它们分别捕捉什么效应？",
+   "paper_id": "2609.17697",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.17697",
+   "entity_boost": []
+  },
+  {
+   "question": "在两个多类高速公路交通网络中，CGL 与 CGL-D、MPC-E 的评价回报对比结果如何？",
+   "paper_id": "2609.17697",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.17697",
+   "entity_boost": []
+  },
+  {
+   "question": "论文承认哪些主要局限性？",
+   "paper_id": "2609.17376",
+   "hit5": false,
+   "top1_is_gold": false,
+   "gold_in_top5": false,
+   "top1": "2401.00437",
+   "entity_boost": []
+  },
+  {
+   "question": "在图像重建任务中，SQ-VAE-2 与 VQ-VAE-2 相比，在重建质量和码本利用率方面有哪些优势？请引用论文中的实验证据。",
+   "paper_id": "2401.00365",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00365",
+   "entity_boost": []
+  }
+ ],
+ "rows_on": [
+  {
+   "question": "在 WMT 2014 英德翻译任务上，Transformer (big) 模型取得了多少 BLEU 分数？它比之前的最佳结果（包括集成模型）提升了多少？",
+   "paper_id": "Attention_Is_All_You_Need",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "Attention_Is_All_You_Need",
+   "entity_boost": [
+    "Attention_Is_All_You_Need"
+   ]
+  },
+  {
+   "question": "chain-of-thought prompting 的核心思想是什么？它通过什么样的提示形式来激发大模型的推理能力？",
+   "paper_id": "Chain_of_Thought",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "Chain_of_Thought",
+   "entity_boost": [
+    "Chain_of_Thought"
+   ]
+  },
+  {
+   "question": "论文在讨论部分指出了 chain-of-thought prompting 的哪些主要局限？",
+   "paper_id": "Chain_of_Thought",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "Chain_of_Thought",
+   "entity_boost": [
+    "Chain_of_Thought"
+   ]
+  },
+  {
+   "question": "GraphRAG 与传统的 vector RAG 在适用查询类型上有何根本区别？",
+   "paper_id": "GraphRAG",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "GraphRAG",
+   "entity_boost": [
+    "GraphRAG"
+   ]
+  },
+  {
+   "question": "LoRA 相比 GPT-3 175B 全量微调，在可训练参数量和 GPU 内存需求上分别能减少多少？",
+   "paper_id": "LoRA",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "LoRA",
+   "entity_boost": [
+    "LoRA"
+   ]
+  },
+  {
+   "question": "在 GPT-3 实验中，LoRA 的秩 r 可以小到什么程度？适配 Wq 和 Wv 与只适配 Wq 时对 r 的需求有何不同？",
+   "paper_id": "LoRA",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "LoRA",
+   "entity_boost": [
+    "LoRA"
+   ]
+  },
+  {
+   "question": "RAG-Sequence 与 RAG-Token 在如何使用检索到的文档生成目标序列上有何区别？",
+   "paper_id": "RAG_Original_Paper",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "RAG_Original_Paper",
+   "entity_boost": []
+  },
+  {
+   "question": "在 FEVER 事实核查任务上，RAG 与当时的最优模型相比表现如何？",
+   "paper_id": "RAG_Original_Paper",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "RAG_Original_Paper",
+   "entity_boost": []
+  },
+  {
+   "question": "ReAct 的核心方法思想是什么？它如何把推理与行动结合起来？",
+   "paper_id": "ReAct",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "ReAct",
+   "entity_boost": [
+    "ReAct"
+   ]
+  },
+  {
+   "question": "在 HotpotQA 和 Fever 上，ReAct 与 CoT 的实验表现有什么差异？",
+   "paper_id": "ReAct",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "ReAct",
+   "entity_boost": [
+    "ReAct"
+   ]
+  },
+  {
+   "question": "RoPE 在将位置信息融入自注意力时，与以往基于加法位置编码的方法相比核心区别是什么？",
+   "paper_id": "RoFormer_RoPE",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "RoFormer_RoPE",
+   "entity_boost": [
+    "RoFormer_RoPE"
+   ]
+  },
+  {
+   "question": "论文作者在局限性部分承认了哪些尚未充分解释的问题？",
+   "paper_id": "RoFormer_RoPE",
+   "hit5": false,
+   "top1_is_gold": false,
+   "gold_in_top5": false,
+   "top1": "2609.18720",
+   "entity_boost": []
+  },
+  {
+   "question": "根据这篇综述，当前对话智能体的评估方法（如 perplexity 和 BLEU）存在哪些主要局限？作者认为哪类评估指标更有前景？",
+   "paper_id": "1803.08419",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1803.08419",
+   "entity_boost": []
+  },
+  {
+   "question": "KB-InfoBot 是如何替代符号查询以实现端到端训练的？它在不同规模知识库上的任务成功率如何，主要局限是什么？",
+   "paper_id": "1803.08419",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1803.08419",
+   "entity_boost": []
+  },
+  {
+   "question": "论文的融合模型在训练时如何处理预训练seq2seq模型？",
+   "paper_id": "1805.04833",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1805.04833",
+   "entity_boost": []
+  },
+  {
+   "question": "论文如何通过自动评估衡量生成故事对prompt的依赖？",
+   "paper_id": "1805.04833",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1805.04833",
+   "entity_boost": []
+  },
+  {
+   "question": "论文提出的 RAVAESum 框架如何联合新闻文档与读者评论进行句子显著性估计，并处理评论中的噪声？",
+   "paper_id": "1708.01065",
+   "hit5": false,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1708.01065",
+   "entity_boost": []
+  },
+  {
+   "question": "在作者自建数据集上，RAVAESum 与 RA-Sparse 以及不考虑读者评论的方法相比，实验结果如何？",
+   "paper_id": "1708.01065",
+   "hit5": false,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1708.01065",
+   "entity_boost": []
+  },
+  {
+   "question": "论文中作者为每个词附加了哪些额外特征来帮助临床事件跨度识别？",
+   "paper_id": "1603.09381",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1603.09381",
+   "entity_boost": []
+  },
+  {
+   "question": "论文指出系统在事件跨度识别上召回率较低的主要原因是什么？",
+   "paper_id": "1603.09381",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1603.09381",
+   "entity_boost": []
+  },
+  {
+   "question": "论文中定义的Tier A和Tier B警报有什么区别？系统如何处理这两类警报？",
+   "paper_id": "1809.08899",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1809.08899",
+   "entity_boost": []
+  },
+  {
+   "question": "论文中如何评估模型在警报检测上的性能？使用了什么验证方法？",
+   "paper_id": "1809.08899",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1809.08899",
+   "entity_boost": []
+  },
+  {
+   "question": "论文中的 Naive Bayes（NB）估计器是如何为一个概念计算争议性分数的？",
+   "paper_id": "1908.07491",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1908.07491",
+   "entity_boost": []
+  },
+  {
+   "question": "论文在比较两种文本模型（n-grams tf-idf 与 word embedding）时，发现哪种模型效果更好？作者认为这说明什么？",
+   "paper_id": "1905.08067",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1905.08067",
+   "entity_boost": []
+  },
+  {
+   "question": "这篇论文在未来工作部分计划进一步研究哪些问题？",
+   "paper_id": "1905.08067",
+   "hit5": false,
+   "top1_is_gold": false,
+   "gold_in_top5": false,
+   "top1": "2609.17841",
+   "entity_boost": []
+  },
+  {
+   "question": "这篇论文提出的新事实核查语料库包含多少条已验证声明和多少篇文档，并提供了哪些标注？",
+   "paper_id": "1911.01214",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1911.01214",
+   "entity_boost": []
+  },
+  {
+   "question": "在立场检测任务中，哪个模型得分最高？哪类模型优于基于词嵌入的神经网络？",
+   "paper_id": "1911.01214",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1911.01214",
+   "entity_boost": []
+  },
+  {
+   "question": "论文提出了哪两种利用人类评分训练图像描述模型的方法？它们分别如何处理评分数据稀疏的问题？",
+   "paper_id": "1911.09753",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1911.09753",
+   "entity_boost": []
+  },
+  {
+   "question": "在实验中，为什么On-policy策略梯度方法（OnPG）的表现不如Off-policy方法（OffPG）？论文指出了哪些具体原因？",
+   "paper_id": "1911.09753",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1911.09753",
+   "entity_boost": []
+  },
+  {
+   "question": "论文为 Twitter 言语行为分类选取的特征分为哪两大类，总共选用了多少个二进制特征？",
+   "paper_id": "1605.05156",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1605.05156",
+   "entity_boost": []
+  },
+  {
+   "question": "论文中的 TweetAct 分类器与 Zhang et al. 的监督式 Twitter 言语行为分类器相比，性能表现如何？",
+   "paper_id": "1605.05156",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1605.05156",
+   "entity_boost": []
+  },
+  {
+   "question": "在SAIL Code-Mixed共享任务中，HI-EN和BN-EN数据集上总体（overall）macro average f-score最高的系统是哪支队伍？两个数据集上的最高分数分别是多少？",
+   "paper_id": "1803.06745",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1803.06745",
+   "entity_boost": []
+  },
+  {
+   "question": "论文指出基于深度学习的CFIL系统为何没有超过基于传统机器学习的系统？",
+   "paper_id": "1803.06745",
+   "hit5": false,
+   "top1_is_gold": false,
+   "gold_in_top5": false,
+   "top1": "2609.17895",
+   "entity_boost": []
+  },
+  {
+   "question": "论文使用了哪三种数据集来推断Twitter用户的SES？它们分别基于什么数据源？",
+   "paper_id": "1901.05389",
+   "hit5": false,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1901.05389",
+   "entity_boost": []
+  },
+  {
+   "question": "在黑盒设置下，AEG 模型采用什么架构，并且基于哪些目标设计奖励来训练生成对抗文本？",
+   "paper_id": "1909.07873",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1909.07873",
+   "entity_boost": []
+  },
+  {
+   "question": "在 IMDB 情感分类任务上，与 DeepWordBug 相比，AEG 对 CNN-Word 模型的攻击效果如何？",
+   "paper_id": "1909.07873",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1909.07873",
+   "entity_boost": []
+  },
+  {
+   "question": "论文中提出的两种神经网络架构分别是什么？它们各自如何处理演讲转录文本的输入？",
+   "paper_id": "1905.08392",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1905.08392",
+   "entity_boost": []
+  },
+  {
+   "question": "在TED演讲评分预测实验中，依赖树模型与词序列模型的平均F-score分别是多少？与使用手工特征的经典机器学习基线相比，神经网络模型表现如何？",
+   "paper_id": "1905.08392",
+   "hit5": false,
+   "top1_is_gold": false,
+   "gold_in_top5": false,
+   "top1": "2401.00383",
+   "entity_boost": []
+  },
+  {
+   "question": "UIT-ViIC 数据集总共包含多少张图像和多少条越南语描述？",
+   "paper_id": "2002.00175",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2002.00175",
+   "entity_boost": []
+  },
+  {
+   "question": "在实验中，作者选择了哪三个 sportball 数据集进行对比，并且训练集、验证集和测试集是如何划分的？",
+   "paper_id": "2002.00175",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2002.00175",
+   "entity_boost": []
+  },
+  {
+   "question": "论文提出的Figure-Caption Correspondence（FCC）任务本质上是什么任务？它如何构造训练用的正负样本？",
+   "paper_id": "1909.09070",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1909.09070",
+   "entity_boost": []
+  },
+  {
+   "question": "该论文探索了哪三种模型来获得用于论辩区域分类的句子向量？",
+   "paper_id": "1703.10152",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1703.10152",
+   "entity_boost": []
+  },
+  {
+   "question": "根据论文讨论部分，词嵌入分类在哪些类别上不如Teufel等人提出的手工特征？",
+   "paper_id": "1703.10152",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1703.10152",
+   "entity_boost": []
+  },
+  {
+   "question": "在实验评估中，词汇基线模型在攻击性语言分类上达到什么F1分数，又在哪些网络欺凌标准上难以可靠检测？",
+   "paper_id": "2004.01820",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2004.01820",
+   "entity_boost": []
+  },
+  {
+   "question": "作者在局限性部分指出，其数据集中存在哪两个可能影响模型训练效果的主要问题？",
+   "paper_id": "2004.01820",
+   "hit5": false,
+   "top1_is_gold": false,
+   "gold_in_top5": false,
+   "top1": "2609.18212",
+   "entity_boost": []
+  },
+  {
+   "question": "在 PIO 分类任务中，使用通用 BERT 嵌入与 BioBERT 嵌入时，论文报告的 ROC_AUC 分数分别是多少？哪个嵌入效果更好？",
+   "paper_id": "1906.11085",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1906.11085",
+   "entity_boost": [
+    "BERT"
+   ]
+  },
+  {
+   "question": "PICONET 数据集是如何构建的？与 BIBREF12 中基于关键词的方法相比，本文为避免歧义采取了什么策略？",
+   "paper_id": "1906.11085",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1906.11085",
+   "entity_boost": []
+  },
+  {
+   "question": "在“this is ...”语法任务中，LGI分类图形身份的准确率是多少？它的分类输出方式与传统的softmax有何不同？",
+   "paper_id": "1905.07562",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1905.07562",
+   "entity_boost": []
+  },
+  {
+   "question": "这篇论文把构建 GitHub Typo Corpus 的流程概括为哪几个主要步骤？",
+   "paper_id": "1911.12893",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1911.12893",
+   "entity_boost": []
+  },
+  {
+   "question": "作者如何评估现有拼写检查器在 GitHub Typo Corpus 上的表现，结果说明了什么？",
+   "paper_id": "1911.12893",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1911.12893",
+   "entity_boost": []
+  },
+  {
+   "question": "在 BERT 句子嵌入实验中，哪种池化方法在所有任务类别中平均表现最好？",
+   "paper_id": "1910.07973",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1910.07973",
+   "entity_boost": [
+    "BERT"
+   ]
+  },
+  {
+   "question": "在 factoid 和非 factoid QA 数据集上，基于 BERT 段落嵌入的模型与 BM25 基线相比表现如何？",
+   "paper_id": "1910.07973",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1910.07973",
+   "entity_boost": [
+    "BERT"
+   ]
+  },
+  {
+   "question": "论文针对滥用语言检测中的性别偏见提出了哪三种缓解方法？",
+   "paper_id": "1808.07231",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1808.07231",
+   "entity_boost": []
+  },
+  {
+   "question": "在性别偏见测量实验中，st 和 abt 两个数据集在公平性指标上表现有何对比？论文如何解释 abt 的偏见更少？",
+   "paper_id": "1808.07231",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1808.07231",
+   "entity_boost": []
+  },
+  {
+   "question": "论文提出了哪三种快速迁移学习方案，它们分别在迁移学习阶段更新哪些参数？",
+   "paper_id": "1701.03578",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1701.03578",
+   "entity_boost": []
+  },
+  {
+   "question": "论文指出将RNN结构用于个性化语言建模主要受哪两个限制约束，并提出什么方案来解决？",
+   "paper_id": "1701.03578",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1701.03578",
+   "entity_boost": []
+  },
+  {
+   "question": "论文使用什么方法从标注和未标注的在线辩论帖子中学习事实性与情感性论证的语言模式？",
+   "paper_id": "1709.05295",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1709.05295",
+   "entity_boost": []
+  },
+  {
+   "question": "与朴素贝叶斯分类器相比，论文提出的词汇句法模式学习器在事实/情感分类上的精确率和召回率表现如何？",
+   "paper_id": "1709.05295",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "1709.05295",
+   "entity_boost": []
+  },
+  {
+   "question": "论文在使用 QLoRA 进行微调时设定了哪些关键超参数？",
+   "paper_id": "2609.17398",
+   "hit5": true,
+   "top1_is_gold": false,
+   "gold_in_top5": true,
+   "top1": "2312.12740",
+   "entity_boost": []
+  },
+  {
+   "question": "在9/11事件中，自指代词（self-references）的同一艺术家内效应与艺术家间效应方向是否相反？具体如何？",
+   "paper_id": "2609.17225",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.17225",
+   "entity_boost": []
+  },
+  {
+   "question": "在 Qwen2.5 7B 和 Llama 3.1 8B 这两个本地开放模型上，显式的 evidence-action gate 与 vanilla RAG 在 quartet consistency（QCS）上的实验结果分别是多少？",
+   "paper_id": "2609.17081",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.17081",
+   "entity_boost": []
+  },
+  {
+   "question": "在通过 activation steering 引入偏置的 subliminal learning 设置中，SALVE 的恢复效果如何？有哪些局限？",
+   "paper_id": "2609.16927",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.16927",
+   "entity_boost": []
+  },
+  {
+   "question": "在DRPG框架中，策略生成器默认采用什么样的检索策略来获取用于生成策略的示例？",
+   "paper_id": "2609.16800",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.16800",
+   "entity_boost": []
+  },
+  {
+   "question": "根据6.1节主实验结果，PunGraph为Qwen-2.5-7B在SemEval-2017和WebPun上的异形双关与同形双关分别带来了多大的相对F1提升？",
+   "paper_id": "2609.16557",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.16557",
+   "entity_boost": []
+  },
+  {
+   "question": "SPLICE 方法是如何从文档语料中构造长上下文训练样本的？",
+   "paper_id": "2312.17296",
+   "hit5": false,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2312.17296",
+   "entity_boost": []
+  },
+  {
+   "question": "Agora 如何避免某个 worker 通过不断延伸自己的分支来制造虚假影响力？",
+   "paper_id": "2609.18094",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18094",
+   "entity_boost": []
+  },
+  {
+   "question": "这篇 Agora 运行报告在因果结论上的主要局限是什么？",
+   "paper_id": "2609.18094",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18094",
+   "entity_boost": []
+  },
+  {
+   "question": "在这项审计实验中，作者是如何操纵“程序痕迹”（trace）与“证据标注”（attribution）这两个自变量的？",
+   "paper_id": "2609.18204",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18204",
+   "entity_boost": []
+  },
+  {
+   "question": "XConf 如何利用经验库来估计置信度？Recall 和 Reflect 两个阶段分别做什么？",
+   "paper_id": "2609.17708",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.17708",
+   "entity_boost": []
+  },
+  {
+   "question": "在九个基准和四个模型上，XConf 相对于十样本自洽性（self-consistency）在区分度和校准误差上的总体表现如何？",
+   "paper_id": "2609.17708",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.17708",
+   "entity_boost": []
+  },
+  {
+   "question": "论文如何将 transformer 的层分组，并为每组训练独立的 SSM 来预测 KV 状态？",
+   "paper_id": "2609.17888",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.17888",
+   "entity_boost": [
+    "Attention_Is_All_You_Need"
+   ]
+  },
+  {
+   "question": "Keqing 框架的工作流程主要包含哪四个阶段？",
+   "paper_id": "2401.00426",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00426",
+   "entity_boost": []
+  },
+  {
+   "question": "这篇综述为什么将 Personality、Persona 和 Profile 这三个术语互换使用？",
+   "paper_id": "2401.00609",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00609",
+   "entity_boost": []
+  },
+  {
+   "question": "Zo 研究中的 2000 名用户样本是如何选取的？",
+   "paper_id": "2401.02978",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.02978",
+   "entity_boost": []
+  },
+  {
+   "question": "Zo 在对话记忆方面存在什么局限？",
+   "paper_id": "2401.02978",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.02978",
+   "entity_boost": []
+  },
+  {
+   "question": "论文如何解释其构造的指数级离线评估困难机制？",
+   "paper_id": "2609.19135",
+   "hit5": false,
+   "top1_is_gold": false,
+   "gold_in_top5": false,
+   "top1": "2609.18314",
+   "entity_boost": []
+  },
+  {
+   "question": "在网格世界实验中，最优估计器在解析选定的 90% 成功预算下的模拟失败率与解析预测是否一致？",
+   "paper_id": "2609.19135",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.19135",
+   "entity_boost": []
+  },
+  {
+   "question": "论文对稀疏线性解释问题（SLE）在 ReLU 神经网络上的计算复杂度给出了什么结论？",
+   "paper_id": "2609.19077",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.19077",
+   "entity_boost": []
+  },
+  {
+   "question": "在参数化局部分布族下，论文证明了 relevance error 与 fidelity error 之间存在怎样的乘性上界？",
+   "paper_id": "2609.19077",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.19077",
+   "entity_boost": []
+  },
+  {
+   "question": "HOPE 与 REAP 在方法上是什么关系？HOPE 相对 REAP 带来的改进主要来自哪里？",
+   "paper_id": "2609.18916",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18916",
+   "entity_boost": []
+  },
+  {
+   "question": "HOPE 的校准阶段有哪些额外开销？它在方法上有哪些主要局限？",
+   "paper_id": "2609.18916",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18916",
+   "entity_boost": []
+  },
+  {
+   "question": "论文如何界定最小证书（minimum certificate）的大小？该界限与最优解相差多少？",
+   "paper_id": "2609.18622",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18622",
+   "entity_boost": []
+  },
+  {
+   "question": "在预训练图像分类器的实验中，置信度分数选择在精确选择下需要读取多少比例的标签？而在 AUGRC 容差 5 × 10−4 下又是多少？",
+   "paper_id": "2609.18622",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18622",
+   "entity_boost": []
+  },
+  {
+   "question": "论文如何定义 weakening neuron？它依据什么权重向量的相似度来判断一个神经元会削弱其检测到的残差流方向？",
+   "paper_id": "2609.18612",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18612",
+   "entity_boost": []
+  },
+  {
+   "question": "消融实验中，ablate weakening neurons 相比其他 IO 类或同层随机神经元对模型指标有什么不同影响？负的 gate 值在这里是否重要？",
+   "paper_id": "2609.18612",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18612",
+   "entity_boost": []
+  },
+  {
+   "question": "论文对目标扰动机制提出了哪两种新的隐私分析，它们分别基于什么工具？",
+   "paper_id": "2401.00583",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00583",
+   "entity_boost": []
+  },
+  {
+   "question": "在实验评估中，论文如何安排与DP-SGD的公平比较，特别是如何处理超参数调优的隐私成本？",
+   "paper_id": "2401.00583",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00583",
+   "entity_boost": []
+  },
+  {
+   "question": "论文用于比特币价格预测的历史数据覆盖了哪个时间段，大约包含多少个交易日？",
+   "paper_id": "2401.00534",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00534",
+   "entity_boost": []
+  },
+  {
+   "question": "论文在评估模型对不同保险类型的公平性时，发现 Medicare 和 Medicaid 保险患者在预测短/长住院时有哪些主要性能差异？",
+   "paper_id": "2401.00902",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00902",
+   "entity_boost": []
+  },
+  {
+   "question": "在 Flight 数据集上，MSGNet 相比当前 SOTA 的 TimesNet 在平均 MSE 和 MAE 上分别降低了多少？",
+   "paper_id": "2401.00423",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00423",
+   "entity_boost": []
+  },
+  {
+   "question": "论文提出的基于决策树的多示例学习（MIL）模型是如何将单个细胞的预测结果聚合成患者层面的突变概率的？",
+   "paper_id": "2609.18825",
+   "hit5": false,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18825",
+   "entity_boost": []
+  },
+  {
+   "question": "根据论文，FLT3-ITD 预测的阳性预测值（PPV）目前存在什么局限？",
+   "paper_id": "2609.18825",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18825",
+   "entity_boost": []
+  },
+  {
+   "question": "论文如何重新形式化 Edit Flows 和 EvoFlows，并指出这种形式化带来了哪些必要约束？",
+   "paper_id": "2609.18745",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18745",
+   "entity_boost": []
+  },
+  {
+   "question": "在多代语言模型社会中，与自己的祖先模型合并和与同时代模型合并相比，实验结果有何差异，作者如何解释这种差异？",
+   "paper_id": "2609.18560",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18560",
+   "entity_boost": []
+  },
+  {
+   "question": "SLE核如何在底层距离不满足条件负定（CND）的情况下仍保证核矩阵的半正定性？其关键构造是什么？",
+   "paper_id": "2609.19083",
+   "hit5": false,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.19083",
+   "entity_boost": []
+  },
+  {
+   "question": "论文作者指出了SLE核的哪些主要局限性？",
+   "paper_id": "2609.19083",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.19083",
+   "entity_boost": []
+  },
+  {
+   "question": "这篇论文提出的谱方法具体是如何从带边翻转噪声的符号邻接矩阵中恢复节点标签的？它的理论保证显式依赖于哪些图结构和噪声参数？",
+   "paper_id": "2609.18527",
+   "hit5": false,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18527",
+   "entity_boost": []
+  },
+  {
+   "question": "论文在结论部分指出了当前工作存在哪些局限，以及作者认为未来可以朝哪些方向扩展？",
+   "paper_id": "2609.18527",
+   "hit5": false,
+   "top1_is_gold": false,
+   "gold_in_top5": false,
+   "top1": "2609.15126",
+   "entity_boost": []
+  },
+  {
+   "question": "为了研究极端 token/参数比下的行为，论文训练了多少个模型，这些模型的参数规模和数据预算范围分别是多少？",
+   "paper_id": "2401.00448",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00448",
+   "entity_boost": []
+  },
+  {
+   "question": "Viz 系统的核心运作流程是什么？它如何让内容提供者利用 QLoRA 创建专用模型并在市场中实现使用追踪与变现？",
+   "paper_id": "2401.00503",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00503",
+   "entity_boost": []
+  },
+  {
+   "question": "尽管 QLoRA 带来了效率提升，Viz 系统仍面临哪些主要挑战或局限？",
+   "paper_id": "2401.00503",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00503",
+   "entity_boost": []
+  },
+  {
+   "question": "在 ECtHR-NPD 的主要实验结果中，哪个系统取得了最低的总体 MAE，相比训练集 median 降低了多少？增大语言模型规模或使用复杂代理配置是否一致地改善 MAE？",
+   "paper_id": "2609.18908",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18908",
+   "entity_boost": []
+  },
+  {
+   "question": "DualViewEval 如何保证选出的 miniset 大小恰好为 K，并且让预测反馈能够传播到离散的任务选择过程中？",
+   "paper_id": "2609.18909",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18909",
+   "entity_boost": []
+  },
+  {
+   "question": "在 APEX-Agents 最紧的预算下，DualViewEval 相比 SparseEval 在 MAE 和 Kendall's τ 上分别取得了多大改进？",
+   "paper_id": "2609.18909",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18909",
+   "entity_boost": []
+  },
+  {
+   "question": "RAGTruth在人工标注环节采取了哪些措施来保证标注质量，标注者之间的一致性如何？",
+   "paper_id": "2401.00396",
+   "hit5": false,
+   "top1_is_gold": false,
+   "gold_in_top5": false,
+   "top1": "2609.18905",
+   "entity_boost": []
+  },
+  {
+   "question": "论文使用什么两步提示策略来生成合成训练数据？",
+   "paper_id": "2401.00368",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00368",
+   "entity_boost": []
+  },
+  {
+   "question": "GeoGalactica 的参数量、基础模型、进一步预训练所用的地学文本语料 token 量以及 SFT 数据量分别是多少？",
+   "paper_id": "2401.00434",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00434",
+   "entity_boost": []
+  },
+  {
+   "question": "在人工评估中，GeoGalactica 与哪些通用语言模型进行了对比？",
+   "paper_id": "2401.00434",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00434",
+   "entity_boost": []
+  },
+  {
+   "question": "论文提出的 Value Flattening 具体指什么现象？作者在哪个受控环境中发现它会随状态空间增大而更明显？",
+   "paper_id": "2609.18708",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18708",
+   "entity_boost": []
+  },
+  {
+   "question": "在 Qwen3-4B-Base 等模型上，SP3O 相比标准 PPO 在域内数学推理和分布外推理上分别取得了多少百分点提升？",
+   "paper_id": "2609.18708",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18708",
+   "entity_boost": []
+  },
+  {
+   "question": "CoRe-MARL 的共享奖励函数是如何在设计上同时兼顾“最差中心服务水平”和“各中心之间的公平性”，同时又避免所有中心一起服务得很差？",
+   "paper_id": "2609.18639",
+   "hit5": false,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18639",
+   "entity_boost": []
+  },
+  {
+   "question": "RLLBC-Lib 的各个 Jupyter notebook 是否遵循统一的代码结构？如果是，包含哪些固定的组成部分？",
+   "paper_id": "2609.19074",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.19074",
+   "entity_boost": []
+  },
+  {
+   "question": "RLLBC-Lib 基于自身代码库开发了几项编程作业？这些作业如何实现自动评分？",
+   "paper_id": "2609.19074",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.19074",
+   "entity_boost": []
+  },
+  {
+   "question": "论文在哪些假设下证明了最优策略的阈值表示？该阈值表示的具体形式是什么？",
+   "paper_id": "2609.18610",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18610",
+   "entity_boost": []
+  },
+  {
+   "question": "LaFFi 与传统的 SFT 在输入构造和训练标签上有什么本质区别？",
+   "paper_id": "2401.00907",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00907",
+   "entity_boost": []
+  },
+  {
+   "question": "KDEy 方法提出的核心表示机制是什么？",
+   "paper_id": "2401.00490",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00490",
+   "entity_boost": []
+  },
+  {
+   "question": "论文在评估量化方法时采用了哪种测试袋生成协议？",
+   "paper_id": "2401.00490",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00490",
+   "entity_boost": []
+  },
+  {
+   "question": "论文提出的OPETRL框架如何将离散变量和连续变量的优化分离到两个时间尺度上，并分别采用什么方法进行求解？",
+   "paper_id": "2401.00445",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00445",
+   "entity_boost": []
+  },
+  {
+   "question": "论文在仿真实验中与哪些基线策略进行了对比，主要实验结果如何？",
+   "paper_id": "2401.00445",
+   "hit5": false,
+   "top1_is_gold": false,
+   "gold_in_top5": false,
+   "top1": "2609.14858",
+   "entity_boost": []
+  },
+  {
+   "question": "如果去掉验证（validation）模块，系统的检索准确率、接地答案准确率和幻觉率会如何变化？这说明检索成功是否足以保证答案可靠？",
+   "paper_id": "2609.15830",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.15830",
+   "entity_boost": []
+  },
+  {
+   "question": "论文作者认为其验证框架存在哪些局限？阈值式词汇与语义相似度检查可能漏掉哪些情况？",
+   "paper_id": "2609.15830",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.15830",
+   "entity_boost": []
+  },
+  {
+   "question": "MoME 是如何在保持 token 索引查找的同时实现上下文感知的记忆读取的？它包含哪两级索引器？",
+   "paper_id": "2609.15126",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.15126",
+   "entity_boost": []
+  },
+  {
+   "question": "作者在讨论中承认自己工作存在哪些主要局限？",
+   "paper_id": "2609.15126",
+   "hit5": true,
+   "top1_is_gold": false,
+   "gold_in_top5": true,
+   "top1": "2609.18720",
+   "entity_boost": []
+  },
+  {
+   "question": "SoT 是如何把模型当前的内生推理状态用于历史证据筛选和停止决策的？",
+   "paper_id": "2609.16055",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.16055",
+   "entity_boost": []
+  },
+  {
+   "question": "在受限访问条件下（无训练控制器或只能拿到文本嵌入），SoT 相对完整版本的表现如何，说明其收益是否依赖特定实现或白盒访问？",
+   "paper_id": "2609.16055",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.16055",
+   "entity_boost": []
+  },
+  {
+   "question": "在记忆重整合（Memory Reconsolidation）阶段，REALM 是如何决定边权修改幅度的，这样设计的作用是什么？",
+   "paper_id": "2609.16053",
+   "hit5": false,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.16053",
+   "entity_boost": []
+  },
+  {
+   "question": "ShopEase 如何确定查询对应的政策类别？它是否依赖固定的意图到政策映射？",
+   "paper_id": "2609.13856",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.13856",
+   "entity_boost": []
+  },
+  {
+   "question": "微调后的 Mistral 7B 在零样本和单样本翻译上与 ChatGPT 及 NLLB 3.3B 相比表现如何？",
+   "paper_id": "2312.12740",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2312.12740",
+   "entity_boost": []
+  },
+  {
+   "question": "Fathom 是如何为每个查询、每个通道决定读取深度的？它依赖什么机制使得不同通道可以有不同的比特深度？",
+   "paper_id": "2609.17652",
+   "hit5": false,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.17652",
+   "entity_boost": []
+  },
+  {
+   "question": "在什么硬件/存储条件下 Fathom 并不能带来加速？原因是什么？",
+   "paper_id": "2609.17652",
+   "hit5": false,
+   "top1_is_gold": false,
+   "gold_in_top5": true,
+   "top1": "FlashAttention",
+   "entity_boost": []
+  },
+  {
+   "question": "HypoEvolve 的评估中 DepMap selectivity 这一指标是如何定义的？论文为什么在实验中不直接使用原始的目标依赖性（raw target dependency）作为指标？",
+   "paper_id": "2609.15938",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.15938",
+   "entity_boost": []
+  },
+  {
+   "question": "在保持科学算子与假设数量不变的前提下，如果把适应度引导的亲本选择替换为均匀随机选择，会对最终假设在两个外部指标上的表现造成怎样的差异？",
+   "paper_id": "2609.15938",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.15938",
+   "entity_boost": []
+  },
+  {
+   "question": "在981个共享问题上的配对五选项对十选项比较中，gpt-6-astra的源键准确率变化是多少？这一变化在负向题干和未标记题干上分别有多大？",
+   "paper_id": "2609.15467",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.15467",
+   "entity_boost": []
+  },
+  {
+   "question": "根据论文的 Limitations 部分，完成的200题人工审计有哪些主要证据局限，为什么不能将这些记录视为独立的专家评级？",
+   "paper_id": "2609.15467",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.15467",
+   "entity_boost": []
+  },
+  {
+   "question": "论文发布的Uthmani-to-Standard词映射包含多少词对？它是基于什么构建的？",
+   "paper_id": "2609.14967",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.14967",
+   "entity_boost": []
+  },
+  {
+   "question": "K-Bench 用什么方法校准其自动化评分器（judge），它与临床医生共识的一致程度如何？",
+   "paper_id": "2609.15855",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.15855",
+   "entity_boost": []
+  },
+  {
+   "question": "在匹配的模型配置中，治疗性提示（therapeutic prompt）与提升推理（elevated reasoning）对 combined-risk 分数分别产生了怎样的平均效果和配置差异？",
+   "paper_id": "2609.15855",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.15855",
+   "entity_boost": []
+  },
+  {
+   "question": "L2C 中的 same-instance reward 和 cross-instance reward 这两个奖励变体有什么区别？各自鼓励 LLM-as-a-Coach 学到什么？",
+   "paper_id": "2609.15851",
+   "hit5": false,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.15851",
+   "entity_boost": []
+  },
+  {
+   "question": "论文提出如何为全双工S2S模型添加流式ASR能力？需要引入什么额外模块，对原架构改动大吗？",
+   "paper_id": "2609.15759",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.15759",
+   "entity_boost": []
+  },
+  {
+   "question": "论文提出的 factual perturbation pipeline 如何生成从正确到逐步错误的答案，并用于评估事实性指标？",
+   "paper_id": "2609.15561",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.15561",
+   "entity_boost": []
+  },
+  {
+   "question": "根据论文实验，基于管道的 factual correctness 方法与 LLM-as-a-judge 在跟踪事实退化方面表现有何差异？模型规模是否总是提升评估表现？",
+   "paper_id": "2609.15561",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.15561",
+   "entity_boost": []
+  },
+  {
+   "question": "MUSE 如何把 McKee 的故事理论转化为可复用的创作规则？其中包含哪几个具体操作步骤？",
+   "paper_id": "2609.15188",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.15188",
+   "entity_boost": []
+  },
+  {
+   "question": "该研究从哪个在线平台采集数据，并使用了多少非威胁和威胁帖子样本？",
+   "paper_id": "2401.02974",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.02974",
+   "entity_boost": []
+  },
+  {
+   "question": "使用 PaLM API 的 Chat-Bison 进行威胁分类时出现了什么输出格式问题，作者建议如何改进？",
+   "paper_id": "2401.02974",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.02974",
+   "entity_boost": []
+  },
+  {
+   "question": "论文如何为微调BERT-NER生成大规模训练数据？",
+   "paper_id": "2312.17180",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2312.17180",
+   "entity_boost": []
+  },
+  {
+   "question": "论文认为现有聊天机器人或语音识别用于科学实验时的主要局限是什么？",
+   "paper_id": "2312.17180",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2312.17180",
+   "entity_boost": []
+  },
+  {
+   "question": "在合成计数任务中，旋转超立方体维度的稀疏连接与不旋转的固定稀疏连接（两者每层链接数相同）的准确率对比如何？",
+   "paper_id": "2609.18145",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18145",
+   "entity_boost": []
+  },
+  {
+   "question": "与现有的基于 PNS 的解释方法相比，SNRE 的主要不同点是什么？",
+   "paper_id": "2609.18049",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18049",
+   "entity_boost": []
+  },
+  {
+   "question": "EdgeReMIND 如何从训练数据中校准多时间尺度 recency bank 的衰减率？",
+   "paper_id": "2609.17916",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.17916",
+   "entity_boost": []
+  },
+  {
+   "question": "在匹配的三随机种子实验中，完整模型相对于 full fine-tuning 在 FACED、ISRUC、SEED-V 和 PhysioNet-MI 上的平均平衡准确率变化分别是多少？",
+   "paper_id": "2609.17886",
+   "hit5": false,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.17886",
+   "entity_boost": []
+  },
+  {
+   "question": "该框架如何判断一个样本应该被送入新意图发现模块，而不是直接归入已知意图？",
+   "paper_id": "2609.17866",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.17866",
+   "entity_boost": []
+  },
+  {
+   "question": "论文在 Minkowski 距离的经验分析中发现，增加数据点数量以及使用较低范数分别对距离集中效应有什么影响？",
+   "paper_id": "2401.00422",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00422",
+   "entity_boost": []
+  },
+  {
+   "question": "论文通过 PCA 的渐近行为分析得出了关于高维数据内在维度的什么结论？",
+   "paper_id": "2401.00422",
+   "hit5": false,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00422",
+   "entity_boost": []
+  },
+  {
+   "question": "论文提出的方差型不确定性度量中，标签级的总不确定性、偶然不确定性和认知不确定性分别被定义为什么？",
+   "paper_id": "2401.00276",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00276",
+   "entity_boost": []
+  },
+  {
+   "question": "在 out-of-distribution detection 实验中，论文如何评估方差型 epistemic uncertainty 度量，使用了哪些数据集和指标，结果说明什么？",
+   "paper_id": "2401.00276",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00276",
+   "entity_boost": []
+  },
+  {
+   "question": "在受控生成实验中，p-NCG 及其与 GwL 的混合采样器相比 FUDGE、SVS 等基线表现如何？它们在遵守控制目标和保持流畅度方面有什么结果？",
+   "paper_id": "2312.17710",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2312.17710",
+   "entity_boost": []
+  },
+  {
+   "question": "论文将 EFS-LSTM-MOEA 与哪些最新的特征选择方法进行了比较，比较结果说明了什么？",
+   "paper_id": "2312.17517",
+   "hit5": false,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2312.17517",
+   "entity_boost": []
+  },
+  {
+   "question": "对于超二次一维损失 L(x)=|x|^n (n>2)，论文指出的左边界理论解释还存在什么局限？",
+   "paper_id": "2609.18314",
+   "hit5": false,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18314",
+   "entity_boost": []
+  },
+  {
+   "question": "在干净的 CICDDoS2019 测试集上，随机森林（RF）、深度集成网络（DNE）和 Transformer（TF）三个基线模型的召回率表现如何？",
+   "paper_id": "2609.18281",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18281",
+   "entity_boost": [
+    "Attention_Is_All_You_Need"
+   ]
+  },
+  {
+   "question": "论文提出的两种混合异常检测方法（H1和H2）分别如何结合日志分录测试（JET）与机器学习方法？",
+   "paper_id": "2609.18228",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18228",
+   "entity_boost": []
+  },
+  {
+   "question": "在H2变体中，Isolation Forest在检测全部异常和降低误报方面表现如何？",
+   "paper_id": "2609.18228",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18228",
+   "entity_boost": []
+  },
+  {
+   "question": "LIGE-GR 在 Instagram Reels 和 Facebook Video 上的线上验证中，time spent 分别提升多少？为此付出的额外推理资源和延迟代价大致是多少？",
+   "paper_id": "2609.18148",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18148",
+   "entity_boost": []
+  },
+  {
+   "question": "Palette 解码器引入的未来价值估计 bF 与普通 beam search 有何本质区别？时长感知的 bFdur 相比 step-based 的 bFstep 缓解了什么偏差？",
+   "paper_id": "2609.18148",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18148",
+   "entity_boost": []
+  },
+  {
+   "question": "在 Mamba-2 的实验中，保留输出门与移除输出门时 token 的聚集程度有何差异？这一差异说明了输出门的什么作用？",
+   "paper_id": "2609.17997",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.17997",
+   "entity_boost": []
+  },
+  {
+   "question": "QuanText 通过哪些步骤来扭曲秘密量及相关属性的分布，从而在保护数据集级秘密的同时保留数据效用？",
+   "paper_id": "2609.17995",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.17995",
+   "entity_boost": []
+  },
+  {
+   "question": "论文如何实现连续时间生成动力学的无模拟（simulation-free）训练？",
+   "paper_id": "2609.17901",
+   "hit5": false,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.17901",
+   "entity_boost": []
+  },
+  {
+   "question": "在 KTH Actions 视频外推任务中，本文方法与 Vid-ODE 的对比结果如何？",
+   "paper_id": "2609.17901",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.17901",
+   "entity_boost": []
+  },
+  {
+   "question": "在NINN-FOM的Schwarz耦合中，离线预训练的NINN参数在在线Schwarz迭代期间是否会更新？这与Snyder等人先前的PINN耦合框架有何关键区别？",
+   "paper_id": "2609.17841",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.17841",
+   "entity_boost": []
+  },
+  {
+   "question": "论文发现的长时程智能体“失败签名”（failure signature）具体包含哪三个特征，各自出现的比例是多少？",
+   "paper_id": "2609.17930",
+   "hit5": false,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.17930",
+   "entity_boost": []
+  },
+  {
+   "question": "这篇论文提出的光学PINN训练框架是如何避免反向传播（BP）并完成参数更新的？",
+   "paper_id": "2401.00413",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00413",
+   "entity_boost": []
+  },
+  {
+   "question": "在20维HJB PDE实验中，所提出的片上无BP张量压缩训练与离片训练在验证损失和硬件鲁棒性方面有何不同？",
+   "paper_id": "2401.00413",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00413",
+   "entity_boost": []
+  },
+  {
+   "question": "论文提出的 burstiness potential（突发性潜力）指标是用来衡量什么的？",
+   "paper_id": "2401.00329",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00329",
+   "entity_boost": []
+  },
+  {
+   "question": "在 server-based training 的 Linear-Allreduce 实验中，为什么所有 worker 到服务器的聚合流量没有比单个 worker 的流量更具突发性？",
+   "paper_id": "2401.00329",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00329",
+   "entity_boost": []
+  },
+  {
+   "question": "这篇论文提出的线性神经网络（LNNs）不实用的新解释是什么？",
+   "paper_id": "2401.00186",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00186",
+   "entity_boost": []
+  },
+  {
+   "question": "在实验中，作者如何构造带有噪声的合成数据集？",
+   "paper_id": "2401.00186",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00186",
+   "entity_boost": []
+  },
+  {
+   "question": "论文中对来自 TUCANA 的传感器数据进行了哪些预处理步骤？",
+   "paper_id": "2401.00112",
+   "hit5": false,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00112",
+   "entity_boost": []
+  },
+  {
+   "question": "在论文的实验中，LSTM AE 与 vanilla AE 在异常检测性能上有何差异？",
+   "paper_id": "2401.00112",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00112",
+   "entity_boost": []
+  },
+  {
+   "question": "论文对强化学习目标中的哪些组件做了消融实验？其中哪个组件最关键，去掉后性能变化如何？",
+   "paper_id": "2609.18677",
+   "hit5": true,
+   "top1_is_gold": false,
+   "gold_in_top5": true,
+   "top1": "2312.15883",
+   "entity_boost": []
+  },
+  {
+   "question": "经过数学领域后训练后，模型在域外任务（TriviaQA）上的表现有何变化？作者认为这种域外性能下降主要来源于什么？",
+   "paper_id": "2609.18677",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18677",
+   "entity_boost": []
+  },
+  {
+   "question": "论文的两个零假设测试分别用来定位什么故障？",
+   "paper_id": "2609.18005",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18005",
+   "entity_boost": []
+  },
+  {
+   "question": "在Qwen2.5-7B上，HQQ 3-bit量化在不同领域的质量损失表现如何？",
+   "paper_id": "2609.18005",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18005",
+   "entity_boost": []
+  },
+  {
+   "question": "REREF 如何通过 Generator 和 Verifier 的循环来生成替代参考报告？如果 Verifier 判定生成样本不合格，会怎么处理？",
+   "paper_id": "2609.19093",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.19093",
+   "entity_boost": []
+  },
+  {
+   "question": "论文报告了报告实践变化会改变模型排名的具体例子：在 MIMIC-CXR 上用 RadCliQ-v1 评估时，压缩参考报告中的正常发现会导致哪两个模型的排名发生什么变化？",
+   "paper_id": "2609.19093",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.19093",
+   "entity_boost": []
+  },
+  {
+   "question": "在 Astrophysics 领域中，频率方法与语义度量相比，在识别“趋势相关术语”上的人类判断对齐情况和 Precision@50 分别是多少？",
+   "paper_id": "2609.18804",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18804",
+   "entity_boost": []
+  },
+  {
+   "question": "BatchEval 的默认最优设置包括哪些核心设计？",
+   "paper_id": "2401.00437",
+   "hit5": false,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00437",
+   "entity_boost": []
+  },
+  {
+   "question": "论文中 QAGNN 方法达到的最佳测试准确率是多少，它与 LM-only 加入知识事实后的准确率相比如何？",
+   "paper_id": "2401.00388",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00388",
+   "entity_boost": []
+  },
+  {
+   "question": "L3Cube-MahaSocialNER 数据集是什么，它包含多少条人工标注句子以及多少个实体类别？",
+   "paper_id": "2401.00170",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00170",
+   "entity_boost": []
+  },
+  {
+   "question": "论文如何论证需要更多社交媒体 NER 数据集？常规 NER 模型在 MahaSocialNER 测试集上的零样本结果如何？",
+   "paper_id": "2401.00170",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00170",
+   "entity_boost": []
+  },
+  {
+   "question": "在童年志向作文中标注是否提及休闲活动时，表现最好的提示策略和模型是什么？其 kappa、准确率和宏平均 F1 分数分别是多少？",
+   "paper_id": "2401.00284",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00284",
+   "entity_boost": []
+  },
+  {
+   "question": "论文如何描述传统微调文本分类模型与未针对特定任务微调的生成式语言模型在标注任务中的性能对比？",
+   "paper_id": "2401.00284",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00284",
+   "entity_boost": []
+  },
+  {
+   "question": "在单层模算术任务中，与仅迁移表示载体（E+U）相比，额外迁移内部注意力/MLP权重矩阵（B）在早期准确率和确认延迟这两个指标上分别带来多少提升？统计显著性如何？",
+   "paper_id": "2609.18078",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18078",
+   "entity_boost": []
+  },
+  {
+   "question": "对于有限单子谓词词库，精确语义读出存在的充要条件是什么？其最小维度由什么量决定？",
+   "paper_id": "2609.18047",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.18047",
+   "entity_boost": []
+  },
+  {
+   "question": "论文提出的 verified record 是什么？它如何用来区分“payout swap 但 reporter 诚实”与“payout 未变但 reporter 撒谎”这两种情况？",
+   "paper_id": "2609.17226",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.17226",
+   "entity_boost": []
+  },
+  {
+   "question": "论文定义的 honest-reporter penalty 是什么？在 Qwen 32B、Qwen 72B 和 Llama 70B 上的数值分别是多少？",
+   "paper_id": "2609.17226",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.17226",
+   "entity_boost": []
+  },
+  {
+   "question": "TabPFN-3.5 把模型宽度翻倍后，参数量和推理时间分别发生了什么变化？既然参数大约翻了几倍，为什么 KV cache 的大小还能基本保持不变？",
+   "paper_id": "2609.17895",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.17895",
+   "entity_boost": []
+  },
+  {
+   "question": "这篇论文最终SVM泛化误差界中的常数 C* 可以取什么具体值？是否可以用一个更粗略的数值常数来表述？",
+   "paper_id": "2609.17845",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.17845",
+   "entity_boost": []
+  },
+  {
+   "question": "论文如何把SVM风险界的统计问题归约到一个确定性的删除集计数问题？",
+   "paper_id": "2609.17845",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.17845",
+   "entity_boost": []
+  },
+  {
+   "question": "论文中 Free Inference（自由推断）是如何定义的？VM 智能体要满足哪些条件才算实现了 Free Inference？",
+   "paper_id": "2609.17816",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.17816",
+   "entity_boost": []
+  },
+  {
+   "question": "在 CGL 中，复合策略梯度被分解为哪两部分，它们分别捕捉什么效应？",
+   "paper_id": "2609.17697",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.17697",
+   "entity_boost": []
+  },
+  {
+   "question": "在两个多类高速公路交通网络中，CGL 与 CGL-D、MPC-E 的评价回报对比结果如何？",
+   "paper_id": "2609.17697",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2609.17697",
+   "entity_boost": []
+  },
+  {
+   "question": "论文承认哪些主要局限性？",
+   "paper_id": "2609.17376",
+   "hit5": false,
+   "top1_is_gold": false,
+   "gold_in_top5": false,
+   "top1": "2401.00437",
+   "entity_boost": []
+  },
+  {
+   "question": "在图像重建任务中，SQ-VAE-2 与 VQ-VAE-2 相比，在重建质量和码本利用率方面有哪些优势？请引用论文中的实验证据。",
+   "paper_id": "2401.00365",
+   "hit5": true,
+   "top1_is_gold": true,
+   "gold_in_top5": true,
+   "top1": "2401.00365",
+   "entity_boost": []
+  }
+ ]
+}

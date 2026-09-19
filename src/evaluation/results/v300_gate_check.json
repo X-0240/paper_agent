@@ -1,0 +1,2435 @@
+{
+ "config": {
+  "RETRIEVAL_CANDIDATES": "50",
+  "RERANK_MODE": "conditional",
+  "QUERY_GENERATION_ENABLED": "1",
+  "QUERY_GENERATION_TIMEOUT": null,
+  "RETRIEVAL_ALPHA": null,
+  "RERANK_TRIGGER_MARGIN": "0.1"
+ },
+ "thresholds": {
+  "legacy88": {
+   "file": "legacy_88.json",
+   "required": 66,
+   "n": 88,
+   "name": "88题证据级@5"
+  },
+  "legacy42": {
+   "file": "forward_40.json",
+   "required": 36,
+   "n": 42,
+   "name": "42题回归@5"
+  }
+ },
+ "sets": {
+  "legacy88": {
+   "name": "88题证据级@5",
+   "required": 66,
+   "cold": {
+    "n": 88,
+    "hits": 45,
+    "rate": 0.5113636363636364,
+    "ci95": [
+     0.40865348719267547,
+     0.61312313690795
+    ],
+    "rerank_trigger_rate": 0.3068181818181818,
+    "total_p95_ms": 3717.0418000023346,
+    "total_median_ms": 920.8503000045312,
+    "rows": [
+     {
+      "question": "Transformer架构抛弃了RNN与卷积模块，完全依靠什么机制搭建模型？",
+      "paper_id": "Attention_Is_All_You_Need",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "Transformer architecture abandons RNN and convolution modules and relies entirely on what mechanism to build the model?",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "缩放点积注意力中，为什么要对QKᵀ除以√dₖ做缩放操作？",
+      "paper_id": "Attention_Is_All_You_Need",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "scaled dot-product attention why divide QK^T by sqrt(d_k) scaling",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "原文中多头注意力设置的头数h、单头维度dₖ、模型总维度d_model分别是多少？",
+      "paper_id": "Attention_Is_All_You_Need",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "What are the number of heads h, per-head dimension d_k, and model dimension d_model in the multi-head attention setup?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "Transformer解码器的自注意力层增加了什么掩码操作，保证生成的自回归属性？",
+      "paper_id": "Attention_Is_All_You_Need",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "What mask operation is added to the self-attention layer of the Transformer decoder to ensure autoregressive generation?",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "原文中前馈网络FFN的计算公式是什么，输入输出维度与中间隐层维度分别是？",
+      "paper_id": "Attention_Is_All_You_Need",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "What is the computation formula of the feed-forward network FFN, and what are the input, output, and intermediate hidden layer dimensions?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "论文采用哪种位置编码方案，该方案相比可学习位置嵌入有什么优势？",
+      "paper_id": "Attention_Is_All_You_Need",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "What positional encoding scheme does the paper adopt and what advantages does it have over learned positional embeddings?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "单层自注意力、循环网络、卷积网络三者每层复杂度、最小顺序操作数分别是什么？",
+      "paper_id": "Attention_Is_All_You_Need",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "single-layer self-attention vs recurrent vs convolutional network per-layer complexity and minimum number of sequential operations",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "在WMT2014英德翻译任务上，Big Transformer取得的单模型BLEU值是多少？",
+      "paper_id": "Attention_Is_All_You_Need",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "WMT2014 English-German translation Big Transformer single model BLEU score",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "Transformer每层子层输出的标准化操作顺序是残差连接后层归一化还是先归一化再残差？",
+      "paper_id": "Attention_Is_All_You_Need",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "Transformer sublayer output normalization order: residual connection then layer normalization or pre-normalization before residual?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "原文可视化实验中，编码器第5层多头注意力能捕捉哪两类语言现象？",
+      "paper_id": "Attention_Is_All_You_Need",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "In visualization experiments, which two types of linguistic phenomena can the multi-head attention in encoder layer 5 capture?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "B区别于GPT的核心预训练任务是什么，该任务如何实现双向上下文建模？",
+      "paper_id": "BERT",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "What is the core pretraining task of BERT that differs from GPT, and how does it achieve bidirectional context modeling?",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "BERT输入序列新增哪两个特殊标记，各自作用是什么？",
+      "paper_id": "BERT",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "BERT input sequence two special tokens [CLS] [SEP] roles",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "BERT预训练的第二个无监督任务NSP全称与目标是什么？",
+      "paper_id": "BERT",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "BERT pre-training NSP next sentence prediction full name and objective",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "MLM掩码时，选中待预测token后三种替换策略的占比分别是多少？",
+      "paper_id": "BERT",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "MLM masking replacement strategies proportions selected token 80% 10% 10%",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "BERT-BASE与BERT-LARGE的层数L、隐藏维度H、注意力头数A分别是？",
+      "paper_id": "BERT",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "BERT-BASE BERT-LARGE number of layers L hidden size H attention heads A",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "消融实验中移除NSP任务后，哪些下游任务性能出现明显下降？",
+      "paper_id": "BERT",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "In ablation study removing NSP task, which downstream tasks show significant performance drop?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "BERT支持两种使用范式，分别是微调范式与哪种特征提取范式？",
+      "paper_id": "BERT",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "BERT fine-tuning paradigm and feature extraction paradigm",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "SQuAD v2.0任务中，BERT如何处理无答案的问答样本？",
+      "paper_id": "BERT",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "BERT SQuAD v2.0 unanswerable questions handling",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "BERT预训练使用的两大语料库分别是什么？",
+      "paper_id": "BERT",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "What are the two major corpora used for BERT pretraining?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "单句分类、句对分类、抽取式问答、序列标注四类任务分别复用BERT哪部分输出？",
+      "paper_id": "BERT",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "Which BERT output is reused for single sentence classification, sentence pair classification, extractive question answering, and sequence labeling?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "CoT提示词的构造形式是哪三元组，区别于标准问答提示？",
+      "paper_id": "Chain_of_Thought",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "Chain-of-thought prompting triplet construction form versus standard question-answering prompting",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "CoT提升模型推理能力是哪种模型涌现能力，多少参数规模下才会显现正向效果？",
+      "paper_id": "Chain_of_Thought",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "Chain-of-thought reasoning emergent ability model scale parameters positive effect",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "在GSM8K小学数学数据集上，PaLM540B标准提示与CoT提示的解题准确率分别是多少？",
+      "paper_id": "Chain_of_Thought",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "GSM8K grade school math PaLM 540B standard prompting vs CoT prompting accuracy",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "论文做的消融实验中，仅输出数学公式、先答案后推理两种变体为什么效果弱于完整CoT？",
+      "paper_id": "Chain_of_Thought",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "ablation study only output mathematical formula vs answer-first then reasoning vs full chain-of-thought CoT performance degradation",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "CoT可以泛化推理到输入样例步数更长的测试样本，论文在哪两类符号任务验证该特性？",
+      "paper_id": "Chain_of_Thought",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "Chain-of-thought generalization longer test examples symbolic tasks two types",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "人工撰写不同风格、不同数量的CoT示例后，模型性能有小幅波动但均显著优于标准提示，说明CoT具备什么特性？",
+      "paper_id": "Chain_of_Thought",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "Manually written CoT examples of different styles and quantities cause small performance fluctuations but all significantly outperform standard prompting, indicating what property of CoT?",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "论文将模型推理错误分为三大类，分别是什么？",
+      "paper_id": "Chain_of_Thought",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "What are the three major categories of model reasoning errors in the paper?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "CoT适用度最高的任务满足哪三个条件？",
+      "paper_id": "Chain_of_Thought",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "What three conditions are most satisfied by tasks with the highest suitability for CoT?",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "常识推理评测使用了CSQA、StrategyQA等数据集，CoT在哪类常识任务提升幅度最大？",
+      "paper_id": "Chain_of_Thought",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "commonsense reasoning evaluation CSQA StrategyQA datasets chain-of-thought CoT which commonsense task types largest improvement",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "仅8个CoT示例就能大幅提升数学推理，是否需要针对每个数据集单独制作示例？",
+      "paper_id": "Chain_of_Thought",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "Do only 8 CoT examples greatly improve mathematical reasoning, and are dataset-specific examples needed for each dataset?",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "标准自注意力的内存瓶颈来自哪个中间矩阵，其空间复杂度与序列长度N是什么关系？",
+      "paper_id": "FlashAttention",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "standard self-attention memory bottleneck intermediate matrix space complexity sequence length N",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "FlashAttention核心两大优化技术分别是什么？",
+      "paper_id": "FlashAttention",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "What are the two core optimization techniques of FlashAttention?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "GPU内存层级从快到慢排序，FlashAttention主要优化哪两层之间的数据读写？",
+      "paper_id": "FlashAttention",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "GPU memory hierarchy fastest to slowest ordering, which two levels does FlashAttention primarily optimize data reads and writes between?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "FlashAttention相比标准注意力，HBM读写量降低多少倍（GPT2实验数据）？",
+      "paper_id": "FlashAttention",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "FlashAttention vs standard attention HBM read/write reduction factor GPT-2 experiments",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "FlashAttention是否改变注意力数学计算结果？",
+      "paper_id": "FlashAttention",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "Does FlashAttention change the mathematical computation result of attention?",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "分块计算softmax时，为保证数值正确性，需要缓存哪两个逐行统计量？",
+      "paper_id": "FlashAttention",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "block-wise softmax numerical stability which two row-wise statistics need to be cached",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "Block-Sparse FlashAttention的IO复杂度相比稠密Flash，会乘以什么稀疏系数？",
+      "paper_id": "FlashAttention",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "Block-Sparse FlashAttention IO complexity sparse coefficient compared to dense FlashAttention",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "使用Flash训练BERT-Large相比MLPerf基准提速多少？GPT2（1K序列）提速倍数？",
+      "paper_id": "FlashAttention",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "Flash training BERT-Large speedup over MLPerf baseline; GPT2 1K sequence speedup",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "FlashAttention的IO复杂度公式是什么，M代表什么硬件参数？",
+      "paper_id": "FlashAttention",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "FlashAttention IO complexity formula and what hardware parameter does M represent",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "Flash支持超长序列，哪两个长文本基准首次通过它实现高于随机的效果？",
+      "paper_id": "FlashAttention",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "Flash enables super-long sequences; which two long-text benchmarks first achieve above-random performance with it?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "LoRA微调仅冻结预训练大模型权重，只训练哪两组低秩矩阵？",
+      "paper_id": "LoRA",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "LoRA fine-tuning freezes pretrained large model weights and trains which two low-rank matrices?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "LoRA推理时是否引入额外延迟，原因是什么？",
+      "paper_id": "LoRA",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "Does LoRA introduce additional inference latency and what are the causes?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "LoRA的权重更新公式是什么，训练初始化矩阵A、B策略是？",
+      "paper_id": "LoRA",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "LoRA weight update formula and initialization strategy for matrices A and B in training",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "论文为什么仅针对注意力矩阵做低秩适配，不作用于FFN层？",
+      "paper_id": "LoRA",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "Why is low-rank adaptation applied only to the attention matrix and not to the FFN layers?",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "LoRA超参数r代表什么，r越大模型适配能力与参数量如何变化？",
+      "paper_id": "LoRA",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "What does LoRA hyperparameter r represent, and how do model adaptation capacity and parameter count change as r increases?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "相比全参数微调、Prefix Tuning，LoRA在存储开销上的优势是什么？",
+      "paper_id": "LoRA",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "What are the storage overhead advantages of LoRA compared to full-parameter fine-tuning and Prefix Tuning?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "LoRA训练阶段是否使用dropout、偏置项等辅助参数？",
+      "paper_id": "LoRA",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "Does LoRA training use dropout and bias terms as auxiliary parameters?",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "在GPT-3 175B实验中，同等性能下LoRA相比全微调节省多少显存？",
+      "paper_id": "LoRA",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "In GPT-3 175B experiments, how much GPU memory does LoRA save compared to full fine-tuning at equal performance?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "多任务场景下LoRA如何切换不同任务适配权重？",
+      "paper_id": "LoRA",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "How does LoRA switch task-specific adapter weights across multiple tasks?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "GraphR相比传统向量RAG，核心新增哪一类结构化存储单元？",
+      "paper_id": "GraphRAG",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "GraphRAG vs vector RAG core new structured storage unit",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "GraphRAG对原始文档做分层抽取，哪两级图结构用于检索？",
+      "paper_id": "GraphRAG",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "GraphRAG hierarchical extraction original documents two-level graph structure retrieval",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "GraphRAG构建图时，通过什么步骤从文本抽取实体与关系三元组？",
+      "paper_id": "GraphRAG",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "GraphRAG graph construction steps for extracting entity-relation triplets from text",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "GraphRAG中社区检测算法的作用是什么？",
+      "paper_id": "GraphRAG",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "What is the role of community detection algorithms in GraphRAG?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "传统向量RAG的缺陷是什么，GraphRAG通过图结构弥补？",
+      "paper_id": "GraphRAG",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "What are the limitations of traditional vector RAG, and how does GraphRAG address them through graph structure?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "全局社区摘要如何生成？",
+      "paper_id": "GraphRAG",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "How are global community summaries generated?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "GraphRAG在多文档综合问答任务上相比普通RAG提升的核心原因？",
+      "paper_id": "GraphRAG",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "GraphRAG vs RAG multi-document comprehensive question answering core reasons for improvement",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "GraphRAG的完整处理流水线包含哪五大核心步骤？",
+      "paper_id": "GraphRAG",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "GraphRAG complete processing pipeline five core steps",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "原始RAG模型由哪两个核心模块组合而成？",
+      "paper_id": "RAG_Original_Paper",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "What two core modules compose the original RAG model?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "RAG两种变体RAG-Sequence与RAG-Token的区别是什么？",
+      "paper_id": "RAG_Original_Paper",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "What is the difference between RAG-Sequence and RAG-Token variants of RAG?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "RAG的核心设计动机是什么，解决大模型什么固有缺陷？",
+      "paper_id": "RAG_Original_Paper",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "What is the core motivation of RAG and what inherent limitations of large language models does it address?",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "检索阶段使用的稠密检索模型DPR，输入分别是什么？",
+      "paper_id": "RAG_Original_Paper",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "DPR dense retrieval model input query passage",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "RAG训练时联合优化哪两类损失？",
+      "paper_id": "RAG_Original_Paper",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "RAG training joint optimization of which two types of losses?",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "论文评测哪四类知识密集型NLP任务验证RAG效果？",
+      "paper_id": "RAG_Original_Paper",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "Which four knowledge-intensive NLP tasks are used to evaluate RAG effectiveness?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "RAG相比纯预训练生成模型，在哪类指标提升最显著？",
+      "paper_id": "RAG_Original_Paper",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "RAG vs pretrained generative models which evaluation metrics show most significant improvement",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "推理阶段RAG检索多少个top-k文档融合进生成上下文？",
+      "paper_id": "RAG_Original_Paper",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "How many top-k retrieved documents are fused into the generation context during inference in RAG?",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "为什么RAG不需要微调海量模型参数就能注入新知识？",
+      "paper_id": "RAG_Original_Paper",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "Why does RAG inject new knowledge without fine-tuning massive model parameters?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "消融实验中移除检索模块后，模型哪项性能断崖下跌？",
+      "paper_id": "RAG_Original_Paper",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "In ablation study, which performance metric drops sharply after removing the retrieval module?",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "Re框架交替生成哪两类内容，实现推理与工具调用协同？",
+      "paper_id": "ReAct",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "Re framework alternating generation reasoning and tool invocation",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "ReAct相比纯CoT、纯工具调用Prompt的核心优势是什么？",
+      "paper_id": "ReAct",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "What are the core advantages of ReAct over pure CoT and pure tool-calling prompts?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "ReAct完整交互循环流程是什么？",
+      "paper_id": "ReAct",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "What is the complete interaction loop process of ReAct?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "论文使用的外部工具主要是什么检索类工具？",
+      "paper_id": "ReAct",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "What are the main external retrieval tools used in the paper?",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "纯CoT模型在需要外部实时知识的任务上存在什么致命缺陷？",
+      "paper_id": "ReAct",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "What are the fatal limitations of pure chain-of-thought models on tasks requiring external real-time knowledge?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "ReAct的提示示例由哪四元组样例构成？",
+      "paper_id": "ReAct",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "What four-tuple examples constitute the ReAct prompting demonstrations?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "在HotpotQA多跳问答数据集，ReAct相比仅CoT基线提升的核心原因？",
+      "paper_id": "ReAct",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "HotpotQA multi-hop question answering ReAct vs CoT-only baseline core reasons for improvement",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "ReAct何时终止Thought-Action循环并输出最终答案？",
+      "paper_id": "ReAct",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "When does ReAct terminate the Thought-Action loop and output the final answer?",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "消融实验移除Action工具调用后，模型会出现什么问题？",
+      "paper_id": "ReAct",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "What problems arise when the Action tool call is removed in ablation experiments?",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "ReAct解决了工具调用模型的什么问题？",
+      "paper_id": "ReAct",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "What problem does ReAct solve for tool-augmented language models?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "GPT1模型基础架构基于哪篇论文提出的解码器Transformer？",
+      "paper_id": "GPT2",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "GPT-1 model architecture decoder Transformer based on which paper?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "GPT1预训练采用什么无监督语言建模目标？",
+      "paper_id": "GPT2",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "What unsupervised language modeling objective was used for GPT-1 pretraining?",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "GPT1的Transformer解码器堆叠层数、隐藏维度、注意力头数是多少？",
+      "paper_id": "GPT2",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "GPT-1 Transformer decoder number of layers hidden dimension attention heads",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "论文核心论点是什么，即大模型无监督预训练后可零样本适配多种NLP任务？",
+      "paper_id": "GPT2",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "What is the core argument that large language models can perform zero-shot adaptation to diverse NLP tasks after unsupervised pretraining?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "RoFormer提出的位置编码全称是什么，缩写RoPE？",
+      "paper_id": "RoFormer_RoPE",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "What is the full name of the positional encoding proposed in RoFormer, abbreviated as RoPE?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "RoPE编码的核心数学操作是对token向量执行什么变换？",
+      "paper_id": "RoFormer_RoPE",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "What transformation does RoPE apply to token vectors in its core mathematical operation?",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "RoPE相比正弦位置编码、可学习位置编码的核心优势？",
+      "paper_id": "RoFormer_RoPE",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "What are the core advantages of RoPE compared with sinusoidal positional encoding and learned positional encoding?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "标准绝对位置编码存在什么缺陷，RoPE予以解决？",
+      "paper_id": "RoFormer_RoPE",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "What are the limitations of standard absolute position encoding that RoPE addresses?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "RoPE如何计算两个token间基于相对位置的注意力分数？",
+      "paper_id": "RoFormer_RoPE",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "How does RoPE compute attention scores between two tokens based on relative position?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "RoFormer基础模型的主干网络采用Transformer编码器还是解码器？",
+      "paper_id": "RoFormer_RoPE",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "Does the RoFormer base model use a Transformer encoder or decoder as its backbone network?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "RoPE旋转计算的频率基底参数作用是什么？",
+      "paper_id": "RoFormer_RoPE",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "What is the role of the frequency base parameter in RoPE rotary computation?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     }
+    ]
+   },
+   "hot": {
+    "n": 88,
+    "hits": 45,
+    "rate": 0.5113636363636364,
+    "ci95": [
+     0.40865348719267547,
+     0.61312313690795
+    ],
+    "rerank_trigger_rate": 0.3068181818181818,
+    "total_p95_ms": 161.50599998945836,
+    "total_median_ms": 122.08479999389965,
+    "rows": [
+     {
+      "question": "Transformer架构抛弃了RNN与卷积模块，完全依靠什么机制搭建模型？",
+      "paper_id": "Attention_Is_All_You_Need",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "Transformer architecture abandons RNN and convolution modules and relies entirely on what mechanism to build the model?",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "缩放点积注意力中，为什么要对QKᵀ除以√dₖ做缩放操作？",
+      "paper_id": "Attention_Is_All_You_Need",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "scaled dot-product attention why divide QK^T by sqrt(d_k) scaling",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "原文中多头注意力设置的头数h、单头维度dₖ、模型总维度d_model分别是多少？",
+      "paper_id": "Attention_Is_All_You_Need",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "What are the number of heads h, per-head dimension d_k, and model dimension d_model in the multi-head attention setup?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "Transformer解码器的自注意力层增加了什么掩码操作，保证生成的自回归属性？",
+      "paper_id": "Attention_Is_All_You_Need",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "What mask operation is added to the self-attention layer of the Transformer decoder to ensure autoregressive generation?",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "原文中前馈网络FFN的计算公式是什么，输入输出维度与中间隐层维度分别是？",
+      "paper_id": "Attention_Is_All_You_Need",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "What is the computation formula of the feed-forward network FFN, and what are the input, output, and intermediate hidden layer dimensions?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "论文采用哪种位置编码方案，该方案相比可学习位置嵌入有什么优势？",
+      "paper_id": "Attention_Is_All_You_Need",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "What positional encoding scheme does the paper adopt and what advantages does it have over learned positional embeddings?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "单层自注意力、循环网络、卷积网络三者每层复杂度、最小顺序操作数分别是什么？",
+      "paper_id": "Attention_Is_All_You_Need",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "single-layer self-attention vs recurrent vs convolutional network per-layer complexity and minimum number of sequential operations",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "在WMT2014英德翻译任务上，Big Transformer取得的单模型BLEU值是多少？",
+      "paper_id": "Attention_Is_All_You_Need",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "WMT2014 English-German translation Big Transformer single model BLEU score",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "Transformer每层子层输出的标准化操作顺序是残差连接后层归一化还是先归一化再残差？",
+      "paper_id": "Attention_Is_All_You_Need",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "Transformer sublayer output normalization order: residual connection then layer normalization or pre-normalization before residual?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "原文可视化实验中，编码器第5层多头注意力能捕捉哪两类语言现象？",
+      "paper_id": "Attention_Is_All_You_Need",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "In visualization experiments, which two types of linguistic phenomena can the multi-head attention in encoder layer 5 capture?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "B区别于GPT的核心预训练任务是什么，该任务如何实现双向上下文建模？",
+      "paper_id": "BERT",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "What is the core pretraining task of BERT that differs from GPT, and how does it achieve bidirectional context modeling?",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "BERT输入序列新增哪两个特殊标记，各自作用是什么？",
+      "paper_id": "BERT",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "BERT input sequence two special tokens [CLS] [SEP] roles",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "BERT预训练的第二个无监督任务NSP全称与目标是什么？",
+      "paper_id": "BERT",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "BERT pre-training NSP next sentence prediction full name and objective",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "MLM掩码时，选中待预测token后三种替换策略的占比分别是多少？",
+      "paper_id": "BERT",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "MLM masking replacement strategies proportions selected token 80% 10% 10%",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "BERT-BASE与BERT-LARGE的层数L、隐藏维度H、注意力头数A分别是？",
+      "paper_id": "BERT",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "BERT-BASE BERT-LARGE number of layers L hidden size H attention heads A",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "消融实验中移除NSP任务后，哪些下游任务性能出现明显下降？",
+      "paper_id": "BERT",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "In ablation study removing NSP task, which downstream tasks show significant performance drop?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "BERT支持两种使用范式，分别是微调范式与哪种特征提取范式？",
+      "paper_id": "BERT",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "BERT fine-tuning paradigm and feature extraction paradigm",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "SQuAD v2.0任务中，BERT如何处理无答案的问答样本？",
+      "paper_id": "BERT",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "BERT SQuAD v2.0 unanswerable questions handling",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "BERT预训练使用的两大语料库分别是什么？",
+      "paper_id": "BERT",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "What are the two major corpora used for BERT pretraining?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "单句分类、句对分类、抽取式问答、序列标注四类任务分别复用BERT哪部分输出？",
+      "paper_id": "BERT",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "Which BERT output is reused for single sentence classification, sentence pair classification, extractive question answering, and sequence labeling?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "CoT提示词的构造形式是哪三元组，区别于标准问答提示？",
+      "paper_id": "Chain_of_Thought",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "Chain-of-thought prompting triplet construction form versus standard question-answering prompting",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "CoT提升模型推理能力是哪种模型涌现能力，多少参数规模下才会显现正向效果？",
+      "paper_id": "Chain_of_Thought",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "Chain-of-thought reasoning emergent ability model scale parameters positive effect",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "在GSM8K小学数学数据集上，PaLM540B标准提示与CoT提示的解题准确率分别是多少？",
+      "paper_id": "Chain_of_Thought",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "GSM8K grade school math PaLM 540B standard prompting vs CoT prompting accuracy",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "论文做的消融实验中，仅输出数学公式、先答案后推理两种变体为什么效果弱于完整CoT？",
+      "paper_id": "Chain_of_Thought",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "ablation study only output mathematical formula vs answer-first then reasoning vs full chain-of-thought CoT performance degradation",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "CoT可以泛化推理到输入样例步数更长的测试样本，论文在哪两类符号任务验证该特性？",
+      "paper_id": "Chain_of_Thought",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "Chain-of-thought generalization longer test examples symbolic tasks two types",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "人工撰写不同风格、不同数量的CoT示例后，模型性能有小幅波动但均显著优于标准提示，说明CoT具备什么特性？",
+      "paper_id": "Chain_of_Thought",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "Manually written CoT examples of different styles and quantities cause small performance fluctuations but all significantly outperform standard prompting, indicating what property of CoT?",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "论文将模型推理错误分为三大类，分别是什么？",
+      "paper_id": "Chain_of_Thought",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "What are the three major categories of model reasoning errors in the paper?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "CoT适用度最高的任务满足哪三个条件？",
+      "paper_id": "Chain_of_Thought",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "What three conditions are most satisfied by tasks with the highest suitability for CoT?",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "常识推理评测使用了CSQA、StrategyQA等数据集，CoT在哪类常识任务提升幅度最大？",
+      "paper_id": "Chain_of_Thought",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "commonsense reasoning evaluation CSQA StrategyQA datasets chain-of-thought CoT which commonsense task types largest improvement",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "仅8个CoT示例就能大幅提升数学推理，是否需要针对每个数据集单独制作示例？",
+      "paper_id": "Chain_of_Thought",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "Do only 8 CoT examples greatly improve mathematical reasoning, and are dataset-specific examples needed for each dataset?",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "标准自注意力的内存瓶颈来自哪个中间矩阵，其空间复杂度与序列长度N是什么关系？",
+      "paper_id": "FlashAttention",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "standard self-attention memory bottleneck intermediate matrix space complexity sequence length N",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "FlashAttention核心两大优化技术分别是什么？",
+      "paper_id": "FlashAttention",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "What are the two core optimization techniques of FlashAttention?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "GPU内存层级从快到慢排序，FlashAttention主要优化哪两层之间的数据读写？",
+      "paper_id": "FlashAttention",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "GPU memory hierarchy fastest to slowest ordering, which two levels does FlashAttention primarily optimize data reads and writes between?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "FlashAttention相比标准注意力，HBM读写量降低多少倍（GPT2实验数据）？",
+      "paper_id": "FlashAttention",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "FlashAttention vs standard attention HBM read/write reduction factor GPT-2 experiments",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "FlashAttention是否改变注意力数学计算结果？",
+      "paper_id": "FlashAttention",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "Does FlashAttention change the mathematical computation result of attention?",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "分块计算softmax时，为保证数值正确性，需要缓存哪两个逐行统计量？",
+      "paper_id": "FlashAttention",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "block-wise softmax numerical stability which two row-wise statistics need to be cached",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "Block-Sparse FlashAttention的IO复杂度相比稠密Flash，会乘以什么稀疏系数？",
+      "paper_id": "FlashAttention",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "Block-Sparse FlashAttention IO complexity sparse coefficient compared to dense FlashAttention",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "使用Flash训练BERT-Large相比MLPerf基准提速多少？GPT2（1K序列）提速倍数？",
+      "paper_id": "FlashAttention",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "Flash training BERT-Large speedup over MLPerf baseline; GPT2 1K sequence speedup",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "FlashAttention的IO复杂度公式是什么，M代表什么硬件参数？",
+      "paper_id": "FlashAttention",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "FlashAttention IO complexity formula and what hardware parameter does M represent",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "Flash支持超长序列，哪两个长文本基准首次通过它实现高于随机的效果？",
+      "paper_id": "FlashAttention",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "Flash enables super-long sequences; which two long-text benchmarks first achieve above-random performance with it?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "LoRA微调仅冻结预训练大模型权重，只训练哪两组低秩矩阵？",
+      "paper_id": "LoRA",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "LoRA fine-tuning freezes pretrained large model weights and trains which two low-rank matrices?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "LoRA推理时是否引入额外延迟，原因是什么？",
+      "paper_id": "LoRA",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "Does LoRA introduce additional inference latency and what are the causes?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "LoRA的权重更新公式是什么，训练初始化矩阵A、B策略是？",
+      "paper_id": "LoRA",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "LoRA weight update formula and initialization strategy for matrices A and B in training",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "论文为什么仅针对注意力矩阵做低秩适配，不作用于FFN层？",
+      "paper_id": "LoRA",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "Why is low-rank adaptation applied only to the attention matrix and not to the FFN layers?",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "LoRA超参数r代表什么，r越大模型适配能力与参数量如何变化？",
+      "paper_id": "LoRA",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "What does LoRA hyperparameter r represent, and how do model adaptation capacity and parameter count change as r increases?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "相比全参数微调、Prefix Tuning，LoRA在存储开销上的优势是什么？",
+      "paper_id": "LoRA",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "What are the storage overhead advantages of LoRA compared to full-parameter fine-tuning and Prefix Tuning?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "LoRA训练阶段是否使用dropout、偏置项等辅助参数？",
+      "paper_id": "LoRA",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "Does LoRA training use dropout and bias terms as auxiliary parameters?",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "在GPT-3 175B实验中，同等性能下LoRA相比全微调节省多少显存？",
+      "paper_id": "LoRA",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "In GPT-3 175B experiments, how much GPU memory does LoRA save compared to full fine-tuning at equal performance?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "多任务场景下LoRA如何切换不同任务适配权重？",
+      "paper_id": "LoRA",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "How does LoRA switch task-specific adapter weights across multiple tasks?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "GraphR相比传统向量RAG，核心新增哪一类结构化存储单元？",
+      "paper_id": "GraphRAG",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "GraphRAG vs vector RAG core new structured storage unit",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "GraphRAG对原始文档做分层抽取，哪两级图结构用于检索？",
+      "paper_id": "GraphRAG",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "GraphRAG hierarchical extraction original documents two-level graph structure retrieval",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "GraphRAG构建图时，通过什么步骤从文本抽取实体与关系三元组？",
+      "paper_id": "GraphRAG",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "GraphRAG graph construction steps for extracting entity-relation triplets from text",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "GraphRAG中社区检测算法的作用是什么？",
+      "paper_id": "GraphRAG",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "What is the role of community detection algorithms in GraphRAG?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "传统向量RAG的缺陷是什么，GraphRAG通过图结构弥补？",
+      "paper_id": "GraphRAG",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "What are the limitations of traditional vector RAG, and how does GraphRAG address them through graph structure?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "全局社区摘要如何生成？",
+      "paper_id": "GraphRAG",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "How are global community summaries generated?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "GraphRAG在多文档综合问答任务上相比普通RAG提升的核心原因？",
+      "paper_id": "GraphRAG",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "GraphRAG vs RAG multi-document comprehensive question answering core reasons for improvement",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "GraphRAG的完整处理流水线包含哪五大核心步骤？",
+      "paper_id": "GraphRAG",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "GraphRAG complete processing pipeline five core steps",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "原始RAG模型由哪两个核心模块组合而成？",
+      "paper_id": "RAG_Original_Paper",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "What two core modules compose the original RAG model?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "RAG两种变体RAG-Sequence与RAG-Token的区别是什么？",
+      "paper_id": "RAG_Original_Paper",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "What is the difference between RAG-Sequence and RAG-Token variants of RAG?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "RAG的核心设计动机是什么，解决大模型什么固有缺陷？",
+      "paper_id": "RAG_Original_Paper",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "What is the core motivation of RAG and what inherent limitations of large language models does it address?",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "检索阶段使用的稠密检索模型DPR，输入分别是什么？",
+      "paper_id": "RAG_Original_Paper",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "DPR dense retrieval model input query passage",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "RAG训练时联合优化哪两类损失？",
+      "paper_id": "RAG_Original_Paper",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "RAG training joint optimization of which two types of losses?",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "论文评测哪四类知识密集型NLP任务验证RAG效果？",
+      "paper_id": "RAG_Original_Paper",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "Which four knowledge-intensive NLP tasks are used to evaluate RAG effectiveness?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "RAG相比纯预训练生成模型，在哪类指标提升最显著？",
+      "paper_id": "RAG_Original_Paper",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "RAG vs pretrained generative models which evaluation metrics show most significant improvement",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "推理阶段RAG检索多少个top-k文档融合进生成上下文？",
+      "paper_id": "RAG_Original_Paper",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "How many top-k retrieved documents are fused into the generation context during inference in RAG?",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "为什么RAG不需要微调海量模型参数就能注入新知识？",
+      "paper_id": "RAG_Original_Paper",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "Why does RAG inject new knowledge without fine-tuning massive model parameters?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "消融实验中移除检索模块后，模型哪项性能断崖下跌？",
+      "paper_id": "RAG_Original_Paper",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "In ablation study, which performance metric drops sharply after removing the retrieval module?",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "Re框架交替生成哪两类内容，实现推理与工具调用协同？",
+      "paper_id": "ReAct",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "Re framework alternating generation reasoning and tool invocation",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "ReAct相比纯CoT、纯工具调用Prompt的核心优势是什么？",
+      "paper_id": "ReAct",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "What are the core advantages of ReAct over pure CoT and pure tool-calling prompts?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "ReAct完整交互循环流程是什么？",
+      "paper_id": "ReAct",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "What is the complete interaction loop process of ReAct?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "论文使用的外部工具主要是什么检索类工具？",
+      "paper_id": "ReAct",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "What are the main external retrieval tools used in the paper?",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "纯CoT模型在需要外部实时知识的任务上存在什么致命缺陷？",
+      "paper_id": "ReAct",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "What are the fatal limitations of pure chain-of-thought models on tasks requiring external real-time knowledge?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "ReAct的提示示例由哪四元组样例构成？",
+      "paper_id": "ReAct",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "What four-tuple examples constitute the ReAct prompting demonstrations?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "在HotpotQA多跳问答数据集，ReAct相比仅CoT基线提升的核心原因？",
+      "paper_id": "ReAct",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "HotpotQA multi-hop question answering ReAct vs CoT-only baseline core reasons for improvement",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "ReAct何时终止Thought-Action循环并输出最终答案？",
+      "paper_id": "ReAct",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "When does ReAct terminate the Thought-Action loop and output the final answer?",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "消融实验移除Action工具调用后，模型会出现什么问题？",
+      "paper_id": "ReAct",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "What problems arise when the Action tool call is removed in ablation experiments?",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "ReAct解决了工具调用模型的什么问题？",
+      "paper_id": "ReAct",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "What problem does ReAct solve for tool-augmented language models?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "GPT1模型基础架构基于哪篇论文提出的解码器Transformer？",
+      "paper_id": "GPT2",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "GPT-1 model architecture decoder Transformer based on which paper?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "GPT1预训练采用什么无监督语言建模目标？",
+      "paper_id": "GPT2",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "What unsupervised language modeling objective was used for GPT-1 pretraining?",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "GPT1的Transformer解码器堆叠层数、隐藏维度、注意力头数是多少？",
+      "paper_id": "GPT2",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "GPT-1 Transformer decoder number of layers hidden dimension attention heads",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "论文核心论点是什么，即大模型无监督预训练后可零样本适配多种NLP任务？",
+      "paper_id": "GPT2",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "What is the core argument that large language models can perform zero-shot adaptation to diverse NLP tasks after unsupervised pretraining?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "RoFormer提出的位置编码全称是什么，缩写RoPE？",
+      "paper_id": "RoFormer_RoPE",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "What is the full name of the positional encoding proposed in RoFormer, abbreviated as RoPE?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "RoPE编码的核心数学操作是对token向量执行什么变换？",
+      "paper_id": "RoFormer_RoPE",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "What transformation does RoPE apply to token vectors in its core mathematical operation?",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "RoPE相比正弦位置编码、可学习位置编码的核心优势？",
+      "paper_id": "RoFormer_RoPE",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "What are the core advantages of RoPE compared with sinusoidal positional encoding and learned positional encoding?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "标准绝对位置编码存在什么缺陷，RoPE予以解决？",
+      "paper_id": "RoFormer_RoPE",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "What are the limitations of standard absolute position encoding that RoPE addresses?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "RoPE如何计算两个token间基于相对位置的注意力分数？",
+      "paper_id": "RoFormer_RoPE",
+      "question_type": "legacy",
+      "hit5": true,
+      "retrieval_query": "How does RoPE compute attention scores between two tokens based on relative position?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "RoFormer基础模型的主干网络采用Transformer编码器还是解码器？",
+      "paper_id": "RoFormer_RoPE",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "Does the RoFormer base model use a Transformer encoder or decoder as its backbone network?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "RoPE旋转计算的频率基底参数作用是什么？",
+      "paper_id": "RoFormer_RoPE",
+      "question_type": "legacy",
+      "hit5": false,
+      "retrieval_query": "What is the role of the frequency base parameter in RoPE rotary computation?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     }
+    ]
+   },
+   "passed": false,
+   "gap_to_required": -21
+  },
+  "legacy42": {
+   "name": "42题回归@5",
+   "required": 36,
+   "cold": {
+    "n": 42,
+    "hits": 32,
+    "rate": 0.7619047619047619,
+    "ci95": [
+     0.6147216491768113,
+     0.8651917918898182
+    ],
+    "rerank_trigger_rate": 0.21428571428571427,
+    "total_p95_ms": 3531.7164000007324,
+    "total_median_ms": 905.1198500019382,
+    "rows": [
+     {
+      "question": "Chain-of-Thought Prompting 的核心思想是什么？它的提示格式由什么构成？",
+      "paper_id": "Chain_of_Thought",
+      "question_type": "method",
+      "hit5": true,
+      "retrieval_query": "Chain-of-Thought Prompting core idea prompt format composition",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "使用链式思考提示在GSM8K数学应用题基准上取得了怎样的效果？",
+      "paper_id": "Chain_of_Thought",
+      "question_type": "experiment",
+      "hit5": true,
+      "retrieval_query": "chain-of-thought prompting GSM8K math word problems performance",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "论文中提到了链式思考提示的哪些局限性？",
+      "paper_id": "Chain_of_Thought",
+      "question_type": "limitation",
+      "hit5": true,
+      "retrieval_query": "What are the limitations of chain-of-thought prompting mentioned in the paper?",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "FlashAttention 通过哪些技术实现精确注意力，同时避免将 N×N 注意力矩阵写入 HBM？",
+      "paper_id": "FlashAttention",
+      "question_type": "method",
+      "hit5": false,
+      "retrieval_query": "FlashAttention exact attention without writing N×N attention matrix to HBM techniques",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "FlashAttention 在训练 BERT、GPT-2 和长程竞技场（LRA）任务上分别取得了怎样的加速效果？",
+      "paper_id": "FlashAttention",
+      "question_type": "experiment",
+      "hit5": true,
+      "retrieval_query": "FlashAttention speedup BERT GPT-2 Long Range Arena LRA training",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "在序列长度增长时，近似注意力方法相比 FlashAttention 会在什么情况下变得更快？",
+      "paper_id": "FlashAttention",
+      "question_type": "comparison",
+      "hit5": true,
+      "retrieval_query": "When does approximate attention become faster than FlashAttention as sequence length grows?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "ReAct 是如何把推理和行动结合起来以协同工作的？",
+      "paper_id": "ReAct",
+      "question_type": "method",
+      "hit5": true,
+      "retrieval_query": "How does ReAct combine reasoning and acting for synergistic operation?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "在 HotpotQA 和 Fever 上，ReAct 与 CoT 的 prompting 结果相比如何？",
+      "paper_id": "ReAct",
+      "question_type": "experiment",
+      "hit5": true,
+      "retrieval_query": "How does ReAct compare to CoT prompting on HotpotQA and Fever?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "ReAct 相比 CoT 在推理形式上有什么局限？",
+      "paper_id": "ReAct",
+      "question_type": "limitation",
+      "hit5": true,
+      "retrieval_query": "What are the limitations of ReAct compared to CoT in reasoning form?",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "GraphRAG 如何构建图索引并生成社区摘要？",
+      "paper_id": "GraphRAG",
+      "question_type": "method",
+      "hit5": false,
+      "retrieval_query": "GraphRAG graph index construction and community summarization",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "在 Experiment 1 中，global approaches 与 conventional vector RAG (SS) 在 comprehensiveness 和 diversity 上的表现相比如何？",
+      "paper_id": "GraphRAG",
+      "question_type": "experiment",
+      "hit5": true,
+      "retrieval_query": "How do global approaches compare with conventional vector RAG (SS) in terms of comprehensiveness and diversity in Experiment 1?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "论文指出的评估局限是什么？",
+      "paper_id": "GraphRAG",
+      "question_type": "limitation",
+      "hit5": false,
+      "retrieval_query": "What are the evaluation limitations identified in the paper?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "相比 GPT-3 175B 使用 Adam 进行全量微调，LoRA 能将可训练参数量和 GPU 内存需求分别降低多少？",
+      "paper_id": "LoRA",
+      "question_type": "fact",
+      "hit5": true,
+      "retrieval_query": "Compared to full fine-tuning GPT-3 175B with Adam, how much does LoRA reduce trainable parameters and GPU memory requirements?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "LoRA 如何对预训练权重更新进行低秩参数化，并且矩阵 A 和 B 的初始化方式是什么？",
+      "paper_id": "LoRA",
+      "question_type": "method",
+      "hit5": true,
+      "retrieval_query": "How does LoRA parameterize pretrained weight updates with low-rank matrices, and how are matrices A and B initialized?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "在 GPT-3 175B 上应用 LoRA 时，适配哪些注意力权重矩阵能取得最佳整体性能？",
+      "paper_id": "LoRA",
+      "question_type": "experiment",
+      "hit5": true,
+      "retrieval_query": "LoRA GPT-3 175B which attention weight matrices adaptation best overall performance",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "RAG模型的参数记忆和非参数记忆分别是什么？",
+      "paper_id": "RAG_Original_Paper",
+      "question_type": "fact",
+      "hit5": true,
+      "retrieval_query": "What are parametric memory and non-parametric memory in RAG models?",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "RAG-Sequence和RAG-Token在边际化检索文档时有什么不同？",
+      "paper_id": "RAG_Original_Paper",
+      "question_type": "method",
+      "hit5": true,
+      "retrieval_query": "RAG-Sequence vs RAG-Token marginalization over retrieved documents",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "在Jeopardy问题生成任务上，人类评估显示RAG和BART在事实性上的对比如何？",
+      "paper_id": "RAG_Original_Paper",
+      "question_type": "comparison",
+      "hit5": true,
+      "retrieval_query": "On the Jeopardy question generation task, how do RAG and BART compare in factual accuracy under human evaluation?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "RoPE 与以往的位置编码方法在注入位置信息的方式上有何根本区别？",
+      "paper_id": "RoFormer_RoPE",
+      "question_type": "comparison",
+      "hit5": true,
+      "retrieval_query": "What is the fundamental difference between RoPE and previous positional encoding methods in the way positional information is injected?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "在 GLUE 下游任务微调中，RoFormer 相对 BERT 的整体表现如何？",
+      "paper_id": "RoFormer_RoPE",
+      "question_type": "experiment",
+      "hit5": false,
+      "retrieval_query": "How does RoFormer perform compared to BERT on GLUE downstream task fine-tuning?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "作者在论文中承认了 RoPE/RoFormer 的哪些主要局限性？",
+      "paper_id": "RoFormer_RoPE",
+      "question_type": "limitation",
+      "hit5": false,
+      "retrieval_query": "What main limitations of RoPE/RoFormer do the authors acknowledge in the paper?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "Transformer 在 WMT 2014 英德和英法翻译任务上分别取得了多少 BLEU 分数，训练成本相对于此前最佳模型如何？",
+      "paper_id": "Attention_Is_All_You_Need",
+      "question_type": "fact",
+      "hit5": true,
+      "retrieval_query": "Transformer BLEU scores on WMT 2014 English-German and English-French translation tasks and training cost compared to previous best models",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "Transformer 为什么要用多头注意力（Multi-Head Attention）而不是单头注意力？具体用了多少个头、每个头的维度是多少？",
+      "paper_id": "Attention_Is_All_You_Need",
+      "question_type": "method",
+      "hit5": true,
+      "retrieval_query": "Why does Transformer use Multi-Head Attention instead of single-head attention, and how many heads and what head dimension are used?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "与循环层和卷积层相比，自注意力层在每层计算复杂度、可并行程度和最大路径长度上有哪些优势？",
+      "paper_id": "Attention_Is_All_You_Need",
+      "question_type": "comparison",
+      "hit5": true,
+      "retrieval_query": "self-attention layer vs recurrent layer vs convolutional layer computational complexity per layer parallelization maximum path length",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "这篇论文采用什么方法自动检测网络欺凌？使用了哪些分类器和特征？",
+      "paper_id": "1801.05617",
+      "question_type": "method",
+      "hit5": true,
+      "retrieval_query": "automatic cyberbullying detection methods classifiers features",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "在实验中，优化后的模型与哪些基线系统进行了比较？结果如何？",
+      "paper_id": "1801.05617",
+      "question_type": "experiment",
+      "hit5": false,
+      "retrieval_query": "Which baseline systems was the optimized model compared with in experiments, and what were the results?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "与以往研究相比，这篇论文在检测网络欺凌信号方面有什么独特之处或主要贡献？",
+      "paper_id": "1801.05617",
+      "question_type": "comparison",
+      "hit5": true,
+      "retrieval_query": "What are the unique contributions of this paper in cyberbullying signal detection compared with previous studies?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "Vinyals 等人提出的序列到序列对话模型在生成回复时，编码器和解码器分别起什么作用？",
+      "paper_id": "1803.08419",
+      "question_type": "method",
+      "hit5": true,
+      "retrieval_query": "Vinyals sequence-to-sequence dialogue model encoder decoder roles response generation",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "KB-InfoBot 在小型知识库以及中大型知识库上的任务成功率分别是多少？",
+      "paper_id": "1803.08419",
+      "question_type": "experiment",
+      "hit5": true,
+      "retrieval_query": "KB-InfoBot task success rate on small knowledge bases and medium-to-large knowledge bases",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "论文认为序列到序列模型相比早期基于规则的模型解决了哪些问题，同时又存在什么根本局限？",
+      "paper_id": "1803.08419",
+      "question_type": "multi_hop",
+      "hit5": false,
+      "retrieval_query": "sequence-to-sequence models vs rule-based models solved problems fundamental limitations",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "AEG 在强化学习训练中使用了什么算法，并且它计算哪三类奖励？",
+      "paper_id": "1909.07873",
+      "question_type": "method",
+      "hit5": false,
+      "retrieval_query": "What algorithm does AEG use in reinforcement learning training and what three types of rewards does it compute?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "在 IMDB 情感分类的 CNN-Word 目标模型上，DeepWordBug 与 AEG 分别将准确率降到多少？",
+      "paper_id": "1909.07873",
+      "question_type": "experiment",
+      "hit5": true,
+      "retrieval_query": "On the CNN-Word target model for IMDB sentiment classification, what accuracy do DeepWordBug and AEG reduce to respectively?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "与 SCPNs 和 DeepWordBug 相比，AEG 在扰动生成方式上有什么不同？",
+      "paper_id": "1909.07873",
+      "question_type": "comparison",
+      "hit5": true,
+      "retrieval_query": "AEG vs SCPNs and DeepWordBug perturbation generation method differences",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "GPT-2 最大模型的参数规模是多少？它在多少个语言建模数据集上取得了零样本 state-of-the-art 结果？",
+      "paper_id": "GPT2",
+      "question_type": "fact",
+      "hit5": true,
+      "retrieval_query": "GPT-2 largest model parameter count and zero-shot state-of-the-art on how many language modeling datasets",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "论文中的 WebText 数据集是怎样构建的？为什么要从 Reddit 链接入手？",
+      "paper_id": "GPT2",
+      "question_type": "method",
+      "hit5": true,
+      "retrieval_query": "How was the WebText dataset constructed and why did it start from Reddit links?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "GPT-2 在 CoQA 零样本阅读理解任务上达到什么 F1，与那些用大量监督数据训练的基线相比如何？",
+      "paper_id": "GPT2",
+      "question_type": "comparison",
+      "hit5": true,
+      "retrieval_query": "GPT-2 zero-shot CoQA reading comprehension F1 compared to supervised baselines",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "BERT 在预训练阶段使用了哪两个无监督任务？其中 Masked LM 的核心做法是什么？",
+      "paper_id": "BERT",
+      "question_type": "method",
+      "hit5": true,
+      "retrieval_query": "BERT pretraining two unsupervised tasks Masked LM core approach",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "论文摘要称 BERT 在多少个 NLP 任务上取得了新的 state-of-the-art？它在 GLUE、MultiNLI、SQuAD v1.1 和 SQuAD v2.0 上分别报告了哪些具体提升？",
+      "paper_id": "BERT",
+      "question_type": "experiment",
+      "hit5": true,
+      "retrieval_query": "BERT new state-of-the-art on how many NLP tasks GLUE MultiNLI SQuAD v1.1 SQuAD v2.0 specific improvements reported",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "BERT 的 Masked LM 预训练存在什么预训练-微调不匹配问题？作者采用什么策略来缓解？",
+      "paper_id": "BERT",
+      "question_type": "limitation",
+      "hit5": false,
+      "retrieval_query": "BERT Masked LM pretraining pretrain-finetune mismatch problem mitigation strategy",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "论文将网络欺凌拆解为哪五个关键判据？它们的英文缩写分别是什么？",
+      "paper_id": "2004.01820",
+      "question_type": "fact",
+      "hit5": false,
+      "retrieval_query": "What are the five key criteria for cyberbullying decomposition in the paper and their English abbreviations?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "在标注任务中，论文如何为每条推文提供社交语境，并要求标注者据此给出哪些标签？",
+      "paper_id": "2004.01820",
+      "question_type": "method",
+      "hit5": true,
+      "retrieval_query": "How do papers provide social context for each tweet in annotation tasks and what labels are annotators required to assign based on it?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "基于文本的基线方法与论文提出的社会特征在检测重复、伤害意图、同伴可见性和权力不平衡时表现有何差异？",
+      "paper_id": "2004.01820",
+      "question_type": "comparison",
+      "hit5": true,
+      "retrieval_query": "text-based baselines vs social features in detecting repetition, harmful intent, peer visibility, and power imbalance",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     }
+    ]
+   },
+   "hot": {
+    "n": 42,
+    "hits": 32,
+    "rate": 0.7619047619047619,
+    "ci95": [
+     0.6147216491768113,
+     0.8651917918898182
+    ],
+    "rerank_trigger_rate": 0.21428571428571427,
+    "total_p95_ms": 162.41279999667313,
+    "total_median_ms": 115.71179999737069,
+    "rows": [
+     {
+      "question": "Chain-of-Thought Prompting 的核心思想是什么？它的提示格式由什么构成？",
+      "paper_id": "Chain_of_Thought",
+      "question_type": "method",
+      "hit5": true,
+      "retrieval_query": "Chain-of-Thought Prompting core idea prompt format composition",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "使用链式思考提示在GSM8K数学应用题基准上取得了怎样的效果？",
+      "paper_id": "Chain_of_Thought",
+      "question_type": "experiment",
+      "hit5": true,
+      "retrieval_query": "chain-of-thought prompting GSM8K math word problems performance",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "论文中提到了链式思考提示的哪些局限性？",
+      "paper_id": "Chain_of_Thought",
+      "question_type": "limitation",
+      "hit5": true,
+      "retrieval_query": "What are the limitations of chain-of-thought prompting mentioned in the paper?",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "FlashAttention 通过哪些技术实现精确注意力，同时避免将 N×N 注意力矩阵写入 HBM？",
+      "paper_id": "FlashAttention",
+      "question_type": "method",
+      "hit5": false,
+      "retrieval_query": "FlashAttention exact attention without writing N×N attention matrix to HBM techniques",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "FlashAttention 在训练 BERT、GPT-2 和长程竞技场（LRA）任务上分别取得了怎样的加速效果？",
+      "paper_id": "FlashAttention",
+      "question_type": "experiment",
+      "hit5": true,
+      "retrieval_query": "FlashAttention speedup BERT GPT-2 Long Range Arena LRA training",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "在序列长度增长时，近似注意力方法相比 FlashAttention 会在什么情况下变得更快？",
+      "paper_id": "FlashAttention",
+      "question_type": "comparison",
+      "hit5": true,
+      "retrieval_query": "When does approximate attention become faster than FlashAttention as sequence length grows?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "ReAct 是如何把推理和行动结合起来以协同工作的？",
+      "paper_id": "ReAct",
+      "question_type": "method",
+      "hit5": true,
+      "retrieval_query": "How does ReAct combine reasoning and acting for synergistic operation?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "在 HotpotQA 和 Fever 上，ReAct 与 CoT 的 prompting 结果相比如何？",
+      "paper_id": "ReAct",
+      "question_type": "experiment",
+      "hit5": true,
+      "retrieval_query": "How does ReAct compare to CoT prompting on HotpotQA and Fever?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "ReAct 相比 CoT 在推理形式上有什么局限？",
+      "paper_id": "ReAct",
+      "question_type": "limitation",
+      "hit5": true,
+      "retrieval_query": "What are the limitations of ReAct compared to CoT in reasoning form?",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "GraphRAG 如何构建图索引并生成社区摘要？",
+      "paper_id": "GraphRAG",
+      "question_type": "method",
+      "hit5": false,
+      "retrieval_query": "GraphRAG graph index construction and community summarization",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "在 Experiment 1 中，global approaches 与 conventional vector RAG (SS) 在 comprehensiveness 和 diversity 上的表现相比如何？",
+      "paper_id": "GraphRAG",
+      "question_type": "experiment",
+      "hit5": true,
+      "retrieval_query": "How do global approaches compare with conventional vector RAG (SS) in terms of comprehensiveness and diversity in Experiment 1?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "论文指出的评估局限是什么？",
+      "paper_id": "GraphRAG",
+      "question_type": "limitation",
+      "hit5": false,
+      "retrieval_query": "What are the evaluation limitations identified in the paper?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "相比 GPT-3 175B 使用 Adam 进行全量微调，LoRA 能将可训练参数量和 GPU 内存需求分别降低多少？",
+      "paper_id": "LoRA",
+      "question_type": "fact",
+      "hit5": true,
+      "retrieval_query": "Compared to full fine-tuning GPT-3 175B with Adam, how much does LoRA reduce trainable parameters and GPU memory requirements?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "LoRA 如何对预训练权重更新进行低秩参数化，并且矩阵 A 和 B 的初始化方式是什么？",
+      "paper_id": "LoRA",
+      "question_type": "method",
+      "hit5": true,
+      "retrieval_query": "How does LoRA parameterize pretrained weight updates with low-rank matrices, and how are matrices A and B initialized?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "在 GPT-3 175B 上应用 LoRA 时，适配哪些注意力权重矩阵能取得最佳整体性能？",
+      "paper_id": "LoRA",
+      "question_type": "experiment",
+      "hit5": true,
+      "retrieval_query": "LoRA GPT-3 175B which attention weight matrices adaptation best overall performance",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "RAG模型的参数记忆和非参数记忆分别是什么？",
+      "paper_id": "RAG_Original_Paper",
+      "question_type": "fact",
+      "hit5": true,
+      "retrieval_query": "What are parametric memory and non-parametric memory in RAG models?",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "RAG-Sequence和RAG-Token在边际化检索文档时有什么不同？",
+      "paper_id": "RAG_Original_Paper",
+      "question_type": "method",
+      "hit5": true,
+      "retrieval_query": "RAG-Sequence vs RAG-Token marginalization over retrieved documents",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "在Jeopardy问题生成任务上，人类评估显示RAG和BART在事实性上的对比如何？",
+      "paper_id": "RAG_Original_Paper",
+      "question_type": "comparison",
+      "hit5": true,
+      "retrieval_query": "On the Jeopardy question generation task, how do RAG and BART compare in factual accuracy under human evaluation?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "RoPE 与以往的位置编码方法在注入位置信息的方式上有何根本区别？",
+      "paper_id": "RoFormer_RoPE",
+      "question_type": "comparison",
+      "hit5": true,
+      "retrieval_query": "What is the fundamental difference between RoPE and previous positional encoding methods in the way positional information is injected?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "在 GLUE 下游任务微调中，RoFormer 相对 BERT 的整体表现如何？",
+      "paper_id": "RoFormer_RoPE",
+      "question_type": "experiment",
+      "hit5": false,
+      "retrieval_query": "How does RoFormer perform compared to BERT on GLUE downstream task fine-tuning?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "作者在论文中承认了 RoPE/RoFormer 的哪些主要局限性？",
+      "paper_id": "RoFormer_RoPE",
+      "question_type": "limitation",
+      "hit5": false,
+      "retrieval_query": "What main limitations of RoPE/RoFormer do the authors acknowledge in the paper?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "Transformer 在 WMT 2014 英德和英法翻译任务上分别取得了多少 BLEU 分数，训练成本相对于此前最佳模型如何？",
+      "paper_id": "Attention_Is_All_You_Need",
+      "question_type": "fact",
+      "hit5": true,
+      "retrieval_query": "Transformer BLEU scores on WMT 2014 English-German and English-French translation tasks and training cost compared to previous best models",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "Transformer 为什么要用多头注意力（Multi-Head Attention）而不是单头注意力？具体用了多少个头、每个头的维度是多少？",
+      "paper_id": "Attention_Is_All_You_Need",
+      "question_type": "method",
+      "hit5": true,
+      "retrieval_query": "Why does Transformer use Multi-Head Attention instead of single-head attention, and how many heads and what head dimension are used?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "与循环层和卷积层相比，自注意力层在每层计算复杂度、可并行程度和最大路径长度上有哪些优势？",
+      "paper_id": "Attention_Is_All_You_Need",
+      "question_type": "comparison",
+      "hit5": true,
+      "retrieval_query": "self-attention layer vs recurrent layer vs convolutional layer computational complexity per layer parallelization maximum path length",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "这篇论文采用什么方法自动检测网络欺凌？使用了哪些分类器和特征？",
+      "paper_id": "1801.05617",
+      "question_type": "method",
+      "hit5": true,
+      "retrieval_query": "automatic cyberbullying detection methods classifiers features",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "在实验中，优化后的模型与哪些基线系统进行了比较？结果如何？",
+      "paper_id": "1801.05617",
+      "question_type": "experiment",
+      "hit5": false,
+      "retrieval_query": "Which baseline systems was the optimized model compared with in experiments, and what were the results?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "与以往研究相比，这篇论文在检测网络欺凌信号方面有什么独特之处或主要贡献？",
+      "paper_id": "1801.05617",
+      "question_type": "comparison",
+      "hit5": true,
+      "retrieval_query": "What are the unique contributions of this paper in cyberbullying signal detection compared with previous studies?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "Vinyals 等人提出的序列到序列对话模型在生成回复时，编码器和解码器分别起什么作用？",
+      "paper_id": "1803.08419",
+      "question_type": "method",
+      "hit5": true,
+      "retrieval_query": "Vinyals sequence-to-sequence dialogue model encoder decoder roles response generation",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "KB-InfoBot 在小型知识库以及中大型知识库上的任务成功率分别是多少？",
+      "paper_id": "1803.08419",
+      "question_type": "experiment",
+      "hit5": true,
+      "retrieval_query": "KB-InfoBot task success rate on small knowledge bases and medium-to-large knowledge bases",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "论文认为序列到序列模型相比早期基于规则的模型解决了哪些问题，同时又存在什么根本局限？",
+      "paper_id": "1803.08419",
+      "question_type": "multi_hop",
+      "hit5": false,
+      "retrieval_query": "sequence-to-sequence models vs rule-based models solved problems fundamental limitations",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "AEG 在强化学习训练中使用了什么算法，并且它计算哪三类奖励？",
+      "paper_id": "1909.07873",
+      "question_type": "method",
+      "hit5": false,
+      "retrieval_query": "What algorithm does AEG use in reinforcement learning training and what three types of rewards does it compute?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "在 IMDB 情感分类的 CNN-Word 目标模型上，DeepWordBug 与 AEG 分别将准确率降到多少？",
+      "paper_id": "1909.07873",
+      "question_type": "experiment",
+      "hit5": true,
+      "retrieval_query": "On the CNN-Word target model for IMDB sentiment classification, what accuracy do DeepWordBug and AEG reduce to respectively?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "与 SCPNs 和 DeepWordBug 相比，AEG 在扰动生成方式上有什么不同？",
+      "paper_id": "1909.07873",
+      "question_type": "comparison",
+      "hit5": true,
+      "retrieval_query": "AEG vs SCPNs and DeepWordBug perturbation generation method differences",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "GPT-2 最大模型的参数规模是多少？它在多少个语言建模数据集上取得了零样本 state-of-the-art 结果？",
+      "paper_id": "GPT2",
+      "question_type": "fact",
+      "hit5": true,
+      "retrieval_query": "GPT-2 largest model parameter count and zero-shot state-of-the-art on how many language modeling datasets",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "论文中的 WebText 数据集是怎样构建的？为什么要从 Reddit 链接入手？",
+      "paper_id": "GPT2",
+      "question_type": "method",
+      "hit5": true,
+      "retrieval_query": "How was the WebText dataset constructed and why did it start from Reddit links?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "GPT-2 在 CoQA 零样本阅读理解任务上达到什么 F1，与那些用大量监督数据训练的基线相比如何？",
+      "paper_id": "GPT2",
+      "question_type": "comparison",
+      "hit5": true,
+      "retrieval_query": "GPT-2 zero-shot CoQA reading comprehension F1 compared to supervised baselines",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "BERT 在预训练阶段使用了哪两个无监督任务？其中 Masked LM 的核心做法是什么？",
+      "paper_id": "BERT",
+      "question_type": "method",
+      "hit5": true,
+      "retrieval_query": "BERT pretraining two unsupervised tasks Masked LM core approach",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "论文摘要称 BERT 在多少个 NLP 任务上取得了新的 state-of-the-art？它在 GLUE、MultiNLI、SQuAD v1.1 和 SQuAD v2.0 上分别报告了哪些具体提升？",
+      "paper_id": "BERT",
+      "question_type": "experiment",
+      "hit5": true,
+      "retrieval_query": "BERT new state-of-the-art on how many NLP tasks GLUE MultiNLI SQuAD v1.1 SQuAD v2.0 specific improvements reported",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "BERT 的 Masked LM 预训练存在什么预训练-微调不匹配问题？作者采用什么策略来缓解？",
+      "paper_id": "BERT",
+      "question_type": "limitation",
+      "hit5": false,
+      "retrieval_query": "BERT Masked LM pretraining pretrain-finetune mismatch problem mitigation strategy",
+      "rerank_triggered": true,
+      "fallback_reason": ""
+     },
+     {
+      "question": "论文将网络欺凌拆解为哪五个关键判据？它们的英文缩写分别是什么？",
+      "paper_id": "2004.01820",
+      "question_type": "fact",
+      "hit5": false,
+      "retrieval_query": "What are the five key criteria for cyberbullying decomposition in the paper and their English abbreviations?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "在标注任务中，论文如何为每条推文提供社交语境，并要求标注者据此给出哪些标签？",
+      "paper_id": "2004.01820",
+      "question_type": "method",
+      "hit5": true,
+      "retrieval_query": "How do papers provide social context for each tweet in annotation tasks and what labels are annotators required to assign based on it?",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     },
+     {
+      "question": "基于文本的基线方法与论文提出的社会特征在检测重复、伤害意图、同伴可见性和权力不平衡时表现有何差异？",
+      "paper_id": "2004.01820",
+      "question_type": "comparison",
+      "hit5": true,
+      "retrieval_query": "text-based baselines vs social features in detecting repetition, harmful intent, peer visibility, and power imbalance",
+      "rerank_triggered": false,
+      "fallback_reason": ""
+     }
+    ]
+   },
+   "passed": false,
+   "gap_to_required": -4
+  }
+ },
+ "elapsed_s": 231.8
+}

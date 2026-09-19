@@ -1,0 +1,108 @@
+{
+ "question": "对比 Transformer 和 BERT 的核心区别",
+ "runs": [
+  {
+   "run": 1,
+   "elapsed_s": 174.7,
+   "papers": 7,
+   "cards": 2,
+   "facts": 6,
+   "conflicts": 0,
+   "has_review": true,
+   "fallback": true,
+   "extract_fail": true,
+   "resolve_drop": false,
+   "extract_raw_samples": [
+    "",
+    "[{\"paper_id\":\"Attention_Is_All_You_Need\",\"entity\":\"Transformer\",\"attribute\":\"架构特征\",\"value\":\"完全基于注意力机制，摒弃循环和卷积\",\"content\":\"本文提出Transformer，完全摒弃循环和卷积，仅基于注意力机制。\",\"section_name\":\"Abstract\",\"raw_quote\":\"本文提出Transformer，完全摒弃循环和卷积，仅基于注意力机制，以提升并行化并缩短训练时间。\"},{\"paper_id\":\"Attention_Is_All_You_Need\",\"entity\":\""
+   ]
+  },
+  {
+   "run": 2,
+   "elapsed_s": 72.2,
+   "papers": 7,
+   "cards": 2,
+   "facts": 15,
+   "conflicts": 0,
+   "has_review": true,
+   "fallback": false,
+   "extract_fail": false,
+   "resolve_drop": false,
+   "extract_raw_samples": [
+    ""
+   ]
+  },
+  {
+   "run": 3,
+   "elapsed_s": 133.4,
+   "papers": 4,
+   "cards": 2,
+   "facts": 9,
+   "conflicts": 0,
+   "has_review": true,
+   "fallback": true,
+   "extract_fail": true,
+   "resolve_drop": false,
+   "extract_raw_samples": [
+    "",
+    ""
+   ]
+  },
+  {
+   "run": 4,
+   "elapsed_s": 83.8,
+   "papers": 6,
+   "cards": 2,
+   "facts": 4,
+   "conflicts": 0,
+   "has_review": true,
+   "fallback": false,
+   "extract_fail": true,
+   "resolve_drop": false,
+   "extract_raw_samples": [
+    "",
+    ""
+   ]
+  },
+  {
+   "run": 5,
+   "elapsed_s": 36.3,
+   "papers": 1,
+   "cards": 1,
+   "facts": 0,
+   "conflicts": 0,
+   "has_review": false,
+   "fallback": true,
+   "extract_fail": true,
+   "resolve_drop": false,
+   "extract_raw_samples": [
+    "",
+    ""
+   ]
+  },
+  {
+   "run": 6,
+   "elapsed_s": 38.0,
+   "papers": 1,
+   "cards": 1,
+   "facts": 0,
+   "conflicts": 0,
+   "has_review": false,
+   "fallback": true,
+   "extract_fail": true,
+   "resolve_drop": false,
+   "extract_raw_samples": [
+    "",
+    ""
+   ]
+  }
+ ],
+ "summary": {
+  "n": 6,
+  "review_ok": 4,
+  "fallback_fired": 4,
+  "extract_failed": 5,
+  "resolve_dropped": 0,
+  "avg_elapsed_s": 89.7
+ }
+}

@@ -1,0 +1,109 @@
+{
+ "question": "对比 Transformer 和 BERT 的核心区别",
+ "runs": [
+  {
+   "run": 1,
+   "elapsed_s": 114.8,
+   "papers": 8,
+   "cards": 2,
+   "facts": 6,
+   "conflicts": 0,
+   "has_review": true,
+   "fallback": false,
+   "extract_fail": true,
+   "resolve_drop": false,
+   "extract_raw_samples": [
+    "",
+    ""
+   ]
+  },
+  {
+   "run": 2,
+   "elapsed_s": 104.7,
+   "papers": 2,
+   "cards": 2,
+   "facts": 13,
+   "conflicts": 0,
+   "has_review": true,
+   "fallback": false,
+   "extract_fail": false,
+   "resolve_drop": false,
+   "extract_raw_samples": [
+    "",
+    ""
+   ]
+  },
+  {
+   "run": 3,
+   "elapsed_s": 88.4,
+   "papers": 5,
+   "cards": 2,
+   "facts": 6,
+   "conflicts": 0,
+   "has_review": true,
+   "fallback": false,
+   "extract_fail": true,
+   "resolve_drop": false,
+   "extract_raw_samples": [
+    "",
+    "[{\"paper_id\":\"Attention_Is_All_You_Need\",\"entity\":\"Transformer\",\"attribute\":\"模型架构\",\"value\":\"完全基于注意力机制，摒弃循环和卷积\",\"content\":\"提出Transformer，首个完全基于注意力机制的序列转导模型，摒弃循环和卷积。\",\"section_name\":\"Abstract\",\"raw_quote\":\"本文提出Transformer，完全摒弃循环和卷积，仅基于注意力机制，以提升并行化并缩短训练时间。\"},{\"paper_id\":\"Attention_Is_All_You_Need\",\"ent"
+   ]
+  },
+  {
+   "run": 4,
+   "elapsed_s": 102.3,
+   "papers": 7,
+   "cards": 2,
+   "facts": 10,
+   "conflicts": 0,
+   "has_review": true,
+   "fallback": false,
+   "extract_fail": false,
+   "resolve_drop": false,
+   "extract_raw_samples": [
+    "",
+    ""
+   ]
+  },
+  {
+   "run": 5,
+   "elapsed_s": 102.2,
+   "papers": 10,
+   "cards": 2,
+   "facts": 8,
+   "conflicts": 0,
+   "has_review": true,
+   "fallback": false,
+   "extract_fail": true,
+   "resolve_drop": false,
+   "extract_raw_samples": [
+    "",
+    "["
+   ]
+  },
+  {
+   "run": 6,
+   "elapsed_s": 84.8,
+   "papers": 6,
+   "cards": 2,
+   "facts": 17,
+   "conflicts": 0,
+   "has_review": true,
+   "fallback": false,
+   "extract_fail": false,
+   "resolve_drop": false,
+   "extract_raw_samples": [
+    "",
+    ""
+   ]
+  }
+ ],
+ "summary": {
+  "n": 6,
+  "review_ok": 6,
+  "fallback_fired": 0,
+  "extract_failed": 3,
+  "resolve_dropped": 0,
+  "avg_elapsed_s": 99.5
+ }
+}
