@@ -109,6 +109,15 @@ def _local_search(query,top_k):
 async def hybrid_search(query,top_k=5):
     #本地检索在线程池，外网并行；本地加载模型延迟到首次调用
     local_task=asyncio.create_task(asyncio.to_thread(_local_search,query,top_k))
+    #外网源不可用期间（arXiv 返回 406、维基超时）不再发起外网请求：
+    #降级逻辑只保证"不报错"，但仍要白等一个超时周期，所以直接跳过更划算
+    if os.getenv("WEB_SEARCH_ENABLED","1")!="1":
+        local=await local_task
+        local=local if isinstance(local,list) else []
+        sources=[_source("local",r.get("source",""),r.get("text",""),
+                         paper_id=r.get("source"),section=r.get("section")) for r in local]
+        context="\n\n".join(f"[{s['source_type']}:{s['title']}]\n{s['snippet']}" for s in sources)
+        return {"sources":sources,"context":context}
     web_task=asyncio.create_task(web_search(query))
     local,web=await asyncio.gather(local_task,web_task,return_exceptions=True)
     local=local if isinstance(local,list) else []

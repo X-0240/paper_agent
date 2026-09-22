@@ -4,6 +4,7 @@ import os
 import datetime
 import threading
 import requests
+import httpx
 from dotenv import load_dotenv
 from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
 
@@ -182,6 +183,38 @@ def call_deepseek_stream(messages,temperature=0.1):
             delta=chunk["choices"][0].get("delta",{}).get("content","")
             if delta:
                 yield delta
+    if usage:
+        log_usage({"model":"deepseek-v4-flash","usage":usage})
+
+#异步流式：同步 requests 在线程里迭代时，每个token都会阻塞线程池，
+#事件循环拿到的是"批量"结果；用 httpx 异步客户端才能边收边推
+async def call_deepseek_stream_async(messages,temperature=0.1):
+    enforce_budget()
+    payload={"model":"deepseek-v4-flash","messages":messages,"temperature":temperature,"stream":True}
+    usage=None
+    async with httpx.AsyncClient(timeout=httpx.Timeout(60.0,connect=10.0)) as client:
+        async with client.stream("POST","https://api.deepseek.com/v1/chat/completions",
+                                 headers=headers,json=payload) as response:
+            response.raise_for_status()
+            #按字节读再自己切行：aiter_lines 会攒批，token 到手时已经过了好几秒
+            buffer=""
+            async for raw in response.aiter_bytes():
+                buffer+=raw.decode("utf-8","ignore")
+                while "\n" in buffer:
+                    line,buffer=buffer.split("\n",1)
+                    line=line.strip()
+                    if not line or not line.startswith("data:"):
+                        continue
+                    data=line[5:].strip()
+                    if data=="[DONE]":
+                        buffer=""
+                        break
+                    chunk=json.loads(data)
+                    if chunk.get("usage"):
+                        usage=chunk["usage"]
+                    delta=chunk["choices"][0].get("delta",{}).get("content","")
+                    if delta:
+                        yield delta
     if usage:
         log_usage({"model":"deepseek-v4-flash","usage":usage})
 

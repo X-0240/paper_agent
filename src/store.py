@@ -8,7 +8,7 @@ from datetime import datetime,timedelta,timezone
 BASE=os.path.dirname(os.path.abspath(__file__))
 MIGRATIONS_DIR=os.path.join(BASE,"migrations")
 #代码已知的最高迁移编号：硬编码并在启动时与目录核对，避免目录缺失时校验失效
-MAX_KNOWN_SCHEMA_VERSION=2
+MAX_KNOWN_SCHEMA_VERSION=3
 
 #每线程一个连接：sqlite3连接不能跨线程共享，线程池下同线程复用同一连接
 _local=threading.local()
@@ -109,6 +109,53 @@ def get_thread(thread_id,user):
     row=get_conn().execute("SELECT thread_id,user,created_at,updated_at FROM threads WHERE thread_id=? AND user=?",
                            (thread_id,user)).fetchone()
     return dict(row) if row else None
+
+
+def list_threads(user,limit=50):
+    #会话列表按最近更新排序；标题优先用用户自定义的，没改名才回退到第一条提问
+    rows=get_conn().execute(
+        "SELECT thread_id,title,created_at,updated_at FROM threads WHERE user=?"
+        " ORDER BY updated_at DESC LIMIT ?",(user,limit)).fetchall()
+    out=[]
+    for row in rows:
+        item=dict(row)
+        custom=(item.pop("title","") or "").strip()
+        if custom:
+            item["title"]=custom
+            item["title_source"]="custom"
+            out.append(item)
+            continue
+        first=get_conn().execute(
+            "SELECT content FROM messages WHERE thread_id=? AND role='user'"
+            " ORDER BY message_id ASC LIMIT 1",(item["thread_id"],)).fetchone()
+        item["title"]=((first["content"] if first else "") or "新对话")[:40]
+        item["title_source"]="auto"
+        out.append(item)
+    return out
+
+
+def rename_thread(thread_id,user,title):
+    #改名同样做归属校验；空标题视为恢复为自动命名
+    #不更新 updated_at：改名不算"有新活动"，否则会话会在列表里跳位置
+    if get_thread(thread_id,user) is None:
+        return None
+    clean=(title or "").strip()[:60]
+    conn=get_conn()
+    with conn:
+        conn.execute("UPDATE threads SET title=? WHERE thread_id=?",(clean,thread_id))
+    return clean
+
+
+def delete_thread(thread_id,user):
+    #归属校验：不是本人的会话一律当作不存在，由接口层转404
+    if get_thread(thread_id,user) is None:
+        return False
+    conn=get_conn()
+    with conn:
+        conn.execute("DELETE FROM messages WHERE thread_id=?",(thread_id,))
+        conn.execute("DELETE FROM tasks WHERE thread_id=?",(thread_id,))
+        conn.execute("DELETE FROM threads WHERE thread_id=?",(thread_id,))
+    return True
 
 
 def add_message(thread_id,user,role,message_type,content,sources=None,rewritten_query=None):

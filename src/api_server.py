@@ -2,6 +2,7 @@ import asyncio
 import json
 import os
 import time
+from contextlib import asynccontextmanager
 from datetime import datetime, timedelta, timezone
 from typing import Optional
 import jwt
@@ -14,13 +15,41 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 import store
 import run_context
-from llm_api import call_deepseek_stream
+from llm_api import call_deepseek_stream, call_deepseek_stream_async
 from pipeline import (build_retrieval_question,simple_answer_with_sources_async,simple_context,
                       survey_pipeline,SIMPLE_SYSTEM_PROMPT)
 from task_router import classify_task, rate_limit_allowed
+import logging
 
 load_dotenv()
-app=FastAPI(title="论文调研Agent API")
+logger=logging.getLogger(__name__)
+
+#启动阶段预热：模型和索引改为服务起来就加载，避免第一次请求等二十多秒
+async def _preheat():
+    try:
+        import retrieval_service
+        service=retrieval_service.get_service()
+        service._ensure_index()
+        service._ensure_bm25()
+        logger.info("预热完成：Embedding 模型与 FAISS 索引已就绪")
+    except Exception as e:
+        #预热失败不阻断启动，真正的报错留给请求链路暴露
+        logger.warning(f"预热失败，改为首次请求时懒加载：{e}")
+    try:
+        from rerank import get_reranker
+        get_reranker()
+        logger.info("预热完成：重排模型已就绪")
+    except Exception as e:
+        logger.warning(f"重排模型预热失败：{e}")
+
+
+@asynccontextmanager
+async def lifespan(app):
+    await _preheat()
+    yield
+
+
+app=FastAPI(title="论文调研Agent API",lifespan=lifespan)
 bearer=HTTPBearer(auto_error=False)
 WEB_DIR=os.path.join(os.path.dirname(os.path.abspath(__file__)),"web")
 
@@ -98,9 +127,19 @@ def health():
 
 @app.get("/")
 def index():
-    return FileResponse(os.path.join(WEB_DIR,"index.html"))
+    #前端不发缓存指令会被浏览器按启发式规则缓存，改完代码刷新仍是旧页面
+    return FileResponse(os.path.join(WEB_DIR,"index.html"),
+                        headers={"Cache-Control":"no-cache, must-revalidate"})
 
-app.mount("/static",StaticFiles(directory=WEB_DIR),name="static")
+class _NoCacheStatic(StaticFiles):
+    #静态资源强制每次向服务端校验，避免改了 app.js 但浏览器还在跑旧版本
+    def file_response(self,*args,**kwargs):
+        resp=super().file_response(*args,**kwargs)
+        resp.headers["Cache-Control"]="no-cache, must-revalidate"
+        return resp
+
+
+app.mount("/static",_NoCacheStatic(directory=WEB_DIR),name="static")
 
 @app.post("/login")
 def login(req: LoginRequest):
@@ -175,6 +214,32 @@ def get_thread_tasks(thread_id: str,user: str=Depends(verify_token)):
     return {"thread_id":thread_id,"tasks":rows}
 
 
+@app.get("/threads")
+def list_threads(user: str=Depends(verify_token)):
+    #会话列表：只返回当前用户自己的会话，按最近更新排序
+    return {"threads":store.list_threads(user)}
+
+
+@app.delete("/threads/{thread_id}")
+def remove_thread(thread_id: str,user: str=Depends(verify_token)):
+    if not store.delete_thread(thread_id,user):
+        raise HTTPException(status_code=404,detail="会话不存在")
+    return {"deleted":thread_id}
+
+
+class RenameRequest(BaseModel):
+    title: str=""
+
+
+@app.patch("/threads/{thread_id}")
+def rename_thread(thread_id: str,req: RenameRequest,user: str=Depends(verify_token)):
+    #标题留空表示恢复为按首条提问自动命名
+    title=store.rename_thread(thread_id,user,req.title)
+    if title is None:
+        raise HTTPException(status_code=404,detail="会话不存在")
+    return {"thread_id":thread_id,"title":title}
+
+
 @app.get("/metrics")
 def metrics(since_hours: int=24,user: str=Depends(verify_token)):
     #运行时指标：只看当前用户自己的数据，外加进程级信息
@@ -194,35 +259,55 @@ def sse_event(obj):
     #numpy.float32不能直接JSON序列化，统一转float兜底
     return f"data: {json.dumps(obj,ensure_ascii=False,default=lambda o: float(o) if isinstance(o,np.float32) else str(o))}\n\n"
 
+
 @app.get("/ask/stream")
-def ask_stream(question: str, thread_id: Optional[str]=None, user: str=Depends(verify_token)):
+async def ask_stream(question: str, thread_id: Optional[str]=None, user: str=Depends(verify_token)):
     if not rate_limit_allowed(user):
         raise HTTPException(status_code=429,detail="请求过于频繁，请稍后再试")
     #同步路由跑在线程池里，这里直接落库不阻塞事件循环；会话不存在时能在响应开始前返回404
     thread= _ensure_thread(thread_id,user)
     task=classify_task(question)
     search_question=_retrieval_question(question,thread,user)
-    store.add_message(thread,user,"user","user_query",question,None,
-                      search_question if search_question!=question else None)
-    task_id=store.create_task(thread,user,task)
+    #落库放到线程池，避免同步写库卡住事件循环
+    await asyncio.to_thread(store.add_message,thread,user,"user","user_query",question,None,
+                            search_question if search_question!=question else None)
+    task_id=await asyncio.to_thread(store.create_task,thread,user,task)
+
     async def gen():
         #流式异常必须转成SSE事件，不能让连接无提示中断
         answer=[]
+        debug_stream=os.getenv("STREAM_DEBUG","0")=="1"
+        _t0=time.time()
+        def _mark(tag,extra=""):
+            #诊断用：记录事件被生产出来的时刻，定位是生产慢还是发送被缓冲
+            if debug_stream:
+                logger.info(f"[stream] {tag} +{time.time()-_t0:.2f}s {extra}")
         #上下文在生成器里设置：同步路由里设的 contextvar 不会带进事件循环任务
         ctx_token=run_context.set_run_context(task_id,thread,user)
         try:
             yield sse_event({"type":"thread","thread_id":thread,"task_id":task_id})
+            _mark("thread")
             yield sse_event({"type":"route","route":task})
+            _mark("route")
             if task=="simple":
+                _mark("simple_start")
+                _t_ctx=time.time()
                 sources,context=await simple_context(question,5,search_question)
+                _mark("sources_ready",f"耗时 {time.time()-_t_ctx:.2f}s")
                 yield sse_event({"type":"sources","sources":sources})
                 messages=[
                     {"role":"system","content":SIMPLE_SYSTEM_PROMPT},
                     {"role":"user","content":f"以下是检索到的相关资料：\n{context}\n\n用户问题：{question}"}
                 ]
-                for token in call_deepseek_stream(messages):
+                _mark("llm_start")
+                _t_llm=time.time()
+                #用 httpx 异步流式：同步 requests 会把线程池里的迭代变成整批返回
+                async for token in call_deepseek_stream_async(messages):
                     answer.append(token)
+                    if len(answer)<4 or len(answer)%50==0:
+                        _mark("llm_token",f"index={len(answer)} 距开始 {time.time()-_t_llm:.2f}s")
                     yield sse_event({"type":"token","content":token})
+                _mark("llm_end",f"共 {len(answer)} token，耗时 {time.time()-_t_llm:.2f}s")
                 await asyncio.to_thread(store.add_message,thread,user,"assistant","assistant_answer",
                                         "".join(answer),_sources_brief(sources))
             else:
@@ -239,6 +324,7 @@ def ask_stream(question: str, thread_id: Optional[str]=None, user: str=Depends(v
                 worker=asyncio.create_task(asyncio.to_thread(
                     survey_pipeline,question,human_confirm=False,on_progress=on_progress))
                 sent=0
+                last_progress_at=time.time()
                 while not worker.done() or sent<len(progress_items):
                     try:
                         await asyncio.wait_for(queue.get(),timeout=heartbeat)
@@ -247,6 +333,13 @@ def ask_stream(question: str, thread_id: Optional[str]=None, user: str=Depends(v
                     while sent<len(progress_items):
                         yield sse_event({"type":"progress","content":progress_items[sent]})
                         sent+=1
+                        last_progress_at=time.time()
+                    #长时间只有心跳时补一条带等待时长的进度，避免界面看着像卡住
+                    waited=time.time()-last_progress_at
+                    if waited>=heartbeat and not worker.done():
+                        yield sse_event({"type":"progress",
+                                         "content":f"仍在处理｜距上一步已 {int(waited)} 秒"})
+                        last_progress_at=time.time()
                 text=await worker
                 for i in range(0,len(text),40):
                     answer.append(text[i:i+40])

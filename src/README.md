@@ -9,7 +9,11 @@ conda activate GPU
 uvicorn api_server:app --host 127.0.0.1 --port 8000
 ```
 
-首次启动会加载 Embedding 模型和 FAISS 索引，耗时约 10-30 秒。
+## 启动预热
+
+服务通过 lifespan 钩子在启动阶段就加载 Embedding 模型、FAISS 索引、BM25 语料和重排模型，启动约 45 秒，之后每次请求都不再等模型。
+
+改成启动预热之前的做法是懒加载：模型和索引在第一次请求时才加载，那次请求要多等 20 多秒（实测进程导入依赖 18.4 秒 + 加载模型 5.4 秒）。预热把这份等待从"用户第一次提问"挪到了"服务启动"。预热失败只记 warning，不会阻断启动。
 
 ## WebUI
 
@@ -17,11 +21,21 @@ uvicorn api_server:app --host 127.0.0.1 --port 8000
 
 界面支持单篇问答和文献综述两种路由：单篇问答流式输出并展示引用来源；文献综述提示处理时长后输出完整综述。前端通过 fetch 读取 SSE，不依赖浏览器原生 EventSource，因此 Token 始终放在请求头里。
 
+左侧会话栏支持完整的对话管理：
+
+- 一个会话里可以连续问多个问题，只有点「新对话」才会新建会话
+- 会话标题默认取该会话第一条提问，双击标题可以改成自己的名字（改名不影响它在列表里的排序位置）
+- 按最后活动时间分组：今天 / 昨天 / 近 7 天 / 更早
+- 悬停出现删除按钮；会话栏右上角可收起，收起后对话区左上角会出现展开入口
+- 刷新页面会自动回到上次的会话并还原历史消息与引用卡片（会话 ID 记在 localStorage）
+- 每条提问可复制、可修改后重新提问；每条回答可复制、可重新生成，操作按钮为图标，悬停才显示
+
 ## 外网检索
 
 - simple 路径并行跑本地 FAISS 检索 + 外网检索（Wikipedia REST + arXiv API），来源统一展示
 - 外网请求默认 8 秒超时、并发上限 5，失败自动降级为本地-only，不阻塞主链路
 - 配置：`.env` 的 `WEB_SEARCH_TIMEOUT` / `WEB_SEARCH_MAX_RESULTS` / `WEB_SEARCH_CONCURRENCY`
+- `WEB_SEARCH_ENABLED=0` 会跳过外网检索直接走本地。外网两个源都不可用时建议关闭：降级逻辑只保证不报错，但仍要白等一个超时周期（实测约 4.5 秒）
 
 ## 重排（Cross-Encoder）
 
@@ -61,13 +75,30 @@ SSE 流式接口，`question` 作为查询参数，需要 `Authorization` 头。
 
 事件格式：
 ```json
+{"type":"thread","thread_id":"th_xxx","task_id":"tk_xxx"}
 {"type":"route","route":"simple"}
 {"type":"sources","sources":[{"source":"论文名","section":"章节","text":"片段"}]}
 {"type":"token","content":"..."}
+{"type":"progress","content":"抽取事实 1/2：Attention_Is_All_You_Need"}
+{"type":"ping"}
 {"type":"done"}
 ```
 
-综述链路会先推送 `{"type":"status","content":"正在生成综述（约 1-3 分钟）"}`。发生异常时推送 `{"type":"error","message":"..."}`，然后推送 `done`，连接不会无提示中断。
+可选参数 `thread_id`：带上就追加到该会话，不带就新建一个会话。`thread` 事件会把最终使用的会话 ID 返回给前端。
+
+综述链路会先推送 `{"type":"status","content":"正在生成综述（约 1-3 分钟）"}`，之后推送 `progress` 分步进度，长时间没有新步骤时补一条带等待时长的 `progress`，心跳用 `ping`。发生异常时推送 `{"type":"error","message":"..."}`，然后推送 `done`，连接不会无提示中断。
+
+### GET /threads
+
+返回当前用户的会话列表，按最后活动时间倒序。`title` 是自定义标题，没改过名时回退为该会话的第一条提问；`title_source` 标明是 `custom` 还是 `auto`。
+
+### PATCH /threads/{thread_id}
+
+请求体 `{"title":"新名字"}`。传空字符串表示恢复为自动命名。改名不更新 `updated_at`，所以会话不会因此在列表里跳到最前。
+
+### DELETE /threads/{thread_id}
+
+删除会话及其消息与任务记录。不存在的会话返回 404，不是本人的会话同样按 404 处理，避免泄露存在性。
 
 ## 测试
 
@@ -129,10 +160,11 @@ docker build -t paper-agent .
 - `evaluation/v150_pipeline.py`：v150语料的manifest、arXiv版本固定、PDF下载、分层split、候选出题审计和快照冻结入口
 - `evaluation/v300/manifest.json`、`evaluation/questions/v300_*`：v300 300篇论文和冻结评测题
 - `scripts/run_acceptance.py`：6 条固定 query 的验收脚本（简单/综述/冲突/超预算/无结果 + Transformer对比）
-- `rag_tool.py`：混合检索（BM25 + FAISS + 条件触发 Cross-Encoder 重排）
+- `rag_tool.py`：**旧检索入口，已弃用**。生产链路走 `retrieval_service.py`；保留是因为 `experiments/` 下的 RRF 与重排对照脚本依赖它复现旧口径
 - `web_search.py`：外网检索并发（Wikipedia/arXiv），统一来源结构与降级
 - `agent_react.py`：手写 ReAct 循环，Supervisor + Worker
-- `agent1_retrieve.py` / `agent2_parse.py` / `agent3_review.py`：旧流水线模块，正在向 `tools.py` 单 Agent 工具集收敛
+- `agent1_retrieve.py` / `agent3_review.py`：**旧 3-Agent 链路，已弃用**。生产综述走 `survey_agent.py` 的单 Agent 工具集；`pipeline.py` 里那段回退分支已于 2026-09-23 删除。保留它们只为让 `experiments/experiment_single_vs_multi.py` 能复现「单 Agent 与 3-Agent 对比」那组对比数据
+- `agent2_parse.py`：**在用**。`tools.py` 仍从它导入 `build_paper_card` 与 `compare_papers`
 - `pipeline.py`：simple 短路与 survey 全链路编排
 - `api_server.py`：FastAPI 接口层，JWT 鉴权 + SSE 流式 + 限流
 - `cost_report.py`：每日 LLM 成本报表
@@ -142,6 +174,10 @@ docker build -t paper-agent .
 ## 已知边界
 
 - 综述链路一次请求约消耗 4-6 倍 Token，且耗时较长，SSE 目前先完整跑完再分片推送，未做真正的中途流式
+- **外网检索当前不可用**：arXiv 的 `export.arxiv.org/api/query` 对所有参数组合返回 406（主站正常），维基百科请求超时。代码里的降级逻辑保证主链路不受影响，但两个源都拿不到数据，因此 `.env` 里用 `WEB_SEARCH_ENABLED=0` 直接跳过，省掉一个超时周期的等待
+- **公式渲染依赖模型输出格式**：前端能渲染 `\(...\)`、`\[...\]`、`$...$` 三种定界符，但模型有时把公式写成裸文本（如 `Attention(Q,K,V)=Softmax(QK^T/√d_k)V`），这种渲染不了。已在系统提示词里要求公式必须用 LaTeX，但提示词不能百分百约束住
+- 首 token 延迟约 8-12 秒（检索 3.5 秒 + 模型读资料后开口 4.8 秒），这是当前方案的下限；`sources` 事件在检索完成时就会推送，可用来给用户可见反馈
+- 综述正文是一整段生成的，只有在管线结束后才拿到，因此正文本身没有真流式；抽取事实与生成正文之间有约 25 秒只有心跳和等待时长提示
 - `GET /ask/stream` 依赖 Authorization 头，浏览器原生 EventSource 无法直接携带，前端需要走 fetch 流式或查询参数方案
 - 服务依赖本地模型和索引文件，Docker 内需要显式挂载并覆盖路径
 - 论文场景以原生文本 PDF 为主，不处理扫描件；图片 OCR 为可选 P1，当前未安装引擎时接口明确返回 OCR 不可用

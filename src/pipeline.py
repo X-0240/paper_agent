@@ -15,7 +15,10 @@ logging.basicConfig(level=logging.INFO)
 logger=logging.getLogger(__name__)
 
 SIMPLE_SYSTEM_PROMPT="""你是一个论文问答助手。根据检索到的相关资料（本地论文/维基百科/arXiv）回答用户问题，回答要标注来源类型。
-如果信息不足，明确说'根据现有资料无法回答'。"""
+如果信息不足，明确说'根据现有资料无法回答'。
+公式必须写成 LaTeX：行内公式用 \\(...\\) 包裹，独立成行的公式用 \\[...\\] 包裹。
+下标写成 d_k、上标写成 QK^\\top，不要写成 d_k 这种裸文本，也不要用 √ 或 ^ 代替 LaTeX 记法。
+举例：缩放点积注意力要写成 \\(\\mathrm{Attention}(Q,K,V)=\\mathrm{softmax}\\left(\\frac{QK^\\top}{\\sqrt{d_k}}\\right)V\\)。"""
 
 MULTI_TURN_PROMPT="""把用户的追问补全成一个自足的问题，用于论文检索。只输出补全后的问题，不要解释。
 规则：保留追问的原始意图；从对话历史里补全被指代的论文、方法或概念；历史里无关的话题不要带入。"""
@@ -75,30 +78,15 @@ def simple_answer(question,k=5,use_rewrite=False):
     return asyncio.run(simple_answer_async(question,k))
 
 def survey_pipeline(question,top_n=3,human_confirm=False,on_progress=None):
-    #新链路：单ReAct Agent综述编排；旧链路保留为回退
+    #单ReAct Agent综述编排：检索、建卡、事实抽取、冲突校验、综述生成都在工具集里
+    #旧 3-Agent 回退分支已于 2026-09-23 删除，只保留这一条实现；
+    #旧模块（agent1_retrieve/agent3_review/rag_tool）仍在仓库里，但只为 experiments 复现旧口径
     t0=time.time()
-    if os.getenv("USE_NEW_SURVEY","1")=="1":
-        from survey_agent import review_to_markdown, run_survey
-        state=run_survey(question,on_progress=on_progress)
-        t1=time.time()
-        logger.info(f"新综述链路耗时{t1-t0:.1f}s papers={len(state.papers)} facts={len(state.facts)} conflicts={len(state.conflicts)}")
-        return review_to_markdown(state.review) if state.review else "证据不足：未找到足够论文生成综述。"
-    #旧链路（deprecated，仅回退用）
-    #注意：旧的 3-Agent 模块改成延迟导入，新链路启用时不再加载它们，避免多余依赖与启动开销
-    try:
-        from agent1_retrieve import agent_1
-        from agent2_parse import agent_2
-        from agent3_review import agent_3
-        papers=agent_1(question,top_n)
-        t1=time.time()
-        out2=agent_2(papers)
-        t2=time.time()
-        out3=agent_3(out2["papers"],out2["comparison"],human_confirm)
-        t3=time.time()
-        logger.info(f"耗时 Agent-1={t1-t0:.1f}s Agent-2={t2-t1:.1f}s Agent-3={t3-t2:.1f}s 总={t3-t0:.1f}s")
-        return out3["review"]
-    except BudgetExceeded as e:
-        return f"[预算保护] {e}"
+    from survey_agent import review_to_markdown, run_survey
+    state=run_survey(question,on_progress=on_progress)
+    t1=time.time()
+    logger.info(f"综述链路耗时{t1-t0:.1f}s papers={len(state.papers)} facts={len(state.facts)} conflicts={len(state.conflicts)}")
+    return review_to_markdown(state.review) if state.review else "证据不足：未找到足够论文生成综述。"
 
 if __name__=="__main__":
     print("论文调研系统（Ctrl+C退出）")

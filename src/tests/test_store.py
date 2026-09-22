@@ -33,6 +33,67 @@ def test_thread_ownership_isolation():
     assert store.list_tasks(thread_id,"bob") is None
 
 
+def test_list_threads_uses_first_question_as_title():
+    #会话列表的标题取该会话第一条提问，供前端侧边栏展示
+    thread_id=store.create_thread("alice")
+    store.add_message(thread_id,"alice","user","user_query","什么是Transformer？")
+    store.add_message(thread_id,"alice","assistant","assistant_answer","答案")
+    store.add_message(thread_id,"alice","user","user_query","第二个问题")
+    rows=store.list_threads("alice")
+    assert len(rows)==1
+    assert rows[0]["thread_id"]==thread_id
+    assert rows[0]["title"]=="什么是Transformer？"
+
+
+def test_list_threads_isolated_by_user():
+    store.create_thread("alice")
+    store.create_thread("bob")
+    assert len(store.list_threads("alice"))==1
+    assert len(store.list_threads("bob"))==1
+
+
+def test_delete_thread_removes_messages_and_checks_ownership():
+    thread_id=store.create_thread("alice")
+    store.add_message(thread_id,"alice","user","user_query","问题")
+    store.create_task(thread_id,"alice","simple")
+    #别人的会话删不掉，也不该被误删
+    assert store.delete_thread(thread_id,"bob") is False
+    assert store.get_thread(thread_id,"alice") is not None
+    assert store.delete_thread(thread_id,"alice") is True
+    assert store.get_thread(thread_id,"alice") is None
+    assert store.list_messages(thread_id,"alice") is None
+
+
+def test_rename_thread_overrides_auto_title_without_reordering():
+    thread_id=store.create_thread("alice")
+    store.add_message(thread_id,"alice","user","user_query","原标题")
+    before=store.list_threads("alice")[0]
+    assert before["title"]=="原标题" and before["title_source"]=="auto"
+
+    assert store.rename_thread(thread_id,"alice","自定义名字")=="自定义名字"
+    after=store.list_threads("alice")[0]
+    assert after["title"]=="自定义名字" and after["title_source"]=="custom"
+    #改名不算新活动，不能把会话顶到列表最前
+    assert after["updated_at"]==before["updated_at"]
+
+
+def test_rename_thread_empty_title_falls_back_to_first_question():
+    thread_id=store.create_thread("alice")
+    store.add_message(thread_id,"alice","user","user_query","首条提问")
+    store.rename_thread(thread_id,"alice","临时名字")
+    assert store.list_threads("alice")[0]["title"]=="临时名字"
+    #传空标题视为恢复自动命名
+    store.rename_thread(thread_id,"alice","")
+    row=store.list_threads("alice")[0]
+    assert row["title"]=="首条提问" and row["title_source"]=="auto"
+
+
+def test_rename_thread_checks_ownership():
+    thread_id=store.create_thread("alice")
+    assert store.rename_thread(thread_id,"bob","偷改") is None
+    assert store.rename_thread("th_not_exist","alice","不存在") is None
+
+
 def test_message_roundtrip_keeps_sources():
     thread_id=store.create_thread("alice")
     store.add_message(thread_id,"alice","user","user_query","什么是Transformer？")

@@ -106,6 +106,8 @@ def test_semaphore_limits_concurrency():
 
 def test_hybrid_search_merges_local_and_web(monkeypatch):
     #本地+外网合并，统一来源结构
+    #外网开关默认可能被关闭，这里显式打开，测的是合并逻辑本身
+    monkeypatch.setenv("WEB_SEARCH_ENABLED","1")
     def fake_local(query,top_k):
         return [{"source":"P","section":"S","text":"T"}]
     monkeypatch.setattr(web_search,"_local_search",fake_local)
@@ -127,6 +129,7 @@ def test_hybrid_search_merges_local_and_web(monkeypatch):
 
 def test_hybrid_search_local_only_on_web_failure(monkeypatch):
     #外网全部失败时降级为本地-only
+    monkeypatch.setenv("WEB_SEARCH_ENABLED","1")
     def fake_local(query,top_k):
         return [{"source":"P","section":"S","text":"T"}]
     monkeypatch.setattr(web_search,"_local_search",fake_local)
