@@ -118,7 +118,13 @@ SSE 流式接口，`question` 作为查询参数，需要 `Authorization` 头。
 python -m pytest tests -q
 ```
 
-`tests/test_task_router.py`、`tests/test_agent_react.py`、`tests/test_llm_cost.py` 是纯逻辑测试，不加载模型，CI 只跑这三个文件；`tests/test_api.py` 会加载模型，用于本地全量回归。
+纯逻辑测试（不加载模型，CI 跑这些）：`test_task_router.py`、`test_agent_react.py`、`test_llm_cost.py`、`test_web_search.py`、`test_evaluation_metrics.py`、`test_dialog_anchor.py`、`test_dialog_e2e.py`。
+
+其中 `test_dialog_anchor.py` 覆盖多轮追问的锚点提取（只取用户提问、支持多篇、数量上限）；`test_dialog_e2e.py` 是端到端多轮回归，**检测不到本地服务时自动跳过**，所以 CI 里不会失败、本地起来服务后能真实跑一遍检索是否命中目标论文。
+
+其余测试（`test_api.py` 等）会加载模型，用于本地全量回归；2026-09-23 实测全量 115 项通过。
+
+多轮改写的批量对照用 `scripts/dialog_rewrite_eval.py`（7 个代词型追问，跑一遍约 2 分钟）；锚点追踪用 `scripts/trace_anchor.py`。
 
 ## 成本控制
 
