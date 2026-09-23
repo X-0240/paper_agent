@@ -749,6 +749,15 @@ async function sendQuestion(){
   if(streaming){return;}
   const question=questionInput.value.trim();
   if(!question){return;}
+  //与服务端同一条规则：只有标点或空白的内容不发起请求，省掉一次往返
+  if(!/[0-9A-Za-z\u4e00-\u9fa5]/.test(question)){
+    questionInput.value="";
+    sendBtn.disabled=true;
+    const node=addMessage("bot");
+    setStatus(node.meta,"请输入具体问题，当前内容只有标点或空白",false);
+    node.el.classList.add("has-error");
+    return;
+  }
   questionInput.value="";
   sendBtn.disabled=true;
   const userNode=addMessage("user",question);

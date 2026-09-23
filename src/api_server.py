@@ -1,6 +1,7 @@
 import asyncio
 import json
 import os
+import re
 import time
 from contextlib import asynccontextmanager
 from datetime import datetime, timedelta, timezone
@@ -96,6 +97,43 @@ def _retrieval_question(question,thread_id,user):
     return build_retrieval_question(question,history)
 
 
+def _dialog_history_enabled():
+    #多轮上下文开关：默认开。关掉后退回"只带当前问题"的老行为，便于做同题对照
+    return os.getenv("DIALOG_HISTORY_ENABLED","1")=="1"
+
+
+#零宽字符与纯标点等"没有语义内容"的输入，挡在调用模型之前
+_MEANINGLESS=re.compile(r"[\s\W_]+",re.UNICODE)
+
+
+def _question_reject_reason(question):
+    #返回拒绝原因；返回空表示通过。空输入会白烧一次 LLM 调用，所以在入口挡掉
+    text=(question or "").strip()
+    if not text:
+        return "问题不能为空"
+    if not _MEANINGLESS.sub("",text):
+        #只剩空白、标点、符号，没有可检索的语义
+        return "请输入具体问题，当前内容只有标点或空白"
+    return ""
+
+
+def _recent_dialog(thread_id,user,turns=3,max_chars=600):
+    #取最近若干轮问答拼进生成提示词。
+    #必须在写入本轮提问之前调用，否则历史里会混进当前问题。
+    #单条截断防止长会话把上下文撑爆；取不到历史就返回空串，不影响首轮问答
+    if not _dialog_history_enabled():
+        return ""
+    rows=store.recent_history(thread_id,user,turns) or []
+    lines=[]
+    for item in rows:
+        content=(item.get("content") or "").strip().replace("\n"," ")
+        if not content:
+            continue
+        who="用户" if item.get("role")=="user" else "助手"
+        lines.append(f"{who}：{content[:max_chars]}")
+    return "\n".join(lines)
+
+
 def _sources_brief(sources):
     #只落库来源摘要，避免把整段原文写进数据库
     out=[]
@@ -151,6 +189,9 @@ def login(req: LoginRequest):
 async def ask(req: AskRequest, user: str=Depends(verify_token)):
     if not rate_limit_allowed(user):
         raise HTTPException(status_code=429,detail="请求过于频繁，请稍后再试")
+    reason=_question_reject_reason(req.question)
+    if reason:
+        raise HTTPException(status_code=400,detail=reason)
     thread_id=await asyncio.to_thread(_ensure_thread,req.thread_id,user)
     task=classify_task(req.question) if req.use_survey is None else ("survey" if req.use_survey else "simple")
     search_question=await asyncio.to_thread(_retrieval_question,req.question,thread_id,user)
@@ -264,10 +305,15 @@ def sse_event(obj):
 async def ask_stream(question: str, thread_id: Optional[str]=None, user: str=Depends(verify_token)):
     if not rate_limit_allowed(user):
         raise HTTPException(status_code=429,detail="请求过于频繁，请稍后再试")
+    reason=_question_reject_reason(question)
+    if reason:
+        raise HTTPException(status_code=400,detail=reason)
     #同步路由跑在线程池里，这里直接落库不阻塞事件循环；会话不存在时能在响应开始前返回404
     thread= _ensure_thread(thread_id,user)
     task=classify_task(question)
     search_question=_retrieval_question(question,thread,user)
+    #取最近几轮对话拼生成提示词：必须在本轮提问落库之前取，否则会把当前问题当成历史
+    dialog=await asyncio.to_thread(_recent_dialog,thread,user)
     #落库放到线程池，避免同步写库卡住事件循环
     await asyncio.to_thread(store.add_message,thread,user,"user","user_query",question,None,
                             search_question if search_question!=question else None)
@@ -295,9 +341,13 @@ async def ask_stream(question: str, thread_id: Optional[str]=None, user: str=Dep
                 sources,context=await simple_context(question,5,search_question)
                 _mark("sources_ready",f"耗时 {time.time()-_t_ctx:.2f}s")
                 yield sse_event({"type":"sources","sources":sources})
+                #有上文时先给对话历史再给资料：多轮里的代词指代靠这段解决
+                user_block=f"以下是检索到的相关资料：\n{context}\n\n用户问题：{question}"
+                if dialog:
+                    user_block=f"之前的对话：\n{dialog}\n\n{user_block}\n\n注意：用户问题里如果出现代词（它/他/这个/那个）或省略主语，指代的是上一轮讨论的对象，请结合上面的对话判断，不要回答成别的论文或方法。"
                 messages=[
                     {"role":"system","content":SIMPLE_SYSTEM_PROMPT},
-                    {"role":"user","content":f"以下是检索到的相关资料：\n{context}\n\n用户问题：{question}"}
+                    {"role":"user","content":user_block}
                 ]
                 _mark("llm_start")
                 _t_llm=time.time()

@@ -150,6 +150,20 @@ def test_stream_survey(monkeypatch):
     assert events[-1]["type"]=="done"
 
 
+def test_meaningless_question_rejected_before_model_call(monkeypatch):
+    #空输入与纯标点在入口就被挡掉，不消耗模型调用
+    #本测试只关心输入校验，直接放行限流，避免令牌桶被其他测试消耗后误判成 429
+    monkeypatch.setattr("api_server.rate_limit_allowed",lambda *a,**k: True)
+    hdr=auth_header(login())
+    assert client.get("/ask/stream",params={"question":""},headers=hdr).status_code==400
+    assert client.get("/ask/stream",params={"question":"   "},headers=hdr).status_code==400
+    assert client.get("/ask/stream",params={"question":"？？？"},headers=hdr).status_code==400
+    assert client.post("/ask",json={"question":""},headers=hdr).status_code==400
+    #正常问题不受影响
+    ok=client.get("/ask/stream",params={"question":"什么是注意力机制？"},headers=hdr)
+    assert ok.status_code==200
+
+
 def test_list_threads_and_delete_requires_ownership():
     #会话列表返回当前用户的会话，标题取第一条提问
     hdr=auth_header(login())
