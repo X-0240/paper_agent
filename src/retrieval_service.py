@@ -6,7 +6,7 @@ import os
 import re
 import threading
 import time
-from collections import OrderedDict
+from collections import OrderedDict, deque
 
 #国内网络直连HuggingFace可能超时，必须在加载模型前设置镜像
 os.environ.setdefault("HF_ENDPOINT","https://hf-mirror.com")
@@ -48,7 +48,10 @@ class _SemanticRecallCache:
         self.max_size=max_size
         self.ttl=ttl
         self._lock=threading.Lock()
-        self._entries=OrderedDict()   #cache_key -> {"vec":np.ndarray,"snapshot":str,"chunk_ids":[...],"expires_at":float}
+        self._entries=OrderedDict()   #cache_key -> {"question","vec","snapshot","chunk_ids","expires_at"}
+        #命中追溯：只记最近若干条，用于事后核查"是否把 A 的答案给了 B"
+        self._hits=deque(maxlen=max_size)
+        self._near_misses=deque(maxlen=50)   #未达阈值但最接近的，用于判断阈值是否卡得太紧
         self.hit=0
         self.miss=0
 
@@ -65,6 +68,7 @@ class _SemanticRecallCache:
             entry=self._entries.get(key)
             if entry and entry["expires_at"]>now:
                 self.hit+=1
+                self._record_hit(question,entry["question"],1.0,"exact")
                 return entry["chunk_ids"],1.0
             best=None
             best_score=0.0
@@ -77,8 +81,14 @@ class _SemanticRecallCache:
                     best=item
             if best is not None and best_score>=self.threshold:
                 self.hit+=1
+                self._record_hit(question,best["question"],best_score,"semantic")
                 return best["chunk_ids"],best_score
             self.miss+=1
+            if best is not None:
+                #记下"差一点就命中"的，方便判断阈值是否过严
+                self._near_misses.append({"asked":question,"closest":best["question"],
+                                          "similarity":round(best_score,4),
+                                          "at":_now_iso()})
             return None,best_score
 
     def store(self,question,vec,index_snapshot,chunk_ids):
@@ -86,19 +96,34 @@ class _SemanticRecallCache:
             return
         key=self._key(question,index_snapshot)
         with self._lock:
-            self._entries[key]={"vec":vec,"snapshot":index_snapshot,
+            self._entries[key]={"question":question,"vec":vec,"snapshot":index_snapshot,
                                 "chunk_ids":list(chunk_ids),
                                 "expires_at":time.time()+self.ttl}
             self._entries.move_to_end(key)
             while len(self._entries)>self.max_size:
                 self._entries.popitem(last=False)
 
+    def _record_hit(self,asked,source,score,mode):
+        #核查一条命中最关心的三件事：谁命中了谁、相似度多少、是精确还是语义
+        self._hits.append({"asked":asked,"matched":source,
+                           "similarity":round(float(score),4),
+                           "mode":mode,"at":_now_iso()})
+
+    def recent_hits(self,limit=20):
+        with self._lock:
+            return list(self._hits)[-limit:][::-1]
+
+    def near_misses(self,limit=10):
+        with self._lock:
+            return list(self._near_misses)[-limit:][::-1]
+
     def stats(self):
         with self._lock:
             total=self.hit+self.miss
             return {"hit":self.hit,"miss":self.miss,
                     "hit_rate":round(self.hit/total,4) if total else 0.0,
-                    "size":len(self._entries),"threshold":self.threshold}
+                    "size":len(self._entries),"threshold":self.threshold,
+                    "hits":len(self._hits),"near_misses":len(self._near_misses)}
 
 
 class _QueryCache:
@@ -178,6 +203,11 @@ class _QueryCache:
 
 def _normalize_question(text):
     return re.sub(r"\s+"," ",(text or "").strip())
+
+
+def _now_iso():
+    #命中日志的时间戳用本地可读格式，方便对着服务日志排查
+    return time.strftime("%Y-%m-%d %H:%M:%S",time.localtime())
 
 
 def _has_cjk(text):

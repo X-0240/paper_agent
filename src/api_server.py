@@ -414,11 +414,27 @@ def metrics(since_hours: int=24,user: str=Depends(verify_token)):
     #缓存与准入统计：过载或缓存行为要能被看到，否则出问题只能靠猜
     data["admission"]=ADMISSION.stats()
     try:
-        import retrieval_service
         data["semantic_cache"]=retrieval_service.get_service().recall_cache.stats()
     except Exception as e:
         data["semantic_cache"]={"error":str(e)[:80]}
     return data
+
+
+@app.get("/metrics/semantic_hits")
+def semantic_hits(limit: int=20,user: str=Depends(verify_token)):
+    #语义缓存命中追溯：用于事后核查"是否把 A 的答案给了 B"
+    #只读缓存内部记录，不改任何状态
+    try:
+        cache=retrieval_service.get_service().recall_cache
+    except Exception as e:
+        raise HTTPException(status_code=503,detail=f"检索服务未就绪：{str(e)[:80]}")
+    limit=max(1,min(int(limit),100))
+    return {
+        "stats":cache.stats(),
+        "recent_hits":cache.recent_hits(limit),
+        "near_misses":cache.near_misses(limit),
+        "说明":"recent_hits 是最近命中（asked 命中了 matched）；near_misses 是差一点命中的，相似度接近阈值可用来判断阈值是否过严",
+    }
 
 def sse_event(obj):
     #numpy.float32不能直接JSON序列化，统一转float兜底

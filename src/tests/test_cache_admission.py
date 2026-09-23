@@ -66,6 +66,40 @@ def test_semantic_cache_capacity_limit():
     assert cache.stats()["size"]==3
 
 
+def test_semantic_cache_records_hit_trace():
+    #命中要能追溯到"谁命中了谁"，否则误命中无法事后核查
+    cache=retrieval_service._SemanticRecallCache(threshold=0.85)
+    cache.store("什么是 BERT？",_vec(1.0,0.0),"snap1",["c1"])
+    cache.lookup("BERT 是什么？",_vec(0.99,0.1),"snap1")
+    hits=cache.recent_hits()
+    assert len(hits)==1
+    assert hits[0]["asked"]=="BERT 是什么？"
+    assert hits[0]["matched"]=="什么是 BERT？"
+    assert hits[0]["mode"]=="semantic"
+    assert hits[0]["similarity"]>=0.85
+    assert hits[0]["at"]
+
+
+def test_semantic_cache_records_exact_hit_mode():
+    cache=retrieval_service._SemanticRecallCache(threshold=0.85)
+    cache.store("什么是 BERT？",_vec(1.0,0.0),"snap1",["c1"])
+    cache.lookup("什么是 BERT？",_vec(0.1,0.99),"snap1")
+    assert cache.recent_hits()[0]["mode"]=="exact"
+    assert cache.recent_hits()[0]["similarity"]==1.0
+
+
+def test_semantic_cache_records_near_miss():
+    #未达阈值但最接近的记录要留下，用于判断阈值是否卡得过严
+    cache=retrieval_service._SemanticRecallCache(threshold=0.92)
+    cache.store("什么是 BERT？",_vec(1.0,0.0),"snap1",["c1"])
+    cache.lookup("BERT 是啥意思",_vec(0.90,0.44),"snap1")
+    nm=cache.near_misses()
+    assert len(nm)==1
+    assert nm[0]["asked"]=="BERT 是啥意思"
+    assert nm[0]["closest"]=="什么是 BERT？"
+    assert 0.85<nm[0]["similarity"]<0.92
+
+
 def test_admission_accepts_until_full_then_rejects():
     gate=api_server._AdmissionGate(max_inflight=2,wait_budget=60,avg_seconds=17)
 
