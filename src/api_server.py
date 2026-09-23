@@ -103,10 +103,16 @@ def _recent_messages(thread_id,user,turns=3):
     return store.recent_history(thread_id,user,turns) or []
 
 
-def _last_named_paper(messages):
-    #从最近往前找第一个点到的论文名：追问里的"它"指的就是它。
-    #用现成的别名识别，不新造一套匹配逻辑；识别不到返回空串
-    for item in reversed(messages or []):
+def _named_papers_in_dialog(messages):
+    #取上一轮的论文名作为追问的检索锚点。
+    #只从用户提问里取：助手回答末尾带"来源类型：本地论文 [local:XXX]"这类引用标注，
+    #扫回答会把引用过的所有论文都当成用户提到的对象（实测因此注入 4 个锚点、把正确论文挤掉）
+    if not messages:
+        return []
+    ordered=[]
+    for item in messages:
+        if item.get("role")!="user":
+            continue
         text=(item.get("content") or "").strip()
         if not text:
             continue
@@ -114,9 +120,11 @@ def _last_named_paper(messages):
             found=extract_named_papers(text)
         except Exception:
             found=[]
-        if found:
-            return found[0]
-    return ""
+        for name in found:
+            if name not in ordered:
+                ordered.append(name)
+    #锚点过多会把检索查询稀释掉，只保留最近的几篇
+    return ordered[::-1][:3][::-1]
 
 
 def _resolve_retrieval_question(question,messages):
@@ -129,10 +137,10 @@ def _resolve_retrieval_question(question,messages):
             return question
     except Exception:
         return question
-    anchor=_last_named_paper(messages)
-    if not anchor:
+    anchors=_named_papers_in_dialog(messages)
+    if not anchors:
         return question
-    return f"{anchor} {question}"
+    return " ".join(anchors)+" "+question
 
 
 def _dialog_history_enabled():
@@ -361,6 +369,8 @@ async def ask_stream(question: str, thread_id: Optional[str]=None, user: str=Dep
     search_question=await asyncio.to_thread(_retrieval_question,question,thread,user)
     #追问没点名论文时，把上一轮的论文名补进检索查询，否则代词原样去搜会捞回无关论文
     search_question=_resolve_retrieval_question(search_question,history)
+    if os.getenv("DIALOG_DEBUG","0")=="1":
+        logger.info(f"[dialog] 原始问题={question!r} 历史条数={len(history)} 检索查询={search_question!r}")
     dialog=_format_dialog(history) if _dialog_history_enabled() else ""
     #落库放到线程池，避免同步写库卡住事件循环
     await asyncio.to_thread(store.add_message,thread,user,"user","user_query",question,None,
