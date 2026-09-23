@@ -16,6 +16,7 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 import store
 import run_context
+from paper_entities import extract_named_papers
 from llm_api import call_deepseek_stream, call_deepseek_stream_async
 from pipeline import (build_retrieval_question,simple_answer_with_sources_async,simple_context,
                       survey_pipeline,SIMPLE_SYSTEM_PROMPT)
@@ -97,6 +98,43 @@ def _retrieval_question(question,thread_id,user):
     return build_retrieval_question(question,history)
 
 
+def _recent_messages(thread_id,user,turns=3):
+    #最近若干轮问答，按时间正序；取不到就返回空列表
+    return store.recent_history(thread_id,user,turns) or []
+
+
+def _last_named_paper(messages):
+    #从最近往前找第一个点到的论文名：追问里的"它"指的就是它。
+    #用现成的别名识别，不新造一套匹配逻辑；识别不到返回空串
+    for item in reversed(messages or []):
+        text=(item.get("content") or "").strip()
+        if not text:
+            continue
+        try:
+            found=extract_named_papers(text)
+        except Exception:
+            found=[]
+        if found:
+            return found[0]
+    return ""
+
+
+def _resolve_retrieval_question(question,messages):
+    #追问里没有论文名时，把上一轮点到的论文名补进检索查询。
+    #实测依据：第一轮明确点名时命中 7/7，换成代词追问只剩 2/7，缺的就是实体名
+    if not messages:
+        return question
+    try:
+        if extract_named_papers(question):
+            return question
+    except Exception:
+        return question
+    anchor=_last_named_paper(messages)
+    if not anchor:
+        return question
+    return f"{anchor} {question}"
+
+
 def _dialog_history_enabled():
     #多轮上下文开关：默认开。关掉后退回"只带当前问题"的老行为，便于做同题对照
     return os.getenv("DIALOG_HISTORY_ENABLED","1")=="1"
@@ -124,6 +162,11 @@ def _recent_dialog(thread_id,user,turns=3,max_chars=600):
     if not _dialog_history_enabled():
         return ""
     rows=store.recent_history(thread_id,user,turns) or []
+    return _format_dialog(rows,max_chars)
+
+
+def _format_dialog(rows,max_chars=600):
+    #把消息列表拼成提示词里的对话段；单条截断防止长会话撑爆上下文
     lines=[]
     for item in rows:
         content=(item.get("content") or "").strip().replace("\n"," ")
@@ -194,7 +237,9 @@ async def ask(req: AskRequest, user: str=Depends(verify_token)):
         raise HTTPException(status_code=400,detail=reason)
     thread_id=await asyncio.to_thread(_ensure_thread,req.thread_id,user)
     task=classify_task(req.question) if req.use_survey is None else ("survey" if req.use_survey else "simple")
+    history=await asyncio.to_thread(_recent_messages,thread_id,user)
     search_question=await asyncio.to_thread(_retrieval_question,req.question,thread_id,user)
+    search_question=_resolve_retrieval_question(search_question,history)
     await asyncio.to_thread(store.add_message,thread_id,user,"user","user_query",req.question,None,
                             search_question if search_question!=req.question else None)
     task_id=await asyncio.to_thread(store.create_task,thread_id,user,task)
@@ -311,9 +356,12 @@ async def ask_stream(question: str, thread_id: Optional[str]=None, user: str=Dep
     #同步路由跑在线程池里，这里直接落库不阻塞事件循环；会话不存在时能在响应开始前返回404
     thread= _ensure_thread(thread_id,user)
     task=classify_task(question)
-    search_question=_retrieval_question(question,thread,user)
-    #取最近几轮对话拼生成提示词：必须在本轮提问落库之前取，否则会把当前问题当成历史
-    dialog=await asyncio.to_thread(_recent_dialog,thread,user)
+    #取最近几轮对话：必须在本轮提问落库之前取，否则会把当前问题当成历史
+    history=await asyncio.to_thread(_recent_messages,thread,user)
+    search_question=await asyncio.to_thread(_retrieval_question,question,thread,user)
+    #追问没点名论文时，把上一轮的论文名补进检索查询，否则代词原样去搜会捞回无关论文
+    search_question=_resolve_retrieval_question(search_question,history)
+    dialog=_format_dialog(history) if _dialog_history_enabled() else ""
     #落库放到线程池，避免同步写库卡住事件循环
     await asyncio.to_thread(store.add_message,thread,user,"user","user_query",question,None,
                             search_question if search_question!=question else None)
