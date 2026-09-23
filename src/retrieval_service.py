@@ -39,6 +39,68 @@ PAPER_RERANK_PROMPT=(
 )
 
 
+class _SemanticRecallCache:
+    #语义召回缓存：同义问法复用上一次的召回结果（只缓存 chunk_id，不缓存答案）
+    #为什么只缓存检索不给答案：实测同义问法的 Top5 重合 4-5/5，而答案措辞每次生成都变；
+    #检索更稳定，缓存它风险低，还能省掉一次编码与一路召回
+    def __init__(self,threshold=0.85,max_size=200,ttl=1800):
+        self.threshold=threshold
+        self.max_size=max_size
+        self.ttl=ttl
+        self._lock=threading.Lock()
+        self._entries=OrderedDict()   #cache_key -> {"vec":np.ndarray,"snapshot":str,"chunk_ids":[...],"expires_at":float}
+        self.hit=0
+        self.miss=0
+
+    def _key(self,question,index_snapshot):
+        #问题文本做归一化后再哈希，避免空格/大小写差异造成未命中
+        norm=re.sub(r"\s+","",(question or "").strip().lower())
+        return f"{index_snapshot}|{hashlib.sha1(norm.encode('utf-8')).hexdigest()[:16]}"
+
+    def lookup(self,question,vec,index_snapshot):
+        #先用精确 key 试一次（零成本），再做语义比对
+        now=time.time()
+        key=self._key(question,index_snapshot)
+        with self._lock:
+            entry=self._entries.get(key)
+            if entry and entry["expires_at"]>now:
+                self.hit+=1
+                return entry["chunk_ids"],1.0
+            best=None
+            best_score=0.0
+            for item in self._entries.values():
+                if item["expires_at"]<=now or item["snapshot"]!=index_snapshot:
+                    continue
+                score=float(np.dot(vec,item["vec"]))
+                if score>best_score:
+                    best_score=score
+                    best=item
+            if best is not None and best_score>=self.threshold:
+                self.hit+=1
+                return best["chunk_ids"],best_score
+            self.miss+=1
+            return None,best_score
+
+    def store(self,question,vec,index_snapshot,chunk_ids):
+        if not chunk_ids:
+            return
+        key=self._key(question,index_snapshot)
+        with self._lock:
+            self._entries[key]={"vec":vec,"snapshot":index_snapshot,
+                                "chunk_ids":list(chunk_ids),
+                                "expires_at":time.time()+self.ttl}
+            self._entries.move_to_end(key)
+            while len(self._entries)>self.max_size:
+                self._entries.popitem(last=False)
+
+    def stats(self):
+        with self._lock:
+            total=self.hit+self.miss
+            return {"hit":self.hit,"miss":self.miss,
+                    "hit_rate":round(self.hit/total,4) if total else 0.0,
+                    "size":len(self._entries),"threshold":self.threshold}
+
+
 class _QueryCache:
     #查询缓存：正缓存长期，负缓存短TTL，完整key并发只生成一次
     def __init__(self,path="",negative_ttl=60):
@@ -157,6 +219,13 @@ class RetrievalService:
             path=os.getenv("QUERY_CACHE_FILE",""),
             negative_ttl=int(os.getenv("QUERY_NEGATIVE_TTL","60"))
         )
+        #语义召回缓存：阈值 0.85 来自实测（同义问法最低 0.88、同实体不同问题最高 0.78）
+        self.recall_cache=_SemanticRecallCache(
+            threshold=float(os.getenv("SEMANTIC_CACHE_THRESHOLD","0.85")),
+            max_size=int(os.getenv("SEMANTIC_CACHE_SIZE","200")),
+            ttl=int(os.getenv("SEMANTIC_CACHE_TTL","1800"))
+        )
+        self._snapshot=""
         self._paper_rerank_cache={}
 
     def _load_metadata(self):
@@ -483,8 +552,69 @@ class RetrievalService:
         return items
 
     def search(self,question,candidate_k=None,rerank_mode=None,top_k=5,search_query=None):
+        #语义召回缓存：同义问法直接复用上次的召回结果。可通过 SEMANTIC_CACHE=0 关掉做对照
+        if os.getenv("SEMANTIC_CACHE","1")=="1":
+            cached=self._semantic_lookup(question,top_k)
+            if cached is not None:
+                return cached
         retrieval_query,cache_hit,fallback_reason=self._build_retrieval_query(question,search_query)
-        return self._execute_search(question,retrieval_query,fallback_reason,candidate_k,rerank_mode,top_k)
+        items=self._execute_search(question,retrieval_query,fallback_reason,candidate_k,rerank_mode,top_k)
+        self._semantic_store(question,items)
+        return items
+
+    def _index_snapshot(self):
+        #索引快照标识：索引文件变了就整体失效，避免复用旧切片
+        if self._snapshot:
+            return self._snapshot
+        try:
+            st=os.stat(self.faiss_path+".faiss")
+            self._snapshot=f"{os.path.basename(self.faiss_path)}:{st.st_size}:{int(st.st_mtime)}"
+        except Exception:
+            self._snapshot="unknown"
+        return self._snapshot
+
+    def _semantic_lookup(self,question,top_k):
+        #命中则按缓存的 chunk_id 还原 items；还原不出来就当作未命中
+        try:
+            self._ensure_index()
+            vec=self.model.encode([question],normalize_embeddings=True)[0]
+            vec=np.asarray(vec,dtype="float32")
+            chunk_ids,score=self.recall_cache.lookup(question,vec,self._index_snapshot())
+            if not chunk_ids:
+                return None
+            items=self._items_from_chunk_ids(chunk_ids[:top_k])
+            if not items:
+                return None
+            logger.info(f"语义召回缓存命中（相似度 {score:.4f}）")
+            return items
+        except Exception as e:
+            #缓存只是加速手段，任何异常都要退回正常检索
+            logger.warning(f"语义召回缓存查询失败，回退正常检索：{e}")
+            return None
+
+    def _items_from_chunk_ids(self,chunk_ids):
+        #chunk_id 稳定，反查下标后按 _make_item 的字段结构还原，保证下游拿到一样的结构
+        id_to_index={cid:i for i,cid in enumerate(self.chunk_ids)}
+        items=[]
+        for rank,cid in enumerate(chunk_ids,1):
+            idx=id_to_index.get(cid)
+            if idx is None:
+                return []   #索引已变化，缓存不可用
+            item=self._make_item(idx,0.0,"semantic_cache")
+            item["final_rank"]=rank
+            items.append(item)
+        return items
+
+    def _semantic_store(self,question,items):
+        if not items:
+            return
+        try:
+            vec=self.model.encode([question],normalize_embeddings=True)[0]
+            self.recall_cache.store(question,np.asarray(vec,dtype="float32"),
+                                    self._index_snapshot(),
+                                    [it["chunk_id"] for it in items])
+        except Exception as e:
+            logger.warning(f"语义召回缓存写入失败：{e}")
 
     async def search_async(self,question,candidate_k=None,rerank_mode=None,top_k=5,search_query=None):
         return await asyncio.to_thread(

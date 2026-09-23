@@ -163,6 +163,58 @@ def _question_reject_reason(question):
     return ""
 
 
+#过载保护：按"预计等待时长"拒绝，而不是干等或无限排队
+class _AdmissionGate:
+    #为什么要按预计等待判断：一次问答十几秒，排队 3 个就超过任何合理等待阈值，
+    #若按"排队超过 N 秒就拒"会让所有并发请求一起失败，比不加队列还差
+    def __init__(self,max_inflight,wait_budget,avg_seconds):
+        self.max_inflight=max_inflight
+        self.wait_budget=wait_budget
+        self.avg_seconds=avg_seconds
+        self._lock=asyncio.Lock()
+        self._inflight=0
+        self.rejected_busy=0
+        self.rejected_wait=0
+        self.peak=0
+
+    def estimate_wait(self):
+        #已有一个请求在跑时，新请求至少要等它跑完
+        return max(0,self._inflight)*self.avg_seconds
+
+    async def acquire(self):
+        #不阻塞事件循环：拿不到锁就让出，再重新判断
+        while True:
+            async with self._lock:
+                if self._inflight>=self.max_inflight:
+                    self.rejected_busy+=1
+                    return False,"过载：并发已达上限"
+                #等待预算的含义是"用户能接受的最长排队时长"，不是"预计等待"。
+                #写成后者会让 inflight>=2 就拒，8 个名额只用上 2 个（实测踩过）
+                if self.estimate_wait()>self.wait_budget:
+                    self.rejected_wait+=1
+                    return False,f"过载：预计等待超过 {int(self.wait_budget)} 秒"
+                self._inflight+=1
+                self.peak=max(self.peak,self._inflight)
+                return True,""
+
+    async def release(self):
+        async with self._lock:
+            self._inflight=max(0,self._inflight-1)
+
+    def stats(self):
+        return {"inflight":self._inflight,"peak":self.peak,
+                "max_inflight":self.max_inflight,
+                "rejected_busy":self.rejected_busy,
+                "rejected_wait":self.rejected_wait}
+
+
+ADMISSION=_AdmissionGate(
+    max_inflight=int(os.getenv("MAX_INFLIGHT","8")),
+    wait_budget=float(os.getenv("ADMISSION_WAIT_BUDGET","60")),
+    avg_seconds=float(os.getenv("ADMISSION_AVG_SECONDS","17"))
+)
+
+
 def _recent_dialog(thread_id,user,turns=3,max_chars=600):
     #取最近若干轮问答拼进生成提示词。
     #必须在写入本轮提问之前调用，否则历史里会混进当前问题。
@@ -245,6 +297,18 @@ async def ask(req: AskRequest, user: str=Depends(verify_token)):
         raise HTTPException(status_code=400,detail=reason)
     thread_id=await asyncio.to_thread(_ensure_thread,req.thread_id,user)
     task=classify_task(req.question) if req.use_survey is None else ("survey" if req.use_survey else "simple")
+    #同步接口同样走准入：它的响应是一次性返回，用 try/finally 直接覆盖整个处理过程
+    admitted,why=await ADMISSION.acquire()
+    if not admitted:
+        logger.warning(f"准入拒绝（/ask）：{why}")
+        raise HTTPException(status_code=503,detail=f"{why}，请稍后重试")
+    try:
+        return await _ask_impl(req,user,thread_id,task)
+    finally:
+        await ADMISSION.release()
+
+
+async def _ask_impl(req: AskRequest,user: str,thread_id: str,task: str):
     history=await asyncio.to_thread(_recent_messages,thread_id,user)
     search_question=await asyncio.to_thread(_retrieval_question,req.question,thread_id,user)
     search_question=_resolve_retrieval_question(search_question,history)
@@ -347,6 +411,13 @@ def metrics(since_hours: int=24,user: str=Depends(verify_token)):
         "entity_boost":os.getenv("ENTITY_BOOST"),
         "multi_turn_rewrite":os.getenv("MULTI_TURN_QUERY_REWRITE"),
     }
+    #缓存与准入统计：过载或缓存行为要能被看到，否则出问题只能靠猜
+    data["admission"]=ADMISSION.stats()
+    try:
+        import retrieval_service
+        data["semantic_cache"]=retrieval_service.get_service().recall_cache.stats()
+    except Exception as e:
+        data["semantic_cache"]={"error":str(e)[:80]}
     return data
 
 def sse_event(obj):
@@ -361,6 +432,21 @@ async def ask_stream(question: str, thread_id: Optional[str]=None, user: str=Dep
     reason=_question_reject_reason(question)
     if reason:
         raise HTTPException(status_code=400,detail=reason)
+    #准入判断放在响应开始之前，这样过载时能正常返回 503 与提示，不必先建立 SSE
+    admitted,why=await ADMISSION.acquire()
+    if not admitted:
+        logger.warning(f"准入拒绝：{why}")
+        raise HTTPException(status_code=503,detail=f"{why}，请稍后重试")
+    try:
+        return await _ask_stream_impl(question,thread_id,user)
+    except Exception:
+        #建立响应之前就失败（例如会话不存在）：此处归还名额，
+        #流一旦开始则由生成器的 finally 负责归还
+        await ADMISSION.release()
+        raise
+
+
+async def _ask_stream_impl(question: str,thread_id: Optional[str],user: str):
     #同步路由跑在线程池里，这里直接落库不阻塞事件循环；会话不存在时能在响应开始前返回404
     thread= _ensure_thread(thread_id,user)
     task=classify_task(question)
@@ -460,5 +546,7 @@ async def ask_stream(question: str, thread_id: Optional[str]=None, user: str=Dep
             yield sse_event({"type":"error","message":str(e)})
         finally:
             run_context.reset_run_context(ctx_token)
+            #名额在流结束（或中途断开）时归还，不能提前到响应建立之前
+            await ADMISSION.release()
         yield sse_event({"type":"done"})
     return StreamingResponse(gen(),media_type="text/event-stream")
