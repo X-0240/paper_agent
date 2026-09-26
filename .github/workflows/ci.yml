@@ -17,4 +17,7 @@ jobs:
       - name: Install lightweight deps
         run: pip install requests python-dotenv tenacity pytest httpx fastapi pydantic PyJWT numpy
       - name: Run pure unit tests
-        run: python -m pytest tests/test_task_router.py tests/test_agent_react.py tests/test_llm_cost.py tests/test_web_search.py tests/test_evaluation_metrics.py tests/test_dialog_anchor.py tests/test_dialog_e2e.py tests/test_cache_admission.py -q
+        #test_cache_admission 曾是"纯逻辑测试"，但它 import api_server -> retrieval_service
+        #-> faiss / rank_bm25 / sentence_transformers(拖 torch)，与轻量 CI 的定位冲突，故移出；
+        #它仍在本地测试集里跑（本地有完整依赖）
+        run: python -m pytest tests/test_task_router.py tests/test_agent_react.py tests/test_llm_cost.py tests/test_web_search.py tests/test_evaluation_metrics.py tests/test_dialog_anchor.py tests/test_dialog_e2e.py -q
