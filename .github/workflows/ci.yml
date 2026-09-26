@@ -5,6 +5,10 @@ on: [push, pull_request]
 jobs:
   pure-tests:
     runs-on: ubuntu-latest
+    #代码在 src/ 下，测试命令要在 src 目录里跑（仓库根上移后加的）
+    defaults:
+      run:
+        working-directory: src
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
