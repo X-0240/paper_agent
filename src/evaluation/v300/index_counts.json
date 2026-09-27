@@ -1,0 +1,11 @@
+{
+  "description": "v300 索引规模记录：对外引用「300 篇论文 / 16121 个切片」时用本文件核对",
+  "measured_at": "2026-09-28",
+  "index_file": "<FAISS_PATH>.faiss",
+  "index_meta_file": "<FAISS_PATH>.json",
+  "papers": 300,
+  "chunks": 16121,
+  "how_measured": "FAISS 索引头 ntotal=16121（magic IxFI，d=768）；元数据的 chunk_ids / documents / sources / sections 四个平行数组长度均为 16121，paper_ids 长度 300",
+  "integrity": "两个文件的 SHA256 与 src/evaluation/v300/freeze.json 中的 index_sha256 / index_meta_sha256 一致，说明被测量的就是冻结的那一份索引",
+  "note": "freeze.json 是冻结时刻写下的产物，本文件只补充它没有记录的规模数字，不改动冻结文件本身"
+}
