@@ -19,7 +19,7 @@ logger=logging.getLogger(__name__)
 CHUNK_TOKENS=448
 CHUNK_OVERLAP=64
 _tokenizer=None
-SECTIONS_DIR=os.path.join(os.path.dirname(os.path.abspath(__file__)),"papers_sections")
+SECTIONS_DIR=os.path.join(os.path.dirname(os.path.abspath(__file__)),"datasets","v300","sections")
 TITLES_FILE=os.path.join(os.path.dirname(os.path.abspath(__file__)),"qasper_titles.json")
 _titles_cache=None
 

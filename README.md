@@ -30,14 +30,14 @@ Python / FastAPI / FAISS / BM25（rank_bm25）/ bge-m3 嵌入 / bge-reranker-v2-
 | Embedding 与 Cross-Encoder 权重 | 本地约 16GB | 自行下载 bge-m3 与 bge-reranker-v2-m3，路径写进 `.env` |
 | `.env` 密钥 | 敏感信息不入库 | 复制 `.env.example` 再填自己的 DeepSeek key |
 
-**克隆后能直接跑的**：CI 那批纯逻辑测试（7 个文件、34 条，不需要模型与索引）——
+**克隆后能直接跑的**：CI 那批纯逻辑测试（6 个文件、30 条，不需要模型与索引）——
 
 ```bash
 cd src && python -m pytest tests/test_task_router.py tests/test_agent_react.py tests/test_llm_cost.py \
-  tests/test_web_search.py tests/test_evaluation_metrics.py tests/test_dialog_anchor.py tests/test_dialog_e2e.py -q
+  tests/test_web_search.py tests/test_evaluation_metrics.py tests/test_dialog_anchor.py -q
 ```
 
-本地全量（需要模型与索引）是 **127 条**，见下面「测试」一节。
+本地全量收集为 **127 条**，其中 4 条端到端用例需要完整服务已启动，见下面「测试」一节。
 
 ## 快速启动
 
@@ -200,11 +200,11 @@ SSE 流式接口，`question` 作为查询参数，需要 `Authorization` 头。
 python -m pytest tests -q
 ```
 
-纯逻辑测试（不加载模型，CI 跑这些）：`test_task_router.py`、`test_agent_react.py`、`test_llm_cost.py`、`test_web_search.py`、`test_evaluation_metrics.py`、`test_dialog_anchor.py`、`test_dialog_e2e.py`。
+纯逻辑测试（不加载模型，CI 跑这些）：`test_task_router.py`、`test_agent_react.py`、`test_llm_cost.py`、`test_web_search.py`、`test_evaluation_metrics.py`、`test_dialog_anchor.py`。
 
-其中 `test_dialog_anchor.py` 覆盖多轮追问的锚点提取（只取用户提问、支持多篇、数量上限）；`test_dialog_e2e.py` 是端到端多轮回归，**检测不到本地服务时自动跳过**，所以 CI 里不会失败、本地起来服务后能真实跑一遍检索是否命中目标论文。
+其中 `test_dialog_anchor.py` 覆盖多轮追问的锚点逻辑（只取用户提问、支持多篇、数量上限）；`test_dialog_e2e.py` 是端到端多轮回归，需要本地完整服务已启动，未启动时自动跳过，因此不接入轻量 CI。
 
-其余测试（`test_api.py` 等）会加载模型，用于本地全量回归。**本地全量实测 127 条通过**（`python -m pytest tests -q --collect-only` = 127 collected，2026-09-28 复测），其中接入 CI 的是上面那 7 个文件 **34 条**。
+其余测试（`test_api.py` 等）会加载模型，用于本地全量回归。**本地全量收集为 127 条**（`python -m pytest tests -q --collect-only` = 127 collected，2026-09-28 复测）；本次在未启动完整服务时实测为 **123 passed、4 skipped**。接入 CI 的是上面 6 个文件 **30 条**。
 
 多轮改写的批量对照用 `scripts/dialog_rewrite_eval.py`（7 个代词型追问，跑一遍约 2 分钟）；锚点追踪用 `scripts/trace_anchor.py`。
 

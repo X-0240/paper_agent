@@ -8,6 +8,9 @@ models/
 # 技术文档要入库就先搬到单独目录，再在这里放行
 docs/
 
+# 本地大数据归档
+_archive/
+
 # 工具生成的缓存与临时产物
 .preview/
 __pycache__/
