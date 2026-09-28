@@ -1,13 +1,53 @@
 # 论文调研Agent系统
 
+[![CI](https://github.com/X-0240/paper_agent/actions/workflows/ci.yml/badge.svg)](https://github.com/X-0240/paper_agent/actions/workflows/ci.yml)
+
 论文知识库问答 + 手写 ReAct Agent 调研系统。用户输入问题，系统按关键词路由：普通问答走混合检索短路路径；对比/综述类问题由单个 ReAct Agent 通过工具集完成检索、读章节、建卡、关系分析、冲突验证与综述生成。
+
+一句话：**把单 Agent 架在 300 篇论文的知识库上，做「可溯源的单篇问答 + 文献综述」，主指标是证据级检索命中率（生产口径 202 题 85.1%，172/202）。**
+
+## 技术栈
+
+Python / FastAPI / FAISS / BM25（rank_bm25）/ bge-m3 嵌入 / bge-reranker-v2-m3 交叉编码器 / DeepSeek API / SSE 流式 / JWT / SQLite 持久化 / GitHub Actions
+
+## 核心能力
+
+- **混合检索 + 条件重排**：BM25 + 向量粗召回 Top-50 → 按 Top-1 与 Top-K 分差条件触发 Cross-Encoder 精排 → Top-5
+- **跨语言检索**：中文问题运行时生成英文检索 query（生产默认开），证据级命中率 72.3%→85.1%（同批 202 题配对，McNemar p<0.0001）
+- **单 ReAct Agent + 6 工具**：检索、读章节、建卡、关系分析、冲突验证、综述生成；引用由事实记录确定性生成，不由模型编造
+- **多轮追问**：生成侧拼最近 3 轮历史；追问缺实体名时从上一轮提问提取论文名注入检索，代词型追问命中 2/7→7/7
+- **可复现评测**：语料与题库按 SHA256 冻结，202 题逐题复现一致（202/202）；单变量消融给出每个开关的独立贡献
+- **工程外壳**：JWT 多用户隔离、SSE 真流式、令牌桶限流、过载快速拒绝、语义召回缓存（阈值 0.85）、按任务成本归因
+
+## 这个仓库能跑什么（克隆前必读）
+
+**本仓库只含代码与配置模板。以下内容不在仓库里，所以克隆后无法直接跑通完整服务：**
+
+| 不在仓库里 | 原因 | 怎么补 |
+|---|---|---|
+| 300 篇论文 PDF 与切片 | 论文正文有版权，且体积大 | 按 `evaluation/v300/manifest.json` 的 arXiv id 重新下载 |
+| FAISS 索引 + BM25 语料 | 体积大（`*.faiss` 被忽略） | `build_merged_faiss.py` 重建；规模记录见 `evaluation/v300/index_counts.json`（300 篇 / 16121 切片） |
+| Embedding 与 Cross-Encoder 权重 | 本地约 16GB | 自行下载 bge-m3 与 bge-reranker-v2-m3，路径写进 `.env` |
+| `.env` 密钥 | 敏感信息不入库 | 复制 `.env.example` 再填自己的 DeepSeek key |
+
+**克隆后能直接跑的**：CI 那批纯逻辑测试（7 个文件、34 条，不需要模型与索引）——
+
+```bash
+cd src && python -m pytest tests/test_task_router.py tests/test_agent_react.py tests/test_llm_cost.py \
+  tests/test_web_search.py tests/test_evaluation_metrics.py tests/test_dialog_anchor.py tests/test_dialog_e2e.py -q
+```
+
+本地全量（需要模型与索引）是 **127 条**，见下面「测试」一节。
 
 ## 快速启动
 
 ```bash
-conda activate GPU
+cd src                      # 代码都在 src/ 下
+conda activate GPU          # 换成你自己的环境名
 uvicorn api_server:app --host 127.0.0.1 --port 8000
 ```
+
+前提是本机已经有索引、语料与两个模型权重（见上一节）。
 
 ## 启动预热
 
@@ -97,7 +137,9 @@ uvicorn api_server:app --host 127.0.0.1 --port 8000
 - 配置：`USE_RERANK` / `RERANK_MODEL_NAME` / `RERANK_MAX_CHARS` / `RERANK_TRIGGER_MARGIN` / `RERANK_CACHE_SIZE`
 - 实测：88 题 64.8%→72.7%（+8.0pp），正向 42 题 64.3%→83.3%（+19.0pp）；候选 25 约 1.0s/题，候选 10 约 0.44s/题
 
-当前统一 `RetrievalService` 已接入，但 Top-50 和检索专用英文 query 尚未达到可部署门槛，默认关闭；生产参数仍为候选 25、条件重排、原问题查询。
+**生产配置（以本机 `.env` 为准）**：`RETRIEVAL_CANDIDATES=50`、`RERANK_MODE=conditional`、`USE_RERANK=1`、`QUERY_GENERATION_ENABLED=1`、`ENTITY_BOOST=1`、`MULTI_TURN_QUERY_REWRITE=0`。
+
+代码里的兜底默认更保守（候选 25、英文 query 关闭），`.env.example` 模板给的是最小可跑值（候选 25、关闭）——**模板值≠生产口径**，看单变量消融数字时按生产配置读（候选 50 + 条件重排 + 运行时英文 query 生成）。
 
 ## 接口
 
@@ -162,7 +204,7 @@ python -m pytest tests -q
 
 其中 `test_dialog_anchor.py` 覆盖多轮追问的锚点提取（只取用户提问、支持多篇、数量上限）；`test_dialog_e2e.py` 是端到端多轮回归，**检测不到本地服务时自动跳过**，所以 CI 里不会失败、本地起来服务后能真实跑一遍检索是否命中目标论文。
 
-其余测试（`test_api.py` 等）会加载模型，用于本地全量回归；2026-09-23 实测全量 115 项通过。
+其余测试（`test_api.py` 等）会加载模型，用于本地全量回归。**本地全量实测 127 条通过**（`python -m pytest tests -q --collect-only` = 127 collected，2026-09-28 复测），其中接入 CI 的是上面那 7 个文件 **34 条**。
 
 多轮改写的批量对照用 `scripts/dialog_rewrite_eval.py`（7 个代词型追问，跑一遍约 2 分钟）；锚点追踪用 `scripts/trace_anchor.py`。
 
@@ -187,6 +229,7 @@ python -m pytest tests -q
 | 维度 | 指标 | 当前结果 |
 |---|---|---|
 | v300 检索 | 证据级 HitRate@5 / @10 | 候选 81.7% / 88.6%（202/202 test，模型复核），基线 72.8% / 82.2% |
+| v300 检索（生产口径：候选 50 + 条件重排 + 运行时英文 query 生成） | 证据级 HitRate@5 | **85.1%（172/202）**；关重排 81.2%、关英文 query 生成 72.3%（146/202）。单变量消融：英文 query +12.9pp（p<0.0001）、条件重排 +4.0pp（p=0.0215）、候选 25→50 无收益 |
 | v300 语料 | 论文/切片/split | 300 篇 / 16121 切片 / 100 dev + 200 test |
 | 检索 | QASPER 证据级 HitRate@5 | 33.1% 基线 / 39.2%（Rerank+邻接），2026-08-23 重测 |
 | 检索 | QASPER 章节级 / 论文级 HitRate@5 | 39.9% / 56.3%（2026-08-23） |
@@ -200,12 +243,15 @@ python -m pytest tests -q
 ## Docker
 
 ```bash
-docker build -t paper-agent .
+# Dockerfile 在 src/ 下，构建上下文是 src/
+docker build -t paper-agent src
 ```
 
 运行容器时需要挂载 FAISS 索引和 Embedding 模型目录，并通过环境变量覆盖 `FAISS_PATH`、`MODEL_PATH`、`DEEPSEEK_API_KEY` 等配置，见 `.env.example` 模板（本地敏感配置在 `.env`，已被 git 忽略）。
 
 ## 目录职责
+
+> 以下路径都相对 `src/`（本 README 在仓库根，代码在 `src/`）。
 
 - `task_router.py`：纯规则路由 + 进程内令牌桶限流，无外部依赖
 - `CONTRACT.md`：模块2/3 接口契约（State 结构、工具接口、旧代码映射）
