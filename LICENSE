@@ -19,12 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----
-补充说明（不属于许可条款本身）
-
-本许可证只覆盖本仓库内的源代码与文档。以下内容不包含在仓库内，因此也不在本许可证的授权范围内：
-
-- 第三方论文原文与 PDF：版权归原作者与出版方所有，仓库只保存 arXiv id 与哈希记录（见 src/evaluation/v300/）。
-- 依赖的模型权重（bge-m3、bge-reranker-v2-m3 等）：各自遵循其原仓库的许可，需自行下载。
-- 本地评测试题与人工复核表：属于个人评测材料，未随仓库分发。
