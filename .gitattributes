@@ -1,0 +1,2 @@
+# Python 源码统一 LF：避免 Black 写 LF、检出转 CRLF，造成整文件级的假差异
+*.py text eol=lf
