@@ -1,21 +1,22 @@
 import os
+
 from dotenv import load_dotenv
 
 load_dotenv()
 
-#包目录与代码根目录（src/）：数据、迁移、前端资源都在代码根下，不在包内
-PKG_DIR=os.path.dirname(os.path.abspath(__file__))
-SRC_ROOT=os.path.dirname(PKG_DIR)
+# 包目录与代码根目录（src/）：数据、迁移、前端资源都在代码根下，不在包内
+PKG_DIR = os.path.dirname(os.path.abspath(__file__))
+SRC_ROOT = os.path.dirname(PKG_DIR)
 
-#统一配置常量，环境变量可覆盖
-MAX_PAPER_PER_QUERY=int(os.getenv("MAX_PAPER_PER_QUERY","10"))
-MAX_CHUNKS_PER_PAPER=int(os.getenv("MAX_CHUNKS_PER_PAPER","20"))
-MAX_AGENT_STEP=int(os.getenv("MAX_AGENT_STEP","15"))
-MAX_FACTS_PER_SESSION=int(os.getenv("MAX_FACTS_PER_SESSION","20"))
-MAX_CONFLICT_PER_SESSION=int(os.getenv("MAX_CONFLICT_PER_SESSION","5"))
-MAX_EXTERNAL_SEARCH_NUM=int(os.getenv("MAX_EXTERNAL_SEARCH_NUM","3"))
-MAX_SEARCH_PER_SESSION=int(os.getenv("MAX_SEARCH_PER_SESSION","3"))
-MAX_PENDING_IN_REVIEW=int(os.getenv("MAX_PENDING_IN_REVIEW","3"))
-MAX_CARDS_TEXT_CHARS=int(os.getenv("MAX_CARDS_TEXT_CHARS","12000"))
-DAILY_COST_BUDGET=float(os.getenv("DAILY_COST_BUDGET","5"))
-SESSION_COST_BUDGET=float(os.getenv("SESSION_COST_BUDGET","1"))
+# 统一配置常量，环境变量可覆盖
+MAX_PAPER_PER_QUERY = int(os.getenv("MAX_PAPER_PER_QUERY", "10"))
+MAX_CHUNKS_PER_PAPER = int(os.getenv("MAX_CHUNKS_PER_PAPER", "20"))
+MAX_AGENT_STEP = int(os.getenv("MAX_AGENT_STEP", "15"))
+MAX_FACTS_PER_SESSION = int(os.getenv("MAX_FACTS_PER_SESSION", "20"))
+MAX_CONFLICT_PER_SESSION = int(os.getenv("MAX_CONFLICT_PER_SESSION", "5"))
+MAX_EXTERNAL_SEARCH_NUM = int(os.getenv("MAX_EXTERNAL_SEARCH_NUM", "3"))
+MAX_SEARCH_PER_SESSION = int(os.getenv("MAX_SEARCH_PER_SESSION", "3"))
+MAX_PENDING_IN_REVIEW = int(os.getenv("MAX_PENDING_IN_REVIEW", "3"))
+MAX_CARDS_TEXT_CHARS = int(os.getenv("MAX_CARDS_TEXT_CHARS", "12000"))
+DAILY_COST_BUDGET = float(os.getenv("DAILY_COST_BUDGET", "5"))
+SESSION_COST_BUDGET = float(os.getenv("SESSION_COST_BUDGET", "1"))
