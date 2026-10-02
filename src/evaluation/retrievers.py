@@ -1,6 +1,12 @@
+import os
+import sys
+
+#让脚本能被独立执行：把代码根（src/）加入模块搜索路径
+sys.path.insert(0,os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 import re
 
-from retrieval_service import RetrievalService
+from paper_agent.retrieval.retrieval_service import RetrievalService
 
 
 def tokenize(text):

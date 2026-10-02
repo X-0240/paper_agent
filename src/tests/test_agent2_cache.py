@@ -1,4 +1,4 @@
-import agent2_parse
+from paper_agent.agent import agent2_parse
 
 def test_card_cache_invalidates_on_prompt_version(tmp_path,monkeypatch):
     #提示词版本变化后旧卡片缓存自动失效，重新生成

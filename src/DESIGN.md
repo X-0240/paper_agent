@@ -11,7 +11,7 @@
 - 阈值依据：实测同义问法最低 0.88（去掉一个术语缩写反例后）、同实体不同问题最高 0.78
 - 索引快照变化时整体失效，避免复用旧切片
 - `SEMANTIC_CACHE=0` 关闭做对照；缓存统计在 `GET /metrics` 的 `semantic_cache` 字段
-- 已知局限：「RAG 是什么？」与「什么是检索增强生成」相似度只有 0.3962，**纯向量抓不住术语缩写与全称的同义**，需要别名映射补（`paper_entities.py` 里已有别名字典可复用）
+- 已知局限：「RAG 是什么？」与「什么是检索增强生成」相似度只有 0.3962，**纯向量抓不住术语缩写与全称的同义**，需要别名映射补（`paper_agent/retrieval/paper_entities.py` 里已有别名字典可复用）
 
 ### 阈值为什么定 0.85 而不是更保守的 0.92
 
@@ -160,7 +160,7 @@ SSE 流式接口，`question` 作为查询参数，需要 `Authorization` 头。
 - 每次 LLM 调用会把 token 用量和估算成本写入 `llm_usage.jsonl`（已被 git 忽略）
 - 估算价按 DeepSeek V4-Flash 峰谷价计算：高峰 9-12 点、14-18 点输出 9 元/百万，闲时 4.5 元/百万
 - `.env` 里 `DAILY_COST_BUDGET` 是每日预算硬闸，超了会返回 `[预算保护]` 提示，不再调用 API
-- 查看每日成本：`python cost_report.py`
+- 查看每日成本：`python -m paper_agent.infra.cost_report`
 - 省钱建议：重活（综述全链路、批量评测）放到闲时跑；Agent 循环已加输出上限和历史裁剪，防止多轮调用上下文无限膨胀
 
 ## 上下文管理

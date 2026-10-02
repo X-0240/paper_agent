@@ -1,10 +1,16 @@
+import os
+import sys
+
+#让脚本能被独立执行：把代码根（src/）加入模块搜索路径
+sys.path.insert(0,os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 import json
 import re
 from dataclasses import asdict
 
-from llm_api import safe_call_deepseek
-from state import FactItem
-from tools import write_review
+from paper_agent.infra.llm_api import safe_call_deepseek
+from paper_agent.state import FactItem
+from paper_agent.agent.tools import write_review
 
 REVIEW_JUDGE_PROMPT="""你是综述质量评测员。按三个维度打分（0-10）：完整性、准确性、清晰度。只输出JSON对象：
 {"completeness":8,"accuracy":9,"clarity":7,"avg":8.0,"comment":"一句话评价"}"""

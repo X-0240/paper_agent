@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from doc_ingest import DocumentRecord, parse_document, chunk_splitter, chunk_text, token_len, CHUNK_TOKENS, CHUNK_OVERLAP
+from paper_agent.ingest.doc_ingest import DocumentRecord, parse_document, chunk_splitter, chunk_text, token_len, CHUNK_TOKENS, CHUNK_OVERLAP
 
 SAMPLE_DIR=Path(__file__).resolve().parents[1]/"multi_format_samples"
 

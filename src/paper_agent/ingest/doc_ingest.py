@@ -11,7 +11,8 @@ from docx import Document as DocxDocument
 from dotenv import load_dotenv
 from openpyxl import load_workbook
 
-from pdf_preprocess import preprocess_pdf
+from paper_agent.retrieval.pdf_preprocess import preprocess_pdf
+from paper_agent.config import SRC_ROOT
 
 load_dotenv()
 logger=logging.getLogger(__name__)
@@ -19,8 +20,8 @@ logger=logging.getLogger(__name__)
 CHUNK_TOKENS=448
 CHUNK_OVERLAP=64
 _tokenizer=None
-SECTIONS_DIR=os.path.join(os.path.dirname(os.path.abspath(__file__)),"datasets","v300","sections")
-TITLES_FILE=os.path.join(os.path.dirname(os.path.abspath(__file__)),"qasper_titles.json")
+SECTIONS_DIR=os.path.join(SRC_ROOT,"datasets","v300","sections")
+TITLES_FILE=os.path.join(SRC_ROOT,"qasper_titles.json")
 _titles_cache=None
 
 def paper_title(paper_id):

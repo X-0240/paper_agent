@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 import faiss
 from rank_bm25 import BM25Okapi
 from sentence_transformers import SentenceTransformer
-from rerank import rerank
+from paper_agent.retrieval.rerank import rerank
 
 if sys.stdout and hasattr(sys.stdout,"reconfigure"):
     sys.stdout.reconfigure(errors="replace")

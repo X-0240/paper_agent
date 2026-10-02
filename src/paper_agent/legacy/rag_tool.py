@@ -1,4 +1,4 @@
-from retrieval_service import get_service
+from paper_agent.retrieval.retrieval_service import get_service
 
 SERVICE=get_service()
 
@@ -30,7 +30,7 @@ def __getattr__(name):
 
 def read_section(source,section,max_chars=4000):
     #旧接口适配：全文展开统一收敛到tools.read_section
-    from tools import read_section as _read
+    from paper_agent.agent.tools import read_section as _read
     result=_read(source,section,max_chars=max_chars)
     return result if result is not None else f"未找到章节：{section}"
 

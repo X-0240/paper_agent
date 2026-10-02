@@ -4,11 +4,11 @@ import os
 import re
 from concurrent.futures import ThreadPoolExecutor,as_completed
 from dataclasses import asdict
-from agent2_parse import build_paper_card as old_build_card, compare_papers
-from config import MAX_CHUNKS_PER_PAPER, MAX_CONFLICT_PER_SESSION, MAX_FACTS_PER_SESSION, MAX_PAPER_PER_QUERY, MAX_PENDING_IN_REVIEW
-from doc_ingest import Chunk, DocumentRecord, chunk_splitter, load_sections, paper_title, token_len
-from llm_api import safe_call_deepseek
-from state import Conflict, FactItem, PaperCard, PaperMeta, ReviewReport, SectionRef
+from paper_agent.agent.agent2_parse import build_paper_card as old_build_card, compare_papers
+from paper_agent.config import MAX_CHUNKS_PER_PAPER, MAX_CONFLICT_PER_SESSION, MAX_FACTS_PER_SESSION, MAX_PAPER_PER_QUERY, MAX_PENDING_IN_REVIEW
+from paper_agent.ingest.doc_ingest import Chunk, DocumentRecord, chunk_splitter, load_sections, paper_title, token_len
+from paper_agent.infra.llm_api import safe_call_deepseek
+from paper_agent.state import Conflict, FactItem, PaperCard, PaperMeta, ReviewReport, SectionRef
 
 logger=logging.getLogger(__name__)
 
@@ -71,7 +71,7 @@ def build_search_result(results):
 
 def search_papers(query,limit=MAX_PAPER_PER_QUERY):
     #本地检索入口：复用rag_tool混合检索，输出契约化的papers+chunks
-    from retrieval_service import get_service
+    from paper_agent.retrieval.retrieval_service import get_service
     service=get_service()
     mode="always" if os.getenv("USE_RERANK")=="1" else "none"
     results=service.search(query,candidate_k=service.candidate_k,rerank_mode=mode,top_k=limit)
@@ -116,7 +116,7 @@ def build_paper_card(paper_id,cache=None):
     #旧建卡逻辑待移植到新链前暂时保留依赖
     card=old_build_card(paper_id)
     sections_ref=[]
-    from retrieval_service import get_service
+    from paper_agent.retrieval.retrieval_service import get_service
     service=get_service()
     for sec in load_sections(paper_id):
         title=sec.get("title","")
@@ -246,7 +246,7 @@ def _empty_json_array(text):
 
 def _resolve_chunk_id(paper_id,section_name):
     #章节名映射到真实chunk_id：精确→模糊→None，来源不可追溯的事实直接丢弃
-    from retrieval_service import get_service
+    from paper_agent.retrieval.retrieval_service import get_service
     service=get_service()
     direct=service.get_section_chunk_ids(paper_id,section_name)
     if direct:

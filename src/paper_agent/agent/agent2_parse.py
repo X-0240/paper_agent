@@ -2,13 +2,14 @@ import json
 import hashlib
 import logging
 import os
-from doc_ingest import load_sections, paper_title
-from llm_api import safe_call_deepseek
+from paper_agent.ingest.doc_ingest import load_sections, paper_title
+from paper_agent.infra.llm_api import safe_call_deepseek
+from paper_agent.config import SRC_ROOT
 
 logging.basicConfig(level=logging.INFO)
 logger=logging.getLogger(__name__)
 
-CARD_DIR=os.path.join(os.path.dirname(os.path.abspath(__file__)),"cards")
+CARD_DIR=os.path.join(SRC_ROOT,"cards")
 os.makedirs(CARD_DIR,exist_ok=True)
 
 #以下两函数复用paper_rag的章节提取逻辑（PyMuPDF blocks按标题切分）

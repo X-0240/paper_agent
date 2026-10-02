@@ -4,14 +4,17 @@ os.environ.setdefault("HF_ENDPOINT","https://hf-mirror.com")
 import json
 import logging
 import re
-import sys
+import sys
+
+#让脚本能被独立执行：把代码根（src/）加入模块搜索路径
+sys.path.insert(0,os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import time
 import numpy as np
 from dotenv import load_dotenv
 import faiss
 from rank_bm25 import BM25Okapi
 from sentence_transformers import SentenceTransformer
-from rerank import get_reranker
+from paper_agent.retrieval.rerank import get_reranker
 
 if sys.stdout and hasattr(sys.stdout,"reconfigure"):
     sys.stdout.reconfigure(errors="replace")

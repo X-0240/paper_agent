@@ -1,11 +1,14 @@
 import logging
 import os
 import re
-import sys
+import sys
+
+#让脚本能被独立执行：把代码根（src/）加入模块搜索路径
+sys.path.insert(0,os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import numpy as np
 from dotenv import load_dotenv
 import jieba
-from rag_tool import index, model, sources, bm25
+from paper_agent.legacy.rag_tool import index, model, sources, bm25
 
 #Windows控制台可能遇到特殊字符，统一兜底防崩溃
 if sys.stdout and hasattr(sys.stdout,"reconfigure"):

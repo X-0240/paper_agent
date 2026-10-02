@@ -4,8 +4,8 @@ import asyncio
 import numpy as np
 import pytest
 
-import api_server
-import retrieval_service
+from paper_agent import api_server
+from paper_agent.retrieval import retrieval_service
 
 
 def _vec(*values):

@@ -1,5 +1,11 @@
-from state import FactItem
-from tools import build_pending_conflicts
+import os
+import sys
+
+#让脚本能被独立执行：把代码根（src/）加入模块搜索路径
+sys.path.insert(0,os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from paper_agent.state import FactItem
+from paper_agent.agent.tools import build_pending_conflicts
 
 #合成小标注集：4个正例（同实体同属性不同值）+3个负例（同值/无关属性）
 FACTS=[

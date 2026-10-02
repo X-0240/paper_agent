@@ -1,10 +1,13 @@
 import logging
 import os
 import re
-import sys
+import sys
+
+#让脚本能被独立执行：把代码根（src/）加入模块搜索路径
+sys.path.insert(0,os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import time
 from dotenv import load_dotenv
-from rag_tool import search_papers_structured, search_papers_rerank
+from paper_agent.legacy.rag_tool import search_papers_structured, search_papers_rerank
 
 #Windows控制台可能遇到特殊字符，统一兜底防崩溃
 if sys.stdout and hasattr(sys.stdout,"reconfigure"):

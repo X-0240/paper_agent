@@ -12,7 +12,7 @@
 ## 这个项目解决什么问题
 
 - **回答要能溯源到章节，而不是"看起来像"**。综述里的引用不是模型写的，是代码从事实记录（facts）里
-  确定性生成的；章节名映射不到真实 `chunk_id` 的事实会被直接丢弃（`src/tools.py` 的 `_resolve_chunk_id`）。
+  确定性生成的；章节名映射不到真实 `chunk_id` 的事实会被直接丢弃（`src/paper_agent/agent/tools.py` 的 `_resolve_chunk_id`）。
 - **综述要把分歧摆出来，不是把摘要拼起来**。输出结构固定为共识 / 分歧 / 被推翻结论 / 开放问题，
   有争议的结论必须回原文取证裁决（`verify_claim`），而不是由模型投票决定。
 - **中文问英文知识库要能命中**。检索前运行时生成英文 query，同批 202 题配对实测命中率
@@ -28,7 +28,7 @@
 | 不在仓库里 | 原因 | 怎么补 |
 |---|---|---|
 | 300 篇论文 PDF 与切片 | 论文正文有版权，且体积大 | 按 `evaluation/v300/manifest.json` 的 arXiv id 重新下载 |
-| FAISS 索引 + BM25 语料 | 体积大（`*.faiss` 被忽略） | `build_merged_faiss.py` 重建；规模记录见 `evaluation/v300/index_counts.json`（300 篇 / 16121 切片） |
+| FAISS 索引 + BM25 语料 | 体积大（`*.faiss` 被忽略） | `python -m paper_agent.retrieval.build_merged_faiss` 重建；规模记录见 `evaluation/v300/index_counts.json`（300 篇 / 16121 切片） |
 | Embedding 与 Cross-Encoder 权重 | 本地约 16GB | 自行下载 bge-m3 与 bge-reranker-v2-m3，路径写进 `.env` |
 | `.env` 密钥 | 敏感信息不入库 | 复制 `.env.example` 再填自己的 DeepSeek key |
 
@@ -44,13 +44,13 @@ cd src && python -m pytest tests/test_task_router.py tests/test_agent_react.py t
 ## 快速开始
 
 ```bash
-cd src                      # 代码都在 src/ 下
+cd src                      # 代码在 src/paper_agent/ 包里，命令都在 src/ 下执行
 conda activate GPU          # 换成你自己的环境名
 pip install -r requirements.txt
 cp .env.example .env        # 填 DEEPSEEK_API_KEY，以及索引/模型/语料的本地路径
 
 python -m pytest tests -q                                   # 全量回归（需要模型与索引）
-uvicorn api_server:app --host 127.0.0.1 --port 8000          # 启动服务，浏览器打开 http://127.0.0.1:8000
+uvicorn paper_agent.api_server:app --host 127.0.0.1 --port 8000   # 启动服务，浏览器打开 http://127.0.0.1:8000
 python scripts/run_acceptance.py                            # 6 条固定 query 的验收脚本
 ```
 
@@ -65,19 +65,21 @@ python scripts/run_acceptance.py                            # 6 条固定 query 
 HTTP / WebUI
   │  ① JWT 鉴权 → 进程内令牌桶限流（默认 10 次/分/账号）→ 过载准入（超过 MAX_INFLIGHT 直接 503）
   ▼
-task_router.classify_task(question)          # 纯规则路由，不调模型
-  ├─ simple  ─ pipeline.simple_answer_with_sources_async
-  │             混合检索（本地 retrieval_service 与外网 web_search 并行）
+orchestration.task_router.classify_task(question)      # 纯规则路由，不调模型
+  ├─ simple  ─ orchestration.pipeline.simple_answer_with_sources_async
+  │             混合检索（本地 retrieval.retrieval_service 与外网 retrieval.web_search 并行）
   │             → 拼上下文 → 流式回答（回答带来源，来源在检索完成时就先推送）
-  └─ survey  ─ pipeline.survey_pipeline
-                survey_agent.run_survey → agent_react.react（手写 ReAct 循环）
+  └─ survey  ─ orchestration.pipeline.survey_pipeline
+                agent.survey_agent.run_survey → agent.agent_react.react（手写 ReAct 循环）
                   search_papers → read_section → build_paper_card
                     → analyze_paper_relations（抽事实 + 生成待核实冲突）
                     → verify_claim（回原文裁决冲突）→ write_review（引用由 facts 生成）
                 → review_to_markdown(state.review)
 
-落库（两条路径共用）：store → SQLite 六张表：threads / messages / tasks / costs / tool_calls / schema_version
+落库（两条路径共用）：infra.store → SQLite 六张表：threads / messages / tasks / costs / tool_calls / schema_version
 ```
+
+> 上图中的模块名前缀相对 `src/paper_agent/`；接口层与配置是包根下的 `api_server.py`、`config.py`、`state.py`。
 
 - 路由是关键词规则（`对比/比较/区别/综述/演进/…` 走 survey），不是模型分类，所以路由本身零成本、可单元测试。
 - survey 路径即使模型提前收尾，编排层也会兜底补抽事实并生成综述，避免返回空结果；
@@ -95,7 +97,7 @@ task_router.classify_task(question)          # 纯规则路由，不调模型
 - 语义召回缓存：同义问法直接复用上次的 `chunk_id` 列表（**只缓存召回，不缓存答案**），阈值 0.85；
   索引快照变化即整体失效。缓存命中与近似未命中的追溯在 `GET /metrics/semantic_hits`。
 - 重排缓存按 `query + 索引快照` 做进程内 LRU，索引更新后自动失效。
-- 检索只有一个入口：所有调用方都走 `retrieval_service.get_service()`，不允许各自拼召回逻辑。
+- 检索只有一个入口：所有调用方都走 `retrieval.retrieval_service.get_service()`，不允许各自拼召回逻辑。
 
 ### 3）综述链路（单 ReAct Agent + 6 工具）
 
@@ -108,45 +110,45 @@ task_router.classify_task(question)          # 纯规则路由，不调模型
 | `verify_claim` | 拿两条事实回原文裁决是否真冲突 | 只能裁决已存在的事实，`fact_id` 不存在直接拒 |
 | `write_review` | 生成综述正文 | 没有事实时拒绝执行并指明下一步该调什么 |
 
-ReAct 循环每一步的工具名与参数都要过 schema 校验（`agent_react._validate_args`），非法动作直接拒绝，不丢给模型自己纠。
+ReAct 循环每一步的工具名与参数都要过 schema 校验（`agent.agent_react._validate_args`），非法动作直接拒绝，不丢给模型自己纠。
 
 ### 4）模块职责
 
-> 路径都相对 `src/`（本 README 在仓库根，代码在 `src/`）。
+> 代码模块的路径都相对 `src/paper_agent/`，非代码目录（`evaluation/` 等）相对 `src/`。
 
 | 分组 | 模块 | 职责 / 关键约束 |
 |---|---|---|
 | 入口与编排 | `api_server.py` | FastAPI 接口层：JWT、SSE 流式、限流、过载准入、WebUI 静态挂载 |
-| | `pipeline.py` | simple 短路与 survey 全链路的编排入口 |
-| | `task_router.py` | 关键词路由 + 进程内令牌桶限流，无外部依赖 |
-| | `run_context.py` | 单次调用的上下文（请求 / 任务 / 工具调用追溯） |
-| 检索 | `retrieval_service.py` | **唯一检索入口**：查询计划、召回、重排、去重、`chunk_id`、缓存、预算边界 |
-| | `rerank.py` / `rerank_policy.py` | Cross-Encoder 重排，以及"是否需要重排"的判定与进程内 LRU |
-| | `web_search.py` | 外网检索（Wikipedia / arXiv）并发、超时与降级；simple 路径的混合检索入口 |
-| | `paper_entities.py` | 论文别名与标题识别（多轮追问补实体用） |
-| | `build_merged_faiss.py` / `pdf_preprocess.py` | 离线构建索引；PDF 预处理 |
-| Agent | `agent_react.py` | 手写 ReAct 循环（Supervisor + Worker）、参数 schema 校验、重复动作上限 |
-| | `survey_agent.py` | 单 ReAct Agent 综述编排：工具前置/后置校验、`pending_conflicts` 聚合、预算降级、进度文案 |
-| | `tools.py` | 6 个工具的落地实现，引用在这里确定性生成 |
-| | `agent2_parse.py` | **在用**：建卡与论文对比，`tools.py` 从这里导入 |
-| | `state.py` | `AgentState` 与实体数据类（PaperMeta / PaperCard / FactItem / Conflict / ReviewReport） |
-| | `llm_api.py` | DeepSeek 调用封装：重试、每日预算硬闸、成本与 token 记账 |
-| | `config.py` | 统一配置常量（检索 / Agent / 成本上限） |
-| | `doc_ingest.py` | 统一文档解析入口（PDF / Word / Excel / CSV / 图片），章节加载与标题映射的唯一实现 |
-| 持久化 | `store.py` | SQLite 持久化：会话、消息、任务、成本、工具调用；导入即迁移 |
-| | `migrations/` | SQLite schema 迁移（3 个） |
+| | `config.py` / `state.py` | 配置常量；`AgentState` 与实体数据类（PaperMeta / PaperCard / FactItem / Conflict / ReviewReport） |
+| | `orchestration/pipeline.py` | simple 短路与 survey 全链路的编排入口 |
+| | `orchestration/task_router.py` | 关键词路由 + 进程内令牌桶限流，无外部依赖 |
+| | `orchestration/run_context.py` | 单次调用的上下文（请求 / 任务 / 工具调用追溯） |
+| 检索 | `retrieval/retrieval_service.py` | **唯一检索入口**：查询计划、召回、重排、去重、`chunk_id`、缓存、预算边界 |
+| | `retrieval/rerank.py` / `retrieval/rerank_policy.py` | Cross-Encoder 重排，以及"是否需要重排"的判定与进程内 LRU |
+| | `retrieval/web_search.py` | 外网检索（Wikipedia / arXiv）并发、超时与降级；simple 路径的混合检索入口 |
+| | `retrieval/paper_entities.py` | 论文别名与标题识别（多轮追问补实体用） |
+| | `retrieval/build_merged_faiss.py` / `retrieval/pdf_preprocess.py` | 离线构建索引；PDF 预处理 |
+| Agent | `agent/agent_react.py` | 手写 ReAct 循环（Supervisor + Worker）、参数 schema 校验、重复动作上限 |
+| | `agent/survey_agent.py` | 单 ReAct Agent 综述编排：工具前置/后置校验、`pending_conflicts` 聚合、预算降级、进度文案 |
+| | `agent/tools.py` | 6 个工具的落地实现，引用在这里确定性生成 |
+| | `agent/agent2_parse.py` | **在用**：建卡与论文对比，`tools.py` 从这里导入 |
+| 基础设施 | `infra/llm_api.py` | DeepSeek 调用封装：重试、每日预算硬闸、成本与 token 记账 |
+| | `infra/store.py` | SQLite 持久化：会话、消息、任务、成本、工具调用；导入即迁移 |
+| | `infra/cost_report.py` | 按日汇总成本的报表脚本 |
+| 文档接入 | `ingest/doc_ingest.py` | 统一文档解析入口（PDF / Word / Excel / CSV / 图片），章节加载与标题映射的唯一实现 |
+| 持久化 | `migrations/` | SQLite schema 迁移（3 个），路径在 `src/` 下 |
 | 设计与契约 | `DESIGN.md` | 检索、缓存、过载、接口、成本、上下文与评测口径的设计说明 |
 | | `CONTRACT.md` | 模块 2/3 接口契约（State 结构、工具接口、旧代码映射、冻结门槛） |
 | 评测与实验 | `evaluation/` | 语料冻结、题库、指标、消融与复现入口（结论的证据都在这里） |
 | | `experiments/` | 一次性对照实验，不在线上链路，清单见 `experiments/README.md` |
 | | `scripts/` | 验收、探针、批量对照脚本（如 `run_acceptance.py`、`dialog_rewrite_eval.py`） |
 | | `tests/` | 本地全量 127 条；CI 只跑其中 6 个纯逻辑文件 |
-| 已弃用 | `rag_tool.py`、`agent1_retrieve.py`、`agent3_review.py` | **已退役，不在生产链路**。保留只为让 `experiments/` 里的 RRF、重排与单/多 Agent 对照能复现旧口径 |
+| 已弃用 | `legacy/rag_tool.py`、`legacy/agent1_retrieve.py`、`legacy/agent3_review.py` | **已退役，不在生产链路**。保留只为让 `experiments/` 里的 RRF、重排与单/多 Agent 对照能复现旧口径 |
 
 ### 5）四条不能越过的线
 
 1. **引用不交给模型**：综述的 references 由 facts 确定性生成，保证每条都能落到真实 `chunk_id`。
-2. **检索只有一个入口**：召回与重排只在 `retrieval_service` 里发生，缓存与预算边界也跟着只做一份。
+2. **检索只有一个入口**：召回与重排只在 `retrieval/retrieval_service.py` 里发生，缓存与预算边界也跟着只做一份。
 3. **模型动作必须过 schema**：工具名、参数类型、重复动作次数都在执行前校验，非法动作直接拒绝。
 4. **预算与步数是硬限制**：`DAILY_COST_BUDGET` 是每日硬闸，`MAX_AGENT_STEP=15`、`MAX_SEARCH_PER_SESSION=3` 防死循环。
 
@@ -157,7 +159,16 @@ paper_agent/                      # 仓库根：只放仓库级元数据
 ├── .github/workflows/ci.yml      # 轻量 CI：只跑 6 个纯逻辑测试文件（30 条）
 ├── LICENSE  README.md
 └── src/                          # 代码根，所有命令都在 src/ 下执行
-    ├── api_server.py             # 服务入口（WebUI 也从这里挂载）
+    ├── paper_agent/              # 代码包（uvicorn paper_agent.api_server:app）
+    │   ├── api_server.py         # 服务入口：FastAPI app + SSE + WebUI 挂载
+    │   ├── config.py  state.py   # 配置常量；共享数据结构
+    │   ├── orchestration/        # pipeline.py  task_router.py  run_context.py
+    │   ├── retrieval/            # retrieval_service.py  rerank.py  rerank_policy.py
+    │   │                         # web_search.py  paper_entities.py  build_merged_faiss.py  pdf_preprocess.py
+    │   ├── agent/                # agent_react.py  survey_agent.py  tools.py  agent2_parse.py
+    │   ├── infra/                # llm_api.py  store.py  cost_report.py
+    │   ├── ingest/               # doc_ingest.py
+    │   └── legacy/               # 已退役的 rag_tool / agent1_retrieve / agent3_review
     ├── web/                      # 前端静态资源（index.html / app.js / style.css / KaTeX）
     ├── tests/                    # 本地全量 127 条测试
     ├── scripts/                  # 验收、探针与批量对照脚本
@@ -165,7 +176,8 @@ paper_agent/                      # 仓库根：只放仓库级元数据
     ├── experiments/              # 一次性对照实验，见其中的 README.md
     ├── migrations/               # SQLite schema 迁移
     ├── multi_format_samples/     # 多格式解析样例（PDF / Word / Excel / CSV / 图片）
-    └── …                         # 24 个 .py 模块，职责分组见上表
+    ├── DESIGN.md  CONTRACT.md    # 设计与接口契约
+    └── requirements.txt  Dockerfile  .env.example  qasper_titles.json
 
 不进仓库（由 .gitignore 挡住）：models/（约 16GB 权重）、docs/（论文 PDF 与个人资料）、
 src/datasets/、src/data/、本地缓存（query_cache.json、llm_usage.jsonl）与 .env
@@ -191,7 +203,7 @@ SSE 事件：`thread`（会话 ID）→ `route`（走了哪条链路）→ `sour
 → `token`（正文分片）→ `progress` / `ping`（综述链路的长任务进度与心跳）→ `done`；
 出错时推 `error` 再推 `done`，连接不会无提示中断。
 
-**CLI**：`python pipeline.py` 是交互式入口，按路由分别走短路与综述链路。
+**CLI**：`python -m paper_agent.orchestration.pipeline` 是交互式入口，按路由分别走短路与综述链路。
 
 ## WebUI
 

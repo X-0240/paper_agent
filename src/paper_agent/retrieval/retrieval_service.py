@@ -17,9 +17,9 @@ from dotenv import load_dotenv
 from rank_bm25 import BM25Okapi
 from sentence_transformers import SentenceTransformer
 
-from llm_api import call_deepseek_once,release_budget,reserve_budget,settle_budget
-from paper_entities import extract_named_papers
-from rerank import rerank
+from paper_agent.infra.llm_api import call_deepseek_once,release_budget,reserve_budget,settle_budget
+from paper_agent.retrieval.paper_entities import extract_named_papers
+from paper_agent.retrieval.rerank import rerank
 
 load_dotenv()
 logger=logging.getLogger(__name__)

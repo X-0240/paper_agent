@@ -1,7 +1,7 @@
 import asyncio
 import unittest.mock as mock
 import httpx
-import web_search
+from paper_agent.retrieval import web_search
 
 def _wiki_resp():
     resp=mock.MagicMock()
@@ -24,7 +24,7 @@ def _arxiv_xml():
 def test_wikipedia_returns_sources():
     #维基正常返回：解析成统一source结构
     async def run():
-        with mock.patch("web_search.httpx.AsyncClient.get",return_value=_wiki_resp()):
+        with mock.patch("paper_agent.retrieval.web_search.httpx.AsyncClient.get",return_value=_wiki_resp()):
             return await web_search.search_wikipedia("Transformer",limit=1)
     res=asyncio.run(run())
     assert len(res)==1
@@ -38,7 +38,7 @@ def test_wikipedia_http_error_returns_empty():
     resp.raise_for_status=mock.MagicMock(side_effect=httpx.HTTPStatusError(
         "rate",request=httpx.Request("GET","http://x"),response=httpx.Response(429)))
     async def run():
-        with mock.patch("web_search.httpx.AsyncClient.get",return_value=resp):
+        with mock.patch("paper_agent.retrieval.web_search.httpx.AsyncClient.get",return_value=resp):
             return await web_search.search_wikipedia("BERT",limit=1)
     assert asyncio.run(run())==[]
 
@@ -48,7 +48,7 @@ def test_arxiv_parses_entries():
     resp.raise_for_status=mock.MagicMock()
     resp.text=_arxiv_xml()
     async def run():
-        with mock.patch("web_search.httpx.AsyncClient.get",return_value=resp):
+        with mock.patch("paper_agent.retrieval.web_search.httpx.AsyncClient.get",return_value=resp):
             return await web_search.search_arxiv("BERT",limit=1)
     res=asyncio.run(run())
     assert len(res)==1
@@ -67,7 +67,7 @@ def test_web_search_merges_both_sources():
             resp.json.side_effect=Exception("not json")
         return resp
     async def run():
-        with mock.patch("web_search.httpx.AsyncClient.get",side_effect=fake_get):
+        with mock.patch("paper_agent.retrieval.web_search.httpx.AsyncClient.get",side_effect=fake_get):
             return await web_search.web_search("BERT",limit=1)
     res=asyncio.run(run())
     types={r["source_type"] for r in res}
@@ -83,7 +83,7 @@ def test_arxiv_uses_english_terms_for_chinese_query():
         resp.text="""<?xml version="1.0"?><feed xmlns="http://www.w3.org/2005/Atom"></feed>"""
         return resp
     async def run():
-        with mock.patch("web_search.httpx.AsyncClient.get",side_effect=fake_get):
+        with mock.patch("paper_agent.retrieval.web_search.httpx.AsyncClient.get",side_effect=fake_get):
             return await web_search.search_arxiv("什么是Transformer？",limit=1)
     asyncio.run(run())
     assert "Transformer" in captured["params"]["search_query"]
@@ -120,7 +120,7 @@ def test_hybrid_search_merges_local_and_web(monkeypatch):
             resp.text="""<?xml version="1.0"?><feed xmlns="http://www.w3.org/2005/Atom"></feed>"""
         return resp
     async def run():
-        with mock.patch("web_search.httpx.AsyncClient.get",side_effect=fake_get):
+        with mock.patch("paper_agent.retrieval.web_search.httpx.AsyncClient.get",side_effect=fake_get):
             return await web_search.hybrid_search("什么是Transformer？",top_k=5)
     data=asyncio.run(run())
     types={s["source_type"] for s in data["sources"]}
@@ -136,7 +136,7 @@ def test_hybrid_search_local_only_on_web_failure(monkeypatch):
     async def fake_get(url,params=None,headers=None):
         raise httpx.ConnectError("network down")
     async def run():
-        with mock.patch("web_search.httpx.AsyncClient.get",side_effect=fake_get):
+        with mock.patch("paper_agent.retrieval.web_search.httpx.AsyncClient.get",side_effect=fake_get):
             return await web_search.hybrid_search("什么是Transformer？",top_k=5)
     data=asyncio.run(run())
     assert {s["source_type"] for s in data["sources"]}=={"local"}

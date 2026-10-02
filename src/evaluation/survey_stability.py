@@ -27,7 +27,7 @@ def main():
     args=parser.parse_args()
 
     load_dotenv()
-    from survey_agent import run_survey
+    from paper_agent.agent.survey_agent import run_survey
 
     root=logging.getLogger()
     root.setLevel(logging.INFO)

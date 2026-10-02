@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 import faiss
 from rank_bm25 import BM25Okapi
 from sentence_transformers import SentenceTransformer
-from llm_api import safe_call_deepseek
+from paper_agent.infra.llm_api import safe_call_deepseek
 
 if sys.stdout and hasattr(sys.stdout,"reconfigure"):
     sys.stdout.reconfigure(errors="replace")

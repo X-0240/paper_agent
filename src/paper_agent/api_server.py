@@ -14,13 +14,14 @@ from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from fastapi.responses import FileResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
-import store
-import run_context
-from paper_entities import extract_named_papers
-from llm_api import call_deepseek_stream, call_deepseek_stream_async
-from pipeline import (build_retrieval_question,simple_answer_with_sources_async,simple_context,
+from paper_agent.infra import store
+from paper_agent.orchestration import run_context
+from paper_agent.config import SRC_ROOT
+from paper_agent.retrieval.paper_entities import extract_named_papers
+from paper_agent.infra.llm_api import call_deepseek_stream, call_deepseek_stream_async
+from paper_agent.orchestration.pipeline import (build_retrieval_question,simple_answer_with_sources_async,simple_context,
                       survey_pipeline,SIMPLE_SYSTEM_PROMPT)
-from task_router import classify_task, rate_limit_allowed
+from paper_agent.orchestration.task_router import classify_task, rate_limit_allowed
 import logging
 
 load_dotenv()
@@ -29,7 +30,7 @@ logger=logging.getLogger(__name__)
 #启动阶段预热：模型和索引改为服务起来就加载，避免第一次请求等二十多秒
 async def _preheat():
     try:
-        import retrieval_service
+        from paper_agent.retrieval import retrieval_service
         service=retrieval_service.get_service()
         service._ensure_index()
         service._ensure_bm25()
@@ -38,7 +39,7 @@ async def _preheat():
         #预热失败不阻断启动，真正的报错留给请求链路暴露
         logger.warning(f"预热失败，改为首次请求时懒加载：{e}")
     try:
-        from rerank import get_reranker
+        from paper_agent.retrieval.rerank import get_reranker
         get_reranker()
         logger.info("预热完成：重排模型已就绪")
     except Exception as e:
@@ -53,7 +54,7 @@ async def lifespan(app):
 
 app=FastAPI(title="论文调研Agent API",lifespan=lifespan)
 bearer=HTTPBearer(auto_error=False)
-WEB_DIR=os.path.join(os.path.dirname(os.path.abspath(__file__)),"web")
+WEB_DIR=os.path.join(SRC_ROOT,"web")
 
 #导入即迁移：schema 版本异常时拒绝启动，接口不会在无表状态下对外服务
 store.init_db()

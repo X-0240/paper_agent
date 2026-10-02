@@ -3,6 +3,10 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+#包目录与代码根目录（src/）：数据、迁移、前端资源都在代码根下，不在包内
+PKG_DIR=os.path.dirname(os.path.abspath(__file__))
+SRC_ROOT=os.path.dirname(PKG_DIR)
+
 #统一配置常量，环境变量可覆盖
 MAX_PAPER_PER_QUERY=int(os.getenv("MAX_PAPER_PER_QUERY","10"))
 MAX_CHUNKS_PER_PAPER=int(os.getenv("MAX_CHUNKS_PER_PAPER","20"))

@@ -81,11 +81,11 @@ def log_usage(data):
 def _record_cost_attribution(item):
     #把本次调用归因到当前任务；归因失败绝不能影响主流程，因此整体包在 try 里
     try:
-        from run_context import current_run_context
+        from paper_agent.orchestration.run_context import current_run_context
         ctx=current_run_context()
         if not ctx:
             return
-        import store
+        from paper_agent.infra import store
         store.record_cost(ctx.get("task_id",""),ctx.get("thread_id",""),ctx.get("user",""),
                           item.get("model",""),item.get("prompt_tokens",0),
                           item.get("completion_tokens",0),item.get("total_tokens",0),item.get("cost",0))

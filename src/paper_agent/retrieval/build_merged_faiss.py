@@ -8,7 +8,8 @@ from dotenv import load_dotenv
 import faiss
 import numpy as np
 from sentence_transformers import SentenceTransformer
-from doc_ingest import DocumentRecord, chunk_splitter, load_sections
+from paper_agent.ingest.doc_ingest import DocumentRecord, chunk_splitter, load_sections
+from paper_agent.config import SRC_ROOT
 
 if sys.stdout and hasattr(sys.stdout,"reconfigure"):
     sys.stdout.reconfigure(errors="replace")
@@ -17,8 +18,8 @@ load_dotenv()
 logging.basicConfig(level=logging.INFO)
 logger=logging.getLogger(__name__)
 
-DATA_PATH=os.path.join(os.path.dirname(os.path.abspath(__file__)),"datasets","qasper-test-v0.3.json")
-SECTIONS_DIR=os.path.join(os.path.dirname(os.path.abspath(__file__)),"papers_sections")
+DATA_PATH=os.path.join(SRC_ROOT,"datasets","qasper-test-v0.3.json")
+SECTIONS_DIR=os.path.join(SRC_ROOT,"papers_sections")
 FAISS_PATH=os.getenv("FAISS_PATH")
 TOP_N_PAPERS=40
 CHUNK_TOKENS=int(os.getenv("CHUNK_TOKENS","448"))
@@ -95,7 +96,7 @@ for p in qasper_papers:
     with open(os.path.join(SECTIONS_DIR,f"{aid}.json"),"w",encoding="utf-8") as f:
         json.dump(sec_list,f,ensure_ascii=False)
     add_record(DocumentRecord(source=aid,doc_type="pdf_text",text="",sections=sec_list),aid)
-with open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"qasper_titles.json"),"w",encoding="utf-8") as f:
+with open(os.path.join(SRC_ROOT,"qasper_titles.json"),"w",encoding="utf-8") as f:
     json.dump(titles,f,ensure_ascii=False)
 logger.info(f"合并语料：{len(chunks)}切片，主项目10篇+QASPER{len(qasper_papers)}篇")
 

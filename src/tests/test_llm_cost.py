@@ -1,6 +1,6 @@
 import json
 import pytest
-from llm_api import estimate_cost, today_spent, enforce_budget, BudgetExceeded
+from paper_agent.infra.llm_api import estimate_cost, today_spent, enforce_budget, BudgetExceeded
 
 def test_estimate_cost_peak():
     #高峰输出9元/百万，1万输出token约0.09元
@@ -13,8 +13,8 @@ def test_estimate_cost_offpeak():
     assert round(cost,4)==round((1000*1.5+10000*4.5)/1000000,4)
 
 def test_today_spent_and_budget(tmp_path,monkeypatch):
-    monkeypatch.setattr("llm_api.USAGE_FILE",str(tmp_path/"u.jsonl"))
-    monkeypatch.setattr("llm_api.DAILY_COST_BUDGET",1.0)
+    monkeypatch.setattr("paper_agent.infra.llm_api.USAGE_FILE",str(tmp_path/"u.jsonl"))
+    monkeypatch.setattr("paper_agent.infra.llm_api.DAILY_COST_BUDGET",1.0)
     with open(tmp_path/"u.jsonl","w",encoding="utf-8") as f:
         f.write(json.dumps({"date":"2099-01-01","cost":2.0})+"\n")
     assert today_spent()==0.0

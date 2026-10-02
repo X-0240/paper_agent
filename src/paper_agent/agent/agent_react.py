@@ -2,7 +2,7 @@ import json
 import logging
 import sys
 import time
-from llm_api import safe_call_deepseek
+from paper_agent.infra.llm_api import safe_call_deepseek
 
 #Windows控制台可能不支持论文中的数学符号，遇到无法编码字符时替换而不是崩溃
 if sys.stdout and hasattr(sys.stdout,"reconfigure"):

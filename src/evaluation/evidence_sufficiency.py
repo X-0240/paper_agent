@@ -8,7 +8,7 @@ import time
 sys.path.insert(0,os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from dotenv import load_dotenv
 
-from llm_api import call_deepseek_once
+from paper_agent.infra.llm_api import call_deepseek_once
 
 BASE=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 

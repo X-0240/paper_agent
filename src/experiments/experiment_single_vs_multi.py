@@ -3,13 +3,16 @@ os.environ.setdefault("HF_ENDPOINT","https://hf-mirror.com")
 
 import json
 import logging
-import sys
+import sys
+
+#让脚本能被独立执行：把代码根（src/）加入模块搜索路径
+sys.path.insert(0,os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import time
 from dotenv import load_dotenv
-from agent_react import react
-from agent1_retrieve import agent1_tools
-from pipeline import survey_pipeline
-from llm_api import safe_call_deepseek, set_tracker
+from paper_agent.agent.agent_react import react
+from paper_agent.legacy.agent1_retrieve import agent1_tools
+from paper_agent.orchestration.pipeline import survey_pipeline
+from paper_agent.infra.llm_api import safe_call_deepseek, set_tracker
 
 if sys.stdout and hasattr(sys.stdout,"reconfigure"):
     sys.stdout.reconfigure(errors="replace")

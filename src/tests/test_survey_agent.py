@@ -1,13 +1,13 @@
-from state import AgentState, Conflict, FactItem, PaperCard, PaperMeta, ReviewReport
-from survey_agent import (TOOL_LABELS,_auto_finalize, _enrich_trace, _finalize_review, _make_tools,
+from paper_agent.state import AgentState, Conflict, FactItem, PaperCard, PaperMeta, ReviewReport
+from paper_agent.agent.survey_agent import (TOOL_LABELS,_auto_finalize, _enrich_trace, _finalize_review, _make_tools,
                           _merge_cards, _progress_text, _record_tool_call, review_to_markdown, run_survey)
-from tools import build_pending_conflicts
+from paper_agent.agent.tools import build_pending_conflicts
 
 
 def test_record_tool_call_uses_run_context(tmp_path,monkeypatch):
     #设置任务上下文后，工具调用必须落到对应任务上
-    import store
-    from run_context import reset_run_context,set_run_context
+    from paper_agent.infra import store
+    from paper_agent.orchestration.run_context import reset_run_context,set_run_context
     monkeypatch.setenv("SQLITE_PATH",str(tmp_path/"a.db"))
     store.close_conn()
     store.init_db()
@@ -67,7 +67,7 @@ def test_tool_preconditions(monkeypatch):
 def test_search_updates_state(monkeypatch):
     #search写入papers并去重，search_count递增
     state=AgentState()
-    monkeypatch.setattr("survey_agent._search_papers",lambda q,limit=10:{"papers":[PaperMeta(paper_id="P1",title="T1"),PaperMeta(paper_id="P1",title="T1")],"chunks":[]})
+    monkeypatch.setattr("paper_agent.agent.survey_agent._search_papers",lambda q,limit=10:{"papers":[PaperMeta(paper_id="P1",title="T1"),PaperMeta(paper_id="P1",title="T1")],"chunks":[]})
     tools=_make_tools(state)
     out=tools["search_papers"]["func"]("q")
     assert "检索完成" in out
@@ -76,7 +76,7 @@ def test_search_updates_state(monkeypatch):
 
 def test_finalize_review_fills_missing_review(monkeypatch):
     #循环结束后有facts没review时补写综述，无facts不生成
-    monkeypatch.setattr("survey_agent._write_review",lambda query,facts,conflicts,pending=None:ReviewReport(title="综述"))
+    monkeypatch.setattr("paper_agent.agent.survey_agent._write_review",lambda query,facts,conflicts,pending=None:ReviewReport(title="综述"))
     state=AgentState()
     _finalize_review(state,"q")
     assert state.review is None
@@ -95,7 +95,7 @@ def test_contract_fields_present():
 
 def test_write_review_observation_has_stats(monkeypatch):
     #Observation返回综述统计信息，让Agent能判断是否补充
-    monkeypatch.setattr("survey_agent._write_review",lambda query,facts,conflicts,pending=None:ReviewReport(
+    monkeypatch.setattr("paper_agent.agent.survey_agent._write_review",lambda query,facts,conflicts,pending=None:ReviewReport(
         title="综述",consensus=["c1","c2"],disagreements=[{"x":1}],superseded_conclusions=["s"]
     ))
     state=AgentState(facts=[FactItem(fact_id="f1",paper_id="P1",entity="E",attribute="A",value="1",content="c",source_chunk_id="c1",section_name="S")])
@@ -117,8 +117,8 @@ def test_enrich_trace_fills_audit_fields():
 
 def test_auto_finalize_analyzes_when_cards_exist(monkeypatch):
     #循环结束后有卡片没事实，编排层自动补事实抽取和综述
-    monkeypatch.setattr("survey_agent._analyze",lambda ids,cache=None:{"comparison":"c","facts":[FactItem(fact_id="f1",paper_id="P1",entity="E",attribute="A",value="1",content="c",source_chunk_id="c1",section_name="S")]})
-    monkeypatch.setattr("survey_agent._write_review",lambda query,facts,conflicts,pending=None:ReviewReport(title="兜底综述"))
+    monkeypatch.setattr("paper_agent.agent.survey_agent._analyze",lambda ids,cache=None:{"comparison":"c","facts":[FactItem(fact_id="f1",paper_id="P1",entity="E",attribute="A",value="1",content="c",source_chunk_id="c1",section_name="S")]})
+    monkeypatch.setattr("paper_agent.agent.survey_agent._write_review",lambda query,facts,conflicts,pending=None:ReviewReport(title="兜底综述"))
     state=AgentState(cards=[PaperCard(paper_id="P1",title="T1")])
     _auto_finalize(state,"q")
     assert state.review is not None
@@ -126,12 +126,12 @@ def test_auto_finalize_analyzes_when_cards_exist(monkeypatch):
 
 def test_auto_finalize_covers_papers_without_cards(monkeypatch):
     #模型提前收尾时可能只检索到论文、没建卡片：兜底也要能补出事实与综述
-    monkeypatch.setattr("survey_agent._analyze",lambda ids,cache=None:{
+    monkeypatch.setattr("paper_agent.agent.survey_agent._analyze",lambda ids,cache=None:{
         "comparison":"c",
         "cards":[PaperCard(paper_id="P1",title="T1")],
         "facts":[FactItem(fact_id="f1",paper_id="P1",entity="E",attribute="A",value="1",
                           content="c",source_chunk_id="c1",section_name="S")]})
-    monkeypatch.setattr("survey_agent._write_review",lambda query,facts,conflicts,pending=None:ReviewReport(title="兜底综述"))
+    monkeypatch.setattr("paper_agent.agent.survey_agent._write_review",lambda query,facts,conflicts,pending=None:ReviewReport(title="兜底综述"))
     state=AgentState(papers=[PaperMeta(paper_id="P1",title="T1")])
     _auto_finalize(state,"q")
     assert state.review is not None
@@ -141,14 +141,14 @@ def test_auto_finalize_covers_papers_without_cards(monkeypatch):
 
 def test_run_survey_forces_search_when_no_papers(monkeypatch):
     #C类兜底：循环结束一篇论文都没有时，用原问题强制检索一次再走兜底
-    monkeypatch.setattr("survey_agent.react",lambda *a,**kw:("",[]))
-    monkeypatch.setattr("survey_agent._search_papers",
+    monkeypatch.setattr("paper_agent.agent.survey_agent.react",lambda *a,**kw:("",[]))
+    monkeypatch.setattr("paper_agent.agent.survey_agent._search_papers",
                         lambda query,limit=3:{"papers":[PaperMeta(paper_id="P1",title="T1")],"chunks":[]})
-    monkeypatch.setattr("survey_agent._analyze",lambda ids,cache=None:{
+    monkeypatch.setattr("paper_agent.agent.survey_agent._analyze",lambda ids,cache=None:{
         "comparison":"c","cards":[PaperCard(paper_id="P1",title="T1")],
         "facts":[FactItem(fact_id="f1",paper_id="P1",entity="E",attribute="A",value="1",
                           content="c",source_chunk_id="c1",section_name="S")]})
-    monkeypatch.setattr("survey_agent._write_review",lambda query,facts,conflicts,pending=None:ReviewReport(title="兜底综述"))
+    monkeypatch.setattr("paper_agent.agent.survey_agent._write_review",lambda query,facts,conflicts,pending=None:ReviewReport(title="兜底综述"))
     state=run_survey("对比 A 和 B")
     assert [p.paper_id for p in state.papers]==["P1"]
     assert state.review is not None

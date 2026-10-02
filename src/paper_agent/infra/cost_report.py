@@ -1,6 +1,6 @@
 import datetime
 import json
-from llm_api import USAGE_FILE
+from paper_agent.infra.llm_api import USAGE_FILE
 
 def main():
     #成本报表：按日汇总并打印当日明细条数

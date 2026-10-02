@@ -1,4 +1,4 @@
-from task_router import classify_task, rate_limit_allowed
+from paper_agent.orchestration.task_router import classify_task, rate_limit_allowed
 
 def test_survey_keywords():
     #对比/综述类问题必须走全链路

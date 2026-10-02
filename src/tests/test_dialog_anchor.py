@@ -1,6 +1,6 @@
 # 多轮追问锚点的纯逻辑测试：不加载模型，可进 CI
 # 覆盖三处实测踩过的坑：只取用户提问、支持多篇、锚点数量上限
-import api_server
+from paper_agent import api_server
 
 
 def _msg(role,content):

@@ -2,8 +2,8 @@ import json
 import logging
 import os
 import sys
-from agent2_parse import CARD_DIR, extract_json
-from llm_api import safe_call_deepseek
+from paper_agent.agent.agent2_parse import CARD_DIR, extract_json
+from paper_agent.infra.llm_api import safe_call_deepseek
 
 #Windows控制台可能遇到特殊字符，统一兜底防崩溃
 if sys.stdout and hasattr(sys.stdout,"reconfigure"):
@@ -89,7 +89,7 @@ def deduplicate_conflicts(conflicts):
 
 def resolve_conflict_with_retrieval(conflict):
     #二次检索验证：冲突不能只看卡片，要回原文取证
-    from rag_tool import search_papers_structured
+    from paper_agent.legacy.rag_tool import search_papers_structured
     query=conflict.get("detail","")[:200] or " ".join(conflict.get("papers",[]))
     results=search_papers_structured(query,k=5)
     if not results:

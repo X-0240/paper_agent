@@ -4,8 +4,8 @@ from datetime import datetime, timedelta, timezone
 import jwt
 import numpy as np
 from fastapi.testclient import TestClient
-import api_server
-from api_server import app
+from paper_agent import api_server
+from paper_agent.api_server import app
 
 client=TestClient(app)
 
@@ -25,7 +25,7 @@ def token_for(username):
 
 
 def test_metrics_endpoint_reports_own_data(monkeypatch):
-    monkeypatch.setattr("api_server.simple_answer_with_sources_async",
+    monkeypatch.setattr("paper_agent.api_server.simple_answer_with_sources_async",
                         mock.AsyncMock(return_value={"answer":"a","sources":[]}))
     token=login()
     assert client.post("/ask",json={"question":"什么是Transformer？"},headers=auth_header(token)).status_code==200
@@ -39,7 +39,7 @@ def test_metrics_endpoint_reports_own_data(monkeypatch):
 
 
 def test_thread_persistence_and_ownership(monkeypatch):
-    monkeypatch.setattr("api_server.simple_answer_with_sources_async",
+    monkeypatch.setattr("paper_agent.api_server.simple_answer_with_sources_async",
                         mock.AsyncMock(return_value={"answer":"mock answer","sources":[]}))
     token=login()
     r=client.post("/ask",json={"question":"什么是Transformer？"},headers=auth_header(token))
@@ -74,7 +74,7 @@ def test_ask_requires_token():
     assert client.post("/ask",json={"question":"x"}).status_code==401
 
 def test_ask_simple(monkeypatch):
-    monkeypatch.setattr("api_server.simple_answer_with_sources_async",
+    monkeypatch.setattr("paper_agent.api_server.simple_answer_with_sources_async",
                         mock.AsyncMock(return_value={"answer":"mock answer","sources":[]}))
     r=client.post("/ask",json={"question":"什么是Transformer？"},headers=auth_header(login()))
     assert r.status_code==200
@@ -84,7 +84,7 @@ def test_ask_simple(monkeypatch):
     assert r.json()["task_id"].startswith("tk_")
 
 def test_ask_forced_survey(monkeypatch):
-    monkeypatch.setattr("api_server.survey_pipeline",lambda q,**kw:"mock review")
+    monkeypatch.setattr("paper_agent.api_server.survey_pipeline",lambda q,**kw:"mock review")
     r=client.post("/ask",json={"question":"对比Transformer和BERT","use_survey":True},headers=auth_header(login()))
     assert r.status_code==200
     assert r.json()["route"]=="survey"
@@ -98,8 +98,8 @@ async def _fake_stream(tokens):
 
 def test_stream_simple(monkeypatch):
     sources=[{"source_type":"local","title":"s","snippet":"t","paper_id":"s","section":"sec","url":None,"arxiv_id":None}]
-    monkeypatch.setattr("api_server.simple_context",mock.AsyncMock(return_value=(sources,"ctx")))
-    monkeypatch.setattr("api_server.call_deepseek_stream_async",lambda messages:_fake_stream(["你","好"]))
+    monkeypatch.setattr("paper_agent.api_server.simple_context",mock.AsyncMock(return_value=(sources,"ctx")))
+    monkeypatch.setattr("paper_agent.api_server.call_deepseek_stream_async",lambda messages:_fake_stream(["你","好"]))
     r=client.get("/ask/stream",params={"question":"什么是Transformer？"},headers=auth_header(login()))
     events=[json.loads(line[5:]) for line in r.iter_lines() if line.startswith("data:")]
     assert [e["type"] for e in events]==["thread","route","sources","token","token","done"]
@@ -108,11 +108,11 @@ def test_stream_simple(monkeypatch):
 
 def test_stream_error_event(monkeypatch):
     sources=[{"source_type":"local","title":"s","snippet":"t","paper_id":"s","section":"sec","url":None,"arxiv_id":None}]
-    monkeypatch.setattr("api_server.simple_context",mock.AsyncMock(return_value=(sources,"ctx")))
+    monkeypatch.setattr("paper_agent.api_server.simple_context",mock.AsyncMock(return_value=(sources,"ctx")))
     async def boom(tokens):
         raise RuntimeError("mock boom")
         yield  # pragma: no cover
-    monkeypatch.setattr("api_server.call_deepseek_stream_async",lambda messages:boom(["x"]))
+    monkeypatch.setattr("paper_agent.api_server.call_deepseek_stream_async",lambda messages:boom(["x"]))
     r=client.get("/ask/stream",params={"question":"什么是Transformer？"},headers=auth_header(login()))
     events=[json.loads(line[5:]) for line in r.iter_lines() if line.startswith("data:")]
     assert any(e["type"]=="error" for e in events)
@@ -121,8 +121,8 @@ def test_stream_error_event(monkeypatch):
 def test_stream_simple_float32_score(monkeypatch):
     #来源里若混入numpy.float32，也必须能过JSON序列化
     sources=[{"source_type":"local","title":"s","snippet":"t","paper_id":"s","section":"sec","url":None,"arxiv_id":None,"score":np.float32(0.5)}]
-    monkeypatch.setattr("api_server.simple_context",mock.AsyncMock(return_value=(sources,"ctx")))
-    monkeypatch.setattr("api_server.call_deepseek_stream_async",lambda messages:_fake_stream(["ok"]))
+    monkeypatch.setattr("paper_agent.api_server.simple_context",mock.AsyncMock(return_value=(sources,"ctx")))
+    monkeypatch.setattr("paper_agent.api_server.call_deepseek_stream_async",lambda messages:_fake_stream(["ok"]))
     r=client.get("/ask/stream",params={"question":"什么是Transformer？"},headers=auth_header(login()))
     events=[json.loads(line[5:]) for line in r.iter_lines() if line.startswith("data:")]
     assert not any(e["type"]=="error" for e in events)
@@ -136,7 +136,7 @@ def test_stream_survey(monkeypatch):
             cb("检索候选论文｜论文3篇｜卡片0张｜事实0条｜冲突0件")
             cb("生成卡片与事实｜论文3篇｜卡片3张｜事实12条｜冲突2件")
         return "A"*100
-    monkeypatch.setattr("api_server.survey_pipeline",fake_survey)
+    monkeypatch.setattr("paper_agent.api_server.survey_pipeline",fake_survey)
     r=client.get("/ask/stream",params={"question":"对比Transformer和BERT"},headers=auth_header(login()))
     events=[json.loads(line[5:]) for line in r.iter_lines() if line.startswith("data:")]
     assert [e for e in events if e["type"]=="route"][0]["route"]=="survey"
@@ -153,7 +153,7 @@ def test_stream_survey(monkeypatch):
 def test_meaningless_question_rejected_before_model_call(monkeypatch):
     #空输入与纯标点在入口就被挡掉，不消耗模型调用
     #本测试只关心输入校验，直接放行限流，避免令牌桶被其他测试消耗后误判成 429
-    monkeypatch.setattr("api_server.rate_limit_allowed",lambda *a,**k: True)
+    monkeypatch.setattr("paper_agent.api_server.rate_limit_allowed",lambda *a,**k: True)
     hdr=auth_header(login())
     assert client.get("/ask/stream",params={"question":""},headers=hdr).status_code==400
     assert client.get("/ask/stream",params={"question":"   "},headers=hdr).status_code==400

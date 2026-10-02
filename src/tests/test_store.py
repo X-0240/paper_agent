@@ -5,7 +5,7 @@ import threading
 
 import pytest
 
-import store
+from paper_agent.infra import store
 
 
 @pytest.fixture(autouse=True)

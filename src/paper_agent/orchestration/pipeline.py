@@ -3,9 +3,9 @@ import logging
 import os
 import sys
 import time
-from llm_api import safe_call_deepseek, BudgetExceeded
-from task_router import classify_task
-from web_search import hybrid_search
+from paper_agent.infra.llm_api import safe_call_deepseek, BudgetExceeded
+from paper_agent.orchestration.task_router import classify_task
+from paper_agent.retrieval.web_search import hybrid_search
 
 #Windows控制台可能遇到特殊字符，统一兜底防崩溃
 if sys.stdout and hasattr(sys.stdout,"reconfigure"):
@@ -82,7 +82,7 @@ def survey_pipeline(question,top_n=3,human_confirm=False,on_progress=None):
     #旧 3-Agent 回退分支已于 2026-09-23 删除，只保留这一条实现；
     #旧模块（agent1_retrieve/agent3_review/rag_tool）仍在仓库里，但只为 experiments 复现旧口径
     t0=time.time()
-    from survey_agent import review_to_markdown, run_survey
+    from paper_agent.agent.survey_agent import review_to_markdown, run_survey
     state=run_survey(question,on_progress=on_progress)
     t1=time.time()
     logger.info(f"综述链路耗时{t1-t0:.1f}s papers={len(state.papers)} facts={len(state.facts)} conflicts={len(state.conflicts)}")

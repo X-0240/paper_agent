@@ -8,7 +8,7 @@ from evaluation.schema import load_questions
 from evaluation.metrics import evidence_hit,wilson_ci
 from evaluation.retrievers import Retriever
 from evaluation.run_eval import build_queries
-from llm_api import safe_call_deepseek
+from paper_agent.infra.llm_api import safe_call_deepseek
 
 RERANK_PROMPT="""你是检索重排器。用户问题是学术论文调研问题，下面是候选片段。
 请选出最能回答该问题的 {k} 个片段，按相关性从高到低排序。

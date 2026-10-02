@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 from evaluation.schema import load_questions
 from evaluation.metrics import evidence_hit,paper_hit,section_hit,wilson_ci
 from evaluation.retrievers import Retriever
-from retrieval_service import get_service
+from paper_agent.retrieval.retrieval_service import get_service
 
 #常见术语扩展：缩写补全，缓解中英文跨语言检索的词汇缺口
 TERM_MAP={

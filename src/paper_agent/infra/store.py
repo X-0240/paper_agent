@@ -5,7 +5,10 @@ import threading
 import uuid
 from datetime import datetime,timedelta,timezone
 
-BASE=os.path.dirname(os.path.abspath(__file__))
+from paper_agent.config import SRC_ROOT
+
+#数据与迁移都在代码根（src/）下，不在包内
+BASE=SRC_ROOT
 MIGRATIONS_DIR=os.path.join(BASE,"migrations")
 #代码已知的最高迁移编号：硬编码并在启动时与目录核对，避免目录缺失时校验失效
 MAX_KNOWN_SCHEMA_VERSION=3

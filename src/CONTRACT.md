@@ -2,6 +2,25 @@
 
 本契约约束执行层（模块2）与输出层（模块3）的交互，冻结接口，不锁内部实现。
 
+## 零、模块路径对照
+
+正文用短模块名指代代码模块，路径都相对 `paper_agent/`（2026-10-02 起 24 个平铺模块收进包内，接口与语义未变）：
+
+| 短名 | 路径 | 短名 | 路径 |
+|---|---|---|---|
+| `api_server` | `api_server.py` | `agent2_parse` | `agent/agent2_parse.py` |
+| `config` | `config.py` | `llm_api` | `infra/llm_api.py` |
+| `state` | `state.py` | `store` | `infra/store.py` |
+| `pipeline` | `orchestration/pipeline.py` | `cost_report` | `infra/cost_report.py` |
+| `task_router` | `orchestration/task_router.py` | `doc_ingest` | `ingest/doc_ingest.py` |
+| `run_context` | `orchestration/run_context.py` | `rag_tool` | `legacy/rag_tool.py` |
+| `retrieval_service` | `retrieval/retrieval_service.py` | `agent1_retrieve` | `legacy/agent1_retrieve.py` |
+| `rerank` / `rerank_policy` | `retrieval/rerank.py` / `rerank_policy.py` | `agent3_review` | `legacy/agent3_review.py` |
+| `web_search` | `retrieval/web_search.py` | `agent_react` | `agent/agent_react.py` |
+| `paper_entities` | `retrieval/paper_entities.py` | `survey_agent` | `agent/survey_agent.py` |
+| `build_merged_faiss` | `retrieval/build_merged_faiss.py` | `tools` | `agent/tools.py` |
+| `pdf_preprocess` | `retrieval/pdf_preprocess.py` | | |
+
 ## 一、设计基线
 
 - 工具函数当前为同步函数，返回结果后由 Agent 循环统一写入 State；异步包装留到 P1 并发阶段

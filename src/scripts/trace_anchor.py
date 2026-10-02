@@ -9,10 +9,10 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-import api_server  # noqa: E402  需要它的提取函数与 store
-import store  # noqa: E402
-import retrieval_service  # noqa: E402
-from paper_entities import extract_named_papers  # noqa: E402
+from paper_agent import api_server  # noqa: E402  需要它的提取函数与 store
+from paper_agent.infra import store  # noqa: E402
+from paper_agent.retrieval import retrieval_service  # noqa: E402
+from paper_agent.retrieval.paper_entities import extract_named_papers  # noqa: E402
 
 print("="*74)
 print("A. 两个失败样例的候选池追踪")

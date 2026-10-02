@@ -1,7 +1,13 @@
+import os
+import sys
+
+#让脚本能被独立执行：把代码根（src/）加入模块搜索路径
+sys.path.insert(0,os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 import time
 
-from pipeline import simple_answer
-from survey_agent import run_survey
+from paper_agent.orchestration.pipeline import simple_answer
+from paper_agent.agent.survey_agent import run_survey
 
 QUERIES=[
     ("simple","BERT输入最大长度"),

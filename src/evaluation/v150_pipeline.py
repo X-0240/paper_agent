@@ -514,7 +514,7 @@ def freeze_snapshot():
 def build_index():
     os.environ["SECTIONS_DIR"]=str(SECTIONS_DIR)
     os.environ["FAISS_PATH"]=V150_INDEX_PREFIX
-    from doc_ingest import DocumentRecord,chunk_splitter,parse_document
+    from paper_agent.ingest.doc_ingest import DocumentRecord,chunk_splitter,parse_document
     from sentence_transformers import SentenceTransformer
     import faiss
 

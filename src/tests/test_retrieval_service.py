@@ -1,4 +1,4 @@
-from retrieval_service import RetrievalService,_valid_retrieval_query
+from paper_agent.retrieval.retrieval_service import RetrievalService,_valid_retrieval_query
 
 
 def make_service(monkeypatch,**env):

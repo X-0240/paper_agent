@@ -2,11 +2,11 @@ import json
 import logging
 import time
 
-from agent_react import react
-from config import MAX_AGENT_STEP, MAX_PAPER_PER_QUERY, MAX_SEARCH_PER_SESSION
-from llm_api import BudgetExceeded
-from state import AgentState, ReviewReport
-from tools import (analyze_paper_relations as _analyze, build_paper_card as _build_card,
+from paper_agent.agent.agent_react import react
+from paper_agent.config import MAX_AGENT_STEP, MAX_PAPER_PER_QUERY, MAX_SEARCH_PER_SESSION
+from paper_agent.infra.llm_api import BudgetExceeded
+from paper_agent.state import AgentState, ReviewReport
+from paper_agent.agent.tools import (analyze_paper_relations as _analyze, build_paper_card as _build_card,
                    build_pending_conflicts, read_section as _read_section,
                    search_papers as _search_papers, verify_claim as _verify_claim,
                    write_review as _write_review)
@@ -63,8 +63,8 @@ def _merge_cards(state,cards):
 def _record_tool_call(entry):
     #工具调用归因：写到当前任务上；写库失败不影响主流程
     try:
-        from run_context import current_run_context
-        import store
+        from paper_agent.orchestration.run_context import current_run_context
+        from paper_agent.infra import store
         ctx=current_run_context()
         if not ctx:
             return

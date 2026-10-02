@@ -5,8 +5,8 @@ import re
 import sys
 sys.path.insert(0,os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from dotenv import load_dotenv
-from doc_ingest import load_sections
-from llm_api import safe_call_deepseek
+from paper_agent.ingest.doc_ingest import load_sections
+from paper_agent.infra.llm_api import safe_call_deepseek
 
 BASE=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 QUESTION_DIR=os.path.join(BASE,"evaluation","questions")

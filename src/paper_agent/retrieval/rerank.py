@@ -4,7 +4,7 @@ os.environ.setdefault("HF_ENDPOINT","https://hf-mirror.com")
 
 import logging
 from sentence_transformers import CrossEncoder
-from rerank_policy import RerankCache,cache_key
+from paper_agent.retrieval.rerank_policy import RerankCache,cache_key
 
 logger=logging.getLogger(__name__)
 #模型下载时httpx会刷大量INFO日志，压到WARNING

@@ -1,4 +1,4 @@
-from agent_react import parse_action, react
+from paper_agent.agent.agent_react import parse_action, react
 
 def test_json_finish():
     #标准格式：Action+Action Input JSON
@@ -23,7 +23,7 @@ def test_tool_bad_json():
 
 def test_validate_args_rejects_unknown():
     #多余参数必须被拒绝，防止LLM发明参数浪费步数
-    from agent_react import run_tool
+    from paper_agent.agent.agent_react import run_tool
     tools={"Search":{"func":lambda q:"found","schema":{"q":{"type":"str","required":True}}}}
     out=run_tool("Search",{"q":"x","max_results":10},tools)
     assert "未知参数" in out
@@ -35,7 +35,7 @@ def test_react_on_step_callback(monkeypatch):
         if len(messages)<5:
             return {"choices":[{"message":{"content":"Action: Search\nAction Input: {\"q\":\"x\"}"}}]}
         return {"choices":[{"message":{"content":"Action: Finish\nAction Input: {\"answer\":\"done\"}"}}]}
-    monkeypatch.setattr("agent_react.safe_call_deepseek",fake_llm)
+    monkeypatch.setattr("paper_agent.agent.agent_react.safe_call_deepseek",fake_llm)
     tools={"Search":{"func":lambda q:"found","description":"","schema":{"q":{"type":"str","required":True}}}}
     answer,history=react("q",tools,"system",max_steps=3,on_step=calls.append)
     assert answer=="done"

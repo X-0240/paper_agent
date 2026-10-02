@@ -1,4 +1,4 @@
-from rerank_policy import RerankCache,cache_key,should_rerank
+from paper_agent.retrieval.rerank_policy import RerankCache,cache_key,should_rerank
 
 def test_should_rerank_by_margin():
     #分差大信任粗排，分差小才触发重排

@@ -2,9 +2,9 @@ import logging
 import os
 import re
 import sys
-from agent_react import react
-from paper_entities import extract_named_papers as _extract_named, normalize_paper_name as _normalize_name
-from rag_tool import search_papers_rerank_text, search_papers_hybrid, search_papers_structured, sources, read_section
+from paper_agent.agent.agent_react import react
+from paper_agent.retrieval.paper_entities import extract_named_papers as _extract_named, normalize_paper_name as _normalize_name
+from paper_agent.legacy.rag_tool import search_papers_rerank_text, search_papers_hybrid, search_papers_structured, sources, read_section
 
 #Windows控制台可能遇到特殊字符，统一兜底防崩溃
 if sys.stdout and hasattr(sys.stdout,"reconfigure"):
