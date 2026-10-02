@@ -1,7 +1,7 @@
 # experiments 索引
 
 本目录放一次性验证脚本与早期对照实验。它们都可以直接运行，互不引用（仓库内被引用次数为 0）。
-**这些脚本的结论都已写进 `../CONTRACT.md` 与 `../迭代清单.md`，脚本保留是为了复现旧口径，不是当前执行链路。**
+**这些脚本的结论都已写进 `../CONTRACT.md` 与本地 `docs/迭代清单.md`，脚本保留是为了复现旧口径，不是当前执行链路。**
 
 当前执行链路的评测入口在 `../evaluation/`（repro_v300、rank_metrics、gate_check、entity_boost_eval、paper_rerank_eval、evidence_sufficiency、build_label_audit）。
 

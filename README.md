@@ -1,23 +1,25 @@
-# 论文调研Agent系统
+# 论文调研 Agent 系统
 
 [![CI](https://github.com/X-0240/paper_agent/actions/workflows/ci.yml/badge.svg)](https://github.com/X-0240/paper_agent/actions/workflows/ci.yml)
 
-论文知识库问答 + 手写 ReAct Agent 调研系统。用户输入问题，系统按关键词路由：普通问答走混合检索短路路径；对比/综述类问题由单个 ReAct Agent 通过工具集完成检索、读章节、建卡、关系分析、冲突验证与综述生成。
+把「单篇论文问答」和「多篇论文综述」做在同一条链路上：问题进来先按关键词路由——普通问答走
+**混合检索 → 条件重排 → 带引用的回答**这条短路；对比/综述类问题交给一个**手写 ReAct Agent**，
+用 6 个工具依次完成检索、读章节、建卡、事实抽取、冲突裁决和综述生成。
 
-一句话：**把单 Agent 架在 300 篇论文的知识库上，做「可溯源的单篇问答 + 文献综述」，主指标是证据级检索命中率（生产口径 202 题 85.1%，172/202）。**
+**主指标是证据级检索命中率**：生产口径 HitRate@5 = **85.1%（172/202）**，
+语料 **300 篇论文 / 16121 个切片**。所有数字都是本机实测值，口径与消融见 [`src/DESIGN.md`](src/DESIGN.md)。
 
-## 技术栈
+## 这个项目解决什么问题
 
-Python / FastAPI / FAISS / BM25（rank_bm25）/ bge-m3 嵌入 / bge-reranker-v2-m3 交叉编码器 / DeepSeek API / SSE 流式 / JWT / SQLite 持久化 / GitHub Actions
-
-## 核心能力
-
-- **混合检索 + 条件重排**：BM25 + 向量粗召回 Top-50 → 按 Top-1 与 Top-K 分差条件触发 Cross-Encoder 精排 → Top-5
-- **跨语言检索**：中文问题运行时生成英文检索 query（生产默认开），证据级命中率 72.3%→85.1%（同批 202 题配对，McNemar p<0.0001）
-- **单 ReAct Agent + 6 工具**：检索、读章节、建卡、关系分析、冲突验证、综述生成；引用由事实记录确定性生成，不由模型编造
-- **多轮追问**：生成侧拼最近 3 轮历史；追问缺实体名时从上一轮提问提取论文名注入检索，代词型追问命中 2/7→7/7
-- **可复现评测**：语料与题库按 SHA256 冻结，202 题逐题复现一致（202/202）；单变量消融给出每个开关的独立贡献
-- **工程外壳**：JWT 多用户隔离、SSE 真流式、令牌桶限流、过载快速拒绝、语义召回缓存（阈值 0.85）、按任务成本归因
+- **回答要能溯源到章节，而不是"看起来像"**。综述里的引用不是模型写的，是代码从事实记录（facts）里
+  确定性生成的；章节名映射不到真实 `chunk_id` 的事实会被直接丢弃（`src/tools.py` 的 `_resolve_chunk_id`）。
+- **综述要把分歧摆出来，不是把摘要拼起来**。输出结构固定为共识 / 分歧 / 被推翻结论 / 开放问题，
+  有争议的结论必须回原文取证裁决（`verify_claim`），而不是由模型投票决定。
+- **中文问英文知识库要能命中**。检索前运行时生成英文 query，同批 202 题配对实测命中率
+  72.3% → 85.1%（McNemar p<0.0001）；关掉重排是 81.2%，三个开关的独立贡献都做过单变量消融。
+- **单 Agent 还是多 Agent 用数据定**。3 题综述上 3-Agent 判定全胜，代价是 4-6 倍 token
+  （对照表在 `src/experiments/README.md`）；生产链路因此用单 Agent + 6 工具，旧 3-Agent 链路保留在仓库里，
+  只为让这组对照能复现。
 
 ## 这个仓库能跑什么（克隆前必读）
 
@@ -39,126 +41,228 @@ cd src && python -m pytest tests/test_task_router.py tests/test_agent_react.py t
 
 本地全量收集为 **127 条**，其中 4 条端到端用例需要完整服务已启动，见下面「测试」一节。
 
-## 快速启动
+## 快速开始
 
 ```bash
 cd src                      # 代码都在 src/ 下
 conda activate GPU          # 换成你自己的环境名
-uvicorn api_server:app --host 127.0.0.1 --port 8000
+pip install -r requirements.txt
+cp .env.example .env        # 填 DEEPSEEK_API_KEY，以及索引/模型/语料的本地路径
+
+python -m pytest tests -q                                   # 全量回归（需要模型与索引）
+uvicorn api_server:app --host 127.0.0.1 --port 8000          # 启动服务，浏览器打开 http://127.0.0.1:8000
+python scripts/run_acceptance.py                            # 6 条固定 query 的验收脚本
 ```
 
-前提是本机已经有索引、语料与两个模型权重（见上一节）。
+前提是本机已经有索引、语料与两个模型权重（见上一节）。服务启动时会预热 Embedding、FAISS、BM25 与
+重排模型，约 45 秒；之后每次请求都不再等模型。
 
-## 启动预热
+## 架构
 
-服务通过 lifespan 钩子在启动阶段就加载 Embedding 模型、FAISS 索引、BM25 语料和重排模型，启动约 45 秒，之后每次请求都不再等模型。
+### 1）主链（一个问题怎么被处理）
 
-改成启动预热之前的做法是懒加载：模型和索引在第一次请求时才加载，那次请求要多等 20 多秒（实测进程导入依赖 18.4 秒 + 加载模型 5.4 秒）。预热把这份等待从"用户第一次提问"挪到了"服务启动"。预热失败只记 warning，不会阻断启动。
+```
+HTTP / WebUI
+  │  ① JWT 鉴权 → 进程内令牌桶限流（默认 10 次/分/账号）→ 过载准入（超过 MAX_INFLIGHT 直接 503）
+  ▼
+task_router.classify_task(question)          # 纯规则路由，不调模型
+  ├─ simple  ─ pipeline.simple_answer_with_sources_async
+  │             混合检索（本地 retrieval_service 与外网 web_search 并行）
+  │             → 拼上下文 → 流式回答（回答带来源，来源在检索完成时就先推送）
+  └─ survey  ─ pipeline.survey_pipeline
+                survey_agent.run_survey → agent_react.react（手写 ReAct 循环）
+                  search_papers → read_section → build_paper_card
+                    → analyze_paper_relations（抽事实 + 生成待核实冲突）
+                    → verify_claim（回原文裁决冲突）→ write_review（引用由 facts 生成）
+                → review_to_markdown(state.review)
+
+落库（两条路径共用）：store → SQLite 六张表：threads / messages / tasks / costs / tool_calls / schema_version
+```
+
+- 路由是关键词规则（`对比/比较/区别/综述/演进/…` 走 survey），不是模型分类，所以路由本身零成本、可单元测试。
+- survey 路径即使模型提前收尾，编排层也会兜底补抽事实并生成综述，避免返回空结果；
+  预算不足时降级生成，仍给出带引用的结论。
+
+### 2）检索链路
+
+```
+问题（中文）→ 需要时运行时生成英文检索 query
+   → BM25 + 向量双路粗召回（生产 RETRIEVAL_CANDIDATES=50）
+   → 条件重排：粗排 Top-1 与 Top-K 分差不够大时才跑 Cross-Encoder（bge-reranker-v2-m3）
+   → 去重、稳定 chunk_id、Top-5 交付
+```
+
+- 语义召回缓存：同义问法直接复用上次的 `chunk_id` 列表（**只缓存召回，不缓存答案**），阈值 0.85；
+  索引快照变化即整体失效。缓存命中与近似未命中的追溯在 `GET /metrics/semantic_hits`。
+- 重排缓存按 `query + 索引快照` 做进程内 LRU，索引更新后自动失效。
+- 检索只有一个入口：所有调用方都走 `retrieval_service.get_service()`，不允许各自拼召回逻辑。
+
+### 3）综述链路（单 ReAct Agent + 6 工具）
+
+| 工具 | 作用 | 关键约束 |
+|---|---|---|
+| `search_papers` | 检索候选论文 | 每会话最多 3 次，防止反复换词刷检索 |
+| `read_section` | 读某篇论文的指定章节原文 | 只能读已检索到的论文 |
+| `build_paper_card` | 生成论文卡片 | 带提示词版本号的缓存，提示词改了自动失效 |
+| `analyze_paper_relations` | 多篇论文抽事实 + 生成待核实冲突 | 事实必须能映射到真实 `chunk_id`，映射不到就丢弃 |
+| `verify_claim` | 拿两条事实回原文裁决是否真冲突 | 只能裁决已存在的事实，`fact_id` 不存在直接拒 |
+| `write_review` | 生成综述正文 | 没有事实时拒绝执行并指明下一步该调什么 |
+
+ReAct 循环每一步的工具名与参数都要过 schema 校验（`agent_react._validate_args`），非法动作直接拒绝，不丢给模型自己纠。
+
+### 4）模块职责
+
+> 路径都相对 `src/`（本 README 在仓库根，代码在 `src/`）。
+
+| 分组 | 模块 | 职责 / 关键约束 |
+|---|---|---|
+| 入口与编排 | `api_server.py` | FastAPI 接口层：JWT、SSE 流式、限流、过载准入、WebUI 静态挂载 |
+| | `pipeline.py` | simple 短路与 survey 全链路的编排入口 |
+| | `task_router.py` | 关键词路由 + 进程内令牌桶限流，无外部依赖 |
+| | `run_context.py` | 单次调用的上下文（请求 / 任务 / 工具调用追溯） |
+| 检索 | `retrieval_service.py` | **唯一检索入口**：查询计划、召回、重排、去重、`chunk_id`、缓存、预算边界 |
+| | `rerank.py` / `rerank_policy.py` | Cross-Encoder 重排，以及"是否需要重排"的判定与进程内 LRU |
+| | `web_search.py` | 外网检索（Wikipedia / arXiv）并发、超时与降级；simple 路径的混合检索入口 |
+| | `paper_entities.py` | 论文别名与标题识别（多轮追问补实体用） |
+| | `build_merged_faiss.py` / `pdf_preprocess.py` | 离线构建索引；PDF 预处理 |
+| Agent | `agent_react.py` | 手写 ReAct 循环（Supervisor + Worker）、参数 schema 校验、重复动作上限 |
+| | `survey_agent.py` | 单 ReAct Agent 综述编排：工具前置/后置校验、`pending_conflicts` 聚合、预算降级、进度文案 |
+| | `tools.py` | 6 个工具的落地实现，引用在这里确定性生成 |
+| | `agent2_parse.py` | **在用**：建卡与论文对比，`tools.py` 从这里导入 |
+| | `state.py` | `AgentState` 与实体数据类（PaperMeta / PaperCard / FactItem / Conflict / ReviewReport） |
+| | `llm_api.py` | DeepSeek 调用封装：重试、每日预算硬闸、成本与 token 记账 |
+| | `config.py` | 统一配置常量（检索 / Agent / 成本上限） |
+| | `doc_ingest.py` | 统一文档解析入口（PDF / Word / Excel / CSV / 图片），章节加载与标题映射的唯一实现 |
+| 持久化 | `store.py` | SQLite 持久化：会话、消息、任务、成本、工具调用；导入即迁移 |
+| | `migrations/` | SQLite schema 迁移（3 个） |
+| 设计与契约 | `DESIGN.md` | 检索、缓存、过载、接口、成本、上下文与评测口径的设计说明 |
+| | `CONTRACT.md` | 模块 2/3 接口契约（State 结构、工具接口、旧代码映射、冻结门槛） |
+| 评测与实验 | `evaluation/` | 语料冻结、题库、指标、消融与复现入口（结论的证据都在这里） |
+| | `experiments/` | 一次性对照实验，不在线上链路，清单见 `experiments/README.md` |
+| | `scripts/` | 验收、探针、批量对照脚本（如 `run_acceptance.py`、`dialog_rewrite_eval.py`） |
+| | `tests/` | 本地全量 127 条；CI 只跑其中 6 个纯逻辑文件 |
+| 已弃用 | `rag_tool.py`、`agent1_retrieve.py`、`agent3_review.py` | **已退役，不在生产链路**。保留只为让 `experiments/` 里的 RRF、重排与单/多 Agent 对照能复现旧口径 |
+
+### 5）四条不能越过的线
+
+1. **引用不交给模型**：综述的 references 由 facts 确定性生成，保证每条都能落到真实 `chunk_id`。
+2. **检索只有一个入口**：召回与重排只在 `retrieval_service` 里发生，缓存与预算边界也跟着只做一份。
+3. **模型动作必须过 schema**：工具名、参数类型、重复动作次数都在执行前校验，非法动作直接拒绝。
+4. **预算与步数是硬限制**：`DAILY_COST_BUDGET` 是每日硬闸，`MAX_AGENT_STEP=15`、`MAX_SEARCH_PER_SESSION=3` 防死循环。
+
+## 目录结构
+
+```
+paper_agent/                      # 仓库根：只放仓库级元数据
+├── .github/workflows/ci.yml      # 轻量 CI：只跑 6 个纯逻辑测试文件（30 条）
+├── LICENSE  README.md
+└── src/                          # 代码根，所有命令都在 src/ 下执行
+    ├── api_server.py             # 服务入口（WebUI 也从这里挂载）
+    ├── web/                      # 前端静态资源（index.html / app.js / style.css / KaTeX）
+    ├── tests/                    # 本地全量 127 条测试
+    ├── scripts/                  # 验收、探针与批量对照脚本
+    ├── evaluation/               # 语料冻结、题库、指标与消融（证据都在这里）
+    ├── experiments/              # 一次性对照实验，见其中的 README.md
+    ├── migrations/               # SQLite schema 迁移
+    ├── multi_format_samples/     # 多格式解析样例（PDF / Word / Excel / CSV / 图片）
+    └── …                         # 24 个 .py 模块，职责分组见上表
+
+不进仓库（由 .gitignore 挡住）：models/（约 16GB 权重）、docs/（论文 PDF 与个人资料）、
+src/datasets/、src/data/、本地缓存（query_cache.json、llm_usage.jsonl）与 .env
+```
+
+## 接口
+
+**HTTP**（FastAPI，13 个端点）：
+
+| 端点 | 作用 |
+|---|---|
+| `GET /health` | 健康检查 |
+| `GET /` | WebUI 页面 |
+| `POST /login` | 换取 JWT |
+| `POST /ask` | 非流式问答，`use_survey` 可强制走某条链路 |
+| `GET /ask/stream` | SSE 流式问答（`question` 走查询参数，需要 `Authorization` 头） |
+| `GET /threads`、`PATCH /threads/{id}`、`DELETE /threads/{id}` | 会话列表、重命名、删除 |
+| `GET /threads/{id}/messages`、`GET /threads/{id}/tasks` | 会话历史与任务记录 |
+| `GET /tasks/{task_id}` | 单次任务状态 |
+| `GET /metrics`、`GET /metrics/semantic_hits` | 运行指标与语义缓存命中追溯 |
+
+SSE 事件：`thread`（会话 ID）→ `route`（走了哪条链路）→ `sources`（检索一完成就推送，用户先看到来源）
+→ `token`（正文分片）→ `progress` / `ping`（综述链路的长任务进度与心跳）→ `done`；
+出错时推 `error` 再推 `done`，连接不会无提示中断。
+
+**CLI**：`python pipeline.py` 是交互式入口，按路由分别走短路与综述链路。
 
 ## WebUI
 
-服务启动后浏览器打开 `http://127.0.0.1:8000`，用 `.env` 里的 `API_USERNAME` / `API_PASSWORD` 登录（默认 `admin` / `admin123`）。
+浏览器打开 `http://127.0.0.1:8000`，用 `.env` 里的 `API_USERNAME` / `API_PASSWORD` 登录（默认 `admin` / `admin123`）。
+界面支持单篇问答与文献综述两种路由：问答流式输出并展示引用来源，综述先提示预计时长再输出完整正文。
+前端通过 fetch 读 SSE（不用浏览器原生 EventSource），Token 始终放在请求头里。
 
-界面支持单篇问答和文献综述两种路由：单篇问答流式输出并展示引用来源；文献综述提示处理时长后输出完整综述。前端通过 fetch 读取 SSE，不依赖浏览器原生 EventSource，因此 Token 始终放在请求头里。
-
-左侧会话栏支持完整的对话管理：
-
-- 一个会话里可以连续问多个问题，只有点「新对话」才会新建会话
-- 会话标题默认取该会话第一条提问，双击标题可以改成自己的名字（改名不影响它在列表里的排序位置）
-- 按最后活动时间分组：今天 / 昨天 / 近 7 天 / 更早
-- 悬停出现删除按钮；会话栏右上角可收起，收起后对话区左上角会出现展开入口
-- 刷新页面会自动回到上次的会话并还原历史消息与引用卡片（会话 ID 记在 localStorage）
-- 每条提问可复制、可修改后重新提问；每条回答可复制、可重新生成，操作按钮为图标，悬停才显示
-
-多轮追问分三层，三层各有各的职责：
-
-- **生成侧**（`DIALOG_HISTORY_ENABLED=1`，默认开）：把最近 3 轮问答拼进提示词，解决「它/那这个」指代的语义理解。拼在检索资料之前，并附一句提示要求模型结合上文判断
-- **检索侧实体注入**（默认开）：追问里没有论文名时，从上一轮**用户提问**（不扫助手回答）用别名识别提取论文名，注入检索查询，最多取最近 3 篇。实测这一层是提升的关键——7 个代词型追问的命中从 2/7 提到 7/7
-  - 为什么只取提问：助手回答末尾带「来源类型：本地论文 [local:XXX]」这类引用标注，扫回答会把引用过的论文全当成用户提到的对象。实测注入 4 个锚点（其中 3 个是引用标注带来的）反而把正确论文挤出候选池
-  - 为什么支持多篇：上一轮是综述时用户可能点到好几篇，只取第一篇会选错；注入多篇让检索自己分辨
-- **多轮改写**（`MULTI_TURN_QUERY_REWRITE=0`，默认关）：检索前用一次 LLM 把追问补全成自足问题。实测开启与关闭的追问命中都是 2/7，零收益还多一次调用，因此默认关闭
-
-三层顺序是：生成侧拿到历史 → 检索侧补实体 → 改写（若开启）。批量对照数据见 `scripts/dialog_rewrite_eval.py`。
-
-输入校验：空白、纯标点等内容在入口被拒（HTTP 400），不会消耗模型调用。前端的发送按钮做同样的判断，避免白跑一次请求。
+会话侧栏支持新建 / 重命名 / 删除会话、按最后活动时间分组、刷新后还原上次会话、历史消息与引用卡片。
+会话管理与多轮追问的实现细节见 [`src/DESIGN.md`](src/DESIGN.md)。
 
 ## 测试
 
 ```bash
-python -m pytest tests -q
+cd src && python -m pytest tests -q
 ```
 
-纯逻辑测试（不加载模型，CI 跑这些）：`test_task_router.py`、`test_agent_react.py`、`test_llm_cost.py`、`test_web_search.py`、`test_evaluation_metrics.py`、`test_dialog_anchor.py`。
+纯逻辑测试（不加载模型，CI 跑这些）：`test_task_router.py`、`test_agent_react.py`、`test_llm_cost.py`、
+`test_web_search.py`、`test_evaluation_metrics.py`、`test_dialog_anchor.py`。
 
-其中 `test_dialog_anchor.py` 覆盖多轮追问的锚点逻辑（只取用户提问、支持多篇、数量上限）；`test_dialog_e2e.py` 是端到端多轮回归，需要本地完整服务已启动，未启动时自动跳过，因此不接入轻量 CI。
+其中 `test_dialog_anchor.py` 覆盖多轮追问的锚点逻辑；`test_dialog_e2e.py` 是端到端多轮回归，
+需要本地完整服务已启动，未启动时自动跳过，因此不接入轻量 CI。其余测试（`test_api.py` 等）会加载模型。
 
-其余测试（`test_api.py` 等）会加载模型，用于本地全量回归。**本地全量收集为 127 条**（`python -m pytest tests -q --collect-only` = 127 collected，2026-09-28 复测）；本次在未启动完整服务时实测为 **123 passed、4 skipped**。接入 CI 的是上面 6 个文件 **30 条**。
-
-多轮改写的批量对照用 `scripts/dialog_rewrite_eval.py`（7 个代词型追问，跑一遍约 2 分钟）；锚点追踪用 `scripts/trace_anchor.py`。
+**本地全量收集为 127 条**（2026-09-28 复测）；未启动完整服务时实测为 **123 passed、4 skipped**。
+接入 CI 的是上面 6 个文件 **30 条**。
 
 ## Docker
 
 ```bash
-# Dockerfile 在 src/ 下，构建上下文是 src/
-docker build -t paper-agent src
+docker build -t paper-agent src        # Dockerfile 在 src/ 下，构建上下文是 src/
 ```
 
-运行容器时需要挂载 FAISS 索引和 Embedding 模型目录，并通过环境变量覆盖 `FAISS_PATH`、`MODEL_PATH`、`DEEPSEEK_API_KEY` 等配置，见 `.env.example` 模板（本地敏感配置在 `.env`，已被 git 忽略）。
-
-## 目录职责
-
-> 以下路径都相对 `src/`（本 README 在仓库根，代码在 `src/`）。
-
-- `task_router.py`：纯规则路由 + 进程内令牌桶限流，无外部依赖
-- `CONTRACT.md`：模块2/3 接口契约（State 结构、工具接口、旧代码映射）
-- `config.py`：统一配置常量（检索/Agent/成本上限）
-- `state.py`：AgentState 与实体数据类（PaperMeta/PaperCard/FactItem/Conflict/ReviewReport）
-- `doc_ingest.py`：统一文档解析入口（PDF/Word/Excel/CSV/图片），章节加载/标题映射的唯一实现
-- `tools.py`：执行层工具入口，6 个工具已全部落地（search_papers / read_section / build_paper_card / analyze_paper_relations / verify_claim / write_review）；引用由 facts 确定性生成，LLM 不编引用
-- `survey_agent.py`：单 ReAct Agent 综述编排，复用 agent_react 循环，工具前置/后置校验、pending_conflicts 聚合、预算降级
-- `retrieval_service.py`：唯一检索服务入口，统一查询计划、召回、重排、去重、稳定 chunk_id、缓存和预算边界
-- `evaluation/v150_pipeline.py`：v150语料的manifest、arXiv版本固定、PDF下载、分层split、候选出题审计和快照冻结入口
-- `evaluation/v300/manifest.json`、`evaluation/questions/v300_*`：v300 300篇论文和冻结评测题
-- `scripts/run_acceptance.py`：6 条固定 query 的验收脚本（简单/综述/冲突/超预算/无结果 + Transformer对比）
-- `rag_tool.py`：**旧检索入口，已弃用**。生产链路走 `retrieval_service.py`；保留是因为 `experiments/` 下的 RRF 与重排对照脚本依赖它复现旧口径
-- `web_search.py`：外网检索并发（Wikipedia/arXiv），统一来源结构与降级
-- `agent_react.py`：手写 ReAct 循环，Supervisor + Worker
-- `agent1_retrieve.py` / `agent3_review.py`：**旧 3-Agent 链路，已弃用**。生产综述走 `survey_agent.py` 的单 Agent 工具集；`pipeline.py` 里那段回退分支已于 2026-09-23 删除。保留它们只为让 `experiments/experiment_single_vs_multi.py` 能复现「单 Agent 与 3-Agent 对比」那组对比数据
-- `agent2_parse.py`：**在用**。`tools.py` 仍从它导入 `build_paper_card` 与 `compare_papers`
-- `pipeline.py`：simple 短路与 survey 全链路编排
-- `api_server.py`：FastAPI 接口层，JWT 鉴权 + SSE 流式 + 限流
-- `cost_report.py`：每日 LLM 成本报表
-- `experiments/`：检索、Rerank、单/多 Agent 对比等评测脚本，不属于线上链路
-- `multi_format_samples/`：多格式解析样例（PDF/Word/Excel/CSV/图片/表格），`scripts/make_samples.py` 可重新生成
+运行容器时需要挂载 FAISS 索引和 Embedding 模型目录，并通过环境变量覆盖 `FAISS_PATH`、`MODEL_PATH`、
+`DEEPSEEK_API_KEY` 等配置，见 `.env.example`（本地敏感配置在 `.env`，已被 git 忽略）。
 
 ## 已知边界
 
-- 综述链路一次请求约消耗 4-6 倍 Token，且耗时较长，SSE 目前先完整跑完再分片推送，未做真正的中途流式
-- **外网检索当前不可用**：arXiv 的 `export.arxiv.org/api/query` 对所有参数组合返回 406（主站正常），维基百科请求超时。代码里的降级逻辑保证主链路不受影响，但两个源都拿不到数据，因此 `.env` 里用 `WEB_SEARCH_ENABLED=0` 直接跳过，省掉一个超时周期的等待
-- **公式渲染依赖模型输出格式**：前端能渲染 `\(...\)`、`\[...\]`、`$...$` 三种定界符，但模型有时把公式写成裸文本（如 `Attention(Q,K,V)=Softmax(QK^T/√d_k)V`），这种渲染不了。已在系统提示词里要求公式必须用 LaTeX，但提示词不能百分百约束住
-- 首 token 延迟约 8-12 秒（检索 3.5 秒 + 模型读资料后开口 4.8 秒），这是当前方案的下限；`sources` 事件在检索完成时就会推送，可用来给用户可见反馈
-- **限流防不住「慢慢刷」**：进程内令牌桶按每分钟 10 次补充，而一次问答要十几秒，等于两次请求之间自动回满 2 个以上令牌。实测连发 14 次全部放行；它能挡的是秒级并发。对 LLM 成本的真正兜底是每日预算硬闸与 `MAX_AGENT_STEP` 上限，要限制长窗口用量得另加按小时/按天的独立计数
-- **单次请求没有输入长度上限**：超长输入（实测 8000 字）不是被应用层拒绝，而是卡在 HTTP 客户端的 URL 长度限制上（`InvalidURL: query too long`）。`/ask/stream` 用 GET 传问题，长文本场景需要改成 POST
-- **多轮改写的指代解析依赖模型**：改写本身是一次 LLM 调用，模型没改对的代词它也解析不了。当前只在少数样例上人工验证，没有批量评测
-- 综述正文是一整段生成的，只有在管线结束后才拿到，因此正文本身没有真流式；抽取事实与生成正文之间有约 25 秒只有心跳和等待时长提示
-- `GET /ask/stream` 依赖 Authorization 头，浏览器原生 EventSource 无法直接携带，前端需要走 fetch 流式或查询参数方案
-- 服务依赖本地模型和索引文件，Docker 内需要显式挂载并覆盖路径
-- 论文场景以原生文本 PDF 为主，不处理扫描件；图片 OCR 为可选 P1，当前未安装引擎时接口明确返回 OCR 不可用
-- Token 计数使用本地 bge-m3 子词 tokenizer（无网络依赖），只作为 DeepSeek 真实 token 数的近似；Chunk 带 `parent_id` 指向完整章节，供后续父文档检索
-- Word 来源定位用“文件 + 章节 + 段落区间 + chunk_id”，不依赖页码；Chunk 的 `position` 字段记录段落区间
+- **外网检索当前不可用**：arXiv 的 `export.arxiv.org/api/query` 对所有参数组合返回 406（主站正常），
+  维基百科请求超时。降级逻辑保证主链路不受影响，但两个源都拿不到数据，因此 `.env` 里用
+  `WEB_SEARCH_ENABLED=0` 直接跳过，省掉一个超时周期的等待。
+- **综述不是真流式**：正文一整段生成，管线跑完才拿到，因此 SSE 是分片推送而非逐 token；
+  抽取事实与生成正文之间有约 25 秒只有心跳与等待时长提示。一次综述约消耗 4-6 倍 token。
+- **限流防不住"慢慢刷"**：进程内令牌桶按每分钟 10 次补充，而一次问答要十几秒，两次请求之间自动回满。
+  实测连发 14 次全部放行；它挡的是秒级并发。真正兜底的是每日预算硬闸与 `MAX_AGENT_STEP`。
+- **单次请求没有输入长度上限**：超长输入（实测 8000 字）会卡在 HTTP 客户端的 URL 长度限制上
+  （`InvalidURL: query too long`）。`/ask/stream` 用 GET 传问题，长文本场景需要改成 POST。
+- **公式渲染依赖模型输出格式**：前端能渲染 `\(...\)`、`\[...\]`、`$...$` 三种定界符，模型写成裸文本就渲染不了。
+  系统提示词里已要求用 LaTeX，但约束不住 100%。
+- **首 token 延迟约 8-12 秒**（检索 3.5 秒 + 模型读资料后开口 4.8 秒），是当前方案的下限；
+  `sources` 事件在检索完成时就推送，用来给用户可见反馈。
+- **多轮改写的指代解析依赖模型**：改写本身是一次 LLM 调用，模型没改对它就解析不了；当前只在少数样例上人工验证。
+- 服务依赖本地模型与索引，Docker 内需要显式挂载并覆盖路径；论文场景以原生文本 PDF 为主，不处理扫描件。
+
+## 文档入口
+
+- 设计细节（缓存与阈值、过载准入、外网检索、重排、WebUI 会话管理、多轮追问、接口、成本、上下文、评测指标）：[`src/DESIGN.md`](src/DESIGN.md)
+- 接口契约与冻结门槛：[`src/CONTRACT.md`](src/CONTRACT.md)
+- 对照实验索引：[`src/experiments/README.md`](src/experiments/README.md)
+- 迭代流水、结论沉淀与方向调研：在本地 `docs/`（不进公开仓库）
+
+## 协作与反馈
+
+个人项目，没有开放的贡献流程；发现问题、有建议或想指出口径错误，请开
+[Issue](https://github.com/X-0240/paper_agent/issues)。
 
 ## 许可与第三方素材
 
 本仓库代码与文档采用 [MIT 许可](LICENSE)。以下内容**不在仓库内**，因此也不在本许可的授权范围内：
 
-- **第三方论文原文与 PDF**：版权归原作者与出版方。仓库只保存 arXiv id、哈希与评测题（`src/evaluation/v300/`），论文正文需自行按 manifest 下载。
+- **第三方论文原文与 PDF**：版权归原作者与出版方。仓库只保存 arXiv id、哈希与评测题（`src/evaluation/v300/`），
+  论文正文需自行按 manifest 下载。
 - **模型权重**：bge-m3、bge-reranker-v2-m3 等由各自原仓库发布并遵循其自身许可，需自行下载。
 - **本地评测试题与人工复核表**：属于个人评测材料，未随仓库分发。
 
-README 与文档里的性能/指标数字都是本机实测值（口径见「评测指标」一节），随硬件、模型与外部 API 状态变化，不承诺复现。
-
-## 文档入口
-
-- 设计细节（缓存与阈值、过载准入、外网检索、重排、接口定义、成本、上下文、评测指标）：[`src/DESIGN.md`](src/DESIGN.md)
-- 接口契约与冻结门槛：[`src/CONTRACT.md`](src/CONTRACT.md)
-- 迭代流水、结论沉淀与方向调研：在本地 `docs/`（不进公开仓库）
+README 与文档里的性能/指标数字都是本机实测值，随硬件、模型与外部 API 状态变化，不承诺复现。
