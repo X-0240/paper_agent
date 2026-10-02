@@ -415,6 +415,8 @@ def metrics(since_hours: int=24,user: str=Depends(verify_token)):
     #缓存与准入统计：过载或缓存行为要能被看到，否则出问题只能靠猜
     data["admission"]=ADMISSION.stats()
     try:
+        #延迟导入：检索服务带重依赖，和启动预热一样放到调用处，避免模块级加载
+        from paper_agent.retrieval import retrieval_service
         data["semantic_cache"]=retrieval_service.get_service().recall_cache.stats()
     except Exception as e:
         data["semantic_cache"]={"error":str(e)[:80]}
@@ -426,6 +428,8 @@ def semantic_hits(limit: int=20,user: str=Depends(verify_token)):
     #语义缓存命中追溯：用于事后核查"是否把 A 的答案给了 B"
     #只读缓存内部记录，不改任何状态
     try:
+        #延迟导入：检索服务带重依赖，和启动预热一样放到调用处，避免模块级加载
+        from paper_agent.retrieval import retrieval_service
         cache=retrieval_service.get_service().recall_cache
     except Exception as e:
         raise HTTPException(status_code=503,detail=f"检索服务未就绪：{str(e)[:80]}")
