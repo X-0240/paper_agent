@@ -1,9 +1,0 @@
-.env
-__pycache__
-*.pyc
-.pytest_cache
-datasets
-eval_results
-*.faiss
-*.faiss.json
-.git

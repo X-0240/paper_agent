@@ -177,7 +177,7 @@ paper_agent/                      # 仓库根：只放仓库级元数据
     ├── migrations/               # SQLite schema 迁移
     ├── multi_format_samples/     # 多格式解析样例（PDF / Word / Excel / CSV / 图片）
     ├── DESIGN.md  CONTRACT.md    # 设计与接口契约
-    └── requirements.txt  Dockerfile  .env.example  qasper_titles.json
+    └── requirements.txt  .env.example  qasper_titles.json
 
 不进仓库（由 .gitignore 挡住）：models/（约 16GB 权重）、docs/（论文 PDF 与个人资料）、
 src/datasets/、src/data/、本地缓存（query_cache.json、llm_usage.jsonl）与 .env
@@ -229,36 +229,18 @@ cd src && python -m pytest tests -q
 **本地全量收集为 127 条**（2026-09-28 复测）；未启动完整服务时实测为 **123 passed、4 skipped**。
 接入 CI 的是上面 6 个文件 **30 条**。
 
-## Docker
-
-```bash
-docker build -t paper-agent src        # Dockerfile 在 src/ 下，构建上下文是 src/
-```
-
-运行容器时需要挂载 FAISS 索引和 Embedding 模型目录，并通过环境变量覆盖 `FAISS_PATH`、`MODEL_PATH`、
-`DEEPSEEK_API_KEY` 等配置，见 `.env.example`（本地敏感配置在 `.env`，已被 git 忽略）。
-
 ## 已知边界
 
-- **外网检索当前不可用**：arXiv 的 `export.arxiv.org/api/query` 对所有参数组合返回 406（主站正常），
-  维基百科请求超时。降级逻辑保证主链路不受影响，但两个源都拿不到数据，因此 `.env` 里用
-  `WEB_SEARCH_ENABLED=0` 直接跳过，省掉一个超时周期的等待。
-- **综述不是真流式**：正文一整段生成，管线跑完才拿到，因此 SSE 是分片推送而非逐 token；
-  抽取事实与生成正文之间有约 25 秒只有心跳与等待时长提示。一次综述约消耗 4-6 倍 token。
-- **限流防不住"慢慢刷"**：进程内令牌桶按每分钟 10 次补充，而一次问答要十几秒，两次请求之间自动回满。
-  实测连发 14 次全部放行；它挡的是秒级并发。真正兜底的是每日预算硬闸与 `MAX_AGENT_STEP`。
-- **单次请求没有输入长度上限**：超长输入（实测 8000 字）会卡在 HTTP 客户端的 URL 长度限制上
-  （`InvalidURL: query too long`）。`/ask/stream` 用 GET 传问题，长文本场景需要改成 POST。
-- **公式渲染依赖模型输出格式**：前端能渲染 `\(...\)`、`\[...\]`、`$...$` 三种定界符，模型写成裸文本就渲染不了。
-  系统提示词里已要求用 LaTeX，但约束不住 100%。
-- **首 token 延迟约 8-12 秒**（检索 3.5 秒 + 模型读资料后开口 4.8 秒），是当前方案的下限；
-  `sources` 事件在检索完成时就推送，用来给用户可见反馈。
-- **多轮改写的指代解析依赖模型**：改写本身是一次 LLM 调用，模型没改对它就解析不了；当前只在少数样例上人工验证。
-- 服务依赖本地模型与索引，Docker 内需要显式挂载并覆盖路径；论文场景以原生文本 PDF 为主，不处理扫描件。
+- **外网检索当前不可用**：arXiv 与维基百科两个源都取不到数据，因此 `.env` 里用 `WEB_SEARCH_ENABLED=0`
+  直接跳过；降级逻辑保证主链路不受影响。
+- **综述不是真流式**：正文一整段生成后才分片推送，抽取事实到正文之间有约 25 秒只有心跳；一次综述约消耗 4-6 倍 token。
+- **首 token 延迟约 8-12 秒**（检索 3.5 秒 + 模型读资料后开口 4.8 秒），这是当前方案的下限。
+
+完整清单（限流挡不住什么、输入长度、公式渲染、多轮改写依赖模型等）见 [`src/DESIGN.md`](src/DESIGN.md) 的「已知限制与边界」。
 
 ## 文档入口
 
-- 设计细节（缓存与阈值、过载准入、外网检索、重排、WebUI 会话管理、多轮追问、接口、成本、上下文、评测指标）：[`src/DESIGN.md`](src/DESIGN.md)
+- 设计细节（缓存与阈值、过载准入、外网检索、重排、WebUI 会话管理、多轮追问、接口、成本、上下文、评测指标、已知限制）：[`src/DESIGN.md`](src/DESIGN.md)
 - 接口契约与冻结门槛：[`src/CONTRACT.md`](src/CONTRACT.md)
 - 对照实验索引：[`src/experiments/README.md`](src/experiments/README.md)
 - 迭代流水、结论沉淀与方向调研：在本地 `docs/`（不进公开仓库）
