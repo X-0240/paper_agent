@@ -9,11 +9,11 @@ import sys
 # 新评测不要再往这里加逻辑，公共的查询构造逻辑如被更多地方使用，应抽成共享模块。
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from dotenv import load_dotenv
-from paper_agent.retrieval.retrieval_service import get_service
 
 from evaluation.metrics import evidence_hit, paper_hit, section_hit, wilson_ci
 from evaluation.retrievers import Retriever
 from evaluation.schema import load_questions
+from paper_agent.retrieval.retrieval_service import get_service
 
 # 常见术语扩展：缩写补全，缓解中英文跨语言检索的词汇缺口
 TERM_MAP = {

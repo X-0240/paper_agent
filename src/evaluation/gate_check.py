@@ -7,9 +7,9 @@ import time
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from dotenv import load_dotenv
-from paper_agent.retrieval.retrieval_service import get_service
 
 from evaluation.metrics import evidence_hit, wilson_ci
+from paper_agent.retrieval.retrieval_service import get_service
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 

@@ -8,6 +8,7 @@ import sys
 # 让脚本能被独立执行：把代码根（src/）加入模块搜索路径
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from dotenv import load_dotenv
+
 from paper_agent.ingest.doc_ingest import load_sections
 
 if sys.stdout and hasattr(sys.stdout, "reconfigure"):

@@ -2,6 +2,7 @@
 import asyncio
 
 import numpy as np
+
 from paper_agent import api_server
 from paper_agent.retrieval import retrieval_service
 

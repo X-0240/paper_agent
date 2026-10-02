@@ -8,6 +8,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import jieba
 import numpy as np
 from dotenv import load_dotenv
+
 from paper_agent.legacy.rag_tool import bm25, index, model, sources
 
 # Windows控制台可能遇到特殊字符，统一兜底防崩溃

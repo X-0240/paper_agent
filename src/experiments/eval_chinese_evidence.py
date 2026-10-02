@@ -11,9 +11,10 @@ import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import faiss
 from dotenv import load_dotenv
-from paper_agent.retrieval.rerank import rerank
 from rank_bm25 import BM25Okapi
 from sentence_transformers import SentenceTransformer
+
+from paper_agent.retrieval.rerank import rerank
 
 if sys.stdout and hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(errors="replace")

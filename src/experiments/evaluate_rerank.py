@@ -8,6 +8,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import time
 
 from dotenv import load_dotenv
+
 from paper_agent.legacy.rag_tool import (
     search_papers_rerank,
     search_papers_structured,

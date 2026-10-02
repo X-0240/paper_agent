@@ -2,6 +2,7 @@ import asyncio
 import unittest.mock as mock
 
 import httpx
+
 from paper_agent.retrieval import web_search
 
 

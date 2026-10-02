@@ -14,9 +14,10 @@ import time
 import faiss
 import numpy as np
 from dotenv import load_dotenv
-from paper_agent.retrieval.rerank import get_reranker
 from rank_bm25 import BM25Okapi
 from sentence_transformers import SentenceTransformer
+
+from paper_agent.retrieval.rerank import get_reranker
 
 if sys.stdout and hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(errors="replace")

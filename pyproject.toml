@@ -7,6 +7,8 @@ target-version = ["py310"]
 [tool.ruff]
 line-length = 80
 target-version = "py310"
+# 代码根是 src/：让 ruff 把 src 下的包认成第一方，导入分组判定才稳定
+src = ["src"]
 exclude = [".git", "__pycache__", ".pytest_cache"]
 
 [tool.ruff.lint]

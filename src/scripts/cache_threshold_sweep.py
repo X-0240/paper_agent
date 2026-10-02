@@ -10,6 +10,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 import numpy as np  # noqa: E402
+
 from paper_agent.retrieval import retrieval_service  # noqa: E402
 
 svc = retrieval_service.get_service()

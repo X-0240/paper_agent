@@ -2,6 +2,7 @@ import sqlite3
 import threading
 
 import pytest
+
 from paper_agent.infra import store
 
 
