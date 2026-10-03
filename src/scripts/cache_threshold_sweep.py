@@ -73,8 +73,7 @@ p = scores(PARAPHRASE)
 for (a, b), s in sorted(zip(PARAPHRASE, p), key=lambda x: x[1]):
     print("  %.4f  %-26s | %s" % (s, a[:24], b[:30]))
 print(
-    "  最低 %.4f | 25分位 %.4f | 中位 %.4f | 最高 %.4f"
-    % (min(p), float(np.percentile(p, 25)), float(np.median(p)), max(p))
+    f"  最低 {min(p):.4f} | 25分位 {float(np.percentile(p, 25)):.4f} | 中位 {float(np.median(p)):.4f} | 最高 {max(p):.4f}"
 )
 
 print()
@@ -85,8 +84,7 @@ n = scores(HARD_NEGATIVE)
 for (a, b), s in sorted(zip(HARD_NEGATIVE, n), key=lambda x: -x[1])[:8]:
     print("  %.4f  %-26s | %s" % (s, a[:24], b[:30]))
 print(
-    "  最高 %.4f | 中位 %.4f | 最低 %.4f"
-    % (max(n), float(np.median(n)), min(n))
+    f"  最高 {max(n):.4f} | 中位 {float(np.median(n)):.4f} | 最低 {min(n):.4f}"
 )
 
 print()

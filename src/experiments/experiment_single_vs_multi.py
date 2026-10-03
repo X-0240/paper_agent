@@ -83,7 +83,7 @@ def judge(q, single, multi):
         {"role": "user", "content": user},
     ]
     text = ""
-    for attempt in range(3):
+    for _ in range(3):
         result = safe_call_deepseek(messages, temperature=0.1, max_tokens=2000)
         text = result["choices"][0]["message"]["content"] or ""
         text = text.strip()

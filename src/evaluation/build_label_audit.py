@@ -140,7 +140,7 @@ def main():
     for cell in ws[1]:
         cell.font = Font(bold=True)
     auto_found = 0
-    for idx, (bucket, question, row) in enumerate(picked, 1):
+    for idx, (bucket, question, _row) in enumerate(picked, 1):
         item = questions.get(question)
         if item is None:
             continue

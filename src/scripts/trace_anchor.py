@@ -78,12 +78,10 @@ survey_messages = [
     },
 ]
 for q in ["它在实验中用了多大显存？", "它的训练数据规模多大？"]:
-    print("  追问: %s" % q)
+    print(f"  追问: {q}")
     print(
-        "     提取到的实体: %s"
-        % api_server._named_papers_in_dialog(survey_messages)
+        f"     提取到的实体: {api_server._named_papers_in_dialog(survey_messages)}"
     )
     print(
-        "     实际注入的查询: %s"
-        % api_server._resolve_retrieval_question(q, survey_messages)
+        f"     实际注入的查询: {api_server._resolve_retrieval_question(q, survey_messages)}"
     )

@@ -293,7 +293,8 @@ def verify_token(
         )
         return payload.get("sub")
     except jwt.PyJWTError:
-        raise HTTPException(status_code=401, detail="无效或过期Token")
+        # 不把 jwt 库的细节暴露给调用方，异常链断开
+        raise HTTPException(status_code=401, detail="无效或过期Token") from None
 
 
 @app.get("/health")
@@ -389,7 +390,7 @@ async def _ask_impl(req: AskRequest, user: str, thread_id: str, task: str):
                     "system_error",
                     str(e),
                 )
-                raise HTTPException(status_code=500, detail=str(e))
+                raise HTTPException(status_code=500, detail=str(e)) from e
             await asyncio.to_thread(store.update_task, task_id, "succeeded")
             await asyncio.to_thread(
                 store.add_message,
@@ -417,7 +418,7 @@ async def _ask_impl(req: AskRequest, user: str, thread_id: str, task: str):
                     "system_error",
                     str(e),
                 )
-                raise HTTPException(status_code=500, detail=str(e))
+                raise HTTPException(status_code=500, detail=str(e)) from e
             answer = data["answer"]
             sources = _sources_brief(data["sources"])
             await asyncio.to_thread(store.update_task, task_id, "succeeded")
@@ -538,7 +539,7 @@ def semantic_hits(limit: int = 20, user: str = Depends(verify_token)):
     except Exception as e:
         raise HTTPException(
             status_code=503, detail=f"检索服务未就绪：{str(e)[:80]}"
-        )
+        ) from e
     limit = max(1, min(int(limit), 100))
     return {
         "stats": cache.stats(),

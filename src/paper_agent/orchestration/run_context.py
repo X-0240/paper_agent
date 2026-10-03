@@ -1,3 +1,4 @@
+import contextlib
 import contextvars
 
 # 当前任务上下文：让 LLM 用量与工具调用能归因到具体任务
@@ -10,10 +11,8 @@ def set_run_context(task_id="", thread_id="", user=""):
 
 
 def reset_run_context(token):
-    try:
+    with contextlib.suppress(Exception):
         _ctx.reset(token)
-    except Exception:
-        pass
 
 
 def current_run_context():

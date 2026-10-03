@@ -108,9 +108,9 @@ def is_heading(text):
         re.I,
     ):
         return True
-    if re.match(r"^[一二三四五六七八九十]+[、.．]\s*[\u4e00-\u9fff]", t):
-        return True
-    return False
+    return bool(
+        re.match(r"^[一二三四五六七八九十]+[、.．]\s*[\u4e00-\u9fff]", t)
+    )
 
 
 def _extract_sections_pdf(pdf_path):

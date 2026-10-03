@@ -251,7 +251,7 @@ for q, _, _ in test_cases:
 t0 = time.time()
 for name, queries in transformed.items():
     hits = 0
-    for (q, source, truth_sections), tq in zip(test_cases, queries):
+    for (_q, source, truth_sections), tq in zip(test_cases, queries):
         hits += chapter_hit(base_top(tq), source, truth_sections)
     print(
         f"{name}：章节级@5={hits/len(test_cases):.1%}（{hits}/{len(test_cases)}）"

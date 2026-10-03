@@ -258,37 +258,35 @@ async def call_deepseek_stream_async(messages, temperature=0.1):
         "stream": True,
     }
     usage = None
-    async with httpx.AsyncClient(
-        timeout=httpx.Timeout(60.0, connect=10.0)
-    ) as client:
-        async with client.stream(
+    async with (
+        httpx.AsyncClient(timeout=httpx.Timeout(60.0, connect=10.0)) as client,
+        client.stream(
             "POST",
             "https://api.deepseek.com/v1/chat/completions",
             headers=headers,
             json=payload,
-        ) as response:
-            response.raise_for_status()
-            # 按字节读再自己切行：aiter_lines 会攒批，token 到手时已经过了好几秒
-            buffer = ""
-            async for raw in response.aiter_bytes():
-                buffer += raw.decode("utf-8", "ignore")
-                while "\n" in buffer:
-                    line, buffer = buffer.split("\n", 1)
-                    line = line.strip()
-                    if not line or not line.startswith("data:"):
-                        continue
-                    data = line[5:].strip()
-                    if data == "[DONE]":
-                        buffer = ""
-                        break
-                    chunk = json.loads(data)
-                    if chunk.get("usage"):
-                        usage = chunk["usage"]
-                    delta = (
-                        chunk["choices"][0].get("delta", {}).get("content", "")
-                    )
-                    if delta:
-                        yield delta
+        ) as response,
+    ):
+        response.raise_for_status()
+        # 按字节读再自己切行：aiter_lines 会攒批，token 到手时已经过了好几秒
+        buffer = ""
+        async for raw in response.aiter_bytes():
+            buffer += raw.decode("utf-8", "ignore")
+            while "\n" in buffer:
+                line, buffer = buffer.split("\n", 1)
+                line = line.strip()
+                if not line or not line.startswith("data:"):
+                    continue
+                data = line[5:].strip()
+                if data == "[DONE]":
+                    buffer = ""
+                    break
+                chunk = json.loads(data)
+                if chunk.get("usage"):
+                    usage = chunk["usage"]
+                delta = chunk["choices"][0].get("delta", {}).get("content", "")
+                if delta:
+                    yield delta
     if usage:
         log_usage({"model": "deepseek-v4-flash", "usage": usage})
 

@@ -58,7 +58,7 @@ def extract_json_array(text):
 
 def call_json(messages, max_tokens=4000):
     last_error = None
-    for attempt in range(3):
+    for _ in range(3):
         result = safe_call_deepseek(
             messages, temperature=0.3, max_tokens=max_tokens
         )
